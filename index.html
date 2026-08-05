@@ -457,8 +457,21 @@
 
   async function handleImageFile(file){
     statusEl.textContent = 'Lese Bild und ermittle dominante Farben…';
+    statusEl.classList.remove('fm-err');
 
-    const { img, url } = await loadImage(file);
+    let img, url;
+    try {
+      ({ img, url } = await loadImage(file));
+    } catch (err){
+      console.error(err);
+      const isHeic = /heic|heif/i.test(file.type) || /\.hei[cf]$/i.test(file.name);
+      statusEl.textContent = isHeic
+        ? 'Dieses Bildformat (HEIC/HEIF, typisch für iPhone-Fotos) kann der Browser nicht lesen. Bitte in den iPhone-Kamera-Einstellungen unter „Formate" auf „Kompatibel (JPG)" stellen, oder das Foto vorher als JPG/PNG exportieren.'
+        : 'Dieses Bild konnte nicht gelesen werden. Bitte als JPG oder PNG erneut versuchen.';
+      statusEl.classList.add('fm-err');
+      return;
+    }
+
     currentImg = img;
 
     const previewWrap = document.getElementById('fmPreviewWrap');
@@ -471,16 +484,24 @@
     runImageAnalysis();
   }
 
+  function handleFileSafely(file){
+    handleFile(file).catch(err => {
+      console.error(err);
+      statusEl.textContent = 'Unerwarteter Fehler beim Verarbeiten der Datei: ' + err.message;
+      statusEl.classList.add('fm-err');
+    });
+  }
+
   dropEl.addEventListener('click', () => fileEl.click());
   dropEl.addEventListener('dragover', e => { e.preventDefault(); dropEl.classList.add('fm-drag'); });
   dropEl.addEventListener('dragleave', () => dropEl.classList.remove('fm-drag'));
   dropEl.addEventListener('drop', e => {
     e.preventDefault();
     dropEl.classList.remove('fm-drag');
-    if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+    if (e.dataTransfer.files.length) handleFileSafely(e.dataTransfer.files[0]);
   });
   fileEl.addEventListener('change', e => {
-    if (e.target.files.length) handleFile(e.target.files[0]);
+    if (e.target.files.length) handleFileSafely(e.target.files[0]);
   });
 
   function hexToRgb(hex){
@@ -811,7 +832,7 @@
     statusEl.classList.remove('fm-err');
 
     const isThreeMF = /\.3mf$/i.test(file.name);
-    const isImage = file.type.startsWith('image/');
+    const isImage = file.type.startsWith('image/') || /\.(jpe?g|png|gif|webp|heic|heif|bmp)$/i.test(file.name);
     imgControlsEl.style.display = isImage ? 'block' : 'none';
     if (!isImage) currentImg = null;
 
