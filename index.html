@@ -203,6 +203,39 @@
     color:var(--ink-dim);
     pointer-events:none;
   }
+  .fm-alt-wrap{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:-4px 0 10px 52px;
+  }
+  .fm-alt-chip{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:5px 12px 5px 6px;
+    text-decoration:none;
+    font-size:11.5px;
+    color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace;
+    transition:border-color .15s ease;
+  }
+  .fm-alt-chip:hover{
+    border-color:var(--accent);
+    color:var(--ink);
+  }
+  .fm-alt-swatch{
+    width:16px;height:16px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.2);
+    flex:none;
+  }
+  .fm-alt-text b{
+    color:var(--ink);
+    font-weight:600;
+  }
   .fm-preview{
     margin-top:14px;
     max-width:100%;
@@ -224,6 +257,36 @@
     line-height:1.5;
     border-top:1px solid var(--line);
     padding-top:14px;
+  }
+  .fm-partner{
+    margin-top:18px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+  }
+  .fm-partner-title{
+    font-size:14px;
+    font-weight:600;
+    color:var(--ink);
+    margin:0 0 6px;
+  }
+  .fm-partner-text{
+    font-size:12.5px;
+    color:var(--ink-dim);
+    line-height:1.5;
+    margin:0 0 14px;
+  }
+  .fm-partner-btn{
+    display:inline-block;
+    background:var(--accent);
+    color:#1a1206;
+    text-decoration:none;
+    font-weight:700;
+    font-size:12.5px;
+    padding:9px 16px;
+    border-radius:7px;
+    font-family:"JetBrains Mono","Courier New",monospace;
   }
 </style>
 
@@ -261,95 +324,97 @@
     </div>
   </div>
 
-  <div class="fm-linkbox">
-    <label for="fmAffiliate">Dein Affiliate-/Shop-Link (wird an jeden Kaufen-Button angehängt)</label>
-    <input type="text" id="fmAffiliate" placeholder="https://dein-shop-oder-digistore24-link.example/?ref=deinlink">
-  </div>
-
   <div class="fm-status" id="fmStatus"></div>
   <div class="fm-results" id="fmResults"></div>
 
   <p class="fm-note">
-    Bei einer 3MF prüft das Tool zuerst, ob dein Slicer (Bambu Studio, OrcaSlicer, PrusaSlicer …) die tatsächlich verwendeten Filamente inkl. Marke und Typ direkt hinterlegt hat. Bei einem Bild werden die dominanten Farben lokal im Browser ermittelt (kein Upload an einen Server) und per CIEDE2000-Farbabstand mit der Datenbank abgeglichen. Aktuell verifiziert: <b>Bambu Lab</b> (offizielle Hex-Tabelle PLA Basic/Matte), <b>Redline Filament</b> (RAL-Normfarben + gemessene Sonderfarben) und <b>Sunlu</b> (bisher nur wenige Farben mit gesichertem Wert). <b>3DJake, Filament2Print und 3Dmensionals</b> sind Mehrmarken-Shops ohne eine einzelne feste Farblinie — hier lässt sich kein pauschaler Farbkatalog hinterlegen, da sie viele verschiedene Hersteller (u.a. Bambu Lab, Sunlu, Polymaker) im Sortiment führen. Dein Link oben wird an jeden „Kaufen"-Button gehängt.
+    Bei einer 3MF prüft das Tool zuerst, ob dein Slicer (Bambu Studio, OrcaSlicer, PrusaSlicer …) die tatsächlich verwendeten Filamente inkl. Marke und Typ direkt hinterlegt hat. Bei einem Bild werden die dominanten Farben lokal im Browser ermittelt (kein Upload an einen Server) und per CIEDE2000-Farbabstand mit der Datenbank abgeglichen. Jede Farbe verlinkt auf eine konkrete Shop-Seite: bei <b>3DJake</b> (Bambu Lab) auf verifizierte Einzelproduktseiten, bei <b>Redline Filament</b> und <b>Sunlu</b> teils auf Einzelprodukte, teils auf die interne Shop-Suche für genau diesen Artikel — nie auf eine bloße Startseite. <b>Filament2Print, 3Dmensionals und Bambu Labs eigener Store</b> sind (noch) nicht angebunden, da dort keine verlässlich gleichbleibenden Produkt-URLs pro Farbe verifiziert werden konnten.
   </p>
+
+  <div class="fm-partner">
+    <p class="fm-partner-title">Du bist 3D-Print-Creator und willst 3DToolBox in deinem Content zeigen?</p>
+    <p class="fm-partner-text">Wir arbeiten mit ausgewählten Partnern zusammen, die 3DToolBox und angebundene Tools bei ihrem Publikum vorstellen. Melde dich mit ein paar Infos zu deinem Kanal — wir schauen uns jede Bewerbung persönlich an.</p>
+    <a class="fm-partner-btn" href="mailto:info@3dtoolbox.info?subject=Partneranfrage%203DToolBox">Partner werden</a>
+  </div>
 </div>
 
 <script>
 (function(){
-  // Offizielle Bambu-Lab-Farbwerte, aus den vom Hersteller veröffentlichten
-  // Hex-Code-Tabellen für PLA Basic und PLA Matte (store.bblcdn.com).
-  // Keine Schätzung — das sind die tatsächlichen Referenzwerte.
+  // Jede Filament-Farbe verweist auf eine konkrete Produktseite (wo bestätigt)
+  // oder auf die interne Shop-Suche für genau diesen Artikel — nie nur auf die Startseite.
   const FILAMENTS = [
-    // PLA Basic
-    {name:"PLA Basic Jade White", brand:"Bambu Lab", hex:"#FFFFFF"},
-    {name:"PLA Basic Black", brand:"Bambu Lab", hex:"#000000"},
-    {name:"PLA Basic Gray", brand:"Bambu Lab", hex:"#8E9089"},
-    {name:"PLA Basic Light Gray", brand:"Bambu Lab", hex:"#D1D3D5"},
-    {name:"PLA Basic Silver", brand:"Bambu Lab", hex:"#A6A9AA"},
-    {name:"PLA Basic Dark Gray", brand:"Bambu Lab", hex:"#545454"},
-    {name:"PLA Basic Blue Grey", brand:"Bambu Lab", hex:"#5B6579"},
-    {name:"PLA Basic Yellow", brand:"Bambu Lab", hex:"#F4EE2A"},
-    {name:"PLA Basic Sunflower Yellow", brand:"Bambu Lab", hex:"#FEC600"},
-    {name:"PLA Basic Orange", brand:"Bambu Lab", hex:"#FF6A13"},
-    {name:"PLA Basic Pumpkin Orange", brand:"Bambu Lab", hex:"#FF9016"},
-    {name:"PLA Basic Gold", brand:"Bambu Lab", hex:"#E4BD68"},
-    {name:"PLA Basic Red", brand:"Bambu Lab", hex:"#C12E1F"},
-    {name:"PLA Basic Maroon Red", brand:"Bambu Lab", hex:"#9D2235"},
-    {name:"PLA Basic Bambu Green", brand:"Bambu Lab", hex:"#00AE42"},
-    {name:"PLA Basic Mistletoe Green", brand:"Bambu Lab", hex:"#3F8E43"},
-    {name:"PLA Basic Bright Green", brand:"Bambu Lab", hex:"#BECF00"},
-    {name:"PLA Basic Cyan", brand:"Bambu Lab", hex:"#0086D6"},
-    {name:"PLA Basic Turquoise", brand:"Bambu Lab", hex:"#00B1B7"},
-    {name:"PLA Basic Blue", brand:"Bambu Lab", hex:"#0A2989"},
-    {name:"PLA Basic Cobalt Blue", brand:"Bambu Lab", hex:"#0056B8"},
-    {name:"PLA Basic Purple", brand:"Bambu Lab", hex:"#5E43B7"},
-    {name:"PLA Basic Indigo Purple", brand:"Bambu Lab", hex:"#482960"},
-    {name:"PLA Basic Magenta", brand:"Bambu Lab", hex:"#EC008C"},
-    {name:"PLA Basic Pink", brand:"Bambu Lab", hex:"#F55A74"},
-    {name:"PLA Basic Hot Pink", brand:"Bambu Lab", hex:"#F5547C"},
-    {name:"PLA Basic Beige", brand:"Bambu Lab", hex:"#F7E6DE"},
-    {name:"PLA Basic Bronze", brand:"Bambu Lab", hex:"#847D48"},
-    {name:"PLA Basic Cocoa Brown", brand:"Bambu Lab", hex:"#6F5034"},
-    {name:"PLA Basic Brown", brand:"Bambu Lab", hex:"#9D432C"},
-    // PLA Matte
-    {name:"PLA Matte Ivory White", brand:"Bambu Lab", hex:"#FFFFFF"},
-    {name:"PLA Matte Charcoal", brand:"Bambu Lab", hex:"#000000"},
-    {name:"PLA Matte Bone White", brand:"Bambu Lab", hex:"#CBC6B8"},
-    {name:"PLA Matte Desert Tan", brand:"Bambu Lab", hex:"#E8DBB7"},
-    {name:"PLA Matte Latte Brown", brand:"Bambu Lab", hex:"#D3B7A7"},
-    {name:"PLA Matte Caramel", brand:"Bambu Lab", hex:"#AE835B"},
-    {name:"PLA Matte Terracotta", brand:"Bambu Lab", hex:"#B15533"},
-    {name:"PLA Matte Dark Brown", brand:"Bambu Lab", hex:"#7D6556"},
-    {name:"PLA Matte Dark Chocolate", brand:"Bambu Lab", hex:"#4D3324"},
-    {name:"PLA Matte Lilac Purple", brand:"Bambu Lab", hex:"#AE96D4"},
-    {name:"PLA Matte Sakura Pink", brand:"Bambu Lab", hex:"#E8AFCF"},
-    {name:"PLA Matte Mandarin Orange", brand:"Bambu Lab", hex:"#F99963"},
-    {name:"PLA Matte Lemon Yellow", brand:"Bambu Lab", hex:"#F7D959"},
-    {name:"PLA Matte Plum", brand:"Bambu Lab", hex:"#950051"},
-    {name:"PLA Matte Scarlet Red", brand:"Bambu Lab", hex:"#DE4343"},
-    {name:"PLA Matte Dark Red", brand:"Bambu Lab", hex:"#BB3D43"},
-    {name:"PLA Matte Dark Green", brand:"Bambu Lab", hex:"#68724D"},
-    {name:"PLA Matte Grass Green", brand:"Bambu Lab", hex:"#61C680"},
-    {name:"PLA Matte Apple Green", brand:"Bambu Lab", hex:"#C2E189"},
-    {name:"PLA Matte Ice Blue", brand:"Bambu Lab", hex:"#A3D8E1"},
-    {name:"PLA Matte Sky Blue", brand:"Bambu Lab", hex:"#56B7E6"},
-    {name:"PLA Matte Marine Blue", brand:"Bambu Lab", hex:"#0078BF"},
-    {name:"PLA Matte Dark Blue", brand:"Bambu Lab", hex:"#042F56"},
-    {name:"PLA Matte Ash Gray", brand:"Bambu Lab", hex:"#9B9EA0"},
-    {name:"PLA Matte Nardo Gray", brand:"Bambu Lab", hex:"#757575"},
-    // Redline Filament — RAL-Normfarben (offiziell) + kolorimeter-gemessene Sonderfarben (filamentcolors.xyz)
-    {name:"PLA Schwarz (RAL 9017)", brand:"Redline Filament", hex:"#1C1C1C"},
-    {name:"PLA Weiß (RAL 9003)", brand:"Redline Filament", hex:"#F4F4F4"},
-    {name:"PLA Rot (RAL 3020)", brand:"Redline Filament", hex:"#C1121C"},
-    {name:"PLA Silber (RAL 9006)", brand:"Redline Filament", hex:"#A5A5A5"},
-    {name:"PLA Eisengrau (RAL 7011)", brand:"Redline Filament", hex:"#434B4D"},
-    {name:"PLA Gelb", brand:"Redline Filament", hex:"#FFC201"},
-    {name:"PLA Leichtes Grün", brand:"Redline Filament", hex:"#71BCB5"},
-    {name:"PLA Leichtes Blau", brand:"Redline Filament", hex:"#ACD5E7"},
-    // Sunlu — kolorimeter-gemessene Werte (filamentcolors.xyz), Abdeckung noch lückenhaft
-    {name:"PLA+ Light Gold", brand:"Sunlu", hex:"#D3943D"},
-    {name:"PLA Meta Blue", brand:"Sunlu", hex:"#00B2CC"},
-    {name:"PLA Grass Green", brand:"Sunlu", hex:"#008B73"},
+    // PLA Basic — Farblink: 3DJake (verifiziertes URL-Muster 3djake.de/bambu-lab/pla-basic-<farbe>)
+    {name:"PLA Basic Jade White", brand:"Bambu Lab", hex:"#FFFFFF", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-jade-white"},
+    {name:"PLA Basic Black", brand:"Bambu Lab", hex:"#000000", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-black"},
+    {name:"PLA Basic Gray", brand:"Bambu Lab", hex:"#8E9089", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-gray"},
+    {name:"PLA Basic Light Gray", brand:"Bambu Lab", hex:"#D1D3D5", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-light-gray"},
+    {name:"PLA Basic Silver", brand:"Bambu Lab", hex:"#A6A9AA", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-silver"},
+    {name:"PLA Basic Dark Gray", brand:"Bambu Lab", hex:"#545454", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-dark-gray"},
+    {name:"PLA Basic Blue Grey", brand:"Bambu Lab", hex:"#5B6579", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-blue-grey"},
+    {name:"PLA Basic Yellow", brand:"Bambu Lab", hex:"#F4EE2A", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-yellow"},
+    {name:"PLA Basic Sunflower Yellow", brand:"Bambu Lab", hex:"#FEC600", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-sunflower-yellow"},
+    {name:"PLA Basic Orange", brand:"Bambu Lab", hex:"#FF6A13", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-orange"},
+    {name:"PLA Basic Pumpkin Orange", brand:"Bambu Lab", hex:"#FF9016", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-pumpkin-orange"},
+    {name:"PLA Basic Gold", brand:"Bambu Lab", hex:"#E4BD68", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-gold"},
+    {name:"PLA Basic Red", brand:"Bambu Lab", hex:"#C12E1F", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-red"},
+    {name:"PLA Basic Maroon Red", brand:"Bambu Lab", hex:"#9D2235", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-maroon-red"},
+    {name:"PLA Basic Bambu Green", brand:"Bambu Lab", hex:"#00AE42", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-bambu-green"},
+    {name:"PLA Basic Mistletoe Green", brand:"Bambu Lab", hex:"#3F8E43", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-mistletoe-green"},
+    {name:"PLA Basic Bright Green", brand:"Bambu Lab", hex:"#BECF00", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-bright-green"},
+    {name:"PLA Basic Cyan", brand:"Bambu Lab", hex:"#0086D6", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-cyan"},
+    {name:"PLA Basic Turquoise", brand:"Bambu Lab", hex:"#00B1B7", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-turquoise"},
+    {name:"PLA Basic Blue", brand:"Bambu Lab", hex:"#0A2989", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-blue"},
+    {name:"PLA Basic Cobalt Blue", brand:"Bambu Lab", hex:"#0056B8", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-cobalt-blue"},
+    {name:"PLA Basic Purple", brand:"Bambu Lab", hex:"#5E43B7", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-purple"},
+    {name:"PLA Basic Indigo Purple", brand:"Bambu Lab", hex:"#482960", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-indigo-purple"},
+    {name:"PLA Basic Magenta", brand:"Bambu Lab", hex:"#EC008C", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-magenta"},
+    {name:"PLA Basic Pink", brand:"Bambu Lab", hex:"#F55A74", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-pink"},
+    {name:"PLA Basic Hot Pink", brand:"Bambu Lab", hex:"#F5547C", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-hot-pink"},
+    {name:"PLA Basic Beige", brand:"Bambu Lab", hex:"#F7E6DE", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-beige"},
+    {name:"PLA Basic Bronze", brand:"Bambu Lab", hex:"#847D48", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-bronze"},
+    {name:"PLA Basic Cocoa Brown", brand:"Bambu Lab", hex:"#6F5034", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-cocoa-brown"},
+    {name:"PLA Basic Brown", brand:"Bambu Lab", hex:"#9D432C", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-brown"},
+    // PLA Matte — Farblink: 3DJake (verifiziertes URL-Muster 3djake.de/bambu-lab/pla-matte-<farbe>)
+    {name:"PLA Matte Ivory White", brand:"Bambu Lab", hex:"#FFFFFF", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-ivory-white"},
+    {name:"PLA Matte Charcoal", brand:"Bambu Lab", hex:"#000000", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-charcoal"},
+    {name:"PLA Matte Bone White", brand:"Bambu Lab", hex:"#CBC6B8", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-bone-white"},
+    {name:"PLA Matte Desert Tan", brand:"Bambu Lab", hex:"#E8DBB7", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-desert-tan"},
+    {name:"PLA Matte Latte Brown", brand:"Bambu Lab", hex:"#D3B7A7", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-latte-brown"},
+    {name:"PLA Matte Caramel", brand:"Bambu Lab", hex:"#AE835B", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-caramel"},
+    {name:"PLA Matte Terracotta", brand:"Bambu Lab", hex:"#B15533", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-terracotta"},
+    {name:"PLA Matte Dark Brown", brand:"Bambu Lab", hex:"#7D6556", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-dark-brown"},
+    {name:"PLA Matte Dark Chocolate", brand:"Bambu Lab", hex:"#4D3324", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-dark-chocolate"},
+    {name:"PLA Matte Lilac Purple", brand:"Bambu Lab", hex:"#AE96D4", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-lilac-purple"},
+    {name:"PLA Matte Sakura Pink", brand:"Bambu Lab", hex:"#E8AFCF", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-sakura-pink"},
+    {name:"PLA Matte Mandarin Orange", brand:"Bambu Lab", hex:"#F99963", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-mandarin-orange"},
+    {name:"PLA Matte Lemon Yellow", brand:"Bambu Lab", hex:"#F7D959", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-lemon-yellow"},
+    {name:"PLA Matte Plum", brand:"Bambu Lab", hex:"#950051", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-plum"},
+    {name:"PLA Matte Scarlet Red", brand:"Bambu Lab", hex:"#DE4343", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-scarlet-red"},
+    {name:"PLA Matte Dark Red", brand:"Bambu Lab", hex:"#BB3D43", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-dark-red"},
+    {name:"PLA Matte Dark Green", brand:"Bambu Lab", hex:"#68724D", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-dark-green"},
+    {name:"PLA Matte Grass Green", brand:"Bambu Lab", hex:"#61C680", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-grass-green"},
+    {name:"PLA Matte Apple Green", brand:"Bambu Lab", hex:"#C2E189", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-apple-green"},
+    {name:"PLA Matte Ice Blue", brand:"Bambu Lab", hex:"#A3D8E1", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-ice-blue"},
+    {name:"PLA Matte Sky Blue", brand:"Bambu Lab", hex:"#56B7E6", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-sky-blue"},
+    {name:"PLA Matte Marine Blue", brand:"Bambu Lab", hex:"#0078BF", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-marine-blue"},
+    {name:"PLA Matte Dark Blue", brand:"Bambu Lab", hex:"#042F56", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-dark-blue"},
+    {name:"PLA Matte Ash Gray", brand:"Bambu Lab", hex:"#9B9EA0", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-ash-gray"},
+    {name:"PLA Matte Nardo Gray", brand:"Bambu Lab", hex:"#757575", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-nardo-gray"},
+    // Redline Filament — RAL-Normfarben. "pla-black" ist eine bestätigte Produktseite,
+    // der Rest verlinkt auf die interne Shop-Suche (führt zuverlässig zum richtigen Produkt).
+    {name:"PLA Schwarz (RAL 9017)", brand:"Redline Filament", hex:"#1C1C1C", shop:"Redline Filament", url:"https://redline-filament.com/products/pla-black"},
+    {name:"PLA Weiß (RAL 9003)", brand:"Redline Filament", hex:"#F4F4F4", shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Wei%C3%9F"},
+    {name:"PLA Rot (RAL 3020)", brand:"Redline Filament", hex:"#C1121C", shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Rot"},
+    {name:"PLA Silber (RAL 9006)", brand:"Redline Filament", hex:"#A5A5A5", shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Silber"},
+    {name:"PLA Eisengrau (RAL 7011)", brand:"Redline Filament", hex:"#434B4D", shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Eisengrau"},
+    {name:"PLA Gelb", brand:"Redline Filament", hex:"#FFC201", shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Gelb"},
+    {name:"PLA Leichtes Grün", brand:"Redline Filament", hex:"#71BCB5", shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Leichtes+Gr%C3%BCn"},
+    {name:"PLA Leichtes Blau", brand:"Redline Filament", hex:"#ACD5E7", shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Leichtes+Blau"},
+    // Sunlu — Farbwerte kolorimeter-gemessen (filamentcolors.xyz), Links über die Shop-Suche.
+    {name:"PLA+ Light Gold", brand:"Sunlu", hex:"#D3943D", shop:"Sunlu", url:"https://www.sunlu.com/de/search?q=Light+Gold"},
+    {name:"PLA Meta Blue", brand:"Sunlu", hex:"#00B2CC", shop:"Sunlu", url:"https://www.sunlu.com/de/search?q=Meta+Blue"},
+    {name:"PLA Grass Green", brand:"Sunlu", hex:"#008B73", shop:"Sunlu", url:"https://www.sunlu.com/de/search?q=Grass+Green"},
+
   ];
 
   const dropEl = document.getElementById('fmDrop');
@@ -357,7 +422,6 @@
   const fnEl = document.getElementById('fmFilename');
   const statusEl = document.getElementById('fmStatus');
   const resultsEl = document.getElementById('fmResults');
-  const affEl = document.getElementById('fmAffiliate');
   const imgControlsEl = document.getElementById('fmImgControls');
   const numColorsEl = document.getElementById('fmNumColors');
   const numColorsValEl = document.getElementById('fmNumColorsVal');
@@ -371,7 +435,6 @@
     resultsEl.innerHTML = '';
     statusEl.classList.remove('fm-err');
 
-    const affLink = affEl.value.trim();
     const numColors = parseInt(numColorsEl.value, 10);
     const minPct = parseInt(minPctEl.value, 10);
     const dominant = extractDominantColors(currentImg, numColors).filter(c => c.pct >= minPct);
@@ -384,20 +447,13 @@
 
     statusEl.textContent = `${dominant.length} dominante Farbe(n) erkannt — Näherungs-Match mit Filamenten:`;
     dominant.forEach(c => {
-      const match = bestMatch(c.hex);
-      renderExactRow(
-        c.hex,
-        match.name,
-        match.brand + ' · Näherungswert',
-        affLink,
-        `Bildanteil: ${c.pct}% · ${c.hex}`
-      );
+      const matches = bestMatchesByBrand(c.hex, 3);
+      renderMatchGroup(c.hex, matches, `Bildanteil: ${c.pct}% · ${c.hex}`);
     });
   }
 
   numColorsEl.addEventListener('input', () => { numColorsValEl.textContent = numColorsEl.value; runImageAnalysis(); });
   minPctEl.addEventListener('input', () => { minPctValEl.textContent = minPctEl.value; runImageAnalysis(); });
-  affEl.addEventListener('input', () => { if (currentImg) runImageAnalysis(); });
 
   async function handleImageFile(file){
     statusEl.textContent = 'Lese Bild und ermittle dominante Farben…';
@@ -520,16 +576,29 @@
     );
   }
 
-  function bestMatch(hex){
-    let best = null, bestDist = Infinity;
+  // Liefert bis zu topN Treffer, aber maximal einen pro Marke. Der beste
+  // Gesamttreffer wird immer gezeigt; weitere Marken nur, wenn ihr bester
+  // Kandidat tatsächlich nah genug an der Zielfarbe liegt (sonst lieber
+  // keine Alternative als eine optisch unpassende).
+  const MAX_ALT_DISTANCE = 14; // ΔE2000 — grobe Grenze für "noch als ähnlich durchgehend"
+
+  function bestMatchesByBrand(hex, topN){
+    const byBrand = new Map();
     for (const f of FILAMENTS){
       const d = colorDistance(hex, f.hex);
-      if (d < bestDist){ bestDist = d; best = f; }
+      const current = byBrand.get(f.brand);
+      if (!current || d < current.dist){
+        byBrand.set(f.brand, { ...f, dist: d });
+      }
     }
-    return best;
+    const sorted = [...byBrand.values()].sort((a,b) => a.dist - b.dist);
+    if (sorted.length === 0) return [];
+    const primary = sorted[0];
+    const alternatives = sorted.slice(1).filter(m => m.dist <= MAX_ALT_DISTANCE);
+    return [primary, ...alternatives].slice(0, topN);
   }
 
-  function renderExactRow(hex, label, sublabel, affLink, extraHtml){
+  function renderExactRow(hex, label, sublabel, url, shop, extraHtml){
     const row = document.createElement('div');
     row.className = 'fm-swatch-row';
 
@@ -548,14 +617,46 @@
     row.appendChild(info);
 
     const buy = document.createElement('a');
-    buy.className = 'fm-buy' + (affLink ? '' : ' fm-disabled');
-    buy.textContent = affLink ? 'Kaufen ↗' : 'Link fehlt';
-    buy.href = affLink || '#';
+    buy.className = 'fm-buy' + (url ? '' : ' fm-disabled');
+    buy.textContent = url ? (shop ? `Bei ${shop} ansehen ↗` : 'Ansehen ↗') : 'Kein Link';
+    buy.href = url || '#';
     buy.target = '_blank';
     buy.rel = 'noopener';
     row.appendChild(buy);
 
     resultsEl.appendChild(row);
+    return row;
+  }
+
+  // Zeigt den besten Treffer als Hauptzeile, plus bis zu 2 Alternativen aus
+  // anderen Marken/Shops darunter — als kompakte Auswahl-Chips.
+  // labelOverride/sublabelOverride: falls die Haupt-Beschriftung nicht vom besten
+  // Treffer kommen soll (z.B. weil der Slicer selbst schon Marke/Typ exakt nennt).
+  function renderMatchGroup(hex, matches, extraHtml, labelOverride, sublabelOverride){
+    if (!matches.length) return;
+    const primary = matches[0];
+    const label = labelOverride || primary.name;
+    const sublabel = sublabelOverride || (primary.brand + ' · Näherungswert');
+    const row = renderExactRow(hex, label, sublabel, primary.url, primary.shop, extraHtml);
+
+    const alternatives = matches.slice(1);
+    if (alternatives.length){
+      const altWrap = document.createElement('div');
+      altWrap.className = 'fm-alt-wrap';
+      alternatives.forEach(alt => {
+        const chip = document.createElement('a');
+        chip.className = 'fm-alt-chip';
+        chip.href = alt.url || '#';
+        chip.target = '_blank';
+        chip.rel = 'noopener';
+        chip.innerHTML = `
+          <span class="fm-alt-swatch" style="background:${alt.hex}"></span>
+          <span class="fm-alt-text"><b>${alt.name}</b> · ${alt.brand}${alt.shop ? ' · ' + alt.shop : ''}</span>
+        `;
+        altWrap.appendChild(chip);
+      });
+      row.after(altWrap);
+    }
   }
 
   // Sucht in einer Bambu-/PrusaSlicer-artigen project_settings.config nach
@@ -669,13 +770,17 @@
     statusEl.textContent = 'Lese 3MF-Archiv…';
     try {
       const zip = await JSZip.loadAsync(file);
-      const affLink = affEl.value.trim();
 
       // 1) Bevorzugt: exakte Slicer-Angaben (Bambu Studio, PrusaSlicer, OrcaSlicer …)
       const exact = await tryReadSlicerSettings(zip);
       if (exact && exact.length){
         statusEl.textContent = `${exact.length} im Projekt verwendete Filament(e) gefunden (aus den Slicer-Einstellungen).`;
-        exact.forEach(item => renderExactRow(item.hex, item.label, item.sublabel, affLink));
+        exact.forEach(item => {
+          // Der Slicer nennt Farbe/Marke/Typ exakt — den Kauflink holen wir uns über
+          // den nächstliegenden Farbwert je Marke aus der verifizierten Datenbank.
+          const matches = bestMatchesByBrand(item.hex, 3);
+          renderMatchGroup(item.hex, matches, null, item.label, item.sublabel);
+        });
         return;
       }
 
@@ -689,8 +794,8 @@
 
       statusEl.textContent = `${uniqueColors.length} Farbe(n) im Modell gefunden (keine Slicer-Angaben vorhanden) — Näherungs-Match:`;
       uniqueColors.forEach(hex => {
-        const match = bestMatch(hex);
-        renderExactRow(hex, match.name, match.brand + ' · Näherungswert', affLink);
+        const matches = bestMatchesByBrand(hex, 3);
+        renderMatchGroup(hex, matches);
       });
     } catch (err){
       console.error(err);
