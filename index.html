@@ -1,4 +1,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js"></script>
 <style>
   :root{
     --bg:#14201c;
@@ -49,6 +50,97 @@
   .fm-brand-3d{
     color:#FF6A2B;
   }
+
+  .fm-tools-bar{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:22px;
+    background:var(--panel);
+  }
+  .fm-tools-title{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin:0 0 12px;
+  }
+  .fm-tools-credit{
+    font-size:12px;
+    color:var(--accent-2);
+    margin:-6px 0 12px;
+  }
+  .fm-tools-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .fm-tool{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .fm-tool-btn{
+    display:inline-block;
+    background:transparent;
+    border:1px solid var(--accent);
+    color:var(--accent);
+    text-decoration:none;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12.5px;
+    font-weight:600;
+    padding:8px 16px;
+    border-radius:8px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .fm-tool-btn:not(.fm-tool-soon):hover{
+    background:var(--accent);
+    color:#1a1206;
+  }
+  .fm-tool-btn.fm-tool-soon{
+    border-color:var(--line);
+    color:var(--ink-dim);
+    cursor:default;
+  }
+  .fm-tool-info{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--panel-2);
+    color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    font-weight:700;
+    line-height:1;
+    cursor:pointer;
+    flex:none;
+  }
+  .fm-tool-info:hover{ border-color:var(--accent); color:var(--accent); }
+  .fm-tool-tip{
+    display:none;
+    position:absolute;
+    top:calc(100% + 8px);
+    left:0;
+    width:220px;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:12px;
+    line-height:1.45;
+    color:var(--ink);
+    z-index:20;
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  /* Desktop: Tooltip beim Hovern über Button ODER Info-Icon */
+  @media (hover: hover){
+    .fm-tool:hover .fm-tool-tip{ display:block; }
+  }
+  /* Mobile/Touch: Tooltip nur nach Tap auf das (i)-Icon */
+  .fm-tool.fm-tool-tip-open .fm-tool-tip{ display:block; }
   h1.fm-title{
     font-size:26px;
     margin:0 0 4px;
@@ -288,6 +380,39 @@
     border-radius:7px;
     font-family:"JetBrains Mono","Courier New",monospace;
   }
+
+  .fm-counter{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:24px;
+    margin-top:22px;
+    padding:14px 0 4px;
+  }
+  .fm-counter-stat{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .fm-counter-num{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:18px;
+    font-weight:700;
+    color:var(--accent-2);
+    line-height:1.2;
+  }
+  .fm-counter-label{
+    font-size:10.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin-top:2px;
+  }
+  .fm-counter-divider{
+    width:1px;
+    height:28px;
+    background:var(--line);
+  }
 </style>
 
 <div class="fm-root">
@@ -299,6 +424,32 @@
       <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
     </svg>
     <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+  </div>
+
+  <div class="fm-tools-bar">
+    <p class="fm-tools-title">Nützliche Tools rund um den 3D-Druck</p>
+    <p class="fm-tools-credit" id="fmToolsCredit" style="display:none;"></p>
+    <div class="fm-tools-grid" id="fmToolsGrid">
+      <div class="fm-tool">
+        <a class="fm-tool-btn" id="fmToolMeshy" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Meshy AI">i</button>
+        <div class="fm-tool-tip">KI-Tool: aus einer Textbeschreibung oder einem Bild automatisch ein druckfertiges 3D-Modell erstellen.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" id="fmToolThangs" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Thangs">i</button>
+        <div class="fm-tool-tip">Große Such- und Modell-Bibliothek: fertige, druckbare 3D-Modelle von anderen Machern finden.</div>
+      </div>
+      <div class="fm-tool">
+        <span class="fm-tool-btn fm-tool-soon">Demnächst</span>
+      </div>
+      <div class="fm-tool">
+        <span class="fm-tool-btn fm-tool-soon">Demnächst</span>
+      </div>
+      <div class="fm-tool">
+        <span class="fm-tool-btn fm-tool-soon">Demnächst</span>
+      </div>
+    </div>
   </div>
   <p class="fm-eyebrow">Filament Matching</p>
   <h1 class="fm-title">3MF-Farbfinder</h1>
@@ -336,10 +487,81 @@
     <p class="fm-partner-text">Wir arbeiten mit ausgewählten Partnern zusammen, die 3DToolBox und angebundene Tools bei ihrem Publikum vorstellen. Melde dich mit ein paar Infos zu deinem Kanal — wir schauen uns jede Bewerbung persönlich an.</p>
     <a class="fm-partner-btn" href="mailto:info@3dtoolbox.info?subject=Partneranfrage%203DToolBox">Partner werden</a>
   </div>
+
+  <div class="fm-counter">
+    <div class="fm-counter-stat">
+      <span class="fm-counter-num" id="fmCounterTotal">–</span>
+      <span class="fm-counter-label">Besucher insgesamt</span>
+    </div>
+    <div class="fm-counter-divider"></div>
+    <div class="fm-counter-stat">
+      <span class="fm-counter-num" id="fmCounterToday">–</span>
+      <span class="fm-counter-label">heute</span>
+    </div>
+  </div>
 </div>
 
 <script>
 (function(){
+  // ============================================================
+  // PARTNER-LINKS — hier trägst du neue Influencer manuell ein,
+  // NACHDEM du ihre Bewerbung geprüft hast (siehe "Partner werden"-Bereich unten).
+  //
+  // Jeder Partner bekommt einen eigenen Link: 3dtoolbox.info/?ref=<key>
+  // Besucht jemand die Seite über diesen Link, werden NUR die Tool-Buttons
+  // (Meshy, Thangs, künftige Tools) gegen die Links dieses Partners getauscht.
+  // Die Filament-Links bleiben davon IMMER unberührt — die zeigen immer zu dir.
+  // ============================================================
+  const PARTNER_LINKS = {
+    // Beispiel-Eintrag zum Kopieren:
+    // "maxmustermann": {
+    //   name: "Max Mustermann",
+    //   meshy: "https://www.meshy.ai?via=maxmustermann",
+    //   thangs: "https://than.gs/u/xxxxxxx"
+    // },
+  };
+
+  function applyPartnerLinks(){
+    const ref = new URLSearchParams(window.location.search).get('ref');
+    if (!ref) return;
+    const partner = PARTNER_LINKS[ref];
+    if (!partner) return; // unbekannter/falscher ref-Wert -> Standardlinks bleiben stehen
+
+    if (partner.meshy) document.getElementById('fmToolMeshy').href = partner.meshy;
+    if (partner.thangs) document.getElementById('fmToolThangs').href = partner.thangs;
+
+    if (partner.name){
+      const creditEl = document.getElementById('fmToolsCredit');
+      creditEl.textContent = `Empfohlen von ${partner.name}`;
+      creditEl.style.display = 'block';
+    }
+  }
+  applyPartnerLinks();
+
+  // ============================================================
+  // BESUCHERZÄHLER — nutzt den kostenlosen, anmeldefreien Dienst
+  // countapi.mileshilliard.com. Zählt Seitenaufrufe (nicht eindeutige
+  // Personen). "Heute" funktioniert, indem täglich ein neuer Zähler-
+  // Schlüssel mit dem aktuellen Datum verwendet wird.
+  // ============================================================
+  (function initVisitorCounter(){
+    const NAMESPACE = '3dtoolbox_info_v1'; // möglichst einzigartig halten (globaler Schlüsselraum)
+    const totalKey = `${NAMESPACE}_total`;
+    const todayKey = `${NAMESPACE}_daily_${new Date().toISOString().slice(0,10)}`;
+    const totalEl = document.getElementById('fmCounterTotal');
+    const todayEl = document.getElementById('fmCounterToday');
+
+    fetch(`https://countapi.mileshilliard.com/api/v1/hit/${totalKey}`)
+      .then(r => r.json())
+      .then(data => { if (totalEl) totalEl.textContent = data.value.toLocaleString('de-DE'); })
+      .catch(() => { if (totalEl) totalEl.textContent = '–'; });
+
+    fetch(`https://countapi.mileshilliard.com/api/v1/hit/${todayKey}`)
+      .then(r => r.json())
+      .then(data => { if (todayEl) todayEl.textContent = data.value.toLocaleString('de-DE'); })
+      .catch(() => { if (todayEl) todayEl.textContent = '–'; });
+  })();
+
   // Jede Filament-Farbe verweist auf eine konkrete Produktseite (wo bestätigt)
   // oder auf die interne Shop-Suche für genau diesen Artikel — nie nur auf die Startseite.
   const FILAMENTS = [
@@ -417,6 +639,22 @@
 
   ];
 
+  // Tools-Leiste: (i)-Icon per Tap öffnet/schließt die Beschreibung (für Touch-Geräte,
+  // die kein :hover kennen). Tap außerhalb schließt alle offenen Tooltips wieder.
+  document.querySelectorAll('.fm-tool-info').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const tool = btn.closest('.fm-tool');
+      const wasOpen = tool.classList.contains('fm-tool-tip-open');
+      document.querySelectorAll('.fm-tool-tip-open').forEach(t => t.classList.remove('fm-tool-tip-open'));
+      if (!wasOpen) tool.classList.add('fm-tool-tip-open');
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.fm-tool-tip-open').forEach(t => t.classList.remove('fm-tool-tip-open'));
+  });
+
   const dropEl = document.getElementById('fmDrop');
   const fileEl = document.getElementById('fmFile');
   const fnEl = document.getElementById('fmFilename');
@@ -456,7 +694,9 @@
   minPctEl.addEventListener('input', () => { minPctValEl.textContent = minPctEl.value; runImageAnalysis(); });
 
   async function handleImageFile(file){
-    statusEl.textContent = 'Lese Bild und ermittle dominante Farben…';
+    statusEl.textContent = isHeicFile(file)
+      ? 'Wandle HEIC-Foto um und ermittle dominante Farben…'
+      : 'Lese Bild und ermittle dominante Farben…';
     statusEl.classList.remove('fm-err');
 
     let img, url;
@@ -464,9 +704,9 @@
       ({ img, url } = await loadImage(file));
     } catch (err){
       console.error(err);
-      const isHeic = /heic|heif/i.test(file.type) || /\.hei[cf]$/i.test(file.name);
+      const isHeic = isHeicFile(file);
       statusEl.textContent = isHeic
-        ? 'Dieses Bildformat (HEIC/HEIF, typisch für iPhone-Fotos) kann der Browser nicht lesen. Bitte in den iPhone-Kamera-Einstellungen unter „Formate" auf „Kompatibel (JPG)" stellen, oder das Foto vorher als JPG/PNG exportieren.'
+        ? 'Die automatische HEIC-Umwandlung ist fehlgeschlagen. Bitte in den iPhone-Kamera-Einstellungen unter „Formate" auf „Kompatibel (JPG)" stellen, oder das Foto vorher manuell als JPG exportieren.'
         : 'Dieses Bild konnte nicht gelesen werden. Bitte als JPG oder PNG erneut versuchen.';
       statusEl.classList.add('fm-err');
       return;
@@ -777,9 +1017,22 @@
     return '#' + toHex(r) + toHex(g) + toHex(b);
   }
 
-  function loadImage(file){
+  function isHeicFile(file){
+    return /heic|heif/i.test(file.type) || /\.hei[cf]$/i.test(file.name);
+  }
+
+  async function loadImage(file){
+    let workingFile = file;
+
+    // iPhones speichern Fotos standardmäßig als HEIC/HEIF — das kann kein
+    // Browser in <canvas> zeichnen. Deshalb hier zuerst nach JPEG umwandeln.
+    if (isHeicFile(file)){
+      const converted = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.85 });
+      workingFile = Array.isArray(converted) ? converted[0] : converted;
+    }
+
     return new Promise((resolve, reject) => {
-      const url = URL.createObjectURL(file);
+      const url = URL.createObjectURL(workingFile);
       const img = new Image();
       img.onload = () => resolve({ img, url });
       img.onerror = reject;
