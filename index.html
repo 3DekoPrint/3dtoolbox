@@ -567,7 +567,7 @@
     <a class="fm-partner-btn" href="mailto:info@3dtoolbox.info?subject=Partneranfrage%203DToolBox">Partner werden</a>
   </div>
 
-  <div class="fm-counter">
+  <div class="fm-counter" id="fmCounter" style="display:none;">
     <div class="fm-counter-stat">
       <span class="fm-counter-num" id="fmCounterTotal">–</span>
       <span class="fm-counter-label">Besucher insgesamt</span>
@@ -619,25 +619,53 @@
 
   // ============================================================
   // BESUCHERZÄHLER — nutzt den kostenlosen, anmeldefreien Dienst
-  // countapi.mileshilliard.com. Zählt Seitenaufrufe (nicht eindeutige
-  // Personen). "Heute" funktioniert, indem täglich ein neuer Zähler-
-  // Schlüssel mit dem aktuellen Datum verwendet wird.
+  // countapi.mileshilliard.com. Zählt jeden Besucher nur EINMAL
+  // (gemerkt per localStorage — gilt domainweit, also auch über
+  // DE/EN-Sprachwechsel hinweg, da beide dieselbe Domain nutzen).
+  // Sichtbar ist der Zähler nur mit ?stats=1 in der URL, damit ihn
+  // niemand außer dir zu sehen bekommt.
   // ============================================================
   (function initVisitorCounter(){
-    const NAMESPACE = '3dtoolbox_info_v1'; // möglichst einzigartig halten (globaler Schlüsselraum)
+    const NAMESPACE = '3dtoolbox_info_v1';
     const totalKey = `${NAMESPACE}_total`;
-    const todayKey = `${NAMESPACE}_daily_${new Date().toISOString().slice(0,10)}`;
+    const todayDateStr = new Date().toISOString().slice(0,10);
+    const todayKey = `${NAMESPACE}_daily_${todayDateStr}`;
+
+    const showStats = new URLSearchParams(window.location.search).get('stats') === '1';
+    const counterEl = document.getElementById('fmCounter');
+    if (showStats && counterEl) counterEl.style.display = 'flex';
+
     const totalEl = document.getElementById('fmCounterTotal');
     const todayEl = document.getElementById('fmCounterToday');
 
-    fetch(`https://countapi.mileshilliard.com/api/v1/hit/${totalKey}`)
+    const STORE_TOTAL = '3dtb_counted_total';
+    const STORE_DAY = '3dtb_counted_day';
+    let alreadyCountedTotal = false, alreadyCountedToday = false;
+    try {
+      alreadyCountedTotal = localStorage.getItem(STORE_TOTAL) === '1';
+      alreadyCountedToday = localStorage.getItem(STORE_DAY) === todayDateStr;
+    } catch(e){} // z.B. wenn Cookies/Storage blockiert sind — dann wird eben jedes Mal gezählt
+
+    const totalUrl = alreadyCountedTotal
+      ? `https://countapi.mileshilliard.com/api/v1/get/${totalKey}`
+      : `https://countapi.mileshilliard.com/api/v1/hit/${totalKey}`;
+    fetch(totalUrl)
       .then(r => r.json())
-      .then(data => { if (totalEl) totalEl.textContent = data.value.toLocaleString('de-DE'); })
+      .then(data => {
+        if (totalEl) totalEl.textContent = data.value.toLocaleString('de-DE');
+        if (!alreadyCountedTotal) { try { localStorage.setItem(STORE_TOTAL, '1'); } catch(e){} }
+      })
       .catch(() => { if (totalEl) totalEl.textContent = '–'; });
 
-    fetch(`https://countapi.mileshilliard.com/api/v1/hit/${todayKey}`)
+    const todayUrl = alreadyCountedToday
+      ? `https://countapi.mileshilliard.com/api/v1/get/${todayKey}`
+      : `https://countapi.mileshilliard.com/api/v1/hit/${todayKey}`;
+    fetch(todayUrl)
       .then(r => r.json())
-      .then(data => { if (todayEl) todayEl.textContent = data.value.toLocaleString('de-DE'); })
+      .then(data => {
+        if (todayEl) todayEl.textContent = data.value.toLocaleString('de-DE');
+        if (!alreadyCountedToday) { try { localStorage.setItem(STORE_DAY, todayDateStr); } catch(e){} }
+      })
       .catch(() => { if (todayEl) todayEl.textContent = '–'; });
   })();
 
