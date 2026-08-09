@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>3DToolBox – Filament-Finder für 3D-Druck</title>
 <meta name="description" content="Kostenloses Online-Tool für 3D-Druck-Hobbyisten: Foto oder 3MF-Datei hochladen und automatisch das passende Filament samt Farbe finden.">
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js"></script>
 <style>
@@ -59,6 +62,36 @@
   }
   .fm-brand-3d{
     color:#FF6A2B;
+  }
+  .fm-lang-switch{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:4px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12px;
+    font-weight:700;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:4px;
+  }
+  .fm-lang-current{
+    padding:5px 10px;
+    border-radius:5px;
+    background:var(--accent);
+    color:#1a1206;
+  }
+  .fm-lang-link{
+    padding:5px 10px;
+    border-radius:5px;
+    color:var(--ink-dim);
+    text-decoration:none;
+    transition:color .15s ease, background .15s ease;
+  }
+  .fm-lang-link:hover{
+    color:var(--ink);
+    background:var(--panel-2);
   }
 
   .fm-tools-bar{
@@ -461,6 +494,10 @@
       <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
     </svg>
     <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+    <div class="fm-lang-switch">
+      <span class="fm-lang-current">DE</span>
+      <a class="fm-lang-link" href="/en/">EN</a>
+    </div>
   </div>
 
   <div class="fm-tools-bar">
