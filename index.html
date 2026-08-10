@@ -481,7 +481,38 @@
     width:1px;
     height:28px;
     background:var(--line);
-  }</style>
+  }
+
+  .fm-footer{
+    margin-top:26px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    text-align:center;
+  }
+  .fm-footer-coop{
+    font-size:12px;
+    color:var(--ink-dim);
+    margin:0 0 10px;
+  }
+  .fm-footer-coop a{
+    color:var(--accent-2);
+    text-decoration:none;
+  }
+  .fm-footer-coop a:hover{ text-decoration:underline; }
+  .fm-footer-legal{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11.5px;
+    color:var(--ink-dim);
+  }
+  .fm-footer-legal a{
+    color:var(--ink-dim);
+    text-decoration:none;
+  }
+  .fm-footer-legal a:hover{ color:var(--ink); text-decoration:underline; }
+</style>
 </head>
 <body>
 
@@ -576,6 +607,15 @@
     <div class="fm-counter-stat">
       <span class="fm-counter-num" id="fmCounterToday">–</span>
       <span class="fm-counter-label">heute</span>
+    </div>
+  </div>
+
+  <div class="fm-footer">
+    <p class="fm-footer-coop">In Kooperation mit <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p>
+    <div class="fm-footer-legal">
+      <a href="/impressum.html">Impressum</a>
+      <span>·</span>
+      <a href="/datenschutz.html">Datenschutz</a>
     </div>
   </div>
 </div>
