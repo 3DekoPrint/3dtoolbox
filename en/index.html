@@ -862,12 +862,12 @@
     {name:"PETG Basic Green", brand:"Bambu Lab", material:"PETG", hex:"#009639", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-green"},
     {name:"PETG Basic Pine Green", brand:"Bambu Lab", material:"PETG", hex:"#034638", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-pine-green"},
     {name:"PETG Basic Dark Brown", brand:"Bambu Lab", material:"PETG", hex:"#4F2C1D", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-dark-brown"},
-    {name:"PETG Basic Dark Beige", brand:"Bambu Lab", material:"PETG", hex:"#DBC8B6", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-dark-beige"},
+    {name:"PETG Basic Dark Beige", brand:"Bambu Lab", material:"PETG", hex:"#DBC8B6", shop:"3DJake", url:"https://www.3djake.de/suche?keyword=Bambu+Lab+PETG+Basic+Dark+Beige"},
     {name:"PETG Basic Black", brand:"Bambu Lab", material:"PETG", hex:"#000000", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-black"},
     {name:"PETG Basic Gray", brand:"Bambu Lab", material:"PETG", hex:"#7F7E83", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-gray"},
     {name:"PETG Basic White", brand:"Bambu Lab", material:"PETG", hex:"#FFFFFF", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-white"},
 // ABS
-    {name:"ABS White", brand:"Bambu Lab", material:"ABS", hex:"#FFFFFF", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-white"},
+    {name:"ABS White", brand:"Bambu Lab", material:"ABS", hex:"#FFFFFF", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-white-10"},
     {name:"ABS Bambu Green", brand:"Bambu Lab", material:"ABS", hex:"#00AE42", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-bambu-green"},
     {name:"ABS Olive", brand:"Bambu Lab", material:"ABS", hex:"#789D4A", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-olive"},
     {name:"ABS Azure", brand:"Bambu Lab", material:"ABS", hex:"#489FDF", shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-azure"},
@@ -955,7 +955,7 @@
     dominant.forEach(c => {
       const matches = bestMatchesByBrand(c.hex, 3, selectedMaterial);
       if (matches.length === 0){
-        renderExactRow(c.hex, `No ${selectedMaterial} in the database yet`, 'No colors have been added for this material yet', null, null, `Image share: ${c.pct}% · ${c.hex}`);
+        renderExactRow(c.hex, `No matching ${selectedMaterial} filament found`, 'No sufficiently similar color available in this material category', null, null, `Image share: ${c.pct}% · ${c.hex}`);
         return;
       }
       renderMatchGroup(c.hex, matches, `Image share: ${c.pct}% · ${c.hex}`);
@@ -1139,7 +1139,10 @@
       }
     }
     const sorted = [...byBrand.values()].sort((a,b) => a.dist - b.dist);
-    if (sorted.length === 0) return [];
+    // No match if even the closest available color is too far off (e.g. brown
+    // in a 6-color palette like ASA) — better an honest "no good match" than
+    // forcing a visually wrong color.
+    if (sorted.length === 0 || sorted[0].dist > MAX_ALT_DISTANCE) return [];
     const primary = sorted[0];
     const alternatives = sorted.slice(1).filter(m => m.dist <= MAX_ALT_DISTANCE);
     return [primary, ...alternatives].slice(0, topN);
@@ -1341,11 +1344,12 @@
           // the closest color value in the SAME material from the verified database
           // (a PETG project shouldn't be compared against PLA colors).
           const normalizedMaterial = normalizeMaterial(item.type);
-          let matches = bestMatchesByBrand(item.hex, 3, normalizedMaterial);
+          const matches = bestMatchesByBrand(item.hex, 3, normalizedMaterial);
           if (matches.length === 0){
-            // No data for this material yet -> try without a material filter,
-            // an approximation is better than no match at all.
-            matches = bestMatchesByBrand(item.hex, 3, null);
+            // No sufficiently close, verified match in this material — better to
+            // show it honestly without a link than to wrongly link a different material.
+            renderExactRow(item.hex, item.label, item.sublabel, null, null, null);
+            return;
           }
           renderMatchGroup(item.hex, matches, null, item.label, item.sublabel);
         });
