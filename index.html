@@ -283,6 +283,36 @@
   }
   .fm-linkbox input:focus{outline:1.5px solid var(--accent);}
 
+  .fm-tolerance-row{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+    margin-top:16px;
+  }
+  .fm-tolerance-row label{
+    display:block;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    color:var(--ink-dim);
+    margin-bottom:8px;
+  }
+  .fm-tolerance-row label span{ color:var(--accent-2); font-weight:600; }
+  .fm-tolerance-desc{ color:var(--ink-dim) !important; font-weight:400 !important; }
+  .fm-tolerance-row input[type="range"]{
+    width:100%;
+    accent-color:var(--accent);
+    cursor:pointer;
+  }
+  .fm-tolerance-scale{
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    color:var(--ink-dim);
+    margin-top:4px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+  }
   .fm-material-row{
     display:flex;
     align-items:center;
@@ -650,6 +680,15 @@
     </div>
   </div>
 
+  <div class="fm-tolerance-row">
+    <label for="fmTolerance">Farbtoleranz: <span id="fmToleranceVal">14</span> <span class="fm-tolerance-desc" id="fmToleranceDesc">(ausgewogen)</span></label>
+    <input type="range" id="fmTolerance" min="4" max="30" value="14" step="1">
+    <div class="fm-tolerance-scale">
+      <span>streng — nur sehr genaue Treffer</span>
+      <span>locker — zeigt auch entferntere Optionen</span>
+    </div>
+  </div>
+
   <div class="fm-status" id="fmStatus"></div>
   <div class="fm-results" id="fmResults"></div>
 
@@ -923,6 +962,24 @@
   const numColorsValEl = document.getElementById('fmNumColorsVal');
   const minPctEl = document.getElementById('fmMinPct');
   const minPctValEl = document.getElementById('fmMinPctVal');
+  const toleranceEl = document.getElementById('fmTolerance');
+  const toleranceValEl = document.getElementById('fmToleranceVal');
+  const toleranceDescEl = document.getElementById('fmToleranceDesc');
+
+  function toleranceLabel(v){
+    if (v <= 8) return '(streng)';
+    if (v <= 18) return '(ausgewogen)';
+    return '(locker)';
+  }
+
+  toleranceEl.addEventListener('input', () => {
+    colorTolerance = parseInt(toleranceEl.value, 10);
+    toleranceValEl.textContent = colorTolerance;
+    toleranceDescEl.textContent = toleranceLabel(colorTolerance);
+    // Ergebnisse mit der neuen Toleranz neu berechnen, ohne die Datei erneut einzulesen.
+    if (currentImg) runImageAnalysis();
+    else if (lastExactItems || lastFallbackColors) renderThreeMFResults();
+  });
 
   let currentImg = null;
   let selectedMaterial = 'PLA';
@@ -953,7 +1010,7 @@
 
     statusEl.textContent = `${dominant.length} dominante Farbe(n) erkannt (${selectedMaterial}) — Näherungs-Match mit Filamenten:`;
     dominant.forEach(c => {
-      const matches = bestMatchesByBrand(c.hex, 3, selectedMaterial);
+      const matches = bestMatchesByBrand(c.hex, 6, selectedMaterial);
       if (matches.length === 0){
         renderExactRow(c.hex, `Kein passendes ${selectedMaterial}-Filament gefunden`, 'Keine ausreichend ähnliche Farbe in dieser Materialkategorie hinterlegt', null, null, `Bildanteil: ${c.pct}% · ${c.hex}`);
         return;
@@ -1113,7 +1170,7 @@
   // Gesamttreffer wird immer gezeigt; weitere Marken nur, wenn ihr bester
   // Kandidat tatsächlich nah genug an der Zielfarbe liegt (sonst lieber
   // keine Alternative als eine optisch unpassende).
-  const MAX_ALT_DISTANCE = 14; // ΔE2000 — grobe Grenze für "noch als ähnlich durchgehend"
+  let colorTolerance = 14; // ΔE2000 — einstellbar über den Toleranz-Regler
 
   // Ordnet die vom Slicer gemeldete Materialbezeichnung (z.B. "PETG-CF", "PLA Silk")
   // einer unserer Datenbank-Materialkategorien zu.
@@ -1130,22 +1187,29 @@
 
   function bestMatchesByBrand(hex, topN, material){
     const pool = material ? FILAMENTS.filter(f => f.material === material) : FILAMENTS;
-    const byBrand = new Map();
-    for (const f of pool){
-      const d = colorDistance(hex, f.hex);
-      const current = byBrand.get(f.brand);
-      if (!current || d < current.dist){
-        byBrand.set(f.brand, { ...f, dist: d });
-      }
-    }
-    const sorted = [...byBrand.values()].sort((a,b) => a.dist - b.dist);
+    const scored = pool
+      .map(f => ({ ...f, dist: colorDistance(hex, f.hex) }))
+      .sort((a, b) => a.dist - b.dist);
+
     // Kein Treffer, wenn selbst die naheliegendste verfügbare Farbe zu weit weg
     // liegt (z.B. Braun bei einer 6-Farben-Palette wie ASA) — lieber ehrlich
     // "kein guter Treffer" als eine optisch falsche Farbe erzwingen.
-    if (sorted.length === 0 || sorted[0].dist > MAX_ALT_DISTANCE) return [];
-    const primary = sorted[0];
-    const alternatives = sorted.slice(1).filter(m => m.dist <= MAX_ALT_DISTANCE);
-    return [primary, ...alternatives].slice(0, topN);
+    if (scored.length === 0 || scored[0].dist > colorTolerance) return [];
+
+    const primary = scored[0];
+    const results = [primary];
+    for (const candidate of scored.slice(1)){
+      if (results.length >= topN) break;
+      if (candidate.dist > colorTolerance) break; // sortiert -> ab hier wird nichts mehr passen
+      // Nur wirklich unterscheidbare Farben als Alternative aufnehmen — sonst könnten
+      // z.B. zwei fast identische Grautöne verschiedener Marken doppelt auftauchen,
+      // während eine deutlich andere Farbe derselben Marke (wie hier "Sakura Pink"
+      // neben "Latte Brown") fälschlich rausfallen würde.
+      const isNearDuplicate = results.some(r => colorDistance(candidate.hex, r.hex) < 3);
+      if (isNearDuplicate) continue;
+      results.push(candidate);
+    }
+    return results;
   }
 
   function renderExactRow(hex, label, sublabel, url, shop, extraHtml){
@@ -1330,29 +1394,45 @@
     });
   }
 
+  let lastExactItems = null;
+  let lastFallbackColors = null;
+
+  function renderThreeMFResults(){
+    resultsEl.innerHTML = '';
+    if (lastExactItems && lastExactItems.length){
+      statusEl.textContent = `${lastExactItems.length} im Projekt verwendete Filament(e) gefunden (aus den Slicer-Einstellungen).`;
+      lastExactItems.forEach(item => {
+        const normalizedMaterial = normalizeMaterial(item.type);
+        const matches = bestMatchesByBrand(item.hex, 6, normalizedMaterial);
+        if (matches.length === 0){
+          renderExactRow(item.hex, item.label, item.sublabel, null, null, null);
+          return;
+        }
+        renderMatchGroup(item.hex, matches, null, item.label, item.sublabel);
+      });
+      return;
+    }
+    if (lastFallbackColors && lastFallbackColors.length){
+      statusEl.textContent = `${lastFallbackColors.length} Farbe(n) im Modell gefunden (keine Slicer-Angaben vorhanden) — Näherungs-Match:`;
+      lastFallbackColors.forEach(hex => {
+        const matches = bestMatchesByBrand(hex, 6);
+        renderMatchGroup(hex, matches);
+      });
+    }
+  }
+
   async function handle3mfFile(file){
     statusEl.textContent = 'Lese 3MF-Archiv…';
+    lastExactItems = null;
+    lastFallbackColors = null;
     try {
       const zip = await JSZip.loadAsync(file);
 
       // 1) Bevorzugt: exakte Slicer-Angaben (Bambu Studio, PrusaSlicer, OrcaSlicer …)
       const exact = await tryReadSlicerSettings(zip);
       if (exact && exact.length){
-        statusEl.textContent = `${exact.length} im Projekt verwendete Filament(e) gefunden (aus den Slicer-Einstellungen).`;
-        exact.forEach(item => {
-          // Der Slicer nennt Farbe/Marke/Typ exakt — den Kauflink holen wir uns über
-          // den nächstliegenden Farbwert im SELBEN Material aus der verifizierten Datenbank
-          // (ein PETG-Projekt soll nicht gegen PLA-Farben verglichen werden).
-          const normalizedMaterial = normalizeMaterial(item.type);
-          const matches = bestMatchesByBrand(item.hex, 3, normalizedMaterial);
-          if (matches.length === 0){
-            // Kein ausreichend ähnlicher, verifizierter Treffer in diesem Material —
-            // lieber ehrlich ohne Link anzeigen als fälschlich ein anderes Material verlinken.
-            renderExactRow(item.hex, item.label, item.sublabel, null, null, null);
-            return;
-          }
-          renderMatchGroup(item.hex, matches, null, item.label, item.sublabel);
-        });
+        lastExactItems = exact;
+        renderThreeMFResults();
         return;
       }
 
@@ -1363,12 +1443,8 @@
         statusEl.classList.add('fm-err');
         return;
       }
-
-      statusEl.textContent = `${uniqueColors.length} Farbe(n) im Modell gefunden (keine Slicer-Angaben vorhanden) — Näherungs-Match:`;
-      uniqueColors.forEach(hex => {
-        const matches = bestMatchesByBrand(hex, 3);
-        renderMatchGroup(hex, matches);
-      });
+      lastFallbackColors = uniqueColors;
+      renderThreeMFResults();
     } catch (err){
       console.error(err);
       statusEl.textContent = 'Fehler beim Lesen der Datei: ' + err.message;
