@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3DToolBox – 3D Printing Cost Calculator</title>
+<meta name="description" content="Free online calculator for 3D printing hobbyists: work out material, electricity, wear and failure-rate costs live — with printer presets and a seller pricing mode.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+<style>
+  :root{
+    --bg:#14201c;
+    --panel:#1b2b25;
+    --panel-2:#22362d;
+    --ink:#eef3ee;
+    --ink-dim:#a8bdb2;
+    --accent:#ff8c3c;
+    --accent-2:#5fd9a0;
+    --line:#2f473c;
+    font-family:"Iowan Old Style","Georgia",serif;
+  }
+  *{box-sizing:border-box;}
+  html, body{ margin:0; padding:0; background:var(--bg); }
+  .fm-root{
+    background:var(--bg);
+    color:var(--ink);
+    padding:28px 22px 36px;
+    border-radius:14px;
+    min-height:100%;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .fm-eyebrow{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent-2);
+    margin:0 0 6px;
+  }
+  .fm-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .fm-brand-icon{
+    width:30px;
+    height:30px;
+    flex:none;
+    border-radius:7px;
+  }
+  .fm-brand-word{
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:700;
+    font-size:19px;
+    color:var(--ink);
+    letter-spacing:.01em;
+  }
+  .fm-brand-3d{ color:#FF6A2B; }
+  .fm-lang-switch{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:4px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12px;
+    font-weight:700;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:4px;
+  }
+  .fm-lang-current{
+    padding:5px 10px;
+    border-radius:5px;
+    background:var(--accent);
+    color:#1a1206;
+  }
+  .fm-lang-link{
+    padding:5px 10px;
+    border-radius:5px;
+    color:var(--ink-dim);
+    text-decoration:none;
+    transition:color .15s ease, background .15s ease;
+  }
+  .fm-lang-link:hover{ color:var(--ink); background:var(--panel-2); }
+
+  .fm-tools-bar{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:22px;
+    background:var(--panel);
+  }
+  .fm-tools-title{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin:0 0 12px;
+  }
+  .fm-tools-grid{ display:flex; flex-wrap:wrap; gap:10px; }
+  .fm-tool{ position:relative; display:flex; align-items:center; gap:6px; }
+  .fm-tool-btn{
+    display:inline-block;
+    background:transparent;
+    border:1px solid var(--accent);
+    color:var(--accent);
+    text-decoration:none;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12.5px;
+    font-weight:600;
+    padding:8px 16px;
+    border-radius:8px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .fm-tool-btn:not(.fm-tool-soon):hover{ background:var(--accent); color:#1a1206; }
+  .fm-tool-btn.fm-tool-soon{ border-color:var(--line); color:var(--ink-dim); cursor:default; }
+  .fm-tool-info{
+    width:20px; height:20px; border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--panel-2);
+    color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px; font-weight:700; line-height:1;
+    cursor:pointer; flex:none;
+  }
+  .fm-tool-info:hover{ border-color:var(--accent); color:var(--accent); }
+  .fm-tool-tip{
+    display:none; position:absolute; top:calc(100% + 8px); left:0;
+    width:220px; background:var(--panel-2); border:1px solid var(--line);
+    border-radius:8px; padding:10px 12px; font-size:12px; line-height:1.45;
+    color:var(--ink); z-index:20; box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  @media (hover: hover){ .fm-tool:hover .fm-tool-tip{ display:block; } }
+  .fm-tool.fm-tool-tip-open .fm-tool-tip{ display:block; }
+
+  h1.fm-title{ font-size:26px; margin:0 0 4px; font-weight:600; letter-spacing:.2px; }
+  .fm-sub{ color:var(--ink-dim); font-size:14px; margin:0 0 22px; max-width:560px; line-height:1.5; }
+
+  /* Kostenrechner-spezifisch */
+  .kr-section{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px 18px 6px;
+    margin-bottom:16px;
+  }
+  .kr-section-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .kr-num{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    color:var(--accent-2);
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:2px 6px;
+  }
+  .kr-section-title{
+    font-size:15px;
+    font-weight:600;
+    margin:0;
+  }
+  .kr-row{
+    display:grid;
+    grid-template-columns:1fr 130px;
+    gap:14px;
+    align-items:center;
+    margin-bottom:14px;
+  }
+  .kr-row label{
+    font-size:13.5px;
+    color:var(--ink);
+    display:block;
+  }
+  .kr-row .kr-hint{
+    display:block;
+    font-size:11.5px;
+    color:var(--ink-dim);
+    margin-top:2px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+  }
+  .kr-input-unit{ position:relative; }
+  .kr-input-unit input, select.kr-select{
+    width:100%;
+    background:var(--bg);
+    border:1px solid var(--line);
+    color:var(--ink);
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:13.5px;
+    padding:9px 10px;
+    border-radius:7px;
+    outline:none;
+    transition:border-color .15s ease;
+    -moz-appearance:textfield;
+  }
+  .kr-input-unit input:focus, select.kr-select:focus{ border-color:var(--accent); }
+  .kr-input-unit input::-webkit-outer-spin-button,
+  .kr-input-unit input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+  .kr-input-unit .kr-unit{
+    position:absolute; right:10px; top:50%; transform:translateY(-50%);
+    font-size:11px; color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace;
+    pointer-events:none;
+  }
+  .kr-full{ grid-column:1 / -1; }
+  select.kr-select{ width:100%; cursor:pointer; }
+  select.kr-select option{ background:var(--panel); color:var(--ink); }
+
+  .kr-pills{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
+  .kr-pill{
+    background:var(--bg);
+    border:1px solid var(--line);
+    color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12px; font-weight:600;
+    padding:6px 14px; border-radius:20px;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .kr-pill:hover{ border-color:var(--accent); color:var(--ink); }
+  .kr-pill-active{ background:var(--accent); border-color:var(--accent); color:#1a1206; }
+
+  .kr-slider-row{
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+    margin-bottom:16px;
+  }
+  .kr-slider-row label{
+    display:block;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11.5px;
+    letter-spacing:.04em;
+    color:var(--ink-dim);
+    margin-bottom:8px;
+  }
+  .kr-slider-row label span{ color:var(--accent-2); font-weight:600; }
+  .kr-slider-row input[type=range]{ width:100%; accent-color:var(--accent); cursor:pointer; }
+
+  /* Ergebnis */
+  .kr-results{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:16px;
+  }
+  .kr-total-wrap{ text-align:center; margin-bottom:18px; }
+  .kr-total-label{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin:0 0 4px;
+  }
+  .kr-total-value{
+    font-size:38px;
+    font-weight:700;
+    color:var(--accent-2);
+    line-height:1.15;
+  }
+  .kr-breakdown{ display:flex; flex-direction:column; gap:0; }
+  .kr-bd-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:9px 0;
+    border-bottom:1px solid var(--line);
+    font-size:13.5px;
+  }
+  .kr-bd-row:last-child{ border-bottom:none; }
+  .kr-bd-label{ display:flex; align-items:center; gap:8px; color:var(--ink-dim); }
+  .kr-dot{ width:8px; height:8px; border-radius:50%; flex:none; }
+  .kr-dot.material{ background:var(--accent); }
+  .kr-dot.energie{ background:var(--accent-2); }
+  .kr-dot.verschleiss{ background:#7fb2e0; }
+  .kr-dot.fehldruck{ background:#e0567f; }
+  .kr-bd-value{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    color:var(--ink);
+    font-size:13.5px;
+  }
+  .kr-mini-stats{
+    display:flex;
+    gap:12px;
+    margin-top:16px;
+  }
+  .kr-mini-stat{
+    flex:1;
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 12px;
+    text-align:center;
+  }
+  .kr-mini-stat-val{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:16px;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .kr-mini-stat-lbl{
+    font-size:10.5px;
+    color:var(--ink-dim);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    margin-top:3px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+  }
+
+  /* Seller-Modus */
+  .kr-seller-toggle{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px 18px;
+    margin-bottom:16px;
+    cursor:pointer;
+  }
+  .kr-seller-toggle-text{ font-size:13.5px; }
+  .kr-seller-toggle-text b{ display:block; font-size:14.5px; margin-bottom:2px; }
+  .kr-seller-toggle-text span{ color:var(--ink-dim); font-size:12px; }
+  .kr-switch{
+    width:42px; height:24px;
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:20px;
+    position:relative;
+    flex:none;
+    transition:background .15s ease;
+  }
+  .kr-switch::after{
+    content:"";
+    position:absolute;
+    top:2px; left:2px;
+    width:18px; height:18px;
+    background:var(--ink-dim);
+    border-radius:50%;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .kr-switch.kr-on{ background:var(--accent); border-color:var(--accent); }
+  .kr-switch.kr-on::after{ transform:translateX(18px); background:#1a1206; }
+
+  .kr-seller-panel{ display:none; }
+  .kr-seller-panel.kr-open{ display:block; }
+
+  .kr-sellprice-box{
+    background:var(--bg);
+    border:1px solid var(--accent-2);
+    border-radius:10px;
+    padding:14px 16px;
+    margin-top:4px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .kr-sellprice-box .kr-sp-label{ font-size:13px; color:var(--ink-dim); }
+  .kr-sellprice-box .kr-sp-value{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:22px;
+    font-weight:700;
+    color:var(--accent-2);
+  }
+
+  .kr-actions{
+    display:flex;
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .kr-btn{
+    flex:1;
+    text-align:center;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12.5px;
+    font-weight:600;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .kr-btn:hover{ border-color:var(--accent); color:var(--ink); }
+  .kr-btn.kr-btn-primary{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#1a1206;
+  }
+  .kr-btn.kr-btn-primary:hover{ opacity:.92; }
+
+  .fm-note{
+    font-size:11.5px;
+    color:var(--ink-dim);
+    margin-top:16px;
+    line-height:1.5;
+    border-top:1px solid var(--line);
+    padding-top:14px;
+  }
+
+  .fm-footer{
+    margin-top:26px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    text-align:center;
+  }
+  .fm-footer-coop{
+    font-size:12px;
+    color:var(--ink-dim);
+    margin:0 0 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+  }
+  .fm-footer-logo{ height:20px; width:auto; display:inline-block; vertical-align:middle; }
+  .fm-footer-coop a{ color:var(--accent-2); text-decoration:none; }
+  .fm-footer-coop a:hover{ text-decoration:underline; }
+  .fm-footer-legal{
+    display:flex; justify-content:center; gap:8px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11.5px; color:var(--ink-dim);
+  }
+  .fm-footer-legal a{ color:var(--ink-dim); text-decoration:none; }
+  .fm-footer-legal a:hover{ color:var(--ink); text-decoration:underline; }
+
+  @media (max-width:480px){
+    .kr-row{ grid-template-columns:1fr; }
+    .kr-mini-stats{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="fm-root">
+  <div class="fm-brand">
+    <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
+      <rect width="220" height="220" rx="44" fill="#FF6A2B"/>
+      <polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/>
+      <polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/>
+      <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
+    </svg>
+    <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+    <div class="fm-lang-switch">
+      <a class="fm-lang-link" href="3d-druck-kostenrechner.html">DE</a>
+      <span class="fm-lang-current">EN</span>
+    </div>
+  </div>
+
+  <div class="fm-tools-bar">
+    <p class="fm-tools-title">Handy tools for 3D printing</p>
+    <div class="fm-tools-grid">
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI</a>
+        <button type="button" class="fm-tool-info" aria-label="More info about Meshy AI">i</button>
+        <div class="fm-tool-tip">AI tool: turn a text description or image into a print-ready 3D model automatically.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs</a>
+        <button type="button" class="fm-tool-info" aria-label="More info about Thangs">i</button>
+        <div class="fm-tool-tip">A large search and model library: find ready-to-print 3D models from other makers.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="/en/filament-finder.html">Filament Finder</a>
+        <button type="button" class="fm-tool-info" aria-label="More info about the Filament Finder">i</button>
+        <div class="fm-tool-tip">Upload a photo or a 3MF file and automatically find the matching filament and colour.</div>
+      </div>
+      <div class="fm-tool"><span class="fm-tool-btn fm-tool-soon">Coming soon</span></div>
+    </div>
+  </div>
+
+  <p class="fm-eyebrow">Cost calculation</p>
+  <h1 class="fm-title">3D Printing Cost Calculator</h1>
+  <p class="fm-sub">Work out material, electricity, wear and failure-rate costs live — with printer presets and an optional seller mode for anyone selling their prints.</p>
+
+  <!-- 01 Drucker -->
+  <div class="kr-section">
+    <div class="kr-section-head">
+      <span class="kr-num">01</span>
+      <h2 class="kr-section-title">Printer</h2>
+    </div>
+
+    <div class="kr-row kr-full">
+      <label>Choose a model
+        <span class="kr-hint">ballpark figures — fully editable below</span>
+      </label>
+      <div></div>
+    </div>
+    <div class="kr-row kr-full" style="margin-top:-8px;">
+      <select class="kr-select" id="printerPreset"></select>
+      <div></div>
+    </div>
+
+    <div class="kr-row">
+      <label>Power draw
+        <span class="kr-hint">avg. consumption while printing</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="power" value="120" min="0" step="5">
+        <span class="kr-unit">W</span>
+      </div>
+    </div>
+    <div class="kr-row">
+      <label>Purchase price
+        <span class="kr-hint">used for depreciation</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="printerPrice" value="399" min="0" step="10">
+        <span class="kr-unit">€</span>
+      </div>
+    </div>
+    <div class="kr-row">
+      <label>Lifetime
+        <span class="kr-hint">estimated total print hours</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="lifetime" value="3000" min="0" step="100">
+        <span class="kr-unit">h</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 Material -->
+  <div class="kr-section">
+    <div class="kr-section-head">
+      <span class="kr-num">02</span>
+      <h2 class="kr-section-title">Material</h2>
+    </div>
+
+    <div class="kr-pills" id="materialPills">
+      <button type="button" class="kr-pill kr-pill-active" data-mat="PLA" data-price="20">PLA</button>
+      <button type="button" class="kr-pill" data-mat="PLA+" data-price="22">PLA+</button>
+      <button type="button" class="kr-pill" data-mat="PETG" data-price="24">PETG</button>
+      <button type="button" class="kr-pill" data-mat="ABS" data-price="22">ABS</button>
+      <button type="button" class="kr-pill" data-mat="ASA" data-price="26">ASA</button>
+      <button type="button" class="kr-pill" data-mat="TPU" data-price="28">TPU</button>
+    </div>
+
+    <div class="kr-row">
+      <label>Price per kg
+        <span class="kr-hint">price of a 1 kg spool</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="pricePerKg" value="20" min="0" step="0.5">
+        <span class="kr-unit">€/kg</span>
+      </div>
+    </div>
+    <div class="kr-row">
+      <label>Print weight
+        <span class="kr-hint">from your slicer (e.g. Cura, PrusaSlicer)</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="gramsUsed" value="50" min="0" step="1">
+        <span class="kr-unit">g</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 Zeit & Energie -->
+  <div class="kr-section">
+    <div class="kr-section-head">
+      <span class="kr-num">03</span>
+      <h2 class="kr-section-title">Time &amp; energy</h2>
+    </div>
+
+    <div class="kr-row">
+      <label>Print time
+        <span class="kr-hint">estimated time from your slicer</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="printHours" value="3" min="0" step="0.25">
+        <span class="kr-unit">h</span>
+      </div>
+    </div>
+    <div class="kr-row">
+      <label>Electricity price
+        <span class="kr-hint">EU average: roughly 30 ct/kWh</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="kwhPrice" value="35" min="0" step="1">
+        <span class="kr-unit">ct/kWh</span>
+      </div>
+    </div>
+
+    <div class="kr-slider-row">
+      <label for="failRate">Failure rate: <span id="failRateVal">10</span> % <span style="color:var(--ink-dim); font-weight:400;">— buffer for failed prints</span></label>
+      <input type="range" id="failRate" min="0" max="30" value="10" step="1">
+    </div>
+  </div>
+
+  <!-- Ergebnis -->
+  <div class="kr-results">
+    <div class="kr-total-wrap">
+      <p class="kr-total-label">Total cost</p>
+      <div class="kr-total-value" id="totalOut">0.00 €</div>
+    </div>
+    <div class="kr-breakdown">
+      <div class="kr-bd-row">
+        <div class="kr-bd-label"><span class="kr-dot material"></span>Material</div>
+        <div class="kr-bd-value" id="matOut">0.00 €</div>
+      </div>
+      <div class="kr-bd-row">
+        <div class="kr-bd-label"><span class="kr-dot energie"></span>Electricity</div>
+        <div class="kr-bd-value" id="energyOut">0.00 €</div>
+      </div>
+      <div class="kr-bd-row">
+        <div class="kr-bd-label"><span class="kr-dot verschleiss"></span>Wear</div>
+        <div class="kr-bd-value" id="wearOut">0.00 €</div>
+      </div>
+      <div class="kr-bd-row">
+        <div class="kr-bd-label"><span class="kr-dot fehldruck"></span>Failure buffer</div>
+        <div class="kr-bd-value" id="failOut">0.00 €</div>
+      </div>
+    </div>
+    <div class="kr-mini-stats">
+      <div class="kr-mini-stat">
+        <div class="kr-mini-stat-val" id="perGramOut">0.0 ct</div>
+        <div class="kr-mini-stat-lbl">per gram</div>
+      </div>
+      <div class="kr-mini-stat">
+        <div class="kr-mini-stat-val" id="perHourOut">0.00 €</div>
+        <div class="kr-mini-stat-lbl">per hour</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seller mode -->
+  <div class="kr-seller-toggle" id="sellerToggle">
+    <div class="kr-seller-toggle-text">
+      <b>Seller mode</b>
+      <span>Selling your prints? Factor in labour time, packaging &amp; marketplace fees.</span>
+    </div>
+    <div class="kr-switch" id="sellerSwitch"></div>
+  </div>
+
+  <div class="kr-section kr-seller-panel" id="sellerPanel">
+    <div class="kr-section-head">
+      <span class="kr-num">04</span>
+      <h2 class="kr-section-title">Selling</h2>
+    </div>
+    <div class="kr-row">
+      <label>Labour time
+        <span class="kr-hint">prep, post-processing, shipping</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="laborMin" value="15" min="0" step="5">
+        <span class="kr-unit">min</span>
+      </div>
+    </div>
+    <div class="kr-row">
+      <label>Hourly rate
+        <span class="kr-hint">your target earnings</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="wage" value="15" min="0" step="1">
+        <span class="kr-unit">€/h</span>
+      </div>
+    </div>
+    <div class="kr-row">
+      <label>Packaging &amp; shipping materials
+        <span class="kr-hint">box, wrap, label …</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="packaging" value="0.80" min="0" step="0.1">
+        <span class="kr-unit">€</span>
+      </div>
+    </div>
+    <div class="kr-row">
+      <label>Marketplace fee
+        <span class="kr-hint">e.g. Etsy, eBay</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="marketFee" value="6.5" min="0" max="90" step="0.5">
+        <span class="kr-unit">%</span>
+      </div>
+    </div>
+    <div class="kr-row">
+      <label>Profit margin
+        <span class="kr-hint">markup on all costs</span>
+      </label>
+      <div class="kr-input-unit">
+        <input type="number" id="margin" value="40" min="0" step="5">
+        <span class="kr-unit">%</span>
+      </div>
+    </div>
+
+    <div class="kr-sellprice-box">
+      <span class="kr-sp-label">Recommended selling price</span>
+      <span class="kr-sp-value" id="sellPriceOut">0.00 €</span>
+    </div>
+    <div style="height:14px;"></div>
+  </div>
+
+  <div class="kr-actions">
+    <button type="button" class="kr-btn" id="resetBtn">Reset</button>
+    <button type="button" class="kr-btn kr-btn-primary" id="exportBtn">Export as text file</button>
+  </div>
+
+  <p class="fm-note">
+    <b>How it's calculated:</b> Material = weight (g) × price/kg ÷ 1,000. Electricity = power (W) × time (h) ÷ 1,000 × electricity price. Wear = purchase price ÷ lifetime (h) × print time (h) — reflects the printer's wear over its lifetime. The failure rate is added as a buffer on top of the material, electricity and wear subtotal. In seller mode, labour time, packaging and margin are added on top; the marketplace fee is calculated so your target margin still holds after the fee is deducted. All calculations run locally in your browser — no data is transmitted.
+  </p>
+
+  <div class="fm-footer">
+    <p class="fm-footer-coop">
+      <img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo">
+      In partnership with <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a>
+    </p>
+    <div class="fm-footer-legal">
+      <a href="/impressum.html">Imprint</a>
+      <span>·</span>
+      <a href="/datenschutz.html">Privacy policy</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+
+  // Printer presets: power draw (W), purchase price (€), lifetime (h) — ballpark figures, fully editable
+  const PRINTERS = [
+    { name: "Custom printer (manual)",   power: 120, price: 399, life: 3000 },
+    { name: "Bambu Lab X1 Carbon",       power: 150, price: 999, life: 4000 },
+    { name: "Bambu Lab P1S",             power: 130, price: 599, life: 4000 },
+    { name: "Bambu Lab A1",              power: 100, price: 369, life: 3500 },
+    { name: "Bambu Lab A1 Mini",         power: 80,  price: 259, life: 3500 },
+    { name: "Bambu Lab H2S",             power: 200, price: 1149, life: 4000 },
+    { name: "Bambu Lab H2D",             power: 220, price: 1899, life: 4000 },
+    { name: "Bambu Lab H2C",             power: 230, price: 2199, life: 4000 },
+    { name: "Prusa MK4",                 power: 120, price: 799, life: 5000 },
+    { name: "Prusa Mini+",               power: 70,  price: 429, life: 4500 },
+    { name: "Creality Ender 3 V3 KE",    power: 110, price: 229, life: 3000 },
+    { name: "Creality Ender 3 V2",       power: 100, price: 189, life: 2500 },
+    { name: "Creality Ender 3 V3 SE",    power: 100, price: 159, life: 2500 },
+    { name: "Elegoo Neptune 4 Pro",      power: 110, price: 239, life: 3000 },
+    { name: "Anycubic Kobra 2",          power: 100, price: 199, life: 2500 }
+  ];
+
+  const DEFAULTS = {
+    power:120, printerPrice:399, lifetime:3000,
+    pricePerKg:20, gramsUsed:50,
+    printHours:3, kwhPrice:35, failRate:10,
+    laborMin:15, wage:15, packaging:0.80, marketFee:6.5, margin:40
+  };
+
+  const ids = ['power','printerPrice','lifetime','pricePerKg','gramsUsed','printHours','kwhPrice',
+               'laborMin','wage','packaging','marketFee','margin'];
+  const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
+  const failRateEl = document.getElementById('failRate');
+  const failRateVal = document.getElementById('failRateVal');
+
+  const presetSelect = document.getElementById('printerPreset');
+  PRINTERS.forEach((p, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = p.name;
+    presetSelect.appendChild(opt);
+  });
+  presetSelect.addEventListener('change', () => {
+    const p = PRINTERS[presetSelect.value];
+    el.power.value = p.power;
+    el.printerPrice.value = p.price;
+    el.lifetime.value = p.life;
+    calc();
+  });
+
+  // Material pills
+  document.getElementById('materialPills').addEventListener('click', (e) => {
+    const btn = e.target.closest('.kr-pill');
+    if (!btn) return;
+    document.querySelectorAll('#materialPills .kr-pill').forEach(b => b.classList.remove('kr-pill-active'));
+    btn.classList.add('kr-pill-active');
+    el.pricePerKg.value = btn.dataset.price;
+    calc();
+  });
+
+  // Seller mode toggle
+  const sellerSwitch = document.getElementById('sellerSwitch');
+  const sellerPanel = document.getElementById('sellerPanel');
+  document.getElementById('sellerToggle').addEventListener('click', () => {
+    const on = sellerSwitch.classList.toggle('kr-on');
+    sellerPanel.classList.toggle('kr-open', on);
+    calc();
+  });
+
+  const fmtEUR = n => n.toLocaleString('en-GB', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+  const fmtCT  = n => (n*100).toLocaleString('en-GB', {minimumFractionDigits:1, maximumFractionDigits:1}) + ' ct';
+
+  let lastResult = null;
+
+  function calc(){
+    const power = parseFloat(el.power.value) || 0;
+    const printerPrice = parseFloat(el.printerPrice.value) || 0;
+    const lifetime = parseFloat(el.lifetime.value) || 0;
+    const pricePerKg = parseFloat(el.pricePerKg.value) || 0;
+    const gramsUsed = parseFloat(el.gramsUsed.value) || 0;
+    const printHours = parseFloat(el.printHours.value) || 0;
+    const kwhPrice = (parseFloat(el.kwhPrice.value) || 0) / 100; // ct -> €
+    const failRate = parseFloat(failRateEl.value) || 0;
+
+    const materialCost = (gramsUsed/1000) * pricePerKg;
+    const energyCost = printHours * (power/1000) * kwhPrice;
+    const wearCost = (printerPrice > 0 && lifetime > 0) ? (printerPrice/lifetime) * printHours : 0;
+
+    const subtotal = materialCost + energyCost + wearCost;
+    const failCost = subtotal * (failRate/100);
+    const total = subtotal + failCost;
+
+    const perGram = gramsUsed > 0 ? total/gramsUsed : 0;
+    const perHour = printHours > 0 ? total/printHours : 0;
+
+    document.getElementById('matOut').textContent = fmtEUR(materialCost);
+    document.getElementById('energyOut').textContent = fmtEUR(energyCost);
+    document.getElementById('wearOut').textContent = fmtEUR(wearCost);
+    document.getElementById('failOut').textContent = fmtEUR(failCost);
+    document.getElementById('totalOut').textContent = fmtEUR(total);
+    document.getElementById('perGramOut').textContent = fmtCT(perGram);
+    document.getElementById('perHourOut').textContent = fmtEUR(perHour);
+
+    let sellPrice = null;
+    if (sellerSwitch.classList.contains('kr-on')){
+      const laborMin = parseFloat(el.laborMin.value) || 0;
+      const wage = parseFloat(el.wage.value) || 0;
+      const packaging = parseFloat(el.packaging.value) || 0;
+      const marketFee = Math.min(parseFloat(el.marketFee.value) || 0, 95);
+      const margin = parseFloat(el.margin.value) || 0;
+
+      const laborCost = (laborMin/60) * wage;
+      const baseCosts = total + laborCost + packaging;
+      const priceBeforeFee = baseCosts * (1 + margin/100);
+      sellPrice = priceBeforeFee / (1 - marketFee/100);
+
+      document.getElementById('sellPriceOut').textContent = fmtEUR(sellPrice);
+    }
+
+    lastResult = { materialCost, energyCost, wearCost, failCost, total, perGram, perHour, sellPrice };
+  }
+
+  ids.forEach(id => el[id].addEventListener('input', calc));
+  failRateEl.addEventListener('input', () => { failRateVal.textContent = failRateEl.value; calc(); });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    Object.keys(DEFAULTS).forEach(id => { if (el[id]) el[id].value = DEFAULTS[id]; });
+    failRateEl.value = DEFAULTS.failRate;
+    failRateVal.textContent = DEFAULTS.failRate;
+    presetSelect.value = 0;
+    document.querySelectorAll('#materialPills .kr-pill').forEach(b => b.classList.remove('kr-pill-active'));
+    document.querySelector('#materialPills .kr-pill').classList.add('kr-pill-active');
+    sellerSwitch.classList.remove('kr-on');
+    sellerPanel.classList.remove('kr-open');
+    calc();
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    if (!lastResult) return;
+    const r = lastResult;
+    const lines = [
+      '3D Printing Cost Calculator — 3DToolBox',
+      '-----------------------------------',
+      'Material:          ' + fmtEUR(r.materialCost),
+      'Electricity:       ' + fmtEUR(r.energyCost),
+      'Wear:              ' + fmtEUR(r.wearCost),
+      'Failure buffer:    ' + fmtEUR(r.failCost),
+      '-----------------------------------',
+      'Total cost:        ' + fmtEUR(r.total),
+      'Cost per gram:     ' + fmtCT(r.perGram),
+      'Cost per hour:     ' + fmtEUR(r.perHour)
+    ];
+    if (r.sellPrice !== null){
+      lines.push('-----------------------------------');
+      lines.push('Recommended price: ' + fmtEUR(r.sellPrice));
+    }
+    const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '3d-print-cost-calculation.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  calc();
+})();
+</script>
+</body>
+</html>
