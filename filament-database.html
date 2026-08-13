@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3DToolBox – Filament Database</title>
+<meta name="description" content="Find filament by color: pick a color, compare brands (Bambu Lab, Sunlu, Redline Filament, …) and jump straight to the matching shop.">
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/filament-datenbank.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/filament-database.html">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/filament-datenbank.html">
+<meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+<style>
+  :root{
+    --bg:#14201c;
+    --panel:#1b2b25;
+    --panel-2:#22362d;
+    --ink:#eef3ee;
+    --ink-dim:#a8bdb2;
+    --accent:#ff8c3c;
+    --accent-2:#5fd9a0;
+    --line:#2f473c;
+    font-family:"Iowan Old Style","Georgia",serif;
+  }
+  *{box-sizing:border-box;}
+  html, body{ margin:0; padding:0; background:var(--bg); }
+  .fm-root{
+    background:var(--bg);
+    color:var(--ink);
+    padding:28px 22px 36px;
+    border-radius:14px;
+    min-height:100%;
+    max-width:960px;
+    margin:0 auto;
+  }
+  .fm-eyebrow{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent-2);
+    margin:0 0 6px;
+  }
+  .fm-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .fm-brand-icon{
+    width:30px;
+    height:30px;
+    flex:none;
+    border-radius:7px;
+  }
+  .fm-brand-word{
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:700;
+    font-size:19px;
+    color:var(--ink);
+    letter-spacing:.01em;
+  }
+  .fm-brand-3d{
+    color:#FF6A2B;
+  }
+  .fm-lang-switch{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:4px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12px;
+    font-weight:700;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:4px;
+  }
+  .fm-lang-current{
+    padding:5px 10px;
+    border-radius:5px;
+    background:var(--accent);
+    color:#1a1206;
+  }
+  .fm-lang-link{
+    padding:5px 10px;
+    border-radius:5px;
+    color:var(--ink-dim);
+    text-decoration:none;
+    transition:color .15s ease, background .15s ease;
+  }
+  .fm-lang-link:hover{
+    color:var(--ink);
+    background:var(--panel-2);
+  }
+
+  .fm-tools-bar{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:22px;
+    background:var(--panel);
+  }
+  .fm-tools-title{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin:0 0 12px;
+  }
+  .fm-tools-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .fm-tool{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .fm-tool-info{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--panel-2);
+    color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    font-weight:700;
+    line-height:1;
+    cursor:pointer;
+    flex:none;
+  }
+  .fm-tool-info:hover{ border-color:var(--accent); color:var(--accent); }
+  .fm-tool-tip{
+    display:none;
+    position:absolute;
+    top:calc(100% + 8px);
+    left:0;
+    width:220px;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:12px;
+    line-height:1.45;
+    color:var(--ink);
+    z-index:20;
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  @media (hover: hover){
+    .fm-tool:hover .fm-tool-tip{ display:block; }
+  }
+  .fm-tool.fm-tool-tip-open .fm-tool-tip{ display:block; }
+  .fm-tool-btn{
+    display:inline-block;
+    background:transparent;
+    border:1px solid var(--accent);
+    color:var(--accent);
+    text-decoration:none;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12.5px;
+    font-weight:600;
+    padding:8px 16px;
+    border-radius:8px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .fm-tool-btn:not(.fm-tool-soon):hover{
+    background:var(--accent);
+    color:#1a1206;
+  }
+  .fm-tool-btn.fm-tool-soon{
+    border-color:var(--line);
+    color:var(--ink-dim);
+    cursor:default;
+  }
+  .fm-tool-btn.fm-tool-active{
+    background:var(--accent);
+    color:#1a1206;
+  }
+
+  h1.fm-title{
+    font-size:26px;
+    margin:0 0 4px;
+    font-weight:600;
+    letter-spacing:.2px;
+  }
+  .fm-sub{
+    color:var(--ink-dim);
+    font-size:14px;
+    margin:0 0 22px;
+    max-width:600px;
+    line-height:1.5;
+  }
+
+  /* ---------- Material-Filter ---------- */
+  .fd-material-bar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+  }
+  .fd-material-label{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    color:var(--ink-dim);
+  }
+  .fd-pills{ display:flex; gap:6px; flex-wrap:wrap; }
+  .fd-pill{
+    background:var(--panel);
+    border:1px solid var(--line);
+    color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12px;
+    font-weight:600;
+    padding:6px 14px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .fd-pill:hover{ border-color:var(--accent); color:var(--ink); }
+  .fd-pill-active{ background:var(--accent); border-color:var(--accent); color:#1a1206; }
+
+  .fd-hex-search-wrap{
+    position:relative;
+    margin-left:auto;
+  }
+  .fd-hex-search-icon{
+    position:absolute;
+    left:10px;
+    top:50%;
+    transform:translateY(-50%);
+    width:14px;
+    height:14px;
+    color:var(--ink-dim);
+    pointer-events:none;
+  }
+  .fd-hex-search{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--ink);
+    padding:7px 12px 7px 30px;
+    font-size:12.5px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    width:150px;
+    text-transform:uppercase;
+  }
+  .fd-hex-search::placeholder{ color:var(--ink-dim); text-transform:none; font-family:"Iowan Old Style","Georgia",serif; }
+  .fd-hex-search:focus{ outline:1.5px solid var(--accent); width:190px; }
+
+  /* ---------- Breadcrumb ---------- */
+  .fd-breadcrumb{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    flex-wrap:wrap;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12.5px;
+    margin-bottom:16px;
+    min-height:20px;
+  }
+  .fd-crumb{
+    background:none;
+    border:none;
+    color:var(--ink-dim);
+    cursor:pointer;
+    padding:0;
+    font-family:inherit;
+    font-size:inherit;
+    text-decoration:underline;
+    text-underline-offset:2px;
+  }
+  .fd-crumb:hover{ color:var(--accent); }
+  .fd-crumb.fd-crumb-current{
+    color:var(--ink);
+    text-decoration:none;
+    cursor:default;
+    font-weight:700;
+  }
+  .fd-crumb-sep{ color:var(--line); }
+  .fd-crumb-swatch{
+    width:12px; height:12px; border-radius:3px;
+    display:inline-block;
+    border:1px solid rgba(255,255,255,.2);
+    vertical-align:middle;
+    margin-right:4px;
+  }
+
+  /* ---------- Level 1: Farben ---------- */
+  .fd-color-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
+    gap:12px;
+  }
+  .fd-color-tile{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    text-align:left;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .fd-color-tile:hover{ border-color:var(--accent); transform:translateY(-2px); }
+  .fd-color-swatch{ height:64px; width:100%; }
+  .fd-color-info{ padding:10px 12px 12px; }
+  .fd-color-name{ font-size:14px; font-weight:600; margin:0; }
+  .fd-color-count{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+    margin:3px 0 0;
+  }
+
+
+  /* ---------- Level 3: Produkte / Shops ---------- */
+  .fd-product-list{ display:flex; flex-direction:column; gap:10px; }
+  .fd-product-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+    flex-wrap:wrap;
+  }
+  .fd-product-swatch{
+    width:38px; height:38px; border-radius:8px;
+    border:1px solid rgba(255,255,255,.15);
+    flex:none;
+  }
+  .fd-product-info{ flex:1; min-width:160px; }
+  .fd-product-name{ font-size:14.5px; font-weight:600; margin:0; }
+  .fd-product-meta{
+    font-size:11.5px;
+    color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace;
+    margin:3px 0 0;
+  }
+  .fd-shop-list{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    flex:none;
+  }
+  .fd-shop-btn{
+    background:var(--accent);
+    color:#1a1206;
+    text-decoration:none;
+    font-weight:700;
+    font-size:12px;
+    padding:8px 14px;
+    border-radius:7px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+    white-space:nowrap;
+  }
+  .fd-shop-btn:hover{ background:var(--accent-2); }
+
+  .fd-empty{
+    text-align:center;
+    padding:40px 20px;
+    color:var(--ink-dim);
+    font-size:14px;
+    border:1px dashed var(--line);
+    border-radius:12px;
+  }
+
+  .fm-note{
+    font-size:11.5px;
+    color:var(--ink-dim);
+    margin-top:26px;
+    line-height:1.5;
+    border-top:1px solid var(--line);
+    padding-top:14px;
+  }
+  .fm-partner{
+    margin-top:18px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+  }
+  .fm-partner-title{ font-size:14px; font-weight:600; color:var(--ink); margin:0 0 6px; }
+  .fm-partner-text{ font-size:12.5px; color:var(--ink-dim); line-height:1.5; margin:0 0 14px; }
+  .fm-partner-btn{
+    display:inline-block;
+    background:var(--accent);
+    color:#1a1206;
+    text-decoration:none;
+    font-weight:700;
+    font-size:12.5px;
+    padding:9px 16px;
+    border-radius:7px;
+    font-family:"JetBrains Mono","Courier New",monospace;
+  }
+  .fm-footer{ margin-top:26px; padding-top:18px; border-top:1px solid var(--line); text-align:center; }
+  .fm-footer-coop{ font-size:12px; color:var(--ink-dim); margin:0 0 10px; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .fm-footer-logo{ height:20px; width:auto; display:inline-block; vertical-align:middle; }
+  .fm-footer-coop a{ color:var(--accent-2); text-decoration:none; }
+  .fm-footer-coop a:hover{ text-decoration:underline; }
+  .fm-footer-legal{ display:flex; justify-content:center; gap:8px; font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--ink-dim); }
+  .fm-footer-legal a{ color:var(--ink-dim); text-decoration:none; }
+  .fm-footer-legal a:hover{ color:var(--ink); text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<div class="fm-root">
+  <div class="fm-brand">
+    <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
+      <rect width="220" height="220" rx="44" fill="#FF6A2B"/>
+      <polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/>
+      <polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/>
+      <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
+    </svg>
+    <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+    <div class="fm-lang-switch">
+      <a class="fm-lang-link" href="/filament-datenbank.html">DE</a>
+      <span class="fm-lang-current">EN</span>
+    </div>
+  </div>
+
+  <div class="fm-tools-bar">
+    <p class="fm-tools-title">Useful tools for 3D printing</p>
+    <div class="fm-tools-grid">
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI</a>
+        <button type="button" class="fm-tool-info" aria-label="More info about Meshy AI">i</button>
+        <div class="fm-tool-tip">AI tool: turn a text description or image into a print-ready 3D model automatically.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs</a>
+        <button type="button" class="fm-tool-info" aria-label="More info about Thangs">i</button>
+        <div class="fm-tool-tip">Large search and model library: find ready-to-print 3D models from other makers.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="/en/filament-finder.html">Filament Finder</a>
+        <button type="button" class="fm-tool-info" aria-label="More info about the Filament Finder">i</button>
+        <div class="fm-tool-tip">Upload a photo or 3MF file and automatically find the matching filament and color.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="/3d-print-cost-calculator.html">Cost Calculator</a>
+        <button type="button" class="fm-tool-info" aria-label="More info about the Cost Calculator">i</button>
+        <div class="fm-tool-tip">Calculate material, electricity and wear costs for your print live — including a seller pricing mode.</div>
+      </div>
+      <div class="fm-tool">
+        <span class="fm-tool-btn fm-tool-active">Filament Database</span>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="/3d-print-lexicon.html">Lexicon</a>
+        <button type="button" class="fm-tool-info" aria-label="More info about the Lexicon">i</button>
+        <div class="fm-tool-tip">Print problems with cause & fix, slicer tips and a material guide to look up.</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="fm-eyebrow">Filament Database</p>
+  <h1 class="fm-title">Filament Database</h1>
+  <p class="fm-sub">Pick a color, compare brands, buy directly at the matching shop.</p>
+
+  <div class="fd-material-bar">
+    <span class="fd-material-label">MATERIAL:</span>
+    <div class="fd-pills" id="fdMaterialPills">
+      <button type="button" class="fd-pill fd-pill-active" data-material="ALL">All</button>
+      <button type="button" class="fd-pill" data-material="PLA">PLA</button>
+      <button type="button" class="fd-pill" data-material="PETG">PETG</button>
+      <button type="button" class="fd-pill" data-material="ABS">ABS</button>
+      <button type="button" class="fd-pill" data-material="ASA">ASA</button>
+      <button type="button" class="fd-pill" data-material="TPU">TPU</button>
+    </div>
+    <div class="fd-hex-search-wrap">
+      <svg class="fd-hex-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+        <path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input type="text" class="fd-hex-search" id="fdHexSearch" placeholder="#Hex code" maxlength="9">
+    </div>
+  </div>
+
+  <div class="fd-breadcrumb" id="fdBreadcrumb"></div>
+
+  <div id="fdView"></div>
+  <div class="fd-empty" id="fdEmpty" style="display:none;">No filaments found for this selection.</div>
+
+  <p class="fm-note">
+    Color values come from official manufacturer data, RAL standard colors, or colorimeter-measured references (filamentcolors.xyz) depending on the brand, and may vary slightly with screen, batch and lighting. Each product currently has one confirmed shop listed (3DJake, Redline Filament, or Sunlu directly) — further sources such as Amazon can be added per product. Prefer finding your filament from a photo or 3MF file instead? Try the <a href="/en/filament-finder.html" style="color:var(--accent-2);">Filament Finder</a>.
+  </p>
+
+  <div class="fm-partner">
+    <p class="fm-partner-title">Are you a 3D-print creator who wants to feature 3DToolBox in your content?</p>
+    <p class="fm-partner-text">We work with selected partners who introduce 3DToolBox and its connected tools to their audience. Reach out with a few details about your channel — we review every application personally.</p>
+    <a class="fm-partner-btn" href="mailto:info@3dtoolbox.info?subject=Partner%20inquiry%20-%203DToolBox">Become a partner</a>
+  </div>
+
+  <div class="fm-footer">
+    <p class="fm-footer-coop">
+      <img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo">
+      In cooperation with <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a>
+    </p>
+    <div class="fm-footer-legal">
+      <a href="/en/impressum.html">Legal Notice</a>
+      <span>·</span>
+      <a href="/en/datenschutz.html">Privacy Policy</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ============================================================
+  // FILAMENT DATABASE — raw data.
+  // Each product can have several purchase options: shops: [{shop, url}, ...]
+  // Currently only one confirmed source is listed per product.
+  // Add further shops (e.g. Amazon) simply as another object in the shops array.
+  // ============================================================
+  const FILAMENTS = [
+    {name:"PLA Basic Jade White", brand:"Bambu Lab", material:"PLA", hex:"#FFFFFF", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-jade-white"}]},
+    {name:"PLA Basic Black", brand:"Bambu Lab", material:"PLA", hex:"#000000", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-black"}]},
+    {name:"PLA Basic Gray", brand:"Bambu Lab", material:"PLA", hex:"#8E9089", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-gray"}]},
+    {name:"PLA Basic Light Gray", brand:"Bambu Lab", material:"PLA", hex:"#D1D3D5", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-light-gray"}]},
+    {name:"PLA Basic Silver", brand:"Bambu Lab", material:"PLA", hex:"#A6A9AA", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-silver"}]},
+    {name:"PLA Basic Dark Gray", brand:"Bambu Lab", material:"PLA", hex:"#545454", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-dark-gray"}]},
+    {name:"PLA Basic Blue Grey", brand:"Bambu Lab", material:"PLA", hex:"#5B6579", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-blue-grey"}]},
+    {name:"PLA Basic Yellow", brand:"Bambu Lab", material:"PLA", hex:"#F4EE2A", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-yellow"}]},
+    {name:"PLA Basic Sunflower Yellow", brand:"Bambu Lab", material:"PLA", hex:"#FEC600", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-sunflower-yellow"}]},
+    {name:"PLA Basic Orange", brand:"Bambu Lab", material:"PLA", hex:"#FF6A13", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-orange"}]},
+    {name:"PLA Basic Pumpkin Orange", brand:"Bambu Lab", material:"PLA", hex:"#FF9016", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-pumpkin-orange"}]},
+    {name:"PLA Basic Gold", brand:"Bambu Lab", material:"PLA", hex:"#E4BD68", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-gold"}]},
+    {name:"PLA Basic Red", brand:"Bambu Lab", material:"PLA", hex:"#C12E1F", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-red"}]},
+    {name:"PLA Basic Maroon Red", brand:"Bambu Lab", material:"PLA", hex:"#9D2235", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-maroon-red"}]},
+    {name:"PLA Basic Bambu Green", brand:"Bambu Lab", material:"PLA", hex:"#00AE42", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-bambu-green"}]},
+    {name:"PLA Basic Mistletoe Green", brand:"Bambu Lab", material:"PLA", hex:"#3F8E43", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-mistletoe-green"}]},
+    {name:"PLA Basic Bright Green", brand:"Bambu Lab", material:"PLA", hex:"#BECF00", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-bright-green"}]},
+    {name:"PLA Basic Cyan", brand:"Bambu Lab", material:"PLA", hex:"#0086D6", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-cyan"}]},
+    {name:"PLA Basic Turquoise", brand:"Bambu Lab", material:"PLA", hex:"#00B1B7", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-turquoise"}]},
+    {name:"PLA Basic Blue", brand:"Bambu Lab", material:"PLA", hex:"#0A2989", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-blue"}]},
+    {name:"PLA Basic Cobalt Blue", brand:"Bambu Lab", material:"PLA", hex:"#0056B8", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-cobalt-blue"}]},
+    {name:"PLA Basic Purple", brand:"Bambu Lab", material:"PLA", hex:"#5E43B7", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-purple"}]},
+    {name:"PLA Basic Indigo Purple", brand:"Bambu Lab", material:"PLA", hex:"#482960", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-indigo-purple"}]},
+    {name:"PLA Basic Magenta", brand:"Bambu Lab", material:"PLA", hex:"#EC008C", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-magenta"}]},
+    {name:"PLA Basic Pink", brand:"Bambu Lab", material:"PLA", hex:"#F55A74", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-pink"}]},
+    {name:"PLA Basic Hot Pink", brand:"Bambu Lab", material:"PLA", hex:"#F5547C", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-hot-pink"}]},
+    {name:"PLA Basic Beige", brand:"Bambu Lab", material:"PLA", hex:"#F7E6DE", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-beige"}]},
+    {name:"PLA Basic Bronze", brand:"Bambu Lab", material:"PLA", hex:"#847D48", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-bronze"}]},
+    {name:"PLA Basic Cocoa Brown", brand:"Bambu Lab", material:"PLA", hex:"#6F5034", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-cocoa-brown"}]},
+    {name:"PLA Basic Brown", brand:"Bambu Lab", material:"PLA", hex:"#9D432C", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-basic-brown"}]},
+    {name:"PLA Matte Ivory White", brand:"Bambu Lab", material:"PLA", hex:"#FFFFFF", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-ivory-white"}]},
+    {name:"PLA Matte Charcoal", brand:"Bambu Lab", material:"PLA", hex:"#000000", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-charcoal"}]},
+    {name:"PLA Matte Bone White", brand:"Bambu Lab", material:"PLA", hex:"#CBC6B8", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-bone-white"}]},
+    {name:"PLA Matte Desert Tan", brand:"Bambu Lab", material:"PLA", hex:"#E8DBB7", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-desert-tan"}]},
+    {name:"PLA Matte Latte Brown", brand:"Bambu Lab", material:"PLA", hex:"#D3B7A7", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-latte-brown"}]},
+    {name:"PLA Matte Caramel", brand:"Bambu Lab", material:"PLA", hex:"#AE835B", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-caramel"}]},
+    {name:"PLA Matte Terracotta", brand:"Bambu Lab", material:"PLA", hex:"#B15533", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-terracotta"}]},
+    {name:"PLA Matte Dark Brown", brand:"Bambu Lab", material:"PLA", hex:"#7D6556", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-dark-brown"}]},
+    {name:"PLA Matte Dark Chocolate", brand:"Bambu Lab", material:"PLA", hex:"#4D3324", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-dark-chocolate"}]},
+    {name:"PLA Matte Lilac Purple", brand:"Bambu Lab", material:"PLA", hex:"#AE96D4", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-lilac-purple"}]},
+    {name:"PLA Matte Sakura Pink", brand:"Bambu Lab", material:"PLA", hex:"#E8AFCF", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-sakura-pink"}]},
+    {name:"PLA Matte Mandarin Orange", brand:"Bambu Lab", material:"PLA", hex:"#F99963", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-mandarin-orange"}]},
+    {name:"PLA Matte Lemon Yellow", brand:"Bambu Lab", material:"PLA", hex:"#F7D959", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-lemon-yellow"}]},
+    {name:"PLA Matte Plum", brand:"Bambu Lab", material:"PLA", hex:"#950051", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-plum"}]},
+    {name:"PLA Matte Scarlet Red", brand:"Bambu Lab", material:"PLA", hex:"#DE4343", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-scarlet-red"}]},
+    {name:"PLA Matte Dark Red", brand:"Bambu Lab", material:"PLA", hex:"#BB3D43", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-dark-red"}]},
+    {name:"PLA Matte Dark Green", brand:"Bambu Lab", material:"PLA", hex:"#68724D", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-dark-green"}]},
+    {name:"PLA Matte Grass Green", brand:"Bambu Lab", material:"PLA", hex:"#61C680", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-grass-green"}]},
+    {name:"PLA Matte Apple Green", brand:"Bambu Lab", material:"PLA", hex:"#C2E189", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-apple-green"}]},
+    {name:"PLA Matte Ice Blue", brand:"Bambu Lab", material:"PLA", hex:"#A3D8E1", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-ice-blue"}]},
+    {name:"PLA Matte Sky Blue", brand:"Bambu Lab", material:"PLA", hex:"#56B7E6", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-sky-blue"}]},
+    {name:"PLA Matte Marine Blue", brand:"Bambu Lab", material:"PLA", hex:"#0078BF", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-marine-blue"}]},
+    {name:"PLA Matte Dark Blue", brand:"Bambu Lab", material:"PLA", hex:"#042F56", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-dark-blue"}]},
+    {name:"PLA Matte Ash Gray", brand:"Bambu Lab", material:"PLA", hex:"#9B9EA0", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-ash-gray"}]},
+    {name:"PLA Matte Nardo Gray", brand:"Bambu Lab", material:"PLA", hex:"#757575", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/pla-matte-nardo-gray"}]},
+    {name:"PLA Schwarz (RAL 9017)", brand:"Redline Filament", material:"PLA", hex:"#1C1C1C", shops:[{shop:"Redline Filament", url:"https://redline-filament.com/products/pla-black"}]},
+    {name:"PLA Weiß (RAL 9003)", brand:"Redline Filament", material:"PLA", hex:"#F4F4F4", shops:[{shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Wei%C3%9F"}]},
+    {name:"PLA Rot (RAL 3020)", brand:"Redline Filament", material:"PLA", hex:"#C1121C", shops:[{shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Rot"}]},
+    {name:"PLA Silber (RAL 9006)", brand:"Redline Filament", material:"PLA", hex:"#A5A5A5", shops:[{shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Silber"}]},
+    {name:"PLA Eisengrau (RAL 7011)", brand:"Redline Filament", material:"PLA", hex:"#434B4D", shops:[{shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Eisengrau"}]},
+    {name:"PLA Gelb", brand:"Redline Filament", material:"PLA", hex:"#FFC201", shops:[{shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Gelb"}]},
+    {name:"PLA Leichtes Grün", brand:"Redline Filament", material:"PLA", hex:"#71BCB5", shops:[{shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Leichtes+Gr%C3%BCn"}]},
+    {name:"PLA Leichtes Blau", brand:"Redline Filament", material:"PLA", hex:"#ACD5E7", shops:[{shop:"Redline Filament", url:"https://redline-filament.com/search?q=PLA+Leichtes+Blau"}]},
+    {name:"PLA+ Light Gold", brand:"Sunlu", material:"PLA", hex:"#D3943D", shops:[{shop:"Sunlu", url:"https://www.sunlu.com/de/search?q=Light+Gold"}]},
+    {name:"PLA Meta Blue", brand:"Sunlu", material:"PLA", hex:"#00B2CC", shops:[{shop:"Sunlu", url:"https://www.sunlu.com/de/search?q=Meta+Blue"}]},
+    {name:"PLA Grass Green", brand:"Sunlu", material:"PLA", hex:"#008B73", shops:[{shop:"Sunlu", url:"https://www.sunlu.com/de/search?q=Grass+Green"}]},
+    {name:"PETG Basic Red", brand:"Bambu Lab", material:"PETG", hex:"#D6001C", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-red"}]},
+    {name:"PETG Basic Orange", brand:"Bambu Lab", material:"PETG", hex:"#FF671F", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-orange"}]},
+    {name:"PETG Basic Yellow", brand:"Bambu Lab", material:"PETG", hex:"#FCE300", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-yellow"}]},
+    {name:"PETG Basic Reflex Blue", brand:"Bambu Lab", material:"PETG", hex:"#001489", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-reflex-blue"}]},
+    {name:"PETG Basic Navy Blue", brand:"Bambu Lab", material:"PETG", hex:"#0086D6", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-navy-blue"}]},
+    {name:"PETG Basic Misty Blue", brand:"Bambu Lab", material:"PETG", hex:"#688197", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-misty-blue"}]},
+    {name:"PETG Basic Green", brand:"Bambu Lab", material:"PETG", hex:"#009639", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-green"}]},
+    {name:"PETG Basic Pine Green", brand:"Bambu Lab", material:"PETG", hex:"#034638", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-pine-green"}]},
+    {name:"PETG Basic Dark Brown", brand:"Bambu Lab", material:"PETG", hex:"#4F2C1D", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-dark-brown"}]},
+    {name:"PETG Basic Dark Beige", brand:"Bambu Lab", material:"PETG", hex:"#DBC8B6", shops:[{shop:"3DJake", url:"https://www.3djake.de/suche?keyword=Bambu+Lab+PETG+Basic+Dark+Beige"}]},
+    {name:"PETG Basic Black", brand:"Bambu Lab", material:"PETG", hex:"#000000", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-black"}]},
+    {name:"PETG Basic Gray", brand:"Bambu Lab", material:"PETG", hex:"#7F7E83", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-gray"}]},
+    {name:"PETG Basic White", brand:"Bambu Lab", material:"PETG", hex:"#FFFFFF", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/petg-basic-white"}]},
+    {name:"ABS White", brand:"Bambu Lab", material:"ABS", hex:"#FFFFFF", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-white-10"}]},
+    {name:"ABS Bambu Green", brand:"Bambu Lab", material:"ABS", hex:"#00AE42", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-bambu-green"}]},
+    {name:"ABS Olive", brand:"Bambu Lab", material:"ABS", hex:"#789D4A", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-olive"}]},
+    {name:"ABS Azure", brand:"Bambu Lab", material:"ABS", hex:"#489FDF", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-azure"}]},
+    {name:"ABS Navy Blue", brand:"Bambu Lab", material:"ABS", hex:"#0C2340", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-navy-blue"}]},
+    {name:"ABS Blue", brand:"Bambu Lab", material:"ABS", hex:"#0A2CA5", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-blue"}]},
+    {name:"ABS Tangerine Yellow", brand:"Bambu Lab", material:"ABS", hex:"#FFC72C", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-tangerine-yellow"}]},
+    {name:"ABS Orange", brand:"Bambu Lab", material:"ABS", hex:"#FF6A13", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-orange"}]},
+    {name:"ABS Red", brand:"Bambu Lab", material:"ABS", hex:"#D32941", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-red"}]},
+    {name:"ABS Purple", brand:"Bambu Lab", material:"ABS", hex:"#AF1685", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-purple"}]},
+    {name:"ABS Silver", brand:"Bambu Lab", material:"ABS", hex:"#87909A", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-silver"}]},
+    {name:"ABS Black", brand:"Bambu Lab", material:"ABS", hex:"#000000", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/abs-black"}]},
+    {name:"ASA White", brand:"Bambu Lab", material:"ASA", hex:"#FFFAF2", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/asa-white"}]},
+    {name:"ASA Gray", brand:"Bambu Lab", material:"ASA", hex:"#8A949E", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/asa-gray"}]},
+    {name:"ASA Red", brand:"Bambu Lab", material:"ASA", hex:"#E02928", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/asa-red"}]},
+    {name:"ASA Green", brand:"Bambu Lab", material:"ASA", hex:"#00A6A0", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/asa-green"}]},
+    {name:"ASA Blue", brand:"Bambu Lab", material:"ASA", hex:"#2140B4", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/asa-blue"}]},
+    {name:"ASA Black", brand:"Bambu Lab", material:"ASA", hex:"#000000", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/asa-black"}]},
+    {name:"TPU 90A Black", brand:"Bambu Lab", material:"TPU", hex:"#000000", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/tpu-90a-black"}]},
+    {name:"TPU 90A White", brand:"Bambu Lab", material:"TPU", hex:"#FFFFEE", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/tpu-90a-white"}]},
+    {name:"TPU 90A Grape Jelly", brand:"Bambu Lab", material:"TPU", hex:"#D6ABFF", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/tpu-90a-grape-jelly"}]},
+    {name:"TPU 90A Crystal Blue", brand:"Bambu Lab", material:"TPU", hex:"#7EB4E1", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/tpu-90a-crystal-blue"}]},
+    {name:"TPU 90A Cocoa Brown", brand:"Bambu Lab", material:"TPU", hex:"#5C4738", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/tpu-90a-cocoa-brown"}]},
+    {name:"TPU 90A Quicksilver", brand:"Bambu Lab", material:"TPU", hex:"#9EA2A2", shops:[{shop:"3DJake", url:"https://www.3djake.de/bambu-lab/tpu-90a-quicksilver"}]},
+  ];
+
+  // ---- Exact color matching ----
+  // Each tile in step 1 corresponds to EXACTLY one hex value from the data above —
+  // no merging of similar shades. New color = new hex value in FILAMENTS,
+  // the tile then appears automatically, no code changes needed here.
+  function normalizeHex(hex){ return '#' + hex.replace('#','').toUpperCase(); }
+  FILAMENTS.forEach(f => { f.hex = normalizeHex(f.hex); });
+
+  function hexToRgb(hex){
+    const h = hex.replace('#','');
+    return { r: parseInt(h.slice(0,2),16), g: parseInt(h.slice(2,4),16), b: parseInt(h.slice(4,6),16) };
+  }
+  function hexToHsl(hex){
+    const {r,g,b} = hexToRgb(hex);
+    const rn=r/255, gn=g/255, bn=b/255;
+    const max=Math.max(rn,gn,bn), min=Math.min(rn,gn,bn);
+    let h=0, s=0; const l=(max+min)/2;
+    const d=max-min;
+    if (d !== 0){
+      s = l > 0.5 ? d/(2-max-min) : d/(max+min);
+      switch(max){
+        case rn: h = (gn-bn)/d + (gn<bn?6:0); break;
+        case gn: h = (bn-rn)/d + 2; break;
+        case bn: h = (rn-gn)/d + 4; break;
+      }
+      h *= 60;
+    }
+    return { h, s: s*100, l: l*100 };
+  }
+
+  // Purely cosmetic display name (e.g. "Black") next to the hex code —
+  // does NOT affect grouping, only the label on the tile.
+  const NAME_REFERENCES = [
+    {name:"Black", hex:"#161616"}, {name:"White", hex:"#F7F7F5"}, {name:"Gray", hex:"#8A8D8F"},
+    {name:"Silver", hex:"#B7BBBD"}, {name:"Red", hex:"#D6001C"}, {name:"Orange", hex:"#FF6A13"},
+    {name:"Yellow", hex:"#FFD400"}, {name:"Gold", hex:"#D4AF6A"}, {name:"Green", hex:"#00AE42"},
+    {name:"Turquoise", hex:"#00B1B7"}, {name:"Blue", hex:"#0056B8"}, {name:"Purple", hex:"#7A3FA0"},
+    {name:"Pink", hex:"#EC5F9C"}, {name:"Brown", hex:"#6F5034"}, {name:"Beige", hex:"#E8DBB7"},
+  ];
+  function nearestName(hex){
+    const a = hexToRgb(hex);
+    let best = NAME_REFERENCES[0], bestDist = Infinity;
+    NAME_REFERENCES.forEach(g => {
+      const b = hexToRgb(g.hex);
+      const d = Math.sqrt((a.r-b.r)**2 + (a.g-b.g)**2 + (a.b-b.b)**2);
+      if (d < bestDist){ bestDist = d; best = g; }
+    });
+    return best.name;
+  }
+
+  function sortByColor(list){
+    return list.slice().sort((x,y) => {
+      const ah = hexToHsl(x.hex), bh = hexToHsl(y.hex);
+      const aNeutral = ah.s < 8, bNeutral = bh.s < 8;
+      if (aNeutral !== bNeutral) return aNeutral ? -1 : 1;
+      if (aNeutral && bNeutral) return bh.l - ah.l;
+      if (Math.abs(ah.h - bh.h) > 0.5) return ah.h - bh.h;
+      return bh.l - ah.l;
+    });
+  }
+
+  // ---- State ----
+  let material = 'ALL';
+  let view = 'colors';       // 'colors' | 'shops'
+  let selectedColor = null;  // exact hex value, e.g. "#000000"
+  let hexQuery = '';         // free-text search for hex code (step 1)
+
+  const materialPillsEl = document.getElementById('fdMaterialPills');
+  const hexSearchEl = document.getElementById('fdHexSearch');
+  const breadcrumbEl = document.getElementById('fdBreadcrumb');
+  const viewEl = document.getElementById('fdView');
+  const emptyEl = document.getElementById('fdEmpty');
+
+  function currentPool(){
+    return FILAMENTS.filter(f => material === 'ALL' || f.material === material);
+  }
+
+  function renderBreadcrumb(){
+    breadcrumbEl.innerHTML = '';
+    const home = document.createElement('button');
+    home.className = 'fd-crumb' + (view === 'colors' ? ' fd-crumb-current' : '');
+    home.textContent = 'Colors';
+    home.disabled = view === 'colors';
+    home.addEventListener('click', () => { view = 'colors'; selectedColor = null; renderAll(); });
+    breadcrumbEl.appendChild(home);
+
+    if (selectedColor){
+      const sep = document.createElement('span');
+      sep.className = 'fd-crumb-sep';
+      sep.textContent = '›';
+      breadcrumbEl.appendChild(sep);
+
+      const colorCrumb = document.createElement('span');
+      colorCrumb.className = 'fd-crumb fd-crumb-current';
+      colorCrumb.innerHTML = `<span class="fd-crumb-swatch" style="background:${selectedColor}"></span>${nearestName(selectedColor)} (${selectedColor})`;
+      breadcrumbEl.appendChild(colorCrumb);
+    }
+  }
+
+  function renderColors(){
+    const pool = currentPool();
+    // Exact grouping: one entry per unique hex value in the current pool.
+    const groups = {};
+    pool.forEach(f => {
+      groups[f.hex] = groups[f.hex] || [];
+      groups[f.hex].push(f);
+    });
+
+    let uniqueHexes = Object.keys(groups);
+    const q = hexQuery.trim().toUpperCase().replace('#','');
+    if (q){
+      uniqueHexes = uniqueHexes.filter(hex => hex.replace('#','').includes(q));
+    }
+
+    if (!uniqueHexes.length){ viewEl.innerHTML = ''; emptyEl.style.display = 'block'; return; }
+    emptyEl.style.display = 'none';
+
+    // Sort by hue for a pleasant order (purely visual, not a grouping)
+    const representative = uniqueHexes.map(hex => ({hex}));
+    const ordered = sortByColor(representative);
+
+    const grid = document.createElement('div');
+    grid.className = 'fd-color-grid';
+    ordered.forEach(({hex}) => {
+      const count = groups[hex].length;
+      const tile = document.createElement('button');
+      tile.type = 'button';
+      tile.className = 'fd-color-tile';
+      tile.innerHTML = `
+        <span class="fd-color-swatch" style="background:${hex}"></span>
+        <span class="fd-color-info">
+          <p class="fd-color-name">${nearestName(hex)}</p>
+          <p class="fd-color-count">${hex} · ${count} filament${count === 1 ? '' : 's'}</p>
+        </span>
+      `;
+      tile.addEventListener('click', () => {
+        selectedColor = hex;
+        view = 'shops';
+        renderAll();
+      });
+      grid.appendChild(tile);
+    });
+    viewEl.innerHTML = '';
+    viewEl.appendChild(grid);
+  }
+
+  function renderShops(){
+    const pool = currentPool().filter(f => f.hex === selectedColor);
+    if (!pool.length){ viewEl.innerHTML = ''; emptyEl.style.display = 'block'; return; }
+    emptyEl.style.display = 'none';
+
+    // Sorted by brand so matching manufacturers stay grouped together
+    const sorted = pool.slice().sort((a,b) => a.brand.localeCompare(b.brand, 'en') || a.name.localeCompare(b.name, 'en'));
+
+    const list = document.createElement('div');
+    list.className = 'fd-product-list';
+    sorted.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'fd-product-row';
+
+      const swatch = document.createElement('span');
+      swatch.className = 'fd-product-swatch';
+      swatch.style.background = item.hex;
+      row.appendChild(swatch);
+
+      const info = document.createElement('div');
+      info.className = 'fd-product-info';
+      info.innerHTML = `<p class="fd-product-name">${item.name}</p><p class="fd-product-meta">${item.brand} · ${item.material}</p>`;
+      row.appendChild(info);
+
+      const shopList = document.createElement('div');
+      shopList.className = 'fd-shop-list';
+      (item.shops || []).forEach(s => {
+        const btn = document.createElement('a');
+        btn.className = 'fd-shop-btn';
+        btn.href = s.url;
+        btn.target = '_blank';
+        btn.rel = 'noopener';
+        btn.textContent = `${s.shop} ↗`;
+        shopList.appendChild(btn);
+      });
+      row.appendChild(shopList);
+
+      list.appendChild(row);
+    });
+    viewEl.innerHTML = '';
+    viewEl.appendChild(list);
+  }
+
+  function renderAll(){
+    renderBreadcrumb();
+    if (view === 'colors') renderColors();
+    else renderShops();
+  }
+
+  // Tools bar: tapping the (i) icon opens/closes the description (for touch devices
+  // that don't support :hover). Tapping outside closes all open tooltips again.
+  document.querySelectorAll('.fm-tool-info').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const tool = btn.closest('.fm-tool');
+      const wasOpen = tool.classList.contains('fm-tool-tip-open');
+      document.querySelectorAll('.fm-tool-tip-open').forEach(t => t.classList.remove('fm-tool-tip-open'));
+      if (!wasOpen) tool.classList.add('fm-tool-tip-open');
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.fm-tool-tip-open').forEach(t => t.classList.remove('fm-tool-tip-open'));
+  });
+
+  materialPillsEl.querySelectorAll('.fd-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      materialPillsEl.querySelectorAll('.fd-pill').forEach(b => b.classList.remove('fd-pill-active'));
+      btn.classList.add('fd-pill-active');
+      material = btn.dataset.material;
+      view = 'colors';
+      selectedColor = null;
+      renderAll();
+    });
+  });
+
+  hexSearchEl.addEventListener('input', () => {
+    hexQuery = hexSearchEl.value;
+    view = 'colors';
+    selectedColor = null;
+    renderAll();
+  });
+
+  renderAll();
+})();
+</script>
+</body>
+</html>

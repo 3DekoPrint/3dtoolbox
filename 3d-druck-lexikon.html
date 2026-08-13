@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3DToolBox – 3D-Druck-Lexikon</title>
+<meta name="description" content="Das große 3D-Druck-Lexikon: alle Druckprobleme mit Ursache, Lösung und Prävention, Slicer-Tipps für PrusaSlicer, Cura, Bambu Studio, OrcaSlicer & SuperSlicer, Materialkunde und Glossar.">
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-lexikon.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/3d-print-lexicon.html">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-lexikon.html">
+<meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+<style>
+  :root{
+    --bg:#14201c;
+    --panel:#1b2b25;
+    --panel-2:#22362d;
+    --ink:#eef3ee;
+    --ink-dim:#a8bdb2;
+    --accent:#ff8c3c;
+    --accent-2:#5fd9a0;
+    --line:#2f473c;
+    font-family:"Iowan Old Style","Georgia",serif;
+  }
+  *{box-sizing:border-box;}
+  html, body{ margin:0; padding:0; background:var(--bg); }
+  .fm-root{
+    background:var(--bg);
+    color:var(--ink);
+    padding:28px 22px 36px;
+    border-radius:14px;
+    min-height:100%;
+    max-width:980px;
+    margin:0 auto;
+  }
+  .fm-eyebrow{
+    font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent-2);
+    margin:0 0 6px;
+  }
+  .fm-brand{ display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .fm-brand-icon{ width:30px; height:30px; flex:none; border-radius:7px; }
+  .fm-brand-word{ font-family:Arial, Helvetica, sans-serif; font-weight:700; font-size:19px; color:var(--ink); letter-spacing:.01em; }
+  .fm-brand-3d{ color:#FF6A2B; }
+  .fm-lang-switch{ margin-left:auto; display:flex; align-items:center; gap:4px; font-family:"JetBrains Mono","Courier New",monospace; font-size:12px; font-weight:700; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:4px; }
+  .fm-lang-current{ padding:5px 10px; border-radius:5px; background:var(--accent); color:#1a1206; }
+  .fm-lang-link{ padding:5px 10px; border-radius:5px; color:var(--ink-dim); text-decoration:none; transition:color .15s ease, background .15s ease; }
+  .fm-lang-link:hover{ color:var(--ink); background:var(--panel-2); }
+
+  .fm-tools-bar{ border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin-bottom:22px; background:var(--panel); }
+  .fm-tools-title{ font-family:"JetBrains Mono","Courier New",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-dim); margin:0 0 12px; }
+  .fm-tools-grid{ display:flex; flex-wrap:wrap; gap:10px; }
+  .fm-tool{ position:relative; display:flex; align-items:center; gap:6px; }
+  .fm-tool-btn{ display:inline-block; background:transparent; border:1px solid var(--accent); color:var(--accent); text-decoration:none; font-family:"JetBrains Mono","Courier New",monospace; font-size:12.5px; font-weight:600; padding:8px 16px; border-radius:8px; transition:background .15s ease, color .15s ease; }
+  .fm-tool-btn:not(.fm-tool-soon):hover{ background:var(--accent); color:#1a1206; }
+  .fm-tool-btn.fm-tool-active{ background:var(--accent); color:#1a1206; }
+  .fm-tool-info{ width:20px; height:20px; border-radius:50%; border:1px solid var(--line); background:var(--panel-2); color:var(--ink-dim); font-family:"JetBrains Mono","Courier New",monospace; font-size:11px; font-weight:700; line-height:1; cursor:pointer; flex:none; }
+  .fm-tool-info:hover{ border-color:var(--accent); color:var(--accent); }
+  .fm-tool-tip{ display:none; position:absolute; top:calc(100% + 8px); left:0; width:220px; background:var(--panel-2); border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:12px; line-height:1.45; color:var(--ink); z-index:20; box-shadow:0 6px 18px rgba(0,0,0,.35); }
+  @media (hover: hover){ .fm-tool:hover .fm-tool-tip{ display:block; } }
+  .fm-tool.fm-tool-tip-open .fm-tool-tip{ display:block; }
+
+  h1.fm-title{ font-size:26px; margin:0 0 4px; font-weight:600; letter-spacing:.2px; }
+  .fm-sub{ color:var(--ink-dim); font-size:14px; margin:0 0 22px; max-width:620px; line-height:1.5; }
+
+  /* ---------- Kontrollleiste: Kategorien + Suche ---------- */
+  .lx-controlbar{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px; position:sticky; top:0; background:var(--bg); padding:10px 0; z-index:10; }
+  .lx-pills{ display:flex; gap:6px; flex-wrap:wrap; }
+  .lx-pill{ background:var(--panel); border:1px solid var(--line); color:var(--ink-dim); font-family:"JetBrains Mono","Courier New",monospace; font-size:12px; font-weight:600; padding:7px 14px; border-radius:20px; cursor:pointer; transition:background .15s ease, color .15s ease, border-color .15s ease; }
+  .lx-pill:hover{ border-color:var(--accent); color:var(--ink); }
+  .lx-pill-active{ background:var(--accent); border-color:var(--accent); color:#1a1206; }
+  .lx-search-wrap{ position:relative; margin-left:auto; flex:1; max-width:260px; min-width:180px; }
+  .lx-search-icon{ position:absolute; left:10px; top:50%; transform:translateY(-50%); width:14px; height:14px; color:var(--ink-dim); pointer-events:none; }
+  .lx-search{ width:100%; background:var(--panel); border:1px solid var(--line); border-radius:20px; color:var(--ink); padding:8px 12px 8px 30px; font-size:13px; font-family:"Iowan Old Style","Georgia",serif; }
+  .lx-search::placeholder{ color:var(--ink-dim); }
+  .lx-search:focus{ outline:1.5px solid var(--accent); }
+  .lx-count{ font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--ink-dim); margin:0 0 14px; }
+
+  /* ---------- Sektionen ---------- */
+  .lx-section{ margin-bottom:34px; }
+  .lx-section-head{ display:flex; align-items:baseline; gap:10px; margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+  .lx-section-title{ font-size:19px; font-weight:600; margin:0; scroll-margin-top:70px; }
+  .lx-section-count{ font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--ink-dim); }
+
+  /* ---------- Problem-Karten (Accordion) ---------- */
+  .lx-cards{ display:flex; flex-direction:column; gap:10px; }
+  details.lx-card{ background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; scroll-margin-top:70px; }
+  details.lx-card[open]{ border-color:var(--accent); }
+  details.lx-card summary.lx-card-head{ list-style:none; cursor:pointer; padding:14px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  details.lx-card summary.lx-card-head::-webkit-details-marker{ display:none; }
+  .lx-card-chevron{ margin-left:auto; width:16px; height:16px; color:var(--ink-dim); flex:none; transition:transform .15s ease; }
+  details.lx-card[open] .lx-card-chevron{ transform:rotate(180deg); color:var(--accent); }
+  .lx-card-title{ font-size:14.5px; font-weight:700; margin:0; color:var(--ink); }
+  .lx-card-symptom{ font-size:12.5px; color:var(--ink-dim); flex-basis:100%; margin-top:2px; line-height:1.4; }
+  .lx-tag{ font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; padding:4px 9px; border-radius:20px; border:1px solid var(--line); color:var(--accent-2); flex:none; white-space:nowrap; }
+  .lx-card-body{ padding:0 16px 18px; border-top:1px solid var(--line); }
+  .lx-block{ margin-top:14px; }
+  .lx-block-label{ font-family:"JetBrains Mono","Courier New",monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin:0 0 6px; }
+  .lx-block p{ margin:0; font-size:13.5px; line-height:1.55; color:var(--ink); }
+  .lx-block ul{ margin:0; padding-left:18px; font-size:13.5px; line-height:1.6; color:var(--ink); }
+  .lx-block li{ margin-bottom:3px; }
+  .lx-related{ margin-top:14px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .lx-related-label{ font-family:"JetBrains Mono","Courier New",monospace; font-size:11px; color:var(--ink-dim); }
+  .lx-related-chip{ background:var(--panel-2); border:1px solid var(--line); color:var(--ink); text-decoration:none; font-size:12px; padding:5px 11px; border-radius:16px; transition:border-color .15s ease, color .15s ease; }
+  .lx-related-chip:hover{ border-color:var(--accent); color:var(--accent); }
+
+  /* ---------- Slicer-Tabs ---------- */
+  .lx-slicer-tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+  .lx-slicer-tab{ display:flex; align-items:center; gap:8px; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px 16px; cursor:pointer; font-size:13.5px; font-weight:700; color:var(--ink-dim); transition:border-color .15s ease, color .15s ease; }
+  .lx-slicer-tab:hover{ color:var(--ink); border-color:var(--accent); }
+  .lx-slicer-tab-active{ color:var(--ink); border-color:var(--dot,var(--accent)); background:var(--panel-2); }
+  .lx-slicer-dot{ width:10px; height:10px; border-radius:50%; flex:none; }
+  .lx-slicer-panel{ display:none; }
+  .lx-slicer-panel-active{ display:block; }
+  .lx-tip-list{ display:flex; flex-direction:column; gap:10px; }
+  .lx-tip{ background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--dot,var(--accent)); border-radius:8px; padding:12px 16px; }
+  .lx-tip-title{ font-size:13.5px; font-weight:700; margin:0 0 4px; color:var(--ink); }
+  .lx-tip-text{ font-size:13px; line-height:1.5; color:var(--ink-dim); margin:0; }
+  .lx-tip-text a{ color:var(--accent-2); }
+
+  /* ---------- Material-Tabelle ---------- */
+  .lx-mat-scroll{ overflow-x:auto; border:1px solid var(--line); border-radius:10px; }
+  table.lx-mat-table{ width:100%; border-collapse:collapse; font-size:13px; min-width:640px; }
+  .lx-mat-table th{ text-align:left; background:var(--panel-2); color:var(--accent-2); font-family:"JetBrains Mono","Courier New",monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; padding:10px 12px; }
+  .lx-mat-table td{ padding:10px 12px; border-top:1px solid var(--line); color:var(--ink); vertical-align:top; }
+  .lx-mat-table tr:hover td{ background:var(--panel); }
+  .lx-mat-name{ font-weight:700; white-space:nowrap; }
+
+  /* ---------- Glossar ---------- */
+  .lx-glossary{ columns:2; column-gap:24px; }
+  @media (max-width:640px){ .lx-glossary{ columns:1; } }
+  .lx-gloss-item{ break-inside:avoid; margin-bottom:14px; scroll-margin-top:70px; }
+  .lx-gloss-term{ font-size:13.5px; font-weight:700; color:var(--accent-2); margin:0 0 3px; }
+  .lx-gloss-def{ font-size:13px; line-height:1.5; color:var(--ink-dim); margin:0; }
+
+  .lx-empty{ text-align:center; padding:40px 20px; color:var(--ink-dim); font-size:14px; border:1px dashed var(--line); border-radius:12px; }
+
+  .fm-note{ font-size:11.5px; color:var(--ink-dim); margin-top:26px; line-height:1.5; border-top:1px solid var(--line); padding-top:14px; }
+  .fm-note a{ color:var(--accent-2); }
+  .fm-partner{ margin-top:18px; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:18px 20px; }
+  .fm-partner-title{ font-size:14px; font-weight:600; color:var(--ink); margin:0 0 6px; }
+  .fm-partner-text{ font-size:12.5px; color:var(--ink-dim); line-height:1.5; margin:0 0 14px; }
+  .fm-partner-btn{ display:inline-block; background:var(--accent); color:#1a1206; text-decoration:none; font-weight:700; font-size:12.5px; padding:9px 16px; border-radius:7px; font-family:"JetBrains Mono","Courier New",monospace; }
+  .fm-footer{ margin-top:26px; padding-top:18px; border-top:1px solid var(--line); text-align:center; }
+  .fm-footer-coop{ font-size:12px; color:var(--ink-dim); margin:0 0 10px; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .fm-footer-logo{ height:20px; width:auto; display:inline-block; vertical-align:middle; }
+  .fm-footer-coop a{ color:var(--accent-2); text-decoration:none; }
+  .fm-footer-coop a:hover{ text-decoration:underline; }
+  .fm-footer-legal{ display:flex; justify-content:center; gap:8px; font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--ink-dim); }
+  .fm-footer-legal a{ color:var(--ink-dim); text-decoration:none; }
+  .fm-footer-legal a:hover{ color:var(--ink); text-decoration:underline; }
+
+  @media (max-width:480px){
+    .lx-search-wrap{ max-width:none; width:100%; margin-left:0; }
+    .lx-controlbar{ flex-direction:column; align-items:stretch; }
+  }
+</style>
+</head>
+<body>
+
+<div class="fm-root">
+  <div class="fm-brand">
+    <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
+      <rect width="220" height="220" rx="44" fill="#FF6A2B"/>
+      <polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/>
+      <polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/>
+      <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
+    </svg>
+    <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+    <div class="fm-lang-switch">
+      <span class="fm-lang-current">DE</span>
+      <a class="fm-lang-link" href="/3d-print-lexicon.html">EN</a>
+    </div>
+  </div>
+
+  <div class="fm-tools-bar">
+    <p class="fm-tools-title">Nützliche Tools rund um den 3D-Druck</p>
+    <div class="fm-tools-grid">
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Meshy AI">i</button>
+        <div class="fm-tool-tip">KI-Tool: aus einer Textbeschreibung oder einem Bild automatisch ein druckfertiges 3D-Modell erstellen.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Thangs">i</button>
+        <div class="fm-tool-tip">Große Such- und Modell-Bibliothek: fertige, druckbare 3D-Modelle von anderen Machern finden.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="/filament-finder.html">Filament-Finder</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zum Filament-Finder">i</button>
+        <div class="fm-tool-tip">Foto oder 3MF-Datei hochladen und automatisch das passende Filament samt Farbe finden.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="/3d-druck-kostenrechner.html">Kostenrechner</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zum Kostenrechner">i</button>
+        <div class="fm-tool-tip">Material-, Strom- und Verschleißkosten für deinen Druck live berechnen — inklusive Verkaufspreis-Kalkulation.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="/filament-datenbank.html">Filament-Datenbank</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zur Filament-Datenbank">i</button>
+        <div class="fm-tool-tip">Filament nach Farbe durchsuchen und direkt zum passenden Shop springen.</div>
+      </div>
+      <div class="fm-tool">
+        <span class="fm-tool-btn fm-tool-active">Lexikon</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="fm-eyebrow">Wissensdatenbank</p>
+  <h1 class="fm-title">3D-Druck-Lexikon</h1>
+  <p class="fm-sub">Über 25 Druckprobleme mit Ursache, Sofort-Lösung und Prävention, Insider-Tipps für die fünf wichtigsten Slicer, eine Materialkunde-Tabelle und ein durchsuchbares Glossar – alles an einem Ort.</p>
+
+  <div class="lx-controlbar">
+    <div class="lx-pills" id="lxCatPills">
+      <button type="button" class="lx-pill lx-pill-active" data-cat="ALL">Alles</button>
+      <button type="button" class="lx-pill" data-cat="probleme">Probleme</button>
+      <button type="button" class="lx-pill" data-cat="slicer">Slicer-Tipps</button>
+      <button type="button" class="lx-pill" data-cat="material">Materialkunde</button>
+      <button type="button" class="lx-pill" data-cat="glossar">Glossar</button>
+    </div>
+    <div class="lx-search-wrap">
+      <svg class="lx-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+        <path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input type="text" class="lx-search" id="lxSearch" placeholder="z.B. Stringing, Warping, Retraction …">
+    </div>
+  </div>
+  <p class="lx-count" id="lxCount"></p>
+
+  <!-- ============ PROBLEME ============ -->
+  <div class="lx-section" id="sec-probleme" data-section="probleme">
+    <div class="lx-section-head">
+      <h2 class="lx-section-title" id="probleme">🛠 Häufige Druckprobleme</h2>
+      <span class="lx-section-count" id="lxProblemCount"></span>
+    </div>
+    <div class="lx-cards" id="lxProblemCards"></div>
+    <div class="lx-empty" id="lxProblemEmpty" style="display:none;">Keine Probleme zu diesem Suchbegriff gefunden.</div>
+  </div>
+
+  <!-- ============ SLICER ============ -->
+  <div class="lx-section" id="sec-slicer" data-section="slicer">
+    <div class="lx-section-head">
+      <h2 class="lx-section-title" id="slicer">🎛 Slicer-Tipps &amp; Tricks</h2>
+    </div>
+    <div class="lx-slicer-tabs" id="lxSlicerTabs"></div>
+    <div id="lxSlicerPanels"></div>
+  </div>
+
+  <!-- ============ MATERIAL ============ -->
+  <div class="lx-section" id="sec-material" data-section="material">
+    <div class="lx-section-head">
+      <h2 class="lx-section-title" id="material">🧵 Materialkunde</h2>
+    </div>
+    <div class="lx-mat-scroll">
+      <table class="lx-mat-table">
+        <thead>
+          <tr><th>Material</th><th>Düse</th><th>Bett</th><th>Kühlung</th><th>Besonderheiten</th></tr>
+        </thead>
+        <tbody id="lxMatBody"></tbody>
+      </table>
+    </div>
+    <p class="fm-note" style="margin-top:14px; border-top:none; padding-top:0;">Genaue Werte hängen immer vom konkreten Filament-Hersteller ab. Passendes Filament findest du in der <a href="/filament-datenbank.html">Filament-Datenbank</a>, die Materialkosten pro Druck rechnet der <a href="/3d-druck-kostenrechner.html">Kostenrechner</a>.</p>
+  </div>
+
+  <!-- ============ GLOSSAR ============ -->
+  <div class="lx-section" id="sec-glossar" data-section="glossar">
+    <div class="lx-section-head">
+      <h2 class="lx-section-title" id="glossar">📚 Glossar</h2>
+      <span class="lx-section-count" id="lxGlossCount"></span>
+    </div>
+    <div class="lx-glossary" id="lxGlossary"></div>
+    <div class="lx-empty" id="lxGlossEmpty" style="display:none;">Kein Begriff zu diesem Suchbegriff gefunden.</div>
+  </div>
+
+  <p class="fm-note">
+    Alle Angaben basieren auf gängigen Community- und Hersteller-Erfahrungswerten für FDM/FFF-Druck und sind bewusst als Ausgangspunkt gedacht – jeder Drucker, jedes Filament und jede Umgebung verhält sich etwas anders, kleine Testdrucke und eigenes Kalibrieren bleiben unverzichtbar. Du willst zur passenden Filamentfarbe direkt den Shop-Link? Nutz den <a href="/filament-finder.html">Filament-Finder</a> oder die <a href="/filament-datenbank.html">Filament-Datenbank</a>.
+  </p>
+
+  <div class="fm-partner">
+    <p class="fm-partner-title">Du bist 3D-Print-Creator und willst 3DToolBox in deinem Content zeigen?</p>
+    <p class="fm-partner-text">Wir arbeiten mit ausgewählten Partnern zusammen, die 3DToolBox und angebundene Tools bei ihrem Publikum vorstellen. Melde dich mit ein paar Infos zu deinem Kanal — wir schauen uns jede Bewerbung persönlich an.</p>
+    <a class="fm-partner-btn" href="mailto:info@3dtoolbox.info?subject=Partneranfrage%203DToolBox">Partner werden</a>
+  </div>
+
+  <div class="fm-footer">
+    <p class="fm-footer-coop">
+      <img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo">
+      In Kooperation mit <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a>
+    </p>
+    <div class="fm-footer-legal">
+      <a href="/impressum.html">Impressum</a>
+      <span>·</span>
+      <a href="/datenschutz.html">Datenschutz</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+
+  // ============================================================
+  // DATEN — PROBLEME
+  // ============================================================
+  const PROBLEMS = [
+    {id:"warping", cat:"Haftung & 1. Schicht", title:"Warping (Aufbiegen der Ecken)",
+      tags:["warping","verzug","ecken heben ab","curl","abheben"],
+      symptom:"Ecken oder Kanten lösen sich vom Bett und biegen sich nach oben — vor allem bei großflächigen Teilen aus ABS, ASA oder Nylon.",
+      ursachen:["Ungleichmäßige Abkühlung zwischen unterer und oberer Schicht","Zu geringe Bett-Temperatur für das Material","Zugluft im Raum (Fenster, Lüfter, Klimaanlage, Tür)","Große, flache Grundfläche ohne zusätzliche Haftungshilfe"],
+      loesung:"Heizbett-Temperatur erhöhen (siehe Materialkunde unten), Brim mit 5–8 mm Breite hinzufügen, jede Zugluftquelle eliminieren.",
+      praevention:"Gehäuse bzw. zugluftfreien Druckraum nutzen, Bett vor jedem Druck mit Isopropanol reinigen, bei ABS/ASA grundsätzlich mit Gehäuse drucken, Brim für große flache Teile standardmäßig aktivieren.",
+      related:["elephant-foot","bett-haftung","curling-ecken"]},
+    {id:"elephant-foot", cat:"Haftung & 1. Schicht", title:"Elephant Foot (ausgebeulte erste Schichten)",
+      tags:["elephant foot","ausbeulung","untere schicht zu breit"],
+      symptom:"Die untersten 1–3 Schichten sind sichtbar breiter als der Rest des Modells, wie ein leicht ausgebeulter Fuß.",
+      ursachen:["Zu heißes Bett drückt die erste Schicht platt","Zu hoher Erstschicht-Druck bzw. zu geringer Z-Offset","Zu weiches Material trifft auf zu warmes Bett"],
+      loesung:"„Elephant Foot Compensation“ im Slicer aktivieren (Start meist 0,1–0,3 mm), Z-Offset minimal erhöhen.",
+      praevention:"Erstschicht-Höhe nicht zu niedrig wählen, Bett-Temperatur nach der ersten Schicht leicht absenken, Z-Offset regelmäßig neu kalibrieren.",
+      related:["warping","bett-haftung","masshaltigkeit"]},
+    {id:"bett-haftung", cat:"Haftung & 1. Schicht", title:"Schlechte Bett-Haftung / erste Schicht löst sich",
+      tags:["haftung","erste schicht","löst sich","adhesion"],
+      symptom:"Der Druck löst sich schon in den ersten Schichten teilweise oder komplett vom Bett.",
+      ursachen:["Bett nicht plan bzw. nicht genivelliert","Zu großer Düsenabstand zum Bett","Verschmutztes oder fettiges Bett","Falsche Erstschicht-Temperatur für das Material"],
+      loesung:"Z-Offset neu kalibrieren (Papier- oder Feeler-Gauge-Test), Bett gründlich mit Isopropanol reinigen.",
+      praevention:"Auto-Bed-Leveling mit manuellem Feintuning kombinieren, bei PETG/ABS zusätzlich Haftmittel (Leimstift, Haarspray) verwenden, Federn/Klemmen der Druckplatte regelmäßig prüfen.",
+      related:["warping","elephant-foot","layer-shift"]},
+    {id:"curling-ecken", cat:"Haftung & 1. Schicht", title:"Curling an dünnen Teilen/Ecken",
+      tags:["curling","hochbiegen","dünne wände"],
+      symptom:"Dünne, freistehende Teile oder Ecken biegen sich während des Drucks leicht nach oben, ohne sich ganz vom Bett zu lösen.",
+      ursachen:["Zu schnelle Abkühlung ungleich verteilt","Zu wenig Haftfläche bei sehr filigranen Konturen"],
+      loesung:"Teilkühlung (Part Cooling Fan) für die ersten Schichten reduzieren, Brim gezielt an kritischen Stellen hinzufügen.",
+      praevention:"Modell-Orientierung so wählen, dass dünne Teile möglichst flach aufliegen, Erstschicht-Geschwindigkeit reduzieren.",
+      related:["warping","bett-haftung"]},
+    {id:"stringing", cat:"Extrusion & Fluss", title:"Stringing (Fäden zwischen Bauteilen)",
+      tags:["stringing","fäden","haare","oozing"],
+      symptom:"Dünne Kunststofffäden ziehen sich zwischen separaten Druckteilen oder über Lücken.",
+      ursachen:["Zu hohe Drucktemperatur","Kein oder zu schwaches Retraction","Feuchtes Filament (besonders PETG, Nylon, TPU)"],
+      loesung:"Retraction-Distanz erhöhen (Bowden: 4–7 mm, Direct Drive: 0,5–2 mm), Retraction-Speed auf 25–45 mm/s setzen.",
+      praevention:"Temperatur in 5 °C-Schritten senken, bis die Fäden verschwinden, Filament in einer Trockenbox lagern, „Combing Mode“ bzw. „Avoid Crossing Perimeters“ aktivieren.",
+      related:["feuchtes-filament","blobs-zits","clogging"]},
+    {id:"unterextrusion", cat:"Extrusion & Fluss", title:"Unterextrusion",
+      tags:["unterextrusion","lücken","dünne wände","zu wenig material"],
+      symptom:"Sichtbare Lücken zwischen Linien, dünne oder brüchige Wände, unvollständig gefüllte Bereiche.",
+      ursachen:["Flow-Faktor zu niedrig eingestellt","Verstopfte oder teilverstopfte Düse","Falscher Filamentdurchmesser im Slicer hinterlegt","Zu niedrige Drucktemperatur"],
+      loesung:"Flow-Kalibrierung über einen 100%-Würfel-Test durchführen (Wanddicke nachmessen und Extrusion Multiplier anpassen).",
+      praevention:"Regelmäßige E-Steps-Kalibrierung, Düse auf Verschleiß prüfen, Filamentdurchmesser stichprobenartig mit Messschieber kontrollieren.",
+      related:["clogging","ueberextrusion","nozzle-verschleiss"]},
+    {id:"ueberextrusion", cat:"Extrusion & Fluss", title:"Überextrusion",
+      tags:["überextrusion","zu viel material","raue oberfläche","blobs"],
+      symptom:"Wände wirken zu dick, Oberflächen sind rau oder wulstig, sichtbare Kleckse an Nahtpunkten.",
+      ursachen:["Flow-Faktor zu hoch","Ausgeleierte, zu weit gebohrte Düse","Falscher (zu kleiner) Filamentdurchmesser im Slicer eingetragen"],
+      loesung:"Flow-Kalibrierung per 100%-Würfel-Test, Extrusion Multiplier in kleinen Schritten (±2–3 %) reduzieren.",
+      praevention:"Düse alle paar hundert Druckstunden tauschen, insbesondere bei abrasiven Filamenten (Carbon, Glasfaser, Glitzer).",
+      related:["unterextrusion","blobs-zits","nozzle-verschleiss"]},
+    {id:"clogging", cat:"Extrusion & Fluss", title:"Düse verstopft (Clogging)",
+      tags:["clogging","verstopfung","kein filamentfluss","düse verstopft"],
+      symptom:"Der Extruder klickt/überspringt Schritte, es kommt kein oder kaum Filament mehr aus der Düse.",
+      ursachen:["Filamentreste verkoken bei häufigen Temperaturwechseln","Feuchtes Filament blubbert in der Schmelzzone","Minderwertiges oder stark schwankendes Filament","Zu geringer Abstand zwischen Düse und Bett verstopft die Öffnung"],
+      loesung:"Cold-Pull-Methode (Atomic Method) zur Reinigung: Filament bei Zieltemperatur einführen, auf ca. 90 °C abkühlen lassen, dann kräftig herausziehen.",
+      praevention:"Düse regelmäßig wechseln (Verschleißteil), Filament trocken in einer Box mit Silica-Gel lagern, hochwertiges Filament mit konstantem Durchmesser verwenden.",
+      related:["feuchtes-filament","unterextrusion","nozzle-verschleiss"]},
+    {id:"nozzle-verschleiss", cat:"Extrusion & Fluss", title:"Nozzle-Verschleiß (ausgeleierte Düse)",
+      tags:["düsenverschleiß","abrasiv","messingdüse","hartened steel"],
+      symptom:"Über Zeit schleichend zunehmende Überextrusion, ungenaue Maße, obwohl Einstellungen unverändert sind.",
+      ursachen:["Abrasive Filamente (Carbon-, Glasfaser-, Metall-gefüllt, Glitzer) nutzen weiche Messingdüsen schnell ab","Sehr hohe Laufleistung ohne Düsenwechsel"],
+      loesung:"Düse mit Messschieber am Auslass nachmessen (z. B. 0,4 mm-Düse sollte nicht deutlich größer sein) und bei Abweichung tauschen.",
+      praevention:"Für abrasive Filamente gehärteten Stahl oder Hartmetall-Düsen verwenden, reguläre Düsen nach ca. 200–500 Druckstunden ersetzen.",
+      related:["ueberextrusion","unterextrusion"]},
+    {id:"delamination", cat:"Oberfläche & Optik", title:"Delamination / Schichttrennung",
+      tags:["delamination","schichttrennung","bricht entlang schicht"],
+      symptom:"Das Teil bricht sauber entlang einer einzelnen Schicht auseinander, statt quer durch das Material.",
+      ursachen:["Zu niedrige Drucktemperatur für ausreichende Schichtverbindung","Zu starke/zu frühe Teilkühlung","Zugluft kühlt einzelne Schichten ungleichmäßig ab"],
+      loesung:"Drucktemperatur um 5–10 °C erhöhen, Testdruck mit reduzierter Kühlung wiederholen.",
+      praevention:"Bei strukturell wichtigen Teilen Bauteilkühlung reduzieren, geschlossenes Gehäuse nutzen, für hohe Festigkeit ggf. auf ASA/PETG statt PLA wechseln.",
+      related:["ringing","zseam"]},
+    {id:"blobs-zits", cat:"Oberfläche & Optik", title:"Blobs & Zits (Kleckse an der Oberfläche)",
+      tags:["blobs","zits","kleckse","pickel"],
+      symptom:"Kleine Kunststoff-Kleckse oder „Pickel“ an bestimmten Stellen der Außenwand, oft am selben Punkt jeder Schicht.",
+      ursachen:["Nahtpunkt (Seam) schlecht bzw. immer an derselben Stelle platziert","Ungünstige Retraction-/Restart-Einstellungen an der Naht"],
+      loesung:"„Coasting“ aktivieren (Extrusion kurz vor Linienende stoppen), Wipe-on-Retract aktivieren.",
+      praevention:"Seam-Position auf „Aligned“ stellen oder gezielt in eine unauffällige Ecke legen, Retraction-Distanz leicht erhöhen.",
+      related:["stringing","zseam","ringing"]},
+    {id:"ringing", cat:"Oberfläche & Optik", title:"Ghosting / Ringing (Vibrationsmuster, VFA)",
+      tags:["ringing","ghosting","vfa","wellen","vibration"],
+      symptom:"Wellenartige, sich wiederholende Muster auf der Außenwand, meist um scharfe Ecken oder Details herum.",
+      ursachen:["Zu hohe Beschleunigung bzw. ruckartige Bewegungen","Lockerer Rahmen oder lose Riemen","Zu hoher Jerk/Junction-Deviation-Wert"],
+      loesung:"Beschleunigung und Jerk/Junction-Deviation in der Firmware bzw. im Slicer reduzieren.",
+      praevention:"Input Shaping kalibrieren, sofern die Firmware es unterstützt (z. B. Klipper), Druckerrahmen regelmäßig auf Wackeln/lose Schrauben prüfen.",
+      related:["layer-shift","delamination"]},
+    {id:"zseam", cat:"Oberfläche & Optik", title:"Z-Seam sichtbar (Naht-Linie)",
+      tags:["z seam","naht","sichtbare linie"],
+      symptom:"Eine senkrechte Linie oder Stufenkante ist an der Stelle sichtbar, an der jede Schicht beginnt und endet.",
+      ursachen:["Seam-Position zufällig oder ungünstig gewählt","Kleine Druckungenauigkeit am Start-/Endpunkt jeder Schicht"],
+      loesung:"Seam-Ausrichtung im Slicer auf „Aligned“, „Nearest“ oder eine definierte Ecke stellen, damit sie an einer unauffälligen Stelle liegt.",
+      praevention:"„Seam Painting“ nutzen, um die Naht manuell an eine versteckte Kante zu legen, leichtes „Coasting“ gegen Blobs an der Naht kombinieren.",
+      related:["blobs-zits","ringing"]},
+    {id:"pillowing", cat:"Oberfläche & Optik", title:"Pillowing (Blasen/raue Top-Fläche)",
+      tags:["pillowing","top layer blasen","kissenoptik"],
+      symptom:"Die oberste, geschlossene Fläche wirkt blasig oder kissenartig uneben statt glatt.",
+      ursachen:["Zu wenige Top-Layer für die gewählte Infill-Dichte","Infill-Muster stützt die Decklage ungleichmäßig"],
+      loesung:"Anzahl der Top-Layer erhöhen (mind. 4–5 bei 0,2 mm Layerhöhe), Infill-Dichte leicht erhöhen.",
+      praevention:"Top-Layer-Anzahl passend zur Infill-Dichte wählen (weniger Infill = mehr Top-Layer nötig), Gyroid- oder Grid-Infill für gleichmäßigere Unterstützung nutzen.",
+      related:["top-layer-luecken"]},
+    {id:"farbinkonsistenz", cat:"Oberfläche & Optik", title:"Farbinkonsistenz bei Multicolor/AMS",
+      tags:["multicolor","ams","farbwechsel","verschmutzte farbe"],
+      symptom:"Bei Multi-Material-/Multi-Color-Drucken wirkt eine Farbe leicht verschmutzt oder es entstehen sichtbare Übergänge an Farbwechselstellen.",
+      ursachen:["Zu geringes Purge-/Spülvolumen beim Filamentwechsel","Reste der vorherigen Farbe in der Schmelzkammer"],
+      loesung:"Purge-Volumen in der Filament-Kompatibilitätstabelle des Slicers erhöhen, insbesondere bei Wechseln zwischen sehr unterschiedlichen Farben (z. B. Schwarz → Weiß).",
+      praevention:"Purge-Tower/Flushing-Objekt einplanen, ähnliche Farbreihenfolgen im Druckauftrag bevorzugen, wenn möglich.",
+      related:["stringing"]},
+    {id:"layer-shift", cat:"Mechanik & Bewegung", title:"Layer Shift (versetzte Schichten)",
+      tags:["layer shift","versatz","verschobene schichten"],
+      symptom:"Ab einer bestimmten Höhe verschiebt sich der komplette Druck plötzlich seitlich in X- oder Y-Richtung.",
+      ursachen:["Riemen zu locker gespannt","Schrittmotor überlastet oder hat Schritte übersprungen","Mechanische Kollision, z. B. ein hängen gebliebenes Kabel oder ein Objekt auf der Druckbahn"],
+      loesung:"Druck in der Regel nicht mehr rettbar — abbrechen, danach Riemenspannung und Bewegungsachsen auf Schwergängigkeit prüfen.",
+      praevention:"Regelmäßige Wartung von Riemen und Grundplatten-Schrauben, Druckgeschwindigkeit/Beschleunigung nicht zu hoch wählen, Motorstrom (VREF) korrekt einstellen.",
+      related:["ringing","bett-haftung"]},
+    {id:"thermal-runaway", cat:"Mechanik & Bewegung", title:"Thermal Runaway / Heizfehler",
+      tags:["thermal runaway","heizfehler","temperatur schwankt"],
+      symptom:"Drucker bricht mit einer Fehlermeldung zur Heizung ab, oder die Düsen-/Bett-Temperatur schwankt stark statt stabil zu bleiben.",
+      ursachen:["Thermistor sitzt lose oder ist beschädigt","Heizpatrone defekt oder Kabel beschädigt","PID-Werte nicht kalibriert"],
+      loesung:"Verkabelung von Thermistor und Heizpatrone auf festen Sitz und Beschädigungen prüfen.",
+      praevention:"PID-Autotune für Düse und Bett regelmäßig durchführen, Kabel an Bewegungspunkten (Druckkopf) auf Ermüdungsbrüche kontrollieren.",
+      related:["clogging"]},
+    {id:"skipped-steps", cat:"Mechanik & Bewegung", title:"Ungewöhnliche Geräusche / Skipped Steps",
+      tags:["klicken","überspringen","geräusche","extruder klickt"],
+      symptom:"Klickende oder knarzende Geräusche vom Extruder-Motor, teils verbunden mit Unterextrusion.",
+      ursachen:["Zu hoher Widerstand beim Filamentvorschub (z. B. Clog, zu enger Bowden-Radius)","Extruder-Federspannung zu hoch oder zu niedrig","Druckgeschwindigkeit über der mechanischen Kapazität des Extruders"],
+      loesung:"Extruder-Federspannung prüfen und nachjustieren, Bowden-Schlauch auf Knicke kontrollieren.",
+      praevention:"Filamentpfad regelmäßig auf Reibungspunkte prüfen, Retraction-Einstellungen nicht unnötig aggressiv wählen.",
+      related:["clogging","unterextrusion"]},
+    {id:"ueberhang-durchsacken", cat:"Support & Überhänge", title:"Überhänge sacken durch",
+      tags:["überhang","durchhängen","sacken"],
+      symptom:"Freitragende, schräge Flächen wirken ausgefranst oder sacken sichtbar nach unten durch.",
+      ursachen:["Zu wenig Bauteilkühlung","Drucktemperatur zu hoch für den Überhangwinkel","Überhangwinkel zu steil für das Material"],
+      loesung:"Bauteilkühlung (Part Cooling Fan) für Überhänge auf 100 % stellen, Drucktemperatur leicht senken.",
+      praevention:"Ab ca. 45–50° Überhangwinkel Stützstrukturen einplanen, Modell-Orientierung so wählen, dass kritische Überhänge minimiert werden.",
+      related:["bridging","support-marken"]},
+    {id:"bridging", cat:"Support & Überhänge", title:"Bridging reißt oder sackt durch",
+      tags:["bridging","brücke","überspannung"],
+      symptom:"Material, das eine Lücke zwischen zwei Stützpunkten überspannen soll, sackt in der Mitte durch oder reißt.",
+      ursachen:["Bridging-Kühlung zu niedrig","Bridging-Geschwindigkeit zu hoch oder zu niedrig für die Spannweite","Zu große Distanz ohne Zwischenstütze"],
+      loesung:"Bridging-spezifische Lüftergeschwindigkeit auf 100 % stellen, Bridging-Flow leicht reduzieren.",
+      praevention:"Sehr große Spannweiten (>30–40 mm) mit dünnen Hilfsstützen unterteilen, Bridging-Geschwindigkeit separat vom Normaldruck kalibrieren.",
+      related:["ueberhang-durchsacken"]},
+    {id:"support-marken", cat:"Support & Überhänge", title:"Supports schwer entfernbar / hinterlassen Narben",
+      tags:["support entfernen","narben","stützstruktur"],
+      symptom:"Stützstrukturen lassen sich nur mit Kraft und Beschädigung der Oberfläche lösen, oder hinterlassen raue Kontaktflächen.",
+      ursachen:["Zu geringer Z-Abstand zwischen Support und Modell","Support-Dichte zu hoch","Falscher Support-Typ für das Material"],
+      loesung:"Z-Gap zwischen Support und Modell im Slicer leicht erhöhen (typisch 0,15–0,3 mm), Support-Dichte reduzieren.",
+      praevention:"Organische/Baum-Supports für einfacheres Entfernen bei Sichtteilen nutzen, Support-Interface-Layer (dünne Trennschicht) aktivieren.",
+      related:["ueberhang-durchsacken"]},
+    {id:"feuchtes-filament", cat:"Material & Handling", title:"Feuchtes Filament (Knistern, Blasen, Stringing)",
+      tags:["feuchtigkeit","knistern","blasen","nasses filament"],
+      symptom:"Knister- oder Zischgeräusche an der Düse, kleine Bläschen/raue Oberfläche, verstärktes Stringing, spröde Ergebnisse — typisch bei PETG, Nylon, TPU, PVA.",
+      ursachen:["Filament hat über Zeit Feuchtigkeit aus der Luft aufgenommen (hygroskopisches Material)","Offene Lagerung ohne Trockenmittel"],
+      loesung:"Filament vor dem Druck trocknen: im Filamenttrockner oder Backofen bei materialgerechter Temperatur (z. B. PETG ca. 65 °C, mehrere Stunden).",
+      praevention:"Filament grundsätzlich in versiegelten Boxen mit Silica-Gel oder aktivem Trockner lagern, besonders bei Nylon/TPU/PVA möglichst direkt aus der Trockenbox drucken.",
+      related:["stringing","clogging","sproedes-filament"]},
+    {id:"filament-verheddert", cat:"Material & Handling", title:"Filament reißt oder verheddert sich auf der Spule",
+      tags:["verheddert","filament reißt","spule","tangle"],
+      symptom:"Der Druck stoppt mitten im Auftrag, weil sich das Filament auf der Spule verhakt hat oder gerissen ist.",
+      ursachen:["Filamentende beim letzten Gebrauch nicht fixiert, dadurch unter andere Wicklungen gerutscht","Spule nicht sauber gewickelt (Billigware, Umspulen nötig)","Filament durch Alterung spröde geworden und reißt unter Zugspannung"],
+      loesung:"Bei Verhedderung: Druck pausieren, Spule entnehmen, verhakte Wicklung vorsichtig lösen; bei Riss: Enden sauber anschrägen und mit einer kurzen Splice-Verbindung oder neuem Filament fortsetzen.",
+      praevention:"Filamentende nach jedem Druck immer in der Halteklemme der Spule fixieren, Spulenhalter mit geringer Reibung nutzen.",
+      related:["sproedes-filament"]},
+    {id:"sproedes-filament", cat:"Material & Handling", title:"Sprödes / brüchiges Filament",
+      tags:["spröde","bricht","alterung"],
+      symptom:"Filament bricht schon beim leichten Biegen, häufig verbunden mit häufigen Filamentabrissen während des Drucks.",
+      ursachen:["Feuchtigkeitsaufnahme (besonders PLA und PETG über lange Zeit)","UV-/Lichteinwirkung bei langer offener Lagerung","Materialalterung generell"],
+      loesung:"Filament trocknen (siehe „Feuchtes Filament“) — stellt bei vielen Materialien einen Großteil der ursprünglichen Flexibilität wieder her.",
+      praevention:"Lichtgeschützt und trocken lagern, ältere Spulenreste vor Gebrauch testen statt direkt in einem großen Druck zu verbauen.",
+      related:["feuchtes-filament","filament-verheddert"]},
+    {id:"top-layer-luecken", cat:"Maßhaltigkeit", title:"Löcher/Lücken in der Decklage (Top-Layer)",
+      tags:["löcher","lücken","top layer","nicht geschlossen"],
+      symptom:"Die oberste Fläche ist nicht vollständig geschlossen, kleine Löcher lassen das Infill-Muster durchscheinen.",
+      ursachen:["Zu wenige Top-Layer für die Infill-Dichte","Infill-Overlap zu gering eingestellt"],
+      loesung:"Top-Layer-Anzahl erhöhen (mind. 4–5 bei 0,2 mm Layerhöhe).",
+      praevention:"Infill-Overlap-Prozentsatz prüfen (Standard meist 10–15 %), Top-Layer-Anzahl an gewählte Infill-Dichte anpassen.",
+      related:["pillowing"]},
+    {id:"masshaltigkeit", cat:"Maßhaltigkeit", title:"Maße stimmen nicht (Über-/Untermaß)",
+      tags:["maßhaltigkeit","zu groß","zu klein","passgenauigkeit","toleranz"],
+      symptom:"Löcher sind zu eng für Schrauben/Stifte, oder Steckverbindungen sitzen zu locker bzw. zu stramm.",
+      ursachen:["Horizontale Expansion durch die geschmolzene Kunststoffbreite (Löcher werden minimal kleiner, Außenkonturen minimal größer)","Elephant Foot an der Kontaktfläche","Ungenaue Kalibrierung von E-Steps/Flow"],
+      loesung:"„Horizontal Expansion“ bzw. „XY Compensation“ im Slicer nutzen: Löcher leicht vergrößern (z. B. +0,1 bis +0,2 mm), Außenkonturen leicht verkleinern.",
+      praevention:"Für funktionale Passungen immer einen kleinen Testdruck mit den exakten Solltoleranzen machen, Flow und E-Steps sauber kalibrieren.",
+      related:["elephant-foot","ueberextrusion"]}
+  ];
+
+  // ============================================================
+  // DATEN — SLICER-TIPPS
+  // ============================================================
+  const SLICERS = [
+    {key:"prusaslicer", name:"PrusaSlicer", color:"#ff8c3c", tips:[
+      {t:"Organic Supports nutzen", d:"Für komplexe Überhänge deutlich materialsparender und leichter zu entfernen als klassische Grid-Supports. Zu finden unter Support-Material → Style: Organic."},
+      {t:"Variable Layer Height", d:"Für runde oder gekrümmte Objekte aktivieren, um an flachen Stellen schneller und an Kurven feiner zu drucken — spart Zeit ohne sichtbaren Qualitätsverlust."},
+      {t:"Eigene Filament-Profile anlegen", d:"Pro Spule/Charge ein eigenes Profil speichern statt das Standardprofil zu überschreiben — so bleiben bewährte Einstellungen erhalten."},
+      {t:"Ironing für Sichtflächen", d:"Glättet Top-Flächen sichtbar, kostet aber zusätzliche Druckzeit. Lohnt sich vor allem bei Deko- und Präsentationsteilen."},
+      {t:"Sequential Printing", d:"„Complete individual objects“ druckt viele Kleinteile nacheinander statt schichtweise parallel — verhindert Kollisionen mit dem Druckkopf, allerdings nur bei ausreichender Bauraumhöhe pro Objekt sinnvoll."},
+      {t:"Adaptive Bettmesh (falls vorhanden)", d:"Sorgt für gleichmäßigere erste Schichten auf leicht unebenen Betten, besonders bei großflächigen Drucken relevant."},
+      {t:"Detailierte Support-Blocker nutzen", d:"Mit dem Stützen-Pinsel gezielt Bereiche von automatischen Supports ausschließen oder erzwingen, statt nur globale Winkel-Schwellen zu nutzen."},
+      {t:"Retraction pro Filament kalibrieren", d:"Der integrierte Retraction-Test-Assistent hilft, Stringing materialspezifisch statt pauschal zu minimieren."}
+    ]},
+    {key:"cura", name:"Cura", color:"#5fd9a0", tips:[
+      {t:"Adaptive Layers aktivieren", d:"In den Experimenteinstellungen zu finden — passt die Schichthöhe automatisch an Detailgrad und Wandwinkel an, für mehr Detailtreue ohne unnötigen Zeitverlust an flachen Flächen."},
+      {t:"Tree Supports für organische Formen", d:"Meist deutlich leichter zu entfernen als lineare Supports und benötigen oft weniger Material."},
+      {t:"Profile über „Custom“ duplizieren", d:"Standardprofile nie direkt überschreiben, sondern als Kopie anpassen — sonst lässt sich schwer zum Ursprungszustand zurückkehren."},
+      {t:"Z-Seam-Ausrichtung auf „Sharpest Corner“", d:"Versteckt die sichtbare Naht zuverlässig an der schärfsten Kante des Modells statt an einer zufälligen Stelle."},
+      {t:"Mesh Fixes aktivieren", d:"Bei fehlerhaften, nicht wasserdichten STL-Dateien hilft „Union Overlapping Volumes“ und „Keep Disconnected Faces“ häufig ohne externe Reparatur-Tools."},
+      {t:"Ooze Shield bei Multi-Material", d:"Fängt Oozing beim Filamentwechsel ab und hält die Farbübergänge am Modell selbst sauberer."},
+      {t:"Combing Mode: „Not in Skin“", d:"Reduziert sichtbare Fahrspuren auf Außen- und Top-Flächen deutlich, ohne die Reisezeiten stark zu erhöhen."},
+      {t:"Gradual Infill Steps", d:"Reduziert die Infill-Dichte zur Modellmitte hin stufenweise — spart Material und Zeit bei kaum spürbarem Festigkeitsverlust im Kern."}
+    ]},
+    {key:"bambustudio", name:"Bambu Studio", color:"#56b7e6", tips:[
+      {t:"Flow-Dynamics-Kalibrierung (Pressure Advance)", d:"Pro Filament durchführen — macht einen spürbaren Unterschied bei scharfen Ecken und feinen Details, zu finden unter Kalibrierung → Flow Dynamics."},
+      {t:"AMS-Purge-Volumen anpassen", d:"In der Filament-Kompatibilitätstabelle das Spülvolumen zwischen Farben feintunen, um Materialverschwendung bei häufigen Wechseln zu reduzieren."},
+      {t:"Precise Wall aktivieren", d:"Sorgt für maßhaltigere Außenwände, besonders wichtig bei funktionalen Teilen mit engen Passungen."},
+      {t:"Auto-Bettnivellierung aktiv lassen", d:"Bei X1/P1-Serien vor jedem Druck aktiv lassen statt manuell zu kalibrieren — spart Zeit und ist zuverlässiger als eine einmalige Handkalibrierung."},
+      {t:"Flow-Rate-Kalibrierung pro Spule", d:"Gerade bei Fremdfilament (nicht Bambu Lab) lohnt sich die integrierte Flow-Rate-Kalibrierung, um Herstellerschwankungen auszugleichen."},
+      {t:"Timelapse für Fehlerdiagnose nutzen", d:"Bei wiederkehrenden Problemen hilft der Zeitraffer, den genauen Moment eines Fehlers (z. B. Layer Shift, Kollision) zu identifizieren."},
+      {t:"Smooth Time Lapse vs. Normal", d:"Für saubere Zeitraffer-Videos „Smooth“ wählen — hebt die Druckdüse zwischen Schichten kurz an, kostet aber etwas Druckzeit."}
+    ]},
+    {key:"orcaslicer", name:"OrcaSlicer", color:"#c792ea", tips:[
+      {t:"Integrierten Calibration-Tab nutzen", d:"Enthält strukturierte Tests für Flow, Pressure Advance, Temperatur-Turm und Retraction an einem Ort — deutlich systematischer als manuelles Ausprobieren."},
+      {t:"Adaptive Bettmesh-Kalibrierung", d:"Sofern der Drucker es unterstützt, sorgt sie für gleichmäßigere erste Schichten auch bei leicht unebenen Betten."},
+      {t:"Precise Wall + Arachne-Wandgenerator", d:"Kombination sorgt für gleichmäßigere Wandstärken gerade bei dünnen, spitz zulaufenden Bereichen."},
+      {t:"Gute Wahl beim Umstieg von PrusaSlicer", d:"Basiert auf demselben Fundament, bringt aber deutlich mehr eingebaute Kalibrierungs-Werkzeuge mit — Profile lassen sich oft direkt importieren."},
+      {t:"Pressure-Advance-Turm statt Einzeltest", d:"Der Turm-Test zeigt mehrere PA-Werte in einem Druck übereinander — schneller als einzelne Testdrucke nacheinander."},
+      {t:"Skirt als Vorwärm-Linie einsetzen", d:"Ein mehrlagiger Skirt in ausreichendem Abstand zum Modell hilft, die Düse vor dem eigentlichen Druck stabil auf Temperatur zu bringen."}
+    ]},
+    {key:"superslicer", name:"SuperSlicer", color:"#a8bdb2", tips:[
+      {t:"Sehr granulare Parameter nutzen", d:"Fast jeder Aspekt der Extrusion ist einzeln einstellbar — ideal für Nutzer, die jeden Parameter selbst feintunen wollen, aber mit Zeitaufwand verbunden."},
+      {t:"Arachne-Wandgenerator aktivieren", d:"Sorgt für variierende Wandstärken statt einer festen Anzahl an Perimetern — besonders hilfreich bei dünnen Details unter der Standard-Wanddicke."},
+      {t:"Eher für Fortgeschrittene geeignet", d:"Die Standardwerte benötigen häufiger manuelles Feintuning als bei Cura oder Bambu Studio — für Einsteiger ist ein anderer Slicer oft der einfachere Start."},
+      {t:"Erweiterte Kühlungs-Kurven nutzen", d:"Lüftergeschwindigkeit lässt sich abhängig von der minimalen Schichtzeit sehr fein über eine Kurve statt nur über feste Stufen steuern."},
+      {t:"Perimeter-Reihenfolge anpassen", d:"„Innen zuerst“ oder „Außen zuerst“ lässt sich gezielt für bessere Maßhaltigkeit vs. bessere Optik der Außenwand konfigurieren."}
+    ]}
+  ];
+
+  // ============================================================
+  // DATEN — MATERIALKUNDE
+  // ============================================================
+  const MATERIALS = [
+    {name:"PLA", nozzle:"190–220 °C", bed:"50–60 °C", fan:"100 %", note:"Einsteigerfreundlich, geringes Warping, aber spröde bei Schlagbelastung."},
+    {name:"PETG", nozzle:"220–250 °C", bed:"70–80 °C", fan:"30–50 %", note:"Zäh und schlagfest, neigt zu Stringing, gute Chemikalienbeständigkeit."},
+    {name:"ABS", nozzle:"230–250 °C", bed:"90–110 °C", fan:"0–20 %", note:"Warpt stark, Gehäuse dringend empfohlen, deutliche Geruchsbelästigung."},
+    {name:"ASA", nozzle:"235–250 °C", bed:"90–110 °C", fan:"0–20 %", note:"Ähnlich ABS, aber deutlich UV-beständiger — gut für Outdoor-Teile."},
+    {name:"TPU", nozzle:"210–230 °C", bed:"30–60 °C", fan:"30–50 %", note:"Flexibel, langsam drucken, Direct-Drive-Extruder klar im Vorteil."},
+    {name:"Nylon (PA)", nozzle:"240–260 °C", bed:"70–90 °C", fan:"0–20 %", note:"Sehr feuchtigkeitsempfindlich, unbedingt vor Gebrauch trocknen."},
+    {name:"PC (Polycarbonat)", nozzle:"260–280 °C", bed:"100–120 °C", fan:"0 %", note:"Sehr hohe Festigkeit und Temperaturbeständigkeit, benötigt Vollgehäuse und hohe Drucktemperaturen."},
+    {name:"PVA", nozzle:"190–210 °C", bed:"45–60 °C", fan:"0–30 %", note:"Wasserlösliches Supportmaterial, extrem feuchtigkeitsempfindlich, luftdicht lagern."}
+  ];
+
+  // ============================================================
+  // DATEN — GLOSSAR
+  // ============================================================
+  const GLOSSARY = [
+    {t:"Retraction", d:"Kurzes Zurückziehen des Filaments vor Reisebewegungen, um Fäden (Stringing) zu vermeiden."},
+    {t:"Z-Offset", d:"Feineinstellung des Abstands zwischen Düse und Bett, entscheidend für die Qualität der ersten Schicht."},
+    {t:"Flow / Extrusion Multiplier", d:"Faktor, der die tatsächlich ausgestoßene Filamentmenge relativ zur berechneten Menge steuert."},
+    {t:"Pressure Advance / Linear Advance", d:"Kompensiert den Druckaufbau in der Düse bei Geschwindigkeitsänderungen, für schärfere Ecken und weniger Blobs."},
+    {t:"Input Shaping", d:"Firmware-Feature (v. a. in Klipper) zur Reduktion von Vibrationen und Ringing bei hohen Geschwindigkeiten."},
+    {t:"Brim", d:"Zusätzliche, dünne Materiallage rund um das Modell auf der ersten Schicht zur Verbesserung der Bett-Haftung."},
+    {t:"Raft", d:"Vollflächiges Opfer-Fundament unter dem Modell, das bei sehr schwieriger Haftung oder unebenem Bett hilft."},
+    {t:"Skirt", d:"Umlaufende Linie(n) um das Modell ohne Kontakt zu ihm — dient dem Vorwärmen der Düse und der Kontrolle des Filamentflusses vor Druckbeginn."},
+    {t:"Seam (Naht)", d:"Der Punkt, an dem jede geschlossene Kontur einer Schicht beginnt und endet — potenziell sichtbar als kleine Linie oder Blob."},
+    {t:"Arachne (Wandgenerator)", d:"Algorithmus für variable Wandstärken statt einer festen Anzahl an Perimetern, besonders hilfreich bei dünnen Details."},
+    {t:"Coasting", d:"Stoppt die Extrusion kurz vor dem Ende einer Linie, um den restlichen Druck in der Düse für das Ende zu nutzen — reduziert Blobs."},
+    {t:"Combing", d:"Steuert, ob Reisebewegungen innerhalb bereits gedruckter Konturen bleiben, um sichtbare Fahrspuren auf Außenflächen zu vermeiden."},
+    {t:"Infill", d:"Innere Füllstruktur eines Drucks, meist als Prozentsatz und Muster (z. B. Gyroid, Grid, Honeycomb) angegeben."},
+    {t:"Perimeter / Wandlinien", d:"Die äußeren, geschlossenen Umrisslinien jeder Schicht, die die sichtbare Außenwand bilden."},
+    {t:"Top/Bottom Layer", d:"Die vollflächig gefüllten Deck- und Bodenschichten eines Drucks, unabhängig vom Infill-Muster."},
+    {t:"Layer Height (Schichthöhe)", d:"Die Dicke jeder einzelnen gedruckten Schicht — kleinere Werte bedeuten mehr Detail, aber längere Druckzeit."},
+    {t:"Nozzle (Düse)", d:"Die Öffnung am Ende des Hotends, durch die das geschmolzene Filament austritt, meist 0,4 mm im Standard."},
+    {t:"Hotend", d:"Die beheizte Baugruppe, die das Filament aufschmilzt, bestehend aus Heizblock, Thermistor, Düse und Wärmebarriere."},
+    {t:"Bowden vs. Direct Drive", d:"Zwei Extruder-Bauformen: beim Bowden liegt der Motor entfernt vom Hotend (langer Schlauch), bei Direct Drive sitzt er direkt darauf."},
+    {t:"PID-Tuning", d:"Kalibrierverfahren, das die Heizregelung von Düse und Bett auf stabile, schwankungsarme Temperaturen einstellt."},
+    {t:"E-Steps", d:"Anzahl der Motorschritte, die der Firmware für einen definierten Filamentvorschub (z. B. 100 mm) hinterlegt sind — Grundlage für korrekte Extrusion."},
+    {t:"Bed Leveling", d:"Ausgleich der Neigung/Unebenheit des Druckbetts, manuell oder automatisch per Sensor (ABL)."},
+    {t:"Mesh Bed Leveling", d:"Automatisch erstelltes Höhenprofil des Betts an mehreren Messpunkten, das während des Drucks kompensiert wird."},
+    {t:"Elephant Foot Compensation", d:"Slicer-Einstellung, die die untersten Schichten geringfügig schmaler druckt, um das Ausbeulen der ersten Schicht auszugleichen."},
+    {t:"Horizontal Expansion / XY Compensation", d:"Slicer-Einstellung, die Außenkonturen und Löcher um einen festen Betrag skaliert, um Über-/Untermaß auszugleichen."},
+    {t:"Support / Stützstruktur", d:"Temporäres, mitgedrucktes Material zur Abstützung von Überhängen, das nach dem Druck entfernt wird."},
+    {t:"Organische / Baum-Supports", d:"Astartige Stützstrukturen mit wenigen Kontaktpunkten zum Modell, meist material­sparender und leichter zu entfernen als Gitter-Supports."},
+    {t:"Bridging", d:"Drucken einer freitragenden Linie zwischen zwei Stützpunkten ohne darunterliegendes Material."},
+    {t:"Overhang (Überhang)", d:"Bereich eines Modells, der über die darunterliegende Schicht hinausragt und ab einem bestimmten Winkel Unterstützung benötigt."},
+    {t:"Purge / Flushing", d:"Ausschieben von Restmaterial beim Filament- oder Farbwechsel, um saubere Übergänge zu gewährleisten."},
+    {t:"AMS (Automatic Material System)", d:"Bambu-Lab-System zum automatischen Wechseln zwischen mehreren Filamentspulen für Multi-Color-/Multi-Material-Drucke."},
+    {t:"Cold Pull / Atomic Method", d:"Reinigungsverfahren für verstopfte Düsen: Filament wird bei kontrollierter Abkühlung kräftig aus dem Hotend gezogen."},
+    {t:"Adaptive Layers", d:"Automatische Anpassung der Schichthöhe je nach Modellgeometrie — flache Bereiche schneller, Details feiner."},
+    {t:"Ironing", d:"Zusätzlicher Glättungs-Durchgang über Top-Flächen mit reduziertem Materialfluss für eine besonders glatte Optik."},
+    {t:"Ooze Shield", d:"Dünne, separate Wand um das Modell, die bei Multi-Material-Drucken Filamentreste vom Düsenwechsel auffängt."},
+    {t:"Jerk / Junction Deviation", d:"Firmware-Parameter, die bestimmen, wie abrupt Geschwindigkeits- und Richtungsänderungen an Ecken erfolgen dürfen."},
+    {t:"VFA (Vertical Fine Artifacts)", d:"Feine, meist hochfrequente Rillen an der Außenwand, oft durch Vibrationen der Lüfter oder Riemen verursacht."},
+    {t:"Shrinkage (Schrumpfung)", d:"Materialbedingtes Zusammenziehen beim Abkühlen, das die tatsächlichen Maße leicht vom Modell abweichen lässt."},
+    {t:"Hygroskopisch", d:"Eigenschaft eines Materials, Feuchtigkeit aus der Luft aufzunehmen — betrifft PETG, Nylon, TPU und PVA besonders stark."},
+    {t:"Filament-Trockner / Trockenbox", d:"Behälter mit aktiver Beheizung oder Trockenmittel zur feuchtigkeitsfreien Lagerung bzw. Trocknung von Filament."}
+  ];
+
+  // ============================================================
+  // RENDERING
+  // ============================================================
+  const problemCardsEl = document.getElementById('lxProblemCards');
+  const problemEmptyEl = document.getElementById('lxProblemEmpty');
+  const problemCountEl = document.getElementById('lxProblemCount');
+  const glossEl = document.getElementById('lxGlossary');
+  const glossEmptyEl = document.getElementById('lxGlossEmpty');
+  const glossCountEl = document.getElementById('lxGlossCount');
+  const countEl = document.getElementById('lxCount');
+  const matBody = document.getElementById('lxMatBody');
+
+  function slugify(s){
+    return s.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+  }
+
+  const byId = {};
+  PROBLEMS.forEach(p => byId[p.id] = p);
+
+  function renderProblems(list){
+    problemCardsEl.innerHTML = '';
+    problemEmptyEl.style.display = list.length ? 'none' : 'block';
+    problemCountEl.textContent = list.length ? `${list.length} Einträge` : '';
+    list.forEach(p => {
+      const det = document.createElement('details');
+      det.className = 'lx-card';
+      det.id = p.id;
+
+      const relatedHtml = (p.related || []).filter(rid => byId[rid]).map(rid =>
+        `<a class="lx-related-chip" href="#${rid}" data-jump="${rid}">${byId[rid].title}</a>`
+      ).join('');
+
+      det.innerHTML = `
+        <summary class="lx-card-head">
+          <p class="lx-card-title">${p.title}</p>
+          <span class="lx-tag">${p.cat}</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="lx-card-symptom">${p.symptom}</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul>${p.ursachen.map(u => `<li>${u}</li>`).join('')}</ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>${p.loesung}</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>${p.praevention}</p>
+          </div>
+          ${relatedHtml ? `<div class="lx-related"><span class="lx-related-label">Verwandt:</span>${relatedHtml}</div>` : ''}
+        </div>
+      `;
+      problemCardsEl.appendChild(det);
+    });
+
+    problemCardsEl.querySelectorAll('[data-jump]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        jumpTo(a.dataset.jump);
+      });
+    });
+  }
+
+  function renderGlossary(list){
+    glossEl.innerHTML = '';
+    glossEmptyEl.style.display = list.length ? 'none' : 'block';
+    glossCountEl.textContent = list.length ? `${list.length} Begriffe` : '';
+    list.forEach(g => {
+      const id = 'g-' + slugify(g.t);
+      const item = document.createElement('div');
+      item.className = 'lx-gloss-item';
+      item.id = id;
+      item.innerHTML = `<p class="lx-gloss-term">${g.t}</p><p class="lx-gloss-def">${g.d}</p>`;
+      glossEl.appendChild(item);
+    });
+  }
+
+  function renderMaterials(){
+    matBody.innerHTML = MATERIALS.map(m => `
+      <tr>
+        <td class="lx-mat-name">${m.name}</td>
+        <td>${m.nozzle}</td>
+        <td>${m.bed}</td>
+        <td>${m.fan}</td>
+        <td>${m.note}</td>
+      </tr>
+    `).join('');
+  }
+
+  function renderSlicers(){
+    const tabsEl = document.getElementById('lxSlicerTabs');
+    const panelsEl = document.getElementById('lxSlicerPanels');
+    tabsEl.innerHTML = SLICERS.map((s, i) => `
+      <button type="button" class="lx-slicer-tab${i===0 ? ' lx-slicer-tab-active' : ''}" data-slicer="${s.key}" style="--dot:${s.color}">
+        <span class="lx-slicer-dot" style="background:${s.color}"></span>${s.name}
+      </button>
+    `).join('');
+    panelsEl.innerHTML = SLICERS.map((s, i) => `
+      <div class="lx-slicer-panel${i===0 ? ' lx-slicer-panel-active' : ''}" id="panel-${s.key}">
+        <div class="lx-tip-list">
+          ${s.tips.map(tip => `
+            <div class="lx-tip" style="--dot:${s.color}">
+              <p class="lx-tip-title">${tip.t}</p>
+              <p class="lx-tip-text">${tip.d}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    tabsEl.querySelectorAll('.lx-slicer-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabsEl.querySelectorAll('.lx-slicer-tab').forEach(b => b.classList.remove('lx-slicer-tab-active'));
+        panelsEl.querySelectorAll('.lx-slicer-panel').forEach(p => p.classList.remove('lx-slicer-panel-active'));
+        btn.classList.add('lx-slicer-tab-active');
+        document.getElementById('panel-' + btn.dataset.slicer).classList.add('lx-slicer-panel-active');
+      });
+    });
+  }
+
+  // ============================================================
+  // FILTER / SUCHE
+  // ============================================================
+  let currentCat = 'ALL';
+  const catPillsEl = document.getElementById('lxCatPills');
+  const searchEl = document.getElementById('lxSearch');
+
+  const SECTION_IDS = { probleme:'sec-probleme', slicer:'sec-slicer', material:'sec-material', glossar:'sec-glossar' };
+
+  function applyFilter(){
+    const q = searchEl.value.trim().toLowerCase();
+
+    Object.entries(SECTION_IDS).forEach(([cat, elId]) => {
+      const visible = currentCat === 'ALL' || currentCat === cat;
+      document.getElementById(elId).style.display = visible ? '' : 'none';
+    });
+
+    const filteredProblems = PROBLEMS.filter(p => {
+      if (!q) return true;
+      const hay = (p.title + ' ' + p.cat + ' ' + p.symptom + ' ' + p.tags.join(' ')).toLowerCase();
+      return hay.includes(q);
+    });
+    renderProblems(filteredProblems);
+
+    const filteredGloss = GLOSSARY.filter(g => {
+      if (!q) return true;
+      return (g.t + ' ' + g.d).toLowerCase().includes(q);
+    });
+    renderGlossary(filteredGloss);
+
+    if (q){
+      const total = filteredProblems.length + filteredGloss.length;
+      countEl.textContent = `${total} Treffer für „${searchEl.value.trim()}“`;
+    } else {
+      countEl.textContent = '';
+    }
+  }
+
+  catPillsEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.lx-pill');
+    if (!btn) return;
+    catPillsEl.querySelectorAll('.lx-pill').forEach(p => p.classList.remove('lx-pill-active'));
+    btn.classList.add('lx-pill-active');
+    currentCat = btn.dataset.cat;
+    applyFilter();
+  });
+
+  searchEl.addEventListener('input', applyFilter);
+
+  function jumpTo(id){
+    currentCat = 'ALL';
+    catPillsEl.querySelectorAll('.lx-pill').forEach(p => p.classList.remove('lx-pill-active'));
+    catPillsEl.querySelector('[data-cat="ALL"]').classList.add('lx-pill-active');
+    searchEl.value = '';
+    applyFilter();
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior:'smooth', block:'center' });
+      if (el.tagName === 'DETAILS') el.open = true;
+    });
+  }
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  renderMaterials();
+  renderSlicers();
+  applyFilter();
+
+  if (location.hash){
+    const id = location.hash.slice(1);
+    setTimeout(() => jumpTo(id), 50);
+  }
+})();
+</script>
+</body>
+</html>
