@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>3DToolBox – 3D-Druck Kostenrechner</title>
 <meta name="description" content="Kostenloser Online-Rechner für 3D-Druck-Hobbyisten: Material, Strom, Verschleiß und Fehldruckrate live berechnen — inklusive Drucker-Presets und Verkaufspreis-Kalkulation.">
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-kostenrechner.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/3d-print-cost-calculator.html">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-kostenrechner.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -121,6 +124,7 @@
   }
   .fm-tool-btn:not(.fm-tool-soon):hover{ background:var(--accent); color:#1a1206; }
   .fm-tool-btn.fm-tool-soon{ border-color:var(--line); color:var(--ink-dim); cursor:default; }
+  .fm-tool-btn.fm-tool-active{ background:var(--accent); color:#1a1206; }
   .fm-tool-info{
     width:20px; height:20px; border-radius:50%;
     border:1px solid var(--line);
@@ -481,7 +485,19 @@
         <button type="button" class="fm-tool-info" aria-label="Mehr Infos zum Filament-Finder">i</button>
         <div class="fm-tool-tip">Foto oder 3MF-Datei hochladen und automatisch das passende Filament samt Farbe finden.</div>
       </div>
-      <div class="fm-tool"><span class="fm-tool-btn fm-tool-soon">Demnächst</span></div>
+      <div class="fm-tool">
+        <span class="fm-tool-btn fm-tool-active">Kostenrechner</span>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="/filament-datenbank.html">Filament-Datenbank</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zur Filament-Datenbank">i</button>
+        <div class="fm-tool-tip">Filament nach Farbe durchsuchen und direkt zum passenden Shop springen.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" href="/3d-druck-lexikon.html">Lexikon</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zum Lexikon">i</button>
+        <div class="fm-tool-tip">Druckprobleme mit Ursache & Lösung, Slicer-Tipps und Materialkunde zum Nachschlagen.</div>
+      </div>
     </div>
   </div>
 
@@ -892,6 +908,22 @@
     a.download = '3d-druck-kalkulation.txt';
     a.click();
     URL.revokeObjectURL(url);
+  });
+
+  // Tools-Leiste: (i)-Icon per Tap öffnet/schließt die Beschreibung (für Touch-Geräte,
+  // die kein :hover kennen). Tap außerhalb schließt alle offenen Tooltips wieder.
+  document.querySelectorAll('.fm-tool-info').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const tool = btn.closest('.fm-tool');
+      const wasOpen = tool.classList.contains('fm-tool-tip-open');
+      document.querySelectorAll('.fm-tool-tip-open').forEach(t => t.classList.remove('fm-tool-tip-open'));
+      if (!wasOpen) tool.classList.add('fm-tool-tip-open');
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.fm-tool-tip-open').forEach(t => t.classList.remove('fm-tool-tip-open'));
   });
 
   calc();
