@@ -153,6 +153,10 @@
     color:var(--ink-dim);
     cursor:default;
   }
+  .fm-tool-btn.fm-tool-active{
+    background:var(--accent);
+    color:#1a1206;
+  }
   .fm-tool-info{
     width:20px;
     height:20px;
@@ -631,13 +635,22 @@
         <div class="fm-tool-tip">Große Such- und Modell-Bibliothek: fertige, druckbare 3D-Modelle von anderen Machern finden.</div>
       </div>
       <div class="fm-tool">
-        <span class="fm-tool-btn fm-tool-soon">Demnächst</span>
+        <span class="fm-tool-btn fm-tool-active">Filament-Finder</span>
       </div>
       <div class="fm-tool">
-        <span class="fm-tool-btn fm-tool-soon">Demnächst</span>
+        <a class="fm-tool-btn" id="fmToolCalc" href="/3d-druck-kostenrechner.html">Kostenrechner</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zum Kostenrechner">i</button>
+        <div class="fm-tool-tip">Material-, Strom- und Verschleißkosten für deinen Druck live berechnen — inklusive Verkaufspreis-Kalkulation.</div>
       </div>
       <div class="fm-tool">
-        <span class="fm-tool-btn fm-tool-soon">Demnächst</span>
+        <a class="fm-tool-btn" id="fmToolDatabase" href="/filament-datenbank.html">Filament-Datenbank</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zur Filament-Datenbank">i</button>
+        <div class="fm-tool-tip">Filament nach Farbe durchsuchen und direkt zum passenden Shop springen.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-btn" id="fmToolLexikon" href="/3d-druck-lexikon.html">Lexikon</a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zum Lexikon">i</button>
+        <div class="fm-tool-tip">Druckprobleme mit Ursache & Lösung, Slicer-Tipps und Materialkunde zum Nachschlagen.</div>
       </div>
     </div>
   </div>
