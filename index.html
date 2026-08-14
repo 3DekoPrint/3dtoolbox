@@ -8,19 +8,6 @@
 <link rel="alternate" hreflang="de" href="https://3dtoolbox.info/">
 <link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/">
 <link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="3DToolBox">
-<meta property="og:locale" content="de_DE">
-<meta property="og:title" content="3DToolBox – Filament-Finder für 3D-Druck">
-<meta property="og:description" content="Kostenloses Online-Tool für 3D-Druck-Hobbyisten: Foto oder 3MF-Datei hochladen und automatisch das passende Filament samt Farbe finden.">
-<meta property="og:image" content="https://3dtoolbox.info/assets/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://3dtoolbox.info/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="3DToolBox – Filament-Finder für 3D-Druck">
-<meta name="twitter:description" content="Kostenloses Online-Tool für 3D-Druck-Hobbyisten: Foto oder 3MF-Datei hochladen und automatisch das passende Filament samt Farbe finden.">
-<meta name="twitter:image" content="https://3dtoolbox.info/assets/og-image.png">
 <meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -614,6 +601,73 @@
     text-decoration:none;
   }
   .fm-footer-legal a:hover{ color:var(--ink); text-decoration:underline; }
+
+  /* ===== Redesign: mehr Luft, einheitliche Tool-Karten, externe Tools getrennt ===== */
+  .fm-root{ padding:40px 24px 56px; max-width:780px; }
+  .fm-brand{ margin-bottom:14px; }
+  .fm-tagline{ color:var(--ink-dim); font-size:14.5px; line-height:1.55; margin:0 0 28px; max-width:560px; }
+
+  .fm-tools-bar{ padding:20px 22px 22px; margin-bottom:34px; }
+  .fm-tools-title{ margin-bottom:14px; }
+  .fm-tools-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; }
+  .fm-tool-card{
+    display:flex; flex-direction:column; gap:5px; height:100%;
+    background:var(--panel-2); border:1px solid var(--line); border-radius:12px;
+    padding:14px 16px; text-decoration:none; color:var(--ink);
+    transition:border-color .15s ease, transform .15s ease, background .15s ease;
+  }
+  a.fm-tool-card:hover{ border-color:var(--accent); transform:translateY(-2px); }
+  .fm-tool-card-name{ font-family:"JetBrains Mono","Courier New",monospace; font-size:12.5px; font-weight:700; letter-spacing:.01em; }
+  .fm-tool-card-desc{ font-size:11.5px; color:var(--ink-dim); line-height:1.45; }
+  .fm-tool-card-active{ border-color:var(--accent); background:linear-gradient(180deg, rgba(255,140,60,.16) 0%, var(--panel-2) 100%); cursor:default; }
+  .fm-tool-card-active .fm-tool-card-name{ color:var(--accent); }
+  .fm-tool-card-flagship{ border-color:var(--accent-2); }
+  .fm-tool-card-flagship.fm-tool-card-active{ border-color:var(--accent); }
+  .fm-tool-card-badge{
+    display:inline-block; font-family:"JetBrains Mono","Courier New",monospace; font-size:9.5px;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--accent-2); margin-bottom:1px;
+  }
+  .fm-tools-external{ margin-top:18px; padding-top:18px; border-top:1px dashed var(--line); }
+  .fm-tools-external-title{
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:10px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-dim); opacity:.75; margin:0 0 12px;
+  }
+  .fm-tools-grid-external .fm-tool-card{ background:transparent; border-style:dashed; opacity:.82; }
+  .fm-tools-grid-external .fm-tool-card:hover{ opacity:1; }
+
+  h1.fm-title{ margin-bottom:8px; }
+  .fm-sub{ margin-bottom:30px; }
+  .fm-flagship-badge{
+    display:inline-flex; align-items:center; gap:5px; font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px; font-weight:700; letter-spacing:.04em; color:#1a1206; background:var(--accent-2);
+    padding:5px 10px; border-radius:20px; margin-bottom:12px;
+  }
+  h1.fm-title-flagship{ font-size:31px; }
+
+  .fm-settings-toggle{ margin-top:16px; }
+  .fm-settings-toggle summary{
+    cursor:pointer; list-style:none; font-family:"JetBrains Mono","Courier New",monospace; font-size:12px;
+    font-weight:600; letter-spacing:.04em; color:var(--ink-dim); padding:12px 16px; background:var(--panel);
+    border:1px solid var(--line); border-radius:10px; display:flex; align-items:center; justify-content:space-between;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .fm-settings-toggle summary::-webkit-details-marker{ display:none; }
+  .fm-settings-toggle summary:hover{ border-color:var(--accent); color:var(--ink); }
+  .fm-settings-toggle summary::after{ content:"▾"; transition:transform .15s ease; }
+  .fm-settings-toggle[open] summary::after{ transform:rotate(180deg); }
+  .fm-settings-toggle[open] summary{ border-bottom-left-radius:0; border-bottom-right-radius:0; border-bottom:none; }
+  .fm-settings-body{ border:1px solid var(--line); border-top:none; border-radius:0 0 10px 10px; padding:16px; background:var(--panel); }
+  .fm-settings-body .fm-linkbox{ margin-top:0; }
+  .fm-settings-body .fm-tolerance-row{ margin-top:16px; }
+
+  .kr-section{ margin-bottom:22px; padding:22px 20px 12px; }
+  .kr-section-head{ margin-bottom:20px; }
+  .lx-section{ margin-bottom:40px; }
+  .fd-color-grid{ gap:14px; }
+
+  @media (max-width:480px){
+    .fm-tools-grid, .fm-tools-grid-external{ grid-template-columns:repeat(auto-fit, minmax(130px,1fr)); }
+  }
 </style>
 </head>
 <body>
@@ -633,42 +687,47 @@
     </div>
   </div>
 
+  <p class="fm-tagline">Kostenlose Tools für den 3D-Druck-Alltag: Filament finden, Kosten berechnen, Wissen nachschlagen – alles direkt im Browser, ganz ohne Anmeldung.</p>
+
   <div class="fm-tools-bar">
-    <p class="fm-tools-title">Nützliche Tools rund um den 3D-Druck</p>
+    <p class="fm-tools-title">Unsere Tools</p>
     <p class="fm-tools-credit" id="fmToolsCredit" style="display:none;"></p>
     <div class="fm-tools-grid" id="fmToolsGrid">
-      <div class="fm-tool">
-        <a class="fm-tool-btn" id="fmToolMeshy" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI</a>
-        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Meshy AI">i</button>
-        <div class="fm-tool-tip">KI-Tool: aus einer Textbeschreibung oder einem Bild automatisch ein druckfertiges 3D-Modell erstellen.</div>
-      </div>
-      <div class="fm-tool">
-        <a class="fm-tool-btn" id="fmToolThangs" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs</a>
-        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Thangs">i</button>
-        <div class="fm-tool-tip">Große Such- und Modell-Bibliothek: fertige, druckbare 3D-Modelle von anderen Machern finden.</div>
-      </div>
-      <div class="fm-tool">
-        <span class="fm-tool-btn fm-tool-active">Filament-Finder</span>
-      </div>
-      <div class="fm-tool">
-        <a class="fm-tool-btn" id="fmToolCalc" href="/3d-druck-kostenrechner.html">Kostenrechner</a>
-        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zum Kostenrechner">i</button>
-        <div class="fm-tool-tip">Material-, Strom- und Verschleißkosten für deinen Druck live berechnen — inklusive Verkaufspreis-Kalkulation.</div>
-      </div>
-      <div class="fm-tool">
-        <a class="fm-tool-btn" id="fmToolDatabase" href="/filament-datenbank.html">Filament-Datenbank</a>
-        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zur Filament-Datenbank">i</button>
-        <div class="fm-tool-tip">Filament nach Farbe durchsuchen und direkt zum passenden Shop springen.</div>
-      </div>
-      <div class="fm-tool">
-        <a class="fm-tool-btn" id="fmToolLexikon" href="/3d-druck-lexikon.html">Lexikon</a>
-        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zum Lexikon">i</button>
-        <div class="fm-tool-tip">Druckprobleme mit Ursache & Lösung, Slicer-Tipps und Materialkunde zum Nachschlagen.</div>
+      <span class="fm-tool-card fm-tool-card-flagship fm-tool-card-active">
+        <span class="fm-tool-card-badge">★</span>
+        <span class="fm-tool-card-name">Filament-Finder</span>
+        <span class="fm-tool-card-desc">Foto oder 3MF hochladen – passendes Filament &amp; Farbe automatisch finden.</span>
+      </span>
+      <a class="fm-tool-card" id="fmToolCalc" href="/3d-druck-kostenrechner.html">
+        <span class="fm-tool-card-name">Kostenrechner</span>
+        <span class="fm-tool-card-desc">Material-, Strom- und Verschleißkosten live berechnen.</span>
+      </a>
+      <a class="fm-tool-card" id="fmToolDatabase" href="/filament-datenbank.html">
+        <span class="fm-tool-card-name">Filament-Datenbank</span>
+        <span class="fm-tool-card-desc">Filament nach Farbe durchsuchen und direkt im Shop kaufen.</span>
+      </a>
+      <a class="fm-tool-card" href="/3d-druck-lexikon.html">
+        <span class="fm-tool-card-name">Lexikon</span>
+        <span class="fm-tool-card-desc">Druckprobleme, Slicer-Tipps &amp; Materialkunde nachschlagen.</span>
+      </a>
+    </div>
+    <div class="fm-tools-external">
+      <p class="fm-tools-external-title">Externe Empfehlungen</p>
+      <div class="fm-tools-grid fm-tools-grid-external">
+        <a class="fm-tool-card" id="fmToolMeshy" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">
+          <span class="fm-tool-card-name">Meshy AI ↗</span>
+          <span class="fm-tool-card-desc">KI: aus Text oder Bild ein druckfertiges 3D-Modell erstellen.</span>
+        </a>
+        <a class="fm-tool-card" id="fmToolThangs" href="https://than.gs/u/8355632" target="_blank" rel="noopener">
+          <span class="fm-tool-card-name">Thangs ↗</span>
+          <span class="fm-tool-card-desc">Große Bibliothek fertiger, druckbarer 3D-Modelle.</span>
+        </a>
       </div>
     </div>
   </div>
   <p class="fm-eyebrow">Filament Matching</p>
-  <h1 class="fm-title">Filament-Finder</h1>
+  <span class="fm-flagship-badge">★ Unser Flaggschiff-Tool</span>
+  <h1 class="fm-title fm-title-flagship">Filament-Finder</h1>
   <p class="fm-sub">Lade ein Foto oder eine 3MF-Datei hoch – das Tool erkennt automatisch die passenden Farben und zeigt dir das dazu passende Filament, direkt verlinkt zum Kauf.</p>
 
   <div class="fm-drop" id="fmDrop">
@@ -682,38 +741,44 @@
     <div class="fm-filename" id="fmFilename"></div>
   </div>
   <div id="fmPreviewWrap"></div>
+  <p style="margin:10px 2px 0; font-size:11.5px; color:var(--ink-dim); font-family:'JetBrains Mono','Courier New',monospace;">Standard: PLA · ausgewogene Farbtoleranz — unten anpassbar.</p>
 
-  <div class="fm-linkbox" id="fmImgControls" style="display:none;">
-    <div class="fm-material-row">
-      <span class="fm-material-label">Material:</span>
-      <div class="fm-material-pills" id="fmMaterialPills">
-        <button type="button" class="fm-pill fm-pill-active" data-material="PLA">PLA</button>
-        <button type="button" class="fm-pill" data-material="PETG">PETG</button>
-        <button type="button" class="fm-pill" data-material="ABS">ABS</button>
-        <button type="button" class="fm-pill" data-material="ASA">ASA</button>
-        <button type="button" class="fm-pill" data-material="TPU">TPU</button>
+  <details class="fm-settings-toggle">
+    <summary>Erweiterte Einstellungen <span style="opacity:.7; font-weight:400;">(Material, Toleranz)</span></summary>
+    <div class="fm-settings-body">
+      <div class="fm-linkbox" id="fmImgControls" style="display:none;">
+        <div class="fm-material-row">
+          <span class="fm-material-label">Material:</span>
+          <div class="fm-material-pills" id="fmMaterialPills">
+            <button type="button" class="fm-pill fm-pill-active" data-material="PLA">PLA</button>
+            <button type="button" class="fm-pill" data-material="PETG">PETG</button>
+            <button type="button" class="fm-pill" data-material="ABS">ABS</button>
+            <button type="button" class="fm-pill" data-material="ASA">ASA</button>
+            <button type="button" class="fm-pill" data-material="TPU">TPU</button>
+          </div>
+        </div>
+        <div class="fm-controls-row">
+          <div class="fm-control">
+            <label for="fmNumColors">Anzahl Farben: <span id="fmNumColorsVal">8</span></label>
+            <input type="range" id="fmNumColors" min="1" max="12" value="8" step="1">
+          </div>
+          <div class="fm-control">
+            <label for="fmMinPct">Mindest-Bildanteil: <span id="fmMinPctVal">1</span>%</label>
+            <input type="range" id="fmMinPct" min="0" max="20" value="1" step="1">
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="fm-controls-row">
-      <div class="fm-control">
-        <label for="fmNumColors">Anzahl Farben: <span id="fmNumColorsVal">8</span></label>
-        <input type="range" id="fmNumColors" min="1" max="12" value="8" step="1">
-      </div>
-      <div class="fm-control">
-        <label for="fmMinPct">Mindest-Bildanteil: <span id="fmMinPctVal">1</span>%</label>
-        <input type="range" id="fmMinPct" min="0" max="20" value="1" step="1">
-      </div>
-    </div>
-  </div>
 
-  <div class="fm-tolerance-row">
-    <label for="fmTolerance">Farbtoleranz: <span id="fmToleranceVal">14</span> <span class="fm-tolerance-desc" id="fmToleranceDesc">(ausgewogen)</span></label>
-    <input type="range" id="fmTolerance" min="4" max="30" value="14" step="1">
-    <div class="fm-tolerance-scale">
-      <span>streng — nur sehr genaue Treffer</span>
-      <span>locker — zeigt auch entferntere Optionen</span>
+      <div class="fm-tolerance-row">
+        <label for="fmTolerance">Farbtoleranz: <span id="fmToleranceVal">14</span> <span class="fm-tolerance-desc" id="fmToleranceDesc">(ausgewogen)</span></label>
+        <input type="range" id="fmTolerance" min="4" max="30" value="14" step="1">
+        <div class="fm-tolerance-scale">
+          <span>streng — nur sehr genaue Treffer</span>
+          <span>locker — zeigt auch entferntere Optionen</span>
+        </div>
+      </div>
     </div>
-  </div>
+  </details>
 
   <div class="fm-status" id="fmStatus"></div>
   <div class="fm-results" id="fmResults"></div>
