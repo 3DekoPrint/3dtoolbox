@@ -16,6 +16,9 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <style>
   :root{
     --bg:#14201c;
@@ -484,6 +487,38 @@
     border:1px solid var(--line);
     display:block;
   }
+  .fm-model-viewer{
+    margin-top:14px;
+    position:relative;
+    width:100%;
+    height:230px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:radial-gradient(circle at 50% 38%, #223a30 0%, #16241e 100%);
+    overflow:hidden;
+    touch-action:none;
+  }
+  .fm-model-viewer canvas{ display:block; width:100%; height:100%; }
+  .fm-model-viewer-hint{
+    position:absolute; bottom:8px; right:10px;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:10px; color:var(--ink-dim);
+    background:rgba(20,32,28,.72); padding:3px 8px; border-radius:6px; pointer-events:none;
+  }
+  .fm-model-viewer-status{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:12px; color:var(--ink-dim);
+    text-align:center; padding:0 20px;
+  }
+  .fm-stl-note{
+    background:var(--panel);
+    border:1px solid var(--accent-2);
+    border-radius:12px;
+    padding:16px 18px;
+    margin-top:14px;
+  }
+  .fm-stl-note p{ margin:0 0 12px; font-size:13px; color:var(--ink); line-height:1.55; }
+  .fm-stl-note p:last-of-type{ margin-bottom:14px; }
+  .fm-stl-note b{ color:var(--accent-2); }
   .fm-pct{
     font-size:11px;
     color:var(--ink-dim);
@@ -668,6 +703,59 @@
   @media (max-width:480px){
     .fm-tools-grid, .fm-tools-grid-external{ grid-template-columns:repeat(auto-fit, minmax(130px,1fr)); }
   }
+
+  /* ===== Redesign V2: Hover/Tap-Tooltip statt Dauertext, 5. Tool, DB-Vorschau ===== */
+  .fm-tool{ position:relative; display:block; }
+  .fm-tool-card{ padding:16px 34px 16px 16px; }
+  .fm-tool-info{
+    position:absolute; top:12px; right:12px; z-index:5;
+    width:19px; height:19px; border-radius:50%;
+    border:1px solid var(--line); background:var(--panel); color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; font-weight:700;
+    line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .fm-tool-info:hover{ border-color:var(--accent); color:var(--accent); }
+  .fm-tool-tip{
+    display:none; position:absolute; top:calc(100% + 6px); left:0; right:0;
+    background:var(--panel-2); border:1px solid var(--line); border-radius:8px;
+    padding:10px 12px; font-size:12px; line-height:1.45; color:var(--ink);
+    z-index:20; box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  @media (hover:hover){ .fm-tool:hover .fm-tool-tip{ display:block; } }
+  .fm-tool.fm-tool-tip-open .fm-tool-tip{ display:block; }
+  .fm-tools-grid{ grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); }
+  .fm-tools-grid-external{ grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); }
+  .fm-tools-grid-external .fm-tool-card{ padding:12px 30px 12px 14px; }
+  .fm-tools-grid-external .fm-tool-info{ top:9px; right:9px; }
+
+  .fm-db-preview{ margin-top:26px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px 22px; }
+  .fm-db-preview-title{ font-size:15px; font-weight:600; margin:0 0 4px; }
+  .fm-db-preview-sub{ font-size:12.5px; color:var(--ink-dim); margin:0 0 16px; line-height:1.5; }
+  .fm-db-swatches{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .fm-db-swatch{ width:26px; height:26px; border-radius:50%; border:1px solid rgba(255,255,255,.15); flex:none; cursor:default; }
+  .fm-db-preview-btn{
+    display:inline-block; background:transparent; border:1px solid var(--accent); color:var(--accent);
+    text-decoration:none; font-family:"JetBrains Mono","Courier New",monospace; font-size:12.5px; font-weight:600;
+    padding:9px 16px; border-radius:8px; transition:background .15s ease, color .15s ease;
+  }
+  .fm-db-preview-btn:hover{ background:var(--accent); color:#1a1206; }
+
+  .fm-tool-card-name{ overflow-wrap:break-word; word-break:break-word; }
+  @media (max-width:480px){
+    .fm-tools-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ===== Ablauf-Block (Schritte + Vertrauens-Badges) ===== */
+  .fm-howto{ margin:4px 0 26px; }
+  .fm-howto-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:12px; margin-bottom:16px; }
+  .fm-howto-step{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .fm-howto-num{ font-family:"JetBrains Mono","Courier New",monospace; font-size:11px; color:var(--accent-2); margin-bottom:6px; }
+  .fm-howto-title{ font-size:14px; font-weight:700; margin:0 0 4px; color:var(--ink); }
+  .fm-howto-desc{ font-size:12.5px; color:var(--ink-dim); line-height:1.5; margin:0; }
+  .fm-trust-row{ display:flex; flex-wrap:wrap; gap:10px 22px; }
+  .fm-trust-item{ display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--ink-dim); }
+  .fm-trust-item svg{ width:14px; height:14px; color:var(--accent-2); flex:none; }
 </style>
 </head>
 <body>
@@ -693,51 +781,92 @@
     <p class="fm-tools-title">Unsere Tools</p>
     <p class="fm-tools-credit" id="fmToolsCredit" style="display:none;"></p>
     <div class="fm-tools-grid" id="fmToolsGrid">
-      <span class="fm-tool-card fm-tool-card-flagship fm-tool-card-active">
-        <span class="fm-tool-card-badge">★</span>
-        <span class="fm-tool-card-name">Filament-Finder</span>
-        <span class="fm-tool-card-desc">Foto oder 3MF hochladen – passendes Filament &amp; Farbe automatisch finden.</span>
-      </span>
-      <a class="fm-tool-card" id="fmToolCalc" href="/3d-druck-kostenrechner.html">
-        <span class="fm-tool-card-name">Kostenrechner</span>
-        <span class="fm-tool-card-desc">Material-, Strom- und Verschleißkosten live berechnen.</span>
-      </a>
-      <a class="fm-tool-card" id="fmToolDatabase" href="/filament-datenbank.html">
-        <span class="fm-tool-card-name">Filament-Datenbank</span>
-        <span class="fm-tool-card-desc">Filament nach Farbe durchsuchen und direkt im Shop kaufen.</span>
-      </a>
-      <a class="fm-tool-card" href="/3d-druck-lexikon.html">
-        <span class="fm-tool-card-name">Lexikon</span>
-        <span class="fm-tool-card-desc">Druckprobleme, Slicer-Tipps &amp; Materialkunde nachschlagen.</span>
-      </a>
+      <div class="fm-tool">
+        <span class="fm-tool-card fm-tool-card-flagship fm-tool-card-active">
+          <span class="fm-tool-card-badge">★</span>
+          <span class="fm-tool-card-name">Filament-Finder</span>
+        </span>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-card" id="fmToolCalc" href="/3d-druck-kostenrechner.html">
+          <span class="fm-tool-card-name">Kostenrechner</span>
+        </a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Kostenrechner">i</button>
+        <div class="fm-tool-tip">Material-, Strom- und Verschleißkosten live berechnen.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-card" id="fmToolDatabase" href="/filament-datenbank.html">
+          <span class="fm-tool-card-name">Filament-Datenbank</span>
+        </a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Filament-Datenbank">i</button>
+        <div class="fm-tool-tip">Filament nach Farbe durchsuchen und direkt im Shop kaufen.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-card" href="/3d-druck-lexikon.html">
+          <span class="fm-tool-card-name">Lexikon</span>
+        </a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Lexikon">i</button>
+        <div class="fm-tool-tip">Druckprobleme, Slicer-Tipps &amp; Materialkunde nachschlagen.</div>
+      </div>
     </div>
     <div class="fm-tools-external">
       <p class="fm-tools-external-title">Externe Empfehlungen</p>
       <div class="fm-tools-grid fm-tools-grid-external">
-        <a class="fm-tool-card" id="fmToolMeshy" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">
-          <span class="fm-tool-card-name">Meshy AI ↗</span>
-          <span class="fm-tool-card-desc">KI: aus Text oder Bild ein druckfertiges 3D-Modell erstellen.</span>
-        </a>
-        <a class="fm-tool-card" id="fmToolThangs" href="https://than.gs/u/8355632" target="_blank" rel="noopener">
-          <span class="fm-tool-card-name">Thangs ↗</span>
-          <span class="fm-tool-card-desc">Große Bibliothek fertiger, druckbarer 3D-Modelle.</span>
-        </a>
+        <div class="fm-tool">
+          <a class="fm-tool-card" id="fmToolMeshy" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">
+            <span class="fm-tool-card-name">Meshy AI ↗</span>
+          </a>
+          <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Meshy AI">i</button>
+          <div class="fm-tool-tip">KI: aus Text oder Bild ein druckfertiges 3D-Modell erstellen.</div>
+        </div>
+        <div class="fm-tool">
+          <a class="fm-tool-card" id="fmToolThangs" href="https://than.gs/u/8355632" target="_blank" rel="noopener">
+            <span class="fm-tool-card-name">Thangs ↗</span>
+          </a>
+          <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Thangs">i</button>
+          <div class="fm-tool-tip">Große Bibliothek fertiger, druckbarer 3D-Modelle.</div>
+        </div>
       </div>
     </div>
   </div>
   <p class="fm-eyebrow">Filament Matching</p>
   <span class="fm-flagship-badge">★ Unser Flaggschiff-Tool</span>
   <h1 class="fm-title fm-title-flagship">Filament-Finder</h1>
-  <p class="fm-sub">Lade ein Foto oder eine 3MF-Datei hoch – das Tool erkennt automatisch die passenden Farben und zeigt dir das dazu passende Filament, direkt verlinkt zum Kauf.</p>
+  <p class="fm-sub">Finde in wenigen Sekunden Filamente, die farblich zu deinem Foto oder deiner 3MF-Datei passen — ohne Anmeldung und direkt mit passenden Shop-Links.</p>
+
+  <div class="fm-howto">
+    <div class="fm-howto-grid">
+      <div class="fm-howto-step">
+        <div class="fm-howto-num">01</div>
+        <p class="fm-howto-title">Datei auswählen</p>
+        <p class="fm-howto-desc">Foto (JPG, PNG, HEIC), 3MF oder STL öffnen.</p>
+      </div>
+      <div class="fm-howto-step">
+        <div class="fm-howto-num">02</div>
+        <p class="fm-howto-title">Farbe erkennen</p>
+        <p class="fm-howto-desc">Farben werden lokal analysiert.</p>
+      </div>
+      <div class="fm-howto-step">
+        <div class="fm-howto-num">03</div>
+        <p class="fm-howto-title">Filament vergleichen</p>
+        <p class="fm-howto-desc">Passende Treffer und Shops ansehen.</p>
+      </div>
+    </div>
+    <div class="fm-trust-row">
+      <span class="fm-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Keine Anmeldung</span>
+      <span class="fm-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Bildanalyse lokal im Browser</span>
+      <span class="fm-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Kostenlos nutzbar</span>
+    </div>
+  </div>
 
   <div class="fm-drop" id="fmDrop">
     <svg class="fm-drop-icon" viewBox="0 0 48 48" aria-hidden="true">
       <path d="M24 6v24M24 6l-9 9M24 6l9 9" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       <path d="M8 32v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
     </svg>
-    <label class="fm-drop-label" for="fmFile"><b>Foto oder 3MF-Datei hierher ziehen</b></label>
+    <label class="fm-drop-label" for="fmFile"><b>Foto, 3MF oder STL hierher ziehen</b></label>
     <div class="fm-drop-sub">oder <span class="fm-drop-browse">Datei auswählen</span></div>
-    <input type="file" id="fmFile" accept=".3mf,image/*">
+    <input type="file" id="fmFile" accept=".3mf,.stl,image/*">
     <div class="fm-filename" id="fmFilename"></div>
   </div>
   <div id="fmPreviewWrap"></div>
@@ -782,6 +911,24 @@
 
   <div class="fm-status" id="fmStatus"></div>
   <div class="fm-results" id="fmResults"></div>
+
+  <div class="fm-db-preview">
+    <p class="fm-db-preview-title">Mehr Farben entdecken</p>
+    <p class="fm-db-preview-sub">Über 100 Filamente in zahlreichen Farben — durchsuchbar nach Marke, Material und Farbton, direkt verlinkt zum Shop.</p>
+    <div class="fm-db-swatches" aria-hidden="true">
+      <span class="fm-db-swatch" style="background:#00AE42" title="Bambu Green"></span>
+      <span class="fm-db-swatch" style="background:#0056B8" title="Cobalt Blue"></span>
+      <span class="fm-db-swatch" style="background:#FF6A13" title="Orange"></span>
+      <span class="fm-db-swatch" style="background:#EC008C" title="Magenta"></span>
+      <span class="fm-db-swatch" style="background:#FEC600" title="Sunflower Yellow"></span>
+      <span class="fm-db-swatch" style="background:#00B1B7" title="Turquoise"></span>
+      <span class="fm-db-swatch" style="background:#9D2235" title="Maroon Red"></span>
+      <span class="fm-db-swatch" style="background:#482960" title="Indigo Purple"></span>
+      <span class="fm-db-swatch" style="background:#E4BD68" title="Gold"></span>
+      <span class="fm-db-swatch" style="background:#000000" title="Black"></span>
+    </div>
+    <a class="fm-db-preview-btn" href="/filament-datenbank.html">Ganze Datenbank durchsuchen →</a>
+  </div>
 
   <p class="fm-note">
     Bei einer 3MF prüft das Tool zuerst, ob dein Slicer (Bambu Studio, OrcaSlicer, PrusaSlicer …) die tatsächlich verwendeten Filamente inkl. Marke und Typ direkt hinterlegt hat — das Material (PLA, PETG, ABS, ASA, TPU) wird dabei automatisch erkannt, damit z. B. ein PETG-Projekt nicht mit PLA-Farben verglichen wird. Bei einem Bild wählst du das Material selbst über die Buttons oben aus. Die dominanten Farben werden lokal im Browser ermittelt (kein Upload an einen Server) und per CIEDE2000-Farbabstand mit der Datenbank abgeglichen. Jede Farbe verlinkt auf eine konkrete Shop-Seite: bei <b>3DJake</b> (Bambu Lab) auf verifizierte Einzelproduktseiten, bei <b>Redline Filament</b> und <b>Sunlu</b> teils auf Einzelprodukte, teils auf die interne Shop-Suche für genau diesen Artikel — nie auf eine bloße Startseite. <b>Filament2Print, 3Dmensionals und Bambu Labs eigener Store</b> sind (noch) nicht angebunden, da dort keine verlässlich gleichbleibenden Produkt-URLs pro Farbe verifiziert werden konnten.
@@ -1485,6 +1632,457 @@
     });
   }
 
+  // --- 3D-Vorschau (STL & 3MF) --------------------------------------------
+  // Rein visuell: zeigt die Geometrie an, macht keine Farb-Zuordnung.
+  let activeViewer = null;
+
+  function disposeActiveViewer(){
+    if (activeViewer){
+      activeViewer.dispose();
+      activeViewer = null;
+    }
+  }
+
+  // Wandelt einen flachen Positions-Array von 3MF/STL-Druckerkoordinaten
+  // (Z zeigt nach oben) direkt in Three.js-Koordinaten (Y zeigt nach oben) um.
+  // Dadurch ist keine zusätzliche Objekt-Rotation mehr nötig, und Bounding-Box-
+  // Berechnungen (Zentrieren/Skalieren) funktionieren direkt auf den fertigen Daten.
+  function zUpToYUp(x, y, z){
+    return [x, z, -y];
+  }
+
+  function renderThreeViewer(meshGroups, container){
+    if (typeof THREE === 'undefined' || !THREE.STLLoader){
+      container.innerHTML = '<div class="fm-model-viewer-status">3D-Vorschau aktuell nicht verfügbar.</div>';
+      return;
+    }
+    meshGroups = meshGroups.filter(g => g.positions && g.positions.length);
+    if (meshGroups.length === 0){
+      container.innerHTML = '<div class="fm-model-viewer-status">Keine darstellbare Geometrie in dieser Datei gefunden.</div>';
+      return;
+    }
+
+    container.innerHTML = '';
+    const viewerEl = document.createElement('div');
+    viewerEl.className = 'fm-model-viewer';
+    const hintEl = document.createElement('div');
+    hintEl.className = 'fm-model-viewer-hint';
+    hintEl.textContent = 'Vorschau · ziehen zum Drehen';
+    viewerEl.appendChild(hintEl);
+    container.appendChild(viewerEl);
+
+    const width = viewerEl.clientWidth || 600;
+    const height = viewerEl.clientHeight || 230;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 5000);
+    const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(width, height);
+    viewerEl.insertBefore(renderer.domElement, hintEl);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    const key = new THREE.DirectionalLight(0xffffff, 0.85);
+    key.position.set(1, 1.4, 1.2);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0x6fe3b4, 0.3);
+    fill.position.set(-1.2, -0.6, -1);
+    scene.add(fill);
+
+    // Geometrien bauen (Achsen wurden beim Aufbau der Positionsdaten bereits
+    // von Z-up auf Y-up umgerechnet, siehe zUpToYUp()).
+    const geometries = meshGroups.map(g => {
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(g.positions, 3));
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+      return { geometry, color: g.color };
+    });
+
+    // Gemeinsame Bounding-Box über alle Teile hinweg, damit mehrere Objekte
+    // (z. B. mehrfarbige Teile) beim Zentrieren/Skalieren korrekt zueinander
+    // ausgerichtet bleiben statt einzeln in die Mitte gezogen zu werden.
+    const globalBox = new THREE.Box3();
+    geometries.forEach(({ geometry }) => globalBox.union(geometry.boundingBox));
+    const center = new THREE.Vector3();
+    globalBox.getCenter(center);
+    const size = new THREE.Vector3();
+    globalBox.getSize(size);
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
+    const scale = 3.2 / maxDim;
+
+    // Nur wenn für mindestens ein Teil eine echte Filamentfarbe ermittelt
+    // werden konnte, werden nicht zugeordnete Teile neutral eingefärbt.
+    // Wenn gar keine Farbdaten vorliegen (z. B. bei STL), bleibt der
+    // markentypische Orange-Ton als Fallback erhalten.
+    const anyColorResolved = meshGroups.some(g => g.color);
+    const group = new THREE.Group();
+    const materials = [];
+    geometries.forEach(({ geometry, color }) => {
+      geometry.translate(-center.x, -center.y, -center.z);
+      geometry.scale(scale, scale, scale);
+      const colorValue = color
+        ? parseInt(color.replace('#', ''), 16)
+        : (anyColorResolved ? 0xd8dde0 : 0xff8c3c);
+      const material = new THREE.MeshStandardMaterial({ color: colorValue, roughness:0.5, metalness:0.08 });
+      materials.push(material);
+      group.add(new THREE.Mesh(geometry, material));
+    });
+    scene.add(group);
+
+    camera.position.set(0, 1.6, 4.2);
+    camera.lookAt(0, 0, 0);
+
+    let controls = null;
+    if (THREE.OrbitControls){
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.08;
+      controls.enablePan = false;
+      controls.minDistance = 2;
+      controls.maxDistance = 9;
+    }
+
+    let rafId = null;
+    let disposed = false;
+    function animate(){
+      if (disposed) return;
+      rafId = requestAnimationFrame(animate);
+      if (!controls){ group.rotation.y += 0.006; }
+      if (controls) controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    function handleResize(){
+      const w = viewerEl.clientWidth || width;
+      const h = viewerEl.clientHeight || height;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+    window.addEventListener('resize', handleResize);
+
+    activeViewer = {
+      dispose(){
+        disposed = true;
+        if (rafId) cancelAnimationFrame(rafId);
+        window.removeEventListener('resize', handleResize);
+        if (controls) controls.dispose();
+        geometries.forEach(({ geometry }) => geometry.dispose());
+        materials.forEach(m => m.dispose());
+        renderer.dispose();
+      }
+    };
+  }
+
+  async function handleStlFile(file, myGen){
+    disposeActiveViewer();
+    statusEl.classList.remove('fm-err');
+    statusEl.textContent = 'Lese STL-Datei und baue die 3D-Vorschau…';
+    resultsEl.innerHTML = '';
+
+    const previewWrap = document.getElementById('fmPreviewWrap');
+    previewWrap.innerHTML = '';
+
+    if (typeof THREE === 'undefined' || !THREE.STLLoader){
+      statusEl.textContent = '3D-Vorschau konnte nicht geladen werden (Internetverbindung prüfen).';
+      statusEl.classList.add('fm-err');
+    } else {
+      try {
+        const buffer = await file.arrayBuffer();
+        const rawGeometry = new THREE.STLLoader().parse(buffer);
+        const src = rawGeometry.getAttribute('position').array;
+        const positions = new Array(src.length);
+        for (let i = 0; i < src.length; i += 3){
+          const [x, y, z] = zUpToYUp(src[i], src[i+1], src[i+2]);
+          positions[i] = x; positions[i+1] = y; positions[i+2] = z;
+        }
+        rawGeometry.dispose();
+        if (myGen !== uploadGen) return;
+        renderThreeViewer([{ positions, color:null }], previewWrap);
+        statusEl.textContent = '3D-Vorschau geladen.';
+      } catch (err){
+        console.error(err);
+        if (myGen !== uploadGen) return;
+        statusEl.textContent = 'Diese STL-Datei konnte nicht gelesen werden.';
+        statusEl.classList.add('fm-err');
+      }
+    }
+
+    if (myGen !== uploadGen) return;
+    resultsEl.innerHTML = `
+      <div class="fm-stl-note">
+        <p><b>STL enthält keine Farbinformationen</b> — anders als 3MF speichert dieses Format nur die reine Geometrie, keine zugewiesenen Filamentfarben. Ein automatischer Farb-Match ist hier deshalb nicht möglich.</p>
+        <p>Wähle dein Wunschfilament stattdessen direkt in der Filament-Datenbank aus.</p>
+        <a class="fm-db-preview-btn" href="/filament-datenbank.html">Filament-Datenbank durchsuchen →</a>
+      </div>
+    `;
+  }
+
+  // Parst eine 3MF-Matrix ("m00 m01 m02 m10 m11 m12 m20 m21 m22 m30 m31 m32",
+  // 12 Werte laut 3MF-Core-Spec) in eine THREE.Matrix4 (Spaltenvektor-Konvention).
+  function parse3mfTransform(str){
+    if (!str) return new THREE.Matrix4();
+    const v = str.trim().split(/\s+/).map(Number);
+    if (v.length !== 12 || v.some(n => Number.isNaN(n))) return new THREE.Matrix4();
+    const m = new THREE.Matrix4();
+    m.set(
+      v[0], v[3], v[6], v[9],
+      v[1], v[4], v[7], v[10],
+      v[2], v[5], v[8], v[11],
+      0, 0, 0, 1
+    );
+    return m;
+  }
+
+  // Baut aus allen .model-XML-Dateien einer 3MF-Zip den vollständigen
+  // Objektgraphen. Bambu Studio & Co. verteilen die Geometrie bei mehrteiligen
+  // Modellen oft über mehrere .model-Dateien (3MF Production Extension,
+  // <component p:path="...">) — Objekt-IDs sind dabei nur INNERHALB einer
+  // Datei eindeutig, deshalb werden Objekte hier je Datei-Pfad gruppiert
+  // statt in einer einzigen flachen Liste (sonst könnten sich IDs aus
+  // verschiedenen Dateien überschreiben).
+  function parse3mfObjectGraph(fileEntries){
+    const objectsByFile = new Map(); // Pfad -> Map<id, {mesh, components}>
+    const rootBuildItems = [];
+    let rootPath = null;
+    const parser = new DOMParser();
+
+    for (const { path, xml } of fileEntries){
+      let doc;
+      try { doc = parser.parseFromString(xml, 'application/xml'); } catch(e){ continue; }
+      if (doc.querySelector('parsererror')) continue;
+
+      const fileMap = objectsByFile.get(path) || new Map();
+
+      const objectNodes = doc.getElementsByTagName('object');
+      for (let oi = 0; oi < objectNodes.length; oi++){
+        const objEl = objectNodes[oi];
+        const id = objEl.getAttribute('id');
+        if (!id) continue;
+        const entry = fileMap.get(id) || { mesh:null, components:[] };
+
+        const meshEl = objEl.getElementsByTagName('mesh')[0];
+        if (meshEl){
+          const verticesParent = meshEl.getElementsByTagName('vertices')[0];
+          const trianglesParent = meshEl.getElementsByTagName('triangles')[0];
+          if (verticesParent && trianglesParent){
+            const vertexNodes = verticesParent.getElementsByTagName('vertex');
+            const verts = new Array(vertexNodes.length);
+            for (let vi = 0; vi < vertexNodes.length; vi++){
+              const v = vertexNodes[vi];
+              verts[vi] = [
+                parseFloat(v.getAttribute('x')) || 0,
+                parseFloat(v.getAttribute('y')) || 0,
+                parseFloat(v.getAttribute('z')) || 0
+              ];
+            }
+            const triNodes = trianglesParent.getElementsByTagName('triangle');
+            const tris = new Array(triNodes.length);
+            for (let ti = 0; ti < triNodes.length; ti++){
+              const t = triNodes[ti];
+              tris[ti] = [
+                parseInt(t.getAttribute('v1'), 10),
+                parseInt(t.getAttribute('v2'), 10),
+                parseInt(t.getAttribute('v3'), 10)
+              ];
+            }
+            entry.mesh = { verts, tris };
+          }
+        }
+
+        const componentsParent = objEl.getElementsByTagName('components')[0];
+        if (componentsParent){
+          const compNodes = componentsParent.getElementsByTagName('component');
+          for (let ci = 0; ci < compNodes.length; ci++){
+            const c = compNodes[ci];
+            const rawPath = c.getAttribute('p:path') || c.getAttribute('path');
+            entry.components.push({
+              objectid: c.getAttribute('objectid'),
+              path: rawPath ? rawPath.replace(/^\/+/, '') : null, // null = gleiche Datei
+              matrix: parse3mfTransform(c.getAttribute('transform'))
+            });
+          }
+        }
+
+        fileMap.set(id, entry);
+      }
+
+      objectsByFile.set(path, fileMap);
+
+      const buildEl = doc.getElementsByTagName('build')[0];
+      if (buildEl){
+        const itemNodes = buildEl.getElementsByTagName('item');
+        // Referenzierte Teildateien (Production Extension) enthalten oft ein
+        // leeres <build/> als Pflichtelement eines gültigen 3MF-Dokuments —
+        // nur eine <build> mit echten <item>-Einträgen zählt als die
+        // tatsächliche Bauplatten-Liste.
+        if (itemNodes.length > 0){
+          rootPath = path;
+          for (let ii = 0; ii < itemNodes.length; ii++){
+            const it = itemNodes[ii];
+            rootBuildItems.push({
+              objectid: it.getAttribute('objectid'),
+              matrix: parse3mfTransform(it.getAttribute('transform'))
+            });
+          }
+        }
+      }
+    }
+
+    return { objectsByFile, rootBuildItems, rootPath };
+  }
+
+  // Best-effort: liest die Farb-/Extruder-Zuordnung, die Bambu Studio /
+  // PrusaSlicer / OrcaSlicer zusätzlich zur reinen Geometrie in einer eigenen
+  // Metadata-Config-Datei ablegen. Wichtig: Ein <part id="N"> dort bezieht
+  // sich auf die N-te Komponente (Reihenfolge!) in der <components>-Liste
+  // des zugehörigen <object>, NICHT auf dessen Objekt-ID in der jeweiligen
+  // Geometrie-Datei — deshalb wird hier pro Objekt eine geordnete Liste von
+  // Extrudern gespeichert statt einer direkten ID-Zuordnung.
+  async function tryReadObjectExtruderMap(zip){
+    const candidatePaths = Object.keys(zip.files).filter(p =>
+      /Metadata\/model_settings\.config$/i.test(p) || /Metadata\/Slic3r_PE_model\.config$/i.test(p)
+    );
+    if (candidatePaths.length === 0) return null;
+
+    const map = new Map(); // objectId -> { defaultExtruder, partExtruders:[] }
+    const parser = new DOMParser();
+
+    for (const path of candidatePaths){
+      let xmlStr;
+      try { xmlStr = await zip.files[path].async('string'); } catch(e){ continue; }
+      let doc;
+      try { doc = parser.parseFromString(xmlStr, 'application/xml'); } catch(e){ continue; }
+      if (doc.querySelector('parsererror')) continue;
+
+      const objectNodes = doc.getElementsByTagName('object');
+      for (let oi = 0; oi < objectNodes.length; oi++){
+        const objEl = objectNodes[oi];
+        const id = objEl.getAttribute('id');
+        if (!id) continue;
+
+        let defaultExtruder = null;
+        try {
+          const directMeta = objEl.querySelector(':scope > metadata[key="extruder"]');
+          if (directMeta) defaultExtruder = parseInt(directMeta.getAttribute('value'), 10) || null;
+        } catch(e){ /* Selector evtl. nicht unterstützt — ignorieren */ }
+
+        const partExtruders = [];
+        const partNodes = objEl.getElementsByTagName('part');
+        for (let pi = 0; pi < partNodes.length; pi++){
+          let ext = null;
+          try {
+            const meta = partNodes[pi].querySelector(':scope > metadata[key="extruder"]');
+            if (meta) ext = parseInt(meta.getAttribute('value'), 10) || null;
+          } catch(e){}
+          partExtruders.push(ext);
+        }
+
+        map.set(id, { defaultExtruder, partExtruders });
+      }
+    }
+
+    return map.size ? map : null;
+  }
+
+  // Löst den Objektgraphen zu einer flachen Liste aus Mesh-Gruppen auf —
+  // eine Gruppe pro platziertem Bauteil, inkl. aller Transformationen
+  // (Build-Item + ggf. über mehrere Dateien verschachtelte Components)
+  // und, falls ermittelbar, der zugehörigen Filamentfarbe.
+  async function build3mfPreviewGroups(zip, extruderColors){
+    const modelPaths = Object.keys(zip.files).filter(p => /\.model$/i.test(p));
+    if (modelPaths.length === 0) return [];
+    const fileEntries = await Promise.all(modelPaths.map(async p => ({
+      path: p.replace(/^\/+/, ''),
+      xml: await zip.files[p].async('string')
+    })));
+
+    const { objectsByFile, rootBuildItems, rootPath } = parse3mfObjectGraph(fileEntries);
+    const extruderInfo = await tryReadObjectExtruderMap(zip);
+    const groups = [];
+
+    function getObject(path, id){
+      const fileMap = objectsByFile.get(path);
+      return fileMap ? fileMap.get(id) : null;
+    }
+
+    function colorForTopLevel(id){
+      if (!extruderInfo) return null;
+      const info = extruderInfo.get(id);
+      if (info && info.defaultExtruder && extruderColors && extruderColors[info.defaultExtruder - 1]){
+        return extruderColors[info.defaultExtruder - 1];
+      }
+      return null;
+    }
+
+    function colorForPart(parentId, idx){
+      if (!extruderInfo) return null;
+      const info = extruderInfo.get(parentId);
+      if (!info) return null;
+      const ext = info.partExtruders[idx] || info.defaultExtruder;
+      if (ext && extruderColors && extruderColors[ext - 1]) return extruderColors[ext - 1];
+      return null;
+    }
+
+    function addInstance(path, id, matrix, inheritedColor, colorCtx){
+      const obj = getObject(path, id);
+      if (!obj) return;
+
+      let ownColor = colorCtx ? colorForPart(colorCtx.parentId, colorCtx.idx) : colorForTopLevel(id);
+      if (!ownColor) ownColor = inheritedColor;
+
+      if (obj.mesh){
+        const { verts, tris } = obj.mesh;
+        const tmp = new THREE.Vector3();
+        const transformed = new Array(verts.length);
+        for (let i = 0; i < verts.length; i++){
+          tmp.set(verts[i][0], verts[i][1], verts[i][2]).applyMatrix4(matrix);
+          transformed[i] = zUpToYUp(tmp.x, tmp.y, tmp.z);
+        }
+        const positions = [];
+        for (const tri of tris){
+          const a = transformed[tri[0]], b = transformed[tri[1]], c = transformed[tri[2]];
+          if (a && b && c) positions.push(...a, ...b, ...c);
+        }
+        if (positions.length) groups.push({ positions, color: ownColor });
+      }
+
+      if (obj.components && obj.components.length){
+        obj.components.forEach((comp, idx) => {
+          if (!comp.objectid) return;
+          const childPath = comp.path || path; // kein p:path = gleiche Datei
+          const childMatrix = new THREE.Matrix4().multiplyMatrices(matrix, comp.matrix);
+          addInstance(childPath, comp.objectid, childMatrix, ownColor, { parentId: id, idx });
+        });
+      }
+    }
+
+    if (rootBuildItems.length && rootPath){
+      rootBuildItems.forEach(item => addInstance(rootPath, item.objectid, item.matrix, null, null));
+    } else {
+      // Fallback ohne erkennbare <build>-Liste: alle gefundenen Objekte anzeigen
+      objectsByFile.forEach((fileMap, path) => {
+        fileMap.forEach((_, id) => addInstance(path, id, new THREE.Matrix4(), null, null));
+      });
+    }
+
+    return groups;
+  }
+
+  async function renderThreeMFPreview(zip, extruderColors, myGen){
+    const previewWrap = document.getElementById('fmPreviewWrap');
+    try {
+      const groups = await build3mfPreviewGroups(zip, extruderColors);
+      if (!groups.length || myGen !== uploadGen) return;
+      disposeActiveViewer();
+      renderThreeViewer(groups, previewWrap);
+    } catch (err){
+      console.error('3D-Vorschau konnte nicht erstellt werden:', err);
+    }
+  }
+
   let lastExactItems = null;
   let lastFallbackColors = null;
 
@@ -1512,7 +2110,7 @@
     }
   }
 
-  async function handle3mfFile(file){
+  async function handle3mfFile(file, myGen){
     statusEl.textContent = 'Lese 3MF-Archiv…';
     lastExactItems = null;
     lastFallbackColors = null;
@@ -1521,6 +2119,9 @@
 
       // 1) Bevorzugt: exakte Slicer-Angaben (Bambu Studio, PrusaSlicer, OrcaSlicer …)
       const exact = await tryReadSlicerSettings(zip);
+      const extruderColors = exact ? exact.map(item => item.hex) : null;
+      renderThreeMFPreview(zip, extruderColors, myGen); // 3D-Vorschau parallel im Hintergrund, mit echten Filamentfarben wenn bekannt
+
       if (exact && exact.length){
         lastExactItems = exact;
         renderThreeMFResults();
@@ -1543,23 +2144,31 @@
     }
   }
 
+  let uploadGen = 0;
+
   async function handleFile(file){
+    uploadGen++;
+    const myGen = uploadGen;
+    disposeActiveViewer();
     fnEl.textContent = file.name;
     resultsEl.innerHTML = '';
     document.getElementById('fmPreviewWrap').innerHTML = '';
     statusEl.classList.remove('fm-err');
 
     const isThreeMF = /\.3mf$/i.test(file.name);
+    const isSTL = /\.stl$/i.test(file.name);
     const isImage = file.type.startsWith('image/') || /\.(jpe?g|png|gif|webp|heic|heif|bmp)$/i.test(file.name);
     imgControlsEl.style.display = isImage ? 'block' : 'none';
     if (!isImage) currentImg = null;
 
     if (isThreeMF){
-      await handle3mfFile(file);
+      await handle3mfFile(file, myGen);
+    } else if (isSTL){
+      await handleStlFile(file, myGen);
     } else if (isImage){
       await handleImageFile(file);
     } else {
-      statusEl.textContent = 'Bitte eine .3mf-Datei oder ein Bild (JPG/PNG/…) hochladen.';
+      statusEl.textContent = 'Bitte ein Bild (JPG/PNG/…), eine .3mf- oder eine .stl-Datei hochladen.';
       statusEl.classList.add('fm-err');
     }
   }
