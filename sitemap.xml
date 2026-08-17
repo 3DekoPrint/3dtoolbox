@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://3dtoolbox.info/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/en/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/3d-druck-kostenrechner.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-kostenrechner.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-cost-calculator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-kostenrechner.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/en/3d-print-cost-calculator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-kostenrechner.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-cost-calculator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-kostenrechner.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/filament-datenbank.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/filament-datenbank.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/filament-database.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/filament-datenbank.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/en/filament-database.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/filament-datenbank.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/filament-database.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/filament-datenbank.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/3d-druck-lexikon.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-lexikon.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-lexicon.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-lexikon.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/en/3d-print-lexicon.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-lexikon.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-lexicon.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-lexikon.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/impressum.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/impressum.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/en/impressum.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/impressum.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/datenschutz.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/datenschutz.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/en/datenschutz.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/datenschutz.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
