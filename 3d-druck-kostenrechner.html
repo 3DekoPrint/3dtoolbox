@@ -515,6 +515,48 @@
   @media (max-width:480px){
     .fm-tools-grid, .fm-tools-grid-external{ grid-template-columns:repeat(auto-fit, minmax(130px,1fr)); }
   }
+
+  /* ===== Redesign V2: Hover/Tap-Tooltip statt Dauertext, 5. Tool, DB-Vorschau ===== */
+  .fm-tool{ position:relative; display:block; }
+  .fm-tool-card{ padding:16px 34px 16px 16px; }
+  .fm-tool-info{
+    position:absolute; top:12px; right:12px; z-index:5;
+    width:19px; height:19px; border-radius:50%;
+    border:1px solid var(--line); background:var(--panel); color:var(--ink-dim);
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; font-weight:700;
+    line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .fm-tool-info:hover{ border-color:var(--accent); color:var(--accent); }
+  .fm-tool-tip{
+    display:none; position:absolute; top:calc(100% + 6px); left:0; right:0;
+    background:var(--panel-2); border:1px solid var(--line); border-radius:8px;
+    padding:10px 12px; font-size:12px; line-height:1.45; color:var(--ink);
+    z-index:20; box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  @media (hover:hover){ .fm-tool:hover .fm-tool-tip{ display:block; } }
+  .fm-tool.fm-tool-tip-open .fm-tool-tip{ display:block; }
+  .fm-tools-grid{ grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); }
+  .fm-tools-grid-external{ grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); }
+  .fm-tools-grid-external .fm-tool-card{ padding:12px 30px 12px 14px; }
+  .fm-tools-grid-external .fm-tool-info{ top:9px; right:9px; }
+
+  .fm-db-preview{ margin-top:26px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px 22px; }
+  .fm-db-preview-title{ font-size:15px; font-weight:600; margin:0 0 4px; }
+  .fm-db-preview-sub{ font-size:12.5px; color:var(--ink-dim); margin:0 0 16px; line-height:1.5; }
+  .fm-db-swatches{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .fm-db-swatch{ width:26px; height:26px; border-radius:50%; border:1px solid rgba(255,255,255,.15); flex:none; cursor:default; }
+  .fm-db-preview-btn{
+    display:inline-block; background:transparent; border:1px solid var(--accent); color:var(--accent);
+    text-decoration:none; font-family:"JetBrains Mono","Courier New",monospace; font-size:12.5px; font-weight:600;
+    padding:9px 16px; border-radius:8px; transition:background .15s ease, color .15s ease;
+  }
+  .fm-db-preview-btn:hover{ background:var(--accent); color:#1a1206; }
+
+  .fm-tool-card-name{ overflow-wrap:break-word; word-break:break-word; }
+  @media (max-width:480px){
+    .fm-tools-grid{ grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
@@ -539,35 +581,51 @@
   <div class="fm-tools-bar">
     <p class="fm-tools-title">Unsere Tools</p>
     <div class="fm-tools-grid">
-      <a class="fm-tool-card fm-tool-card-flagship" href="/index.html">
-        <span class="fm-tool-card-badge">★</span>
-        <span class="fm-tool-card-name">Filament-Finder</span>
-        <span class="fm-tool-card-desc">Foto oder 3MF hochladen – passendes Filament &amp; Farbe automatisch finden.</span>
-      </a>
-      <span class="fm-tool-card fm-tool-card-active">
-        <span class="fm-tool-card-name">Kostenrechner</span>
-        <span class="fm-tool-card-desc">Material-, Strom- und Verschleißkosten live berechnen.</span>
-      </span>
-      <a class="fm-tool-card" href="/filament-datenbank.html">
-        <span class="fm-tool-card-name">Filament-Datenbank</span>
-        <span class="fm-tool-card-desc">Filament nach Farbe durchsuchen und direkt im Shop kaufen.</span>
-      </a>
-      <a class="fm-tool-card" href="/3d-druck-lexikon.html">
-        <span class="fm-tool-card-name">Lexikon</span>
-        <span class="fm-tool-card-desc">Druckprobleme, Slicer-Tipps &amp; Materialkunde nachschlagen.</span>
-      </a>
+      <div class="fm-tool">
+        <a class="fm-tool-card fm-tool-card-flagship" href="/index.html">
+          <span class="fm-tool-card-badge">★</span>
+          <span class="fm-tool-card-name">Filament-Finder</span>
+        </a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Filament-Finder">i</button>
+        <div class="fm-tool-tip">Foto oder 3MF hochladen – passendes Filament &amp; Farbe automatisch finden.</div>
+      </div>
+      <div class="fm-tool">
+        <span class="fm-tool-card fm-tool-card-active">
+          <span class="fm-tool-card-name">Kostenrechner</span>
+        </span>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-card" href="/filament-datenbank.html">
+          <span class="fm-tool-card-name">Filament-Datenbank</span>
+        </a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Filament-Datenbank">i</button>
+        <div class="fm-tool-tip">Filament nach Farbe durchsuchen und direkt im Shop kaufen.</div>
+      </div>
+      <div class="fm-tool">
+        <a class="fm-tool-card" href="/3d-druck-lexikon.html">
+          <span class="fm-tool-card-name">Lexikon</span>
+        </a>
+        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Lexikon">i</button>
+        <div class="fm-tool-tip">Druckprobleme, Slicer-Tipps &amp; Materialkunde nachschlagen.</div>
+      </div>
     </div>
     <div class="fm-tools-external">
       <p class="fm-tools-external-title">Externe Empfehlungen</p>
       <div class="fm-tools-grid fm-tools-grid-external">
-        <a class="fm-tool-card" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">
-          <span class="fm-tool-card-name">Meshy AI ↗</span>
-          <span class="fm-tool-card-desc">KI: aus Text oder Bild ein druckfertiges 3D-Modell erstellen.</span>
-        </a>
-        <a class="fm-tool-card" href="https://than.gs/u/8355632" target="_blank" rel="noopener">
-          <span class="fm-tool-card-name">Thangs ↗</span>
-          <span class="fm-tool-card-desc">Große Bibliothek fertiger, druckbarer 3D-Modelle.</span>
-        </a>
+        <div class="fm-tool">
+          <a class="fm-tool-card" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">
+            <span class="fm-tool-card-name">Meshy AI ↗</span>
+          </a>
+          <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Meshy AI">i</button>
+          <div class="fm-tool-tip">KI: aus Text oder Bild ein druckfertiges 3D-Modell erstellen.</div>
+        </div>
+        <div class="fm-tool">
+          <a class="fm-tool-card" href="https://than.gs/u/8355632" target="_blank" rel="noopener">
+            <span class="fm-tool-card-name">Thangs ↗</span>
+          </a>
+          <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Thangs">i</button>
+          <div class="fm-tool-tip">Große Bibliothek fertiger, druckbarer 3D-Modelle.</div>
+        </div>
       </div>
     </div>
   </div>
