@@ -65,11 +65,29 @@
     border-top:1px solid var(--line);
     padding-top:16px;
   }
+
+  body{ background:radial-gradient(800px 420px at 85% -8%, rgba(255,140,60,.11), transparent 60%),
+        radial-gradient(700px 420px at -10% 15%, rgba(95,217,160,.08), transparent 60%), var(--bg); background-attachment:fixed; }
+  .lg-root{ background:transparent; }
+  .lg-nav{ display:flex; align-items:center; gap:10px; margin:0 0 28px; padding:9px 16px; border-radius:16px;
+    background:rgba(27,43,37,.78); border:1px solid var(--line); }
+  .lg-nav a{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .lg-nav svg{ width:30px; height:30px; border-radius:7px; }
+  .lg-word{ font-family:Arial,Helvetica,sans-serif; font-weight:700; font-size:19px; color:var(--ink); }
+  .lg-word b{ color:#FF6A2B; }
+  h1{ font-family:Arial,Helvetica,sans-serif; letter-spacing:-.02em; font-size:clamp(28px,4vw,38px); }
+  .lg-box{ border-radius:18px; }
 </style>
 </head>
 <body>
 <div class="lg-root">
-  <a class="lg-back" href="/">← Zurück zu 3DToolBox</a>
+  <nav class="lg-nav"><a href="/" aria-label="3DToolBox"><svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
+      <rect width="220" height="220" rx="44" fill="#FF6A2B"/>
+      <polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/>
+      <polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/>
+      <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
+    </svg><span class="lg-word"><b>3D</b>ToolBox</span></a></nav>
+    <a class="lg-back" href="/">← Zurück zu 3DToolBox</a>
   <h1>Impressum</h1>
   <p class="lg-updated">Stand: August 2026 · <a href="/en/impressum.html">English version</a></p>
 

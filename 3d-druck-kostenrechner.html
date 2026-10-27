@@ -571,82 +571,114 @@
   @media (max-width:480px){
     .fm-tools-grid{ grid-template-columns:1fr; }
   }
+
+  /* ===== Bento-Stil (gemeinsam für alle Unterseiten) ===== */
+  html{ scroll-behavior:smooth; }
+  body{
+    background:
+      radial-gradient(900px 480px at 85% -8%, rgba(255,140,60,.12), transparent 60%),
+      radial-gradient(800px 460px at -10% 18%, rgba(95,217,160,.09), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;
+  }
+  .fm-root.bt-sub{ background:transparent; padding-top:0; }
+  .bt-nav{
+    position:sticky; top:12px; z-index:50; display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+    margin:12px 0 0; padding:9px 12px 9px 16px; border-radius:16px;
+    background:rgba(27,43,37,.78); border:1px solid var(--line);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  }
+  .bt-logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .bt-nav .fm-lang-switch{ margin-left:auto; }
+  .bt-switch{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:16px 0 8px; }
+  .bt-chip{
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:12.5px; font-weight:600; text-decoration:none;
+    color:var(--ink-dim); padding:9px 15px; border-radius:99px; border:1px solid var(--line);
+    background:rgba(27,43,37,.6); transition:color .15s, border-color .15s, transform .15s;
+  }
+  .bt-chip:hover{ color:var(--ink); border-color:var(--accent-2); transform:translateY(-1px); }
+  .bt-chip-active{ background:var(--accent); border-color:var(--accent); color:#1a1206; }
+  .bt-chip-active:hover{ color:#1a1206; border-color:var(--accent); transform:none; }
+  .bt-chip-flag::before{ content:"★ "; }
+  .bt-ext-group{
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-left:auto; padding:5px 6px 5px 12px;
+    border:1px dashed #56707a; border-radius:99px; background:rgba(86,112,122,.08);
+  }
+  .bt-ext-label{ font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:#9db4bd; }
+  .bt-chip-ext{ border-style:dashed; border-color:#56707a; background:transparent; color:#b8ccd3; padding:6px 12px; }
+  .bt-chip-ext:hover{ border-color:#9db4bd; }
+  .fm-eyebrow{ margin-top:26px; }
+  .fm-title{ font-family:Arial, Helvetica, sans-serif; letter-spacing:-.02em; font-size:clamp(28px,4.2vw,42px); }
+  .bt-foot{ margin-top:40px; padding-top:20px; border-top:1px solid var(--line); text-align:center;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--ink-dim); }
+  .bt-foot a{ color:var(--ink-dim); text-decoration:none; } .bt-foot a:hover{ color:var(--ink); text-decoration:underline; }
+  @media (max-width:640px){ .bt-ext-group{ margin-left:0; } }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} .bt-chip{transition:none;} }
+  .fd-color-tile{ color:var(--ink); }
+  .bt-subhero{ padding:44px 0 26px; position:relative; }
+  .bt-subhero .bt-pill{
+    display:inline-flex; align-items:center; gap:8px; font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12px; letter-spacing:.04em; text-transform:none; color:var(--accent-2); padding:7px 14px; border-radius:99px;
+    background:rgba(95,217,160,.08); border:1px solid rgba(95,217,160,.28); margin:0;
+  }
+  .bt-subhero .bt-pill i{ width:7px; height:7px; border-radius:50%; background:var(--accent-2); box-shadow:0 0 10px var(--accent-2); }
+  .bt-subhero h1.fm-title{
+    font-size:clamp(32px,5.2vw,54px); line-height:1.06; margin:18px 0 14px; font-weight:700;
+    background:linear-gradient(90deg,var(--ink) 40%,#ffc07a 80%,var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .bt-subhero .fm-sub{ font-size:clamp(15px,1.8vw,17px); max-width:640px; margin:0 0 26px; }
+  .bt-kpis{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:640px; }
+  .bt-kpi{ padding:16px 14px; border-radius:18px; background:linear-gradient(180deg,rgba(34,54,45,.75),rgba(27,43,37,.75)); border:1px solid var(--line); }
+  .bt-kpi b{ display:block; font-family:Arial,Helvetica,sans-serif; font-size:clamp(20px,2.6vw,26px); letter-spacing:-.02em; color:var(--ink); }
+  .bt-kpi span{ display:block; margin-top:3px; font-size:12px; color:var(--ink-dim); line-height:1.35; }
+  .bt-panel{
+    margin-top:8px; padding:clamp(16px,3vw,32px); border-radius:28px;
+    background:radial-gradient(620px 300px at 0% 0%,rgba(95,217,160,.09),transparent 65%), linear-gradient(180deg,rgba(27,43,37,.85),rgba(22,36,30,.85));
+    border:1px solid var(--line); box-shadow:0 30px 80px rgba(0,0,0,.25);
+  }
+  .bt-panel > :first-child{ margin-top:0; }
+  .bt-sub .fm-partner{ margin-top:30px; border-radius:24px; padding:28px;
+    background:radial-gradient(520px 260px at 100% 100%,rgba(255,140,60,.14),transparent 65%), var(--panel); }
+  .lx-controlbar{ top:78px !important; }
+  @media (max-width:560px){ .bt-kpis{ grid-template-columns:1fr; } }
+
+  .fm-db-preview,
+  .kr-results,
+  .kr-section,
+  .kr-seller-toggle{ border-radius:18px; }
 </style>
 </head>
 <body>
 
-<div class="fm-root">
-  <div class="fm-brand">
-    <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
+<div class="fm-root bt-sub">
+  <nav class="bt-nav">
+    <a class="bt-logo" href="/" aria-label="3DToolBox">
+      <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
       <rect width="220" height="220" rx="44" fill="#FF6A2B"/>
       <polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/>
       <polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/>
       <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
     </svg>
-    <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+      <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+    </a>
     <div class="fm-lang-switch">
       <span class="fm-lang-current">DE</span>
       <a class="fm-lang-link" href="/en/3d-print-cost-calculator.html">EN</a>
     </div>
+  </nav>
+  <div class="bt-switch"><a class="bt-chip bt-chip-flag" href="/">Filament-Finder</a><span class="bt-chip bt-chip-active" aria-current="page">Kostenrechner</span><a class="bt-chip" href="/filament-datenbank.html">Filament-Datenbank</a><a class="bt-chip" href="/3d-druck-lexikon.html">Lexikon</a>
+    <span class="bt-ext-group"><span class="bt-ext-label">Extern · nicht von uns</span>
+      <a class="bt-chip bt-chip-ext" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI ↗</a>
+      <a class="bt-chip bt-chip-ext" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs ↗</a>
+    </span>
   </div>
 
-  <p class="fm-tagline">Kostenlose Tools für den 3D-Druck-Alltag: Filament finden, Kosten berechnen, Wissen nachschlagen – alles direkt im Browser, ganz ohne Anmeldung.</p>
-
-  <div class="fm-tools-bar">
-    <p class="fm-tools-title">Unsere Tools</p>
-    <div class="fm-tools-grid">
-      <div class="fm-tool">
-        <a class="fm-tool-card fm-tool-card-flagship" href="/index.html">
-          <span class="fm-tool-card-badge">★</span>
-          <span class="fm-tool-card-name">Filament-Finder</span>
-        </a>
-        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Filament-Finder">i</button>
-        <div class="fm-tool-tip">Foto oder 3MF hochladen – passendes Filament &amp; Farbe automatisch finden.</div>
-      </div>
-      <div class="fm-tool">
-        <span class="fm-tool-card fm-tool-card-active">
-          <span class="fm-tool-card-name">Kostenrechner</span>
-        </span>
-      </div>
-      <div class="fm-tool">
-        <a class="fm-tool-card" href="/filament-datenbank.html">
-          <span class="fm-tool-card-name">Filament-Datenbank</span>
-        </a>
-        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Filament-Datenbank">i</button>
-        <div class="fm-tool-tip">Filament nach Farbe durchsuchen und direkt im Shop kaufen.</div>
-      </div>
-      <div class="fm-tool">
-        <a class="fm-tool-card" href="/3d-druck-lexikon.html">
-          <span class="fm-tool-card-name">Lexikon</span>
-        </a>
-        <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Lexikon">i</button>
-        <div class="fm-tool-tip">Druckprobleme, Slicer-Tipps &amp; Materialkunde nachschlagen.</div>
-      </div>
-    </div>
-    <div class="fm-tools-external">
-      <p class="fm-tools-external-title">Externe Empfehlungen</p>
-      <div class="fm-tools-grid fm-tools-grid-external">
-        <div class="fm-tool">
-          <a class="fm-tool-card" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">
-            <span class="fm-tool-card-name">Meshy AI ↗</span>
-          </a>
-          <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Meshy AI">i</button>
-          <div class="fm-tool-tip">KI: aus Text oder Bild ein druckfertiges 3D-Modell erstellen.</div>
-        </div>
-        <div class="fm-tool">
-          <a class="fm-tool-card" href="https://than.gs/u/8355632" target="_blank" rel="noopener">
-            <span class="fm-tool-card-name">Thangs ↗</span>
-          </a>
-          <button type="button" class="fm-tool-info" aria-label="Mehr Infos zu Thangs">i</button>
-          <div class="fm-tool-tip">Große Bibliothek fertiger, druckbarer 3D-Modelle.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <p class="fm-eyebrow">Kostenkalkulation</p>
+  <header class="bt-subhero"><span class="bt-pill"><i></i>Kostenkalkulation</span>
   <h1 class="fm-title">3D-Druck Kostenrechner</h1>
   <p class="fm-sub">Material, Strom, Verschleiß und Fehldruckrate live berechnen — mit Drucker-Presets und optionalem Verkaufsmodus für alle, die ihre Drucke verkaufen.</p>
+  <div class="bt-kpis"><div class="bt-kpi"><b>Live</b><span>Berechnung beim Tippen</span></div><div class="bt-kpi"><b>5</b><span>Materialien inkl. TPU</span></div><div class="bt-kpi"><b>0 €</b><span>ohne Anmeldung</span></div></div>
+  </header>
+  <section class="bt-panel">
 
   <!-- 01 Drucker -->
   <div class="kr-section">
@@ -874,6 +906,8 @@
   <p class="fm-note">
     <b>So wird gerechnet:</b> Material = Gewicht (g) × Preis/kg ÷ 1.000. Strom = Leistung (W) × Zeit (h) ÷ 1.000 × Strompreis. Verschleiß = Kaufpreis ÷ Lebensdauer (h) × Druckzeit (h) — bildet die Abnutzung des Druckers über seine Lebenszeit ab. Die Fehldruckrate wird als Puffer auf die Zwischensumme aus Material, Strom und Verschleiß aufgeschlagen. Im Seller-Modus kommen Arbeitszeit, Verpackung und Marge hinzu; die Marktplatz-Gebühr wird so eingerechnet, dass die gewünschte Marge auch nach Abzug der Gebühr erhalten bleibt. Alle Berechnungen laufen lokal im Browser, es werden keine Daten übertragen.
   </p>
+
+  </section>
 
   <div class="fm-footer">
     <p class="fm-footer-coop">

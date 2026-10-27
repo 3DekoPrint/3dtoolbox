@@ -770,82 +770,269 @@
   .fm-trust-row{ display:flex; flex-wrap:wrap; gap:10px 22px; }
   .fm-trust-item{ display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--ink-dim); }
   .fm-trust-item svg{ width:14px; height:14px; color:var(--accent-2); flex:none; }
+
+  /* ===== Bento-Redesign (Farben/Logo unverändert) ===== */
+  html{ scroll-behavior:smooth; }
+  body{
+    background:
+      radial-gradient(900px 480px at 85% -8%, rgba(255,140,60,.13), transparent 60%),
+      radial-gradient(800px 460px at -10% 18%, rgba(95,217,160,.10), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;
+  }
+  .bt-root{ max-width:1080px; padding:0 24px 56px; background:transparent; }
+  .bt-nav{
+    position:sticky; top:12px; z-index:50; display:flex; align-items:center; gap:18px;
+    margin:12px 0 0; padding:9px 12px 9px 16px; border-radius:16px;
+    background:rgba(27,43,37,.72); border:1px solid var(--line);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  }
+  .bt-logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .bt-links{ display:flex; gap:4px; margin-left:auto; }
+  .bt-links a{
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:12.5px; color:var(--ink-dim);
+    text-decoration:none; padding:7px 12px; border-radius:9px; transition:color .15s, background .15s;
+  }
+  .bt-links a:hover{ color:var(--ink); background:var(--panel-2); }
+  .bt-nav .fm-lang-switch{ margin-left:0; }
+
+  .bt-hero{ text-align:center; padding:78px 0 52px; position:relative; }
+  .bt-pill{
+    display:inline-flex; align-items:center; gap:8px; font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12px; color:var(--accent-2); padding:7px 14px; border-radius:99px;
+    background:rgba(95,217,160,.08); border:1px solid rgba(95,217,160,.28);
+  }
+  .bt-pill i{ width:7px; height:7px; border-radius:50%; background:var(--accent-2); box-shadow:0 0 10px var(--accent-2); }
+  .bt-h1{
+    font-family:Arial, Helvetica, sans-serif; font-weight:700; letter-spacing:-.02em;
+    font-size:clamp(34px,6vw,62px); line-height:1.06; margin:22px auto 18px; max-width:820px;
+  }
+  .bt-h1 em{
+    font-style:normal;
+    background:linear-gradient(90deg,var(--accent),#ffc07a 55%,var(--accent-2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .bt-lead{ color:var(--ink-dim); font-size:clamp(15px,2vw,18px); line-height:1.6; max-width:600px; margin:0 auto 28px; }
+  .bt-credit{ margin:-10px 0 20px; }
+  .bt-cta{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .bt-btn{
+    font-family:"JetBrains Mono","Courier New",monospace; font-weight:700; font-size:13.5px; text-decoration:none;
+    padding:14px 24px; border-radius:12px; transition:transform .15s, box-shadow .2s, background .15s, border-color .15s;
+  }
+  .bt-btn-primary{ background:var(--accent); color:#1a1206; box-shadow:0 8px 30px rgba(255,140,60,.28); }
+  .bt-btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 38px rgba(255,140,60,.4); }
+  .bt-btn-ghost{ color:var(--ink); border:1px solid var(--line); background:rgba(27,43,37,.6); }
+  .bt-btn-ghost:hover{ border-color:var(--accent-2); transform:translateY(-2px); }
+  .bt-kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:54px auto 0; max-width:880px; }
+  .bt-kpi{
+    padding:20px 14px; border-radius:18px; background:linear-gradient(180deg,rgba(34,54,45,.75),rgba(27,43,37,.75));
+    border:1px solid var(--line);
+  }
+  .bt-kpi b{ display:block; font-family:Arial, Helvetica, sans-serif; font-size:clamp(24px,3.4vw,34px); color:var(--ink); letter-spacing:-.02em; }
+  .bt-kpi span{ display:block; margin-top:4px; font-size:12px; color:var(--ink-dim); line-height:1.4; }
+
+  .bt-section{ padding:34px 0 20px; scroll-margin-top:90px; }
+  .bt-section-head{ margin-bottom:22px; }
+  .bt-section-head h2{ font-family:Arial, Helvetica, sans-serif; font-size:clamp(24px,3vw,32px); letter-spacing:-.02em; margin:0 0 6px; }
+  .bt-section-head p{ margin:0; color:var(--ink-dim); font-size:14.5px; }
+
+  .bt-bento{ display:grid; grid-template-columns:repeat(6,1fr); gap:16px; }
+  .bt-tile{
+    position:relative; display:flex; flex-direction:column; gap:8px; padding:24px; border-radius:22px;
+    text-decoration:none; color:var(--ink); overflow:hidden;
+    background:linear-gradient(160deg,rgba(34,54,45,.9),rgba(27,43,37,.9)); border:1px solid var(--line);
+    transition:transform .2s ease, border-color .2s ease, box-shadow .25s ease;
+  }
+  .bt-tile::before{
+    content:""; position:absolute; inset:auto -30% -60% auto; width:70%; height:90%; pointer-events:none;
+    background:radial-gradient(closest-side,rgba(95,217,160,.16),transparent); opacity:0; transition:opacity .25s;
+  }
+  .bt-tile:hover{ transform:translateY(-4px); border-color:var(--accent-2); box-shadow:0 18px 44px rgba(0,0,0,.35); }
+  .bt-tile:hover::before{ opacity:1; }
+  .bt-name{ font-family:"JetBrains Mono","Courier New",monospace; font-weight:700; font-size:16px; }
+  .bt-name-lg{ font-family:Arial, Helvetica, sans-serif; font-size:clamp(26px,3.2vw,36px); letter-spacing:-.02em; }
+  .bt-desc{ color:var(--ink-dim); font-size:13.5px; line-height:1.55; }
+  .bt-ico{
+    width:42px; height:42px; border-radius:13px; display:grid; place-items:center; margin-bottom:10px;
+    background:rgba(95,217,160,.1); border:1px solid rgba(95,217,160,.25); color:var(--accent-2);
+  }
+  .bt-ico svg{ width:20px; height:20px; }
+  .bt-arrow{ margin-top:auto; padding-top:8px; color:var(--accent); font-family:"JetBrains Mono","Courier New",monospace; transition:transform .2s; }
+  .bt-tile:hover .bt-arrow{ transform:translateX(5px); }
+
+  .bt-flagship{
+    grid-column:span 3; grid-row:span 3; justify-content:flex-start; gap:12px; padding:30px;
+    border-color:rgba(255,140,60,.55);
+    background:radial-gradient(520px 320px at 100% 0%,rgba(255,140,60,.22),transparent 65%),
+               linear-gradient(160deg,#2a3a2f,#1b2b25);
+    box-shadow:0 0 0 1px rgba(255,140,60,.08), 0 24px 60px rgba(255,140,60,.08);
+  }
+  .bt-flagship:hover{ border-color:var(--accent); box-shadow:0 22px 60px rgba(255,140,60,.2); }
+  .bt-flag-tag, .bt-ext-tag{
+    align-self:flex-start; font-family:"JetBrains Mono","Courier New",monospace; font-size:11px; font-weight:700;
+    letter-spacing:.05em; padding:5px 11px; border-radius:99px;
+  }
+  .bt-flag-tag{ background:var(--accent-2); color:#1a1206; }
+  .bt-ext-tag{ background:transparent; color:var(--ink-dim); border:1px dashed var(--line); font-weight:600; }
+  .bt-swatches{ display:flex; margin-top:auto; padding-top:20px; }
+  .bt-swatches i{ width:34px; height:34px; border-radius:50%; border:2px solid #1f322a; margin-right:-9px; box-shadow:0 4px 10px rgba(0,0,0,.3); }
+  .bt-flag-btn{
+    align-self:flex-start; margin-top:18px; font-family:"JetBrains Mono","Courier New",monospace; font-weight:700; font-size:13px;
+    background:var(--accent); color:#1a1206; padding:11px 18px; border-radius:11px;
+  }
+  .bt-tool{ grid-column:span 3; }
+
+  /* Finder-Panel */
+  .bt-finder{
+    margin-top:44px; padding:clamp(22px,4vw,44px); border-radius:28px; scroll-margin-top:90px;
+    background:radial-gradient(620px 300px at 0% 0%,rgba(95,217,160,.10),transparent 65%), linear-gradient(180deg,rgba(27,43,37,.85),rgba(22,36,30,.85));
+    border:1px solid var(--line); box-shadow:0 30px 80px rgba(0,0,0,.28);
+  }
+  .bt-finder > *{ max-width:820px; margin-left:auto; margin-right:auto; }
+  h2.fm-title{ font-family:Arial, Helvetica, sans-serif; font-size:clamp(28px,4vw,40px); letter-spacing:-.02em; margin:0 auto 8px; font-weight:700; }
+  .bt-finder .fm-howto-step{ border-radius:18px; background:rgba(34,54,45,.6); }
+  .bt-finder .fm-drop{ border-radius:20px; padding:56px 24px; }
+  .bt-finder .fm-db-preview, .bt-finder .fm-linkbox, .bt-finder .fm-tolerance-row{ border-radius:18px; }
+
+  .fm-partner{ max-width:1080px; margin-top:44px; padding:30px; border-radius:24px; scroll-margin-top:90px;
+    background:radial-gradient(520px 260px at 100% 100%,rgba(255,140,60,.14),transparent 65%), var(--panel); }
+  .fm-partner-title{ font-family:Arial, Helvetica, sans-serif; font-size:20px; }
+  .fm-partner-text{ max-width:640px; font-size:14px; }
+  .fm-partner-btn{ border-radius:11px; padding:12px 20px; }
+
+  @media (max-width:820px){
+    .bt-links{ display:none; }
+    .bt-nav{ justify-content:space-between; }
+    .bt-kpis{ grid-template-columns:repeat(2,1fr); }
+    .bt-flagship, .bt-tool, .bt-ext, .bt-bento > .bt-tool:nth-child(4){ grid-column:1 / -1; grid-row:auto; }
+    .bt-hero{ padding:54px 0 36px; }
+  }
+  @media (max-width:480px){
+    .bt-root{ padding:0 16px 40px; }
+    .bt-btn{ width:100%; text-align:center; }
+  }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} .bt-tile,.bt-btn{transition:none;} }
+  .bt-finder .fm-flagship-badge{ display:flex; width:fit-content; }
+  .bt-finder > p[style]{ margin-left:auto !important; margin-right:auto !important; width:100%; }
+  .bt-finder .fm-flagship-badge{ display:none; }
+
+  .bt-bento .bt-tool{ grid-column:span 3; }
+  /* Externe Empfehlungen: bewusst anders (graublau, gestrichelt) */
+  .bt-extsec{ padding-top:44px; }
+  .bt-extbox{ padding:26px; border-radius:26px; border:1px dashed #56707a; background:rgba(86,112,122,.07); }
+  .bt-extbox .bt-section-head{ margin-bottom:18px; }
+  .bt-ext-badge{
+    display:inline-block; vertical-align:middle; margin-left:10px; font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#1a1206;
+    background:#9db4bd; padding:5px 11px; border-radius:99px;
+  }
+  .bt-ext-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .bt-tile.bt-ext{ background:rgba(20,32,36,.6); border:1px dashed #56707a; }
+  .bt-tile.bt-ext:hover{ border-color:#9db4bd; box-shadow:0 14px 36px rgba(0,0,0,.3); }
+  .bt-tile.bt-ext::before{ background:radial-gradient(closest-side,rgba(157,180,189,.16),transparent); }
+  .bt-ext-tag{ color:#9db4bd; border-color:#56707a; }
+  .bt-ext-disc{ margin:16px 2px 0; font-size:12px; color:var(--ink-dim); }
+  @media (max-width:820px){ .bt-ext-grid{ grid-template-columns:1fr; } .bt-extbox{ padding:18px; } }
+  @media (max-width:820px){ .bt-bento .bt-tool, .bt-bento .bt-flagship{ grid-column:1 / -1; grid-row:auto; } }
+
 </style>
 </head>
 <body>
 
-<div class="fm-root">
-  <div class="fm-brand">
-    <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
+<div class="fm-root bt-root">
+  <nav class="bt-nav">
+    <a class="bt-logo" href="/en/" aria-label="3DToolBox">
+      <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
       <rect width="220" height="220" rx="44" fill="#FF6A2B"/>
       <polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/>
       <polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/>
       <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
     </svg>
-    <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+      <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+    </a>
+    <div class="bt-links">
+      <a href="#tools">Tools</a>
+      <a href="#finder">Filament Finder</a>
+      <a href="#partner">Partners</a>
+    </div>
     <div class="fm-lang-switch">
       <a class="fm-lang-link" href="/">DE</a>
       <span class="fm-lang-current">EN</span>
     </div>
-  </div>
+  </nav>
 
-  <p class="fm-tagline">Free tools for everyday 3D printing: match filament, calculate costs, look up know-how – right in your browser, no sign-up needed.</p>
+  <header class="bt-hero">
+    <span class="bt-pill"><i></i>Free · no sign-up · right in your browser</span>
+    <h1 class="bt-h1">Free tools for <em>everyday 3D printing</em></h1>
+    <p class="bt-lead">Match filament, calculate costs, look up know-how – one toolbox for makers and 3D-print fans.</p>
+    <p class="fm-tools-credit bt-credit" id="fmToolsCredit" style="display:none;"></p>
+    <div class="bt-cta">
+      <a class="bt-btn bt-btn-primary" href="#finder">Start the Filament Finder</a>
+      <a class="bt-btn bt-btn-ghost" href="#tools">Browse all tools</a>
+    </div>
+    <div class="bt-kpis"><div class="bt-kpi"><b>100+</b><span>filaments checked</span></div><div class="bt-kpi"><b>5</b><span>materials: PLA to TPU</span></div><div class="bt-kpi"><b>€0</b><span>free, no account</span></div><div class="bt-kpi"><b>100%</b><span>local image analysis</span></div></div>
+  </header>
 
-  <div class="fm-tools-bar">
-    <p class="fm-tools-title">Our Tools</p>
-    <p class="fm-tools-credit" id="fmToolsCredit" style="display:none;"></p>
-    <div class="fm-tools-grid" id="fmToolsGrid">
-      <div class="fm-tool">
-        <span class="fm-tool-card fm-tool-card-flagship fm-tool-card-active">
-          <span class="fm-tool-card-badge">★</span>
-          <span class="fm-tool-card-name">Filament Finder</span>
-        </span>
-      </div>
-      <div class="fm-tool">
-        <a class="fm-tool-card" id="fmToolCalc" href="/en/3d-print-cost-calculator.html">
-          <span class="fm-tool-card-name">Cost Calculator</span>
-        </a>
-        <button type="button" class="fm-tool-info" aria-label="More info about Cost Calculator">i</button>
-        <div class="fm-tool-tip">Calculate material, electricity and wear costs live.</div>
-      </div>
-      <div class="fm-tool">
-        <a class="fm-tool-card" id="fmToolDatabase" href="/en/filament-database.html">
-          <span class="fm-tool-card-name">Filament Database</span>
-        </a>
-        <button type="button" class="fm-tool-info" aria-label="More info about Filament Database">i</button>
-        <div class="fm-tool-tip">Browse filament by color and buy straight from the shop.</div>
-      </div>
-      <div class="fm-tool">
-        <a class="fm-tool-card" href="/en/3d-print-lexicon.html">
-          <span class="fm-tool-card-name">Lexicon</span>
-        </a>
-        <button type="button" class="fm-tool-info" aria-label="More info about Lexicon">i</button>
-        <div class="fm-tool-tip">Look up print problems, slicer tips &amp; material guide.</div>
-      </div>
+  <section class="bt-section" id="tools">
+    <div class="bt-section-head">
+      <h2>Our Tools</h2>
+      <p>Everything you need for everyday printing.</p>
     </div>
-    <div class="fm-tools-external">
-      <p class="fm-tools-external-title">External Recommendations</p>
-      <div class="fm-tools-grid fm-tools-grid-external">
-        <div class="fm-tool">
-          <a class="fm-tool-card" id="fmToolMeshy" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">
-            <span class="fm-tool-card-name">Meshy AI ↗</span>
-          </a>
-          <button type="button" class="fm-tool-info" aria-label="More info about Meshy AI">i</button>
-          <div class="fm-tool-tip">AI: turn text or an image into a print-ready 3D model.</div>
-        </div>
-        <div class="fm-tool">
-          <a class="fm-tool-card" id="fmToolThangs" href="https://than.gs/u/8355632" target="_blank" rel="noopener">
-            <span class="fm-tool-card-name">Thangs ↗</span>
-          </a>
-          <button type="button" class="fm-tool-info" aria-label="More info about Thangs">i</button>
-          <div class="fm-tool-tip">Large library of ready-to-print 3D models.</div>
-        </div>
-      </div>
+    <div class="bt-bento">
+      <a class="bt-tile bt-flagship" href="#finder">
+        <span class="bt-flag-tag">★ Flagship</span>
+        <span class="bt-name bt-name-lg">Filament Finder</span>
+        <span class="bt-desc">Upload a photo or 3MF – get matching filaments with shop links in seconds.</span>
+        <span class="bt-swatches" aria-hidden="true"><i style="background:#00AE42"></i><i style="background:#0056B8"></i><i style="background:#FF6A13"></i><i style="background:#EC008C"></i><i style="background:#FEC600"></i><i style="background:#00B1B7"></i><i style="background:#9D2235"></i><i style="background:#482960"></i><i style="background:#E4BD68"></i></span>
+        <span class="bt-flag-btn">Try it now →</span>
+      </a>
+      <a class="bt-tile bt-tool" id="fmToolCalc" href="/en/3d-print-cost-calculator.html">
+        <span class="bt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span>
+        <span class="bt-name">Cost Calculator</span>
+        <span class="bt-desc">Calculate material, electricity and wear costs live.</span>
+        <span class="bt-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="bt-tile bt-tool" id="fmToolDatabase" href="/en/filament-database.html">
+        <span class="bt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="9" r="2.4"/><circle cx="11" cy="16" r="3.2"/></svg></span>
+        <span class="bt-name">Filament Database</span>
+        <span class="bt-desc">Browse filament by color and buy straight from the shop.</span>
+        <span class="bt-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="bt-tile bt-tool" href="/en/3d-print-lexicon.html">
+        <span class="bt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M9 9h5M9 13h5"/></svg></span>
+        <span class="bt-name">Lexicon</span>
+        <span class="bt-desc">Look up print problems, slicer tips &amp; material guide.</span>
+        <span class="bt-arrow" aria-hidden="true">→</span>
+      </a>
     </div>
-  </div>
+  </section>
+
+  <section class="bt-section bt-extsec" id="extern">
+    <div class="bt-extbox">
+      <div class="bt-section-head">
+        <h2>External Recommendations <span class="bt-ext-badge">Not by 3DToolBox</span></h2>
+        <p>These tools are made by other providers. We recommend them because they fit 3D printing well – they open on the provider's own site.</p>
+      </div>
+      <div class="bt-ext-grid">
+      <a class="bt-tile bt-ext" id="fmToolMeshy" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">
+        <span class="bt-ext-tag">↗ External website</span>
+        <span class="bt-name">Meshy AI ↗</span>
+        <span class="bt-desc">AI: turn text or an image into a print-ready 3D model.</span>
+      </a>
+      <a class="bt-tile bt-ext" id="fmToolThangs" href="https://than.gs/u/8355632" target="_blank" rel="noopener">
+        <span class="bt-ext-tag">↗ External website</span>
+        <span class="bt-name">Thangs ↗</span>
+        <span class="bt-desc">Large library of ready-to-print 3D models.</span>
+      </a>
+      </div>
+      <p class="bt-ext-disc">Contains partner links (ad). No extra cost to you.</p>
+    </div>
+  </section>
+
+  <section class="bt-finder" id="finder">
   <p class="fm-eyebrow">Filament Matching</p>
   <span class="fm-flagship-badge">★ Our Flagship Tool</span>
-  <h1 class="fm-title fm-title-flagship">Filament Finder</h1>
+  <h2 class="fm-title fm-title-flagship">Filament Finder</h2>
   <p class="fm-sub">Find filaments that match your photo or 3MF file in seconds — no sign-up needed, with direct shop links.</p>
 
   <div class="fm-howto">
@@ -948,6 +1135,9 @@
     For a 3MF file, the tool first checks whether your slicer (Bambu Studio, OrcaSlicer, PrusaSlicer …) has the actually used filaments — including brand and type — stored directly in the file; the material (PLA, PETG, ABS, ASA, TPU) is detected automatically, so a PETG project won't be compared against PLA colors. For an image, you choose the material yourself via the buttons above. The dominant colors are detected locally in your browser (nothing is uploaded to a server) and matched against the database using CIEDE2000 color distance. Every color links to a specific shop page: for <b>3DJake</b> (Bambu Lab) to verified individual product pages, for <b>Redline Filament</b> and <b>Sunlu</b> partly to individual products, partly to the shop's internal search for that exact item — never to a bare homepage. <b>Filament2Print, 3Dmensionals, and Bambu Lab's own store</b> are not (yet) connected, since no reliably stable product URL per color could be verified there.
   </p>
 
+  </section>
+
+  <div id="partner"></div>
   <div class="fm-partner">
     <p class="fm-partner-title">Are you a 3D-print creator who wants to feature 3DToolBox in your content?</p>
     <p class="fm-partner-text">We work with selected partners who introduce 3DToolBox and its connected tools to their audience. Reach out with a few details about your channel — we review every application personally.</p>
