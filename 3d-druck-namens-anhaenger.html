@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3DToolBox – Geschichteter Namens-Anhänger</title>
+<meta name="description" content="Eigenen Namen als mehrfarbigen 3D-Schlüsselanhänger gestalten — der Name selbst ist der Anhänger, drei Schichten in je eigener Farbe. Direkt im Browser, als druckfertige 3MF-Datei exportierbar.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="3DToolBox">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="3DToolBox – Geschichteter Namens-Anhänger">
+<meta property="og:description" content="Eigenen Namen als mehrfarbigen 3D-Schlüsselanhänger gestalten und als druckfertige 3MF-Datei exportieren — komplett im Browser.">
+<meta property="og:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://3dtoolbox.info/3d-druck-namens-anhaenger.html">
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+<style>
+  :root{
+    --bg:#14201c;
+    --panel:#1b2b25;
+    --panel-2:#22362d;
+    --ink:#eef3ee;
+    --ink-dim:#a8bdb2;
+    --accent:#ff8c3c;
+    --accent-2:#5fd9a0;
+    --line:#2f473c;
+    font-family:"Iowan Old Style","Georgia",serif;
+  }
+  *{box-sizing:border-box;}
+  html, body{ margin:0; padding:0; background:var(--bg); }
+  .fm-root{
+    background:var(--bg); color:var(--ink);
+    padding:40px 24px 56px; border-radius:14px; min-height:100%;
+    max-width:960px; margin:0 auto;
+  }
+  .fm-eyebrow{
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:11px;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--accent-2); margin:0 0 6px;
+  }
+  .fm-brand{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .fm-brand-icon{ width:30px; height:30px; flex:none; border-radius:7px; }
+  .fm-brand-word{ font-family:Arial, Helvetica, sans-serif; font-weight:700; font-size:19px; color:var(--ink); letter-spacing:.01em; }
+  .fm-brand-3d{ color:#FF6A2B; }
+  .fm-lang-switch{
+    margin-left:auto; display:flex; align-items:center; gap:4px;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:12px; font-weight:700;
+    background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:4px;
+  }
+  .fm-lang-current{ padding:5px 10px; border-radius:5px; background:var(--accent); color:#1a1206; }
+  .fm-lang-link{ padding:5px 10px; border-radius:5px; color:var(--ink-dim); text-decoration:none; transition:color .15s ease, background .15s ease; }
+  .fm-lang-link:hover{ color:var(--ink); background:var(--panel-2); }
+  .fm-tagline{ color:var(--ink-dim); font-size:14.5px; line-height:1.55; margin:0 0 28px; max-width:640px; }
+
+  h1.fm-title{ font-size:26px; margin:0 0 8px; font-weight:600; letter-spacing:.2px; }
+  .fm-sub{ color:var(--ink-dim); font-size:14px; margin:0 0 30px; max-width:640px; line-height:1.5; }
+
+  /* Shape-Auswahl */
+  .og-shapes{ display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; margin-bottom:8px; }
+  .og-shape-btn{
+    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    padding:16px 12px; text-align:center; cursor:pointer; color:var(--ink);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .og-shape-btn:hover{ border-color:var(--accent); }
+  .og-shape-btn.active{ border-color:var(--accent); background:linear-gradient(180deg, rgba(255,140,60,.16) 0%, var(--panel) 100%); }
+
+  .og-gtype-btn{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:10px; text-align:center; cursor:pointer; color:var(--ink-dim);
+    transition:border-color .15s ease, background .15s ease, color .15s ease;
+  }
+  .og-gtype-btn:hover{ border-color:var(--accent); }
+  .og-gtype-btn.active{ border-color:var(--accent); background:linear-gradient(180deg, rgba(255,140,60,.16) 0%, var(--panel) 100%); color:var(--accent); }
+  .og-shape-icon{ width:34px; height:34px; margin:0 auto 8px; color:var(--accent-2); }
+  .og-shape-icon svg{ width:100%; height:100%; }
+  .og-shape-name{ font-size:12.5px; font-weight:700; }
+  .og-shape-btn.active .og-shape-name{ color:var(--accent); }
+
+  /* Layout: Viewer + Panel nebeneinander */
+  .og-layout{ display:grid; grid-template-columns:1fr 340px; gap:20px; align-items:start; }
+  @media (max-width:820px){ .og-layout{ grid-template-columns:1fr; } }
+
+  .og-viewer-wrap{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    overflow:hidden; position:relative;
+  }
+  .og-viewer{ width:100%; height:460px; display:block; touch-action:none; position:relative; }
+  .og-viewer-loading{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:13px; color:var(--ink-dim);
+    background:rgba(20,32,28,.6); z-index:5;
+  }
+  .og-viewer canvas{ display:block; width:100%; height:100%; }
+  .og-viewer-hint{
+    position:absolute; bottom:10px; right:12px;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; color:var(--ink-dim);
+    background:rgba(20,32,28,.72); padding:4px 9px; border-radius:6px; pointer-events:none;
+  }
+  .og-viewer-dims{
+    position:absolute; top:10px; left:12px;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--accent-2);
+    background:rgba(20,32,28,.72); padding:6px 10px; border-radius:8px; line-height:1.6;
+  }
+
+  .og-panel{ display:flex; flex-direction:column; gap:14px; }
+  .og-section{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .og-section-title{
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-dim); margin:0 0 12px;
+  }
+  .og-row{ margin-bottom:14px; }
+  .og-row:last-child{ margin-bottom:0; }
+  .og-row label{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size:12.5px; color:var(--ink); margin-bottom:6px;
+  }
+  .og-row label span.og-val{ font-family:"JetBrains Mono","Courier New",monospace; color:var(--accent-2); font-weight:600; }
+  .og-row input[type=range]{ width:100%; accent-color:var(--accent); cursor:pointer; }
+
+  .og-toggle-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:12px 14px;
+  }
+  .og-toggle-label{ font-size:13px; color:var(--ink); }
+  .og-toggle-sub{ font-size:11px; color:var(--ink-dim); margin-top:2px; }
+  .og-switch{ position:relative; width:42px; height:24px; flex:none; }
+  .og-switch input{ opacity:0; width:0; height:0; position:absolute; }
+  .og-switch-track{
+    position:absolute; inset:0; background:var(--line); border-radius:20px; cursor:pointer;
+    transition:background .15s ease;
+  }
+  .og-switch-track::before{
+    content:""; position:absolute; width:18px; height:18px; left:3px; top:3px;
+    background:var(--ink); border-radius:50%; transition:transform .15s ease;
+  }
+  .og-switch input:checked + .og-switch-track{ background:var(--accent); }
+  .og-switch input:checked + .og-switch-track::before{ transform:translateX(18px); background:#1a1206; }
+
+  .og-skadis-note{
+    font-size:11px; color:var(--ink-dim); line-height:1.5; margin-top:10px;
+    border-top:1px solid var(--line); padding-top:10px;
+  }
+  .og-skadis-note b{ color:var(--accent-2); }
+
+  .og-color-row{ display:flex; align-items:center; gap:10px; }
+  .og-color-row input[type=color]{
+    width:36px; height:36px; border-radius:8px; border:1px solid var(--line);
+    background:none; cursor:pointer; padding:0;
+  }
+  .og-color-hex{ font-family:"JetBrains Mono","Courier New",monospace; font-size:12px; color:var(--ink-dim); }
+
+  .og-export-btn{
+    width:100%; background:var(--accent); border:1px solid var(--accent); color:#1a1206;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:13.5px; font-weight:700;
+    padding:13px 14px; border-radius:10px; cursor:pointer; transition:opacity .15s ease;
+  }
+  .og-export-btn:hover{ opacity:.92; }
+  .og-export-hint{ font-size:11px; color:var(--ink-dim); text-align:center; margin-top:8px; }
+
+  .fm-note{ font-size:11.5px; color:var(--ink-dim); margin-top:28px; line-height:1.5; border-top:1px solid var(--line); padding-top:14px; }
+
+  .fm-footer{ margin-top:26px; padding-top:18px; border-top:1px solid var(--line); text-align:center; }
+  .fm-footer-coop{ font-size:12px; color:var(--ink-dim); margin:0 0 10px; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .fm-footer-logo{ height:20px; width:auto; display:inline-block; vertical-align:middle; }
+  .fm-footer-coop a{ color:var(--accent-2); text-decoration:none; }
+  .fm-footer-coop a:hover{ text-decoration:underline; }
+  .fm-footer-legal{ display:flex; justify-content:center; gap:8px; font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--ink-dim); }
+  .fm-footer-legal a{ color:var(--ink-dim); text-decoration:none; }
+  .fm-footer-legal a:hover{ color:var(--ink); text-decoration:underline; }
+
+  @media (max-width:560px){
+    .og-shapes{ grid-template-columns:1fr; }
+    .og-viewer{ height:320px; }
+  }
+
+  /* ===== Bento-Stil (gemeinsam für alle Unterseiten) ===== */
+  html{ scroll-behavior:smooth; }
+  body{
+    background:
+      radial-gradient(900px 480px at 85% -8%, rgba(255,140,60,.12), transparent 60%),
+      radial-gradient(800px 460px at -10% 18%, rgba(95,217,160,.09), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;
+  }
+  .fm-root.bt-sub{ background:transparent; padding-top:0; }
+  .bt-nav{
+    position:sticky; top:12px; z-index:50; display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+    margin:12px 0 0; padding:9px 12px 9px 16px; border-radius:16px;
+    background:rgba(27,43,37,.78); border:1px solid var(--line);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  }
+  .bt-logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .bt-nav .fm-lang-switch{ margin-left:auto; }
+  .bt-switch{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:16px 0 8px; }
+  .bt-chip{
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:12.5px; font-weight:600; text-decoration:none;
+    color:var(--ink-dim); padding:9px 15px; border-radius:99px; border:1px solid var(--line);
+    background:rgba(27,43,37,.6); transition:color .15s, border-color .15s, transform .15s;
+  }
+  .bt-chip:hover{ color:var(--ink); border-color:var(--accent-2); transform:translateY(-1px); }
+  .bt-chip-active{ background:var(--accent); border-color:var(--accent); color:#1a1206; }
+  .bt-chip-active:hover{ color:#1a1206; border-color:var(--accent); transform:none; }
+  .bt-chip-flag::before{ content:"★ "; }
+  .bt-ext-group{
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-left:auto; padding:5px 6px 5px 12px;
+    border:1px dashed #56707a; border-radius:99px; background:rgba(86,112,122,.08);
+  }
+  .bt-ext-label{ font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:#9db4bd; }
+  .bt-chip-ext{ border-style:dashed; border-color:#56707a; background:transparent; color:#b8ccd3; padding:6px 12px; }
+  .bt-chip-ext:hover{ border-color:#9db4bd; }
+  .fm-eyebrow{ margin-top:26px; }
+  .fm-title{ font-family:Arial, Helvetica, sans-serif; letter-spacing:-.02em; font-size:clamp(28px,4.2vw,42px); }
+  .bt-foot{ margin-top:40px; padding-top:20px; border-top:1px solid var(--line); text-align:center;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--ink-dim); }
+  .bt-foot a{ color:var(--ink-dim); text-decoration:none; } .bt-foot a:hover{ color:var(--ink); text-decoration:underline; }
+  @media (max-width:640px){ .bt-ext-group{ margin-left:0; } }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} .bt-chip{transition:none;} }
+  .fd-color-tile{ color:var(--ink); }
+  .bt-subhero{ padding:44px 0 26px; position:relative; }
+  .bt-subhero .bt-pill{
+    display:inline-flex; align-items:center; gap:8px; font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12px; letter-spacing:.04em; text-transform:none; color:var(--accent-2); padding:7px 14px; border-radius:99px;
+    background:rgba(95,217,160,.08); border:1px solid rgba(95,217,160,.28); margin:0;
+  }
+  .bt-subhero .bt-pill i{ width:7px; height:7px; border-radius:50%; background:var(--accent-2); box-shadow:0 0 10px var(--accent-2); }
+  .bt-subhero h1.fm-title{
+    font-size:clamp(32px,5.2vw,54px); line-height:1.06; margin:18px 0 14px; font-weight:700;
+    background:linear-gradient(90deg,var(--ink) 40%,#ffc07a 80%,var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .bt-subhero .fm-sub{ font-size:clamp(15px,1.8vw,17px); max-width:640px; margin:0 0 26px; }
+  .bt-kpis{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:640px; }
+  .bt-kpi{ padding:16px 14px; border-radius:18px; background:linear-gradient(180deg,rgba(34,54,45,.75),rgba(27,43,37,.75)); border:1px solid var(--line); }
+  .bt-kpi b{ display:block; font-family:Arial,Helvetica,sans-serif; font-size:clamp(20px,2.6vw,26px); letter-spacing:-.02em; color:var(--ink); }
+  .bt-kpi span{ display:block; margin-top:3px; font-size:12px; color:var(--ink-dim); line-height:1.35; }
+  .bt-panel{
+    margin-top:8px; padding:clamp(16px,3vw,32px); border-radius:28px;
+    background:radial-gradient(620px 300px at 0% 0%,rgba(95,217,160,.09),transparent 65%), linear-gradient(180deg,rgba(27,43,37,.85),rgba(22,36,30,.85));
+    border:1px solid var(--line); box-shadow:0 30px 80px rgba(0,0,0,.25);
+  }
+  .bt-panel > :first-child{ margin-top:0; }
+  .bt-sub .fm-partner{ margin-top:30px; border-radius:24px; padding:28px;
+    background:radial-gradient(520px 260px at 100% 100%,rgba(255,140,60,.14),transparent 65%), var(--panel); }
+  .lx-controlbar{ top:78px !important; }
+  @media (max-width:560px){ .bt-kpis{ grid-template-columns:1fr; } }
+  .lx-controlbar{ background:#1a2a24 !important; border:1px solid var(--line); border-radius:16px; padding:10px 14px !important; }
+  .bt-switch-gen{ margin-top:0; }
+  .bt-group-label{ font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-2); padding:0 6px 0 2px; }
+  .bt-chip small{ font-size:9.5px; opacity:.7; margin-left:3px; letter-spacing:.05em; }
+  @media (max-width:640px){
+    .bt-switch{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; margin:12px -16px 6px; padding:0 16px; }
+    .bt-switch::-webkit-scrollbar{ display:none; }
+    .bt-chip, .bt-group-label, .bt-ext-group{ flex:none; white-space:nowrap; }
+    .bt-switch-gen{ margin-top:0; }
+    .bt-ext-group{ margin-left:0; }
+    .bt-gen .bt-kpis{ grid-template-columns:repeat(3,1fr); gap:8px; }
+    .bt-gen .bt-kpi{ padding:12px 10px; border-radius:14px; }
+    .bt-gen .bt-kpi span{ font-size:11px; }
+  }
+  /* ===== Generator-Seiten ===== */
+  .bt-gen{ max-width:1080px !important; }
+  .bt-gen .og-viewer-wrap{ border-radius:24px !important; border:1px solid rgba(95,217,160,.35) !important; box-shadow:0 0 0 1px rgba(95,217,160,.06), 0 24px 70px rgba(95,217,160,.07); overflow:hidden; }
+  .bt-gen .og-section{ border-radius:20px; background:linear-gradient(160deg,rgba(34,54,45,.92),rgba(27,43,37,.92)); }
+  .bt-gen .og-shape-btn, .bt-gen .og-gtype-btn{ border-radius:16px; }
+  .bt-gen .og-export-btn{ border-radius:14px; box-shadow:0 10px 30px rgba(255,140,60,.28); }
+  .bt-gen .og-export-btn:hover{ box-shadow:0 14px 38px rgba(255,140,60,.4); }
+  .bt-gen .fm-note{ margin-top:28px; border-top:1px solid var(--line); }
+  .bt-gen .bt-subhero{ padding-bottom:20px; }
+  .bt-gen .bt-kpis{ margin-bottom:6px; }
+  .bt-gen-lang{ cursor:help; }
+
+</style>
+</head>
+<body>
+
+<div class="fm-root bt-sub bt-gen">
+  <nav class="bt-nav">
+    <a class="bt-logo" href="/" aria-label="3DToolBox">
+      <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
+      <rect width="220" height="220" rx="44" fill="#FF6A2B"/>
+      <polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/>
+      <polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/>
+      <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
+    </svg>
+      <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+    </a>
+    <div class="fm-lang-switch">
+      <span class="fm-lang-current">DE</span>
+      <a class="fm-lang-link bt-gen-lang" href="/en/" title="English site (this tool is available in German only for now)">EN</a>
+    </div>
+  </nav>
+  <div class="bt-switch"><a class="bt-chip bt-chip-flag" href="/">Filament-Finder</a><a class="bt-chip" href="/3d-druck-kostenrechner.html">Kostenrechner</a><a class="bt-chip" href="/filament-datenbank.html">Filament-Datenbank</a><a class="bt-chip" href="/3d-druck-lexikon.html">Lexikon</a></div>
+  <div class="bt-switch bt-switch-gen"><span class="bt-group-label">Generatoren</span><a class="bt-chip" href="/3d-druck-objektgenerator.html">Objekt-Generator</a><a class="bt-chip" href="/3d-druck-planetengetriebe-generator.html">Planetengetriebe</a><span class="bt-chip bt-chip-active" aria-current="page">Namens-Anhänger</span><a class="bt-chip" href="/3d-druck-namensschild-anhaenger.html">Namensschild</a>
+    <span class="bt-ext-group"><span class="bt-ext-label">Extern · nicht von uns</span>
+      <a class="bt-chip bt-chip-ext" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI ↗</a>
+      <a class="bt-chip bt-chip-ext" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs ↗</a>
+    </span>
+  </div>
+  <header class="bt-subhero"><span class="bt-pill"><i></i>Personalisierte Anhänger</span>
+  <h1 class="fm-title">Geschichteter Namens-Anhänger</h1>
+  <p class="fm-sub">Kein Schild, keine Grundplatte — der Name selbst ist der Schlüsselanhänger. Drei Schichten (Name + zwei Kontur-Stufen), jede in eigener Farbe, mit Schlüsselring-Öse. Direkt als druckfertige 3MF-Datei exportierbar.</p>
+  <div class="bt-kpis"><div class="bt-kpi"><b>3MF</b><span>druckfertiger Export</span></div><div class="bt-kpi"><b>Live</b><span>3D-Vorschau im Browser</span></div><div class="bt-kpi"><b>0 €</b><span>ohne Anmeldung</span></div></div>
+  </header>
+
+  <div class="og-layout">
+    <div class="og-viewer-wrap">
+      <div class="og-viewer" id="ogViewer">
+        <div class="og-viewer-dims" id="ogDims">–</div>
+        <div class="og-viewer-hint">ziehen zum Drehen · scrollen zum Zoomen</div>
+      </div>
+    </div>
+
+    <div class="og-panel">
+
+      <div class="og-section">
+        <p class="og-section-title">Name</p>
+        <div class="og-row"><label>Text</label></div>
+        <input type="text" id="n_text" value="Aya" maxlength="16" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-family:'JetBrains Mono',monospace; font-size:16px; margin-bottom:14px;">
+        <div class="og-row"><label>Schriftart</label></div>
+        <select id="n_font" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-size:14px; margin-bottom:6px;">
+          <option value="'Baloo 2', cursive" selected>Rundlich (Baloo 2)</option>
+          <option value="'Fredoka', sans-serif">Verspielt (Fredoka)</option>
+          <option value="'Poppins', sans-serif">Modern (Poppins)</option>
+          <option value="'Pacifico', cursive">Schreibschrift (Pacifico)</option>
+          <option value="Arial, sans-serif">Klassisch (Arial)</option>
+        </select>
+        <p style="font-size:11px; color:var(--ink-dim); margin:4px 0 0;">Kurze Namen funktionieren am besten. Einzelne Buchstaben ohne Verbindung zueinander werden automatisch über die Kontur-Stufen zusammengehalten.</p>
+      </div>
+
+      <div class="og-section">
+        <p class="og-section-title">Größe &amp; Schichten</p>
+        <div class="og-row"><label>Namenshöhe <span class="og-val" id="v_n_height">30</span> mm</label><input type="range" id="n_height" min="15" max="80" step="1" value="30"></div>
+        <div class="og-row"><label>Detailgrad <span class="og-val" id="v_n_detail">3.5</span></label><input type="range" id="n_detail" min="1.5" max="6" step="0.5" value="3.5"></div>
+        <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 6px;" id="n_detailNote">Höher = schärfere Kanten, aber mehr Dreiecke/größere Datei.</p>
+        <div class="og-row"><label>Namens-Dicke <span class="og-val" id="v_n_thick1">3</span> mm</label><input type="range" id="n_thick1" min="1" max="8" step="0.5" value="3"></div>
+        <div class="og-row"><label>Kontur-Stufe 1 <span class="og-val" id="v_n_border1">1.6</span> mm</label><input type="range" id="n_border1" min="0.6" max="4" step="0.1" value="1.6"></div>
+        <div class="og-row"><label>Dicke Stufe 1 <span class="og-val" id="v_n_thick2">1.6</span> mm</label><input type="range" id="n_thick2" min="0.8" max="4" step="0.2" value="1.6"></div>
+        <div class="og-row"><label>Kontur-Stufe 2 <span class="og-val" id="v_n_border2">1.6</span> mm</label><input type="range" id="n_border2" min="0" max="4" step="0.1" value="1.6"></div>
+        <div class="og-row"><label>Dicke Stufe 2 <span class="og-val" id="v_n_thick3">1.6</span> mm</label><input type="range" id="n_thick3" min="0.8" max="4" step="0.2" value="1.6"></div>
+        <p style="font-size:11px; color:var(--ink-dim); margin:4px 0 0;" id="n_mergeNote"></p>
+      </div>
+
+      <div class="og-section">
+        <p class="og-section-title">Farben (Vorschau)</p>
+        <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
+          <input type="color" id="n_color1" value="#ff8c3c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <span style="font-size:13px;">Name (Schicht 1)</span>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
+          <input type="color" id="n_color2" value="#ffffff" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <span style="font-size:13px;">Kontur-Stufe 1</span>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <input type="color" id="n_color3" value="#14201c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <span style="font-size:13px;">Kontur-Stufe 2</span>
+        </div>
+      </div>
+
+      <div class="og-section">
+        <p class="og-section-title">Schlüsselring-Öse</p>
+        <div class="og-toggle-row" style="margin-bottom:14px;">
+          <div>
+            <div class="og-toggle-label">Öse hinzufügen</div>
+            <div class="og-toggle-sub">Kleine Lasche mit Loch, am linken Rand des Namens</div>
+          </div>
+          <label class="og-switch">
+            <input type="checkbox" id="n_holeon" checked>
+            <span class="og-switch-track"></span>
+          </label>
+        </div>
+        <div id="n_holeRow">
+          <div class="og-row"><label>Loch-Ø <span class="og-val" id="v_n_holed">4.5</span> mm</label><input type="range" id="n_holed" min="2.5" max="8" step="0.5" value="4.5"></div>
+        </div>
+      </div>
+
+      <p style="font-size:11px; color:var(--ink-dim); margin-top:6px; line-height:1.5;">
+        <b>3 Teile</b>, farblich unterschieden: <span style="color:#ff8c3c;">Name</span> (unterste Schicht), <span style="color:#7a8a9a;">Kontur-Stufe 1</span>, <span style="color:#4a5a52;">Kontur-Stufe 2</span> (oberste, breiteste Schicht, trägt die Öse). Jede Stufe wächst gleichmäßig um den Namen herum — bei genug Abstand verbinden sich benachbarte Buchstaben automatisch zu einem zusammenhängenden Stück, ohne dass einzelne Buchstaben lose herumhängen. Für den 3D-Druck empfiehlt sich ein Filamentwechsel zwischen den Schichten (z. B. Multi-Material-Drucker, oder von Hand pausieren).
+      </p>
+
+      <button type="button" class="og-export-btn" id="ogExport" style="margin-top:16px;">Als 3MF exportieren</button>
+      <p class="og-export-hint">3 Schichten als separate Objekte in einer 3MF-Datei — beim Slicen einzeln einfärbbar.</p>
+
+    </div>
+  </div>
+
+  <div class="fm-footer">
+    <p class="fm-footer-coop">
+      <img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo">
+      In Kooperation mit <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a>
+    </p>
+    <div class="fm-footer-legal">
+      <a href="/impressum.html">Impressum</a>
+      <span>·</span>
+      <a href="/datenschutz.html">Datenschutz</a>
+    </div>
+  </div>
+</div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Fredoka:wght@600&family=Poppins:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+<script>
+(function(){
+'use strict';
+// ===== Schnelle 2D-Euklidische Distanztransformation (Felzenszwalb/Huttenlocher) ====
+// Validiert: Wachstums-/Verschmelzungsverhalten stimmt exakt mit der
+// erwarteten Geometrie überein (Testfall: 5mm Lücke schließt sich bei
+// >=2.5mm Wachstum pro Seite).
+function edt1d(f, n){
+  const d = new Float64Array(n);
+  const v = new Int32Array(n);
+  const z = new Float64Array(n+1);
+  let k = 0;
+  v[0] = 0; z[0] = -Infinity; z[1] = Infinity;
+  for (let q=1; q<n; q++){
+    let s;
+    while (true){
+      s = ((f[q]+q*q) - (f[v[k]]+v[k]*v[k])) / (2*q - 2*v[k]);
+      if (s <= z[k]) k--; else break;
+    }
+    k++;
+    v[k]=q; z[k]=s; z[k+1]=Infinity;
+  }
+  k=0;
+  for (let q=0;q<n;q++){
+    while (z[k+1]<q) k++;
+    d[q] = (q-v[k])*(q-v[k]) + f[v[k]];
+  }
+  return d;
+}
+function edt2d(mask, w, h){
+  const INF = 1e10;
+  const g = new Float64Array(w*h);
+  for (let i=0;i<w*h;i++) g[i] = mask[i] ? 0 : INF;
+  for (let x=0;x<w;x++){
+    const col = new Float64Array(h);
+    for (let y=0;y<h;y++) col[y] = g[y*w+x];
+    const d = edt1d(col, h);
+    for (let y=0;y<h;y++) g[y*w+x] = d[y];
+  }
+  for (let y=0;y<h;y++){
+    const row = new Float64Array(w);
+    for (let x=0;x<w;x++) row[x] = g[y*w+x];
+    const d = edt1d(row, w);
+    for (let x=0;x<w;x++) g[y*w+x] = d[x];
+  }
+  const dist = new Float64Array(w*h);
+  for (let i=0;i<w*h;i++) dist[i] = Math.sqrt(g[i]);
+  return dist;
+}
+
+function countConnectedComponents(mask, w, h){
+  const visited = new Uint8Array(w*h);
+  let count = 0;
+  for (let start=0; start<w*h; start++){
+    if (!mask[start] || visited[start]) continue;
+    count++;
+    const stack=[start]; visited[start]=1;
+    while (stack.length){
+      const i = stack.pop();
+      const x=i%w, y=Math.floor(i/w);
+      [[-1,0],[1,0],[0,-1],[0,1]].forEach(([dx,dy]) => {
+        const nx=x+dx, ny=y+dy;
+        if (nx<0||nx>=w||ny<0||ny>=h) return;
+        const ni = ny*w+nx;
+        if (mask[ni] && !visited[ni]){ visited[ni]=1; stack.push(ni); }
+      });
+    }
+  }
+  return count;
+}
+
+// Diagonal-Berührungen auffüllen (zwei Pixel, die sich nur an einer Ecke
+// berühren, keine echte Kanten-Nachbarschaft haben) — erzeugt sonst eine
+// mehrdeutige Topologie beim Vermaschen (an genau dieser Stelle würden
+// vier statt zwei Dreiecke an derselben Kante zusammentreffen). Macht die
+// Ecke stattdessen massiv, was für den Druck ohnehin robuster ist als eine
+// messerscharfe Diagonalverbindung.
+function fixDiagonalTouches(mask, w, h){
+  const fixed = mask.slice();
+  for (let y=0;y<h-1;y++){
+    for (let x=0;x<w-1;x++){
+      const a=mask[y*w+x], b=mask[y*w+x+1], c=mask[(y+1)*w+x], d=mask[(y+1)*w+x+1];
+      if (a && d && !b && !c){ fixed[y*w+x+1]=1; fixed[(y+1)*w+x]=1; }
+      else if (b && c && !a && !d){ fixed[y*w+x]=1; fixed[(y+1)*w+x+1]=1; }
+    }
+  }
+  return fixed;
+}
+
+// ===== Gestufte Voxel-Oberfläche (validiert: 0 fehlerhafte Kanten bei =====
+// ===== jeder Wachstumsstufe inkl. Verschmelzung) ==========================
+// EIN gemeinsames Eckpunkt-Gitter für Deckel/Boden — benachbarte Pixel
+// teilen echte Vertex-Indizes an ihrer gemeinsamen Kante, statt pro Pixel
+// neue (nur geometrisch zufällig deckungsgleiche) Punkte zu erzeugen.
+function buildStepMesh(mask, w, h, cellSize, zBottom, zTop, originX, originY){
+  originX = originX || 0; originY = originY || 0;
+  const positions = [];
+  const indices = [];
+  const gw = w+1, gh = h+1;
+
+  // EIN gemeinsames Eckpunkt-Gitter für Deckel/Boden -- benachbarte Pixel
+  // teilen echte Vertex-Indizes an ihrer gemeinsamen Kante. (Eine Version
+  // mit zusammengefassten Pixel-Läufen pro Zeile wurde ausprobiert, um die
+  // Dreieckszahl zu senken, brach aber die Wasserdichtigkeit bei
+  // unterschiedlichen Lauflängen benachbarter Zeilen -- klassisches
+  // "T-Verbindungs"-Problem. Wasserdichtigkeit hat Vorrang, die
+  // Dreieckszahl wird stattdessen über die Rasterauflösung gesteuert.)
+  const topIdx = new Int32Array(gw*gh);
+  const botIdx = new Int32Array(gw*gh);
+  for (let gy=0; gy<gh; gy++){
+    for (let gx=0; gx<gw; gx++){
+      const x = gx*cellSize + originX, y = gy*cellSize + originY;
+      topIdx[gy*gw+gx] = positions.length/3; positions.push(x, zTop, y);
+      botIdx[gy*gw+gx] = positions.length/3; positions.push(x, zBottom, y);
+    }
+  }
+
+  function isIn(x,y){ return x>=0&&x<w&&y>=0&&y<h&&mask[y*w+x]; }
+  function corner(gridIdx, gx, gy){ return gridIdx[gy*gw+gx]; }
+
+  for (let y=0;y<h;y++){
+    for (let x=0;x<w;x++){
+      if (!mask[y*w+x]) continue;
+      const t00=corner(topIdx,x,y), t10=corner(topIdx,x+1,y), t11=corner(topIdx,x+1,y+1), t01=corner(topIdx,x,y+1);
+      indices.push(t00,t10,t11, t00,t11,t01);
+      const b00=corner(botIdx,x,y), b10=corner(botIdx,x+1,y), b11=corner(botIdx,x+1,y+1), b01=corner(botIdx,x,y+1);
+      indices.push(b00,b11,b10, b00,b01,b11);
+
+      if (!isIn(x-1,y)) indices.push(b00,t00,t01, b00,t01,b01);
+      if (!isIn(x+1,y)) indices.push(b11,t11,t10, b11,t10,b10);
+      if (!isIn(x,y-1)) indices.push(b10,t10,t00, b10,t00,b00);
+      if (!isIn(x,y+1)) indices.push(b01,t01,t11, b01,t11,b11);
+    }
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geo.setIndex(indices);
+  geo.computeVertexNormals();
+  return geo;
+}
+
+// ===== Canvas-Textrasterung =================================================
+// Nutzt echtes Browser-Canvas-2D-Textrendering statt einer eigenen
+// Font-Ladelogik (typeface.json) — dadurch ist jede Web-/System-Schriftart
+// nutzbar, und es gibt keine der Fragilität, die die Leuchtschrift-
+// Schriftarten-Ladelogik früher hatte (eine Schriftart lud zwar, war aber
+// kein gültiges Format und lieferte für jeden Buchstaben ein leeres
+// Ergebnis, ohne Fehlermeldung).
+function rasterizeName(text, fontFamily, pxPerMm, targetHeightMm){
+  const measureCanvas = document.createElement('canvas');
+  const mctx = measureCanvas.getContext('2d');
+  const fontPx = 200; // grosse Referenzgroesse zum Vermessen
+  mctx.font = `700 ${fontPx}px ${fontFamily}`;
+  const metrics = mctx.measureText(text || ' ');
+  const ascent = metrics.actualBoundingBoxAscent || fontPx*0.75;
+  const descent = metrics.actualBoundingBoxDescent || fontPx*0.2;
+  const textW = Math.max(1, metrics.width);
+  const textH = Math.max(1, ascent+descent);
+
+  const scale = (targetHeightMm*pxPerMm) / textH;
+  const canvasW = Math.ceil(textW*scale) + 20;
+  const canvasH = Math.ceil(textH*scale) + 20;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = canvasW; canvas.height = canvasH;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#000';
+  ctx.font = `700 ${fontPx*scale}px ${fontFamily}`;
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText(text || ' ', 10, 10 + ascent*scale);
+
+  const imgData = ctx.getImageData(0, 0, canvasW, canvasH);
+  const mask = new Uint8Array(canvasW*canvasH);
+  for (let i=0; i<canvasW*canvasH; i++){
+    mask[i] = imgData.data[i*4+3] > 128 ? 1 : 0;
+  }
+
+  // Leerraum am Rand zuschneiden (Canvas hatte Sicherheitsrand)
+  let minX=canvasW, maxX=0, minY=canvasH, maxY=0, any=false;
+  for (let y=0;y<canvasH;y++) for (let x=0;x<canvasW;x++){
+    if (mask[y*canvasW+x]){ any=true; if(x<minX)minX=x; if(x>maxX)maxX=x; if(y<minY)minY=y; if(y>maxY)maxY=y; }
+  }
+  if (!any){ minX=0; maxX=1; minY=0; maxY=1; }
+  const cropW = maxX-minX+1, cropH = maxY-minY+1;
+  const cropped = new Uint8Array(cropW*cropH);
+  for (let y=0;y<cropH;y++) for (let x=0;x<cropW;x++){
+    cropped[y*cropW+x] = mask[(y+minY)*canvasW+(x+minX)];
+  }
+
+  return { mask: cropped, w: cropW, h: cropH, pxPerMm };
+}
+
+// ===== Schlüsselring-Öse ====================================================
+// Additive Lasche (Kreis) am linken Rand, mit einem kleineren "Loch"
+// (Wert 0) in der Mitte -- reine Raster-Operationen, robust und
+// widerspruchsfrei mit dem Rest der Pipeline.
+function addKeyringTab(mask, w, h, holeDiameterMm, pxPerMm, attachY){
+  const tabR = Math.round((holeDiameterMm/2 + 1.8) * pxPerMm);
+  const holeR = Math.round((holeDiameterMm/2) * pxPerMm);
+  const cx = 0, cy = Math.round(attachY);
+
+  const newW = w + tabR; // links erweitern
+  const shiftX = tabR;
+  const newMask = new Uint8Array(newW*h);
+  for (let y=0;y<h;y++) for (let x=0;x<w;x++){
+    newMask[y*newW + x+shiftX] = mask[y*w+x];
+  }
+  const tabCx = shiftX, tabCy = cy;
+  for (let y=0;y<h;y++){
+    for (let x=0;x<newW;x++){
+      const d = Math.hypot(x-tabCx, y-tabCy);
+      if (d <= tabR) newMask[y*newW+x] = 1;
+    }
+  }
+  for (let y=0;y<h;y++){
+    for (let x=0;x<newW;x++){
+      const d = Math.hypot(x-tabCx, y-tabCy);
+      if (d <= holeR) newMask[y*newW+x] = 0;
+    }
+  }
+  return { mask: newMask, w: newW, h, shiftX };
+}
+
+// ===== Hilfsfunktionen (Shape/Export, bewährtes Muster) ===================
+function shapeFromPoints(pts){
+  const shape = new THREE.Shape();
+  shape.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 1; i < pts.length; i++) shape.lineTo(pts[i][0], pts[i][1]);
+  shape.closePath();
+  return shape;
+}
+function circlePts(r, cx, cy, segs){
+  cx = cx||0; cy = cy||0;
+  const pts = [];
+  for (let i = 0; i < segs; i++){
+    const a = (i/segs)*2*Math.PI;
+    pts.push([cx+r*Math.cos(a), cy+r*Math.sin(a)]);
+  }
+  return pts;
+}
+
+// ===== Komplette Baugruppe ==================================================
+// Reihenfolge (unten -> oben): breiteste Kontur (Stufe 2) zuerst, dann
+// Stufe 1, dann der Name selbst zuoberst -- ergibt den "erhabenen Name mit
+// Farbrand darunter"-Look. Jede Stufe nutzt die VOLLE eigene Maske (keine
+// Ring-Subtraktion nötig) -- von oben gesehen zeigt sich automatisch nur
+// der jeweils oberste (schmalste) Bereich der jeweiligen Farbe, weil die
+// darunterliegenden, breiteren Schichten dort schlicht verdeckt werden.
+function buildLayeredNameTag(p){
+  // Rasterauflösung einstellbar (Regler "Detailgrad"): höher = schärfere
+  // Kanten, aber mehr Dreiecke/größere Datei. Kein fester Kompromiss mehr
+  // vorgegeben — bei einem lokalen Rechenverfahren wie diesem (Raster statt
+  // Vektorkontur) ist das ein echter Kompromiss, der je nach Name/Zweck
+  // unterschiedlich ausfallen kann.
+  const pxPerMm = p.detail || 3.5;
+  const base = rasterizeName(p.text, p.font, pxPerMm, p.height);
+
+  const attachY = base.h * 0.55;
+  let withTab = { mask: base.mask, w: base.w, h: base.h, shiftX: 0 };
+  if (p.holeOn){
+    withTab = addKeyringTab(base.mask, base.w, base.h, p.holeD, pxPerMm, attachY);
+  }
+
+  const dist = edt2d(withTab.mask, withTab.w, withTab.h);
+  const grow1px = Math.round(p.border1 * pxPerMm);
+  const grow2px = Math.round((p.border1+p.border2) * pxPerMm);
+
+  const maskName = fixDiagonalTouches(withTab.mask, withTab.w, withTab.h);
+  const maskB1raw = new Uint8Array(withTab.w*withTab.h);
+  const maskB2raw = new Uint8Array(withTab.w*withTab.h);
+  for (let i=0;i<withTab.w*withTab.h;i++){
+    maskB1raw[i] = dist[i] <= grow1px ? 1 : 0;
+    maskB2raw[i] = dist[i] <= grow2px ? 1 : 0;
+  }
+  const maskB1 = fixDiagonalTouches(maskB1raw, withTab.w, withTab.h);
+  const maskB2 = fixDiagonalTouches(maskB2raw, withTab.w, withTab.h);
+
+  const originX = -withTab.w/(2*pxPerMm);
+  const originY = -withTab.h/(2*pxPerMm);
+  const cell = 1/pxPerMm;
+
+  const groups = [];
+  let z = 0;
+  // Stufe 2 (breiteste, unterste Schicht)
+  if (p.border2 > 0.05){
+    const geo = buildStepMesh(maskB2, withTab.w, withTab.h, cell, z, z+p.thick3, originX, originY);
+    groups.push({ geo, color: p.color3, part:'Kontur-Stufe 2', fuse:'stufe2' });
+    z += p.thick3;
+  }
+  // Stufe 1 (mittlere Schicht)
+  if (p.border1 > 0.05){
+    const geo = buildStepMesh(maskB1, withTab.w, withTab.h, cell, z, z+p.thick2, originX, originY);
+    groups.push({ geo, color: p.color2, part:'Kontur-Stufe 1', fuse:'stufe1' });
+    z += p.thick2;
+  }
+  // Name (schmalste, oberste Schicht)
+  {
+    const geo = buildStepMesh(maskName, withTab.w, withTab.h, cell, z, z+p.thick1, originX, originY);
+    groups.push({ geo, color: p.color1, part:'Name', fuse:'name' });
+    z += p.thick1;
+  }
+
+  const componentsAtName = countConnectedComponents(maskName, withTab.w, withTab.h);
+  const componentsAtOuter = countConnectedComponents(maskB2.some(v=>v) ? maskB2 : maskName, withTab.w, withTab.h);
+
+  return {
+    groups,
+    meta: {
+      totalWidth: withTab.w/pxPerMm, totalHeight: withTab.h/pxPerMm, totalThick: z,
+      lettersConnectedAtBase: componentsAtName <= 1,
+      lettersConnectedAtOuter: countConnectedComponents(maskB2, withTab.w, withTab.h) <= 1
+    }
+  };
+}
+
+// ===== Szene, Kamera, Steuerung (bewährtes Muster) =========================
+let scene, camera, renderer, controls, modelGroup;
+function initScene(){
+  const container = document.getElementById('ogViewer');
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(45, container.clientWidth/container.clientHeight, 0.1, 5000);
+  renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  container.appendChild(renderer.domElement);
+
+  controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+
+  const grid = new THREE.GridHelper(200, 20, 0x35473f, 0x233129);
+  scene.add(grid);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+  const dir = new THREE.DirectionalLight(0xffffff, 0.7);
+  dir.position.set(1, 1.6, 1);
+  scene.add(dir);
+  const dir2 = new THREE.DirectionalLight(0xffffff, 0.35);
+  dir2.position.set(-1, 0.6, -1);
+  scene.add(dir2);
+
+  modelGroup = new THREE.Group();
+  scene.add(modelGroup);
+
+  window.addEventListener('resize', () => {
+    camera.aspect = container.clientWidth/container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  });
+  animate();
+}
+function animate(){
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+let cameraNeedsReset = true;
+function finishRebuild(){
+  const box = new THREE.Box3().setFromObject(modelGroup);
+  const size = new THREE.Vector3(); box.getSize(size);
+  const center = new THREE.Vector3(); box.getCenter(center);
+  const maxDim = Math.max(size.x, size.y, size.z, 20);
+
+  if (cameraNeedsReset){
+    controls.target.set(center.x, center.y, center.z);
+    camera.position.set(center.x, center.y + maxDim*0.6, center.z + maxDim*1.5);
+    cameraNeedsReset = false;
+  }
+  camera.near = maxDim/100; camera.far = maxDim*40;
+  camera.updateProjectionMatrix();
+
+  document.getElementById('ogDims').textContent =
+    `B ${size.x.toFixed(0)} × T ${size.z.toFixed(0)} × H ${size.y.toFixed(0)} mm`;
+}
+
+// ===== 3MF-Export (bewährtes Muster) =======================================
+function meshListToXmlObject(meshList, objectId){
+  let vertsXml = '', trisXml = '', vertexOffset = 0;
+  meshList.forEach(mesh => {
+    const geo = mesh.geometry;
+    const posAttr = geo.attributes.position;
+    for (let i = 0; i < posAttr.count; i++){
+      vertsXml += `<vertex x="${posAttr.getX(i).toFixed(4)}" y="${posAttr.getY(i).toFixed(4)}" z="${posAttr.getZ(i).toFixed(4)}"/>`;
+    }
+    const idx = geo.index;
+    for (let i = 0; i < idx.count; i += 3){
+      trisXml += `<triangle v1="${idx.getX(i)+vertexOffset}" v2="${idx.getX(i+1)+vertexOffset}" v3="${idx.getX(i+2)+vertexOffset}"/>`;
+    }
+    vertexOffset += posAttr.count;
+  });
+  return `<object id="${objectId}" type="model"><mesh><vertices>${vertsXml}</vertices><triangles>${trisXml}</triangles></mesh></object>`;
+}
+function groupMeshesByFuse(meshes){
+  const groups = [], map = new Map();
+  meshes.forEach(mesh => {
+    const key = mesh.userData && mesh.userData.fuseGroup;
+    if (key){
+      if (!map.has(key)){ const arr = []; map.set(key, arr); groups.push(arr); }
+      map.get(key).push(mesh);
+    } else { groups.push([mesh]); }
+  });
+  return groups;
+}
+async function exportMultiPart3MF(meshes, filename){
+  if (typeof JSZip === 'undefined'){ alert('3MF-Export-Modul konnte nicht geladen werden (Internetverbindung prüfen).'); return; }
+  if (!meshes.length){ alert('Nichts zu exportieren.'); return; }
+  const fuseGroups = groupMeshesByFuse(meshes);
+  let objectsXml = '', buildXml = '';
+  fuseGroups.forEach((meshList, i) => {
+    const id = i+1;
+    objectsXml += meshListToXmlObject(meshList, id);
+    buildXml += `<item objectid="${id}"/>`;
+  });
+  const modelXml = `<?xml version="1.0" encoding="UTF-8"?>\n<model unit="millimeter" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02"><resources>${objectsXml}</resources><build>${buildXml}</build></model>`;
+  const contentTypes = `<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>`;
+  const rels = `<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>`;
+  const zip = new JSZip();
+  zip.file('[Content_Types].xml', contentTypes);
+  zip.file('_rels/.rels', rels);
+  zip.file('3D/3dmodel.model', modelXml);
+  const blob = await zip.generateAsync({ type:'blob' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ===== State, Rebuild, UI ===================================================
+const state = {
+  text: 'Aya', font: "'Baloo 2', cursive", height: 30, detail: 3.5,
+  thick1: 3, border1: 1.6, thick2: 1.6, border2: 1.6, thick3: 1.6,
+  color1: '#ff8c3c', color2: '#ffffff', color3: '#14201c',
+  holeOn: true, holeD: 4.5
+};
+
+let rebuildTimer = null;
+function rebuild(){
+  clearTimeout(rebuildTimer);
+  rebuildTimer = setTimeout(() => {
+    const assembly = buildLayeredNameTag(state);
+    while (modelGroup.children.length) modelGroup.remove(modelGroup.children[0]);
+    assembly.groups.forEach(item => {
+      const mat = new THREE.MeshStandardMaterial({ color: item.color, roughness:0.5, metalness:0.05, side: THREE.DoubleSide });
+      const mesh = new THREE.Mesh(item.geo, mat);
+      mesh.userData.partLabel = item.part;
+      mesh.userData.fuseGroup = item.fuse;
+      modelGroup.add(mesh);
+    });
+    finishRebuild();
+
+    const note = document.getElementById('n_mergeNote');
+    if (!assembly.meta.lettersConnectedAtOuter){
+      note.textContent = 'Hinweis: Bei diesem Namen/dieser Schriftart bleiben einzelne Buchstaben auch bei voller Kontur-Breite getrennt — für mehr Stabilität Kontur-Stufen erhöhen.';
+      note.style.color = 'var(--accent)';
+    } else if (!assembly.meta.lettersConnectedAtBase){
+      note.textContent = 'Einzelne Buchstaben sind erst durch die Kontur-Stufen verbunden (normal bei den meisten Schriftarten/Namen).';
+      note.style.color = 'var(--ink-dim)';
+    } else {
+      note.textContent = 'Alle Buchstaben sind bereits im Namen selbst zusammenhängend.';
+      note.style.color = 'var(--ink-dim)';
+    }
+  }, 150);
+}
+
+function setupUI(){
+  function setV(id, val, dec){ document.getElementById('v_'+id).textContent = dec!==undefined ? val.toFixed(dec) : Math.round(val); }
+
+  document.getElementById('n_text').addEventListener('input', e => { state.text = e.target.value; rebuild(); });
+  document.getElementById('n_font').addEventListener('change', e => { state.font = e.target.value; rebuild(); });
+  document.getElementById('n_height').addEventListener('input', e => { state.height = parseFloat(e.target.value); setV('n_height', state.height); rebuild(); });
+  document.getElementById('n_detail').addEventListener('input', e => { state.detail = parseFloat(e.target.value); setV('n_detail', state.detail, 1); rebuild(); });
+  document.getElementById('n_thick1').addEventListener('input', e => { state.thick1 = parseFloat(e.target.value); setV('n_thick1', state.thick1, 1); rebuild(); });
+  document.getElementById('n_border1').addEventListener('input', e => { state.border1 = parseFloat(e.target.value); setV('n_border1', state.border1, 1); rebuild(); });
+  document.getElementById('n_thick2').addEventListener('input', e => { state.thick2 = parseFloat(e.target.value); setV('n_thick2', state.thick2, 1); rebuild(); });
+  document.getElementById('n_border2').addEventListener('input', e => { state.border2 = parseFloat(e.target.value); setV('n_border2', state.border2, 1); rebuild(); });
+  document.getElementById('n_thick3').addEventListener('input', e => { state.thick3 = parseFloat(e.target.value); setV('n_thick3', state.thick3, 1); rebuild(); });
+  document.getElementById('n_color1').addEventListener('input', e => { state.color1 = e.target.value; rebuild(); });
+  document.getElementById('n_color2').addEventListener('input', e => { state.color2 = e.target.value; rebuild(); });
+  document.getElementById('n_color3').addEventListener('input', e => { state.color3 = e.target.value; rebuild(); });
+  document.getElementById('n_holeon').addEventListener('change', e => {
+    state.holeOn = e.target.checked;
+    document.getElementById('n_holeRow').style.display = state.holeOn ? 'block' : 'none';
+    rebuild();
+  });
+  document.getElementById('n_holed').addEventListener('input', e => { state.holeD = parseFloat(e.target.value); setV('n_holed', state.holeD, 1); rebuild(); });
+
+  document.getElementById('ogExport').addEventListener('click', () => {
+    exportMultiPart3MF(modelGroup.children, (state.text||'name').replace(/[^a-z0-9]/gi,'_') + '_anhaenger.3mf');
+  });
+}
+
+// Web-Fonts vor dem ersten Render laden (verhindert, dass die erste
+// Rasterung noch die Browser-Standardschrift nutzt, bevor die echte
+// Schriftart geladen ist)
+async function waitForFonts(){
+  if (document.fonts && document.fonts.ready){
+    try { await document.fonts.ready; } catch(e){}
+  }
+}
+
+(async function(){
+  await waitForFonts();
+  initScene();
+  setupUI();
+  rebuild();
+})();
+
+})();
+</script>
+</body>
+</html>

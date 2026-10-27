@@ -264,6 +264,19 @@
   .lx-controlbar{ top:78px !important; }
   @media (max-width:560px){ .bt-kpis{ grid-template-columns:1fr; } }
   .lx-controlbar{ background:#1a2a24 !important; border:1px solid var(--line); border-radius:16px; padding:10px 14px !important; }
+  .bt-switch-gen{ margin-top:0; }
+  .bt-group-label{ font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-2); padding:0 6px 0 2px; }
+  .bt-chip small{ font-size:9.5px; opacity:.7; margin-left:3px; letter-spacing:.05em; }
+  @media (max-width:640px){
+    .bt-switch{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; margin:12px -16px 6px; padding:0 16px; }
+    .bt-switch::-webkit-scrollbar{ display:none; }
+    .bt-chip, .bt-group-label, .bt-ext-group{ flex:none; white-space:nowrap; }
+    .bt-switch-gen{ margin-top:0; }
+    .bt-ext-group{ margin-left:0; }
+    .bt-gen .bt-kpis{ grid-template-columns:repeat(3,1fr); gap:8px; }
+    .bt-gen .bt-kpi{ padding:12px 10px; border-radius:14px; }
+    .bt-gen .bt-kpi span{ font-size:11px; }
+  }
 
   .fm-partner,
   .lx-calc,
@@ -288,7 +301,8 @@
       <span class="fm-lang-current">EN</span>
     </div>
   </nav>
-  <div class="bt-switch"><a class="bt-chip bt-chip-flag" href="/en/">Filament Finder</a><a class="bt-chip" href="/en/3d-print-cost-calculator.html">Cost Calculator</a><a class="bt-chip" href="/en/filament-database.html">Filament Database</a><span class="bt-chip bt-chip-active" aria-current="page">Lexicon</span>
+  <div class="bt-switch"><a class="bt-chip bt-chip-flag" href="/en/">Filament Finder</a><a class="bt-chip" href="/en/3d-print-cost-calculator.html">Cost Calculator</a><a class="bt-chip" href="/en/filament-database.html">Filament Database</a><span class="bt-chip bt-chip-active" aria-current="page">Lexicon</span></div>
+  <div class="bt-switch bt-switch-gen"><span class="bt-group-label">Generators</span><a class="bt-chip" href="/3d-druck-objektgenerator.html" hreflang="de">Object Generator <small>DE</small></a><a class="bt-chip" href="/3d-druck-planetengetriebe-generator.html" hreflang="de">Planetary Gearbox <small>DE</small></a><a class="bt-chip" href="/3d-druck-namens-anhaenger.html" hreflang="de">Layered Name Tag <small>DE</small></a><a class="bt-chip" href="/3d-druck-namensschild-anhaenger.html" hreflang="de">Name Plate Tag <small>DE</small></a>
     <span class="bt-ext-group"><span class="bt-ext-label">External · not ours</span>
       <a class="bt-chip bt-chip-ext" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI ↗</a>
       <a class="bt-chip bt-chip-ext" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs ↗</a>

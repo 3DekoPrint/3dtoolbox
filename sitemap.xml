@@ -75,6 +75,30 @@
   </url>
 
   <url>
+    <loc>https://3dtoolbox.info/3d-druck-objektgenerator.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/3d-druck-planetengetriebe-generator.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/3d-druck-namens-anhaenger.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/3d-druck-namensschild-anhaenger.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://3dtoolbox.info/impressum.html</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/impressum.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/impressum.html"/>
