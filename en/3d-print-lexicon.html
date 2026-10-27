@@ -8,20 +8,6 @@
 <link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-lexikon.html">
 <link rel="alternate" hreflang="en" href="https://3dtoolbox.info/3d-print-lexicon.html">
 <link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-lexikon.html">
-
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="3DToolBox">
-<meta property="og:locale" content="en_US">
-<meta property="og:title" content="3DToolBox – 3D Printing Lexicon">
-<meta property="og:description" content="The complete 3D printing lexicon: every print problem with cause, fix and prevention, slicer tips for PrusaSlicer, Cura, Bambu Studio, OrcaSlicer & SuperSlicer, a material guide and a glossary.">
-<meta property="og:image" content="https://3dtoolbox.info/assets/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://3dtoolbox.info/en/3d-print-lexicon.html">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="3DToolBox – 3D Printing Lexicon">
-<meta name="twitter:description" content="The complete 3D printing lexicon: every print problem with cause, fix and prevention, slicer tips for PrusaSlicer, Cura, Bambu Studio, OrcaSlicer & SuperSlicer, a material guide and a glossary.">
-<meta name="twitter:image" content="https://3dtoolbox.info/assets/og-image.png">
 <meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -125,6 +111,38 @@
   .lx-related-chip{ background:var(--panel-2); border:1px solid var(--line); color:var(--ink); text-decoration:none; font-size:12px; padding:5px 11px; border-radius:16px; transition:border-color .15s ease, color .15s ease; }
   .lx-related-chip:hover{ border-color:var(--accent); color:var(--accent); }
 
+  /* ---------- Practical Guides ---------- */
+  .lx-guide-intro{ font-size:12.5px; color:var(--ink-dim); flex-basis:100%; margin-top:2px; line-height:1.4; }
+  .lx-callout{ background:var(--panel-2); border-left:3px solid var(--accent-2); border-radius:8px; padding:12px 16px; margin-top:14px; font-size:13px; line-height:1.55; color:var(--ink); }
+  .lx-callout strong{ color:var(--accent); }
+  .lx-mini-table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+  .lx-mini-table th{ text-align:left; background:var(--panel-2); color:var(--accent-2); font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:8px 10px; }
+  .lx-mini-table td{ padding:8px 10px; border-top:1px solid var(--line); color:var(--ink); vertical-align:top; }
+  .lx-mini-table tr:hover td{ background:var(--panel); }
+  .lx-rating{ font-size:12px; white-space:nowrap; }
+  .lx-rating .fill{ color:var(--accent); }
+  .lx-rating .empty{ color:var(--line); }
+  .lx-guide-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px; }
+  @media (max-width:560px){ .lx-guide-grid{ grid-template-columns:1fr; } }
+  .lx-guide-cell{ background:var(--panel-2); border:1px solid var(--line); border-radius:8px; padding:10px 12px; }
+  .lx-guide-cell-title{ font-size:13px; font-weight:700; color:var(--accent); margin:0 0 4px; }
+  .lx-guide-cell ul{ margin:0; padding-left:16px; font-size:12.5px; line-height:1.5; color:var(--ink-dim); }
+
+  /* ---------- Flow calculator ---------- */
+  .lx-calc{ margin-top:14px; background:var(--panel-2); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+  .lx-calc-title{ font-family:"JetBrains Mono","Courier New",monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin:0 0 10px; }
+  .lx-calc-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+  @media (max-width:560px){ .lx-calc-grid{ grid-template-columns:1fr; } }
+  .lx-calc-field label{ font-size:11px; color:var(--ink-dim); display:block; margin-bottom:4px; font-family:"JetBrains Mono","Courier New",monospace; }
+  .lx-calc-field input{ width:100%; background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:8px 10px; color:var(--ink); font-size:13.5px; font-family:"Iowan Old Style","Georgia",serif; box-sizing:border-box; }
+  .lx-calc-field input:focus{ outline:1.5px solid var(--accent); }
+  .lx-calc-result{ margin-top:12px; padding:12px 14px; background:var(--panel); border-radius:8px; border-left:3px solid var(--accent); font-size:13.5px; line-height:1.5; color:var(--ink); }
+  .lx-calc-result .lx-calc-val{ font-weight:700; color:var(--accent); font-size:17px; }
+  .lx-download-btn{ display:inline-flex; align-items:center; gap:8px; margin-top:12px; background:var(--accent); color:#1a1206; text-decoration:none; font-weight:700; font-size:13px; padding:10px 18px; border-radius:8px; font-family:"JetBrains Mono","Courier New",monospace; transition:opacity .15s ease; }
+  .lx-download-btn:hover{ opacity:.85; }
+  .lx-download-btn svg{ width:15px; height:15px; flex:none; }
+  .lx-download-note{ font-size:11.5px; color:var(--ink-dim); margin-top:6px; }
+
   /* ---------- Slicer tabs ---------- */
   .lx-slicer-tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
   .lx-slicer-tab{ display:flex; align-items:center; gap:8px; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px 16px; cursor:pointer; font-size:13.5px; font-weight:700; color:var(--ink-dim); transition:border-color .15s ease, color .15s ease; }
@@ -174,115 +192,6 @@
   @media (max-width:480px){
     .lx-search-wrap{ max-width:none; width:100%; margin-left:0; }
     .lx-controlbar{ flex-direction:column; align-items:stretch; }
-  }
-
-  /* ===== Redesign: mehr Luft, einheitliche Tool-Karten, externe Tools getrennt ===== */
-  .fm-root{ padding:40px 24px 56px; max-width:780px; }
-  .fm-brand{ margin-bottom:14px; }
-  .fm-tagline{ color:var(--ink-dim); font-size:14.5px; line-height:1.55; margin:0 0 28px; max-width:560px; }
-
-  .fm-tools-bar{ padding:20px 22px 22px; margin-bottom:34px; }
-  .fm-tools-title{ margin-bottom:14px; }
-  .fm-tools-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; }
-  .fm-tool-card{
-    display:flex; flex-direction:column; gap:5px; height:100%;
-    background:var(--panel-2); border:1px solid var(--line); border-radius:12px;
-    padding:14px 16px; text-decoration:none; color:var(--ink);
-    transition:border-color .15s ease, transform .15s ease, background .15s ease;
-  }
-  a.fm-tool-card:hover{ border-color:var(--accent); transform:translateY(-2px); }
-  .fm-tool-card-name{ font-family:"JetBrains Mono","Courier New",monospace; font-size:12.5px; font-weight:700; letter-spacing:.01em; }
-  .fm-tool-card-desc{ font-size:11.5px; color:var(--ink-dim); line-height:1.45; }
-  .fm-tool-card-active{ border-color:var(--accent); background:linear-gradient(180deg, rgba(255,140,60,.16) 0%, var(--panel-2) 100%); cursor:default; }
-  .fm-tool-card-active .fm-tool-card-name{ color:var(--accent); }
-  .fm-tool-card-flagship{ border-color:var(--accent-2); }
-  .fm-tool-card-flagship.fm-tool-card-active{ border-color:var(--accent); }
-  .fm-tool-card-badge{
-    display:inline-block; font-family:"JetBrains Mono","Courier New",monospace; font-size:9.5px;
-    letter-spacing:.06em; text-transform:uppercase; color:var(--accent-2); margin-bottom:1px;
-  }
-  .fm-tools-external{ margin-top:18px; padding-top:18px; border-top:1px dashed var(--line); }
-  .fm-tools-external-title{
-    font-family:"JetBrains Mono","Courier New",monospace; font-size:10px; letter-spacing:.1em;
-    text-transform:uppercase; color:var(--ink-dim); opacity:.75; margin:0 0 12px;
-  }
-  .fm-tools-grid-external .fm-tool-card{ background:transparent; border-style:dashed; opacity:.82; }
-  .fm-tools-grid-external .fm-tool-card:hover{ opacity:1; }
-
-  h1.fm-title{ margin-bottom:8px; }
-  .fm-sub{ margin-bottom:30px; }
-  .fm-flagship-badge{
-    display:inline-flex; align-items:center; gap:5px; font-family:"JetBrains Mono","Courier New",monospace;
-    font-size:11px; font-weight:700; letter-spacing:.04em; color:#1a1206; background:var(--accent-2);
-    padding:5px 10px; border-radius:20px; margin-bottom:12px;
-  }
-  h1.fm-title-flagship{ font-size:31px; }
-
-  .fm-settings-toggle{ margin-top:16px; }
-  .fm-settings-toggle summary{
-    cursor:pointer; list-style:none; font-family:"JetBrains Mono","Courier New",monospace; font-size:12px;
-    font-weight:600; letter-spacing:.04em; color:var(--ink-dim); padding:12px 16px; background:var(--panel);
-    border:1px solid var(--line); border-radius:10px; display:flex; align-items:center; justify-content:space-between;
-    transition:border-color .15s ease, color .15s ease;
-  }
-  .fm-settings-toggle summary::-webkit-details-marker{ display:none; }
-  .fm-settings-toggle summary:hover{ border-color:var(--accent); color:var(--ink); }
-  .fm-settings-toggle summary::after{ content:"▾"; transition:transform .15s ease; }
-  .fm-settings-toggle[open] summary::after{ transform:rotate(180deg); }
-  .fm-settings-toggle[open] summary{ border-bottom-left-radius:0; border-bottom-right-radius:0; border-bottom:none; }
-  .fm-settings-body{ border:1px solid var(--line); border-top:none; border-radius:0 0 10px 10px; padding:16px; background:var(--panel); }
-  .fm-settings-body .fm-linkbox{ margin-top:0; }
-  .fm-settings-body .fm-tolerance-row{ margin-top:16px; }
-
-  .kr-section{ margin-bottom:22px; padding:22px 20px 12px; }
-  .kr-section-head{ margin-bottom:20px; }
-  .lx-section{ margin-bottom:40px; }
-  .fd-color-grid{ gap:14px; }
-
-  @media (max-width:480px){
-    .fm-tools-grid, .fm-tools-grid-external{ grid-template-columns:repeat(auto-fit, minmax(130px,1fr)); }
-  }
-
-  /* ===== Redesign V2: Hover/Tap-Tooltip statt Dauertext, 5. Tool, DB-Vorschau ===== */
-  .fm-tool{ position:relative; display:block; }
-  .fm-tool-card{ padding:16px 34px 16px 16px; }
-  .fm-tool-info{
-    position:absolute; top:12px; right:12px; z-index:5;
-    width:19px; height:19px; border-radius:50%;
-    border:1px solid var(--line); background:var(--panel); color:var(--ink-dim);
-    font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; font-weight:700;
-    line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
-    transition:border-color .15s ease, color .15s ease;
-  }
-  .fm-tool-info:hover{ border-color:var(--accent); color:var(--accent); }
-  .fm-tool-tip{
-    display:none; position:absolute; top:calc(100% + 6px); left:0; right:0;
-    background:var(--panel-2); border:1px solid var(--line); border-radius:8px;
-    padding:10px 12px; font-size:12px; line-height:1.45; color:var(--ink);
-    z-index:20; box-shadow:0 6px 18px rgba(0,0,0,.35);
-  }
-  @media (hover:hover){ .fm-tool:hover .fm-tool-tip{ display:block; } }
-  .fm-tool.fm-tool-tip-open .fm-tool-tip{ display:block; }
-  .fm-tools-grid{ grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); }
-  .fm-tools-grid-external{ grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); }
-  .fm-tools-grid-external .fm-tool-card{ padding:12px 30px 12px 14px; }
-  .fm-tools-grid-external .fm-tool-info{ top:9px; right:9px; }
-
-  .fm-db-preview{ margin-top:26px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px 22px; }
-  .fm-db-preview-title{ font-size:15px; font-weight:600; margin:0 0 4px; }
-  .fm-db-preview-sub{ font-size:12.5px; color:var(--ink-dim); margin:0 0 16px; line-height:1.5; }
-  .fm-db-swatches{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
-  .fm-db-swatch{ width:26px; height:26px; border-radius:50%; border:1px solid rgba(255,255,255,.15); flex:none; cursor:default; }
-  .fm-db-preview-btn{
-    display:inline-block; background:transparent; border:1px solid var(--accent); color:var(--accent);
-    text-decoration:none; font-family:"JetBrains Mono","Courier New",monospace; font-size:12.5px; font-weight:600;
-    padding:9px 16px; border-radius:8px; transition:background .15s ease, color .15s ease;
-  }
-  .fm-db-preview-btn:hover{ background:var(--accent); color:#1a1206; }
-
-  .fm-tool-card-name{ overflow-wrap:break-word; word-break:break-word; }
-  @media (max-width:480px){
-    .fm-tools-grid{ grid-template-columns:1fr; }
   }
 
   /* ===== Bento-Stil (gemeinsam für alle Unterseiten) ===== */
@@ -354,9 +263,10 @@
     background:radial-gradient(520px 260px at 100% 100%,rgba(255,140,60,.14),transparent 65%), var(--panel); }
   .lx-controlbar{ top:78px !important; }
   @media (max-width:560px){ .bt-kpis{ grid-template-columns:1fr; } }
+  .lx-controlbar{ background:#1a2a24 !important; border:1px solid var(--line); border-radius:16px; padding:10px 14px !important; }
 
-  .fm-db-preview,
   .fm-partner,
+  .lx-calc,
   details.lx-card{ border-radius:18px; }
 </style>
 </head>
@@ -387,8 +297,8 @@
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Knowledge base</span>
   <h1 class="fm-title">3D Printing Lexicon</h1>
-  <p class="fm-sub">Over 25 print problems with cause, quick fix and prevention, insider tips for the five most popular slicers, a material guide and a searchable glossary — all in one place.</p>
-  <div class="bt-kpis"><div class="bt-kpi"><b>25+</b><span>print problems with fixes</span></div><div class="bt-kpi"><b>5</b><span>slicers with insider tips</span></div><div class="bt-kpi"><b>A–Z</b><span>searchable glossary</span></div></div>
+  <p class="fm-sub">Over 30 print problems with cause, quick fix and prevention, eight practical guides on layer height, nozzles, flow calibration, supports, strength and materials, insider tips for the five most popular slicers, a material guide and a searchable glossary — all in one place.</p>
+  <div class="bt-kpis"><div class="bt-kpi"><b>30+</b><span>print problems with fixes</span></div><div class="bt-kpi"><b>8</b><span>practical guides</span></div><div class="bt-kpi"><b>A–Z</b><span>searchable glossary</span></div></div>
   </header>
   <section class="bt-panel">
 
@@ -396,6 +306,7 @@
     <div class="lx-pills" id="lxCatPills">
       <button type="button" class="lx-pill lx-pill-active" data-cat="ALL">All</button>
       <button type="button" class="lx-pill" data-cat="probleme">Problems</button>
+      <button type="button" class="lx-pill" data-cat="guides">Practical Guides</button>
       <button type="button" class="lx-pill" data-cat="slicer">Slicer Tips</button>
       <button type="button" class="lx-pill" data-cat="material">Material Guide</button>
       <button type="button" class="lx-pill" data-cat="glossar">Glossary</button>
@@ -418,6 +329,16 @@
     </div>
     <div class="lx-cards" id="lxProblemCards"></div>
     <div class="lx-empty" id="lxProblemEmpty" style="display:none;">No problems found for this search term.</div>
+  </div>
+
+  <!-- ============ PRACTICAL GUIDES ============ -->
+  <div class="lx-section" id="sec-guides" data-section="guides">
+    <div class="lx-section-head">
+      <h2 class="lx-section-title" id="guides">🧭 Practical Guides</h2>
+      <span class="lx-section-count" id="lxGuideCount"></span>
+    </div>
+    <div class="lx-cards" id="lxGuideCards"></div>
+    <div class="lx-empty" id="lxGuideEmpty" style="display:none;">No guide found for this search term.</div>
   </div>
 
   <!-- ============ SLICER ============ -->
@@ -528,14 +449,14 @@
       ursachen:["Flow factor set too low","Partially or fully clogged nozzle","Wrong filament diameter set in the slicer","Print temperature too low"],
       loesung:"Run a flow calibration using a 100% wall-thickness cube test (measure the wall and adjust the extrusion multiplier).",
       praevention:"Recalibrate E-steps regularly, check the nozzle for wear, occasionally verify filament diameter with calipers.",
-      related:["clogging","overextrusion","nozzle-wear"]},
+      related:["clogging","overextrusion","nozzle-wear","flow-calibration"]},
     {id:"overextrusion", cat:"Extrusion & Flow", title:"Over-extrusion",
       tags:["over-extrusion","too much material","rough surface","blobs"],
       symptom:"Walls look too thick, surfaces are rough or bumpy, visible blobs at seam points.",
       ursachen:["Flow factor set too high","Worn, over-bored nozzle","Wrong (too small) filament diameter entered in the slicer"],
       loesung:"Run a flow calibration with a 100% wall-thickness cube test, reduce the extrusion multiplier in small steps (±2–3%).",
       praevention:"Replace the nozzle every few hundred print hours, especially with abrasive filaments (carbon, glass fiber, glitter).",
-      related:["underextrusion","blobs-zits","nozzle-wear"]},
+      related:["underextrusion","blobs-zits","nozzle-wear","flow-calibration"]},
     {id:"clogging", cat:"Extrusion & Flow", title:"Clogged nozzle",
       tags:["clog","clogging","no flow","blocked nozzle"],
       symptom:"The extruder clicks or skips steps, and little to no filament comes out of the nozzle.",
@@ -556,7 +477,7 @@
       ursachen:["Print temperature too low for adequate layer bonding","Cooling too aggressive or starts too early","Draft cools individual layers unevenly"],
       loesung:"Increase print temperature by 5–10 °C, repeat a test print with reduced cooling.",
       praevention:"Reduce part cooling for structurally important parts, use an enclosure, consider switching to ASA/PETG instead of PLA for higher strength.",
-      related:["ringing","z-seam"]},
+      related:["ringing","z-seam","print-orientation"]},
     {id:"blobs-zits", cat:"Surface & Aesthetics", title:"Blobs & zits (surface bumps)",
       tags:["blobs","zits","bumps","pimples"],
       symptom:"Small plastic blobs or \"pimples\" at specific spots on the outer wall, often at the same point on every layer.",
@@ -619,14 +540,14 @@
       ursachen:["Too little part cooling","Print temperature too high for the overhang angle","Overhang angle too steep for the material"],
       loesung:"Set part cooling fan to 100% for overhangs, lower print temperature slightly.",
       praevention:"Plan supports from roughly 45–50° overhang angle onward, orient the model to minimize critical overhangs.",
-      related:["bridging","support-scarring"]},
+      related:["bridging","support-scarring","support"]},
     {id:"bridging", cat:"Supports & Overhangs", title:"Bridging sags or breaks",
       tags:["bridging","bridge","spanning a gap"],
       symptom:"Material meant to span a gap between two support points sags in the middle or breaks.",
       ursachen:["Bridging cooling too low","Bridging speed too high or too low for the span","Span too long without an intermediate support"],
       loesung:"Set bridging-specific fan speed to 100%, slightly reduce bridging flow.",
       praevention:"Break up very long spans (>30–40 mm) with thin helper supports, calibrate bridging speed separately from normal printing.",
-      related:["overhang-sagging"]},
+      related:["overhang-sagging","support"]},
     {id:"support-scarring", cat:"Supports & Overhangs", title:"Supports hard to remove / leave scarring",
       tags:["support removal","scarring","support structure"],
       symptom:"Supports only come off with force and damage the surface, or leave rough contact points.",
@@ -668,7 +589,325 @@
       ursachen:["Horizontal expansion from the width of the molten plastic (holes shrink slightly, outer contours grow slightly)","Elephant foot at the contact surface","Inaccurate E-steps/flow calibration"],
       loesung:"Use \"horizontal expansion\" / \"XY compensation\" in the slicer: enlarge holes slightly (e.g. +0.1 to +0.2 mm), shrink outer contours slightly.",
       praevention:"For functional fits, always run a small test print with the exact target tolerances, calibrate flow and E-steps carefully.",
-      related:["elephant-foot","overextrusion"]}
+      related:["elephant-foot","overextrusion","shrinkage","flow-calibration"]}
+  ];
+
+  // ============================================================
+  // DATA — PRACTICAL GUIDES
+  // ============================================================
+  const GUIDES = [
+    {id:"layer-height-guide", tag:"Slicer & Quality", title:"Choosing the right layer height (0.08–0.32 mm)",
+      intro:"The one setting that controls both surface quality AND print time — and when each step is worth it.",
+      related:["nozzle-guide","walls-vs-infill"],
+      body:`
+        <div class="lx-block">
+          <p class="lx-block-label">The principle</p>
+          <ul>
+            <li><strong>Finer = smoother surface:</strong> Thin layers make curves and slopes look visibly smoother — on vertical walls you barely notice a difference.</li>
+            <li><strong>Thicker = faster:</strong> 0.28 mm instead of 0.20 mm saves roughly a third of print time — often irrelevant for functional parts.</li>
+            <li><strong>The nozzle sets the limit:</strong> Rule of thumb — layer height = 25–80% of the nozzle diameter. With a 0.4 mm nozzle, that's roughly 0.10–0.32 mm.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">The 5 steps at a glance</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Height</th><th>Use case</th><th>Rel. print time</th></tr></thead>
+            <tbody>
+              <tr><td>0.08 mm</td><td>Miniatures, jewelry, finest detail</td><td>~250%</td></tr>
+              <tr><td>0.12 mm</td><td>Figures, decor, visible surfaces</td><td>~170%</td></tr>
+              <tr><td>0.20 mm</td><td>All-rounder — 90% of prints (reference)</td><td>100%</td></tr>
+              <tr><td>0.28 mm</td><td>Functional parts, prototypes, large models</td><td>~70%</td></tr>
+              <tr><td>0.32 mm</td><td>Rough parts, first drafts (upper limit for a 0.4 mm nozzle)</td><td>~60%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          <strong>3 pro tricks:</strong> Use adaptive layers in the slicer (fine on curves, coarse on flat sections). Always print a thicker first layer (0.2–0.25 mm) — it forgives bed unevenness and sticks better. For strength, go thicker: fewer layers means fewer bond lines, so 0.24–0.28 mm works well for functional parts.
+        </div>`},
+    {id:"nozzle-guide", tag:"Hardware", title:"Choosing the right nozzle (0.2–0.8 mm)",
+      intro:"Line width sets the detail limit, throughput sets the speed, bead width sets the strength.",
+      related:["layer-height-guide","walls-vs-infill"],
+      body:`
+        <div class="lx-block">
+          <p class="lx-block-label">What the nozzle changes</p>
+          <ul>
+            <li><strong>Line width = detail limit:</strong> The nozzle determines how fine text, edges and thin walls can get.</li>
+            <li><strong>Throughput = speed:</strong> A 0.8 mm nozzle pushes far more material per second — large parts finish in hours instead of days.</li>
+            <li><strong>Wider beads = stronger parts:</strong> Thicker lines fuse better, so functional parts from a 0.6 mm nozzle hold up noticeably more.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Which nozzle for which job</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Nozzle</th><th>Type</th><th>Pro</th><th>Con</th></tr></thead>
+            <tbody>
+              <tr><td>0.2 mm</td><td>Detail nozzle</td><td>Finest detail, miniatures, jewelry</td><td>Slow, clog-prone — CF filaments off-limits</td></tr>
+              <tr><td>0.4 mm</td><td>The standard ★</td><td>Best quality/speed ratio, huge profile selection</td><td>Neither the fastest nor the finest</td></tr>
+              <tr><td>0.6 mm</td><td>Functional nozzle</td><td>Stronger parts, shorter print time, first choice for CF/TPU</td><td>Fine detail is lost</td></tr>
+              <tr><td>0.8 mm</td><td>Speed nozzle</td><td>Very fast, very stable prints, large parts</td><td>Visibly coarse lines, almost no detail</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          If you only own one nozzle: <strong>0.4 mm</strong> — everything else is a specialty tool for specific cases. Workshop secret: <strong>0.6 mm + 0.28 mm layers</strong> is nearly as fast as 0.8 mm but noticeably cleaner. Always choose layer height and nozzle together (the 25–80% rule).
+        </div>`},
+    {id:"support", tag:"Supports & Overhangs", title:"Using supports wisely — the 45° rule",
+      intro:"The single most useful number for judging support needs, plus settings for clean removal.",
+      related:["overhang-sagging","bridging","support-scarring","print-orientation"],
+      body:`
+        <div class="lx-block">
+          <p class="lx-block-label">The 45° rule</p>
+          <ul>
+            <li><strong>Up to 45° from vertical:</strong> no support needed — each layer still sits far enough on the one below, prints clean.</li>
+            <li><strong>Steeper than 45°:</strong> support is usually needed — the layer extends too far into thin air and sags.</li>
+            <li><strong>Rule of thumb:</strong> overhangs up to 45° and bridges up to roughly 5–10 mm span print fine unsupported. Anything beyond that → support or redesign.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">When support is actually needed</p>
+          <ul>
+            <li><strong>Steep overhangs:</strong> flatter than 45° from horizontal — e.g. far-projecting noses.</li>
+            <li><strong>Long bridges:</strong> beyond roughly 10 mm of free span, the strand sags.</li>
+            <li><strong>Floating islands:</strong> areas with no connection to the layer below always need support.</li>
+          </ul>
+          <p style="margin-top:8px;">No support needed for: holes (arches up to 90° self-support), chamfers, and shallow cones.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Settings for easy removal</p>
+          <table class="lx-mini-table">
+            <tbody>
+              <tr><td><strong>Z-gap</strong></td><td>0.2 mm (≈ 1 layer height) — releases cleanly</td></tr>
+              <tr><td><strong>Support type</strong></td><td>Tree/organic supports — less material, only touches where needed</td></tr>
+              <tr><td><strong>Support on build plate only</strong></td><td>On, when possible — avoids scarring on the part's surface</td></tr>
+              <tr><td><strong>Overhang threshold</strong></td><td>45–50° — support only kicks in past this angle, saving unnecessary material</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          <strong>The best support is the one you never needed:</strong> use 45° chamfers instead of sharp overhangs (bevel the edge and it prints self-supporting). Pull horizontal holes into a teardrop instead of a circle — it removes the bridge entirely. And often the overhang simply disappears by rotating the part on the bed. While modeling, keep asking: how will this part actually sit on the plate?
+        </div>`},
+    {id:"print-orientation", tag:"Strength", title:"Print orientation for maximum strength",
+      intro:"Why print orientation decides between solid and broken — and how to plan for it while modeling.",
+      related:["delamination","support","walls-vs-infill"],
+      body:`
+        <div class="lx-block">
+          <p class="lx-block-label">The principle</p>
+          <ul>
+            <li><strong>Along the layers: strong.</strong> In the print plane (X/Y), the material holds almost like solid stock.</li>
+            <li><strong>Across the layers: weak.</strong> In Z, only the bond between layers holds — this is where parts break first.</li>
+          </ul>
+          <p style="margin-top:8px;">Rule of thumb: an FDM part tears between layers like a book flipped open at the pages — never across the paper itself. So always put the main load into the print plane.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Orienting correctly — examples</p>
+          <ul>
+            <li><strong>Lay hooks and hangers flat:</strong> The pulling force needs to run along the layers, not pry them apart.</li>
+            <li><strong>Print pins and axles lying down:</strong> Printed upright, they snap at the weakest layer immediately.</li>
+            <li><strong>Tilt angles and brackets cleverly:</strong> Orient so the bending force falls into the print plane.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">The trade-off</p>
+          <p>The strongest orientation isn't always the prettiest — weigh it up: <strong>strength</strong> (priority 1 for functional parts, main load along the layers), <strong>surface finish</strong> (priority 2 for looks, put visible faces up or outward) and <strong>support effort</strong> (priority 3, orienting with minimal overhang saves cleanup and material).</p>
+        </div>
+        <div class="lx-callout">
+          A critical load you can't reorient away? Then thicken the walls and pick a tough material like <strong>PETG or PA</strong>. Or: split the part and glue it — separating an L-shaped part into two flat halves, each printed optimally, then joined. Two strongly printed halves beat one weakly printed whole.
+        </div>`},
+    {id:"walls-vs-infill", tag:"Strength", title:"Walls vs. infill — what actually makes a part strong",
+      intro:"The most common mistake in functional printing: adding more infill. The walls are what make a part stable.",
+      related:["print-orientation","top-layer-gaps","nozzle-guide"],
+      body:`
+        <div class="lx-block">
+          <p class="lx-block-label">Walls carry the load</p>
+          <ul>
+            <li><strong>More perimeters = more strength:</strong> Four walls at 20% infill are stronger than two walls at 50%.</li>
+            <li><strong>Infill only supports the top surface:</strong> Above roughly 40% it adds barely any strength, but costs time and material.</li>
+            <li><strong>Wall thickness = perimeters × line width:</strong> 3 walls × 0.4 mm = 1.2 mm of solid material on the outside.</li>
+          </ul>
+          <p style="margin-top:8px;">Rule of thumb: walls first, then infill. It saves time and filament — while increasing stability.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">How many walls?</p>
+          <table class="lx-mini-table">
+            <tbody>
+              <tr><td>Decor & looks</td><td>no load — saves time, looks are what matters</td><td>2 walls</td></tr>
+              <tr><td>Standard use</td><td>boxes, holders, everyday parts without real force</td><td>3 walls</td></tr>
+              <tr><td>Functional & loaded</td><td>clamps, hooks, tool holders</td><td>4 walls</td></tr>
+              <tr><td>Heavily loaded</td><td>carries real weight or leverage</td><td>5–6 walls</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Which infill pattern?</p>
+          <div class="lx-guide-grid">
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Gyroid</p><ul><li>Equally strong in every direction</li><li>Great all-rounder</li><li>Default choice</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Grid / Lines</p><ul><li>Fastest option</li><li>Fine for non-critical parts</li><li>Less load-bearing</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Cubic</p><ul><li>Strong across 3 axes</li><li>Good for mechanical parts</li><li>Slightly slower</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Concentric</p><ul><li>Follows the contour</li><li>Great for TPU/flexibles</li><li>Not for hard loads</li></ul></div>
+          </div>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">How much infill?</p>
+          <table class="lx-mini-table">
+            <tbody>
+              <tr><td>Decor / looks</td><td>5–10%</td></tr>
+              <tr><td>Standard use</td><td>15%</td></tr>
+              <tr><td>Functional</td><td>25–40%</td></tr>
+              <tr><td>Heavily loaded</td><td>40–60%</td></tr>
+              <tr><td>Nearly solid (rarely needed)</td><td>&gt; 60%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          When in doubt: <strong>gyroid at 15–25%.</strong> Covers nearly every functional print. Going above 50% infill is rarely worth it — add another wall instead, saving time and material while gaining more stability.
+        </div>`},
+    {id:"shrinkage", tag:"Material", title:"Compensating for material shrinkage",
+      intro:"Every filament shrinks as it cools — but by how much? The values per material and how to compensate.",
+      related:["dimensional-accuracy","elephant-foot","filament-selection-guide"],
+      body:`
+        <div class="lx-block">
+          <p class="lx-block-label">Why it shrinks</p>
+          <ul>
+            <li><strong>Hot in, tight when cold:</strong> Molten filament contracts as it cools — the higher the print temperature, the stronger the effect.</li>
+            <li><strong>The bigger the part, the more millimeters:</strong> Shrinkage is a percentage — at 20 mm you won't notice, at 200 mm you can suddenly be missing over a millimeter.</li>
+            <li><strong>Holes get hit twice:</strong> Material shrinks toward the center, so bores end up tighter than the rest of the part.</li>
+          </ul>
+          <p style="margin-top:8px;">Same material ≠ same shrinkage: brand, pigment and additives noticeably change the value. Treat the figures below as a starting point, then measure your own.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Typical shrinkage on cooling</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Material</th><th>Shrinkage</th></tr></thead>
+            <tbody>
+              <tr><td>PLA — the dimensionally stable one</td><td>0.2–0.5%</td></tr>
+              <tr><td>PETG — rarely an issue</td><td>0.2–0.8%</td></tr>
+              <tr><td>ASA — better than ABS</td><td>0.4–0.7%</td></tr>
+              <tr><td>PC — polycarbonate</td><td>0.5–0.8%</td></tr>
+              <tr><td>TPU — flex, depends on hardness</td><td>0.4–1.4%</td></tr>
+              <tr><td>ABS — the classic warper</td><td>0.7–1.6%</td></tr>
+              <tr><td>PA / nylon — pulls in moisture</td><td>0.7–2.0%</td></tr>
+              <tr><td>PP — the extreme case</td><td>1.0–3.0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">How to compensate</p>
+          <ul>
+            <li><strong>Print a test cube and measure:</strong> print a 100 mm test piece, measure it with calipers — actual ÷ target gives your real shrinkage rate.</li>
+            <li><strong>Set compensation in the slicer:</strong> Bambu Studio/Orca: Filament → Shrinkage. The slicer then scales the model automatically — saved per filament.</li>
+            <li><strong>Close the door for ABS, ASA & PA:</strong> an enclosed, warm chamber means even cooling, which means less shrinkage and warping.</li>
+            <li><strong>Compensate holes separately:</strong> XY hole compensation of roughly 0.05 mm for PLA, 0.1 mm for PETG/ABS, 0.15 mm for nylon.</li>
+          </ul>
+        </div>
+        <div class="lx-callout">
+          <strong>Pro tip:</strong> CF/GF variants (carbon/glass fiber) shrink noticeably less than the base material — ideal when dimensions really matter. From ABS upward: printing dimensionally accurate parts without shrinkage compensation is a gamble — PLA/PETG are forgiving, the rest aren't.
+        </div>`},
+    {id:"filament-selection-guide", tag:"Material", title:"Which filament for what? The 8 key materials",
+      intro:"Temperatures, properties and use cases for the eight most important filaments — at a glance.",
+      related:["shrinkage","print-orientation"],
+      body:`
+        <div class="lx-block">
+          <p class="lx-block-label">The everyday four</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Material</th><th>Nozzle / bed</th><th>Rating</th><th>Quick profile</th></tr></thead>
+            <tbody>
+              <tr><td><strong>PLA</strong><br>the beginner</td><td>190–220° / 0–60°</td><td class="lx-rating">Print <span class="fill">●●●●●</span><br>Strength <span class="fill">●●</span><span class="empty">●●●</span><br>Outdoor <span class="fill">●</span><span class="empty">●●●●</span></td><td>Barely warps, huge color range. Softens above ~55 °C — no good for a hot car.</td></tr>
+              <tr><td><strong>PETG</strong><br>the all-rounder</td><td>230–250° / 70–90°</td><td class="lx-rating">Print <span class="fill">●●●●</span><span class="empty">●</span><br>Strength <span class="fill">●●●●</span><span class="empty">●</span><br>Outdoor <span class="fill">●●●●</span><span class="empty">●</span></td><td>Tough, water- and chemical-resistant. First choice for functional parts around the house & garden.</td></tr>
+              <tr><td><strong>TPU</strong><br>the flexible one</td><td>210–240° / 40–60°</td><td class="lx-rating">Print <span class="fill">●●●</span><span class="empty">●●</span><br>Strength <span class="fill">●●</span><span class="empty">●●●</span><br>Outdoor <span class="fill">●●●●</span><span class="empty">●</span></td><td>Rubbery, absorbs impact, mind the Shore hardness. Print slowly — patience pays off.</td></tr>
+              <tr><td><strong>ABS</strong><br>the classic</td><td>230–260° / 90–110°</td><td class="lx-rating">Print <span class="fill">●●●</span><span class="empty">●●</span><br>Strength <span class="fill">●●●●</span><span class="empty">●</span><br>Outdoor <span class="fill">●●●</span><span class="empty">●●</span></td><td>Heat-resistant, sands well. Wants an enclosed, warm chamber — otherwise warping.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">The specialists</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Material</th><th>Nozzle / bed</th><th>Rating</th><th>Quick profile</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ASA</strong><br>the outdoor king</td><td>240–260° / 90–110°</td><td class="lx-rating">Print <span class="fill">●●●</span><span class="empty">●●</span><br>Strength <span class="fill">●●●●</span><span class="empty">●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>UV-stable, weatherproof, doesn't yellow. Anything living outdoors long-term gets printed in ASA.</td></tr>
+              <tr><td><strong>PA / Nylon</strong><br>the tough one</td><td>250–280° / 70–100°</td><td class="lx-rating">Print <span class="fill">●●●●</span><span class="empty">●</span><br>Strength <span class="fill">●●●●●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>Extremely tough and abrasion-resistant — gears, bearings, hinges. Absorbs water: dry before every print.</td></tr>
+              <tr><td><strong>CF blends</strong><br>PETG-CF · PA-CF</td><td>250–280° / 70–110°</td><td class="lx-rating">Print <span class="fill">●●●●</span><span class="empty">●</span><br>Strength <span class="fill">●●●●●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>Stiff, light, dimensionally accurate — barely warps. Carbon fiber eats brass nozzles: a hardened nozzle is mandatory.</td></tr>
+              <tr><td><strong>PC</strong><br>the industrial one</td><td>260–310° / 100–120°</td><td class="lx-rating">Print <span class="fill">●●●●●</span><br>Strength <span class="fill">●●●●●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>Impact-tough, dimensionally stable up to ~110 °C. Needs heat — an enclosure and a hot bed are mandatory.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">What to print in what</p>
+          <div class="lx-guide-grid">
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PLA</p><ul><li>Prototypes & decor</li><li>Indoor organizers</li><li>Models & gifts</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PETG</p><ul><li>Holders & clips</li><li>Storage containers, jars</li><li>House & garden parts</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">TPU</p><ul><li>Seals & feet</li><li>Cases & bumpers</li><li>Flexible hinges</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">ABS</p><ul><li>Enclosures & covers</li><li>Mechanical parts</li><li>Interior car parts</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">ASA</p><ul><li>Garden accessories</li><li>Outdoor mounts</li><li>Signs & covers</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PA / Nylon</p><ul><li>Gears & bearings</li><li>Heavily loaded holders</li><li>Wear parts</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">CF blends</p><ul><li>Drone & RC parts</li><li>Lightweight structural parts</li><li>Dimensionally critical fixtures</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PC</p><ul><li>Machine parts</li><li>Parts near heat sources</li><li>Protective covers</li></ul></div>
+          </div>
+        </div>
+        <div class="lx-callout">
+          <strong>Practical notes:</strong> Always dry PA and PC before printing — wet filament ruins both surface finish and strength. Print TPU slowly and, ideally, straight off the spool holder rather than forcing it through an AMS. CF filaments need a hardened nozzle — stay away from brass nozzles, the carbon fiber wears them out in no time.
+        </div>`},
+    {id:"flow-calibration", tag:"Calibration", title:"Flow calibration per filament (step by step)",
+      intro:"Print a 35 mm cube, measure it with calipers, calculate the exact flow value — worth doing once per spool.",
+      related:["underextrusion","overextrusion","dimensional-accuracy"],
+      body:`
+        <div class="lx-block">
+          <p class="lx-block-label">Why calibrate?</p>
+          <p>The flow value (extrusion multiplier) controls how much filament the printer actually pushes out per millimeter of movement. Manufacturer specs and filament diameter vary slightly between brand, color and even batch — at 100% flow this results in slightly too much or too little material. The result: prints that come out marginally over- or undersized. A one-time calibration per filament fixes this permanently.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Step 1 — Print a test cube</p>
+          <p>Print a cube with <strong>35 × 35 × 35 mm</strong> edges using your profile's <strong>default settings</strong> (leave flow/extrusion multiplier at 100%, normal infill like 15–20% is fine). Important: only test the flow setting — don't change other parameters (temperature, speed) in between.</p>
+          <a class="lx-download-btn" href="/assets/kalibrierwuerfel-35mm.stl" download>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download the 35×35×35 mm calibration cube (STL)
+          </a>
+          <p class="lx-download-note">Watertight cube, exactly 35.000 mm per edge — ready to slice.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Step 2 — Measure with calipers</p>
+          <p>Once cooled, measure all three axes (X, Y, Z) at two points each with digital calipers and average the results. Example: target 35.0 mm, measured average <strong>34.8 mm</strong> — the cube is too small, meaning too little material was extruded (under-extrusion).</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Step 3 — The formula</p>
+          <div class="lx-callout" style="margin-top:0;">
+            <strong>New flow (%) = Current flow (%) × (Target size ÷ Measured size)</strong>
+          </div>
+          <p style="margin-top:10px;">Worked through with the example above: 100% × (35.0 ÷ 34.8) = 100% × 1.00575 = <strong>100.6%</strong>. Flow needs to go from 100% to roughly 100.6% so the next print comes out at exactly 35.0 mm. If the cube prints too large instead (over-extrusion), the same formula automatically gives a value below 100% — it works in both directions.</p>
+        </div>
+        <div class="lx-calc">
+          <p class="lx-calc-title">🧮 Flow calculator — plug in your own numbers</p>
+          <div class="lx-calc-grid">
+            <div class="lx-calc-field">
+              <label for="lxFlowTarget">Target size (mm)</label>
+              <input type="number" id="lxFlowTarget" value="35" step="0.01">
+            </div>
+            <div class="lx-calc-field">
+              <label for="lxFlowMeasured">Measured (mm)</label>
+              <input type="number" id="lxFlowMeasured" value="34.8" step="0.01">
+            </div>
+            <div class="lx-calc-field">
+              <label for="lxFlowCurrent">Current flow (%)</label>
+              <input type="number" id="lxFlowCurrent" value="100" step="0.1">
+            </div>
+          </div>
+          <div class="lx-calc-result" id="lxFlowResult">New flow value: <span class="lx-calc-val">100.6 %</span></div>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Step 4 — Enter the new value in your slicer</p>
+          <ul>
+            <li><strong>PrusaSlicer / OrcaSlicer / SuperSlicer:</strong> Filament Settings → Advanced → "Extrusion multiplier"</li>
+            <li><strong>Cura:</strong> Print Settings → Material → "Flow" (in %)</li>
+            <li><strong>Bambu Studio:</strong> Filament Settings → "Flow Ratio", or run the built-in Flow Dynamics calibration</li>
+          </ul>
+          <p style="margin-top:8px;">Best saved directly in the filament profile rather than globally — that way it sticks permanently for this specific spool.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Step 5 — Reprint and verify</p>
+          <p>Print the same cube again with the new flow value and measure once more. It should now land very close to <strong>35.0 mm</strong> (typical deviation under 0.05 mm). If a small gap remains, simply apply the formula a second time — using the new flow value as "current flow" and the new measurement.</p>
+        </div>
+        <div class="lx-callout">
+          Don't mix these up: flow fixes <strong>under-/over-extrusion</strong> (too little or too much material). For holes that are only too tight or too loose while overall dimensions are otherwise correct, use "horizontal expansion" instead; for bulging first layers, use "elephant foot compensation" — keep these settings separate.
+        </div>`}
   ];
 
   // ============================================================
@@ -778,7 +1017,9 @@
     {t:"VFA (Vertical Fine Artifacts)", d:"Fine, usually high-frequency grooves on the outer wall, often caused by fan or belt vibration."},
     {t:"Shrinkage", d:"Material-related contraction during cooling that causes actual dimensions to deviate slightly from the model."},
     {t:"Hygroscopic", d:"A material property of absorbing moisture from the air — strongly affects PETG, nylon, TPU and PVA."},
-    {t:"Filament dryer / dry box", d:"A container with active heating or a desiccant used to store or dry filament moisture-free."}
+    {t:"Filament dryer / dry box", d:"A container with active heating or a desiccant used to store or dry filament moisture-free."},
+    {t:"Shore hardness", d:"A scale for the hardness of flexible materials like TPU — lower numbers (e.g. 85A) mean softer/rubbery, higher numbers mean firmer."},
+    {t:"Chamfer", d:"A beveled instead of sharp edge on a model — often turns a support-requiring overhang into a self-supporting, printable surface."}
   ];
 
   // ============================================================
@@ -799,6 +1040,7 @@
 
   const byId = {};
   PROBLEMS.forEach(p => byId[p.id] = p);
+  GUIDES.forEach(g => byId[g.id] = g);
 
   function renderProblems(list){
     problemCardsEl.innerHTML = '';
@@ -845,6 +1087,69 @@
         jumpTo(a.dataset.jump);
       });
     });
+  }
+
+  const guideCardsEl = document.getElementById('lxGuideCards');
+  const guideEmptyEl = document.getElementById('lxGuideEmpty');
+  const guideCountEl = document.getElementById('lxGuideCount');
+
+  function renderGuides(list){
+    guideCardsEl.innerHTML = '';
+    guideEmptyEl.style.display = list.length ? 'none' : 'block';
+    guideCountEl.textContent = list.length ? `${list.length} guides` : '';
+    list.forEach(g => {
+      const det = document.createElement('details');
+      det.className = 'lx-card';
+      det.id = g.id;
+
+      const relatedHtml = (g.related || []).filter(rid => byId[rid]).map(rid =>
+        `<a class="lx-related-chip" href="#${rid}" data-jump="${rid}">${byId[rid].title}</a>`
+      ).join('');
+
+      det.innerHTML = `
+        <summary class="lx-card-head">
+          <p class="lx-card-title">${g.title}</p>
+          <span class="lx-tag">${g.tag}</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="lx-guide-intro">${g.intro}</span>
+        </summary>
+        <div class="lx-card-body">
+          ${g.body}
+          ${relatedHtml ? `<div class="lx-related"><span class="lx-related-label">Related:</span>${relatedHtml}</div>` : ''}
+        </div>
+      `;
+      guideCardsEl.appendChild(det);
+    });
+
+    guideCardsEl.querySelectorAll('[data-jump]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        jumpTo(a.dataset.jump);
+      });
+    });
+
+    setupFlowCalc();
+  }
+
+  function setupFlowCalc(){
+    const t = document.getElementById('lxFlowTarget');
+    const m = document.getElementById('lxFlowMeasured');
+    const c = document.getElementById('lxFlowCurrent');
+    const r = document.getElementById('lxFlowResult');
+    if (!t || !m || !c || !r) return;
+    function calc(){
+      const target = parseFloat(t.value);
+      const measured = parseFloat(m.value);
+      const current = parseFloat(c.value);
+      if (!target || !measured || measured <= 0 || !current){
+        r.innerHTML = 'Please enter valid values.';
+        return;
+      }
+      const newFlow = current * (target / measured);
+      r.innerHTML = `New flow value: <span class="lx-calc-val">${newFlow.toFixed(2)} %</span>`;
+    }
+    [t, m, c].forEach(el => el.addEventListener('input', calc));
+    calc();
   }
 
   function renderGlossary(list){
@@ -911,7 +1216,7 @@
   const catPillsEl = document.getElementById('lxCatPills');
   const searchEl = document.getElementById('lxSearch');
 
-  const SECTION_IDS = { probleme:'sec-probleme', slicer:'sec-slicer', material:'sec-material', glossar:'sec-glossar' };
+  const SECTION_IDS = { probleme:'sec-probleme', guides:'sec-guides', slicer:'sec-slicer', material:'sec-material', glossar:'sec-glossar' };
 
   function applyFilter(){
     const q = searchEl.value.trim().toLowerCase();
@@ -928,6 +1233,13 @@
     });
     renderProblems(filteredProblems);
 
+    const filteredGuides = GUIDES.filter(g => {
+      if (!q) return true;
+      const hay = (g.title + ' ' + g.tag + ' ' + g.intro + ' ' + g.body).toLowerCase();
+      return hay.includes(q);
+    });
+    renderGuides(filteredGuides);
+
     const filteredGloss = GLOSSARY.filter(g => {
       if (!q) return true;
       return (g.t + ' ' + g.d).toLowerCase().includes(q);
@@ -935,7 +1247,7 @@
     renderGlossary(filteredGloss);
 
     if (q){
-      const total = filteredProblems.length + filteredGloss.length;
+      const total = filteredProblems.length + filteredGuides.length + filteredGloss.length;
       countEl.textContent = `${total} results for "${searchEl.value.trim()}"`;
     } else {
       countEl.textContent = '';
