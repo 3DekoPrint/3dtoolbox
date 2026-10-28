@@ -685,4 +685,22 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://3dtoolbox.info/bild-zu-3d.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/bild-zu-3d.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/image-to-3d.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/bild-zu-3d.html"/>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/image-to-3d.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/bild-zu-3d.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/image-to-3d.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/bild-zu-3d.html"/>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
