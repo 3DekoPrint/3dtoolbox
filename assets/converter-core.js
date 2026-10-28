@@ -268,6 +268,24 @@
     for (k = 0; k < m.v.length; k += 3) for (j = 0; j < 3; j++) { mn[j] = Math.min(mn[j], m.v[k + j]); mx[j] = Math.max(mx[j], m.v[k + j]); }
     return { tris: m.i.length / 3, verts: m.v.length / 3, size: [mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2]] };
   }
+  // Netzprüfung: offene Kanten (nur 1 Dreieck), mehrfach genutzte Kanten (>2), gleich gerichtete Kanten (Flächen verdreht), entartete Dreiecke
+  function check(m) {
+    var I = m.i, V = m.v, e = new Map(), k, j, open = 0, multi = 0, flipped = 0, degen = 0;
+    for (k = 0; k < I.length; k += 3) {
+      var a = I[k], b = I[k + 1], c = I[k + 2];
+      var ux = V[3 * b] - V[3 * a], uy = V[3 * b + 1] - V[3 * a + 1], uz = V[3 * b + 2] - V[3 * a + 2], wx = V[3 * c] - V[3 * a], wy = V[3 * c + 1] - V[3 * a + 1], wz = V[3 * c + 2] - V[3 * a + 2];
+      var cx = uy * wz - uz * wy, cy = uz * wx - ux * wz, cz = ux * wy - uy * wx;
+      if (cx * cx + cy * cy + cz * cz < 1e-18) degen++;
+      var ed = [[a, b], [b, c], [c, a]];
+      for (j = 0; j < 3; j++) {
+        var p = ed[j][0], q = ed[j][1], lo = p < q ? p : q, hi = p < q ? q : p, key = lo * 4294967296 + hi, r = e.get(key);
+        if (!r) { r = [0, 0]; e.set(key, r); }
+        r[p < q ? 0 : 1]++;
+      }
+    }
+    e.forEach(function (r) { var n = r[0] + r[1]; if (n === 1) open++; else if (n > 2) multi++; else if (r[0] === 2 || r[1] === 2) flipped++; });
+    return { open: open, multi: multi, flipped: flipped, degen: degen, ok: !open && !multi && !flipped && !degen };
+  }
   function detect(name, buf) {
     var e = (name.split('.').pop() || '').toLowerCase();
     if (e === 'stp') e = 'step';
@@ -278,6 +296,6 @@
   }
   async function parse(fmt, buf, opts) { return fmt === 'stl' ? parseSTL(buf) : fmt === 'obj' ? parseOBJ(buf) : fmt === '3mf' ? parse3MF(buf) : parseSTEP(buf, opts); }
   function write(fmt, mesh, name, opts) { return fmt === 'stl' ? writeSTL(mesh, opts && opts.ascii, name) : fmt === 'obj' ? writeOBJ(mesh, name) : fmt === '3mf' ? write3MF(mesh, name) : writeSTEP(mesh, name); }
-  var api = { parse: parse, write: write, stats: stats, detect: detect };
+  var api = { parse: parse, write: write, stats: stats, check: check, detect: detect };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Conv = api;
 })(typeof self !== 'undefined' ? self : this);

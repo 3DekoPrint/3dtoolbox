@@ -5,10 +5,12 @@
   var T = {
     de: { drop: 'Datei hierher ziehen oder klicken', loaded: 'Geladen', tris: 'Dreiecke', size: 'Größe (mm)', err: 'Die Datei konnte nicht gelesen werden. Ist sie beschädigt oder ein anderes Format?', errStep: 'Die STEP-Datei konnte nicht verarbeitet werden. Möglicherweise enthält sie keine Volumenkörper/Flächen.', busy: 'Wird verarbeitet …', loadStep: 'STEP-Modul wird geladen (einmalig ca. 3 MB) …',
       conv: 'Konvertieren', dl: 'Herunterladen', done: 'Fertig', same: 'Quell- und Zielformat sind gleich.', big: 'Achtung: Bei sehr vielen Dreiecken wird die STEP-Datei sehr groß (grob 1 MB je 1.000 Dreiecke).', mb: 'MB', kb: 'KB',
-      stepWarn: 'Hinweis: STL/3MF/OBJ sind Dreiecksnetze. Die STEP-Datei besteht deshalb aus lauter ebenen Dreiecksflächen – sie lässt sich in CAD öffnen, aber nicht wie ein ursprüngliches CAD-Modell bearbeiten (keine Bohrungen/Rundungen als Features).', none: 'Noch keine Datei gewählt.' },
+      stepWarn: 'Hinweis: STL/3MF/OBJ sind Dreiecksnetze. Die STEP-Datei besteht deshalb aus lauter ebenen Dreiecksflächen – sie lässt sich in CAD öffnen, aber nicht wie ein ursprüngliches CAD-Modell bearbeiten (keine Bohrungen/Rundungen als Features).', none: 'Noch keine Datei gewählt.',
+      meshBad: 'Das Netz ist nicht wasserdicht (offene Kanten: {o}, verdrehte Flächen: {f}, mehrfach genutzte Kanten: {m}, entartete Dreiecke: {d}). Bei STEP meldet z. B. Bambu Studio dann „Schale nicht geschlossen“. Tipp: Quelldatei vorher reparieren (Bambu Studio: Rechtsklick → Reparieren, oder Windows 3D-Builder).' },
     en: { drop: 'Drop a file here or click', loaded: 'Loaded', tris: 'triangles', size: 'Size (mm)', err: 'The file could not be read. It may be damaged or a different format.', errStep: 'The STEP file could not be processed. It may not contain solids/faces.', busy: 'Processing …', loadStep: 'Loading STEP module (one time, about 3 MB) …',
       conv: 'Convert', dl: 'Download', done: 'Done', same: 'Source and target format are the same.', big: 'Note: with very many triangles the STEP file gets very large (roughly 1 MB per 1,000 triangles).', mb: 'MB', kb: 'KB',
-      stepWarn: 'Note: STL/3MF/OBJ are triangle meshes. The STEP file therefore consists of many flat triangular faces – it opens in CAD but cannot be edited like an original CAD model (no holes/fillets as features).', none: 'No file selected yet.' }
+      stepWarn: 'Note: STL/3MF/OBJ are triangle meshes. The STEP file therefore consists of many flat triangular faces – it opens in CAD but cannot be edited like an original CAD model (no holes/fillets as features).', none: 'No file selected yet.',
+      meshBad: 'The mesh is not watertight (open edges: {o}, flipped faces: {f}, multi-used edges: {m}, degenerate triangles: {d}). With STEP, e.g. Bambu Studio will then warn "shell not closed". Tip: repair the source file first (Bambu Studio: right-click → Repair, or Windows 3D Builder).' }
   }[LANG];
   function $(i) { return document.getElementById(i); }
   function fmtSize(n) { return n > 1048576 ? (n / 1048576).toFixed(1) + ' ' + T.mb : Math.max(1, Math.round(n / 1024)) + ' ' + T.kb; }
@@ -55,6 +57,8 @@
       a.textContent = T.dl + ' ' + state.name + '.' + ext + ' (' + fmtSize(blob.size) + ')';
       $('cvStats').textContent = s.tris.toLocaleString() + ' ' + T.tris + ' · ' + T.size + ': ' + s.size.map(function (x) { return x.toFixed(1); }).join(' × ');
       $('cvOut').hidden = false; msg(T.done + (tgt === 'step' && s.tris > 50000 ? ' – ' + T.big : ''));
+      var ck = C.check(mesh), wn = $('cvWarn');
+      if (!ck.ok && tgt === 'step') wn.textContent = T.meshBad.replace('{o}', ck.open).replace('{f}', ck.flipped).replace('{m}', ck.multi).replace('{d}', ck.degen);
       draw(mesh);
     } catch (e) { msg(state.fmt === 'step' ? T.errStep : T.err, true); }
     btn.disabled = false;
