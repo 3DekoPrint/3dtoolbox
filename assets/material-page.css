@@ -45,5 +45,5 @@
 .cv-out{margin-top:14px;display:grid;gap:10px}
 .cv-out canvas{width:100%;max-width:560px;aspect-ratio:3/2;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;touch-action:none;cursor:grab}
 .cv-dl{display:inline-block;background:var(--accent-2);color:#0c1a13;border-radius:10px;padding:11px 18px;font-weight:700;text-decoration:none;justify-self:start}
-.mp a.cv-dl{color:#0c1a13}
+.mp a.cv-dl:not(.bt-chip):not(.md-link){color:#0c1a13}
 .mp [hidden]{display:none!important}
