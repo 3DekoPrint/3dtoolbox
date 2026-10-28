@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3DToolBox – Planetary Gearbox Generator</title>
+<meta name="description" content="Design a planetary gearbox (sun gear, planet gears, ring gear, carrier) parametrically with sliders and export it directly as a printable 3MF file. No CAD skills needed, entirely in your browser.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="3DToolBox">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="3DToolBox – Planetary Gearbox Generator">
+<meta property="og:description" content="Design a planetary gearbox parametrically and export it as a printable 3MF file — sun gear, planet gears, ring gear and carrier, entirely in your browser.">
+<meta property="og:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://3dtoolbox.info/en/3d-print-planetary-gearbox-generator.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="3DToolBox – Planetary Gearbox Generator">
+<meta name="twitter:description" content="Design a planetary gearbox parametrically and export it as a printable 3MF file — entirely in your browser.">
+<meta name="twitter:image" content="https://3dtoolbox.info/assets/og-image.png">
+
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-planetengetriebe-generator.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-planetary-gearbox-generator.html">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-planetengetriebe-generator.html">
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+<style>
+  :root{
+    --bg:#14201c;
+    --panel:#1b2b25;
+    --panel-2:#22362d;
+    --ink:#eef3ee;
+    --ink-dim:#a8bdb2;
+    --accent:#ff8c3c;
+    --accent-2:#5fd9a0;
+    --line:#2f473c;
+    font-family:"Iowan Old Style","Georgia",serif;
+  }
+  *{box-sizing:border-box;}
+  html, body{ margin:0; padding:0; background:var(--bg); }
+  .fm-root{
+    background:var(--bg); color:var(--ink);
+    padding:40px 24px 56px; border-radius:14px; min-height:100%;
+    max-width:960px; margin:0 auto;
+  }
+  .fm-eyebrow{
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:11px;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--accent-2); margin:0 0 6px;
+  }
+  .fm-brand{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .fm-brand-icon{ width:30px; height:30px; flex:none; border-radius:7px; }
+  .fm-brand-word{ font-family:Arial, Helvetica, sans-serif; font-weight:700; font-size:19px; color:var(--ink); letter-spacing:.01em; }
+  .fm-brand-3d{ color:#FF6A2B; }
+  .fm-lang-switch{
+    margin-left:auto; display:flex; align-items:center; gap:4px;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:12px; font-weight:700;
+    background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:4px;
+  }
+  .fm-lang-current{ padding:5px 10px; border-radius:5px; background:var(--accent); color:#1a1206; }
+  .fm-lang-link{ padding:5px 10px; border-radius:5px; color:var(--ink-dim); text-decoration:none; transition:color .15s ease, background .15s ease; }
+  .fm-lang-link:hover{ color:var(--ink); background:var(--panel-2); }
+  .fm-tagline{ color:var(--ink-dim); font-size:14.5px; line-height:1.55; margin:0 0 28px; max-width:640px; }
+
+  h1.fm-title{ font-size:26px; margin:0 0 8px; font-weight:600; letter-spacing:.2px; }
+  .fm-sub{ color:var(--ink-dim); font-size:14px; margin:0 0 30px; max-width:640px; line-height:1.5; }
+
+  /* Shape-Auswahl */
+  .og-shapes{ display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; margin-bottom:8px; }
+  .og-shape-btn{
+    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    padding:16px 12px; text-align:center; cursor:pointer; color:var(--ink);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .og-shape-btn:hover{ border-color:var(--accent); }
+  .og-shape-btn.active{ border-color:var(--accent); background:linear-gradient(180deg, rgba(255,140,60,.16) 0%, var(--panel) 100%); }
+
+  .og-gtype-btn{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:10px; text-align:center; cursor:pointer; color:var(--ink-dim);
+    transition:border-color .15s ease, background .15s ease, color .15s ease;
+  }
+  .og-gtype-btn:hover{ border-color:var(--accent); }
+  .og-gtype-btn.active{ border-color:var(--accent); background:linear-gradient(180deg, rgba(255,140,60,.16) 0%, var(--panel) 100%); color:var(--accent); }
+  .og-shape-icon{ width:34px; height:34px; margin:0 auto 8px; color:var(--accent-2); }
+  .og-shape-icon svg{ width:100%; height:100%; }
+  .og-shape-name{ font-size:12.5px; font-weight:700; }
+  .og-shape-btn.active .og-shape-name{ color:var(--accent); }
+
+  /* Layout: Viewer + Panel nebeneinander */
+  .og-layout{ display:grid; grid-template-columns:1fr 340px; gap:20px; align-items:start; }
+  @media (max-width:820px){ .og-layout{ grid-template-columns:1fr; } }
+
+  .og-viewer-wrap{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    overflow:hidden; position:relative;
+  }
+  .og-viewer{ width:100%; height:460px; display:block; touch-action:none; position:relative; }
+  .og-viewer-loading{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:13px; color:var(--ink-dim);
+    background:rgba(20,32,28,.6); z-index:5;
+  }
+  .og-viewer canvas{ display:block; width:100%; height:100%; }
+  .og-viewer-hint{
+    position:absolute; bottom:10px; right:12px;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; color:var(--ink-dim);
+    background:rgba(20,32,28,.72); padding:4px 9px; border-radius:6px; pointer-events:none;
+  }
+  .og-viewer-dims{
+    position:absolute; top:10px; left:12px;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--accent-2);
+    background:rgba(20,32,28,.72); padding:6px 10px; border-radius:8px; line-height:1.6;
+  }
+
+  .og-panel{ display:flex; flex-direction:column; gap:14px; }
+  .og-section{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .og-section-title{
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-dim); margin:0 0 12px;
+  }
+  .og-row{ margin-bottom:14px; }
+  .og-row:last-child{ margin-bottom:0; }
+  .og-row label{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size:12.5px; color:var(--ink); margin-bottom:6px;
+  }
+  .og-row label span.og-val{ font-family:"JetBrains Mono","Courier New",monospace; color:var(--accent-2); font-weight:600; }
+  .og-row input[type=range]{ width:100%; accent-color:var(--accent); cursor:pointer; }
+
+  .og-toggle-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:12px 14px;
+  }
+  .og-toggle-label{ font-size:13px; color:var(--ink); }
+  .og-toggle-sub{ font-size:11px; color:var(--ink-dim); margin-top:2px; }
+  .og-switch{ position:relative; width:42px; height:24px; flex:none; }
+  .og-switch input{ opacity:0; width:0; height:0; position:absolute; }
+  .og-switch-track{
+    position:absolute; inset:0; background:var(--line); border-radius:20px; cursor:pointer;
+    transition:background .15s ease;
+  }
+  .og-switch-track::before{
+    content:""; position:absolute; width:18px; height:18px; left:3px; top:3px;
+    background:var(--ink); border-radius:50%; transition:transform .15s ease;
+  }
+  .og-switch input:checked + .og-switch-track{ background:var(--accent); }
+  .og-switch input:checked + .og-switch-track::before{ transform:translateX(18px); background:#1a1206; }
+
+  .og-skadis-note{
+    font-size:11px; color:var(--ink-dim); line-height:1.5; margin-top:10px;
+    border-top:1px solid var(--line); padding-top:10px;
+  }
+  .og-skadis-note b{ color:var(--accent-2); }
+
+  .og-color-row{ display:flex; align-items:center; gap:10px; }
+  .og-color-row input[type=color]{
+    width:36px; height:36px; border-radius:8px; border:1px solid var(--line);
+    background:none; cursor:pointer; padding:0;
+  }
+  .og-color-hex{ font-family:"JetBrains Mono","Courier New",monospace; font-size:12px; color:var(--ink-dim); }
+
+  .og-export-btn{
+    width:100%; background:var(--accent); border:1px solid var(--accent); color:#1a1206;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:13.5px; font-weight:700;
+    padding:13px 14px; border-radius:10px; cursor:pointer; transition:opacity .15s ease;
+  }
+  .og-export-btn:hover{ opacity:.92; }
+  .og-export-hint{ font-size:11px; color:var(--ink-dim); text-align:center; margin-top:8px; }
+
+  .fm-note{ font-size:11.5px; color:var(--ink-dim); margin-top:28px; line-height:1.5; border-top:1px solid var(--line); padding-top:14px; }
+
+  .fm-footer{ margin-top:26px; padding-top:18px; border-top:1px solid var(--line); text-align:center; }
+  .fm-footer-coop{ font-size:12px; color:var(--ink-dim); margin:0 0 10px; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .fm-footer-logo{ height:20px; width:auto; display:inline-block; vertical-align:middle; }
+  .fm-footer-coop a{ color:var(--accent-2); text-decoration:none; }
+  .fm-footer-coop a:hover{ text-decoration:underline; }
+  .fm-footer-legal{ display:flex; justify-content:center; gap:8px; font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--ink-dim); }
+  .fm-footer-legal a{ color:var(--ink-dim); text-decoration:none; }
+  .fm-footer-legal a:hover{ color:var(--ink); text-decoration:underline; }
+
+  @media (max-width:560px){
+    .og-shapes{ grid-template-columns:1fr; }
+    .og-viewer{ height:320px; }
+  }
+
+  /* ===== Bento-Stil (gemeinsam für alle Unterseiten) ===== */
+  html{ scroll-behavior:smooth; }
+  body{
+    background:
+      radial-gradient(900px 480px at 85% -8%, rgba(255,140,60,.12), transparent 60%),
+      radial-gradient(800px 460px at -10% 18%, rgba(95,217,160,.09), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;
+  }
+  .fm-root.bt-sub{ background:transparent; padding-top:0; }
+  .bt-nav{
+    position:sticky; top:12px; z-index:50; display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+    margin:12px 0 0; padding:9px 12px 9px 16px; border-radius:16px;
+    background:rgba(27,43,37,.78); border:1px solid var(--line);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  }
+  .bt-logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .bt-nav .fm-lang-switch{ margin-left:auto; }
+  .bt-switch{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:16px 0 8px; }
+  .bt-chip{
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:12.5px; font-weight:600; text-decoration:none;
+    color:var(--ink-dim); padding:9px 15px; border-radius:99px; border:1px solid var(--line);
+    background:rgba(27,43,37,.6); transition:color .15s, border-color .15s, transform .15s;
+  }
+  .bt-chip:hover{ color:var(--ink); border-color:var(--accent-2); transform:translateY(-1px); }
+  .bt-chip-active{ background:var(--accent); border-color:var(--accent); color:#1a1206; }
+  .bt-chip-active:hover{ color:#1a1206; border-color:var(--accent); transform:none; }
+  .bt-chip-flag::before{ content:"★ "; }
+  .bt-ext-group{
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-left:auto; padding:5px 6px 5px 12px;
+    border:1px dashed #56707a; border-radius:99px; background:rgba(86,112,122,.08);
+  }
+  .bt-ext-label{ font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:#9db4bd; }
+  .bt-chip-ext{ border-style:dashed; border-color:#56707a; background:transparent; color:#b8ccd3; padding:6px 12px; }
+  .bt-chip-ext:hover{ border-color:#9db4bd; }
+  .fm-eyebrow{ margin-top:26px; }
+  .fm-title{ font-family:Arial, Helvetica, sans-serif; letter-spacing:-.02em; font-size:clamp(28px,4.2vw,42px); }
+  .bt-foot{ margin-top:40px; padding-top:20px; border-top:1px solid var(--line); text-align:center;
+    font-family:"JetBrains Mono","Courier New",monospace; font-size:11.5px; color:var(--ink-dim); }
+  .bt-foot a{ color:var(--ink-dim); text-decoration:none; } .bt-foot a:hover{ color:var(--ink); text-decoration:underline; }
+  @media (max-width:640px){ .bt-ext-group{ margin-left:0; } }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} .bt-chip{transition:none;} }
+  .fd-color-tile{ color:var(--ink); }
+  .bt-subhero{ padding:44px 0 26px; position:relative; }
+  .bt-subhero .bt-pill{
+    display:inline-flex; align-items:center; gap:8px; font-family:"JetBrains Mono","Courier New",monospace;
+    font-size:12px; letter-spacing:.04em; text-transform:none; color:var(--accent-2); padding:7px 14px; border-radius:99px;
+    background:rgba(95,217,160,.08); border:1px solid rgba(95,217,160,.28); margin:0;
+  }
+  .bt-subhero .bt-pill i{ width:7px; height:7px; border-radius:50%; background:var(--accent-2); box-shadow:0 0 10px var(--accent-2); }
+  .bt-subhero h1.fm-title{
+    font-size:clamp(32px,5.2vw,54px); line-height:1.06; margin:18px 0 14px; font-weight:700;
+    background:linear-gradient(90deg,var(--ink) 40%,#ffc07a 80%,var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .bt-subhero .fm-sub{ font-size:clamp(15px,1.8vw,17px); max-width:640px; margin:0 0 26px; }
+  .bt-kpis{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:640px; }
+  .bt-kpi{ padding:16px 14px; border-radius:18px; background:linear-gradient(180deg,rgba(34,54,45,.75),rgba(27,43,37,.75)); border:1px solid var(--line); }
+  .bt-kpi b{ display:block; font-family:Arial,Helvetica,sans-serif; font-size:clamp(20px,2.6vw,26px); letter-spacing:-.02em; color:var(--ink); }
+  .bt-kpi span{ display:block; margin-top:3px; font-size:12px; color:var(--ink-dim); line-height:1.35; }
+  .bt-panel{
+    margin-top:8px; padding:clamp(16px,3vw,32px); border-radius:28px;
+    background:radial-gradient(620px 300px at 0% 0%,rgba(95,217,160,.09),transparent 65%), linear-gradient(180deg,rgba(27,43,37,.85),rgba(22,36,30,.85));
+    border:1px solid var(--line); box-shadow:0 30px 80px rgba(0,0,0,.25);
+  }
+  .bt-panel > :first-child{ margin-top:0; }
+  .bt-sub .fm-partner{ margin-top:30px; border-radius:24px; padding:28px;
+    background:radial-gradient(520px 260px at 100% 100%,rgba(255,140,60,.14),transparent 65%), var(--panel); }
+  .lx-controlbar{ top:78px !important; }
+  @media (max-width:560px){ .bt-kpis{ grid-template-columns:1fr; } }
+  .lx-controlbar{ background:#1a2a24 !important; border:1px solid var(--line); border-radius:16px; padding:10px 14px !important; }
+  .bt-switch-gen{ margin-top:0; }
+  .bt-group-label{ font-family:"JetBrains Mono","Courier New",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-2); padding:0 6px 0 2px; }
+  .bt-chip small{ font-size:9.5px; opacity:.7; margin-left:3px; letter-spacing:.05em; }
+  @media (max-width:640px){
+    .bt-switch{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; margin:12px -16px 6px; padding:0 16px; }
+    .bt-switch::-webkit-scrollbar{ display:none; }
+    .bt-chip, .bt-group-label, .bt-ext-group{ flex:none; white-space:nowrap; }
+    .bt-switch-gen{ margin-top:0; }
+    .bt-ext-group{ margin-left:0; }
+    .bt-gen .bt-kpis{ grid-template-columns:repeat(3,1fr); gap:8px; }
+    .bt-gen .bt-kpi{ padding:12px 10px; border-radius:14px; }
+    .bt-gen .bt-kpi span{ font-size:11px; }
+  }
+  /* ===== Generator-Seiten ===== */
+  .bt-gen{ max-width:1080px !important; }
+  .bt-gen .og-viewer-wrap{ border-radius:24px !important; border:1px solid rgba(95,217,160,.35) !important; box-shadow:0 0 0 1px rgba(95,217,160,.06), 0 24px 70px rgba(95,217,160,.07); overflow:hidden; }
+  .bt-gen .og-section{ border-radius:20px; background:linear-gradient(160deg,rgba(34,54,45,.92),rgba(27,43,37,.92)); }
+  .bt-gen .og-shape-btn, .bt-gen .og-gtype-btn{ border-radius:16px; }
+  .bt-gen .og-export-btn{ border-radius:14px; box-shadow:0 10px 30px rgba(255,140,60,.28); }
+  .bt-gen .og-export-btn:hover{ box-shadow:0 14px 38px rgba(255,140,60,.4); }
+  .bt-gen .fm-note{ margin-top:28px; border-top:1px solid var(--line); }
+  .bt-gen .bt-subhero{ padding-bottom:20px; }
+  .bt-gen .bt-kpis{ margin-bottom:6px; }
+  .bt-gen-lang{ cursor:help; }
+
+</style>
+</head>
+<body>
+
+<div class="fm-root bt-sub bt-gen">
+  <nav class="bt-nav">
+    <a class="bt-logo" href="/en/" aria-label="3DToolBox">
+      <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
+      <rect width="220" height="220" rx="44" fill="#FF6A2B"/>
+      <polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/>
+      <polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/>
+      <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
+    </svg>
+      <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
+    </a>
+    <div class="fm-lang-switch">
+      <a class="fm-lang-link" href="/3d-druck-planetengetriebe-generator.html">DE</a>
+      <span class="fm-lang-current">EN</span>
+    </div>
+  </nav>
+  <div class="bt-switch"><a class="bt-chip bt-chip-flag" href="/en/">Filament Finder</a><a class="bt-chip" href="/en/3d-print-cost-calculator.html">Cost Calculator</a><a class="bt-chip" href="/en/filament-database.html">Filament Database</a><a class="bt-chip" href="/en/3d-print-lexicon.html">Lexicon</a></div>
+  <div class="bt-switch bt-switch-gen"><span class="bt-group-label">Generators</span><a class="bt-chip" href="/en/3d-print-object-generator.html">Object Generator</a><span class="bt-chip bt-chip-active" aria-current="page">Planetary Gearbox</span><a class="bt-chip" href="/en/3d-print-layered-name-tag.html">Layered Name Tag</a><a class="bt-chip" href="/en/3d-print-name-plate-tag.html">Name Plate Tag</a>
+    <span class="bt-ext-group"><span class="bt-ext-label">External · not ours</span>
+      <a class="bt-chip bt-chip-ext" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI ↗</a>
+      <a class="bt-chip bt-chip-ext" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs ↗</a>
+    </span>
+  </div>
+  <header class="bt-subhero"><span class="bt-pill"><i></i>Parametric generator</span>
+  <h1 class="fm-title">Planetary Gearbox Generator</h1>
+  <p class="fm-sub">Design the sun gear, planet gears, ring gear and carrier with sliders — export directly as 3MF. Tooth counts and planet count are checked automatically for mechanical validity (assembly condition, collision-free).</p>
+  <div class="bt-kpis"><div class="bt-kpi"><b>3MF</b><span>print-ready export</span></div><div class="bt-kpi"><b>Live</b><span>3D preview in your browser</span></div><div class="bt-kpi"><b>€0</b><span>no sign-up</span></div></div>
+  </header>
+
+  <div class="og-layout">
+    <div class="og-viewer-wrap">
+      <div class="og-viewer" id="ogViewer">
+        <div class="og-viewer-dims" id="ogDims">–</div>
+        <div class="og-viewer-hint">drag to rotate · scroll to zoom</div>
+      </div>
+      <div class="og-section" id="ogPartVisibilityWrap" style="display:none; margin-top:12px;">
+        <p class="og-section-title">Show/hide parts in the preview</p>
+        <p style="font-size:11px; color:var(--ink-dim); margin:-4px 0 10px; line-height:1.4;">Display only — all parts are always included in the export.</p>
+        <div id="ogPartVisibility" style="display:flex; flex-direction:column; gap:2px;"></div>
+      </div>
+    </div>
+
+    <div class="og-panel">
+
+      <div class="og-section">
+        <p class="og-section-title">Ratio &amp; teeth</p>
+        <div class="og-row"><label>Sun gear teeth <span class="og-val" id="v_p_zs">12</span></label><input type="range" id="p_zs" min="6" max="40" step="1" value="12"></div>
+        <div class="og-row"><label>Planet gear teeth <span class="og-val" id="v_p_zp">18</span></label><input type="range" id="p_zp" min="6" max="60" step="1" value="18"></div>
+        <div class="og-row"><label>Number of planet gears <span class="og-val" id="v_p_count">3</span></label><input type="range" id="p_count" min="3" max="6" step="1" value="3"></div>
+        <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 6px; line-height:1.4;" id="p_ratioInfo">Ring gear: 48 teeth · ratio 1:5 (carrier output, ring gear fixed)</p>
+        <p class="og-skadis-note" id="p_clampNote" style="display:none; margin-top:6px;"></p>
+      </div>
+
+      <div class="og-section">
+        <p class="og-section-title">Tooth shape &amp; dimensions</p>
+        <div class="og-row"><label>Module <span class="og-val" id="v_p_mod">1.5</span> mm</label><input type="range" id="p_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
+        <div class="og-row"><label>Pressure angle <span class="og-val" id="v_p_pa">20</span> °</label><input type="range" id="p_pa" min="14.5" max="25" step="0.5" value="20"></div>
+        <div class="og-row"><label>Face width (gears) <span class="og-val" id="v_p_face">10</span> mm</label><input type="range" id="p_face" min="4" max="30" step="1" value="10"></div>
+        <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 14px; line-height:1.4;" id="p_underNote"></p>
+      </div>
+
+      <div class="og-section">
+        <p class="og-section-title">Shafts &amp; fit</p>
+        <div class="og-row"><label>Sun shaft bore <span class="og-val" id="v_p_sunbore">6</span> mm</label><input type="range" id="p_sunbore" min="0" max="20" step="0.5" value="6"></div>
+        <div class="og-row"><label>Carrier output shaft bore <span class="og-val" id="v_p_outbore">8</span> mm</label><input type="range" id="p_outbore" min="0" max="25" step="0.5" value="8"></div>
+        <div class="og-row"><label>Planet pin Ø <span class="og-val" id="v_p_pind">4</span> mm</label><input type="range" id="p_pind" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label>Fit clearance (all bores) <span class="og-val" id="v_p_fit">0.4</span> mm</label><input type="range" id="p_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
+      </div>
+
+      <div class="og-section">
+        <p class="og-section-title">Extension</p>
+        <div class="og-toggle-row" style="margin-bottom:14px;">
+          <div>
+            <div class="og-toggle-label">Extend output shaft</div>
+            <div class="og-toggle-sub">A shaft stub protrudes beyond the back cover — for docking another stage (e.g. a second planetary gearbox whose sun gear bore fits onto it)</div>
+          </div>
+          <label class="og-switch">
+            <input type="checkbox" id="p_extendon">
+            <span class="og-switch-track"></span>
+          </label>
+        </div>
+        <div id="p_extendRow" style="display:none;">
+          <div class="og-row"><label>Shaft stub length <span class="og-val" id="v_p_extendlen">18</span> mm</label><input type="range" id="p_extendlen" min="5" max="40" step="1" value="18"></div>
+          <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 14px; line-height:1.4;">Requires "Carrier output shaft bore" &gt; 0 — the shaft stub automatically takes this diameter.</p>
+        </div>
+      </div>
+
+      <div class="og-section">
+        <p class="og-section-title">Housing</p>
+        <div class="og-row"><label>Cover thickness <span class="og-val" id="v_p_coverthick">4</span> mm</label><input type="range" id="p_coverthick" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label>Screw Ø (4×) <span class="og-val" id="v_p_boltd">3</span> mm</label><input type="range" id="p_boltd" min="2" max="12" step="0.5" value="3"></div>
+        <div style="display:flex; gap:6px; margin-top:14px;">
+          <button type="button" class="og-gtype-btn active" data-flansch="round" style="flex:1; padding:9px;"><div class="og-shape-name" style="font-size:11.5px;">Round</div></button>
+          <button type="button" class="og-gtype-btn" data-flansch="square" style="flex:1; padding:9px;"><div class="og-shape-name" style="font-size:11.5px;">Square</div></button>
+        </div>
+      </div>
+
+      <p style="font-size:11px; color:var(--ink-dim); margin-top:6px; line-height:1.5;">
+        <b>7 parts</b> are generated (shown in different colors, pulled apart in the preview for clarity): <span style="color:#7a8a9a;">Front cover</span>, <span style="color:#5fd9a0;">Sun gear</span>, <span style="color:#ff8c3c;">3–6× planet gear</span>, <span style="color:#8a9a92;">Ring gear</span>, <span style="color:#d9c79e;">Carrier (with planet pins)</span>, <span style="color:#7a8a9a;">Back cover</span>. Sun gear = input, ring gear = screwed fixed into the housing, carrier = output. All gears share the same module and pressure angle (otherwise they will not mesh properly). Tooth counts and planet count are adjusted automatically so that the assembly condition and collision-free spacing between the planets are met — the values actually used are shown in the ratio info above.
+      </p>
+
+      <button type="button" class="og-export-btn" id="ogExport" style="margin-top:16px;">Export as 3MF</button>
+      <p class="og-export-hint">All 7 parts as separate, individually placeable objects in one 3MF file — each planet gear and the carrier (fused with all pins) can be arranged on its own.</p>
+
+    </div>
+  </div>
+
+  <p class="fm-note">
+    All shapes are built purely additively from basic solids (no Boolean CAD kernel) — this is unproblematic for 3D printing; every common slicer turns the exported 3MF file into a clean, printable model. The involute gearing uses the same verified calculation as in the <a href="/en/3d-print-object-generator.html">3D Object Generator</a> (gear base shape).
+  </p>
+
+  <div class="fm-footer">
+    <p class="fm-footer-coop">
+      <img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo">
+      In partnership with <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a>
+    </p>
+    <div class="fm-footer-legal">
+      <a href="/en/impressum.html">Imprint</a>
+      <span>·</span>
+      <a href="/en/datenschutz.html">Privacy policy</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+'use strict';
+// ===== Geometrie-Hilfsfunktionen (übernommen, bewährt) ====================
+function shapeFromPoints(pts){
+  const shape = new THREE.Shape();
+  shape.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 1; i < pts.length; i++) shape.lineTo(pts[i][0], pts[i][1]);
+  shape.closePath();
+  return shape;
+}
+function circlePts(r, cx, cy, segs){
+  cx = cx||0; cy = cy||0;
+  const pts = [];
+  for (let i = 0; i < segs; i++){
+    const a = (i/segs)*2*Math.PI;
+    pts.push([cx+r*Math.cos(a), cy+r*Math.sin(a)]);
+  }
+  return pts;
+}
+function outlineCentroid(pts){
+  let cx=0, cy=0;
+  pts.forEach(([x,y]) => { cx+=x; cy+=y; });
+  return [cx/pts.length, cy/pts.length];
+}
+function roundedRectShape(w, d, r){
+  r = Math.min(r, w/2, d/2);
+  const pts = [];
+  const segs = 6;
+  const corners = [
+    [w/2-r, d/2-r, 0],
+    [-w/2+r, d/2-r, Math.PI/2],
+    [-w/2+r, -d/2+r, Math.PI],
+    [w/2-r, -d/2+r, -Math.PI/2]
+  ];
+  corners.forEach(([cx,cy,startA]) => {
+    for (let i=0; i<=segs; i++){
+      const a = startA + (i/segs)*(Math.PI/2);
+      pts.push([cx+r*Math.cos(a), cy+r*Math.sin(a)]);
+    }
+  });
+  return shapeFromPoints(pts);
+}
+
+// ===== Evolventenverzahnung (identisch zum 3D-Objekt-Generator, bewährt) ==
+function involuteGearProfile(m, z, pressureAngleDeg){
+  const addendumFactor = 1, dedendumFactor = 1.25;
+  const alpha = pressureAngleDeg * Math.PI/180;
+  const pitchR = m*z/2;
+  const baseR = pitchR * Math.cos(alpha);
+  const outerR = pitchR + m*addendumFactor;
+  const rootR = Math.max(pitchR - m*dedendumFactor, baseR*0.98);
+
+  function involutePoint(t){ return [baseR*(Math.cos(t)+t*Math.sin(t)), baseR*(Math.sin(t)-t*Math.cos(t))]; }
+  function tForR(r){ const ratio = r/baseR; return Math.sqrt(Math.max(0, ratio*ratio - 1)); }
+
+  const tOuter = tForR(outerR);
+  const rStart = Math.max(baseR, rootR);
+  const tStart = tForR(rStart);
+
+  const steps = 8;
+  const rightFlankRaw = [];
+  for (let i = 0; i <= steps; i++){
+    const t = tStart + (tOuter - tStart) * (i/steps);
+    rightFlankRaw.push(involutePoint(t));
+  }
+
+  const tPitch = tForR(pitchR);
+  const pPitch = involutePoint(tPitch);
+  const angleAtPitchNatural = Math.atan2(pPitch[1], pPitch[0]);
+  const halfToothAngle = Math.PI/(2*z);
+  const rotOffset = halfToothAngle + angleAtPitchNatural;
+
+  function rotP([x,y], a){ const c=Math.cos(a), s=Math.sin(a); return [x*c-y*s, x*s+y*c]; }
+  const rightFlankRot = rightFlankRaw.map(([x,y]) => rotP([x,-y], rotOffset));
+
+  return { rightFlankRot, rootR, outerR, baseR, pitchR };
+}
+
+function unwrapForward(from, to){
+  let t = to;
+  while (t < from) t += 2*Math.PI;
+  while (t - from > Math.PI) t -= 2*Math.PI;
+  if (t < from) t += 2*Math.PI;
+  return t;
+}
+
+function buildGearOutlinePoints(m, z, pressureAngleDeg){
+  const { rightFlankRot, rootR, outerR } = involuteGearProfile(m, z, pressureAngleDeg);
+  const toothAngle = 2*Math.PI/z;
+  const pts = [];
+  const tipArcSteps = 3, rootArcSteps = 3;
+  function rot([x,y], a){ const c=Math.cos(a), s=Math.sin(a); return [x*c-y*s, x*s+y*c]; }
+
+  const enterFlank = rightFlankRot.map(([x,y]) => [x,-y]);
+  const exitFlank = rightFlankRot.slice().reverse();
+
+  for (let i = 0; i < z; i++){
+    const baseAngle = i * toothAngle;
+    enterFlank.forEach(p => pts.push(rot(p, baseAngle)));
+
+    const lastEnter = enterFlank[enterFlank.length-1];
+    const firstExit = exitFlank[0];
+    const aEnterTip = Math.atan2(lastEnter[1], lastEnter[0]);
+    const aExitTip = unwrapForward(aEnterTip, Math.atan2(firstExit[1], firstExit[0]));
+    for (let k = 1; k < tipArcSteps; k++){
+      const a = aEnterTip + (aExitTip - aEnterTip) * (k/tipArcSteps);
+      pts.push(rot([outerR*Math.cos(a), outerR*Math.sin(a)], baseAngle));
+    }
+
+    exitFlank.forEach(p => pts.push(rot(p, baseAngle)));
+
+    const lastExit = exitFlank[exitFlank.length-1];
+    const nextEnterFirst = enterFlank[0];
+    const aExitRoot = Math.atan2(lastExit[1], lastExit[0]);
+    const aNextEnterRoot = unwrapForward(aExitRoot, Math.atan2(nextEnterFirst[1], nextEnterFirst[0]) + toothAngle);
+    for (let k = 1; k < rootArcSteps; k++){
+      const a = aExitRoot + (aNextEnterRoot - aExitRoot) * (k/rootArcSteps);
+      pts.push(rot([rootR*Math.cos(a), rootR*Math.sin(a)], baseAngle));
+    }
+  }
+  return pts;
+}
+
+function buildGear(m, z, faceWidth, bore, pressureAngleDeg, internal, rim){
+  const pts = buildGearOutlinePoints(m, z, pressureAngleDeg);
+  const toothShape = shapeFromPoints(pts);
+  const pitchR = m*z/2;
+  const rootRNominal = pitchR - 1.25*m;
+  const outerRNominal = pitchR + m;
+
+  let outerShape, geo;
+
+  if (!internal){
+    outerShape = toothShape;
+    const maxBore = Math.max(1, 2*rootRNominal - 3);
+    const safeBore = Math.min(bore, maxBore);
+    if (safeBore > 0.5){
+      const holePts = [];
+      const segs = 48;
+      for (let i = 0; i <= segs; i++){
+        const a = (i/segs) * Math.PI * 2;
+        holePts.push([safeBore/2*Math.cos(a), safeBore/2*Math.sin(a)]);
+      }
+      outerShape.holes = [shapeFromPoints(holePts.reverse())];
+    }
+  } else {
+    const ringOuterR = outerRNominal + Math.max(2, rim);
+    const ringPts = [];
+    const segs = Math.max(64, z*3);
+    for (let i = 0; i <= segs; i++){
+      const a = (i/segs) * Math.PI * 2;
+      ringPts.push([ringOuterR*Math.cos(a), ringOuterR*Math.sin(a)]);
+    }
+    outerShape = shapeFromPoints(ringPts);
+    const holePts = pts.slice().reverse();
+    outerShape.holes = [shapeFromPoints(holePts)];
+  }
+
+  geo = new THREE.ExtrudeGeometry(outerShape, { depth: faceWidth, bevelEnabled:false, curveSegments:1 });
+  geo.translate(0, 0, -faceWidth/2);
+  // KEINE Rotation hier — bleibt in derselben Vor-Rotations-Ebene wie
+  // Deckel/Steg (X,Y = radiale Ebene, Z = Tiefe), damit die Baugruppe am
+  // Ende nur EINMAL insgesamt gedreht wird (vorher: Zahnräder wurden
+  // versehentlich zweifach rotiert, einmal hier und einmal beim Zusammenbau).
+  return geo;
+}
+
+// ===== Planetengetriebe-spezifische Berechnung =============================
+// Kernbedingungen (zwingend für ein funktionierendes Planetengetriebe):
+//  1) Zähnezahl Hohlrad = Zähnezahl Sonnenrad + 2 × Zähnezahl Planetenrad
+//     (sonst passt der Achsabstand Sonne<->Planet nicht zum Achsabstand
+//     Planet<->Hohlrad — die Räder würden nicht gleichzeitig sauber
+//     ineinandergreifen)
+//  2) Montagebedingung: (Zs + Zr) muss durch die Planetenanzahl teilbar
+//     sein — sonst lassen sich die Planeten nicht gleichmäßig verteilen,
+//     ohne dass sich Zahnflanken an der falschen Stelle träfen
+//  3) Planeten dürfen sich (Kopfkreis) nicht gegenseitig berühren
+//
+// Alle drei werden geprüft; bei Verletzung wird automatisch die
+// Planetenanzahl reduziert (am robustesten, verändert nicht die vom
+// Nutzer gewählten Zähnezahlen) bis alle Bedingungen erfüllt sind.
+function computePlanetaryGeometry(p){
+  const ZsWish = Math.round(p.zs);
+  let Zp = Math.round(p.zp);
+  let planetCount = Math.round(p.planetCount);
+  let clamped = false;
+
+  function assemblyOk(zp, n){ return (ZsWish + (ZsWish+2*zp)) % n === 0; }
+  function collisionOk(zp, n){
+    const Zr = ZsWish + 2*zp;
+    const centerDist = p.m*(ZsWish+zp)/2;
+    const planetOuterD = p.m*(zp+2);
+    const spacing = 2*centerDist*Math.sin(Math.PI/n);
+    return spacing > planetOuterD + 1;
+  }
+
+  // Schritt 1: Bei der GEWÜNSCHTEN Planetenanzahl zuerst versuchen, eine
+  // passende Planetenrad-Zähnezahl (möglichst nah am Wunschwert) zu finden,
+  // die beide Bedingungen erfüllt — die Planetenanzahl bleibt dabei so, wie
+  // zuletzt eingestellt (hat Priorität, da explizit vom Nutzer gewählt),
+  // statt sie klammheimlich zu reduzieren.
+  let bestZp = null, bestDist = Infinity;
+  for (let dz = 0; dz <= 40; dz++){
+    const candidates = dz === 0 ? [Zp] : [Zp - dz, Zp + dz];
+    for (const cand of candidates){
+      if (cand < 6) continue;
+      if (assemblyOk(cand, planetCount) && collisionOk(cand, planetCount)){
+        if (dz < bestDist){ bestDist = dz; bestZp = cand; }
+      }
+    }
+    if (bestZp !== null) break;
+  }
+
+  if (bestZp !== null){
+    if (bestZp !== Zp) clamped = true;
+    Zp = bestZp;
+  } else {
+    // Schritt 2: Selbst mit angepasster Zähnezahl passt die gewünschte
+    // Planetenanzahl nicht in einem sinnvollen Zähnezahl-Bereich — jetzt
+    // doch die Planetenanzahl reduzieren (bewährte Rückfallebene).
+    while (planetCount > 3 && (!assemblyOk(Zp, planetCount) || !collisionOk(Zp, planetCount))){
+      planetCount--;
+      clamped = true;
+    }
+    if (!assemblyOk(Zp, planetCount) || !collisionOk(Zp, planetCount)){
+      let bestZp2 = null, bestDist2 = Infinity;
+      for (let dz = 1; dz <= 40; dz++){
+        [Zp - dz, Zp + dz].forEach(cand => {
+          if (cand < 6) return;
+          if (assemblyOk(cand, planetCount) && collisionOk(cand, planetCount)){
+            if (dz < bestDist2){ bestDist2 = dz; bestZp2 = cand; }
+          }
+        });
+        if (bestZp2 !== null) break;
+      }
+      if (bestZp2 !== null){ Zp = bestZp2; clamped = true; }
+    }
+    if (!collisionOk(Zp, planetCount)){
+      while (Zp > 6 && !collisionOk(Zp, planetCount)){ Zp--; clamped = true; }
+    }
+  }
+
+  const Zr = ZsWish + 2*Zp;
+  const finalAssemblyOk = assemblyOk(Zp, planetCount);
+  const finalCollisionOk = collisionOk(Zp, planetCount);
+
+  const centerDist = p.m*(ZsWish+Zp)/2;
+  const ratio = Zr/ZsWish + 1; // Steg-Abtrieb, Hohlrad fest: i = 1 + Zr/Zs
+
+  return {
+    Zs: ZsWish, Zp, Zr, planetCount, centerDist, ratio,
+    clamped, assemblyOk: finalAssemblyOk, collisionOk: finalCollisionOk
+  };
+}
+
+// ===== Gehäuse-Außenkontur (rund/eckig) — übernommenes Muster ============
+function housingOuterShape(bodyR, flansch){
+  if (flansch === 'square'){
+    const side = bodyR*2 + 10;
+    return roundedRectShape(side, side, 10);
+  }
+  return shapeFromPoints(circlePts(bodyR + 6, 0, 0, 72));
+}
+
+function planetaryWallOuter(desiredBoltD){
+  const safetyGap = 1.5, structuralMargin = 2, headroom = 1;
+  return Math.max(10, desiredBoltD + 2*safetyGap + structuralMargin + headroom);
+}
+function boltHoles(bodyR, innerBoundaryR, boltD, wallOuter){
+  const boltR = bodyR - wallOuter/2;
+  const boltCount = 4;
+  const safetyGap = 1.5;
+  const maxBoltD = Math.max(2, 2*(boltR - innerBoundaryR - safetyGap) - 2);
+  const safeBoltD = Math.min(boltD, maxBoltD);
+  const holes = [];
+  for (let i = 0; i < boltCount; i++){
+    const a = (i/boltCount)*2*Math.PI + Math.PI/boltCount;
+    const cx = boltR*Math.cos(a), cy = boltR*Math.sin(a);
+    holes.push(shapeFromPoints(circlePts(safeBoltD/2, cx, cy, 16).reverse()));
+  }
+  return { holes, boltR, safeBoltD };
+}
+
+function buildCarrier(g, p, bodyR){
+  const geos = [];
+  const plateR = g.centerDist + p.m*(g.Zp/2 + 1) + 4;
+  const plateThick = Math.max(3, p.coverThick*0.8);
+  const pinR = p.pinD/2;
+  const pinLen = p.face + 1;
+
+  // Bolzen ZUERST (lokal z=[0, pinLen]) — reichen von hier aus in Richtung
+  // der Planetenräder, die im Baugruppen-Stapel VOR dem Steg liegen.
+  // Vorher zeigten die Bolzen fälschlich in die andere Richtung (von den
+  // Planeten weg), wodurch sich Frontdeckel/Steg/Rückdeckel im gesamten
+  // Stapel überlappten.
+  for (let i = 0; i < g.planetCount; i++){
+    const a = (i/g.planetCount) * 2*Math.PI;
+    const cx = g.centerDist*Math.cos(a), cy = g.centerDist*Math.sin(a);
+    const pinShape = shapeFromPoints(circlePts(pinR, cx, cy, 24));
+    const pinGeo = new THREE.ExtrudeGeometry(pinShape, { depth: pinLen, bevelEnabled:false, curveSegments:1 });
+    geos.push(pinGeo);
+  }
+
+  // Trägerplatte sitzt DAHINTER (weiter weg von den Planetenrädern, Richtung
+  // Rückdeckel) — trägt gleichzeitig die Abtriebswellen-Bohrung.
+  const plateShape = shapeFromPoints(circlePts(plateR, 0, 0, 72));
+  const outHoleR = Math.max(0.5, p.outBore/2 + p.fit/2);
+  if (outHoleR > 0.5){
+    plateShape.holes = [shapeFromPoints(circlePts(outHoleR, 0, 0, 32).reverse())];
+  }
+  const plateGeo = new THREE.ExtrudeGeometry(plateShape, { depth: plateThick, bevelEnabled:false, curveSegments:1 });
+  plateGeo.translate(0, 0, pinLen);
+  geos.push(plateGeo);
+
+  return { geos, plateThick, pinLen, totalDepth: pinLen + plateThick, plateR };
+}
+
+function buildPlanetaryCover(g, p, bodyR, wallOuter, shaftHoleR){
+  const outerShape = housingOuterShape(bodyR, p.flansch);
+  const through = shapeFromPoints(circlePts(shaftHoleR, 0, 0, 32).reverse());
+  const bolts = boltHoles(bodyR, g.centerDist + p.m*(g.Zp/2+1) + 2, p.boltD, wallOuter);
+  outerShape.holes = [through, ...bolts.holes];
+  const geo = new THREE.ExtrudeGeometry(outerShape, { depth: p.coverThick, bevelEnabled:false, curveSegments:1 });
+  return { geo, bolts };
+}
+
+function buildPlanetaryAssembly(p){
+  const g = computePlanetaryGeometry(p);
+  const wallOuter = planetaryWallOuter(p.boltD);
+  const bodyR = g.centerDist + p.m*(g.Zp/2 + 1) + wallOuter;
+  const gap = 6;
+  const groups = [];
+  let z = 0;
+
+  const sunHoleR = Math.max(1.5, p.sunBore/2 + p.fit/2 + 1);
+  const front = buildPlanetaryCover(g, p, bodyR, wallOuter, sunHoleR);
+  front.geo.translate(0, 0, z);
+  groups.push({ geo: front.geo, color: 0x7a8a9a, part:'Front cover', fuse:'Frontdeckel' });
+  z += p.coverThick + gap;
+
+  const sunBoreEff = p.sunBore > 0 ? p.sunBore + p.fit : 0;
+  const sunGeo = buildGear(p.m, g.Zs, p.face, sunBoreEff, p.pa, false, 0);
+  sunGeo.translate(0, 0, z + p.face/2);
+  groups.push({ geo: sunGeo, color: 0x5fd9a0, part:'Sun gear', fuse:'Sonnenrad' });
+
+  const planetBoreEff = p.pinD + p.fit;
+  for (let i = 0; i < g.planetCount; i++){
+    const a = (i/g.planetCount) * 2*Math.PI;
+    const cx = g.centerDist*Math.cos(a), cy = g.centerDist*Math.sin(a);
+    const pGeo = buildGear(p.m, g.Zp, p.face, planetBoreEff, p.pa, false, 0);
+    pGeo.translate(cx, cy, 0);
+    pGeo.translate(0, 0, z + p.face/2);
+    groups.push({ geo: pGeo, color: 0xff8c3c, part:'Planet gears', fuse:'planet_'+i });
+  }
+
+  const ringGeo = buildGear(p.m, g.Zr, p.face, 0, p.pa, true, wallOuter*0.5);
+  ringGeo.translate(0, 0, z + p.face/2);
+  groups.push({ geo: ringGeo, color: 0x8a9a92, part:'Ring gear', fuse:'Hohlrad' });
+  z += p.face + gap;
+
+  const carrier = buildCarrier(g, p, bodyR);
+  carrier.geos.forEach(cg => { cg.translate(0, 0, z); groups.push({ geo: cg, color: 0xd9c79e, part:'Carrier', fuse:'Steg' }); });
+
+  // Optionale Erweiterung: Abtriebswelle als durchgehender Wellenstumpf, der
+  // über den Rückdeckel hinausragt — damit lässt sich eine weitere Stufe
+  // (z.B. ein zweites Planetengetriebe) direkt andocken, deren Sonnenrad-
+  // Bohrung auf diesen Zapfen passt. Fest mit dem Steg verschmolzen (dreht
+  // sich mit ihm mit), Durchmesser folgt der Abtriebswellen-Bohrung.
+  if (p.extendOn && p.outBore > 0){
+    const extR = p.outBore/2;
+    const extGeo = new THREE.ExtrudeGeometry(shapeFromPoints(circlePts(extR, 0, 0, 32)), { depth: p.extendLen, bevelEnabled:false, curveSegments:1 });
+    extGeo.translate(0, 0, z + carrier.totalDepth);
+    groups.push({ geo: extGeo, color: 0xd9c79e, part:'Carrier', fuse:'Steg' });
+  }
+  z += carrier.totalDepth + gap;
+
+  const outHoleR = Math.max(1.5, p.outBore/2 + p.fit/2 + 1);
+  const back = buildPlanetaryCover(g, p, bodyR, wallOuter, outHoleR);
+  back.geo.translate(0, 0, z);
+  groups.push({ geo: back.geo, color: 0x7a8a9a, part:'Back cover', fuse:'Rückdeckel' });
+
+  // Baugruppe waagerecht ausrichten: die Stapel-/Wellenachse (lokal Z) soll
+  // in der Standardansicht horizontal (Welt-X) verlaufen statt senkrecht —
+  // so sieht man beim ersten Öffnen sofort die ganze Teilereihenfolge
+  // nebeneinander, statt einen hohen Turm von oben zu betrachten.
+  groups.forEach(item => { item.geo.rotateY(Math.PI/2); });
+
+  return { groups, meta: g, bodyR };
+}
+
+// ===== Szene, Kamera, Steuerung ============================================
+let scene, camera, renderer, controls, modelGroup;
+function initScene(){
+  const container = document.getElementById('ogViewer');
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(45, container.clientWidth/container.clientHeight, 0.1, 5000);
+  renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+
+  const grid = new THREE.GridHelper(400, 20, 0x35473f, 0x233129);
+  scene.add(grid);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.65));
+  const dir = new THREE.DirectionalLight(0xffffff, 0.7);
+  dir.position.set(1, 1.4, 1);
+  scene.add(dir);
+  const dir2 = new THREE.DirectionalLight(0xffffff, 0.35);
+  dir2.position.set(-1, 0.6, -1);
+  scene.add(dir2);
+
+  modelGroup = new THREE.Group();
+  scene.add(modelGroup);
+
+  window.addEventListener('resize', () => {
+    camera.aspect = container.clientWidth/container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  });
+
+  animate();
+}
+function animate(){
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+let cameraNeedsReset = true;
+function finishRebuild(){
+  const box = new THREE.Box3().setFromObject(modelGroup);
+  const size = new THREE.Vector3(); box.getSize(size);
+  const center = new THREE.Vector3(); box.getCenter(center);
+  const maxDim = Math.max(size.x, size.y, size.z, 20);
+
+  if (cameraNeedsReset){
+    controls.target.set(center.x, center.y, center.z);
+    camera.position.set(center.x + maxDim*1.3, center.y + maxDim*1.05, center.z + maxDim*1.5);
+    cameraNeedsReset = false;
+  }
+  camera.near = maxDim/100; camera.far = maxDim*40;
+  camera.updateProjectionMatrix();
+
+  document.getElementById('ogDims').textContent =
+    `W ${size.x.toFixed(0)} × D ${size.z.toFixed(0)} × H ${size.y.toFixed(0)} mm`;
+}
+
+// ===== Teile-Sichtbarkeit (nur Anzeige) ====================================
+const hiddenParts = new Set();
+function rebuildPartVisibilityUI(){
+  const wrap = document.getElementById('ogPartVisibilityWrap');
+  const container = document.getElementById('ogPartVisibility');
+  const labels = [...new Set(modelGroup.children.map(m => m.userData.partLabel).filter(Boolean))];
+
+  modelGroup.children.forEach(m => {
+    if (m.userData.partLabel) m.visible = !hiddenParts.has(m.userData.partLabel);
+  });
+
+  if (labels.length < 2){ wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  container.innerHTML = '';
+  labels.forEach(label => {
+    const row = document.createElement('label');
+    row.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink); cursor:pointer; padding:4px 0;';
+    const checked = !hiddenParts.has(label);
+    row.innerHTML = `<input type="checkbox" ${checked?'checked':''} style="accent-color:var(--accent); width:15px; height:15px; flex:none;"><span>${label}</span>`;
+    const cb = row.querySelector('input');
+    cb.addEventListener('change', () => {
+      if (cb.checked) hiddenParts.delete(label); else hiddenParts.add(label);
+      modelGroup.children.forEach(m => { if (m.userData.partLabel === label) m.visible = cb.checked; });
+    });
+    container.appendChild(row);
+  });
+}
+
+// ===== 3MF-Export (bewährtes Muster) =======================================
+function meshVolume(geo){
+  // vorzeichenbehaftetes Volumen; negativ = Dreiecke zeigen nach innen
+  const pos = geo.attributes.position, idx = geo.index;
+  const n = idx ? idx.count : pos.count;
+  let v = 0;
+  for (let i = 0; i < n; i += 3){
+    const a = idx ? idx.getX(i) : i, b = idx ? idx.getX(i+1) : i+1, c = idx ? idx.getX(i+2) : i+2;
+    const ax = pos.getX(a), ay = pos.getY(a), az = pos.getZ(a);
+    const bx = pos.getX(b), by = pos.getY(b), bz = pos.getZ(b);
+    const cx = pos.getX(c), cy = pos.getY(c), cz = pos.getZ(c);
+    v += ax*(by*cz - bz*cy) - ay*(bx*cz - bz*cx) + az*(bx*cy - by*cx);
+  }
+  return v / 6;
+}
+function triOk(pos, a, b, c){
+  // verwirft entartete (flächenlose) Dreiecke, z. B. an Rotationsnähten
+  const ax = Math.round(pos.getX(a)*1000), ay = Math.round(pos.getY(a)*1000), az = Math.round(pos.getZ(a)*1000);
+  const bx = Math.round(pos.getX(b)*1000), by = Math.round(pos.getY(b)*1000), bz = Math.round(pos.getZ(b)*1000);
+  const cx = Math.round(pos.getX(c)*1000), cy = Math.round(pos.getY(c)*1000), cz = Math.round(pos.getZ(c)*1000);
+  return !(ax===bx && ay===by && az===bz) && !(bx===cx && by===cy && bz===cz) && !(ax===cx && ay===cy && az===cz);
+}
+function meshListToXmlObject(meshList, objectId){
+  const vParts = [], tParts = [];
+  let vertexOffset = 0;
+  meshList.forEach(mesh => {
+    const geo = mesh.geometry;
+    const posAttr = geo.attributes.position;
+    const flip = meshVolume(geo) < 0; // nach innen gerichtete Flächen im Export umdrehen
+    const idx = geo.index;
+    const n = idx ? idx.count : posAttr.count;
+    // nur tatsächlich verwendete Eckpunkte exportieren (spart bei großen Rastern viel Platz)
+    const remap = new Int32Array(posAttr.count).fill(-1);
+    let used = 0;
+    const get = i => idx ? idx.getX(i) : i;
+    for (let i = 0; i < n; i += 3){
+      const a = get(i), b = get(i+1), c = get(i+2);
+      if (!triOk(posAttr, a, b, c)) continue;
+      const tri = flip ? [a, c, b] : [a, b, c];
+      for (let k = 0; k < 3; k++){
+        const v = tri[k];
+        if (remap[v] < 0){
+          remap[v] = used++;
+          vParts.push(`<vertex x="${+posAttr.getX(v).toFixed(3)}" y="${+posAttr.getY(v).toFixed(3)}" z="${+posAttr.getZ(v).toFixed(3)}"/>`);
+        }
+      }
+      tParts.push(`<triangle v1="${remap[tri[0]]+vertexOffset}" v2="${remap[tri[1]]+vertexOffset}" v3="${remap[tri[2]]+vertexOffset}"/>`);
+    }
+    vertexOffset += used;
+  });
+  if (!tParts.length) return '';
+  return `<object id="${objectId}" type="model"><mesh><vertices>${vParts.join('')}</vertices><triangles>${tParts.join('')}</triangles></mesh></object>\n`.replace(/\n$/, '');
+}
+function groupMeshesByFuse(meshes){
+  const groups = [], map = new Map();
+  meshes.forEach(mesh => {
+    const key = mesh.userData && mesh.userData.fuseGroup;
+    if (key){
+      if (!map.has(key)){ const arr = []; map.set(key, arr); groups.push(arr); }
+      map.get(key).push(mesh);
+    } else { groups.push([mesh]); }
+  });
+  return groups;
+}
+async function exportMultiPart3MF(meshes, filename){
+  if (typeof JSZip === 'undefined'){ alert('The 3MF export module could not be loaded (check your internet connection).'); return; }
+  meshes = meshes.filter(m => m.geometry && m.geometry.attributes.position && m.geometry.attributes.position.count >= 3);
+  if (!meshes.length){ alert('Nothing to export.'); return; }
+  const fuseGroups = groupMeshesByFuse(meshes);
+  let objectsXml = '', buildXml = '';
+  let nextId = 1;
+  fuseGroups.forEach(meshList => {
+    const xml = meshListToXmlObject(meshList, nextId);
+    if (!xml) return; // Gruppen ohne Dreiecke (z. B. leerer Text) überspringen
+    objectsXml += xml;
+    buildXml += `<item objectid="${nextId}"/>`;
+    nextId++;
+  });
+  if (nextId === 1){ alert('Nothing to export.'); return; }
+  const modelXml = `<?xml version="1.0" encoding="UTF-8"?>\n<model unit="millimeter" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02"><resources>${objectsXml}</resources><build>${buildXml}</build></model>`;
+  const contentTypes = `<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>`;
+  const rels = `<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>`;
+  const zip = new JSZip();
+  zip.file('[Content_Types].xml', contentTypes);
+  zip.file('_rels/.rels', rels);
+  zip.file('3D/3dmodel.model', new TextEncoder().encode(modelXml));
+  const blob = await zip.generateAsync({ type:'blob', compression:'DEFLATE', compressionOptions:{ level:1 } });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
+}
+
+// ===== State, Rebuild, UI ===================================================
+const state = {
+  zs:12, zp:18, planetCount:3, m:1.5, pa:20, face:10,
+  sunBore:6, outBore:8, pinD:4, fit:0.4, coverThick:4, boltD:3, flansch:'round',
+  extendOn:false, extendLen:18
+};
+
+function rebuild(){
+  const assembly = buildPlanetaryAssembly(state);
+  while (modelGroup.children.length) modelGroup.remove(modelGroup.children[0]);
+  assembly.groups.forEach(item => {
+    const mat = new THREE.MeshStandardMaterial({ color: item.color, roughness:0.55, metalness:0.08, side: THREE.DoubleSide });
+    const mesh = new THREE.Mesh(item.geo, mat);
+    mesh.userData.partLabel = item.part || '';
+    mesh.userData.fuseGroup = item.fuse || item.part || '';
+    modelGroup.add(mesh);
+  });
+  rebuildPartVisibilityUI();
+  finishRebuild();
+
+  const g = assembly.meta;
+  document.getElementById('p_ratioInfo').textContent =
+    `Ring gear: ${g.Zr} teeth · ${g.planetCount} planets (${g.Zp} teeth) · ratio 1:${g.ratio.toFixed(2)} (carrier output, ring gear fixed)`;
+  const note = document.getElementById('p_clampNote');
+  if (g.clamped){
+    note.style.display = 'block';
+    note.textContent = `Values adjusted automatically so the assembly condition and collision-free spacing between the planets are met — actually used: ${g.planetCount} planets, planet gear ${g.Zp} teeth.`;
+  } else {
+    note.style.display = 'none';
+  }
+  // Regler auf den TATSÄCHLICH verwendeten Wert zurücksetzen — sonst zeigt
+  // der Regler z.B. "5" an, obwohl wegen Kollisionsfreiheit nur 4 Planeten
+  // gebaut wurden, was ohne diesen Abgleich leicht übersehen wird.
+  const countSlider = document.getElementById('p_count');
+  if (parseInt(countSlider.value, 10) !== g.planetCount){
+    countSlider.value = g.planetCount;
+    document.getElementById('v_p_count').textContent = g.planetCount;
+  }
+  const zpSlider = document.getElementById('p_zp');
+  if (parseInt(zpSlider.value, 10) !== g.Zp){
+    zpSlider.value = g.Zp;
+    document.getElementById('v_p_zp').textContent = g.Zp;
+  }
+}
+
+function setupUI(){
+  function setV(id, val, dec){ document.getElementById('v_'+id).textContent = dec!==undefined ? val.toFixed(dec) : Math.round(val); }
+
+  document.getElementById('p_zs').addEventListener('input', e => { state.zs = parseFloat(e.target.value); setV('p_zs', state.zs); rebuild(); });
+  document.getElementById('p_zp').addEventListener('input', e => { state.zp = parseFloat(e.target.value); setV('p_zp', state.zp); rebuild(); });
+  document.getElementById('p_count').addEventListener('input', e => { state.planetCount = parseFloat(e.target.value); setV('p_count', state.planetCount); rebuild(); });
+  document.getElementById('p_mod').addEventListener('input', e => { state.m = parseFloat(e.target.value); setV('p_mod', state.m, 1); rebuild(); });
+  document.getElementById('p_pa').addEventListener('input', e => { state.pa = parseFloat(e.target.value); setV('p_pa', state.pa, 1); rebuild(); });
+  document.getElementById('p_face').addEventListener('input', e => { state.face = parseFloat(e.target.value); setV('p_face', state.face); rebuild(); });
+  document.getElementById('p_sunbore').addEventListener('input', e => { state.sunBore = parseFloat(e.target.value); setV('p_sunbore', state.sunBore, 1); rebuild(); });
+  document.getElementById('p_outbore').addEventListener('input', e => { state.outBore = parseFloat(e.target.value); setV('p_outbore', state.outBore, 1); rebuild(); });
+  document.getElementById('p_pind').addEventListener('input', e => { state.pinD = parseFloat(e.target.value); setV('p_pind', state.pinD, 1); rebuild(); });
+  document.getElementById('p_fit').addEventListener('input', e => { state.fit = parseFloat(e.target.value); setV('p_fit', state.fit, 2); rebuild(); });
+  document.getElementById('p_coverthick').addEventListener('input', e => { state.coverThick = parseFloat(e.target.value); setV('p_coverthick', state.coverThick, 1); rebuild(); });
+  document.getElementById('p_boltd').addEventListener('input', e => { state.boltD = parseFloat(e.target.value); setV('p_boltd', state.boltD, 1); rebuild(); });
+  document.getElementById('p_extendon').addEventListener('change', e => {
+    state.extendOn = e.target.checked;
+    document.getElementById('p_extendRow').style.display = state.extendOn ? 'block' : 'none';
+    rebuild();
+  });
+  document.getElementById('p_extendlen').addEventListener('input', e => { state.extendLen = parseFloat(e.target.value); setV('p_extendlen', state.extendLen); rebuild(); });
+
+  document.querySelectorAll('[data-flansch]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-flansch]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.flansch = btn.dataset.flansch;
+      rebuild();
+    });
+  });
+
+  document.getElementById('ogExport').addEventListener('click', () => {
+    exportMultiPart3MF(modelGroup.children, 'planetary-gearbox.3mf');
+  });
+}
+
+initScene();
+setupUI();
+rebuild();
+
+})();
+</script>
+</body>
+</html>

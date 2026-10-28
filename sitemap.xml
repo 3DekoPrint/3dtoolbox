@@ -76,24 +76,72 @@
 
   <url>
     <loc>https://3dtoolbox.info/3d-druck-objektgenerator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-objektgenerator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-object-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-objektgenerator.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/en/3d-print-object-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-objektgenerator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-object-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-objektgenerator.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://3dtoolbox.info/3d-druck-planetengetriebe-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-planetengetriebe-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-planetary-gearbox-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-planetengetriebe-generator.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/en/3d-print-planetary-gearbox-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-planetengetriebe-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-planetary-gearbox-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-planetengetriebe-generator.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://3dtoolbox.info/3d-druck-namens-anhaenger.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-namens-anhaenger.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-layered-name-tag.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-namens-anhaenger.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/en/3d-print-layered-name-tag.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-namens-anhaenger.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-layered-name-tag.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-namens-anhaenger.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://3dtoolbox.info/3d-druck-namensschild-anhaenger.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-namensschild-anhaenger.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-name-plate-tag.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-namensschild-anhaenger.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://3dtoolbox.info/en/3d-print-name-plate-tag.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-namensschild-anhaenger.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-name-plate-tag.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-namensschild-anhaenger.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
