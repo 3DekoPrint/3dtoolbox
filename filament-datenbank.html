@@ -755,7 +755,7 @@
   // (dort lassen sich weitere Anbieter per Kommentar aktivieren).
   const FILAMENTS = window.FilamentCatalog.items('de').map(it => ({name:it.name, brand:it.brand, material:it.material, hex:it.hex, color:it.color, shops:[{shop:it.shop, url:it.url}]}));
 
-  // ---- Farb-Zuordnung: Familie → Farbton → Produkte aller Marken ----
+  // ---- Farb-Zuordnung: alle Farbtöne auf einer Seite (nach Familien gegliedert) → Produkte aller Marken ----
   // Stufe 1: Farbfamilien (Rot, Blau, Gold …). Stufe 2: Farbtöne einer Familie; sehr ähnliche Töne
   // (Farbabstand ΔE < 4) werden zu einer Kachel zusammengefasst, damit Marken zusammen erscheinen.
   // Stufe 3: alle Produkte dieses Farbtons mit den Shop-Links aller angebundenen Marken.
@@ -931,7 +931,6 @@
     const q = hexQuery.trim();
     crumb(T.colors, () => { hexQuery=''; hexSearchEl.value=''; resetView(); renderAll(); }, view === 'families' && !q);
     if (q && view !== 'shops') crumb('#' + q.toUpperCase().replace('#',''), null, true);
-    if (selectedFamily && !q) crumb(T.fam[selectedFamily], () => { view='shades'; selectedCluster=null; renderAll(); }, view === 'shades');
     if (selectedCluster) crumb(clusterTitle(selectedCluster) + ' (' + selectedCluster.hex + ')', null, true, selectedCluster.hex);
   }
 
@@ -958,31 +957,41 @@
     })));
   }
 
+  // Alle Farbtöne auf einer Seite, nach Familien gegliedert; Schnellsprung-Chips oben
   function renderFamilies(){
     const pool = currentPool();
     const q = hexQuery.trim().toUpperCase().replace('#','');
-    if (q){   // Hex-Suche: direkt Farbtöne quer über alle Familien
-      const hit = pool.filter(f => f.hex.replace('#','').includes(q));
-      if (!hit.length){ viewEl.innerHTML=''; emptyEl.style.display='block'; return; }
-      emptyEl.style.display='none'; showShadeTiles(clustersOf(hit)); return;
-    }
-    if (!pool.length){ viewEl.innerHTML=''; emptyEl.style.display='block'; return; }
+    const list = q ? pool.filter(f => f.hex.replace('#','').includes(q)) : pool;
+    if (!list.length){ viewEl.innerHTML=''; emptyEl.style.display='block'; return; }
     emptyEl.style.display='none';
     const fams = {};
-    pool.forEach(f => { (fams[f.fam] = fams[f.fam] || []).push(f); });
-    showGrid(FAMILY_ORDER.filter(k => fams[k]).map(k => {
+    list.forEach(f => { (fams[f.fam] = fams[f.fam] || []).push(f); });
+    const keys = FAMILY_ORDER.filter(k => fams[k]);
+    viewEl.innerHTML = '';
+    const jump = document.createElement('div'); jump.className = 'fd-pills'; jump.style.margin = '0 0 14px';
+    keys.forEach(k => {
+      const c = clustersOf(fams[k])[0];
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'fd-pill';
+      b.innerHTML = '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:' + c.hex + ';border:1px solid rgba(255,255,255,.35)"></span>' + T.fam[k];
+      b.addEventListener('click', () => { const el = document.getElementById('fdfam-' + k); if (el) el.scrollIntoView({behavior:'smooth', block:'start'}); });
+      jump.appendChild(b);
+    });
+    viewEl.appendChild(jump);
+    keys.forEach(k => {
       const cl = clustersOf(fams[k]);
-      const sw = cl.slice(0, 6).map(c => c.hex);
-      const bg = sw.length > 1 ? 'background:linear-gradient(90deg,' + sw.join(',') + ')' : 'background:' + sw[0];
-      return { html: tileHtml(bg, T.fam[k], plural(fams[k].length, T.fil) + ' · ' + plural(cl.length, T.shades)),
-               onClick: () => { selectedFamily = k; view = 'shades'; renderAll(); } };
-    }));
-  }
-  function renderShades(){
-    const items = currentPool().filter(f => f.fam === selectedFamily);
-    if (!items.length){ viewEl.innerHTML=''; emptyEl.style.display='block'; return; }
-    emptyEl.style.display='none';
-    showShadeTiles(clustersOf(items));
+      const h = document.createElement('h3'); h.id = 'fdfam-' + k;
+      h.style.cssText = 'margin:22px 0 10px;font-size:15px;letter-spacing:.04em;scroll-margin-top:80px;';
+      h.textContent = T.fam[k] + ' · ' + plural(fams[k].length, T.fil);
+      viewEl.appendChild(h);
+      const grid = document.createElement('div'); grid.className = 'fd-color-grid';
+      cl.forEach(c => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'fd-color-tile';
+        b.innerHTML = tileHtml('background:' + c.hex, clusterTitle(c), shadeName(c.hex, c.fam) + ' · ' + c.hex + '<br>' + plural(c.items.length, T.fil) + ' · ' + brandsOf(c.items));
+        b.addEventListener('click', () => { selectedCluster = c; view = 'shops'; renderAll(); window.scrollTo({top: breadcrumbEl.getBoundingClientRect().top + window.scrollY - 90}); });
+        grid.appendChild(b);
+      });
+      viewEl.appendChild(grid);
+    });
   }
   function renderShops(){
     const items = currentPool().filter(f => f.fam === selectedCluster.fam && deltaE(f.hex, selectedCluster.hex) < 4);
