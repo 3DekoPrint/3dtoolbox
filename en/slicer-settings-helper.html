@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slicer Settings Helper: Temperature, Speed &amp; Retraction per Material | 3DToolBox</title>
+<meta name="description" content="Free slicer helper: pick material, nozzle and goal and get starting values for temperature, layer height, speed, fan and retraction – for PLA, PETG, ABS, ASA, TPU, nylon and more.">
+<link rel="canonical" href="https://3dtoolbox.info/en/slicer-settings-helper.html">
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/slicer-einstellungen-helfer.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/slicer-settings-helper.html">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/slicer-einstellungen-helfer.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="3DToolBox">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Slicer Settings Helper: Temperature, Speed &amp; Retraction per Material | 3DToolBox">
+<meta property="og:description" content="Free slicer helper: pick material, nozzle and goal and get starting values for temperature, layer height, speed, fan and retraction – for PLA, PETG, ABS, ASA, TPU, nylon and more.">
+<meta property="og:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta property="og:url" content="https://3dtoolbox.info/en/slicer-settings-helper.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Slicer Settings Helper: Temperature, Speed &amp; Retraction per Material | 3DToolBox">
+<meta name="twitter:description" content="Free slicer helper: pick material, nozzle and goal and get starting values for temperature, layer height, speed, fan and retraction – for PLA, PETG, ABS, ASA, TPU, nylon and more.">
+<meta name="twitter:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Slicer Settings Helper", "url": "https://3dtoolbox.info/en/slicer-settings-helper.html", "description": "Free slicer helper: pick material, nozzle and goal and get starting values for temperature, layer height, speed, fan and retraction – for PLA, PETG, ABS, ASA, TPU, nylon and more.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (Web Browser)", "inLanguage": "en", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "publisher": {"@type": "Organization", "name": "3DekoPrint", "url": "https://3dtoolbox.info/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What temperature is right for PLA?", "acceptedAnswer": {"@type": "Answer", "text": "Usually 190–230 °C. The helper picks roughly the middle as a starting value; use a temperature tower to find the best value for your spool."}}, {"@type": "Question", "name": "Why does speed change with the nozzle?", "acceptedAnswer": {"@type": "Answer", "text": "Maximum speed depends on volumetric flow. Larger nozzles with thicker layers move more material per second, so the speed per line drops."}}, {"@type": "Question", "name": "Do the values apply to every printer?", "acceptedAnswer": {"@type": "Answer", "text": "No, they are guidelines. Bambu, Prusa, Creality and others have different hotends and extruders – use the values as a starting point and fine-tune."}}]}]}</script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/material-page.css">
+</head>
+<body>
+<div class="fm-root bt-sub">
+  <nav class="bt-nav">
+    <a class="bt-logo" href="/en/" aria-label="3DToolBox"><svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true"><rect width="220" height="220" rx="44" fill="#FF6A2B"/><polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/><polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/><polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/></svg><span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span></a>
+    <div class="fm-lang-switch"><span class="fm-lang-current">EN</span><a class="fm-lang-link" href="/slicer-einstellungen-helfer.html" hreflang="de">DE</a></div>
+  </nav>
+  <div class="bt-switch"><a class="bt-chip bt-chip-flag" href="/en/">Filament Finder</a><a class="bt-chip" href="/en/3d-print-cost-calculator.html">Cost Calculator</a><a class="bt-chip" href="/en/filament-database.html">Filament Database</a><a class="bt-chip" href="/en/3d-print-lexicon.html">Lexicon</a><a class="bt-chip" href="/en/filament-remaining-calculator.html">Remaining Filament</a><span class="bt-chip bt-chip-active" aria-current="page">Slicer Helper</span><a class="bt-chip" href="/en/materials/">Materials</a></div>
+  <div class="bt-switch bt-switch-gen"><span class="bt-group-label">Generators</span><a class="bt-chip" href="/en/3d-print-object-generator.html">Object Generator</a><a class="bt-chip" href="/en/3d-print-planetary-gearbox-generator.html">Planetary Gearbox</a><a class="bt-chip" href="/en/3d-print-layered-name-tag.html">Layered Name Tag</a><a class="bt-chip" href="/en/3d-print-name-plate-tag.html">Name Plate Tag</a>
+    <span class="bt-ext-group"><span class="bt-ext-label">External · not by us</span>
+      <a class="bt-chip bt-chip-ext" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI ↗</a>
+      <a class="bt-chip bt-chip-ext" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs ↗</a></span>
+  </div>
+
+  <header class="bt-subhero"><span class="bt-pill"><i></i>Slicer helper</span><h1 class="fm-title">Slicer Settings Helper</h1><p class="fm-sub">Pick material, nozzle and goal – and get starting values for temperature, layer height, speed, fan and retraction.</p>
+  <div class="bt-kpis"><div class="bt-kpi"><b>24</b><span>Materials</span></div><div class="bt-kpi"><b>4</b><span>Nozzle sizes</span></div><div class="bt-kpi"><b>3</b><span>Goals</span></div></div></header>
+  <section class="bt-panel mp">
+  <div class="rr-grid">
+   <label>Material<select id="shMat"></select></label>
+   <label>Nozzle size<select id="shNoz"><option value="0.2">0.2 mm</option><option value="0.4" selected>0.4 mm</option><option value="0.6">0.6 mm</option><option value="0.8">0.8 mm</option></select></label>
+   <label>Goal<select id="shGoal"><option value="q">Quality (fine detail)</option><option value="s" selected>Standard</option><option value="f">Speed (fast & stable)</option></select></label>
+   <label>Extruder<select id="shDD"><option value="1">Direct drive</option><option value="0">Bowden</option></select></label>
+   <label>Enclosure<select id="shEnc"><option value="0">No enclosure</option><option value="1">Enclosure</option></select></label>
+  </div>
+  <h2>Recommended starting values</h2><div id="shOut" aria-live="polite"></div><div id="shWarn"></div>
+  <h2>How to use the values</h2><p>The values are starting points for Bambu Studio, PrusaSlicer, OrcaSlicer, Cura and others. Enter them in your filament and process profile, then use a temperature tower, flow test and retraction test to find what your printer really needs.</p><p>Speed is calculated from the material's maximum volumetric flow: speed = flow ÷ (layer height × line width). Thicker layers or wider lines therefore mean lower speed at the same flow.</p><p>Your hotend and extruder may differ from these guidelines (e.g. high-flow hotends). The values printed on the spool take priority.</p><h2>Frequently asked questions</h2><details class="mp-faq"><summary>What temperature is right for PLA?</summary><p>Usually 190–230 °C. The helper picks roughly the middle as a starting value; use a temperature tower to find the best value for your spool.</p></details><details class="mp-faq"><summary>Why does speed change with the nozzle?</summary><p>Maximum speed depends on volumetric flow. Larger nozzles with thicker layers move more material per second, so the speed per line drops.</p></details><details class="mp-faq"><summary>Do the values apply to every printer?</summary><p>No, they are guidelines. Bambu, Prusa, Creality and others have different hotends and extruders – use the values as a starting point and fine-tune.</p></details><p>Details per material are in our <a href="/en/materials/">material guides</a>.</p></section>
+  <div class="fm-partner"><p class="fm-partner-title">Are you a 3D-print creator who wants to feature 3DToolBox in your content?</p><p class="fm-partner-text">We work with selected partners who introduce 3DToolBox and its connected tools to their audience. Reach out with a few details about your channel — we review every application personally.</p><a class="fm-partner-btn" href="mailto:info@3dtoolbox.info?subject=Partner%20inquiry%20-%203DToolBox">Become a partner</a></div>
+  <div class="fm-footer">
+    <p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> In cooperation with <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p>
+    <div class="fm-footer-legal"><a href="/en/impressum.html">Legal Notice</a><span>·</span><a href="/en/datenschutz.html">Privacy Policy</a></div>
+  </div>
+</div>
+<script src="/assets/materials.js"></script>
+<script src="/assets/slicer-data.js"></script>
+<script src="/assets/slicer-helper.js"></script>
+</body>
+</html>

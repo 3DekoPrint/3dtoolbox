@@ -28,3 +28,7 @@
 .rr-bar i{display:block;height:100%;width:0;background:var(--accent-2);transition:width .25s}
 .rr-verdict{font-weight:600;min-height:1.6em}
 @media(max-width:520px){.rr-out{grid-template-columns:1fr}}
+.sh-row{display:grid;grid-template-columns:minmax(120px,200px) 1fr;gap:4px 14px;padding:9px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.sh-row span{color:var(--ink-dim);font-size:13px}.sh-row b{font-weight:600}.sh-row small{grid-column:2;color:var(--ink-dim)}
+@media(max-width:520px){.sh-row{grid-template-columns:1fr}.sh-row small{grid-column:1}}
+#shWarn h3{margin:18px 0 6px;font-size:16px}
