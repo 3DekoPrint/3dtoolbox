@@ -753,12 +753,23 @@
   // ============================================================
   // Anbieter, Daten und Affiliate-Links werden zentral in /assets/filament-catalog.js gepflegt
   // (dort lassen sich weitere Anbieter per Kommentar aktivieren).
-  const FILAMENTS = window.FilamentCatalog.items('de').map(it => ({name:it.name, brand:it.brand, material:it.material, hex:it.hex, shops:[{shop:it.shop, url:it.url}]}));
+  const FILAMENTS = window.FilamentCatalog.items('de').map(it => ({name:it.name, brand:it.brand, material:it.material, hex:it.hex, color:it.color, shops:[{shop:it.shop, url:it.url}]}));
 
-  // ---- Exakte Farb-Zuordnung ----
-  // Jede Kachel auf Stufe 1 entspricht GENAU einem Hex-Wert aus den Daten oben —
-  // kein Zusammenfassen ähnlicher Töne. Neue Farbe = neuer Hex-Wert in FILAMENTS,
-  // die Kachel erscheint dann automatisch, ohne dass hier etwas geändert werden muss.
+  // ---- Farb-Zuordnung: Familie → Farbton → Produkte aller Marken ----
+  // Stufe 1: Farbfamilien (Rot, Blau, Gold …). Stufe 2: Farbtöne einer Familie; sehr ähnliche Töne
+  // (Farbabstand ΔE < 4) werden zu einer Kachel zusammengefasst, damit Marken zusammen erscheinen.
+  // Stufe 3: alle Produkte dieses Farbtons mit den Shop-Links aller angebundenen Marken.
+  const LANG = 'de';
+  const T = {
+    de: { colors:'Farben', fil:['Filament','Filamente'], shades:['Farbton','Farbtöne'], brandLbl:'MARKE:', all:'Alle', empty:'Keine Filamente für diese Auswahl gefunden.',
+      fam:{black:'Schwarz',white:'Weiß',grey:'Grau',silver:'Silber',red:'Rot',orange:'Orange',yellow:'Gelb',gold:'Gold',green:'Grün',turquoise:'Türkis',blue:'Blau',purple:'Lila',pink:'Pink & Rosa',brown:'Braun',beige:'Beige & Creme'},
+      light:'Hell', dark:'Dunkel', rosa:'Rosa', pinkN:'Pink', darkpink:'Dunkelpink' },
+    en: { colors:'Colors', fil:['filament','filaments'], shades:['shade','shades'], brandLbl:'BRAND:', all:'All', empty:'No filaments found for this selection.',
+      fam:{black:'Black',white:'White',grey:'Grey',silver:'Silver',red:'Red',orange:'Orange',yellow:'Yellow',gold:'Gold',green:'Green',turquoise:'Turquoise',blue:'Blue',purple:'Purple',pink:'Pink & Rose',brown:'Brown',beige:'Beige & Cream'},
+      light:'Light ', dark:'Dark ', rosa:'Light pink', pinkN:'Pink', darkpink:'Dark pink' }
+  }[LANG];
+  const FAMILY_ORDER = ['white','silver','grey','black','red','orange','gold','yellow','green','turquoise','blue','purple','pink','brown','beige'];
+
   function normalizeHex(hex){ return '#' + hex.replace('#','').toUpperCase(); }
   FILAMENTS.forEach(f => { f.hex = normalizeHex(f.hex); });
 
@@ -783,169 +794,221 @@
     }
     return { h, s: s*100, l: l*100 };
   }
+  function hexToLab(hex){
+    const {r,g,b} = hexToRgb(hex);
+    const lin = v => { v/=255; return v<=0.04045 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4); };
+    const R=lin(r), G=lin(g), B=lin(b);
+    let x=(R*0.4124+G*0.3576+B*0.1805)/0.95047, y=(R*0.2126+G*0.7152+B*0.0722), z=(R*0.0193+G*0.1192+B*0.9505)/1.08883;
+    const f = t => t>0.008856 ? Math.cbrt(t) : 7.787*t+16/116;
+    return { L:116*f(y)-16, a:500*(f(x)-f(y)), b:200*(f(y)-f(z)) };
+  }
+  function deltaE(h1,h2){ const a=hexToLab(h1), b=hexToLab(h2); return Math.sqrt((a.L-b.L)**2+(a.a-b.a)**2+(a.b-b.b)**2); }
 
-  // Rein kosmetischer Anzeigename (z.B. "Schwarz") neben dem Hex-Code —
-  // beeinflusst NICHT die Gruppierung, nur das Label auf der Kachel.
-  const NAME_REFERENCES = [
-    {name:"Schwarz", hex:"#161616"}, {name:"Weiß", hex:"#F7F7F5"}, {name:"Grau", hex:"#8A8D8F"},
-    {name:"Silber", hex:"#B7BBBD"}, {name:"Rot", hex:"#D6001C"}, {name:"Orange", hex:"#FF6A13"},
-    {name:"Gelb", hex:"#FFD400"}, {name:"Gold", hex:"#D4AF6A"}, {name:"Grün", hex:"#00AE42"},
-    {name:"Türkis", hex:"#00B1B7"}, {name:"Blau", hex:"#0056B8"}, {name:"Lila", hex:"#7A3FA0"},
-    {name:"Pink", hex:"#EC5F9C"}, {name:"Braun", hex:"#6F5034"}, {name:"Beige", hex:"#E8DBB7"},
-  ];
-  function nearestName(hex){
-    const a = hexToRgb(hex);
-    let best = NAME_REFERENCES[0], bestDist = Infinity;
-    NAME_REFERENCES.forEach(g => {
-      const b = hexToRgb(g.hex);
-      const d = Math.sqrt((a.r-b.r)**2 + (a.g-b.g)**2 + (a.b-b.b)**2);
-      if (d < bestDist){ bestDist = d; best = g; }
-    });
-    return best.name;
+  // Farbfamilie aus Farbton/Sättigung/Helligkeit (rein regelbasiert, Gold nur für echte Goldtöne)
+  function familyOf(hex){
+    const {h,s,l} = hexToHsl(hex);
+    if (l < 8 || (l < 13 && s < 25)) return 'black';
+    if (s < 12 || l > 94){ if (l >= 88) return 'white'; if (l < 18) return 'black'; if (l >= 62 && s < 8) return 'silver'; return 'grey'; }
+    if (s < 20 && l >= 20 && l <= 82) return 'grey';
+    if (h < 10 || h >= 345){
+      if (s < 50 && l < 50) return 'brown';
+      if (l >= 72 || (s < 65 && l >= 55)) return 'pink';
+      return 'red';
+    }
+    if (h < 56 && h >= 36 && s >= 35 && s <= 80 && l >= 45 && l <= 72) return 'gold';
+    if (h < 20 && l >= 68 && s >= 55) return 'pink';
+    if (h < 40){
+      if (l >= 72) return (s < 70 || h >= 30) ? 'beige' : 'orange';
+      if (l < 35) return 'brown';
+      if (s < 60) return l >= 66 && s < 50 ? 'beige' : 'brown';
+      return 'orange';
+    }
+    if (h < 68){
+      if (l >= 78 && s < 60) return 'beige';
+      if (h >= 50 && l < 45) return 'green';
+      if (l < 45 && s < 70) return 'brown';
+      return 'yellow';
+    }
+    if (h < 165) return 'green';
+    if (h < 200) return 'turquoise';
+    if (h < 250) return 'blue';
+    if (h < 300) return 'purple';
+    return (l < 50 && s < 50) ? 'brown' : 'pink';
+  }
+  // Familie eines Produkts: Namen mit "Gold"/"Silver" gehören sicher in diese Familien
+  function familyOfItem(f){
+    const n = (f.name + ' ' + (f.color || '')).toLowerCase();
+    const EXACT = {black:'black',schwarz:'black',white:'white','weiß':'white',red:'red',rot:'red',blue:'blue',blau:'blue',green:'green','grün':'green',yellow:'yellow',gelb:'yellow',orange:'orange',pink:'pink',purple:'purple',lila:'purple',magenta:'pink',gold:'gold',silver:'silver',silber:'silver',grey:'grey',gray:'grey',grau:'grey',brown:'brown',braun:'brown',beige:'beige',aqua:'turquoise',nude:'beige'};
+    const cn = (f.color || '').trim().toLowerCase();
+    if (EXACT[cn]) return EXACT[cn];
+    if (/\b(rose ?gold)\b/.test(n)) return familyOf(f.hex);
+    if (/\bgold\b/.test(n)) return 'gold';
+    if (/\b(silver|silber)\b/.test(n)) return 'silver';
+    const hf = familyOf(f.hex);
+    return hf === 'gold' ? 'yellow' : hf;   // Gold nur, wenn das Produkt wirklich Gold heißt
+  }
+  // Anzeigename eines Farbtons: Familie + Helligkeit (z. B. "Hellblau", "Dunkelgrün")
+  function shadeName(hex, fam){
+    const {l} = hexToHsl(hex);
+    const F = T.fam[fam];
+    if (fam === 'pink') return l >= 75 ? T.rosa : (l < 40 ? T.darkpink : T.pinkN);
+    if (['black','white','beige','gold','silver'].includes(fam)) return F.replace(' & Rose','').replace(' & Creme','').replace(' & Cream','');
+    const base = F.toLowerCase();
+    if (LANG === 'de'){ if (l >= 72) return 'Hell' + base; if (l < 32) return 'Dunkel' + base; return F; }
+    if (l >= 72) return T.light + base; if (l < 32) return T.dark + base; return F;
   }
 
-  function sortByColor(list){
-    return list.slice().sort((x,y) => {
-      const ah = hexToHsl(x.hex), bh = hexToHsl(y.hex);
-      const aNeutral = ah.s < 8, bNeutral = bh.s < 8;
-      if (aNeutral !== bNeutral) return aNeutral ? -1 : 1;
-      if (aNeutral && bNeutral) return bh.l - ah.l;
-      if (Math.abs(ah.h - bh.h) > 0.5) return ah.h - bh.h;
-      return bh.l - ah.l;
-    });
-  }
+  function sortByLightness(list){ return list.slice().sort((x,y) => hexToHsl(y.hex).l - hexToHsl(x.hex).l); }
+
+  FILAMENTS.forEach(f => { f.fam = familyOfItem(f); });
 
   // ---- State ----
   let material = 'ALL';
-  let view = 'colors';       // 'colors' | 'shops'
-  let selectedColor = null;  // exakter Hex-Wert, z.B. "#000000"
-  let hexQuery = '';         // Freitext-Suche nach Hex-Code (Stufe 1)
+  let brand = 'ALL';
+  let view = 'families';      // 'families' | 'shades' | 'shops'
+  let selectedFamily = null;
+  let selectedCluster = null; // {hex, items}
+  let hexQuery = '';
 
   const materialPillsEl = document.getElementById('fdMaterialPills');
   const hexSearchEl = document.getElementById('fdHexSearch');
   const breadcrumbEl = document.getElementById('fdBreadcrumb');
   const viewEl = document.getElementById('fdView');
   const emptyEl = document.getElementById('fdEmpty');
+  emptyEl.textContent = T.empty;
 
+  // Marken-Filter (aus dem Katalog erzeugt, folgt automatisch den aktiven Anbietern)
+  (function buildBrandBar(){
+    const bar = document.querySelector('.fd-material-bar');
+    const brands = [...new Set(FILAMENTS.map(f => f.brand))];
+    const wrap = document.createElement('div');
+    wrap.className = 'fd-material-bar'; wrap.style.marginTop = '0';
+    wrap.innerHTML = '<span class="fd-material-label">' + T.brandLbl + '</span><div class="fd-pills" id="fdBrandPills"></div>';
+    bar.parentNode.insertBefore(wrap, bar.nextSibling);
+    const pills = wrap.querySelector('#fdBrandPills');
+    ['ALL'].concat(brands).forEach(b => {
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'fd-pill' + (b === 'ALL' ? ' fd-pill-active' : '');
+      btn.textContent = b === 'ALL' ? T.all : b; btn.dataset.brand = b;
+      btn.addEventListener('click', () => {
+        pills.querySelectorAll('.fd-pill').forEach(x => x.classList.remove('fd-pill-active'));
+        btn.classList.add('fd-pill-active');
+        brand = b; resetView(); renderAll();
+      });
+      pills.appendChild(btn);
+    });
+  })();
+
+  function resetView(){ view = 'families'; selectedFamily = null; selectedCluster = null; }
   function currentPool(){
-    return FILAMENTS.filter(f => material === 'ALL' || f.material === material);
+    return FILAMENTS.filter(f => (material === 'ALL' || f.material === material) && (brand === 'ALL' || f.brand === brand));
   }
+  // Ähnliche Töne einer Familie zu Clustern zusammenfassen (ΔE < 4)
+  function clustersOf(list){
+    const sorted = sortByLightness(list);
+    const clusters = [];
+    sorted.forEach(f => {
+      const c = clusters.find(c => c.fam === f.fam && deltaE(c.hex, f.hex) < 4);
+      if (c) c.items.push(f); else clusters.push({hex:f.hex, fam:f.fam, items:[f]});
+    });
+    return clusters;
+  }
+  function brandsOf(items){ return [...new Set(items.map(i => i.brand))].join(', '); }
+  function plural(n, p){ return n + ' ' + (n === 1 ? p[0] : p[1]); }
 
   function renderBreadcrumb(){
     breadcrumbEl.innerHTML = '';
-    const home = document.createElement('button');
-    home.className = 'fd-crumb' + (view === 'colors' ? ' fd-crumb-current' : '');
-    home.textContent = 'Farben';
-    home.disabled = view === 'colors';
-    home.addEventListener('click', () => { view = 'colors'; selectedColor = null; renderAll(); });
-    breadcrumbEl.appendChild(home);
-
-    if (selectedColor){
-      const sep = document.createElement('span');
-      sep.className = 'fd-crumb-sep';
-      sep.textContent = '›';
-      breadcrumbEl.appendChild(sep);
-
-      const colorCrumb = document.createElement('span');
-      colorCrumb.className = 'fd-crumb fd-crumb-current';
-      colorCrumb.innerHTML = `<span class="fd-crumb-swatch" style="background:${selectedColor}"></span>${nearestName(selectedColor)} (${selectedColor})`;
-      breadcrumbEl.appendChild(colorCrumb);
+    function crumb(text, onClick, current, swatch){
+      if (breadcrumbEl.children.length){
+        const sep = document.createElement('span'); sep.className = 'fd-crumb-sep'; sep.textContent = '›'; breadcrumbEl.appendChild(sep);
+      }
+      const el = document.createElement(current ? 'span' : 'button');
+      el.className = 'fd-crumb' + (current ? ' fd-crumb-current' : '');
+      el.innerHTML = (swatch ? '<span class="fd-crumb-swatch" style="background:' + swatch + '"></span>' : '') + text;
+      if (!current) el.addEventListener('click', onClick);
+      breadcrumbEl.appendChild(el);
     }
+    const q = hexQuery.trim();
+    crumb(T.colors, () => { hexQuery=''; hexSearchEl.value=''; resetView(); renderAll(); }, view === 'families' && !q);
+    if (q && view !== 'shops') crumb('#' + q.toUpperCase().replace('#',''), null, true);
+    if (selectedFamily && !q) crumb(T.fam[selectedFamily], () => { view='shades'; selectedCluster=null; renderAll(); }, view === 'shades');
+    if (selectedCluster) crumb(clusterTitle(selectedCluster) + ' (' + selectedCluster.hex + ')', null, true, selectedCluster.hex);
   }
 
-  function renderColors(){
+  function tileHtml(swatchStyle, title, sub){
+    return '<span class="fd-color-swatch" style="' + swatchStyle + '"></span><span class="fd-color-info"><p class="fd-color-name">' + title + '</p><p class="fd-color-count">' + sub + '</p></span>';
+  }
+  function showGrid(tiles){
+    const grid = document.createElement('div'); grid.className = 'fd-color-grid';
+    tiles.forEach(t => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'fd-color-tile';
+      b.innerHTML = t.html; b.addEventListener('click', t.onClick); grid.appendChild(b);
+    });
+    viewEl.innerHTML = ''; viewEl.appendChild(grid);
+  }
+  // Titel: konkreter Farbname aus den Produkten (kürzester), sonst Familie + Helligkeit
+  function clusterTitle(c){
+    const names = c.items.map(i => (i.color || '').trim()).filter(Boolean).sort((a,b) => a.length - b.length);
+    return names.length ? names[0] : shadeName(c.hex, c.fam);
+  }
+  function showShadeTiles(clusters){
+    showGrid(clusters.map(c => ({
+      html: tileHtml('background:' + c.hex, clusterTitle(c), shadeName(c.hex, c.fam) + ' · ' + c.hex + '<br>' + plural(c.items.length, T.fil) + ' · ' + brandsOf(c.items)),
+      onClick: () => { selectedCluster = c; view = 'shops'; renderAll(); }
+    })));
+  }
+
+  function renderFamilies(){
     const pool = currentPool();
-    // Exakte Gruppierung: ein Eintrag pro einzigartigem Hex-Wert im aktuellen Pool.
-    const groups = {};
-    pool.forEach(f => {
-      groups[f.hex] = groups[f.hex] || [];
-      groups[f.hex].push(f);
-    });
-
-    let uniqueHexes = Object.keys(groups);
     const q = hexQuery.trim().toUpperCase().replace('#','');
-    if (q){
-      uniqueHexes = uniqueHexes.filter(hex => hex.replace('#','').includes(q));
+    if (q){   // Hex-Suche: direkt Farbtöne quer über alle Familien
+      const hit = pool.filter(f => f.hex.replace('#','').includes(q));
+      if (!hit.length){ viewEl.innerHTML=''; emptyEl.style.display='block'; return; }
+      emptyEl.style.display='none'; showShadeTiles(clustersOf(hit)); return;
     }
-
-    if (!uniqueHexes.length){ viewEl.innerHTML = ''; emptyEl.style.display = 'block'; return; }
-    emptyEl.style.display = 'none';
-
-    // Für eine angenehme Reihenfolge nach Farbton sortieren (rein optisch, keine Gruppierung)
-    const representative = uniqueHexes.map(hex => ({hex}));
-    const ordered = sortByColor(representative);
-
-    const grid = document.createElement('div');
-    grid.className = 'fd-color-grid';
-    ordered.forEach(({hex}) => {
-      const count = groups[hex].length;
-      const tile = document.createElement('button');
-      tile.type = 'button';
-      tile.className = 'fd-color-tile';
-      tile.innerHTML = `
-        <span class="fd-color-swatch" style="background:${hex}"></span>
-        <span class="fd-color-info">
-          <p class="fd-color-name">${nearestName(hex)}</p>
-          <p class="fd-color-count">${hex} · ${count} Filament${count === 1 ? '' : 'e'}</p>
-        </span>
-      `;
-      tile.addEventListener('click', () => {
-        selectedColor = hex;
-        view = 'shops';
-        renderAll();
-      });
-      grid.appendChild(tile);
-    });
-    viewEl.innerHTML = '';
-    viewEl.appendChild(grid);
+    if (!pool.length){ viewEl.innerHTML=''; emptyEl.style.display='block'; return; }
+    emptyEl.style.display='none';
+    const fams = {};
+    pool.forEach(f => { (fams[f.fam] = fams[f.fam] || []).push(f); });
+    showGrid(FAMILY_ORDER.filter(k => fams[k]).map(k => {
+      const cl = clustersOf(fams[k]);
+      const sw = cl.slice(0, 6).map(c => c.hex);
+      const bg = sw.length > 1 ? 'background:linear-gradient(90deg,' + sw.join(',') + ')' : 'background:' + sw[0];
+      return { html: tileHtml(bg, T.fam[k], plural(fams[k].length, T.fil) + ' · ' + plural(cl.length, T.shades)),
+               onClick: () => { selectedFamily = k; view = 'shades'; renderAll(); } };
+    }));
   }
-
+  function renderShades(){
+    const items = currentPool().filter(f => f.fam === selectedFamily);
+    if (!items.length){ viewEl.innerHTML=''; emptyEl.style.display='block'; return; }
+    emptyEl.style.display='none';
+    showShadeTiles(clustersOf(items));
+  }
   function renderShops(){
-    const pool = currentPool().filter(f => f.hex === selectedColor);
-    if (!pool.length){ viewEl.innerHTML = ''; emptyEl.style.display = 'block'; return; }
-    emptyEl.style.display = 'none';
-
-    // Nach Marke sortiert, damit gleiche Hersteller beieinander stehen
-    const sorted = pool.slice().sort((a,b) => a.brand.localeCompare(b.brand, 'de') || a.name.localeCompare(b.name, 'de'));
-
-    const list = document.createElement('div');
-    list.className = 'fd-product-list';
+    const items = currentPool().filter(f => f.fam === selectedCluster.fam && deltaE(f.hex, selectedCluster.hex) < 4);
+    if (!items.length){ viewEl.innerHTML=''; emptyEl.style.display='block'; return; }
+    emptyEl.style.display='none';
+    const sorted = items.slice().sort((a,b) => a.brand.localeCompare(b.brand, LANG) || a.name.localeCompare(b.name, LANG));
+    const list = document.createElement('div'); list.className = 'fd-product-list';
     sorted.forEach(item => {
-      const row = document.createElement('div');
-      row.className = 'fd-product-row';
-
-      const swatch = document.createElement('span');
-      swatch.className = 'fd-product-swatch';
-      swatch.style.background = item.hex;
-      row.appendChild(swatch);
-
-      const info = document.createElement('div');
-      info.className = 'fd-product-info';
-      info.innerHTML = `<p class="fd-product-name">${item.name}</p><p class="fd-product-meta">${item.brand} · ${item.material}</p>`;
+      const row = document.createElement('div'); row.className = 'fd-product-row';
+      const swatch = document.createElement('span'); swatch.className = 'fd-product-swatch'; swatch.style.background = item.hex; row.appendChild(swatch);
+      const info = document.createElement('div'); info.className = 'fd-product-info';
+      info.innerHTML = '<p class="fd-product-name">' + item.name + '</p><p class="fd-product-meta">' + item.brand + ' · ' + item.material + ' · ' + item.hex + '</p>';
       row.appendChild(info);
-
-      const shopList = document.createElement('div');
-      shopList.className = 'fd-shop-list';
+      const shopList = document.createElement('div'); shopList.className = 'fd-shop-list';
       (item.shops || []).forEach(s => {
-        const btn = document.createElement('a');
-        btn.className = 'fd-shop-btn';
-        btn.href = s.url;
-        btn.target = '_blank';
-        btn.rel = 'sponsored nofollow noopener';
-        btn.textContent = `${s.shop} ↗`;
-        shopList.appendChild(btn);
+        const btn = document.createElement('a'); btn.className = 'fd-shop-btn'; btn.href = s.url; btn.target = '_blank';
+        btn.rel = 'sponsored nofollow noopener'; btn.textContent = s.shop + ' ↗'; shopList.appendChild(btn);
       });
-      row.appendChild(shopList);
-
-      list.appendChild(row);
+      row.appendChild(shopList); list.appendChild(row);
     });
-    viewEl.innerHTML = '';
-    viewEl.appendChild(list);
+    viewEl.innerHTML = ''; viewEl.appendChild(list);
   }
-
   function renderAll(){
     renderBreadcrumb();
-    if (view === 'colors') renderColors();
+    if (view === 'families') renderFamilies();
+    else if (view === 'shades') renderShades();
     else renderShops();
   }
 
@@ -970,16 +1033,14 @@
       materialPillsEl.querySelectorAll('.fd-pill').forEach(b => b.classList.remove('fd-pill-active'));
       btn.classList.add('fd-pill-active');
       material = btn.dataset.material;
-      view = 'colors';
-      selectedColor = null;
+      resetView();
       renderAll();
     });
   });
 
   hexSearchEl.addEventListener('input', () => {
     hexQuery = hexSearchEl.value;
-    view = 'colors';
-    selectedColor = null;
+    resetView();
     renderAll();
   });
 
