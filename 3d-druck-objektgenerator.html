@@ -2337,12 +2337,15 @@
     const groups = [];
     let z = 0;
 
+    // Gehaeuse mittig ueber die Spanne der drei Wellen legen (bisher auf Welle 2 zentriert: bei
+    // ungleichen Achsabstaenden ragte eine Bohrung ueber den Rand, Deckel nicht geschlossen)
+    const hc = ((x1 - x2) + (x3 - x2)) / 2;
     function housingShapeWithHoles(holeRadii){
       const shape = roundedRectShape(housingW, housingD, Math.min(14, wallOuter));
       const holes = [
-        shapeFromPoints(circlePts(holeRadii[0], x1 - x2, 0, 32).reverse()),
-        shapeFromPoints(circlePts(holeRadii[1], 0, 0, 32).reverse()),
-        shapeFromPoints(circlePts(holeRadii[2], x3 - x2, 0, 32).reverse())
+        shapeFromPoints(circlePts(holeRadii[0], x1 - x2 - hc, 0, 32).reverse()),
+        shapeFromPoints(circlePts(holeRadii[1], 0 - hc, 0, 32).reverse()),
+        shapeFromPoints(circlePts(holeRadii[2], x3 - x2 - hc, 0, 32).reverse())
       ];
       const bw = housingW/2 - wallOuter/2, bd = housingD/2 - wallOuter/2;
       [[bw,bd],[-bw,bd],[-bw,-bd],[bw,-bd]].forEach(([bx,by]) => {
@@ -2358,7 +2361,7 @@
     const midBoreR = Math.max(1.5, p.pinD/2 + shaftFitR + 1);
 
     const front = new THREE.ExtrudeGeometry(housingShapeWithHoles([inBoreR, midBoreR, outBoreR]), { depth: p.coverThick, bevelEnabled:false, curveSegments:2 });
-    front.translate(0, 0, z);
+    front.translate(hc, 0, z);
     groups.push({ geo: front, color: 0x7a8a9a, part:'Frontdeckel', fuse:'Frontdeckel' });
     z += p.coverThick + gap;
 
@@ -2394,7 +2397,7 @@
     z += p.face + gap;
 
     const back = new THREE.ExtrudeGeometry(housingShapeWithHoles([inBoreR, midBoreR, outBoreR]), { depth: p.coverThick, bevelEnabled:false, curveSegments:2 });
-    back.translate(0, 0, z);
+    back.translate(hc, 0, z);
     groups.push({ geo: back, color: 0x7a8a9a, part:'Rückdeckel', fuse:'Rückdeckel' });
 
     groups.forEach(item => { item.geo.rotateY(Math.PI/2); });
@@ -2688,8 +2691,8 @@
       }
       for (let it = 0; it < thetaSteps; it++){
         const it2 = (it+1)%thetaSteps;
-        indices.push(idx(0,it), bottomRingStart+it2, bottomRingStart+it);
-        indices.push(idx(0,it), idx(0,it2), bottomRingStart+it2);
+        indices.push(idx(0,it), bottomRingStart+it, bottomRingStart+it2);
+        indices.push(idx(0,it), bottomRingStart+it2, idx(0,it2));
       }
       const topRingStart = bottomRingStart + thetaSteps;
       for (let it = 0; it < thetaSteps; it++){
@@ -2697,8 +2700,8 @@
       }
       for (let it = 0; it < thetaSteps; it++){
         const it2 = (it+1)%thetaSteps;
-        indices.push(idx(zSteps,it), topRingStart+it, topRingStart+it2);
-        indices.push(idx(zSteps,it), topRingStart+it2, idx(zSteps,it2));
+        indices.push(idx(zSteps,it), topRingStart+it2, topRingStart+it);
+        indices.push(idx(zSteps,it), idx(zSteps,it2), topRingStart+it2);
       }
       // Innenwand der Bohrung selbst (fehlte bisher — dadurch blieb das
       // Loch am Bohrungsrand offen/nicht wasserdicht, exakt an dieser
@@ -3555,15 +3558,15 @@
     }
     for (let c=0; c<cols-1; c++){
       const fa=idxFront(c,0), fb=idxFront(c+1,0), ba=idxBack(c,0), bb=idxBack(c+1,0);
-      indices.push(fa,fb,bb, fa,bb,ba);
+      indices.push(fa,bb,fb, fa,ba,bb);
       const fa2=idxFront(c,rows-1), fb2=idxFront(c+1,rows-1), ba2=idxBack(c,rows-1), bb2=idxBack(c+1,rows-1);
-      indices.push(fa2,bb2,fb2, fa2,ba2,bb2);
+      indices.push(fa2,fb2,bb2, fa2,bb2,ba2);
     }
     for (let r=0; r<rows-1; r++){
       const fa=idxFront(0,r), fb=idxFront(0,r+1), ba=idxBack(0,r), bb=idxBack(0,r+1);
-      indices.push(fa,bb,fb, fa,ba,bb);
+      indices.push(fa,fb,bb, fa,bb,ba);
       const fa2=idxFront(cols-1,r), fb2=idxFront(cols-1,r+1), ba2=idxBack(cols-1,r), bb2=idxBack(cols-1,r+1);
-      indices.push(fa2,fb2,bb2, fa2,bb2,ba2);
+      indices.push(fa2,bb2,fb2, fa2,ba2,bb2);
     }
 
     const geo = new THREE.BufferGeometry();
@@ -3615,15 +3618,15 @@
     if (!closeLoop){
       for (let c=0; c<cols-1; c++){
         const fa=idxFront(c,0), fb=idxFront(c+1,0), ba=idxBack(c,0), bb=idxBack(c+1,0);
-        indices.push(fa,fb,bb, fa,bb,ba);
+        indices.push(fa,bb,fb, fa,ba,bb);
         const fa2=idxFront(c,rows-1), fb2=idxFront(c+1,rows-1), ba2=idxBack(c,rows-1), bb2=idxBack(c+1,rows-1);
-        indices.push(fa2,bb2,fb2, fa2,ba2,bb2);
+        indices.push(fa2,fb2,bb2, fa2,bb2,ba2);
       }
       for (let r=0; r<rows-1; r++){
         const fa=idxFront(0,r), fb=idxFront(0,r+1), ba=idxBack(0,r), bb=idxBack(0,r+1);
-        indices.push(fa,bb,fb, fa,ba,bb);
+        indices.push(fa,fb,bb, fa,bb,ba);
         const fa2=idxFront(cols-1,r), fb2=idxFront(cols-1,r+1), ba2=idxBack(cols-1,r), bb2=idxBack(cols-1,r+1);
-        indices.push(fa2,fb2,bb2, fa2,bb2,ba2);
+        indices.push(fa2,bb2,fb2, fa2,ba2,bb2);
       }
     } else {
       // Vollzylinder: kein Seiten-"Schnitt", stattdessen oben/unten
@@ -3631,9 +3634,9 @@
       for (let c=0; c<cols; c++){
         const c2 = (c+1)%cols;
         const fa=idxFront(c,0), fb=idxFront(c2,0), ba=idxBack(c,0), bb=idxBack(c2,0);
-        indices.push(fa,fb,bb, fa,bb,ba);
+        indices.push(fa,bb,fb, fa,ba,bb);
         const fa2=idxFront(c,rows-1), fb2=idxFront(c2,rows-1), ba2=idxBack(c,rows-1), bb2=idxBack(c2,rows-1);
-        indices.push(fa2,bb2,fb2, fa2,ba2,bb2);
+        indices.push(fa2,fb2,bb2, fa2,bb2,ba2);
       }
     }
 
@@ -3689,9 +3692,9 @@
     for (let c=0; c<cols; c++){
       const c2 = (c+1)%cols;
       const fa=idxFront(c,0), fb=idxFront(c2,0), ba=idxBack(c,0), bb=idxBack(c2,0);
-      indices.push(fa,fb,bb, fa,bb,ba);
+      indices.push(fa,bb,fb, fa,ba,bb);
       const fa2=idxFront(c,rows-1), fb2=idxFront(c2,rows-1), ba2=idxBack(c,rows-1), bb2=idxBack(c2,rows-1);
-      indices.push(fa2,bb2,fb2, fa2,ba2,bb2);
+      indices.push(fa2,fb2,bb2, fa2,bb2,ba2);
     }
 
     const geo = new THREE.BufferGeometry();
@@ -4886,34 +4889,58 @@
   // nur aus einem Teil bestehen (dann enthält die 3MF einfach ein Objekt).
   // meshList-basierte Variante: verschmilzt mehrere Meshes zu EINEM 3MF-
   // Objekt (Vertex-Indizes werden pro zusätzlichem Mesh verschoben).
-  function meshListToXmlObject(meshList, objectId){
-    let vertsXml = '';
-    let trisXml = '';
-    let vertexOffset = 0;
-    meshList.forEach(mesh => {
-      const geo = mesh.geometry;
-      const posAttr = geo.attributes.position;
-      for (let i = 0; i < posAttr.count; i++){
-        vertsXml += `<vertex x="${posAttr.getX(i).toFixed(4)}" y="${posAttr.getY(i).toFixed(4)}" z="${posAttr.getZ(i).toFixed(4)}"/>`;
-      }
-      const idx = geo.index;
-      if (idx){
-        for (let i = 0; i < idx.count; i += 3){
-          trisXml += `<triangle v1="${idx.getX(i)+vertexOffset}" v2="${idx.getX(i+1)+vertexOffset}" v3="${idx.getX(i+2)+vertexOffset}"/>`;
-        }
-      } else {
-        for (let i = 0; i < posAttr.count; i += 3){
-          trisXml += `<triangle v1="${i+vertexOffset}" v2="${i+1+vertexOffset}" v3="${i+2+vertexOffset}"/>`;
-        }
-      }
-      vertexOffset += posAttr.count;
-    });
-    return `<object id="${objectId}" type="model"><mesh><vertices>${vertsXml}</vertices><triangles>${trisXml}</triangles></mesh></object>`;
+function meshVolume(geo){
+  // vorzeichenbehaftetes Volumen; negativ = Dreiecke zeigen nach innen
+  const pos = geo.attributes.position, idx = geo.index;
+  const n = idx ? idx.count : pos.count;
+  let v = 0;
+  for (let i = 0; i < n; i += 3){
+    const a = idx ? idx.getX(i) : i, b = idx ? idx.getX(i+1) : i+1, c = idx ? idx.getX(i+2) : i+2;
+    const ax = pos.getX(a), ay = pos.getY(a), az = pos.getZ(a);
+    const bx = pos.getX(b), by = pos.getY(b), bz = pos.getZ(b);
+    const cx = pos.getX(c), cy = pos.getY(c), cz = pos.getZ(c);
+    v += ax*(by*cz - bz*cy) - ay*(bx*cz - bz*cx) + az*(bx*cy - by*cx);
   }
-
-  // Meshes mit derselben fuseGroup gehören fest zusammen (z.B. Ring +
-  // alle Bolzen, Welle + Exzenter + Zapfen) und werden zu einem einzigen
-  // 3MF-Objekt verschmolzen. Meshes ohne fuseGroup bleiben einzeln.
+  return v / 6;
+}
+function triOk(pos, a, b, c){
+  // verwirft entartete (flächenlose) Dreiecke, z. B. an Rotationsnähten
+  const ax = Math.round(pos.getX(a)*1000), ay = Math.round(pos.getY(a)*1000), az = Math.round(pos.getZ(a)*1000);
+  const bx = Math.round(pos.getX(b)*1000), by = Math.round(pos.getY(b)*1000), bz = Math.round(pos.getZ(b)*1000);
+  const cx = Math.round(pos.getX(c)*1000), cy = Math.round(pos.getY(c)*1000), cz = Math.round(pos.getZ(c)*1000);
+  return !(ax===bx && ay===by && az===bz) && !(bx===cx && by===cy && bz===cz) && !(ax===cx && ay===cy && az===cz);
+}
+function meshListToXmlObject(meshList, objectId){
+  const vParts = [], tParts = [];
+  let vertexOffset = 0;
+  meshList.forEach(mesh => {
+    const geo = mesh.geometry;
+    const posAttr = geo.attributes.position;
+    const flip = meshVolume(geo) < 0; // nach innen gerichtete Flächen im Export umdrehen
+    const idx = geo.index;
+    const n = idx ? idx.count : posAttr.count;
+    // nur tatsächlich verwendete Eckpunkte exportieren (spart bei großen Rastern viel Platz)
+    const remap = new Int32Array(posAttr.count).fill(-1);
+    let used = 0;
+    const get = i => idx ? idx.getX(i) : i;
+    for (let i = 0; i < n; i += 3){
+      const a = get(i), b = get(i+1), c = get(i+2);
+      if (!triOk(posAttr, a, b, c)) continue;
+      const tri = flip ? [a, c, b] : [a, b, c];
+      for (let k = 0; k < 3; k++){
+        const v = tri[k];
+        if (remap[v] < 0){
+          remap[v] = used++;
+          vParts.push(`<vertex x="${+posAttr.getX(v).toFixed(3)}" y="${+posAttr.getY(v).toFixed(3)}" z="${+posAttr.getZ(v).toFixed(3)}"/>`);
+        }
+      }
+      tParts.push(`<triangle v1="${remap[tri[0]]+vertexOffset}" v2="${remap[tri[1]]+vertexOffset}" v3="${remap[tri[2]]+vertexOffset}"/>`);
+    }
+    vertexOffset += used;
+  });
+  if (!tParts.length) return '';
+  return `<object id="${objectId}" type="model"><mesh><vertices>${vParts.join('')}</vertices><triangles>${tParts.join('')}</triangles></mesh></object>\n`.replace(/\n$/, '');
+}
   function groupMeshesByFuse(meshes){
     const groups = [];
     const map = new Map();
@@ -4940,11 +4967,15 @@
     }
     const fuseGroups = groupMeshesByFuse(meshes);
     let objectsXml = '', buildXml = '';
-    fuseGroups.forEach((meshList, i) => {
-      const id = i+1;
-      objectsXml += meshListToXmlObject(meshList, id);
-      buildXml += `<item objectid="${id}"/>`;
+    let nextId = 1;
+    fuseGroups.forEach(meshList => {
+      const xml = meshListToXmlObject(meshList, nextId);
+      if (!xml) return; // Gruppen ohne Dreiecke (z. B. leerer Text) überspringen
+      objectsXml += xml;
+      buildXml += `<item objectid="${nextId}"/>`;
+      nextId++;
     });
+    if (nextId === 1){ alert('Nichts zu exportieren.'); return; }
     const modelXml = `<?xml version="1.0" encoding="UTF-8"?>\n<model unit="millimeter" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02"><resources>${objectsXml}</resources><build>${buildXml}</build></model>`;
     const contentTypes = `<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>`;
     const rels = `<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>`;
@@ -4952,14 +4983,15 @@
     const zip = new JSZip();
     zip.file('[Content_Types].xml', contentTypes);
     zip.file('_rels/.rels', rels);
-    zip.file('3D/3dmodel.model', modelXml);
-    const blob = await zip.generateAsync({ type:'blob' });
+    zip.file('3D/3dmodel.model', new TextEncoder().encode(modelXml));
+    const blob = await zip.generateAsync({ type:'blob', compression:'DEFLATE', compressionOptions:{ level:1 } });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = filename;
+    document.body.appendChild(a);
     a.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
   }
 
   document.getElementById('ogExport').addEventListener('click', () => {

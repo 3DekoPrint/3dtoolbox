@@ -6,7 +6,7 @@
 <title>3DToolBox – 3D-Druck-Lexikon</title>
 <meta name="description" content="Das große 3D-Druck-Lexikon: alle Druckprobleme mit Ursache, Lösung und Prävention, Slicer-Tipps für PrusaSlicer, Cura, Bambu Studio, OrcaSlicer & SuperSlicer, Materialkunde und Glossar.">
 <link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-lexikon.html">
-<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/3d-print-lexicon.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-lexicon.html">
 <link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-lexikon.html">
 <meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -1155,7 +1155,7 @@
       const target = parseFloat(t.value);
       const measured = parseFloat(m.value);
       const current = parseFloat(c.value);
-      if (!target || !measured || measured <= 0 || !current){
+      if (!(target > 0) || !(measured > 0) || !(current > 0)){
         r.innerHTML = 'Bitte gültige Werte eingeben.';
         return;
       }

@@ -1749,7 +1749,7 @@
         chip.rel = 'noopener';
         chip.innerHTML = `
           <span class="fm-alt-swatch" style="background:${alt.hex}"></span>
-          <span class="fm-alt-text"><b>${alt.name}</b> · ${alt.brand}${alt.shop ? ' · ' + alt.shop : ''}</span>
+          <span class="fm-alt-text"><b>${alt.name}</b> · ${alt.brand}${alt.shop && alt.shop !== alt.brand ? ' · ' + alt.shop : ''}</span>
         `;
         altWrap.appendChild(chip);
       });

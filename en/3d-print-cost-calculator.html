@@ -6,7 +6,7 @@
 <title>3DToolBox – 3D Printing Cost Calculator</title>
 <meta name="description" content="Free online calculator for 3D printing hobbyists: work out material, electricity, wear and failure-rate costs live — with printer presets and a seller pricing mode.">
 <link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-kostenrechner.html">
-<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/3d-print-cost-calculator.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-cost-calculator.html">
 <link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-kostenrechner.html">
 
 <meta property="og:type" content="website">
@@ -1006,20 +1006,20 @@
     calc();
   });
 
-  const fmtEUR = n => n.toLocaleString('en-GB', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+  const fmtEUR = n => '€' + n.toLocaleString('en-GB', {minimumFractionDigits:2, maximumFractionDigits:2});
   const fmtCT  = n => (n*100).toLocaleString('en-GB', {minimumFractionDigits:1, maximumFractionDigits:1}) + ' ct';
 
   let lastResult = null;
 
   function calc(){
-    const power = parseFloat(el.power.value) || 0;
-    const printerPrice = parseFloat(el.printerPrice.value) || 0;
-    const lifetime = parseFloat(el.lifetime.value) || 0;
-    const pricePerKg = parseFloat(el.pricePerKg.value) || 0;
-    const gramsUsed = parseFloat(el.gramsUsed.value) || 0;
-    const printHours = parseFloat(el.printHours.value) || 0;
-    const kwhPrice = (parseFloat(el.kwhPrice.value) || 0) / 100; // ct -> €
-    const failRate = parseFloat(failRateEl.value) || 0;
+    const power = Math.max(0, parseFloat(el.power.value) || 0);
+    const printerPrice = Math.max(0, parseFloat(el.printerPrice.value) || 0);
+    const lifetime = Math.max(0, parseFloat(el.lifetime.value) || 0);
+    const pricePerKg = Math.max(0, parseFloat(el.pricePerKg.value) || 0);
+    const gramsUsed = Math.max(0, parseFloat(el.gramsUsed.value) || 0);
+    const printHours = Math.max(0, parseFloat(el.printHours.value) || 0);
+    const kwhPrice = (Math.max(0, parseFloat(el.kwhPrice.value) || 0)) / 100; // ct -> €
+    const failRate = Math.max(0, parseFloat(failRateEl.value) || 0);
 
     const materialCost = (gramsUsed/1000) * pricePerKg;
     const energyCost = printHours * (power/1000) * kwhPrice;
@@ -1042,11 +1042,11 @@
 
     let sellPrice = null;
     if (sellerSwitch.classList.contains('kr-on')){
-      const laborMin = parseFloat(el.laborMin.value) || 0;
-      const wage = parseFloat(el.wage.value) || 0;
-      const packaging = parseFloat(el.packaging.value) || 0;
-      const marketFee = Math.min(parseFloat(el.marketFee.value) || 0, 95);
-      const margin = parseFloat(el.margin.value) || 0;
+      const laborMin = Math.max(0, parseFloat(el.laborMin.value) || 0);
+      const wage = Math.max(0, parseFloat(el.wage.value) || 0);
+      const packaging = Math.max(0, parseFloat(el.packaging.value) || 0);
+      const marketFee = Math.min(Math.max(0, parseFloat(el.marketFee.value) || 0), 95);
+      const margin = Math.max(0, parseFloat(el.margin.value) || 0);
 
       const laborCost = (laborMin/60) * wage;
       const baseCosts = total + laborCost + packaging;
@@ -1098,8 +1098,9 @@
     const a = document.createElement('a');
     a.href = url;
     a.download = '3d-print-cost-calculation.txt';
+    document.body.appendChild(a);
     a.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
   });
 
   // Tools bar: tapping the (i) icon opens/closes the description (for touch devices
