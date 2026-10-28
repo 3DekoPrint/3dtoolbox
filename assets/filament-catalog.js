@@ -52,9 +52,9 @@
       brand: 'Anycubic', shop: 'Anycubic Store',
       link: function (h, v) { return awin(69360, 'https://store.anycubic.com/products/' + h + q(v)); }
     },
-    azurefilm: {  // Awin Merchant 106471 — deutscher Shop (WooCommerce), Farbe per #color=<slug>
+    azurefilm: {  // Awin Merchant 106471 — deutscher Shop (WooCommerce), Farbe per #color=<slug>; das ?utm_medium davor ist nötig, damit Awin seine Parameter mit & statt ? anhängt (sonst geht die Farbwahl verloren)
       brand: 'Azurefilm', shop: 'Azurefilm',
-      link: function (h, v) { return awin(106471, 'https://azurefilm.de/produkt/' + h + '/' + (v ? '#color=' + v : '')); }
+      link: function (h, v) { return awin(106471, 'https://azurefilm.de/produkt/' + h + '/?utm_medium=3dtoolbox' + (v ? '#color=' + v : '')); }
     }
     // ------------------------------------------------------------------------
     // NOCH NICHT AKTIV — zum Aktivieren die "//" entfernen (und das Komma vor dem Block beachten):
