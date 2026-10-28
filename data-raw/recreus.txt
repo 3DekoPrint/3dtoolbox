@@ -1,0 +1,36 @@
+TPU|Filaflex 82A|Negro|#373938|filaflex-82a|45921644577027
+TPU|Filaflex 82A|Blanco|#d7d4d1|filaflex-82a|45921644642563
+TPU|Filaflex 82A|Transparente|#c9c9c6|filaflex-82a|45921644708099
+TPU|Filaflex 82A|Nude|#e9b7a6|filaflex-82a|45921644773635
+TPU|Filaflex 82A|Rojo|#ef504f|filaflex-82a|45921644839171
+TPU|Filaflex 82A|Azul|#338fb4|filaflex-82a|45921644904707
+TPU|Filaflex 82A|Blue Food Grade|#337abf|filaflex-82a|47308902760707
+TPU|Filaflex 82A|Verde|#82c84b|filaflex-82a|45921644970243
+TPU|Filaflex 82A|Amarillo|#e5cd4d|filaflex-82a|45921645035779
+TPU|Filaflex 82A|Naranja|#eb9889|filaflex-82a|45921645101315
+TPU|Filaflex 82A|Magenta|#df579a|filaflex-82a|45921645166851
+TPU|Filaflex 82A|Aqua|#76dcbc|filaflex-82a|45921645232387
+TPU|Filaflex 82A|Fluor|#d8e945|filaflex-82a|45921645297923
+TPU|Filaflex 82A|Marrón|#916557|filaflex-82a|45921645363459
+TPU|Filaflex 82A|Gris|#979ca3|filaflex-82a|45921645396227
+TPU|Filaflex 82A|Oro|#dba073|filaflex-82a|45921645461763
+TPU|Filaflex 95A|Negro|#797879|filaflex-95a|45921633566979
+TPU|Filaflex 95A|Blanco|#d9d5d2|filaflex-95a|45921633632515
+TPU|Filaflex 95A|Transparente|#c8c8c5|filaflex-95a|45921633698051
+TPU|Filaflex 95A|Nude|#e9b9a9|filaflex-95a|45921633763587
+TPU|Filaflex 95A|Rojo|#f14d56|filaflex-95a|45921633829123
+TPU|Filaflex 95A|Azul|#4693b6|filaflex-95a|45921633894659
+TPU|Filaflex 95A|Blue Food Grade|#5683ab|filaflex-95a|47308898992387
+TPU|Filaflex 95A|Verde|#94cb7c|filaflex-95a|45921633960195
+TPU|Filaflex 95A|Fluor|#dbe975|filaflex-95a|45921634025731
+TPU|Filaflex 70A|Negro|#706e6f|filaflex-70a|45921628979459
+TPU|Filaflex 70A|Blanco|#d3d2d2|filaflex-70a|45921629110531
+TPU|Filaflex 70A|Transparente|#c8c8c5|filaflex-70a|45921629241603
+TPU|Filaflex 70A|Rojo|#eb797b|filaflex-70a|45921629372675
+TPU|Filaflex 70A|Azul marino|#9491c6|filaflex-70a|45921629503747
+TPU|Filaflex 70A|Nude|#e9b9a8|filaflex-70a|45921629634819
+TPU|Filaflex 60A|Negro|#646263|filaflex-60a|45921624424707
+TPU|Filaflex 60A|Blanco|#d0cfd0|filaflex-60a|45921624555779
+TPU|Filaflex 60A|Nude|#e7b5a4|filaflex-60a|45921624686851
+TPU|Filaflex 60A|Red|#d97c7b|filaflex-60a|48165750014211
+TPU|Filaflex 60A|Blue Food Grade|#507caa|filaflex-60a|48425477406979
