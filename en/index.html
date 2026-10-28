@@ -918,7 +918,20 @@
   .bt-finder > p[style]{ margin-left:auto !important; margin-right:auto !important; width:100%; }
   .bt-finder .fm-flagship-badge{ display:none; }
 
-  .bt-bento .bt-tool{ grid-column:span 3; }
+  /* kompaktere Tool-Kacheln */
+  .bt-bento{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
+  .bt-bento .bt-flagship{ flex:0 0 100%; grid-row:auto; padding:22px 26px; }
+  .bt-bento .bt-swatches{ padding-top:12px; }
+  .bt-bento .bt-flag-btn{ margin-top:12px; }
+  .bt-bento .bt-tool{ flex:0 0 calc((100% - 24px) / 3); box-sizing:border-box; display:grid; grid-template-columns:auto 1fr; align-content:center; column-gap:12px; row-gap:2px; padding:14px 16px; border-radius:16px; }
+  .bt-bento .bt-tool .bt-ico{ grid-row:1 / span 2; width:36px; height:36px; border-radius:11px; margin:0; align-self:center; }
+  .bt-bento .bt-tool .bt-ico svg{ width:18px; height:18px; }
+  .bt-bento .bt-tool .bt-name{ font-size:14.5px; align-self:end; }
+  .bt-bento .bt-tool .bt-desc{ font-size:12.5px; line-height:1.45; align-self:start; }
+  .bt-bento .bt-tool .bt-arrow{ display:none; }
+  .bt-bento .bt-tool:hover{ transform:translateY(-2px); }
+  @media (max-width:1000px){ .bt-bento .bt-tool{ flex-basis:calc((100% - 12px) / 2); } }
+  @media (max-width:820px){ .bt-bento .bt-tool{ flex-basis:100%; } }
   /* Externe Empfehlungen: bewusst anders (graublau, gestrichelt) */
   .bt-extsec{ padding-top:44px; }
   .bt-extbox{ padding:26px; border-radius:26px; border:1px dashed #56707a; background:rgba(86,112,122,.07); }
