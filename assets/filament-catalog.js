@@ -42,7 +42,7 @@
     },
     recreus: {     // Awin Merchant 128357
       brand: 'Recreus', shop: 'Recreus',
-      link: function (h, v) { return awin(128357, 'https://recreus.com/en/products/' + h + q(v)); }
+      link: function (h) { return awin(128357, 'https://recreus.com/en/products/' + h); }  // ?variant= wird vom Shop ignoriert (öffnet immer Schwarz) -> Farbe wählt der Nutzer im Shop
     },
     redline: {     // Awin Merchant 22266
       brand: 'Redline Filament', shop: 'Redline Filament',
