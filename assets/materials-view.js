@@ -66,7 +66,7 @@
       return '<article class="md-card" id="mat-' + esc(m.id) + '"><div class="md-grp">' + esc(DB.groups[m.grp][LANG]) + '</div><h3>' + esc(m.name[LANG]) + '</h3>' + dots(m.diff) +
         '<dl class="md-specs">' + spec(L.nozzle, m.nozzle) + spec(L.bed, m.bed) + spec(L.hdt, m.hdt) + spec(L.tensile, m.tensile) + spec(L.elong, m.elong) + spec(L.shore, m.shore) + spec(L.dens, m.dens) + spec(L.dry, m.dry) + '</dl>' +
         '<div><span class="md-badge">' + esc(L.encl[m.encl]) + '</span>' + (m.hard ? '<span class="md-badge warn">' + esc(L.hard) + '</span>' : '') + '</div>' +
-        '<p><b>' + L.uses + ':</b> ' + esc(m.uses[LANG]) + '</p><p class="md-pro"><b>+ ' + L.pro + ':</b> ' + esc(m.pro[LANG]) + '</p><p class="md-con"><b>– ' + L.con + ':</b> ' + esc(m.con[LANG]) + '</p></article>';
+        '<p><b>' + L.uses + ':</b> ' + esc(m.uses[LANG]) + '</p><p class="md-pro"><b>+ ' + L.pro + ':</b> ' + esc(m.pro[LANG]) + '</p><p class="md-con"><b>– ' + L.con + ':</b> ' + esc(m.con[LANG]) + '</p><a class="md-link" href="' + (LANG === 'en' ? '/en/materials/' : '/materialien/') + m.id.toLowerCase().replace('+', '-plus') + '.html">' + (LANG === 'en' ? 'Full guide →' : 'Ausführlicher Ratgeber →') + '</a></article>';
     }).join('');
     var w = document.getElementById('mdTableWrap');
     w.innerHTML = '<table class="md-table"><thead><tr><th>Material</th><th>' + L.diff + '</th><th>' + L.nozzle + '</th><th>' + L.bed + '</th><th>' + L.hdt + '</th><th>' + L.tensile + '</th><th>' + L.elong + ' / Shore</th></tr></thead><tbody>' +
