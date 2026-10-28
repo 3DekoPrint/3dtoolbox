@@ -1,0 +1,305 @@
+PLA|PLA Translucent|Red|#ea140e|pla-translucent|53395021824276
+PLA|PLA Translucent|Yellow|#fbec07|pla-translucent|53395021857044
+PLA|PLA Translucent|Light Blue|#339bf7|pla-translucent|53395021889812
+PLA|PLA Translucent|Green|#08e327|pla-translucent|53395021922580
+PLA|PLA Translucent|Pink|#f9b0bd|pla-translucent|53395021955348
+PETG|PETG Glitter|Glitter Black|#707372|petg-glitter|53687628726548
+PETG|PETG Glitter|Glitter Blue|#006298|petg-glitter|53687628792084
+PETG|PETG Glitter|Glitter Orange|#ff7f41|petg-glitter|53687628824852
+PETG|PETG Glitter|Glitter Light Grey|#b2b4b2|petg-glitter|53687628857620
+PETG|PETG Glitter|Glitter Light Pink|#cca1a6|petg-glitter|53687628890388
+PETG|PETG Glitter|Glitter Light Purple|#c6a1cf|petg-glitter|53687628923156
+PETG|PETG Glitter|Glitter Light Brown|#dda46f|petg-glitter|53687628955924
+PETG|PETG Glitter|Glitter Teal Green|#00685e|petg-glitter|53687628988692
+PETG|PETG Glitter|Glitter Purple Pink|#b580d1|petg-glitter|53687629021460
+PETG|PETG Glitter|Glitter Olive Green|#708573|petg-glitter|53687629054228
+PETG|PETG Glitter|Glitter Olive Yellow|#bbb323|petg-glitter|53687629086996
+TPU|TPU 72D|Black|#000000|tpu-72d|53633302069524
+TPU|TPU 72D|Grey|#8f949b|tpu-72d|53633302167828
+TPU|TPU 72D|Red|#ea140e|tpu-72d|53633302200596
+TPU|TPU 72D|Yellow|#fbec07|tpu-72d|53633302233364
+TPU|TPU 72D|Blue|#2240af|tpu-72d|53633302266132
+TPU|TPU 72D|Green|#08e327|tpu-72d|53633302298900
+PETG|PETG HF|Black|#000000|petg-hf|53388428083476
+PETG|PETG HF|Space Grey|#7e7e7e|petg-hf|53390223868180
+PLA|PLA CMYK|Rilievo Yellow|#f4ee2a|pla-cmyk|53633327399188
+PLA|PLA CMYK|Rilievo White|#fffffff|pla-cmyk|53633327431956
+PLA|PLA CMYK|Rilievo Cyan|#0086d6|pla-cmyk|53633327464724
+PLA|PLA CMYK|Rilievo Magenta|#ec008c|pla-cmyk|53633327497492
+ASA|ASA|Blue|#2240af|asa-filament-1-75mm-colored-10kg|51188487454996
+ASA|ASA|Grey|#8f949b|asa-filament-1-75mm-colored-10kg|51188487520532
+ASA|ASA|Red|#ea140e|asa-filament-1-75mm-colored-10kg|51188487553300
+ASA|ASA|Deep Black|#000000|asa-filament-1-75mm-colored-10kg|51638714040596
+ASA|ASA|ASA Green|#08b690|asa-filament-1-75mm-colored-10kg|52576861716756
+PLA|PLA (RFID) emoji® Brand Edition|Black|#000000|pla-rfid-emoji-edition|52547169222932
+PLA|PLA (RFID) emoji® Brand Edition|Grey|#8f949b|pla-rfid-emoji-edition|52547169288468
+PLA|PLA (RFID) emoji® Brand Edition|Red|#ea140e|pla-rfid-emoji-edition|52547169321236
+PLA|PLA (RFID) emoji® Brand Edition|Yellow|#fbec07|pla-rfid-emoji-edition|52547169354004
+PLA|PLA (RFID) emoji® Brand Edition|Orange|#fd7c18|pla-rfid-emoji-edition|52547169386772
+PLA|PLA (RFID) emoji® Brand Edition|Dark Blue|#2240af|pla-rfid-emoji-edition|52547169419540
+PLA|PLA (RFID) emoji® Brand Edition|Neon Green|#08e327|pla-rfid-emoji-edition|52547169452308
+PLA|PLA (RFID) emoji® Brand Edition|Pink|#f9b0bd|pla-rfid-emoji-edition|52547169485076
+PLA|PLA (RFID) emoji® Brand Edition|Purple|#603ba0|pla-rfid-emoji-edition|52547169517844
+PLA|PLA (RFID) emoji® Brand Edition|Sky Blue|#32d0ec|pla-rfid-emoji-edition|52547169550612
+PLA|PLA (RFID) emoji® Brand Edition|Sea Green|#08b690|pla-rfid-emoji-edition|52547169583380
+PLA|PLA (RFID) emoji® Brand Edition|Space Grey|#7e7e7e|pla-rfid-emoji-edition|52547169616148
+PLA|PLA (RFID) emoji® Brand Edition|Wood Color|#b19870|pla-rfid-emoji-edition|52547169648916
+PLA|PLA (RFID) emoji® Brand Edition|Brown|#9e6a4b|pla-rfid-emoji-edition|52547169681684
+PLA|PLA (RFID) emoji® Brand Edition|Beige|#f4e0b8|pla-rfid-emoji-edition|52547169714452
+PLA|PLA|Black|#000000|pla-filament-1-75mm-colored-5kg|52267249467668
+PLA|PLA|Grey|#8f949b|pla-filament-1-75mm-colored-5kg|52267249533204
+PLA|PLA|Neon Green|#08e327|pla-filament-1-75mm-colored-5kg|52267249565972
+PLA|PLA|Dark Blue|#2240af|pla-filament-1-75mm-colored-5kg|52267249598740
+PLA|PLA|Red|#ea140e|pla-filament-1-75mm-colored-5kg|52267249631508
+PLA|PLA|Yellow|#fbec07|pla-filament-1-75mm-colored-5kg|52267249664276
+PLA|PLA|Orange|#fd7c18|pla-filament-1-75mm-colored-5kg|52267249697044
+PLA|PLA|Pink|#f9b0bd|pla-filament-1-75mm-colored-5kg|52267249729812
+PLA|PLA|Purple|#603ba0|pla-filament-1-75mm-colored-5kg|52267249762580
+PLA|PLA|Sky Blue|#32d0ec|pla-filament-1-75mm-colored-5kg|52267249828116
+PLA|PLA|Sea Green|#08b690|pla-filament-1-75mm-colored-5kg|52267249860884
+PLA|PLA|Space Grey|#7e7e7e|pla-filament-1-75mm-colored-5kg|52267249893652
+PLA|PLA|Wood Color|#b19870|pla-filament-1-75mm-colored-5kg|52267249926420
+PLA|PLA|Brown|#9e6a4b|pla-filament-1-75mm-colored-5kg|52267249959188
+PLA|PLA|Beige|#f4e0b8|pla-filament-1-75mm-colored-5kg|52267249991956
+PLA|PLA|Copper Filled|#895837|pla-filament-1-75mm-colored-5kg|52267250024724
+PLA|PLA Glow|Glow Blue|#80cbf7|pla-glow|51894621339924
+PLA|PLA Glow|Glow Green|#ade589|pla-glow|51894621372692
+PLA|PLA Glow|Glow Orange|#ffa067|pla-glow|51894621438228
+PLA|PLA Silk|Silk Gold|#ffd10e|silk-pla-filament-1-75mm-colored-10kg|50527488147732
+PLA|PLA Silk|Silk Coral Pink|#f4717d|silk-pla-filament-1-75mm-colored-10kg|50527488278804
+PLA|PLA Silk|Silk Mint Green|#53d8d4|silk-pla-filament-1-75mm-colored-10kg|50527488311572
+PLA|PLA Silk|Silk Silver Grey|#dbdde2|silk-pla-filament-1-75mm-colored-10kg|51797806088468
+PLA|PLA Silk|Silk Gold|#ffd10e|elegoo-silk-pla-filament-1-75mm-colored-1kg|47962863567124
+PLA|PLA Silk|Silk Silver Grey|#dbdde2|elegoo-silk-pla-filament-1-75mm-colored-1kg|47962863599892
+PLA|PLA Silk|Silk Coral Pink|#f4717d|elegoo-silk-pla-filament-1-75mm-colored-1kg|47962863698196
+PLA|PLA Silk|Silk Mint Green|#53d8d4|elegoo-silk-pla-filament-1-75mm-colored-1kg|47962863730964
+PLA|RAPID PLA Plus|Black|#000000|rapid-pla-plus-filament-1-75mm-colored-5kg|51482315391252
+PLA|RAPID PLA Plus|Grey|#8f949b|rapid-pla-plus-filament-1-75mm-colored-5kg|51482315456788
+PLA|RAPID PLA Plus|Blue|#2240af|rapid-pla-plus-filament-1-75mm-colored-5kg|51482315489556
+PLA|RAPID PLA Plus|Green|#08e327|rapid-pla-plus-filament-1-75mm-colored-5kg|51482315522324
+PLA|RAPID PLA Plus|Red|#ea140e|rapid-pla-plus-filament-1-75mm-colored-5kg|51482315555092
+PLA|RAPID PLA Plus|Orange|#fd7c18|rapid-pla-plus-filament-1-75mm-colored-5kg|51482315587860
+PLA|RAPID PLA Plus|Yellow|#fbec07|rapid-pla-plus-filament-1-75mm-colored-5kg|51482315620628
+PLA|RAPID PLA Plus|Silver|#9f9f9f|rapid-pla-plus-filament-1-75mm-colored-5kg|51482315653396
+PLA|RAPID PLA Plus|Beige|#f4e0b8|rapid-pla-plus-filament-1-75mm-colored-5kg|51482315686164
+PLA|RAPID PLA Plus|Brown|#9e6a4b|rapid-pla-plus-filament-1-75mm-colored-5kg|51482315718932
+PLA|PLA Plus|Black|#000000|pla-plus-filament-1-75mm-colored-5kg|51482016514324
+PLA|PLA Plus|Grey|#8f949b|pla-plus-filament-1-75mm-colored-5kg|51482016579860
+PLA|PLA Plus|Neon Green|#08e327|pla-plus-filament-1-75mm-colored-5kg|51482016612628
+PLA|PLA Plus|Dark Blue|#2240af|pla-plus-filament-1-75mm-colored-5kg|51482016645396
+PLA|PLA Plus|Red|#ea140e|pla-plus-filament-1-75mm-colored-5kg|51482016678164
+PLA|PLA Plus|Yellow|#fbec07|pla-plus-filament-1-75mm-colored-5kg|51482016710932
+PLA|PLA Plus|Orange|#fd7c18|pla-plus-filament-1-75mm-colored-5kg|51482016743700
+PLA|PLA Plus|Pink|#f9b0bd|pla-plus-filament-1-75mm-colored-5kg|51482016776468
+PLA|PLA Plus|Purple|#603ba0|pla-plus-filament-1-75mm-colored-5kg|51482016809236
+PLA|PLA Plus|Sky Blue|#32d0ec|pla-plus-filament-1-75mm-colored-5kg|51482016874772
+PLA|PLA Plus|Sea Green|#08b690|pla-plus-filament-1-75mm-colored-5kg|51482016907540
+PLA|PLA Plus|Space Grey|#7e7e7e|pla-plus-filament-1-75mm-colored-5kg|51482016940308
+PLA|PLA Plus|Wood Color|#b19870|pla-plus-filament-1-75mm-colored-5kg|51482016973076
+PLA|PLA Plus|Beige|#f4e0b8|pla-plus-filament-1-75mm-colored-5kg|51482017005844
+PLA|PLA Plus|Brown|#9e6a4b|pla-plus-filament-1-75mm-colored-5kg|51482017038612
+PLA|PLA Wood|Wood filled|#9d8058|pla-wood|51422752538900
+PLA|PLA Wood|Oak Wood/Light Brown|#d7c4b4|pla-wood|51422752604436
+PLA|PLA Wood|Walnut Wood|#77504a|pla-wood|51422752637204
+PLA|PLA Wood|Rosewood|#523530|pla-wood|51422752669972
+PLA|PLA Wood|Tan Birch|#f2e9dd|pla-wood|51422752702740
+PLA|PLA Wood|Medium Brown|#885a40|pla-wood|51422752735508
+PLA|PLA Metallic|Metal Gold|#706457|pla-metal-filament-1-75-mm-colored-1-kg|51170282012948
+PLA|PLA Metallic|Metal Bronze|#614638|pla-metal-filament-1-75-mm-colored-1-kg|51170282045716
+PLA|PLA Metallic|Metal Blue|#3a4e6a|pla-metal-filament-1-75-mm-colored-1-kg|51170282078484
+PLA|PLA Matte|Matte Black|#090909|pla-matte-filament-1-75mm-colored-10kg|50528033341716
+PLA|PLA Matte|Matte White|#f6f6f6|pla-matte-filament-1-75mm-colored-10kg|50528033374484
+PLA|PLA Matte|Slate Grey|#969799|pla-matte-filament-1-75mm-colored-10kg|50528033407252
+PLA|PLA Matte|Ruby Red|#bb2c2e|pla-matte-filament-1-75mm-colored-10kg|50528033440020
+PLA|PLA Matte|Navy Blue|#2d3f6f|pla-matte-filament-1-75mm-colored-10kg|50528033472788
+PLA|PLA Matte|Ice Blue|#b3f3fd|pla-matte-filament-1-75mm-colored-10kg|50528033505556
+PLA|PLA Matte|Teal Green|#74cdc7|pla-matte-filament-1-75mm-colored-10kg|50528033538324
+PLA|PLA Matte|Mint Green|#dbebba|pla-matte-filament-1-75mm-colored-10kg|50528033571092
+PLA|PLA Matte|Sunshine Yellow|#f7d863|pla-matte-filament-1-75mm-colored-10kg|50528033603860
+PLA|PLA Matte|Lavender Purple|#9d85d1|pla-matte-filament-1-75mm-colored-10kg|50528033636628
+PLA|PLA Matte|Sakura Pink|#f9c2d5|pla-matte-filament-1-75mm-colored-10kg|50528033669396
+PLA|PLA Matte|Beige|#f4e0b8|pla-matte-filament-1-75mm-colored-10kg|50528033702164
+PLA|PLA Matte|Earth Brown|#805947|pla-matte-filament-1-75mm-colored-10kg|51247916450068
+TPU|Rapid TPU 95A|Black|#000000|rapid-tpu-filament-1-75mm-colored-1kg|50832286581012
+TPU|Rapid TPU 95A|Red|#ea140e|rapid-tpu-filament-1-75mm-colored-1kg|50832286646548
+PLA|PLA Basic Refill|Black|#000000|pla-basic-filament-1-75mm-colored-1kg|51589494604052
+PLA|PLA Basic Refill|Red|#ea140e|pla-basic-filament-1-75mm-colored-1kg|51589494636820
+PLA|PLA Basic Refill|Yellow|#fbec07|pla-basic-filament-1-75mm-colored-1kg|51589494669588
+PLA|PLA Basic Refill|Cyan|#3aa2ff|pla-basic-filament-1-75mm-colored-1kg|51589494702356
+PLA|PLA Basic Refill|Purple|#603ba0|pla-basic-filament-1-75mm-colored-1kg|51589494735124
+PLA|PLA Basic Refill|Cocoa Brown|#665345|pla-basic-filament-1-75mm-colored-1kg|51589494767892
+PLA|PLA Basic Refill|Hot Pink|#ff5d8e|pla-basic-filament-1-75mm-colored-1kg|51589494800660
+PLA|PLA Basic Refill|Sunflower Yellow|#fbb404|pla-basic-filament-1-75mm-colored-1kg|51589494833428
+PLA|PLA Basic Refill|Cobalt Blue|#1341d2|pla-basic-filament-1-75mm-colored-1kg|51589494866196
+PLA|PLA Basic Refill|Apple Green|#c2de31|pla-basic-filament-1-75mm-colored-1kg|51589494898964
+PLA|PLA Basic Refill|Turquoise Green|#23c5c5|pla-basic-filament-1-75mm-colored-1kg|51589494931732
+PLA|PLA Basic Refill|Grey|#8f949b|pla-basic-filament-1-75mm-colored-1kg|51589494997268
+PLA|PLA Basic Refill|Beige|#f4e0b8|pla-basic-filament-1-75mm-colored-1kg|51589495030036
+PLA|PLA Basic Refill|Pink|#f9b0bd|pla-basic-filament-1-75mm-colored-1kg|51589495062804
+PLA|PLA Basic Refill|Green|#08e327|pla-basic-filament-1-75mm-colored-1kg|51589495128340
+PLA|PLA Basic Refill|Misty Blue|#586d83|pla-basic-filament-1-75mm-colored-1kg|51597358039316
+PLA|PLA Basic Refill|Orange|#fd7c18|pla-basic-filament-1-75mm-colored-1kg|51797966061844
+ABS|ABS|Red|#ea140e|abs-filament-1-75mm-colored-1kg|50502335070484
+ABS|ABS|Grey|#8f949b|abs-filament-1-75mm-colored-1kg|50502335103252
+ABS|ABS|Blue|#2240af|abs-filament-1-75mm-colored-1kg|50502335136020
+ABS|ABS|Orange|#fd7c18|abs-filament-1-75mm-colored-1kg|50502335168788
+ABS|ABS|Yellow|#fbec07|abs-filament-1-75mm-colored-1kg|51988540522772
+ABS|ABS|Green|#08e327|abs-filament-1-75mm-colored-1kg|51988540555540
+ABS|ABS|ABS Purple|#a506b4|abs-filament-1-75mm-colored-1kg|51988540588308
+ABS|ABS|ABS Pink|#f77d7f|abs-filament-1-75mm-colored-1kg|51988540621076
+ABS|ABS|ABS Cyan|#8de2b8|abs-filament-1-75mm-colored-1kg|51988540653844
+ABS|ABS|ABS Olive Green|#589c00|abs-filament-1-75mm-colored-1kg|51988540686612
+ABS|ABS|ABS Sky Blue|#36a7f7|abs-filament-1-75mm-colored-1kg|51988540719380
+ABS|ABS|Orange Yellow|#e3bf1f|abs-filament-1-75mm-colored-1kg|51988540752148
+ABS|ABS|Navy Blue|#2d3f6f|abs-filament-1-75mm-colored-1kg|51988540784916
+PETG|PETG-GF|Glass Fiber Black|#0c0908|petg-gf-filament-1-75mm-colored-1kg|50497382940948
+PETG|PETG-GF|Glass Fiber Grey|#858590|petg-gf-filament-1-75mm-colored-1kg|50497382973716
+PETG|PETG-GF|Glass Fiber White|#ffffff|petg-gf-filament-1-75mm-colored-1kg|50497383006484
+PLA|PLA|Black|#000000|pla-filament-1kg-gift|50283119116564
+PLA|PLA|Grey|#8f949b|pla-filament-1kg-gift|50283119182100
+PLA|PLA Plus|Black|#000000|pla-plus-filament-1-75mm-colored-10kg|49773635895572
+PLA|PLA Plus|Grey|#8f949b|pla-plus-filament-1-75mm-colored-10kg|50523479376148
+PLA|PLA Plus|Neon Green|#08e327|pla-plus-filament-1-75mm-colored-10kg|50523479408916
+PLA|PLA Plus|Dark Blue|#2240af|pla-plus-filament-1-75mm-colored-10kg|50523479441684
+PLA|PLA Plus|Red|#ea140e|pla-plus-filament-1-75mm-colored-10kg|50523479474452
+PLA|PLA Plus|Yellow|#fbec07|pla-plus-filament-1-75mm-colored-10kg|50523479507220
+PLA|PLA Plus|Orange|#fd7c18|pla-plus-filament-1-75mm-colored-10kg|50523479539988
+PLA|PLA Plus|Pink|#f9b0bd|pla-plus-filament-1-75mm-colored-10kg|50523479572756
+PLA|PLA Plus|Purple|#603ba0|pla-plus-filament-1-75mm-colored-10kg|50523479605524
+PLA|PLA Plus|Sky Blue|#32d0ec|pla-plus-filament-1-75mm-colored-10kg|50523479671060
+PLA|PLA Plus|Sea Green|#08b690|pla-plus-filament-1-75mm-colored-10kg|50523479703828
+PLA|PLA Plus|Space Grey|#7e7e7e|pla-plus-filament-1-75mm-colored-10kg|50523479736596
+PLA|PLA Plus|Wood Color|#b19870|pla-plus-filament-1-75mm-colored-10kg|50523479769364
+PLA|PLA Plus|Beige|#f4e0b8|pla-plus-filament-1-75mm-colored-10kg|50523479802132
+PLA|PLA Plus|Brown|#9e6a4b|pla-plus-filament-1-75mm-colored-10kg|50523479834900
+PETG|PETG Pro|Black|#000000|petg-pro-filament-1-75mm-colored-10kg|50524052848916
+PETG|PETG Pro|Grey|#8f949b|petg-pro-filament-1-75mm-colored-10kg|50524052914452
+PETG|PETG Pro|Silver|#9f9f9f|petg-pro-filament-1-75mm-colored-10kg|50524052947220
+PETG|PETG Pro|Pink|#f9b0bd|petg-pro-filament-1-75mm-colored-10kg|50524052979988
+PETG|PETG Pro|Red|#ea140e|petg-pro-filament-1-75mm-colored-10kg|50524053012756
+PETG|PETG Pro|Olive Green|#25460f|petg-pro-filament-1-75mm-colored-10kg|50524053045524
+PETG|PETG Pro|Blue|#2240af|petg-pro-filament-1-75mm-colored-10kg|50524053078292
+PETG|PETG Pro|Burgundy Red|#9c2129|petg-pro-filament-1-75mm-colored-10kg|51904009273620
+PETG|PETG Pro|Green|#08e327|petg-pro-filament-1-75mm-colored-10kg|51904009339156
+PETG|PETG Pro|Purple|#603ba0|petg-pro-filament-1-75mm-colored-10kg|51904009404692
+PLA|PLA Pro|Black|#000000|pla-pro-filament-1-75mm-colored-10kg|50523964080404
+PLA|PLA Pro|Grey|#8f949b|pla-pro-filament-1-75mm-colored-10kg|50523964145940
+PLA|PLA Pro|Blue|#2240af|pla-pro-filament-1-75mm-colored-10kg|50523964211476
+PLA|PLA Pro|Light Blue|#339bf7|pla-pro-filament-1-75mm-colored-10kg|50523964244244
+PLA|PLA Pro|Yellow|#fbec07|pla-pro-filament-1-75mm-colored-10kg|50523964309780
+PETG|Rapid PETG|Black|#000000|rapid-petg-filament-1-75mm-colored-10kg|50524029223188
+PETG|Rapid PETG|Grey|#8f949b|rapid-petg-filament-1-75mm-colored-10kg|50524029288724
+PETG|Rapid PETG|Blue|#2240af|rapid-petg-filament-1-75mm-colored-10kg|50524029321492
+PETG|Rapid PETG|Green|#08e327|rapid-petg-filament-1-75mm-colored-10kg|50524029354260
+PETG|Rapid PETG|Red|#ea140e|rapid-petg-filament-1-75mm-colored-10kg|50524029387028
+PETG|Rapid PETG|Orange|#fd7c18|rapid-petg-filament-1-75mm-colored-10kg|50524029419796
+PETG|Rapid PETG|Yellow|#fbec07|rapid-petg-filament-1-75mm-colored-10kg|50524029452564
+PETG|Rapid PETG|Space Grey|#7e7e7e|rapid-petg-filament-1-75mm-colored-10kg|50524029485332
+PETG|Rapid PETG|Beige|#f4e0b8|rapid-petg-filament-1-75mm-colored-10kg|50524029518100
+PETG|Rapid PETG|Brown|#9e6a4b|rapid-petg-filament-1-75mm-colored-10kg|50524029550868
+PETG|Rapid PETG|Transparent|#ebebef|rapid-petg-filament-1-75mm-colored-10kg|50524029583636
+PLA|Rapid PLA Plus|Black|#000000|rapid-pla-plus-filament-1-75mm-colored-10kg|49773685506324
+PLA|Rapid PLA Plus|Grey|#8f949b|rapid-pla-plus-filament-1-75mm-colored-10kg|49460505739540
+PLA|Rapid PLA Plus|Blue|#2240af|rapid-pla-plus-filament-1-75mm-colored-10kg|50523935605012
+PLA|Rapid PLA Plus|Green|#08e327|rapid-pla-plus-filament-1-75mm-colored-10kg|50523935637780
+PLA|Rapid PLA Plus|Red|#ea140e|rapid-pla-plus-filament-1-75mm-colored-10kg|50523935670548
+PLA|Rapid PLA Plus|Orange|#fd7c18|rapid-pla-plus-filament-1-75mm-colored-10kg|50523935703316
+PLA|Rapid PLA Plus|Yellow|#fbec07|rapid-pla-plus-filament-1-75mm-colored-10kg|50523935736084
+PLA|Rapid PLA Plus|Silver|#9f9f9f|rapid-pla-plus-filament-1-75mm-colored-10kg|50523935768852
+PLA|Rapid PLA Plus|Beige|#f4e0b8|rapid-pla-plus-filament-1-75mm-colored-10kg|50523935801620
+PLA|Rapid PLA Plus|Brown|#9e6a4b|rapid-pla-plus-filament-1-75mm-colored-10kg|50523935834388
+PLA|Rapid PLA Plus|Black|#000000|rapid-pla-plus-filament-1-75mm-colored-5kg-for-orangestorm-giga|49542207471892
+PLA|Rapid PLA Plus|Grey|#8f949b|rapid-pla-plus-filament-1-75mm-colored-5kg-for-orangestorm-giga|49543693795604
+PLA|Rapid PLA Plus|Red|#ea140e|rapid-pla-plus-filament-1-75mm-colored-5kg-for-orangestorm-giga|49543693893908
+PLA|Rapid PLA Plus|Blue|#2240af|rapid-pla-plus-filament-1-75mm-colored-5kg-for-orangestorm-giga|49543693926676
+PLA|Rapid PLA Plus|Green|#08e327|rapid-pla-plus-filament-1-75mm-colored-5kg-for-orangestorm-giga|49543693959444
+PLA|Rapid PLA Plus|Silver|#9f9f9f|rapid-pla-plus-filament-1-75mm-colored-5kg-for-orangestorm-giga|49543693992212
+TPU|TPU 95A|Black|#000000|tpu-filament-1-75mm-colored-1kg|47962766180628
+TPU|TPU 95A|Grey|#8f949b|tpu-filament-1-75mm-colored-1kg|51176089518356
+PETG|PETG Pro|Black|#000000|petg-pro-filament-1-75mm-colored-1kg|47735962435860
+PETG|PETG Pro|Grey|#8f949b|petg-pro-filament-1-75mm-colored-1kg|47735962501396
+PETG|PETG Pro|Silver|#9f9f9f|petg-pro-filament-1-75mm-colored-1kg|47735962796308
+PETG|PETG Pro|Pink|#f9b0bd|petg-pro-filament-1-75mm-colored-1kg|47832406589716
+PETG|PETG Pro|Red|#ea140e|petg-pro-filament-1-75mm-colored-1kg|47832406622484
+PETG|PETG Pro|Olive Green|#25460f|petg-pro-filament-1-75mm-colored-1kg|49520246554900
+PETG|PETG Pro|Blue|#2240af|petg-pro-filament-1-75mm-colored-1kg|50098197659924
+PETG|PETG Pro|Burgundy Red|#9c2129|petg-pro-filament-1-75mm-colored-1kg|51130643284244
+PETG|PETG Pro|Green|#08e327|petg-pro-filament-1-75mm-colored-1kg|51130643349780
+PETG|PETG Pro|Purple|#603ba0|petg-pro-filament-1-75mm-colored-1kg|51130643415316
+PETG|Rapid PETG|Black|#000000|rapid-petg-filament-1-75mm-colored-1kg|47708966912276
+PETG|Rapid PETG|Grey|#8f949b|rapid-petg-filament-1-75mm-colored-1kg|47708966977812
+PETG|Rapid PETG|Blue|#2240af|rapid-petg-filament-1-75mm-colored-1kg|47708967010580
+PETG|Rapid PETG|Green|#08e327|rapid-petg-filament-1-75mm-colored-1kg|47708967043348
+PETG|Rapid PETG|Red|#ea140e|rapid-petg-filament-1-75mm-colored-1kg|47708967076116
+PETG|Rapid PETG|Orange|#fd7c18|rapid-petg-filament-1-75mm-colored-1kg|47708967108884
+PETG|Rapid PETG|Yellow|#fbec07|rapid-petg-filament-1-75mm-colored-1kg|47708967141652
+PETG|Rapid PETG|Space Grey|#7e7e7e|rapid-petg-filament-1-75mm-colored-1kg|48802771370260
+PETG|Rapid PETG|Beige|#f4e0b8|rapid-petg-filament-1-75mm-colored-1kg|48802771435796
+PETG|Rapid PETG|Brown|#9e6a4b|rapid-petg-filament-1-75mm-colored-1kg|48802771566868
+PETG|Rapid PETG|Transparent|#ebebef|rapid-petg-filament-1-75mm-colored-1kg|49276202516756
+PLA|PLA Matte|Matte Black|#090909|pla-matte-filament-1-75mm-colored-1kg|47628934480148
+PLA|PLA Matte|Matte White|#f6f6f6|pla-matte-filament-1-75mm-colored-1kg|47628934512916
+PLA|PLA Matte|Slate Grey|#969799|pla-matte-filament-1-75mm-colored-1kg|47628934545684
+PLA|PLA Matte|Ruby Red|#bb2c2e|pla-matte-filament-1-75mm-colored-1kg|47628934578452
+PLA|PLA Matte|Navy Blue|#2d3f6f|pla-matte-filament-1-75mm-colored-1kg|47628934611220
+PLA|PLA Matte|Ice Blue|#b3f3fd|pla-matte-filament-1-75mm-colored-1kg|47628934643988
+PLA|PLA Matte|Teal Green|#74cdc7|pla-matte-filament-1-75mm-colored-1kg|47628934676756
+PLA|PLA Matte|Mint Green|#dbebba|pla-matte-filament-1-75mm-colored-1kg|47628934709524
+PLA|PLA Matte|Sunshine Yellow|#f7d863|pla-matte-filament-1-75mm-colored-1kg|47628934742292
+PLA|PLA Matte|Lavender Purple|#9d85d1|pla-matte-filament-1-75mm-colored-1kg|47628934775060
+PLA|PLA Matte|Sakura Pink|#f9c2d5|pla-matte-filament-1-75mm-colored-1kg|47628942901524
+PLA|PLA Matte|Beige|#f4e0b8|pla-matte-filament-1-75mm-colored-1kg|47628942934292
+PLA|PLA Matte|Earth Brown|#805947|pla-matte-filament-1-75mm-colored-1kg|51130628407572
+PLA|PLA Pro|Black|#000000|pla-pro-filament-1-75mm-colored-1kg|47556168614164
+PLA|PLA Pro|Grey|#8f949b|pla-pro-filament-1-75mm-colored-1kg|47556168679700
+PLA|PLA Pro|Blue|#2240af|pla-pro-filament-1-75mm-colored-1kg|47556168745236
+PLA|PLA Pro|Light Blue|#339bf7|pla-pro-filament-1-75mm-colored-1kg|47556168778004
+PLA|PLA Pro|Yellow|#fbec07|pla-pro-filament-1-75mm-colored-1kg|47556168843540
+PLA|PLA Pro|Purple|#603ba0|pla-pro-filament-1-75mm-colored-1kg|47556168876308
+PLA|PLA Pro|Hot Pink|#ff5d8e|pla-pro-filament-1-75mm-colored-1kg|51892025360660
+ASA|ASA|Deep Black|#000000|asa-filament-1-75mm-colored-1kg|47555441885460
+ASA|ASA|Blue|#2240af|asa-filament-1-75mm-colored-1kg|51149474365716
+ASA|ASA|ASA Green|#08b690|asa-filament-1-75mm-colored-1kg|51149474398484
+ASA|ASA|Grey|#8f949b|asa-filament-1-75mm-colored-1kg|51149474431252
+ASA|ASA|Red|#ea140e|asa-filament-1-75mm-colored-1kg|51149474464020
+PLA|Rapid PLA Plus|Black|#000000|elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg|45521233510676
+PLA|Rapid PLA Plus|Grey|#8f949b|elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg|45521233608980
+PLA|Rapid PLA Plus|Blue|#2240af|elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg|45521233740052
+PLA|Rapid PLA Plus|Green|#08e327|elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg|45521233674516
+PLA|Rapid PLA Plus|Red|#ea140e|elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg|45521233805588
+PLA|Rapid PLA Plus|Orange|#fd7c18|elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg|45521233969428
+PLA|Rapid PLA Plus|Yellow|#fbec07|elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg|45521233903892
+PLA|Rapid PLA Plus|Silver|#9f9f9f|elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg|48565524398356
+PLA|Rapid PLA Plus|Beige|#f4e0b8|elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg|48802684502292
+PLA|Rapid PLA Plus|Brown|#9e6a4b|elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg|48802684535060
+PLA|PLA Plus|Black|#000000|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|45521217945876
+PLA|PLA Plus|Grey|#8f949b|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|45521218011412
+PLA|PLA Plus|Neon Green|#08e327|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|45521218044180
+PLA|PLA Plus|Dark Blue|#2240af|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|45521218076948
+PLA|PLA Plus|Red|#ea140e|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|45521218109716
+PLA|PLA Plus|Yellow|#fbec07|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|45521218142484
+PLA|PLA Plus|Orange|#fd7c18|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|45521218175252
+PLA|PLA Plus|Pink|#f9b0bd|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|47555270312212
+PLA|PLA Plus|Purple|#603ba0|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|47555270344980
+PLA|PLA Plus|Sky Blue|#32d0ec|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|47555270410516
+PLA|PLA Plus|Sea Green|#08b690|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|47555270443284
+PLA|PLA Plus|Space Grey|#7e7e7e|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|47555270476052
+PLA|PLA Plus|Wood Color|#b19870|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|47555270508820
+PLA|PLA Plus|Beige|#f4e0b8|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|47555270541588
+PLA|PLA Plus|Brown|#9e6a4b|elegoo-pla-plus-3d-printer-filament-1-75mm-colored-1kg|48355530801428
+PLA|PLA|Black|#000000|pla-filament-1-75mm-colored-1kg|51888865837332
+PLA|PLA|Grey|#8f949b|pla-filament-1-75mm-colored-1kg|51888865902868
+PLA|PLA|Neon Green|#08e327|pla-filament-1-75mm-colored-1kg|51888865935636
+PLA|PLA|Dark Blue|#2240af|pla-filament-1-75mm-colored-1kg|51888865968404
+PLA|PLA|Red|#ea140e|pla-filament-1-75mm-colored-1kg|51888866001172
+PLA|PLA|Yellow|#fbec07|pla-filament-1-75mm-colored-1kg|51888866033940
+PLA|PLA|Orange|#fd7c18|pla-filament-1-75mm-colored-1kg|51888866066708
+PLA|PLA|Pink|#f9b0bd|pla-filament-1-75mm-colored-1kg|51888866099476
+PLA|PLA|Purple|#603ba0|pla-filament-1-75mm-colored-1kg|51888866132244
+PLA|PLA|Sky Blue|#32d0ec|pla-filament-1-75mm-colored-1kg|51888866197780
+PLA|PLA|Sea Green|#08b690|pla-filament-1-75mm-colored-1kg|51888866230548
+PLA|PLA|Space Grey|#7e7e7e|pla-filament-1-75mm-colored-1kg|51888866263316
+PLA|PLA|Wood Color|#b19870|pla-filament-1-75mm-colored-1kg|51888866296084
+PLA|PLA|Brown|#9e6a4b|pla-filament-1-75mm-colored-1kg|51888866328852
+PLA|PLA|Beige|#f4e0b8|pla-filament-1-75mm-colored-1kg|51888866361620
+PLA|PLA|Copper Filled|#895837|pla-filament-1-75mm-colored-1kg|49770463592724
