@@ -1,0 +1,61 @@
+PLA|PLA Lightweight (LW-PLA)|White 0.8kg/roll|#dfdfdd|sunlu-pla-lightweight-lwpla-3d-printer-filament-0-8kg|52721972642074
+PLA|PLA Metallic (PLA Metal )|Azurite|#2d5597|sunlu-pla-metallic-3d-filament-1kg|52721962975514
+PLA|PLA Metallic (PLA Metal )|Brass Gold|#917049|sunlu-pla-metallic-3d-filament-1kg|52721962942746
+PETG|PETG 2.0|Lavender Purple(Purple)|#8470c9|petg-v2-3d-printer-filament-1kg|52687843819802
+PETG|PETG 2.0|Beige(Skin)|#f2d9ca|petg-v2-3d-printer-filament-1kg|52687843885338
+PETG|PETG 2.0|Aqua Blue|#02b9b9|petg-v2-3d-printer-filament-1kg|52687864037658
+PETG|PETG 2.0|Blush Pink|#fbceca|petg-v2-3d-printer-filament-1kg|52687864070426
+PETG|PETG 2.0|Peach Pink|#f89984|petg-v2-3d-printer-filament-1kg|52687864103194
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Vivid Rose|#e94b95|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52687944778010
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Violet|#8c60d7|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52688457531674
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Shiny Blue|#3a98e5|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52688457564442
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Glossy Lake Cyan|#1fa6af|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52688457597210
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Streamer Blue|#a0beea|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52688457629978
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Metallic Green|#5f9067|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52688457695514
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Satin Glow Orange|#f16a38|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52688457728282
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Luxury Bright Red|#f53a45|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52688457793818
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Copper Red|#c46b4e|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52688457826586
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Silver|#a1afbe|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52688457859354
+PLA|SILK PLA+ 2.0(SILK PLA+ V2)|Soft Satin Pink|#efacbd|silk-pla-plus-v2-3d-printer-filament-1kg-enhanced-silk-shine|52688457892122
+TPU|TPU-SILK(SILK-Textured TPU)|Black|#393939|1-75mm-sunlu-tpu-silk-3d-printer-filament-1kg-roll|47027831308570
+TPU|TPU-SILK(SILK-Textured TPU)|Cream White|#efe8cb|1-75mm-sunlu-tpu-silk-3d-printer-filament-1kg-roll|47027831341338
+TPU|TPU-SILK(SILK-Textured TPU)|Burgundy|#57363f|1-75mm-sunlu-tpu-silk-3d-printer-filament-1kg-roll|47027831439642
+TPU|TPU-SILK(SILK-Textured TPU)|Dark Blue|#363964|1-75mm-sunlu-tpu-silk-3d-printer-filament-1kg-roll|47027831406874
+PLA|PLA|PLA Black|#292929|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079868944666
+PLA|PLA|PLA White|#f0efed|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079868977434
+PLA|PLA|PLA Midnight|#212237|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50751425413402
+PLA|PLA|PLA Ceramic White|#e0e1e6|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50751425544474
+PLA|PLA|PLA Roasted Chestnut Black|#2c1815|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50751425478938
+PLA|PLA|PLA Blue(Klein Blue)|#141fa7|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079869534490
+PLA|PLA|PLA Green|#329e28|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079869468954
+PLA|PLA|PLA Grass Green|#357c63|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079869436186
+PLA|PLA|PLA Silver|#becad9|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079869075738
+PLA|PLA|PLA Sunny Orange|#fb7d29|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079869108506
+PLA|PLA|PLA Lemon Yellow|#eced70|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079869174042
+PLA|PLA|PLA Sky Blue|#31ccfa|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079869206810
+PLA|PLA|PLA Mint Green|#04b09c|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079869305114
+PLA|PLA|PLA Red|#bb282a|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079869370650
+PLA|PLA|PLA Cyan|#0297d1|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50403691331866
+PLA|PLA|PLA Transparent|#dfdfdd|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50403692577050
+PLA|PLA|PLA Transparent Red|#d02a36|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50403701850394
+PLA|PLA|PLA Transparent Blue|#3f69fc|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50403702145306
+PLA|PLA|PLA Transparent Green|#03a91f|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50403702079770
+PLA|PLA|PLA Transparent Purple|#8831ba|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50751425773850
+PLA|PLA|PLA Magenta|#c1206b|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|50079869272346
+PLA|PLA|PLA Blue Grey|#3573cd|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|40115907264598
+PLA|PLA|Fluorescent Blue|#363bf0|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51666469814554
+PLA|PLA|Fluorescent Purple|#8447fc|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51666481840410
+PLA|PLA|Fluorescent Red|#fd4c1b|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51666473320730
+PLA|PLA|Fluorescent Orange|#fd7828|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51666477449498
+PLA|PLA|Fluorescent Yellow|#e7e903|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51664757227802
+PLA|PLA|Strawberry Jam|#fc5956|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51664739959066
+PLA|PLA|Orange Juice|#fd960e|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51664739926298
+PLA|PLA|Grape Jelly|#b081ed|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51664739991834
+PLA|PLA|Mint Ice|#1bd6a7|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51664740024602
+PLA|PLA|Ocean Haze|#4a87b4|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51664740057370
+PLA|PLA|Mist Black|#2d3340|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|51664740090138
+PLA|PLA|Pistachio Green|#b8d791|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|52884622672154
+PLA|PLA|Sage Green|#a2bdab|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|52884627357978
+PLA|PLA|Pastel Blue|#8dc1d9|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|52884631027994
+PLA|PLA|Peach Pink|#ef9b8a|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|52884635353370
+PLA|PLA|Earth Green|#34421e|over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer|52884616937754
