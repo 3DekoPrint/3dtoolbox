@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Stilvorschau | 3DToolBox</title>
+<style>
+@font-face{font-family:"TB Display";src:url(fonts/InterDisplay-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"TB Display";src:url(fonts/InterDisplay-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"TB Text";src:url(fonts/Inter-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"TB Text";src:url(fonts/Inter-SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
+
+:root{
+  /* Farben der bestehenden Seite – unverändert */
+  --bg:#14201c; --panel:#1b2b25; --panel-2:#22362d; --ink:#eef3ee; --ink-dim:#a8bdb2;
+  --accent:#ff8c3c; --accent-2:#5fd9a0; --line:#2f473c;
+  /* abgeleitet */
+  --bg-deep:#0d1612; --line-soft:rgba(168,189,178,.14); --glass:rgba(34,54,45,.55);
+  --r-lg:28px; --r-md:16px; --r-sm:10px; --cut:56px;
+  --f-display:"TB Display","Inter Display","Helvetica Neue",Arial,sans-serif;
+  --f-text:"TB Text","Inter","Helvetica Neue",Arial,sans-serif;
+  --f-mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-text);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 40px;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:6px}
+.mono{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* ---------- Navigation: schwebende Pille ---------- */
+.nav{position:sticky;top:max(10px,env(safe-area-inset-top,0px));z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:8px 10px 8px 16px;margin-bottom:14px;border:1px solid var(--line-soft);border-radius:999px;
+  background:rgba(20,32,28,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:700;font-size:18px;letter-spacing:-.01em}
+.logo svg{width:28px;height:28px;flex:none}
+.logo b{color:var(--accent);font-weight:700}
+.nav-links{display:flex;gap:4px}
+.nav-links a{padding:8px 14px;border-radius:999px;font-size:14px;color:var(--ink-dim);transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--ink);background:var(--panel-2)}
+.lang{display:flex;gap:2px;font-family:var(--f-mono);font-size:12px}
+.lang span,.lang a{padding:7px 10px;border-radius:999px}
+.lang span{background:var(--panel-2);color:var(--ink)}
+.lang a{color:var(--ink-dim)}
+
+/* ---------- Hero: Rahmen mit abgeschrägter Ecke ---------- */
+.hero{position:relative;overflow:hidden;isolation:isolate;border-radius:var(--r-lg);
+  clip-path:polygon(0 0,100% 0,100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)));
+  background:
+    radial-gradient(60% 70% at 8% 100%,rgba(95,217,160,.26),transparent 70%),
+    radial-gradient(50% 60% at 96% 12%,rgba(255,140,60,.20),transparent 70%),
+    linear-gradient(180deg,var(--bg-deep),#101c17);
+  border:1px solid var(--line-soft);padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:center;min-height:560px}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;
+  background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+  background-size:44px 44px;mask-image:radial-gradient(70% 80% at 70% 40%,#000,transparent 85%);-webkit-mask-image:radial-gradient(70% 80% at 70% 40%,#000,transparent 85%)}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;border:1px solid var(--line-soft);border-radius:999px;background:var(--glass)}
+.tag i{width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px rgba(95,217,160,.18)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(36px,5.2vw,68px);line-height:1.02;letter-spacing:-.035em;margin:20px 0 20px;text-wrap:balance}
+h1 .dim{color:var(--ink-dim);font-weight:500}
+h1 em{white-space:nowrap;font-style:normal;background:linear-gradient(90deg,var(--accent),#ffb27a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:46ch;color:var(--ink-dim);font-size:clamp(16px,1.5vw,18.5px);margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn-primary{background:var(--accent);color:#1a1206;box-shadow:0 10px 34px rgba(255,140,60,.30)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,140,60,.40)}
+.btn-ghost{border:1px solid var(--line);background:var(--glass);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--accent-2)}
+.btn .ar{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(26,18,6,.14);transition:transform .2s}
+.btn:hover .ar{transform:translateX(3px)}
+.btn-ghost .ar{background:var(--panel-2)}
+
+/* Hero-Bildfläche */
+.stage{position:relative;aspect-ratio:1/1;max-width:520px;width:100%;justify-self:center}
+.stage svg.cube{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.card{position:absolute;border:1px solid var(--line-soft);border-radius:var(--r-md);background:rgba(20,32,28,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.res{right:-4%;bottom:-2%;width:min(300px,64%);padding:14px}
+.res-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.res-row{display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line-soft)}
+.res-row i{width:30px;height:30px;border-radius:9px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.res-row b{display:block;font-size:13.5px;font-weight:600;line-height:1.25}
+.res-row small{color:var(--ink-dim);font-size:12px}
+.de{font-family:var(--f-mono);font-size:12px;color:var(--accent-2);white-space:nowrap}
+.chip{left:0;top:10%;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.chip b{font-family:var(--f-display);font-size:22px;line-height:1}
+.chip span{font-size:12px;color:var(--ink-dim);line-height:1.3}
+
+/* Kennzahlen als Datenstreifen */
+.specs{display:grid;grid-template-columns:repeat(4,1fr);margin:18px 0 0;border:1px solid var(--line-soft);border-radius:var(--r-md);background:rgba(27,43,37,.45)}
+.spec{padding:18px 22px;position:relative}
+.spec+.spec{border-left:1px solid var(--line-soft)}
+.spec b{display:block;font-family:var(--f-display);font-size:clamp(26px,3vw,38px);letter-spacing:-.03em;line-height:1.1;margin:6px 0 2px}
+.spec .sd{font-size:13.5px;color:var(--ink-dim)}
+
+/* ---------- Abschnitte ---------- */
+section{padding-top:clamp(56px,8vw,96px)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+h2{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,4vw,48px);letter-spacing:-.03em;line-height:1.05;margin:10px 0 0}
+.head p{max-width:42ch;margin:0;color:var(--ink-dim)}
+
+/* Werkzeug-Raster mit Fadenkreuz-Ecken */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.t{position:relative;display:flex;flex-direction:column;gap:10px;padding:22px;min-height:190px;border:1px solid var(--line-soft);border-radius:var(--r-md);background:linear-gradient(180deg,rgba(34,54,45,.55),rgba(27,43,37,.55));transition:transform .25s,border-color .25s,background .25s}
+.t::before,.t::after{content:"";position:absolute;width:9px;height:9px;border:1px solid var(--accent-2);opacity:0;transition:opacity .25s}
+.t::before{top:9px;left:9px;border-right:0;border-bottom:0}
+.t::after{bottom:9px;right:9px;border-left:0;border-top:0}
+.t:hover{transform:translateY(-4px);border-color:rgba(95,217,160,.5)}
+.t:hover::before,.t:hover::after{opacity:1}
+.t .top{display:flex;justify-content:space-between;align-items:center}
+.ico{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--panel-2);border:1px solid var(--line-soft);color:var(--accent-2)}
+.ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.t h3{font-family:var(--f-display);font-weight:700;font-size:19px;letter-spacing:-.015em;margin:auto 0 0}
+.t p{margin:0;color:var(--ink-dim);font-size:14.5px}
+.t .go{position:absolute;right:20px;top:20px;opacity:0;transform:translate(-4px,4px);transition:.25s;color:var(--accent)}
+.t:hover .go{opacity:1;transform:none}
+.t:hover .ico+.mono{opacity:0}
+
+.wide{grid-column:1/-1;min-height:0;flex-direction:row;align-items:center;gap:20px;padding:20px 24px}
+.wide h3{margin:0}.wide p{flex:1;margin:0}.wide .top{gap:14px}
+.flag{grid-column:span 2;grid-row:span 2;min-height:400px;border-color:rgba(255,140,60,.38);overflow:hidden;isolation:isolate;
+  clip-path:polygon(0 0,100% 0,100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)));
+  background:radial-gradient(80% 70% at 100% 0%,rgba(255,140,60,.22),transparent 65%),radial-gradient(70% 60% at 0% 100%,rgba(95,217,160,.18),transparent 65%),linear-gradient(180deg,#1d3128,#16241e)}
+.flag h3{font-size:clamp(28px,3.4vw,40px);letter-spacing:-.03em;line-height:1.05;margin-top:auto}
+.flag p{font-size:16px;max-width:36ch}
+.flag .badge{color:var(--accent)}
+.sw{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 8px}
+.sw i{width:34px;height:34px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 6px 14px rgba(0,0,0,.35)}
+.flag .btn{align-self:flex-start;margin-top:6px}
+
+/* Generatoren als Datenzeilen */
+.rows{border:1px solid var(--line-soft);border-radius:var(--r-md);overflow:hidden;background:rgba(27,43,37,.4)}
+.row{display:grid;grid-template-columns:56px 52px 1fr auto 28px;gap:18px;align-items:center;padding:20px 24px;transition:background .2s}
+.row+.row{border-top:1px solid var(--line-soft)}
+.row:hover{background:rgba(34,54,45,.7)}
+.row h3{font-family:var(--f-display);font-size:19px;font-weight:700;letter-spacing:-.015em;margin:0 0 2px}
+.row p{margin:0;color:var(--ink-dim);font-size:14.5px}
+.pill{padding:5px 11px;border-radius:999px;border:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--accent-2);white-space:nowrap}
+.row .ar{color:var(--ink-dim);transition:transform .2s,color .2s}
+.row:hover .ar{transform:translateX(4px);color:var(--accent)}
+
+/* Externe Empfehlungen */
+.ext{border:1px dashed var(--line);border-radius:var(--r-lg);padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;align-items:center}
+.ext .head{grid-column:1/-1;margin:0}
+.ext .head h2{font-size:clamp(24px,3vw,34px)}
+.ad{display:inline-block;padding:3px 9px;border-radius:6px;background:rgba(255,140,60,.14);color:var(--accent);font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;vertical-align:middle;margin-left:8px}
+.ext-item{display:flex;flex-direction:column;gap:4px;padding:18px 20px;border:1px solid var(--line-soft);border-radius:var(--r-md);background:var(--glass);transition:border-color .2s}
+.ext-item:hover{border-color:var(--accent)}
+.ext-item b{font-family:var(--f-display);font-size:18px}
+.ext-item span{color:var(--ink-dim);font-size:14.5px}
+.ext small{grid-column:1/-1;color:var(--ink-dim)}
+
+footer{margin-top:clamp(56px,8vw,96px);padding-top:24px;border-top:1px solid var(--line-soft);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;color:var(--ink-dim);font-size:14px}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+footer a:hover{color:var(--ink)}
+
+/* ---------- Responsiv ---------- */
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr;min-height:0}
+  .stage{max-width:420px}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .wide{grid-column:1/-1;min-height:0;flex-direction:row;align-items:center;gap:20px;padding:20px 24px}
+.wide h3{margin:0}.wide p{flex:1;margin:0}.wide .top{gap:14px}
+.flag{grid-column:span 2;grid-row:auto;min-height:340px}
+  .specs{grid-template-columns:repeat(2,1fr)}
+  .spec:nth-child(3){border-left:0}
+  .spec:nth-child(n+3){border-top:1px solid var(--line-soft)}
+  .nav-links{display:none}
+  .ext{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  :root{--cut:36px}
+  .bento{grid-template-columns:1fr}
+  .flag{grid-column:auto}
+  .t{min-height:0}
+  .wide{flex-direction:column;align-items:flex-start;gap:10px}
+  .row{grid-template-columns:44px 1fr 24px;gap:14px;padding:18px}
+  .row .mono,.row .pill{display:none}
+  .btn{width:100%;justify-content:space-between}
+  .stage{aspect-ratio:auto;display:flex;flex-direction:column;gap:12px}
+  .stage svg.cube{position:static;width:min(100%,300px);height:auto;aspect-ratio:1/1;align-self:center}
+  .card{position:static;width:100%}
+  .chip{order:-1}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.cubeg{animation:float 7s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-calc" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+  <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="9" r="2.4"/><circle cx="11" cy="16" r="3.2"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M9 9h5M9 13h5"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+  <symbol id="i-spool" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/><path d="M12 4v3M12 17v3"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 8h9M17 8h3M4 16h3M11 16h9"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M5 8h13l-3-3M19 16H6l3 3"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-4 4 3 3-2 4 3"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M3 8l9-4 9 4v8l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v8"/></symbol>
+  <symbol id="i-hex" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/><circle cx="12" cy="5" r="1.6"/><circle cx="18" cy="15.5" r="1.6"/><circle cx="6" cy="15.5" r="1.6"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M4 8h9a4 4 0 0 1 0 8H4z"/><circle cx="18.5" cy="12" r="1.4"/></symbol>
+  <symbol id="i-plate" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M8 12h8"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+  <symbol id="i-ar" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<div class="wrap">
+
+  <nav class="nav" aria-label="Hauptnavigation">
+    <a class="logo" href="#" aria-label="3DToolBox">
+      <svg viewBox="0 0 220 220" aria-hidden="true"><rect width="220" height="220" rx="44" fill="#FF6A2B"/><polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/><polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/><polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/></svg>
+      <span><b>3D</b>ToolBox</span>
+    </a>
+    <div class="nav-links">
+      <a href="#tools">Tools</a><a href="#generatoren">Generatoren</a><a href="#finder">Filament-Finder</a><a href="#partner">Partner</a>
+    </div>
+    <div class="lang"><span>DE</span><a href="#">EN</a></div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <span class="tag mono"><i></i>Kostenlos · ohne Anmeldung · im Browser</span>
+      <h1><span class="dim">Kostenlose Tools für den</span> <em>3D-Druck-Alltag</em></h1>
+      <p class="lead">Filament nach Foto finden, Kosten berechnen, Gehäuse und Modelle erzeugen, Druckprobleme nachschlagen. Alles läuft lokal auf deinem Gerät.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#finder">Filament-Finder starten <span class="ar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ar"/></svg></span></a>
+        <a class="btn btn-ghost" href="#tools">Alle Tools ansehen <span class="ar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ar"/></svg></span></a>
+      </div>
+    </div>
+
+    <div class="stage" aria-hidden="true">
+      <svg class="cube" viewBox="0 0 400 400" fill="none">
+        <defs>
+          <linearGradient id="gTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fd9a0" stop-opacity=".55"/><stop offset="1" stop-color="#22362d" stop-opacity=".4"/></linearGradient>
+          <linearGradient id="gL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b4438" stop-opacity=".85"/><stop offset="1" stop-color="#14201c" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="gR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8c3c" stop-opacity=".5"/><stop offset="1" stop-color="#3a2415" stop-opacity=".85"/></linearGradient>
+          <radialGradient id="gGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#5fd9a0" stop-opacity=".35"/><stop offset="1" stop-color="#5fd9a0" stop-opacity="0"/></radialGradient>
+        </defs>
+        <ellipse cx="200" cy="210" rx="190" ry="170" fill="url(#gGlow)"/>
+        <!-- Maßlinien -->
+        <g stroke="#a8bdb2" stroke-opacity=".55" stroke-width="1" stroke-dasharray="3 4">
+          <path d="M60 128 L60 288"/><path d="M52 128 H68M52 288 H68" stroke-dasharray="0"/>
+          <path d="M96 336 L200 372 L304 336" />
+        </g>
+        <text x="46" y="214" fill="#a8bdb2" font-size="11" font-family="ui-monospace,Menlo,monospace" transform="rotate(-90 46 214)" text-anchor="middle">62.0 mm</text>
+        <text x="200" y="392" fill="#a8bdb2" font-size="11" font-family="ui-monospace,Menlo,monospace" text-anchor="middle">85.0 mm</text>
+        <g class="cubeg">
+          <polygon points="200,70 320,139 200,208 80,139" fill="url(#gTop)" stroke="#5fd9a0" stroke-opacity=".8"/>
+          <polygon points="80,139 200,208 200,346 80,277" fill="url(#gL)" stroke="#a8bdb2" stroke-opacity=".35"/>
+          <polygon points="200,208 320,139 320,277 200,346" fill="url(#gR)" stroke="#ff8c3c" stroke-opacity=".7"/>
+          <!-- Schichtlinien -->
+          <g stroke="#eef3ee" stroke-opacity=".10"><path d="M80 163 L200 232 L320 163"/><path d="M80 187 L200 256 L320 187"/><path d="M80 211 L200 280 L320 211"/><path d="M80 235 L200 304 L320 235"/><path d="M80 259 L200 328 L320 259"/></g>
+          <!-- Düse -->
+          <g transform="translate(200 40)"><path d="M-12 -18 H12 V0 L4 14 H-4 L-12 0Z" fill="#22362d" stroke="#ff8c3c"/><circle cy="20" r="2.2" fill="#ff8c3c"/></g>
+          <path d="M200 62 V70" stroke="#ff8c3c" stroke-width="1.5"/>
+        </g>
+        <!-- Fadenkreuze -->
+        <g stroke="#5fd9a0" stroke-opacity=".8"><path d="M330 90 h12M336 84 v12"/><path d="M52 330 h12M58 324 v12"/></g>
+      </svg>
+
+      <div class="card chip">
+        <b>600+</b><span>Filamente<br>in der Datenbank</span>
+      </div>
+
+      <div class="card res">
+        <div class="res-head"><span class="mono">Beispiel-Ergebnis</span><span class="mono" style="color:var(--accent-2)">ΔE₀₀</span></div>
+        <div class="res-row"><i style="background:#2f8f5b"></i><div><b>PLA matt, Grün</b><small>#2F8F5B</small></div><span class="de">1,8</span></div>
+        <div class="res-row"><i style="background:#2b7a55"></i><div><b>PLA Basic, Grün</b><small>#2B7A55</small></div><span class="de">3,2</span></div>
+        <div class="res-row"><i style="background:#3d9a6a"></i><div><b>PETG, Grün</b><small>#3D9A6A</small></div><span class="de">4,6</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="specs" role="list">
+    <div class="spec" role="listitem"><span class="mono">01 · Datenbank</span><b>600+</b><span class="sd">Filamente nach Farbcode</span></div>
+    <div class="spec" role="listitem"><span class="mono">02 · Werkzeuge</span><b>10</b><span class="sd">Tools und Generatoren</span></div>
+    <div class="spec" role="listitem"><span class="mono">03 · Kosten</span><b>0 €</b><span class="sd">ohne Konto, ohne Anmeldung</span></div>
+    <div class="spec" role="listitem"><span class="mono">04 · Datenschutz</span><b>lokal</b><span class="sd">Dateien bleiben im Browser</span></div>
+  </div>
+
+  <section id="tools">
+    <div class="head">
+      <div><span class="mono">Werkzeugkiste</span><h2>Unsere Tools</h2></div>
+      <p>Alles, was im Druckalltag anfällt – ohne Installation, auf Handy und Desktop.</p>
+    </div>
+    <div class="bento">
+      <a class="t flag" href="#finder">
+        <div class="top"><span class="mono badge">★ Flaggschiff</span></div>
+        <div class="sw"><i style="background:#00AE42"></i><i style="background:#0056B8"></i><i style="background:#FF6A13"></i><i style="background:#EC008C"></i><i style="background:#FEC600"></i><i style="background:#00B1B7"></i><i style="background:#e9e6df"></i><i style="background:#1d1d1f"></i></div>
+        <h3>Filament-Finder</h3>
+        <p>Foto oder 3MF hochladen und passende Filamente mehrerer Hersteller finden. Farbabgleich mit CIEDE2000.</p>
+        <span class="btn btn-primary">Jetzt ausprobieren <span class="ar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ar"/></svg></span></span>
+      </a>
+      <a class="t" href="#"><div class="top"><span class="ico"><svg><use href="#i-calc"/></svg></span><span class="mono">T-01</span></div><svg class="go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-up"/></svg><h3>Kostenrechner</h3><p>Material-, Strom- und Verschleißkosten live berechnen.</p></a>
+      <a class="t" href="#"><div class="top"><span class="ico"><svg><use href="#i-dots"/></svg></span><span class="mono">T-02</span></div><svg class="go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-up"/></svg><h3>Filament-Datenbank</h3><p>Nach Farbcode, Material und Hersteller filtern.</p></a>
+      <a class="t" href="#"><div class="top"><span class="ico"><svg><use href="#i-book"/></svg></span><span class="mono">T-03</span></div><svg class="go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-up"/></svg><h3>Lexikon</h3><p>Druckprobleme, Slicer-Tipps und Materialkunde.</p></a>
+      <a class="t" href="#"><div class="top"><span class="ico"><svg><use href="#i-layers"/></svg></span><span class="mono">T-04</span></div><svg class="go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-up"/></svg><h3>Materialien</h3><p>PLA, PETG, ABS, ASA, TPU: Kennwerte und Temperaturen.</p></a>
+      <a class="t" href="#"><div class="top"><span class="ico"><svg><use href="#i-spool"/></svg></span><span class="mono">T-05</span></div><svg class="go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-up"/></svg><h3>Restmengenrechner</h3><p>Reicht der Rest auf der Spule noch für den Druck?</p></a>
+      <a class="t" href="#"><div class="top"><span class="ico"><svg><use href="#i-sliders"/></svg></span><span class="mono">T-06</span></div><svg class="go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-up"/></svg><h3>Slicer-Helfer</h3><p>Startwerte für Temperatur, Speed und Retraction.</p></a>
+      <a class="t" href="#"><div class="top"><span class="ico"><svg><use href="#i-swap"/></svg></span><span class="mono">T-07</span></div><svg class="go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-up"/></svg><h3>Datei-Konverter</h3><p>STL, 3MF, OBJ und STEP im Browser umwandeln.</p></a>
+      <a class="t" href="#"><div class="top"><span class="ico"><svg><use href="#i-image"/></svg></span><span class="mono">T-08</span></div><svg class="go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-up"/></svg><h3>Bild zu 3D</h3><p>Lithophane, Relief oder Anhänger aus einem Foto.</p></a>
+      <a class="t wide" href="#"><div class="top"><span class="ico"><svg><use href="#i-box"/></svg></span><span class="mono">T-09 · Neu</span></div><svg class="go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-up"/></svg><h3>Gehäuse-Generator</h3><p>Gehäuse für Raspberry Pi, Arduino, ESP32 und mehr.</p></a>
+    </div>
+  </section>
+
+  <section id="generatoren">
+    <div class="head">
+      <div><span class="mono">Parametrisch · 3MF-Export</span><h2>Generatoren</h2></div>
+      <p>Eigene Modelle ohne CAD: Regler bewegen, Vorschau prüfen, druckfertig exportieren.</p>
+    </div>
+    <div class="rows">
+      <a class="row" href="#"><span class="mono">G-01</span><span class="ico"><svg><use href="#i-hex"/></svg></span><div><h3>Objekt-Generator</h3><p>Box, Behälter, Vase, Zahnräder und mehr per Schieberegler.</p></div><span class="pill">3MF</span><svg class="ar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ar"/></svg></a>
+      <a class="row" href="#"><span class="mono">G-02</span><span class="ico"><svg><use href="#i-gear"/></svg></span><div><h3>Planetengetriebe-Generator</h3><p>Sonnenrad, Planetenräder, Hohlrad und Steg parametrisch gestalten.</p></div><span class="pill">3MF</span><svg class="ar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ar"/></svg></a>
+      <a class="row" href="#"><span class="mono">G-03</span><span class="ico"><svg><use href="#i-tag"/></svg></span><div><h3>Namens-Anhänger</h3><p>Dein Name als mehrfarbiger Schlüsselanhänger in drei Schichten.</p></div><span class="pill">3MF</span><svg class="ar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ar"/></svg></a>
+      <a class="row" href="#"><span class="mono">G-04</span><span class="ico"><svg><use href="#i-plate"/></svg></span><div><h3>Namensschild-Anhänger</h3><p>Wort oder Name auf Schild, Herz, Stern oder Kreis in zwei Farben.</p></div><span class="pill">3MF</span><svg class="ar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ar"/></svg></a>
+    </div>
+  </section>
+
+  <section id="partner">
+    <div class="ext">
+      <div class="head">
+        <div><span class="mono">Nicht von 3DToolBox</span><h2>Externe Empfehlungen<span class="ad">Werbung</span></h2></div>
+        <p>Tools anderer Anbieter, die gut zu 3D-Druck passen. Sie öffnen sich auf der jeweiligen Fremdseite.</p>
+      </div>
+      <a class="ext-item" href="#"><b>Meshy AI ↗</b><span>KI: aus Text oder Bild ein druckfertiges 3D-Modell erstellen.</span></a>
+      <a class="ext-item" href="#"><b>Thangs ↗</b><span>Große Bibliothek fertiger, druckbarer 3D-Modelle.</span></a>
+      <small>Enthält Partner-Links (Werbung). Für dich entstehen keine Mehrkosten.</small>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 3DToolBox · kostenlose Werkzeuge für Maker</span>
+    <nav><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">EN</a></nav>
+  </footer>
+</div>
+</body>
+</html>
