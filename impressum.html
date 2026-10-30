@@ -16,7 +16,7 @@
     --accent:#ff8c3c;
     --accent-2:#5fd9a0;
     --line:#2f473c;
-    font-family:"Iowan Old Style","Georgia",serif;
+    font-family:var(--f-text);
   }
   *{box-sizing:border-box;}
   html, body{ margin:0; padding:0; background:var(--bg); }
@@ -33,13 +33,13 @@
     margin-bottom:24px;
     color:var(--accent-2);
     text-decoration:none;
-    font-family:"JetBrains Mono","Courier New",monospace;
+    font-family:var(--f-mono);
     font-size:13px;
   }
   .lg-back:hover{ text-decoration:underline; }
   h1{ font-size:28px; margin:0 0 6px; }
   .lg-updated{
-    font-family:"JetBrains Mono","Courier New",monospace;
+    font-family:var(--f-mono);
     font-size:12px;
     color:var(--ink-dim);
     margin:0 0 32px;
@@ -75,13 +75,14 @@
     background:rgba(27,43,37,.78); border:1px solid var(--line); }
   .lg-nav a{ display:flex; align-items:center; gap:10px; text-decoration:none; }
   .lg-nav svg{ width:30px; height:30px; border-radius:7px; }
-  .lg-word{ font-family:Arial,Helvetica,sans-serif; font-weight:700; font-size:19px; color:var(--ink); }
+  .lg-word{ font-family:var(--f-display); font-weight:700; font-size:19px; color:var(--ink); }
   .lg-word b{ color:#FF6A2B; }
-  h1{ font-family:Arial,Helvetica,sans-serif; letter-spacing:-.02em; font-size:clamp(28px,4vw,38px); }
+  h1{ font-family:var(--f-display); letter-spacing:-.02em; font-size:clamp(28px,4vw,38px); }
   .lg-box{ border-radius:18px; }
 </style>
 <script src="/assets/ref-config.js"></script>
 <script src="/assets/ref.js" defer></script>
+<link rel="stylesheet" href="/assets/theme.css">
 </head>
 <body>
 <div class="lg-root">
