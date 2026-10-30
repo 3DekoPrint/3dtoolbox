@@ -58,3 +58,19 @@
 .i3-params .i3-chk{flex-direction:row;align-items:center;gap:8px;color:var(--ink)}
 .i3-dls{display:flex;flex-wrap:wrap;gap:10px}
 .i3-light{width:100%;max-width:560px;background:#0b1410;border:1px solid var(--line);border-radius:12px;image-rendering:auto}
+/* Gehäuse-Generator */
+.en-pick{display:grid;grid-template-columns:2fr 1fr;gap:12px 16px;margin-top:8px}
+@media(max-width:620px){.en-pick{grid-template-columns:1fr}}
+.en-pick label,.en-grid label{display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--ink-dim);min-width:0}
+.en-pick select,.en-pick input,.en-grid input[type=number],.en-grid select,.en-port input,.en-port select{background:var(--panel-2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:9px 10px;font-size:16px;width:100%}
+.en-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 16px;margin-top:12px}
+.en-grid label output{color:var(--accent-2);font-weight:700;margin-left:4px}
+.en-ports{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.en-port{display:grid;grid-template-columns:minmax(80px,1.2fr) repeat(5,minmax(70px,1fr)) 36px;gap:8px;align-items:end;padding:8px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.en-port label{display:flex;flex-direction:column;gap:3px;font-size:11px;color:var(--ink-dim);min-width:0}
+.en-pn{font-size:13px;font-weight:600;align-self:center;overflow-wrap:anywhere}
+.en-del{height:38px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:8px;font-size:20px;cursor:pointer}
+@media(max-width:760px){.en-port{grid-template-columns:repeat(3,1fr)}.en-pn{grid-column:1/-1}.en-del{width:100%}}
+.en-top{margin-top:8px;max-width:640px}
+.en-svg{width:100%;height:auto;display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.en-o{fill:none;stroke:var(--ink-dim);stroke-width:.6}.en-b{fill:rgba(60,160,90,.28);stroke:#3ca05a;stroke-width:.5}.en-h{fill:#f2d21b;stroke:none}.en-p{stroke:#f07a1c;stroke-width:2}.en-l{fill:rgba(60,120,220,.35);stroke:#3c78dc;stroke-width:.4}

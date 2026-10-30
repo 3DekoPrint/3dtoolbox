@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gehäuse-Generator für Raspberry Pi, Arduino &amp; ESP32 (kostenlos) | 3DToolBox</title>
+<meta name="description" content="Kostenlos ein 3D-druckbares Gehäuse für Raspberry Pi, Arduino, ESP32, Pico und weitere Boards erzeugen: mit Haltern, Anschluss-Aussparungen und Deckel als STL/3MF – direkt im Browser.">
+<link rel="canonical" href="https://3dtoolbox.info/gehaeuse-generator.html">
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/gehaeuse-generator.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/enclosure-generator.html">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/gehaeuse-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="3DToolBox">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="Gehäuse-Generator für Raspberry Pi, Arduino &amp; ESP32 (kostenlos) | 3DToolBox">
+<meta property="og:description" content="Kostenlos ein 3D-druckbares Gehäuse für Raspberry Pi, Arduino, ESP32, Pico und weitere Boards erzeugen: mit Haltern, Anschluss-Aussparungen und Deckel als STL/3MF – direkt im Browser.">
+<meta property="og:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta property="og:url" content="https://3dtoolbox.info/gehaeuse-generator.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gehäuse-Generator für Raspberry Pi, Arduino &amp; ESP32 (kostenlos) | 3DToolBox">
+<meta name="twitter:description" content="Kostenlos ein 3D-druckbares Gehäuse für Raspberry Pi, Arduino, ESP32, Pico und weitere Boards erzeugen: mit Haltern, Anschluss-Aussparungen und Deckel als STL/3MF – direkt im Browser.">
+<meta name="twitter:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Gehäuse-Generator für Entwicklerboards", "url": "https://3dtoolbox.info/gehaeuse-generator.html", "description": "Kostenlos ein 3D-druckbares Gehäuse für Raspberry Pi, Arduino, ESP32, Pico und weitere Boards erzeugen: mit Haltern, Anschluss-Aussparungen und Deckel als STL/3MF – direkt im Browser.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (Web Browser)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Passt das Gehäuse sicher auf mein Board?", "acceptedAnswer": {"@type": "Answer", "text": "Die Platinen- und Lochmaße der großen Boards stammen aus den Herstellerzeichnungen. Revisionen und Nachbauten können abweichen. Drucke deshalb zuerst die Passprobe und stelle bei Bedarf das Spiel nach."}}, {"@type": "Question", "name": "Mein Board fehlt – was kann ich tun?", "acceptedAnswer": {"@type": "Answer", "text": "Wähle „Eigene Platine“, trage Länge, Breite, Plattendicke und die Löcher ein und lege die Aussparungen für die Anschlüsse selbst an. Schreib mir über das Formular, welches Board fehlt, dann nehme ich es in die Liste auf."}}, {"@type": "Question", "name": "Welches Filament eignet sich?", "acceptedAnswer": {"@type": "Answer", "text": "PETG oder ASA für Gehäuse mit Wärmeentwicklung (Raspberry Pi 4/5), PLA reicht für kühle Boards. Plane ausreichend Lüftung ein, wenn das Board viel Wärme erzeugt."}}, {"@type": "Question", "name": "Werden meine Eingaben hochgeladen?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. Die Berechnung läuft im Browser, es werden keine Daten an einen Server gesendet."}}]}]}</script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/material-page.css">
+<script src="/assets/ref-config.js"></script>
+<script src="/assets/ref.js" defer></script>
+</head>
+<body>
+<div class="fm-root bt-sub">
+  <nav class="bt-nav">
+    <a class="bt-logo" href="/" aria-label="3DToolBox"><svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true"><rect width="220" height="220" rx="44" fill="#FF6A2B"/><polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/><polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/><polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/></svg><span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span></a>
+    <div class="fm-lang-switch"><span class="fm-lang-current">DE</span><a class="fm-lang-link" href="/en/enclosure-generator.html" hreflang="en">EN</a></div>
+  </nav>
+  <div class="bt-switch"><a class="bt-chip bt-chip-flag" href="/">Filament-Finder</a><a class="bt-chip" href="/3d-druck-kostenrechner.html">Kostenrechner</a><a class="bt-chip" href="/filament-datenbank.html">Filament-Datenbank</a><a class="bt-chip" href="/3d-druck-lexikon.html">Lexikon</a><a class="bt-chip" href="/filament-restmengenrechner.html">Restmengen</a><a class="bt-chip" href="/slicer-einstellungen-helfer.html">Slicer-Helfer</a><a class="bt-chip" href="/3d-datei-konverter.html">Konverter</a><a class="bt-chip" href="/bild-zu-3d.html">Bild zu 3D</a><span class="bt-chip bt-chip-active" aria-current="page">Gehäuse</span><a class="bt-chip" href="/materialien/">Materialien</a></div>
+  <div class="bt-switch bt-switch-gen"><span class="bt-group-label">Generatoren</span><a class="bt-chip" href="/3d-druck-objektgenerator.html">Objekt-Generator</a><a class="bt-chip" href="/3d-druck-planetengetriebe-generator.html">Planetengetriebe</a><a class="bt-chip" href="/3d-druck-namens-anhaenger.html">Namens-Anhänger</a><a class="bt-chip" href="/3d-druck-namensschild-anhaenger.html">Namensschild</a>
+    <span class="bt-ext-group"><span class="bt-ext-label">Extern · nicht von uns</span>
+      <a class="bt-chip bt-chip-ext" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI ↗</a>
+      <a class="bt-chip bt-chip-ext" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs ↗</a></span>
+  </div>
+
+  <header class="bt-subhero"><span class="bt-pill"><i></i>Gehäuse</span><h1 class="fm-title">Gehäuse-Generator für Entwicklerboards</h1><p class="fm-sub">Board auswählen, Maße anpassen und ein passendes Gehäuse mit Deckel als STL oder 3MF herunterladen – direkt im Browser, ohne Registrierung.</p>
+  <div class="bt-kpis"><div class="bt-kpi"><b>20+</b><span>Boards</span></div><div class="bt-kpi"><b>∞</b><span>Eigene Platine</span></div><div class="bt-kpi"><b>STL + 3MF</b><span>Export</span></div></div></header>
+  <section class="bt-panel mp">
+  <div class="en-pick"><label>Board auswählen<select id="enBoard"></select></label><label>Board suchen<input id="enSearch" type="search" autocomplete="off"></label></div>
+  <p id="enNone" class="cv-warn" hidden></p>
+  <p id="enTip" class="cv-warn"></p>
+  <div id="enParams" class="i3-params"></div>
+  <h3>Aussparungen für Anschlüsse</h3><p class="md-note">Position = Mitte der Öffnung entlang der Kante, Höhe ab Platine = Mitte der Öffnung über der Platinenoberseite.</p>
+  <div id="enPorts" class="en-ports"></div>
+  <p id="enStatus" class="cv-status" role="status" aria-live="polite"></p>
+  <div id="enOut" class="cv-out" hidden><div class="i3-dls"><button id="enDlStl" class="cv-btn" type="button">STL herunterladen</button><button id="enDl3mf" class="cv-btn" type="button">3MF herunterladen</button></div><span id="enStats" class="md-note" style="margin:0"></span><canvas id="enCanvas" width="840" height="560" aria-label="3D-Vorschau (ziehen zum Drehen, Mausrad zum Zoomen)"></canvas><span class="md-note" style="margin:0">3D-Vorschau (ziehen zum Drehen, Mausrad zum Zoomen)</span><div id="enTopView" class="en-top"></div><span class="md-note" style="margin:0">Draufsicht: grün = Platine, gelb = Löcher, orange = Aussparungen, blau = Öffnung im Deckel</span></div>
+  <h2>So entsteht dein Gehäuse</h2><p><b>Board wählen:</b> Raspberry Pi 5, 4, 3, Zero und Pico, Arduino Uno und Mega, ESP32, ESP8266, Teensy, XIAO und weitere. Fehlt dein Board, wähle „Eigene Platine“ und gib Länge, Breite und Lochabstände ein.</p><p><b>Anpassen:</b> Wandstärke, Spiel um die Platine, Höhe der Halter, Platz über der Platine, Deckel mit Lüftungsschlitzen und die Aussparungen für USB, HDMI, Ethernet oder SD-Karte. Die Draufsicht zeigt dir, wo die Öffnungen sitzen.</p><p><b>Drucken:</b> Der Boden wird mit Haltern an den Montagelöchern gedruckt (Stifte zum Aufstecken oder Schraubdome). Der Deckel mit Lippe liegt im Druck mit der Außenseite nach unten und rastet im Boden ein. Vor dem großen Druck lohnt sich die „Passprobe“, ein flacher Boden zum Anprobieren der Platine.</p><p>Alles läuft in deinem Browser. Die Körper sind geschlossen (wasserdicht) und lassen sich direkt in Bambu Studio, OrcaSlicer, PrusaSlicer oder Cura öffnen. Maße und Anschlusspositionen: Bei Boards ohne Herstellerplan sind es Näherungswerte, bitte immer mit dem Messschieber prüfen.</p><h2>Häufige Fragen</h2><details class="mp-faq"><summary>Passt das Gehäuse sicher auf mein Board?</summary><p>Die Platinen- und Lochmaße der großen Boards stammen aus den Herstellerzeichnungen. Revisionen und Nachbauten können abweichen. Drucke deshalb zuerst die Passprobe und stelle bei Bedarf das Spiel nach.</p></details><details class="mp-faq"><summary>Mein Board fehlt – was kann ich tun?</summary><p>Wähle „Eigene Platine“, trage Länge, Breite, Plattendicke und die Löcher ein und lege die Aussparungen für die Anschlüsse selbst an. Schreib mir über das Formular, welches Board fehlt, dann nehme ich es in die Liste auf.</p></details><details class="mp-faq"><summary>Welches Filament eignet sich?</summary><p>PETG oder ASA für Gehäuse mit Wärmeentwicklung (Raspberry Pi 4/5), PLA reicht für kühle Boards. Plane ausreichend Lüftung ein, wenn das Board viel Wärme erzeugt.</p></details><details class="mp-faq"><summary>Werden meine Eingaben hochgeladen?</summary><p>Nein. Die Berechnung läuft im Browser, es werden keine Daten an einen Server gesendet.</p></details><p>Weitere Tools: <a href="/3d-datei-konverter.html">3D-Datei-Konverter</a>, <a href="/bild-zu-3d.html">Bild zu 3D</a>, <a href="/slicer-einstellungen-helfer.html">Slicer-Einstellungen-Helfer</a>, <a href="/3d-druck-kostenrechner.html">Kostenrechner</a>.</p></section>
+  <div class="fm-partner"><p class="fm-partner-title">Du bist 3D-Print-Creator und willst 3DToolBox in deinem Content zeigen?</p><p class="fm-partner-text">Wir arbeiten mit ausgewählten Partnern zusammen, die 3DToolBox und angebundene Tools bei ihrem Publikum vorstellen. Melde dich mit ein paar Infos zu deinem Kanal — wir schauen uns jede Bewerbung persönlich an.</p><a class="fm-partner-btn" href="mailto:info@3dtoolbox.info?subject=Partneranfrage%203DToolBox">Partner werden</a></div>
+  <div class="fm-footer">
+    <p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> In Kooperation mit <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p>
+    <div class="fm-footer-legal"><a href="/impressum.html">Impressum</a><span>·</span><a href="/datenschutz.html">Datenschutz</a></div>
+  </div>
+</div>
+<script src="/assets/converter-core.js"></script>
+<script src="/assets/boards-data.js"></script>
+<script src="/assets/enclosure-core.js"></script>
+<script src="/assets/mesh-preview.js"></script>
+<script src="/assets/enclosure-ui.js"></script>
+</body>
+</html>
