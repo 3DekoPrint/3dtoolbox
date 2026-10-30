@@ -181,7 +181,10 @@
       }
       lid = lid.subtract(cut);
       var hs = fan.h / 2;
-      [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(function (q) { lid = lid.subtract(cyl(fcx + q[0] * hs, fcy + q[1] * hs, lipH - 1, lipH + lt + 1, fan.sd)); });
+      var fsd = p.fanScrew === 1 ? (fan.sd > 4 ? 3.3 : fan.sd > 3.2 ? 2.6 : 2.2) : fan.sd;
+      out.info.fan.holes = [[-1, -1], [1, -1], [-1, 1], [1, 1]].map(function (q) { return [fcx + q[0] * hs, fcy + q[1] * hs]; });
+      out.info.fan.sd = fsd; out.info.fan.m = fan.sd > 4 ? 'M4' : fan.sd > 3.2 ? 'M3' : fan.sd > 2.9 ? 'M2.5' : 'M2';
+      out.info.fan.holes.forEach(function (h) { lid = lid.subtract(cyl(h[0], h[1], lipH - 1, lipH + lt + 1, fsd)); });
     }
     out.lidAsm = toMesh(lid);
     if (p.models) out.models = models(p, { x0: x0, x1: x1, y0: y0, y1: y1, zp: zp, zr: zr, lt: lt, fan: fan, info: out.info });

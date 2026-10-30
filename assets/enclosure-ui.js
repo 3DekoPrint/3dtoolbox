@@ -14,7 +14,7 @@
       cust: { L: 'Länge (mm)', W: 'Breite (mm)', t: 'Platinendicke (mm)', holes: 'Montagelöcher (4 im Rechteck)', ox: 'Abstand Loch von links (mm)', oy: 'Abstand Loch von unten (mm)', dx: 'Lochabstand X (mm)', dy: 'Lochabstand Y (mm)', hd: 'Lochdurchmesser (mm)' },
       ports: 'Aussparungen für Anschlüsse', add: '+ Aussparung hinzufügen', edge: 'Kante', e: { W: 'links', E: 'rechts', S: 'unten', N: 'oben' }, pos: 'Position (mm)', wid: 'Breite', hei: 'Höhe', zc: 'Höhe ab Platine',
       stl: 'STL herunterladen', mf: '3MF herunterladen', stat: 'Außenmaße', tris: 'Dreiecke', view: 'Draufsicht', top: 'oben', del: 'entfernen', pad: 'Platz für überstehende Buchsen',
-      g: { size: 'Gehäusegröße', vent: 'Belüftung', ex: 'Zusätzlicher Platz in Länge (mm)', ey: 'Zusätzlicher Platz in Breite (mm)', ctr: 'Platine im Gehäuse zentrieren', sv: 'Lüftungsschlitze in den Seitenwänden', vw: 'Schlitzbreite (mm)', vp: 'Schlitzabstand (mm)', fan: 'Lüfter im Deckel', fnone: 'kein Lüfter', fg: 'Lüftergitter', fg0: 'offen', fg1: 'Kreuzstreben', fg2: 'Kreuz + Ringe', fox: 'Lüfter verschieben X (mm)', foy: 'Lüfter verschieben Y (mm)', fwarn: 'Der Lüfter ist größer als der Deckel – vergrößere das Gehäuse oder wähle einen kleineren Lüfter.', fshrink: 'Öffnung wurde verkleinert, damit sie in den Deckel passt.' },
+      g: { size: 'Gehäusegröße', vent: 'Belüftung', ex: 'Zusätzlicher Platz in Länge (mm)', ey: 'Zusätzlicher Platz in Breite (mm)', ctr: 'Platine im Gehäuse zentrieren', sv: 'Lüftungsschlitze in den Seitenwänden', vw: 'Schlitzbreite (mm)', vp: 'Schlitzabstand (mm)', fan: 'Lüfter im Deckel', fnone: 'kein Lüfter', fg: 'Lüftergitter', fg0: 'offen', fg1: 'Kreuzstreben', fg2: 'Kreuz + Ringe', fs: 'Schraubenlöcher Lüfter', fs0: 'Durchgangsloch (Schraube + Mutter)', fs1: 'Kernloch (selbstschneidende Schraube)', fsm: 'Schrauben:', fox: 'Lüfter verschieben X (mm)', foy: 'Lüfter verschieben Y (mm)', fwarn: 'Der Lüfter ist größer als der Deckel – vergrößere das Gehäuse oder wähle einen kleineren Lüfter.', fshrink: 'Öffnung wurde verkleinert, damit sie in den Deckel passt.' },
       v: { title: 'Teile anzeigen', base: 'Boden', lid: 'Deckel', board: 'Platine', fan: 'Lüfter', ghost: 'Deckel durchsichtig', ex: 'Auseinanderziehen', note: 'Platine und Lüfter sind schematisch (Maße und Anschlüsse stimmen, Bauteile sind vereinfacht).' } },
     en: { loading: 'Loading 3D library …', busy: 'Calculating …', err: 'The enclosure could not be calculated. Please check the dimensions.', libErr: 'The 3D library could not be loaded (WebAssembly required).',
       custom: 'Custom board (enter dimensions)', search: 'Search boards …', none: 'No board found – choose “Custom board” or tell me which board is missing.',
@@ -26,13 +26,13 @@
       cust: { L: 'Length (mm)', W: 'Width (mm)', t: 'Board thickness (mm)', holes: 'Mounting holes (4 in a rectangle)', ox: 'Hole distance from left (mm)', oy: 'Hole distance from bottom (mm)', dx: 'Hole spacing X (mm)', dy: 'Hole spacing Y (mm)', hd: 'Hole diameter (mm)' },
       ports: 'Connector cut-outs', add: '+ Add cut-out', edge: 'Edge', e: { W: 'left', E: 'right', S: 'bottom', N: 'top' }, pos: 'Position (mm)', wid: 'Width', hei: 'Height', zc: 'Height above board',
       stl: 'Download STL', mf: 'Download 3MF', stat: 'Outer size', tris: 'triangles', view: 'Top view', top: 'top', del: 'remove', pad: 'Space for protruding jacks',
-      g: { size: 'Case size', vent: 'Ventilation', ex: 'Extra space in length (mm)', ey: 'Extra space in width (mm)', ctr: 'Centre the board in the case', sv: 'Ventilation slots in the side walls', vw: 'Slot width (mm)', vp: 'Slot pitch (mm)', fan: 'Fan in the lid', fnone: 'no fan', fg: 'Fan grille', fg0: 'open', fg1: 'Cross ribs', fg2: 'Cross + rings', fox: 'Move fan X (mm)', foy: 'Move fan Y (mm)', fwarn: 'The fan is larger than the lid – enlarge the case or pick a smaller fan.', fshrink: 'The opening was reduced to fit into the lid.' },
+      g: { size: 'Case size', vent: 'Ventilation', ex: 'Extra space in length (mm)', ey: 'Extra space in width (mm)', ctr: 'Centre the board in the case', sv: 'Ventilation slots in the side walls', vw: 'Slot width (mm)', vp: 'Slot pitch (mm)', fan: 'Fan in the lid', fnone: 'no fan', fg: 'Fan grille', fg0: 'open', fg1: 'Cross ribs', fg2: 'Cross + rings', fs: 'Fan screw holes', fs0: 'Clearance hole (screw + nut)', fs1: 'Pilot hole (self-tapping screw)', fsm: 'Screws:', fox: 'Move fan X (mm)', foy: 'Move fan Y (mm)', fwarn: 'The fan is larger than the lid – enlarge the case or pick a smaller fan.', fshrink: 'The opening was reduced to fit into the lid.' },
       v: { title: 'Show parts', base: 'Base', lid: 'Lid', board: 'Board', fan: 'Fan', ghost: 'Transparent lid', ex: 'Pull apart', note: 'Board and fan are schematic (dimensions and connectors match, components are simplified).' } }
   }[LANG];
   function $(i) { return document.getElementById(i); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
-  var P = { cl: 0.6, wall: 2, floor: 2, under: 4, hr: 12, mode: 'pin', lidT: 2, fit: 0.2, rc: 2, vents: 0, lidcut: 1, part: 'both', exX: 0, exY: 0, ctr: 1, fan: 0, fanGrille: 1, fanOx: 0, fanOy: 0, sideVents: 0, ventW: 2, ventPitch: 5 };
+  var P = { cl: 0.6, wall: 2, floor: 2, under: 4, hr: 12, mode: 'pin', lidT: 2, fit: 0.2, rc: 2, vents: 0, lidcut: 1, part: 'both', exX: 0, exY: 0, ctr: 1, fan: 0, fanGrille: 1, fanScrew: 0, fanOx: 0, fanOy: 0, sideVents: 0, ventW: 2, ventPitch: 5 };
   var VIS = { base: 1, lid: 1, board: 1, fan: 1, ghost: 0 }, EXPLODE = 0;
   var SPEC = [['cl', 0.2, 4, 0.1], ['wall', 1.2, 5, 0.2], ['floor', 1.2, 5, 0.2], ['under', 1, 20, 0.5], ['hr', 3, 80, 0.5], ['lidT', 1.2, 5, 0.2], ['fit', 0, 0.6, 0.05], ['rc', 0, 8, 0.5]];
   var SPEC_SIZE = [['exX', 0, 80, 1, 'ex'], ['exY', 0, 80, 1, 'ey']], SPEC_VENT = [['ventW', 1, 4, 0.25, 'vw'], ['ventPitch', 3, 12, 0.5, 'vp']], FANS = [0, 25, 30, 40, 50, 60, 80, 92, 120];
@@ -89,6 +89,7 @@
     h += '<label>' + T.g.fan + '<select data-p="fan">' + FANS.map(function (f) { return '<option value="' + f + '"' + (P.fan === f ? ' selected' : '') + '>' + (f ? f + ' × ' + f + ' mm' : T.g.fnone) + '</option>'; }).join('') + '</select></label>';
     if (P.fan) {
       h += '<label>' + T.g.fg + '<select data-p="fanGrille">' + [0, 1, 2].map(function (g) { return '<option value="' + g + '"' + (P.fanGrille === g ? ' selected' : '') + '>' + T.g['fg' + g] + '</option>'; }).join('') + '</select></label>';
+      h += '<label>' + T.g.fs + '<select data-p="fanScrew">' + [0, 1].map(function (g) { return '<option value="' + g + '"' + (P.fanScrew === g ? ' selected' : '') + '>' + T.g['fs' + g] + '</option>'; }).join('') + '</select></label>';
       h += '<label>' + T.g.fox + ' <output>' + P.fanOx + '</output><input type="range" data-p="fanOx" min="-40" max="40" step="1" value="' + P.fanOx + '"></label>';
       h += '<label>' + T.g.foy + ' <output>' + P.fanOy + '</output><input type="range" data-p="fanOy" min="-40" max="40" step="1" value="' + P.fanOy + '"></label>';
     }
@@ -138,7 +139,7 @@
     var b = st.b, pd = b.pad || {}, ex = P.exX, ey = P.exY, pad = { W: pd.W || 0, E: pd.E || 0, S: pd.S || 0, N: pd.N || 0 };
     if (P.ctr) { pad.W += ex / 2; pad.E += ex / 2; pad.S += ey / 2; pad.N += ey / 2; } else { pad.E += ex; pad.N += ey; }
     return { L: b.L, W: b.W, t: b.t, holes: b.holes, hd: b.hd, mode: P.mode, cl: P.cl, wall: P.wall, floor: P.floor, under: P.under, hr: P.hr, lidT: P.lidT, lipH: 3, fit: P.fit, rc: P.rc, pad: pad, models: 1, chips: b.chips, pcbCol: b.col || PCB[b.g] || [0.12, 0.55, 0.26],
-      fan: P.fan, fanGrille: P.fanGrille, fanOx: P.fanOx, fanOy: P.fanOy, sideVents: P.sideVents, ventW: P.ventW, ventPitch: P.ventPitch,
+      fan: P.fan, fanGrille: P.fanGrille, fanScrew: P.fanScrew, fanOx: P.fanOx, fanOy: P.fanOy, sideVents: P.sideVents, ventW: P.ventW, ventPitch: P.ventPitch,
       ports: b.ports.map(function (q) { return { e: q[0], c: q[1], w: q[2], h: q[3], zc: q[4], n: q[5] }; }),
       lidCuts: P.lidcut && b.lid ? b.lid.map(function (l) { return { x: l[0], y: l[1], w: l[2], h: l[3] }; }) : [], vents: P.vents, part: part || (P.part === 'test' ? 'test' : 'both') };
   }
@@ -159,6 +160,11 @@
       else s += '<line y1="' + Y(b.W + P.cl + pn) + '" y2="' + Y(b.W + P.cl + pn) + '" x1="' + (c - hw) + '" x2="' + (c + hw) + '" class="en-p"/>';
     });
     if (P.lidcut && b.lid) b.lid.forEach(function (l) { s += '<rect x="' + l[0] + '" y="' + Y(l[1] + l[3]) + '" width="' + l[2] + '" height="' + l[3] + '" class="en-l"/>'; });
+    var fi = st.last && st.last.info && st.last.info.fan;
+    if (fi && P.fan) {
+      s += '<circle cx="' + fi.cx.toFixed(2) + '" cy="' + Y(fi.cy) + '" r="' + (fi.d / 2).toFixed(2) + '" class="en-f"/>';
+      (fi.holes || []).forEach(function (h) { s += '<circle cx="' + h[0].toFixed(2) + '" cy="' + Y(h[1]) + '" r="' + (fi.sd / 2).toFixed(2) + '" class="en-fh"/>'; });
+    }
     s += '</g></svg>';
     $('enTopView').innerHTML = s;
   }
@@ -196,11 +202,10 @@
     clearTimeout(st.timer); msg(T.busy);
     st.timer = setTimeout(function () {
       try {
-        drawTop();
         var r = EN.build(params()), mesh = pick(r) || r.base;
-        st.last = r; var s = C.stats(mesh);
+        st.last = r; drawTop(); var s = C.stats(mesh);
         $('enStats').textContent = T.stat + ': ' + r.info.outer.map(function (x) { return x.toFixed(1); }).join(' × ') + ' mm · ' + s.tris.toLocaleString() + ' ' + T.tris;
-        var fw = $('enFanWarn'); if (fw) { var fi = r.info.fan; fw.hidden = !(fi && !fi.fits); if (fi && !fi.fits) fw.textContent = T.g.fwarn; }
+        var fw = $('enFanWarn'); if (fw) { var fi = r.info.fan; fw.hidden = !fi; if (fi) fw.textContent = fi.fits ? T.g.fsm + ' ' + fi.m + ', ' + (fi.sd).toFixed(1) + ' mm' : T.g.fwarn; }
         out.hidden = false; msg('');
         if (!prev) { prev = window.EnclosureView.create($('enCanvas')); buildViewPanel(); }
         if (prev.ok) { prev.set(sceneParts(r)); applyView(); }

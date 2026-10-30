@@ -78,3 +78,4 @@
 .en-parts{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:10px 0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
 .en-vt{font-size:13px}.en-ex{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-dim)}
 .en-ex input{width:140px}
+.en-f{fill:rgba(240,122,28,.12);stroke:#f07a1c;stroke-width:.5;stroke-dasharray:2 1.5}.en-fh{fill:#fff;stroke:#f07a1c;stroke-width:.5}
