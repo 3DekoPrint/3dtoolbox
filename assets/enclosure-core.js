@@ -16,6 +16,60 @@
     return loading;
   }
 
+  // Lüfter: s = Kantenlänge, h = Lochabstand (Schrauben), d = Öffnung im Deckel, sd = Schraubenloch, th = Dicke
+  var FAN = { 25: { s: 25, h: 20, d: 22, sd: 2.8, th: 10 }, 30: { s: 30, h: 24, d: 27, sd: 3.0, th: 10 }, 40: { s: 40, h: 32, d: 37, sd: 3.4, th: 10 },
+    50: { s: 50, h: 40, d: 46, sd: 3.4, th: 15 }, 60: { s: 60, h: 50, d: 56, sd: 3.4, th: 15 }, 80: { s: 80, h: 71.5, d: 76, sd: 4.3, th: 25 },
+    92: { s: 92, h: 82.5, d: 86, sd: 4.3, th: 25 }, 120: { s: 120, h: 105, d: 114, sd: 4.3, th: 25 } };
+
+  function boxMesh(x0, y0, z0, x1, y1, z1) {
+    var v = new Float64Array([x0, y0, z0, x1, y0, z0, x1, y1, z0, x0, y1, z0, x0, y0, z1, x1, y0, z1, x1, y1, z1, x0, y1, z1]);
+    var i = new Uint32Array([0, 2, 1, 0, 3, 2, 4, 5, 6, 4, 6, 7, 0, 1, 5, 0, 5, 4, 1, 2, 6, 1, 6, 5, 2, 3, 7, 2, 7, 6, 3, 0, 4, 3, 4, 7]);
+    return { v: v, i: i };
+  }
+  function shift(m, dx, dy, dz) { var v = new Float64Array(m.v), k; for (k = 0; k < v.length; k += 3) { v[k] += dx; v[k + 1] += dy; v[k + 2] += dz; } return { v: v, i: m.i }; }
+
+  // Schematisches Modell der Platine (PCB, Anschlüsse, Chips) und des Lüfters – nur für die Vorschau
+  var PCB_COL = { 'Raspberry Pi': [0.12, 0.55, 0.26], 'Arduino': [0.0, 0.5, 0.55], 'ESP32 / ESP8266': [0.1, 0.11, 0.13], 'Weitere Boards': [0.08, 0.35, 0.2] };
+  function models(p, g) {
+    var parts = [], zb = g.zp - p.t, k;
+    var pcb = box(0, 0, zb, p.L, p.W, g.zp);
+    (p.holes || []).forEach(function (h) { pcb = pcb.subtract(cyl(h[0], h[1], zb - 1, g.zp + 1, p.hd || 2.7)); });
+    parts.push({ id: 'pcb', c: p.pcbCol || [0.12, 0.55, 0.26], m: toMesh(pcb) });
+    var conn = [], dark = [], metal = [];
+    (p.ports || []).forEach(function (q) {
+      var w = Math.max(q.w - 1.5, 3), hh = Math.max(q.h - 0.8, 1.5), d = Math.max(5, Math.min(21, q.w * 1.25)), zlo = g.zp + q.zc - hh / 2, zhi = g.zp + q.zc + hh / 2, c = q.c, nm = (q.n || '').toLowerCase();
+      if (q.zc < 0) { zlo = Math.max(zlo, zb - 3); zhi = Math.min(zhi, zb + 0.4); d = 12; }
+      else if (zlo < g.zp) zlo = g.zp;
+      if (zhi <= zlo) return;
+      var m;
+      if (q.e === 'E') m = boxMesh(p.L - d + 1, c - w / 2, zlo, p.L + 1, c + w / 2, zhi);
+      else if (q.e === 'W') m = boxMesh(-1, c - w / 2, zlo, d - 1, c + w / 2, zhi);
+      else if (q.e === 'S') m = boxMesh(c - w / 2, -1, zlo, c + w / 2, d - 1, zhi);
+      else m = boxMesh(c - w / 2, p.W - d + 1, zlo, c + w / 2, p.W + 1, zhi);
+      (/dc|audio|sd|strom/.test(nm) && !/usb/.test(nm) ? dark : metal).push(m);
+    });
+    (p.lidCuts || []).forEach(function (l) { dark.push(boxMesh(l.x, l.y, g.zp, l.x + l.w, l.y + l.h, g.zp + 8.5)); });
+    var chips = [];
+    (p.chips || []).forEach(function (c) { chips.push(boxMesh(c[0], c[1], g.zp, c[0] + c[2], c[1] + c[3], g.zp + c[4])); });
+    function join(arr) { var o = arr[0], j; for (j = 1; j < arr.length; j++) o = merge(o, arr[j]); return o; }
+    if (metal.length) parts.push({ id: 'conn', c: [0.78, 0.8, 0.83], m: join(metal) });
+    if (dark.length) parts.push({ id: 'conn2', c: [0.1, 0.1, 0.11], m: join(dark) });
+    if (chips.length) parts.push({ id: 'chip', c: [0.55, 0.57, 0.6], m: join(chips) });
+    var res = { board: parts, fan: [] };
+    var fan = g.fan;
+    if (fan && p.fanShow !== 0) {
+      var fi = g.info.fan, z0 = g.zr + g.lt, s = fan.s, th = fan.th, fx = fi.cx, fy = fi.cy;
+      var frame = ext(rrect(fx - s / 2, fy - s / 2, fx + s / 2, fy + s / 2, 3), z0, z0 + th).subtract(cyl(fx, fy, z0 - 1, z0 + th + 1, fan.d));
+      [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(function (q) { frame = frame.subtract(cyl(fx + q[0] * fan.h / 2, fy + q[1] * fan.h / 2, z0 - 1, z0 + th + 1, fan.sd)); });
+      var hub = cyl(fx, fy, z0 + th * 0.1, z0 + th * 0.9, s * 0.36), rotor = hub, bl = 7, rl = fan.d / 2 - 0.8;
+      for (k = 0; k < bl; k++) rotor = rotor.add(box(0, -s * 0.06, 0, rl, s * 0.06, th * 0.45).translate([s * 0.12, 0, th * 0.275]).rotate([0, 0, k * 360 / bl]).translate([fx, fy, z0]));
+      var spokes = box(fx - fan.d / 2 - 0.5, fy - 0.8, z0, fx + fan.d / 2 + 0.5, fy + 0.8, z0 + 1.2);
+      res.fan.push({ id: 'fanframe', c: [0.13, 0.14, 0.16], m: toMesh(frame) });
+      res.fan.push({ id: 'fanrotor', c: [0.32, 0.34, 0.38], m: toMesh(rotor) });
+    }
+    return res;
+  }
+
   function rrect(x0, y0, x1, y1, r) {
     var CS = M.CrossSection, w = x1 - x0, h = y1 - y0;
     r = Math.max(0, Math.min(r, w / 2 - 0.01, h / 2 - 0.01));
@@ -81,7 +135,20 @@
       base = base.subtract(c);
     });
 
-    var out = { info: { outer: [x1 - x0 + 2 * wall, y1 - y0 + 2 * wall, zr], inner: [x1 - x0, y1 - y0, zr - f], zp: zp } };
+    // Seitliche Lüftungsschlitze (Wände unten/oben)
+    if (p.sideVents) {
+      var svw = p.ventW || 2, svp = p.ventPitch || 5, svh = Math.max(3, Math.min(14, hr - 3)), sz0 = zp + 1.5;
+      var sa0 = x0 + p.rc + 3, sa1 = x1 - p.rc - 3;
+      if (sa1 - sa0 > svw + 2 && svh > 2) {
+        var sn = Math.max(1, Math.floor((sa1 - sa0 + svp - svw) / svp)), stt = (sn - 1) * svp + svw, ssx = (x0 + x1) / 2 - stt / 2;
+        for (k = 0; k < sn; k++) {
+          base = base.subtract(box(ssx + k * svp, y0 - wall - 1, sz0, ssx + k * svp + svw, y0 + 0.4, sz0 + svh));
+          base = base.subtract(box(ssx + k * svp, y1 - 0.4, sz0, ssx + k * svp + svw, y1 + wall + 1, sz0 + svh));
+        }
+      }
+    }
+
+    var out = { info: { outer: [x1 - x0 + 2 * wall, y1 - y0 + 2 * wall, zr], inner: [x1 - x0, y1 - y0, zr - f], zp: zp, zr: zr, lipH: lipH, lt: lt, f: f } };
     if (p.part !== 'lid') out.base = toMesh(base);
     if (p.part === 'base' || p.part === 'test') return out;
 
@@ -98,7 +165,26 @@
         for (k = 0; k < n; k++) lid = lid.subtract(box(sx + k * vp, ay0, lipH - 1, sx + k * vp + vw, ay1, lipH + lt + 1));
       }
     }
-    var yc = (y0 + y1) / 2;
+    var yc = (y0 + y1) / 2, xc = (x0 + x1) / 2;
+    var fan = FAN[p.fan | 0];
+    if (fan) {
+      var fcx = xc + (p.fanOx || 0), fcy = yc + (p.fanOy || 0), fd = Math.min(fan.d, Math.min(x1 - x0, y1 - y0) - 8);
+      out.info.fan = { size: fan.s, d: fd, cx: fcx, cy: fcy, fits: fd >= fan.d - 0.01 && (x1 - x0) >= fan.s - 2 && (y1 - y0) >= fan.s - 2 };
+      var cut = cyl(fcx, fcy, -1, lipH + lt + 1, fd);
+      if (p.fanGrille) {
+        var rw = 1.6;
+        cut = cut.subtract(box(fcx - fd / 2 - 1, fcy - rw / 2, -2, fcx + fd / 2 + 1, fcy + rw / 2, lipH + lt + 2)).subtract(box(fcx - rw / 2, fcy - fd / 2 - 1, -2, fcx + rw / 2, fcy + fd / 2 + 1, lipH + lt + 2));
+        if (p.fanGrille > 1) for (k = 1; k <= Math.floor(fd / 2 / 7); k++) {
+          var ro = k * 7, ringc = M.Manifold.cylinder(lipH + lt + 4, ro, ro, 48, false).subtract(M.Manifold.cylinder(lipH + lt + 6, ro - 1.4, ro - 1.4, 48, false).translate([0, 0, -1])).translate([fcx, fcy, -2]);
+          cut = cut.subtract(ringc);
+        }
+      }
+      lid = lid.subtract(cut);
+      var hs = fan.h / 2;
+      [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(function (q) { lid = lid.subtract(cyl(fcx + q[0] * hs, fcy + q[1] * hs, lipH - 1, lipH + lt + 1, fan.sd)); });
+    }
+    out.lidAsm = toMesh(lid);
+    if (p.models) out.models = models(p, { x0: x0, x1: x1, y0: y0, y1: y1, zp: zp, zr: zr, lt: lt, fan: fan, info: out.info });
     lid = lid.mirror([0, 1, 0]).mirror([0, 0, 1]).translate([0, 2 * yc, lipH + lt]);
     var lm = toMesh(lid);
     if (p.part === 'lid') { out.lid = lm; return out; }

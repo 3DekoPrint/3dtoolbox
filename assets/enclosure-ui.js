@@ -13,7 +13,9 @@
       parts: { both: 'Boden + Deckel', base: 'Nur Boden', lid: 'Nur Deckel', test: 'Passprobe (flacher Boden)' },
       cust: { L: 'Länge (mm)', W: 'Breite (mm)', t: 'Platinendicke (mm)', holes: 'Montagelöcher (4 im Rechteck)', ox: 'Abstand Loch von links (mm)', oy: 'Abstand Loch von unten (mm)', dx: 'Lochabstand X (mm)', dy: 'Lochabstand Y (mm)', hd: 'Lochdurchmesser (mm)' },
       ports: 'Aussparungen für Anschlüsse', add: '+ Aussparung hinzufügen', edge: 'Kante', e: { W: 'links', E: 'rechts', S: 'unten', N: 'oben' }, pos: 'Position (mm)', wid: 'Breite', hei: 'Höhe', zc: 'Höhe ab Platine',
-      stl: 'STL herunterladen', mf: '3MF herunterladen', stat: 'Außenmaße', tris: 'Dreiecke', view: 'Draufsicht', top: 'oben', del: 'entfernen', pad: 'Platz für überstehende Buchsen' },
+      stl: 'STL herunterladen', mf: '3MF herunterladen', stat: 'Außenmaße', tris: 'Dreiecke', view: 'Draufsicht', top: 'oben', del: 'entfernen', pad: 'Platz für überstehende Buchsen',
+      g: { size: 'Gehäusegröße', vent: 'Belüftung', ex: 'Zusätzlicher Platz in Länge (mm)', ey: 'Zusätzlicher Platz in Breite (mm)', ctr: 'Platine im Gehäuse zentrieren', sv: 'Lüftungsschlitze in den Seitenwänden', vw: 'Schlitzbreite (mm)', vp: 'Schlitzabstand (mm)', fan: 'Lüfter im Deckel', fnone: 'kein Lüfter', fg: 'Lüftergitter', fg0: 'offen', fg1: 'Kreuzstreben', fg2: 'Kreuz + Ringe', fox: 'Lüfter verschieben X (mm)', foy: 'Lüfter verschieben Y (mm)', fwarn: 'Der Lüfter ist größer als der Deckel – vergrößere das Gehäuse oder wähle einen kleineren Lüfter.', fshrink: 'Öffnung wurde verkleinert, damit sie in den Deckel passt.' },
+      v: { title: 'Teile anzeigen', base: 'Boden', lid: 'Deckel', board: 'Platine', fan: 'Lüfter', ghost: 'Deckel durchsichtig', ex: 'Auseinanderziehen', note: 'Platine und Lüfter sind schematisch (Maße und Anschlüsse stimmen, Bauteile sind vereinfacht).' } },
     en: { loading: 'Loading 3D library …', busy: 'Calculating …', err: 'The enclosure could not be calculated. Please check the dimensions.', libErr: 'The 3D library could not be loaded (WebAssembly required).',
       custom: 'Custom board (enter dimensions)', search: 'Search boards …', none: 'No board found – choose “Custom board” or tell me which board is missing.',
       okTip: 'Board outline and hole positions follow the manufacturer drawing. Connector positions are approximations: check them in the top view and print a fit test first.',
@@ -23,13 +25,18 @@
       parts: { both: 'Base + lid', base: 'Base only', lid: 'Lid only', test: 'Fit test (low base)' },
       cust: { L: 'Length (mm)', W: 'Width (mm)', t: 'Board thickness (mm)', holes: 'Mounting holes (4 in a rectangle)', ox: 'Hole distance from left (mm)', oy: 'Hole distance from bottom (mm)', dx: 'Hole spacing X (mm)', dy: 'Hole spacing Y (mm)', hd: 'Hole diameter (mm)' },
       ports: 'Connector cut-outs', add: '+ Add cut-out', edge: 'Edge', e: { W: 'left', E: 'right', S: 'bottom', N: 'top' }, pos: 'Position (mm)', wid: 'Width', hei: 'Height', zc: 'Height above board',
-      stl: 'Download STL', mf: 'Download 3MF', stat: 'Outer size', tris: 'triangles', view: 'Top view', top: 'top', del: 'remove', pad: 'Space for protruding jacks' }
+      stl: 'Download STL', mf: 'Download 3MF', stat: 'Outer size', tris: 'triangles', view: 'Top view', top: 'top', del: 'remove', pad: 'Space for protruding jacks',
+      g: { size: 'Case size', vent: 'Ventilation', ex: 'Extra space in length (mm)', ey: 'Extra space in width (mm)', ctr: 'Centre the board in the case', sv: 'Ventilation slots in the side walls', vw: 'Slot width (mm)', vp: 'Slot pitch (mm)', fan: 'Fan in the lid', fnone: 'no fan', fg: 'Fan grille', fg0: 'open', fg1: 'Cross ribs', fg2: 'Cross + rings', fox: 'Move fan X (mm)', foy: 'Move fan Y (mm)', fwarn: 'The fan is larger than the lid – enlarge the case or pick a smaller fan.', fshrink: 'The opening was reduced to fit into the lid.' },
+      v: { title: 'Show parts', base: 'Base', lid: 'Lid', board: 'Board', fan: 'Fan', ghost: 'Transparent lid', ex: 'Pull apart', note: 'Board and fan are schematic (dimensions and connectors match, components are simplified).' } }
   }[LANG];
   function $(i) { return document.getElementById(i); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
-  var P = { cl: 0.6, wall: 2, floor: 2, under: 4, hr: 12, mode: 'pin', lidT: 2, fit: 0.2, rc: 2, vents: 0, lidcut: 1, part: 'both' };
+  var P = { cl: 0.6, wall: 2, floor: 2, under: 4, hr: 12, mode: 'pin', lidT: 2, fit: 0.2, rc: 2, vents: 0, lidcut: 1, part: 'both', exX: 0, exY: 0, ctr: 1, fan: 0, fanGrille: 1, fanOx: 0, fanOy: 0, sideVents: 0, ventW: 2, ventPitch: 5 };
+  var VIS = { base: 1, lid: 1, board: 1, fan: 1, ghost: 0 }, EXPLODE = 0;
   var SPEC = [['cl', 0.2, 4, 0.1], ['wall', 1.2, 5, 0.2], ['floor', 1.2, 5, 0.2], ['under', 1, 20, 0.5], ['hr', 3, 80, 0.5], ['lidT', 1.2, 5, 0.2], ['fit', 0, 0.6, 0.05], ['rc', 0, 8, 0.5]];
+  var SPEC_SIZE = [['exX', 0, 80, 1, 'ex'], ['exY', 0, 80, 1, 'ey']], SPEC_VENT = [['ventW', 1, 4, 0.25, 'vw'], ['ventPitch', 3, 12, 0.5, 'vp']], FANS = [0, 25, 30, 40, 50, 60, 80, 92, 120];
+  var PCB = { 'Raspberry Pi': [0.12, 0.55, 0.26], 'Arduino': [0.0, 0.5, 0.55], 'ESP32 / ESP8266': [0.1, 0.11, 0.13], 'Weitere Boards': [0.08, 0.35, 0.2] };
   var st = { id: 'rpi4', b: null, custom: { L: 60, W: 40, t: 1.6, holes: 1, ox: 3.5, oy: 3.5, dx: 53, dy: 33, hd: 2.75 }, timer: 0, ready: false, last: null };
   var prev = null, status = $('enStatus'), out = $('enOut');
   function msg(t, bad) { status.textContent = t || ''; status.className = 'cv-status' + (bad ? ' bad' : ''); }
@@ -68,18 +75,30 @@
       if (c.holes) h += ['ox', 'oy', 'dx', 'dy', 'hd'].map(function (k) { return '<label>' + T.cust[k] + '<input type="number" step="0.05" min="0" data-c="' + k + '" value="' + c[k] + '"></label>'; }).join('');
       h += '</div>';
     }
-    h += '<div class="en-grid">';
+    h += '<h3 class="en-h3">' + T.g.size + '</h3><div class="en-grid">';
+    SPEC_SIZE.forEach(function (s) { var k = s[0]; h += '<label>' + T.g[s[4]] + ' <output>' + P[k] + '</output><input type="range" data-p="' + k + '" min="' + s[1] + '" max="' + s[2] + '" step="' + s[3] + '" value="' + P[k] + '"></label>'; });
+    h += '<label class="i3-chk"><input type="checkbox" data-p="ctr"' + (P.ctr ? ' checked' : '') + '> ' + T.g.ctr + '</label></div><div class="en-grid">';
     SPEC.forEach(function (s) { var k = s[0]; h += '<label>' + T.f[k] + ' <output>' + P[k] + '</output><input type="range" data-p="' + k + '" min="' + s[1] + '" max="' + s[2] + '" step="' + s[3] + '" value="' + P[k] + '"></label>'; });
     h += '<label>' + T.f.mode + '<select data-p="mode">' + Object.keys(T.modes).map(function (m) { return '<option value="' + m + '"' + (P.mode === m ? ' selected' : '') + '>' + T.modes[m] + '</option>'; }).join('') + '</select></label>';
     h += '<label>' + T.f.part + '<select data-p="part">' + Object.keys(T.parts).map(function (m) { return '<option value="' + m + '"' + (P.part === m ? ' selected' : '') + '>' + T.parts[m] + '</option>'; }).join('') + '</select></label>';
-    h += '<label class="i3-chk"><input type="checkbox" data-p="vents"' + (P.vents ? ' checked' : '') + '> ' + T.f.vents + '</label>';
     if (b.lid && b.lid.length) h += '<label class="i3-chk"><input type="checkbox" data-p="lidcut"' + (P.lidcut ? ' checked' : '') + '> ' + T.f.lidcut + ' ' + esc(b.lid.map(function (l) { return l[4]; }).join(', ')) + '</label>';
-    h += '</div>';
+    h += '</div><h3 class="en-h3">' + T.g.vent + '</h3><div class="en-grid">';
+    h += '<label class="i3-chk"><input type="checkbox" data-p="vents"' + (P.vents ? ' checked' : '') + '> ' + T.f.vents + '</label>';
+    h += '<label class="i3-chk"><input type="checkbox" data-p="sideVents"' + (P.sideVents ? ' checked' : '') + '> ' + T.g.sv + '</label>';
+    SPEC_VENT.forEach(function (s) { var k = s[0]; h += '<label>' + T.g[s[4]] + ' <output>' + P[k] + '</output><input type="range" data-p="' + k + '" min="' + s[1] + '" max="' + s[2] + '" step="' + s[3] + '" value="' + P[k] + '"></label>'; });
+    h += '<label>' + T.g.fan + '<select data-p="fan">' + FANS.map(function (f) { return '<option value="' + f + '"' + (P.fan === f ? ' selected' : '') + '>' + (f ? f + ' × ' + f + ' mm' : T.g.fnone) + '</option>'; }).join('') + '</select></label>';
+    if (P.fan) {
+      h += '<label>' + T.g.fg + '<select data-p="fanGrille">' + [0, 1, 2].map(function (g) { return '<option value="' + g + '"' + (P.fanGrille === g ? ' selected' : '') + '>' + T.g['fg' + g] + '</option>'; }).join('') + '</select></label>';
+      h += '<label>' + T.g.fox + ' <output>' + P.fanOx + '</output><input type="range" data-p="fanOx" min="-40" max="40" step="1" value="' + P.fanOx + '"></label>';
+      h += '<label>' + T.g.foy + ' <output>' + P.fanOy + '</output><input type="range" data-p="fanOy" min="-40" max="40" step="1" value="' + P.fanOy + '"></label>';
+    }
+    h += '</div><div id="enFanWarn" class="md-note" hidden></div>';
     $('enParams').innerHTML = h;
     Array.prototype.forEach.call($('enParams').querySelectorAll('[data-p]'), function (el) {
       el.addEventListener('input', function () {
         var k = el.getAttribute('data-p');
-        P[k] = el.type === 'checkbox' ? (el.checked ? 1 : 0) : (el.tagName === 'SELECT' ? el.value : parseFloat(el.value));
+        P[k] = el.type === 'checkbox' ? (el.checked ? 1 : 0) : (el.tagName === 'SELECT' ? (k === 'mode' || k === 'part' ? el.value : parseFloat(el.value)) : parseFloat(el.value));
+        if (k === 'fan') { buildPanel(); recompute(); return; }
         var o = el.parentNode.querySelector('output'); if (o) o.textContent = P[k];
         recompute();
       });
@@ -116,10 +135,12 @@
   }
 
   function params(part) {
-    var b = st.b;
-    return { L: b.L, W: b.W, t: b.t, holes: b.holes, hd: b.hd, mode: P.mode, cl: P.cl, wall: P.wall, floor: P.floor, under: P.under, hr: P.hr, lidT: P.lidT, lipH: 3, fit: P.fit, rc: P.rc, pad: b.pad,
-      ports: b.ports.map(function (q) { return { e: q[0], c: q[1], w: q[2], h: q[3], zc: q[4] }; }),
-      lidCuts: P.lidcut && b.lid ? b.lid.map(function (l) { return { x: l[0], y: l[1], w: l[2], h: l[3] }; }) : [], vents: P.vents, part: part || P.part };
+    var b = st.b, pd = b.pad || {}, ex = P.exX, ey = P.exY, pad = { W: pd.W || 0, E: pd.E || 0, S: pd.S || 0, N: pd.N || 0 };
+    if (P.ctr) { pad.W += ex / 2; pad.E += ex / 2; pad.S += ey / 2; pad.N += ey / 2; } else { pad.E += ex; pad.N += ey; }
+    return { L: b.L, W: b.W, t: b.t, holes: b.holes, hd: b.hd, mode: P.mode, cl: P.cl, wall: P.wall, floor: P.floor, under: P.under, hr: P.hr, lidT: P.lidT, lipH: 3, fit: P.fit, rc: P.rc, pad: pad, models: 1, chips: b.chips, pcbCol: b.col || PCB[b.g] || [0.12, 0.55, 0.26],
+      fan: P.fan, fanGrille: P.fanGrille, fanOx: P.fanOx, fanOy: P.fanOy, sideVents: P.sideVents, ventW: P.ventW, ventPitch: P.ventPitch,
+      ports: b.ports.map(function (q) { return { e: q[0], c: q[1], w: q[2], h: q[3], zc: q[4], n: q[5] }; }),
+      lidCuts: P.lidcut && b.lid ? b.lid.map(function (l) { return { x: l[0], y: l[1], w: l[2], h: l[3] }; }) : [], vents: P.vents, part: part || (P.part === 'test' ? 'test' : 'both') };
   }
 
   function drawTop() {
@@ -142,24 +163,53 @@
     $('enTopView').innerHTML = s;
   }
 
+  function pick(r) { var P0 = P.part; return P0 === 'base' || P0 === 'test' ? r.base : P0 === 'lid' ? r.lid : r.both; }
+  var COL = { base: [0.93, 0.78, 0.55], lid: [0.93, 0.78, 0.55] };
+  function sceneParts(r) {
+    var i = r.info, list = [], q;
+    if (r.base) list.push({ id: 'base', m: r.base, c: COL.base, dz: 0 });
+    if (r.lidAsm) { var m = r.lidAsm, v = new Float64Array(m.v), k, dz = i.zr - i.lipH; for (k = 2; k < v.length; k += 3) v[k] += dz; list.push({ id: 'lid', m: { v: v, i: m.i }, c: COL.lid, dz: 1.2 }); }
+    if (r.models) {
+      r.models.board.forEach(function (x) { list.push({ id: 'board', m: x.m, c: x.c, dz: 0.6 * 0 + 0.4 }); });
+      r.models.fan.forEach(function (x) { list.push({ id: 'fan', m: x.m, c: x.c, dz: 2 }); });
+    }
+    return list;
+  }
+  function applyView() {
+    if (!prev || !prev.ok) return;
+    var vis = { base: VIS.base, lid: VIS.lid, board: VIS.board, fan: VIS.fan };
+    prev.update({ vis: vis, alpha: { lid: VIS.ghost ? 0.3 : 1 }, explode: EXPLODE });
+  }
+  function buildViewPanel() {
+    var el = $('enParts'); if (!el) return;
+    var h = '<strong class="en-vt">' + T.v.title + '</strong>';
+    ['base', 'lid', 'board', 'fan'].forEach(function (k) { h += '<label class="i3-chk"><input type="checkbox" data-v="' + k + '"' + (VIS[k] ? ' checked' : '') + '> ' + T.v[k] + '</label>'; });
+    h += '<label class="i3-chk"><input type="checkbox" data-v="ghost"' + (VIS.ghost ? ' checked' : '') + '> ' + T.v.ghost + '</label>';
+    h += '<label class="en-ex">' + T.v.ex + ' <input type="range" id="enEx" min="0" max="60" step="1" value="' + EXPLODE + '"></label>';
+    el.innerHTML = h;
+    Array.prototype.forEach.call(el.querySelectorAll('[data-v]'), function (c) { c.addEventListener('input', function () { VIS[c.getAttribute('data-v')] = c.checked ? 1 : 0; applyView(); }); });
+    $('enEx').addEventListener('input', function () { EXPLODE = parseFloat(this.value); applyView(); });
+  }
+
   function recompute() {
     if (!st.ready) return;
     clearTimeout(st.timer); msg(T.busy);
     st.timer = setTimeout(function () {
       try {
         drawTop();
-        var r = EN.build(params()), mesh = r.both || r.base || r.lid;
+        var r = EN.build(params()), mesh = pick(r) || r.base;
         st.last = r; var s = C.stats(mesh);
         $('enStats').textContent = T.stat + ': ' + r.info.outer.map(function (x) { return x.toFixed(1); }).join(' × ') + ' mm · ' + s.tris.toLocaleString() + ' ' + T.tris;
+        var fw = $('enFanWarn'); if (fw) { var fi = r.info.fan; fw.hidden = !(fi && !fi.fits); if (fi && !fi.fits) fw.textContent = T.g.fwarn; }
         out.hidden = false; msg('');
-        if (!prev) prev = window.MeshPreview.create($('enCanvas'), { rx: -0.9, rz: 0.5 });
-        if (prev.ok) prev.set(mesh);
+        if (!prev) { prev = window.EnclosureView.create($('enCanvas')); buildViewPanel(); }
+        if (prev.ok) { prev.set(sceneParts(r)); applyView(); }
       } catch (e) { msg(T.err, true); if (window.console) console.error(e); }
     }, 140);
   }
   function save(fmt) {
     if (!st.last) return;
-    var r = EN.build(params()), mesh = r.both || r.base || r.lid, nm = (st.b.id === 'custom' ? 'platine' : st.b.id) + '-gehaeuse-' + P.part;
+    var r = st.last, mesh = pick(r) || r.base, nm = (st.b.id === 'custom' ? 'platine' : st.b.id) + '-gehaeuse-' + P.part;
     var blob = C.write(fmt, mesh, nm), a = document.createElement('a');
     a.href = URL.createObjectURL(blob); a.download = nm + '.' + fmt; document.body.appendChild(a); a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
