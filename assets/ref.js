@@ -18,7 +18,8 @@
   function codeFor(partner) {
     var p = (C.partners || {})[partner];
     if (!p || !p.url) return null;
-    var inf = ref && (C.influencers || {})[ref];
+    /* Nur Partner mit shared:true dürfen Influencer-Codes bekommen; alle anderen Links gehören immer dir. */
+    var inf = ref && p.shared === true && (C.influencers || {})[ref];
     var code = (inf && inf[partner]) || p.own || '';
     return code ? p.url.replace('{code}', encodeURIComponent(code)) : null;
   }
