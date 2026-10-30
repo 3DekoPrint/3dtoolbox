@@ -2,7 +2,7 @@
    1. Liest ?ref=name und merkt es sich nur für diese Browser-Sitzung (sessionStorage).
    2. Links mit data-partner="meshy" bekommen den Code des Influencers (sonst deinen eigenen).
    3. Awin- und Impact-Links bekommen die Kennung als Sub-ID, damit das Netzwerk Verkäufe pro Influencer zeigt.
-   4. Klicks auf Partner-Links werden – nur wenn ein GoatCounter-Code eingetragen ist – anonym gezählt.
+   4. Seitenaufrufe und Klicks auf Partner-Links werden – nur wenn ein GoatCounter-Code eingetragen ist – anonym und ohne Cookies gezählt.
    Konfiguration: assets/ref-config.js */
 (function () {
   'use strict';
@@ -42,17 +42,20 @@
     var h = (a.hostname || '').toLowerCase();
     return a.hasAttribute('data-partner') || h.indexOf('awin1.com') > -1 || h.indexOf('sjv.io') > -1 || /sca_ref=/.test(a.search || '');
   }
-  var gcLoaded = false;
+  /* GoatCounter: zählt Seitenaufrufe (mit Quelle aus ?ref=) und Klicks auf Partner-Links – ohne Cookies. */
+  var gc = /^[a-z0-9-]{1,40}$/.test(C.goatcounter || '') ? C.goatcounter : '';
+  var gcQueue = [];
   function count(name) {
-    if (!C.goatcounter || !/^[a-z0-9-]{1,40}$/.test(C.goatcounter)) return;
-    function send() { try { window.goatcounter.count({ path: name, title: 'Klick', event: true }); } catch (e) {} }
-    if (window.goatcounter && window.goatcounter.count) return send();
-    if (gcLoaded) return;
-    gcLoaded = true;
-    window.goatcounter = { no_onload: true };
+    if (!gc) return;
+    if (window.goatcounter && window.goatcounter.count) { try { window.goatcounter.count({ path: name, title: 'Klick', event: true }); } catch (e) {} }
+    else gcQueue.push(name);
+  }
+  if (gc) {
     var s = document.createElement('script');
     s.async = true; s.src = 'https://gc.zgo.at/count.js';
-    s.onload = send; document.head.appendChild(s);
+    s.setAttribute('data-goatcounter', 'https://' + gc + '.goatcounter.com/count');
+    s.onload = function () { while (gcQueue.length) count(gcQueue.shift()); };
+    document.head.appendChild(s);
   }
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
