@@ -34,6 +34,58 @@
       var e = 0.001;
       return Mf.hull([Mf.extrude(cs0, e).translate([0, 0, z0]), Mf.extrude(cs1, e).translate([0, 0, z1 - e])]);
     };
+
+    /* Text als Raster (Canvas) und daraus Querschnitt. Im Browser echt, ohne DOM ein Ersatzblock (Tests). */
+    H.rasterText = function (text, family, hMm, pxmm) {
+      text = String(text || ' ');
+      if (typeof document === 'undefined') { var tw = Math.max(1, Math.round(text.length * hMm * 0.6 * pxmm)), th = Math.max(1, Math.round(hMm * pxmm)), mk = new Uint8Array(tw * th), ii; for (ii = 0; ii < mk.length; ii++) mk[ii] = ((ii % tw) % 9 < 6) ? 1 : 0; return { mask: mk, w: tw, h: th, px: pxmm }; }
+      if (document.fonts && document.fonts.check && !document.fonts.check('700 40px ' + family)) {
+        if (!H._fontReq) { H._fontReq = true; document.fonts.load('700 40px ' + family).then(function () { if (root.__gk) root.__gk.rebuild(); }, function () {}); }
+      }
+      var mc = document.createElement('canvas').getContext('2d'), fpx = 200; mc.font = '700 ' + fpx + 'px ' + family;
+      var me = mc.measureText(text), asc = me.actualBoundingBoxAscent || fpx * 0.75, desc = me.actualBoundingBoxDescent || fpx * 0.2, tw0 = Math.max(1, me.width), th0 = Math.max(1, asc + desc);
+      var sc = (hMm * pxmm) / th0, cw = Math.ceil(tw0 * sc) + 20, ch = Math.ceil(th0 * sc) + 20, cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
+      var cx = cv.getContext('2d'); cx.fillStyle = '#000'; cx.font = '700 ' + (fpx * sc) + 'px ' + family; cx.textBaseline = 'alphabetic'; cx.fillText(text, 10, 10 + asc * sc);
+      var d = cx.getImageData(0, 0, cw, ch).data, x, y, x0 = cw, x1 = 0, y0 = ch, y1 = 0, any = false;
+      for (y = 0; y < ch; y++) for (x = 0; x < cw; x++) if (d[(y * cw + x) * 4 + 3] > 128) { any = true; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      if (!any) { x0 = 0; x1 = 1; y0 = 0; y1 = 1; }
+      var w = x1 - x0 + 1, h = y1 - y0 + 1, mask = new Uint8Array(w * h);
+      for (y = 0; y < h; y++) for (x = 0; x < w; x++) mask[y * w + x] = d[((y + y0) * cw + (x + x0)) * 4 + 3] > 128 ? 1 : 0;
+      return { mask: mask, w: w, h: h, px: pxmm };
+    };
+    /* Maske (Zeile 0 = oben) in Querschnitt (y nach oben, Ursprung links unten). Waagerechte Läufe, senkrecht zusammengefasst. */
+    H.maskToCS = function (r) {
+      var w = r.w, h = r.h, px = r.px, open = {}, polys = [], x, y, key;
+      for (y = 0; y <= h; y++) {
+        var runs = {};
+        if (y < h) { x = 0; while (x < w) { if (r.mask[y * w + x]) { var s = x; while (x < w && r.mask[y * w + x]) x++; runs[s + '_' + x] = [s, x]; } else x++; } }
+        for (key in open) if (!runs[key]) { var o = open[key]; polys.push([[o.s / px, (h - y) / px], [o.e / px, (h - y) / px], [o.e / px, (h - o.y0) / px], [o.s / px, (h - o.y0) / px]]); delete open[key]; }
+        for (key in runs) if (!open[key]) open[key] = { s: runs[key][0], e: runs[key][1], y0: y };
+      }
+      return polys.length ? m.CrossSection.ofPolygons(polys) : m.CrossSection.square([1 / px, 1 / px], false);
+    };
+    /* Inseln (eingeschlossene freie Flächen, z. B. im O) per Brücke mit dem Rand verbinden: Schablonen. mask: 1 = Öffnung. */
+    H.stencilBridges = function (r, bridgeMm) {
+      var w = r.w, h = r.h, pad = 2, W = w + 2 * pad, Hh = h + 2 * pad, g = new Uint8Array(W * Hh), x, y, i, bw = Math.max(1, Math.round(bridgeMm * r.px));
+      for (y = 0; y < h; y++) for (x = 0; x < w; x++) g[(y + pad) * W + x + pad] = r.mask[y * w + x];
+      var lab = new Int32Array(W * Hh), n = 0, st = [];
+      for (i = 0; i < W * Hh; i++) { if (g[i] || lab[i]) continue; n++; lab[i] = n; st.push(i); while (st.length) { var q = st.pop(), qx = q % W, qy = (q - qx) / W; [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (dd) { var nx = qx + dd[0], ny = qy + dd[1]; if (nx < 0 || ny < 0 || nx >= W || ny >= Hh) return; var j = ny * W + nx; if (!g[j] && !lab[j]) { lab[j] = n; st.push(j); } }); } }
+      var outer = lab[0], seen = {}, order = [];
+      for (i = 0; i < W * Hh; i++) if (!g[i] && lab[i] !== outer && !seen[lab[i]]) { seen[lab[i]] = 1; order.push(i); }
+      order.forEach(function (first) {
+        var L = lab[first], px0 = first % W, py0 = (first - px0) / W, dirs = [[0, -1], [0, 1], [-1, 0], [1, 0]], di;
+        for (di = 0; di < 4; di++) {
+          var dx = dirs[di][0], dy = dirs[di][1], cx = px0, cy = py0, steps = 0, ok = false;
+          /* vom Rand der Insel in Richtung dx,dy bis zum äußeren Bereich laufen */
+          while (cx >= 0 && cy >= 0 && cx < W && cy < Hh && lab[cy * W + cx] === L) { cx += dx; cy += dy; }
+          var sx = cx, sy = cy;
+          while (cx >= 0 && cy >= 0 && cx < W && cy < Hh && steps < 400) { var lb = lab[cy * W + cx]; if (!g[cy * W + cx] && lb !== L && lb) { ok = lb === outer || true; break; } cx += dx; cy += dy; steps++; }
+          if (ok) { var ex = cx, ey = cy, k, a; for (k = 0; ; k++) { var tx = sx + dx * k, ty = sy + dy * k; if (tx === ex && ty === ey) break; for (a = -Math.floor(bw / 2); a < Math.ceil(bw / 2); a++) { var ux = tx + (dy ? a : 0), uy = ty + (dx ? a : 0); if (ux >= 0 && uy >= 0 && ux < W && uy < Hh) g[uy * W + ux] = 0; } } break; }
+        }
+      });
+      var out = new Uint8Array(w * h); for (y = 0; y < h; y++) for (x = 0; x < w; x++) out[y * w + x] = g[(y + pad) * W + x + pad];
+      return { mask: out, w: w, h: h, px: r.px };
+    };
     H.toMesh = function (man) {
       var me = man.getMesh(), n = me.vertProperties.length / me.numProp, v = new Float64Array(n * 3), k;
       for (k = 0; k < n; k++) { v[3 * k] = me.vertProperties[k * me.numProp]; v[3 * k + 1] = me.vertProperties[k * me.numProp + 1]; v[3 * k + 2] = me.vertProperties[k * me.numProp + 2]; }
@@ -155,6 +207,10 @@
           f.innerHTML = lab; c = el('select'); c.innerHTML = it.opts.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(L(o[1])) + '</option>'; }).join(''); c.value = P[it.k]; f.appendChild(c);
           c.addEventListener('change', function () { P[it.k] = isNaN(+c.value) || it.str ? c.value : +c.value; presetOff(); applyShow(); schedule(); }); inputs[it.k] = { s: c };
         }
+        else if (it.t === 'txt') {
+          f.innerHTML = lab; c = el('input'); c.type = 'text'; c.maxLength = it.max || 40; c.value = P[it.k]; f.appendChild(c);
+          c.addEventListener('input', function () { P[it.k] = c.value; presetOff(); schedule(); }); inputs[it.k] = { x: c };
+        }
         rows[it.k] = f; pane.appendChild(f);
       });
       b.addEventListener('click', function () { tabBtns.forEach(function (x) { x.classList.remove('on'); }); panes.forEach(function (x) { x.classList.remove('on'); }); b.classList.add('on'); pane.classList.add('on'); });
@@ -163,7 +219,7 @@
     function presetOff() { if (inputs.__preset) inputs.__preset.value = ''; }
     function applyShow() { flat.forEach(function (it) { if (it.show) rows[it.k].style.display = it.show(P) ? '' : 'none'; }); }
     function syncInputs() {
-      flat.forEach(function (it) { var i = inputs[it.k], v = P[it.k]; if (i.r) { i.r.value = v; i.n.value = numStr(v); } else if (i.c) i.c.checked = !!v; else if (i.s) i.s.value = v; });
+      flat.forEach(function (it) { var i = inputs[it.k], v = P[it.k]; if (i.r) { i.r.value = v; i.n.value = numStr(v); } else if (i.c) i.c.checked = !!v; else if (i.s) i.s.value = v; else if (i.x) i.x.value = v; });
       applyShow();
     }
 
@@ -236,7 +292,7 @@
     /* Teilen / Speichern */
     function diff() { var o = {}; flat.forEach(function (it) { if (P[it.k] !== DEF[it.k]) o[it.k] = P[it.k]; }); return o; }
     function updateHash() { try { var d = diff(), s = Object.keys(d).length ? 'c=' + btoa(unescape(encodeURIComponent(JSON.stringify(d)))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '') : ''; history.replaceState(null, '', s ? '#' + s : location.pathname + location.search); } catch (e) { /* ignorieren */ } }
-    function applyObj(o) { Object.keys(o || {}).forEach(function (k) { var it = flat.filter(function (x) { return x.k === k; })[0]; if (!it) return; var v = o[k]; if (it.t === 'bool') P[k] = !!v; else if (it.t === 'sel') { if (it.opts.some(function (x) { return String(x[0]) === String(v); })) P[k] = v; } else if (typeof v === 'number' && isFinite(v)) P[k] = Math.max(it.min, Math.min(it.max, it.t === 'int' ? Math.round(v) : v)); }); syncInputs(); }
+    function applyObj(o) { Object.keys(o || {}).forEach(function (k) { var it = flat.filter(function (x) { return x.k === k; })[0]; if (!it) return; var v = o[k]; if (it.t === 'bool') P[k] = !!v; else if (it.t === 'txt') { if (typeof v === 'string') P[k] = v.slice(0, it.max || 40); } else if (it.t === 'sel') { if (it.opts.some(function (x) { return String(x[0]) === String(v); })) P[k] = v; } else if (typeof v === 'number' && isFinite(v)) P[k] = Math.max(it.min, Math.min(it.max, it.t === 'int' ? Math.round(v) : v)); }); syncInputs(); }
     function fromHash() { var m = /[#&]c=([\w-]+)/.exec(location.hash || ''); if (!m) return; try { var b = m[1].replace(/-/g, '+').replace(/_/g, '/'); while (b.length % 4) b += '='; applyObj(JSON.parse(decodeURIComponent(escape(atob(b))))); } catch (e) { /* ungültiger Link */ } }
     bLink.addEventListener('click', function () {
       updateHash(); var u = location.href, done = function () { var o = bLink.textContent; bLink.textContent = T.copied; setTimeout(function () { bLink.textContent = T.link; }, 1600); };
