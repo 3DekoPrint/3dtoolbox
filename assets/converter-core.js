@@ -217,6 +217,25 @@
       { name: '3D/3dmodel.model', data: enc.encode(p.join('')) }
     ]);
   }
+  /* Mehrere Teile als getrennte Objekte in einer 3MF (z. B. Schraube + Mutter). parts: [{name, mesh}] */
+  function write3MFParts(parts) {
+    var p = ['<?xml version="1.0" encoding="UTF-8"?>\n<model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02"><metadata name="Application">3DToolBox</metadata><resources>'], b = [], k, n;
+    parts.forEach(function (pt, idx) {
+      var mesh = pt.mesh, id = idx + 1;
+      p.push('<object id="' + id + '" name="' + String(pt.name || 'part' + id).replace(/[^\w.\- ]/g, '_') + '" type="model"><mesh><vertices>');
+      for (k = 0; k < mesh.v.length; k += 3) p.push('<vertex x="' + mesh.v[k] + '" y="' + mesh.v[k + 1] + '" z="' + mesh.v[k + 2] + '"/>');
+      p.push('</vertices><triangles>');
+      for (k = 0; k < mesh.i.length; k += 3) p.push('<triangle v1="' + mesh.i[k] + '" v2="' + mesh.i[k + 1] + '" v3="' + mesh.i[k + 2] + '"/>');
+      p.push('</triangles></mesh></object>');
+      b.push('<item objectid="' + id + '"/>');
+    });
+    p.push('</resources><build>' + b.join('') + '</build></model>');
+    return zipStore([
+      { name: '[Content_Types].xml', data: enc.encode('<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>') },
+      { name: '_rels/.rels', data: enc.encode('<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>') },
+      { name: '3D/3dmodel.model', data: enc.encode(p.join('')) }
+    ]);
+  }
   function writeSTEP(mesh, name) { // B-Rep aus ebenen Dreiecksflächen (jedes Dreieck = eine Fläche)
     var nm = String(name || 'model').replace(/[^\w.\- ]/g, '_'), L = [], id = 0, k;
     function add(s) { id++; L.push('#' + id + '=' + s + ';'); return id; }
@@ -296,6 +315,6 @@
   }
   async function parse(fmt, buf, opts) { return fmt === 'stl' ? parseSTL(buf) : fmt === 'obj' ? parseOBJ(buf) : fmt === '3mf' ? parse3MF(buf) : parseSTEP(buf, opts); }
   function write(fmt, mesh, name, opts) { return fmt === 'stl' ? writeSTL(mesh, opts && opts.ascii, name) : fmt === 'obj' ? writeOBJ(mesh, name) : fmt === '3mf' ? write3MF(mesh, name) : writeSTEP(mesh, name); }
-  var api = { parse: parse, write: write, stats: stats, check: check, detect: detect };
+  var api = { parse: parse, write: write, write3MFParts: write3MFParts, stats: stats, check: check, detect: detect };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Conv = api;
 })(typeof self !== 'undefined' ? self : this);

@@ -715,4 +715,78 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/enclosure-generator.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/gehaeuse-generator.html"/>
   </url>
+  <!-- gen:start -->
+  <url>
+    <loc>https://3dtoolbox.info/generatoren.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/generatoren.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/generators.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/generatoren.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/generators.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/generatoren.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/generators.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/generatoren.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/gridfinity-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/gridfinity-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/gridfinity-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/gridfinity-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/gridfinity-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/gridfinity-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/gridfinity-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/gridfinity-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/spulenhalter-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/spulenhalter-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/spool-holder-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/spulenhalter-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/spool-holder-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/spulenhalter-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/spool-holder-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/spulenhalter-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/schrauben-und-muttern-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/schrauben-und-muttern-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/bolt-and-nut-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/schrauben-und-muttern-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/bolt-and-nut-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/schrauben-und-muttern-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/bolt-and-nut-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/schrauben-und-muttern-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- gen:end -->
 </urlset>
