@@ -56,14 +56,17 @@
   }
   /* Teile nebeneinander auf die Platte legen (Druckausrichtung bleibt, z ab 0). */
   function layout(parts, gap) {
-    var x = 0, out = [], maxY = 0;
     gap = gap == null ? 8 : gap;
-    parts.forEach(function (p) {
-      var b = bbox(p.mesh), s = shifted(p.mesh, x - b.min[0], -b.min[1], -b.min[2]);
-      out.push({ name: p.name, mesh: s, size: b.size });
-      x += b.size[0] + gap; if (b.size[1] > maxY) maxY = b.size[1];
+    var bs = parts.map(function (p) { return bbox(p.mesh); }), area = 0, maxW = 0;
+    bs.forEach(function (b) { area += (b.size[0] + gap) * (b.size[1] + gap); if (b.size[0] > maxW) maxW = b.size[0]; });
+    var rowMax = Math.max(maxW, Math.sqrt(area) * 1.5), x = 0, y = 0, rowH = 0, usedW = 0, out = [];
+    parts.forEach(function (p, i) {
+      var b = bs[i];
+      if (x > 0 && x + b.size[0] > rowMax + 0.001) { y += rowH + gap; x = 0; rowH = 0; }
+      out.push({ name: p.name, mesh: shifted(p.mesh, x - b.min[0], y - b.min[1], -b.min[2]), size: b.size });
+      x += b.size[0] + gap; if (x - gap > usedW) usedW = x - gap; if (b.size[1] > rowH) rowH = b.size[1];
     });
-    return { parts: out, w: Math.max(0, x - gap), d: maxY };
+    return { parts: out, w: usedW, d: y + rowH };
   }
   function stats(mesh) {
     var v = mesh.v, ix = mesh.i, vol = 0, area = 0, k;
