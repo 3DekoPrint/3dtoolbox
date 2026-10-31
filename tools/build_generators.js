@@ -8,7 +8,7 @@ const defs = [];
 global.self = global; global.GenKit = { define: function (d) { defs.push(d); return d; } };
 const files = fs.readdirSync(path.join(ROOT, 'assets/gen')).filter(f => f.endsWith('.js')).sort();
 files.forEach(f => (0, eval)(fs.readFileSync(path.join(ROOT, 'assets/gen', f), 'utf8')));
-const ORDER = ['gridfinity', 'spool', 'bolts', 'spacer', 'cableclip', 'hook', 'vent', 'vase', 'drawer', 'tray', 'pegboard', 'hingebox', 'deckbox', 'minibase', 'cutter', 'coaster', 'stamp', 'stencil', 'phonestand', 'knob', 'funnel', 'hexgrip', 'keycap'];
+const ORDER = ['gridfinity', 'spool', 'bolts', 'spacer', 'cableclip', 'hook', 'vent', 'vase', 'drawer', 'tray', 'pegboard', 'hingebox', 'deckbox', 'minibase', 'cutter', 'coaster', 'stamp', 'stencil', 'phonestand', 'knob', 'funnel', 'hexgrip', 'keycap','cleat','honeycomb','planter','keychain','bracket'];
 defs.sort((a, b) => (ORDER.indexOf(a.id) + 99) % 99 - (ORDER.indexOf(b.id) + 99) % 99);
 
 const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
@@ -108,7 +108,7 @@ sm = sm.replace('</urlset>', block + '</urlset>');
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sm);
 
 /* ---- bestehende Seiten: Chip „Alle Generatoren“ und Zeilen auf der Startseite (wiederholbar) ---- */
-const ICON = { gridfinity: 'i-box', spool: 'i-gear', bolts: 'i-hex', spacer: 'i-hex', cableclip: 'i-layers', hook: 'i-tag', vent: 'i-plate', vase: 'i-spool', drawer: 'i-layers', tray: 'i-box', pegboard: 'i-tag', hingebox: 'i-box', deckbox: 'i-plate', minibase: 'i-hex', cutter: 'i-tag', coaster: 'i-spool', stamp: 'i-plate', stencil: 'i-layers', phonestand: 'i-sliders', knob: 'i-dots', funnel: 'i-swap', hexgrip: 'i-hex', keycap: 'i-plate' };
+const ICON = { gridfinity: 'i-box', spool: 'i-gear', bolts: 'i-hex', spacer: 'i-hex', cableclip: 'i-layers', hook: 'i-tag', vent: 'i-plate', vase: 'i-spool', drawer: 'i-layers', tray: 'i-box', pegboard: 'i-tag', hingebox: 'i-box', deckbox: 'i-plate', minibase: 'i-hex', cutter: 'i-tag', coaster: 'i-spool', stamp: 'i-plate', stencil: 'i-layers', phonestand: 'i-sliders', knob: 'i-dots', funnel: 'i-swap', hexgrip: 'i-hex', keycap: 'i-plate', cleat: 'i-layers', honeycomb: 'i-hex', planter: 'i-spool', keychain: 'i-tag', bracket: 'i-sliders' };
 function patchChips() {
   const all = [];
   (function walk(dir) { fs.readdirSync(dir, { withFileTypes: true }).forEach(e => { if (e.name === '.git' || e.name === 'node_modules' || e.name === 'tools') return; const f = path.join(dir, e.name); if (e.isDirectory()) walk(f); else if (e.name.endsWith('.html')) all.push(f); }); })(ROOT);
