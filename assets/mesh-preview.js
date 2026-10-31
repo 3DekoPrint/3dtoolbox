@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   function create(cv, opt) {
-    var gl = null, G = null, cur = null, view = { rx: (opt && opt.rx) != null ? opt.rx : -0.5, rz: (opt && opt.rz) != null ? opt.rz : 0.6, z: 1 };
+    var gl = null, G = null, cur = null, view = { rx: (opt && opt.rx) != null ? opt.rx : -0.5, rz: (opt && opt.rz) != null ? opt.rz : 0.6, z: (opt && opt.z) != null ? opt.z : 1 };
     try { gl = cv.getContext('webgl2', { antialias: true }); } catch (e) { gl = null; }
     if (!gl) return { set: function () {}, ok: false };
     function sh(t, src) { var o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return o; }
