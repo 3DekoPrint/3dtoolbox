@@ -1148,5 +1148,95 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://3dtoolbox.info/french-cleat-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/french-cleat-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/french-cleat-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/french-cleat-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/french-cleat-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/french-cleat-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/french-cleat-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/french-cleat-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/wabenwand-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/wabenwand-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/honeycomb-wall-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/wabenwand-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/honeycomb-wall-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/wabenwand-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/honeycomb-wall-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/wabenwand-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/blumentopf-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/blumentopf-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/planter-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/blumentopf-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/planter-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/blumentopf-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/planter-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/blumentopf-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/schluesselanhaenger-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/schluesselanhaenger-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/keychain-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/schluesselanhaenger-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/keychain-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/schluesselanhaenger-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/keychain-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/schluesselanhaenger-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/regalwinkel-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/regalwinkel-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/shelf-bracket-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/regalwinkel-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/shelf-bracket-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/regalwinkel-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/shelf-bracket-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/regalwinkel-generator.html"/>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- gen:end -->
 </urlset>
