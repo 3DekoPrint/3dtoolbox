@@ -35,7 +35,7 @@
 /* Fremdbibliotheken erst bei Bedarf laden (spart ~1 MB beim Seitenaufruf) */
 window.tbLoad=(function(){
   var U={zip:['https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'],
-    heic:['https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js'],
+    heic:['https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js'],
     three:['https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js','https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js','https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js']}, P={};
   function one(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=function(){rej(new Error('load '+src))};document.head.appendChild(s)})}
   return function(name){
