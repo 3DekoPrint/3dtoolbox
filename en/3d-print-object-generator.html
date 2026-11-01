@@ -422,9 +422,9 @@
           </label>
         </div>
         <div id="boxLidRows" style="display:none;">
-          <div class="og-row"><label>Lid thickness <span class="og-val" id="v_box_lidcap">2.4</span> mm</label><input type="range" id="box_lidcap" min="1" max="8" step="0.2" value="2.4"></div>
-          <div class="og-row"><label>Insertion depth <span class="og-val" id="v_box_lidplug">8</span> mm</label><input type="range" id="box_lidplug" min="2" max="30" step="0.5" value="8"></div>
-          <div class="og-row"><label>Fit clearance <span class="og-val" id="v_box_lidfit">0.3</span> mm</label><input type="range" id="box_lidfit" min="0.1" max="1" step="0.05" value="0.3"></div>
+          <div class="og-row"><label for="box_lidcap">Lid thickness <span class="og-val" id="v_box_lidcap">2.4</span> mm</label><input type="range" id="box_lidcap" min="1" max="8" step="0.2" value="2.4"></div>
+          <div class="og-row"><label for="box_lidplug">Insertion depth <span class="og-val" id="v_box_lidplug">8</span> mm</label><input type="range" id="box_lidplug" min="2" max="30" step="0.5" value="8"></div>
+          <div class="og-row"><label for="box_lidfit">Fit clearance <span class="og-val" id="v_box_lidfit">0.3</span> mm</label><input type="range" id="box_lidfit" min="0.1" max="1" step="0.05" value="0.3"></div>
           <div class="og-toggle-row" style="margin-bottom:10px;">
             <div>
               <div class="og-toggle-label">Handle</div>
@@ -435,8 +435,8 @@
             </label>
           </div>
           <div id="boxLidHandleRows">
-            <div class="og-row"><label>Handle Ø <span class="og-val" id="v_box_lidhandled">20</span> mm</label><input type="range" id="box_lidhandled" min="8" max="60" step="1" value="20"></div>
-            <div class="og-row"><label>Handle height <span class="og-val" id="v_box_lidhandleh">8</span> mm</label><input type="range" id="box_lidhandleh" min="2" max="30" step="0.5" value="8"></div>
+            <div class="og-row"><label for="box_lidhandled">Handle Ø <span class="og-val" id="v_box_lidhandled">20</span> mm</label><input type="range" id="box_lidhandled" min="8" max="60" step="1" value="20"></div>
+            <div class="og-row"><label for="box_lidhandleh">Handle height <span class="og-val" id="v_box_lidhandleh">8</span> mm</label><input type="range" id="box_lidhandleh" min="2" max="30" step="0.5" value="8"></div>
           </div>
           <p style="font-size:11px; color:var(--ink-dim); margin-top:6px; line-height:1.4;">The lid is exported as its own separate object — it can be placed individually on the build plate in the slicer.</p>
         </div>
@@ -445,11 +445,11 @@
       <!-- Rundbehälter-Parameter -->
       <div class="og-section" id="panelRound" style="display:none;">
         <p class="og-section-title">Dimensions</p>
-        <div class="og-row"><label>Bottom radius <span class="og-val" id="v_rd_rb">40</span> mm</label><input type="range" id="rd_rb" min="10" max="150" step="1" value="40"></div>
-        <div class="og-row"><label>Top radius <span class="og-val" id="v_rd_rt">45</span> mm</label><input type="range" id="rd_rt" min="10" max="150" step="1" value="45"></div>
-        <div class="og-row"><label>Height <span class="og-val" id="v_rd_h">90</span> mm</label><input type="range" id="rd_h" min="15" max="300" step="1" value="90"></div>
-        <div class="og-row"><label>Wall thickness <span class="og-val" id="v_rd_wall">2.4</span> mm</label><input type="range" id="rd_wall" min="0.8" max="10" step="0.2" value="2.4"></div>
-        <div class="og-row"><label>Floor thickness <span class="og-val" id="v_rd_floor">3</span> mm</label><input type="range" id="rd_floor" min="0.8" max="10" step="0.2" value="3"></div>
+        <div class="og-row"><label for="rd_rb">Bottom radius <span class="og-val" id="v_rd_rb">40</span> mm</label><input type="range" id="rd_rb" min="10" max="150" step="1" value="40"></div>
+        <div class="og-row"><label for="rd_rt">Top radius <span class="og-val" id="v_rd_rt">45</span> mm</label><input type="range" id="rd_rt" min="10" max="150" step="1" value="45"></div>
+        <div class="og-row"><label for="rd_h">Height <span class="og-val" id="v_rd_h">90</span> mm</label><input type="range" id="rd_h" min="15" max="300" step="1" value="90"></div>
+        <div class="og-row"><label for="rd_wall">Wall thickness <span class="og-val" id="v_rd_wall">2.4</span> mm</label><input type="range" id="rd_wall" min="0.8" max="10" step="0.2" value="2.4"></div>
+        <div class="og-row"><label for="rd_floor">Floor thickness <span class="og-val" id="v_rd_floor">3</span> mm</label><input type="range" id="rd_floor" min="0.8" max="10" step="0.2" value="3"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Lid</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
@@ -463,9 +463,9 @@
           </label>
         </div>
         <div id="rdLidRows" style="display:none;">
-          <div class="og-row"><label>Lid thickness <span class="og-val" id="v_rd_lidcap">2.4</span> mm</label><input type="range" id="rd_lidcap" min="1" max="8" step="0.2" value="2.4"></div>
-          <div class="og-row"><label>Insertion depth <span class="og-val" id="v_rd_lidplug">8</span> mm</label><input type="range" id="rd_lidplug" min="2" max="30" step="0.5" value="8"></div>
-          <div class="og-row"><label>Fit clearance <span class="og-val" id="v_rd_lidfit">0.3</span> mm</label><input type="range" id="rd_lidfit" min="0.1" max="1" step="0.05" value="0.3"></div>
+          <div class="og-row"><label for="rd_lidcap">Lid thickness <span class="og-val" id="v_rd_lidcap">2.4</span> mm</label><input type="range" id="rd_lidcap" min="1" max="8" step="0.2" value="2.4"></div>
+          <div class="og-row"><label for="rd_lidplug">Insertion depth <span class="og-val" id="v_rd_lidplug">8</span> mm</label><input type="range" id="rd_lidplug" min="2" max="30" step="0.5" value="8"></div>
+          <div class="og-row"><label for="rd_lidfit">Fit clearance <span class="og-val" id="v_rd_lidfit">0.3</span> mm</label><input type="range" id="rd_lidfit" min="0.1" max="1" step="0.05" value="0.3"></div>
           <div class="og-toggle-row" style="margin-bottom:10px;">
             <div>
               <div class="og-toggle-label">Handle</div>
@@ -476,8 +476,8 @@
             </label>
           </div>
           <div id="rdLidHandleRows">
-            <div class="og-row"><label>Handle Ø <span class="og-val" id="v_rd_lidhandled">20</span> mm</label><input type="range" id="rd_lidhandled" min="8" max="60" step="1" value="20"></div>
-            <div class="og-row"><label>Handle height <span class="og-val" id="v_rd_lidhandleh">8</span> mm</label><input type="range" id="rd_lidhandleh" min="2" max="30" step="0.5" value="8"></div>
+            <div class="og-row"><label for="rd_lidhandled">Handle Ø <span class="og-val" id="v_rd_lidhandled">20</span> mm</label><input type="range" id="rd_lidhandled" min="8" max="60" step="1" value="20"></div>
+            <div class="og-row"><label for="rd_lidhandleh">Handle height <span class="og-val" id="v_rd_lidhandleh">8</span> mm</label><input type="range" id="rd_lidhandleh" min="2" max="30" step="0.5" value="8"></div>
           </div>
           <p style="font-size:11px; color:var(--ink-dim); margin-top:6px; line-height:1.4;">The lid is exported as its own separate object — it can be placed individually on the build plate in the slicer.</p>
         </div>
@@ -486,13 +486,13 @@
       <!-- Lochtablett-Parameter -->
       <div class="og-section" id="panelTray" style="display:none;">
         <p class="og-section-title">Dimensions</p>
-        <div class="og-row"><label>Width <span class="og-val" id="v_tr_w">160</span> mm</label><input type="range" id="tr_w" min="40" max="300" step="1" value="160"></div>
-        <div class="og-row"><label>Depth <span class="og-val" id="v_tr_d">120</span> mm</label><input type="range" id="tr_d" min="40" max="300" step="1" value="120"></div>
-        <div class="og-row"><label>Rim height <span class="og-val" id="v_tr_rim">10</span> mm</label><input type="range" id="tr_rim" min="0" max="60" step="1" value="10"></div>
-        <div class="og-row"><label>Corner radius <span class="og-val" id="v_tr_r">10</span> mm</label><input type="range" id="tr_r" min="0" max="40" step="1" value="10"></div>
-        <div class="og-row"><label>Floor thickness <span class="og-val" id="v_tr_floor">3</span> mm</label><input type="range" id="tr_floor" min="1" max="10" step="0.2" value="3"></div>
-        <div class="og-row"><label>Hole Ø <span class="og-val" id="v_tr_hole">6</span> mm</label><input type="range" id="tr_hole" min="2" max="30" step="0.5" value="6"></div>
-        <div class="og-row"><label>Hole pitch <span class="og-val" id="v_tr_pitch">14</span> mm</label><input type="range" id="tr_pitch" min="4" max="50" step="1" value="14"></div>
+        <div class="og-row"><label for="tr_w">Width <span class="og-val" id="v_tr_w">160</span> mm</label><input type="range" id="tr_w" min="40" max="300" step="1" value="160"></div>
+        <div class="og-row"><label for="tr_d">Depth <span class="og-val" id="v_tr_d">120</span> mm</label><input type="range" id="tr_d" min="40" max="300" step="1" value="120"></div>
+        <div class="og-row"><label for="tr_rim">Rim height <span class="og-val" id="v_tr_rim">10</span> mm</label><input type="range" id="tr_rim" min="0" max="60" step="1" value="10"></div>
+        <div class="og-row"><label for="tr_r">Corner radius <span class="og-val" id="v_tr_r">10</span> mm</label><input type="range" id="tr_r" min="0" max="40" step="1" value="10"></div>
+        <div class="og-row"><label for="tr_floor">Floor thickness <span class="og-val" id="v_tr_floor">3</span> mm</label><input type="range" id="tr_floor" min="1" max="10" step="0.2" value="3"></div>
+        <div class="og-row"><label for="tr_hole">Hole Ø <span class="og-val" id="v_tr_hole">6</span> mm</label><input type="range" id="tr_hole" min="2" max="30" step="0.5" value="6"></div>
+        <div class="og-row"><label for="tr_pitch">Hole pitch <span class="og-val" id="v_tr_pitch">14</span> mm</label><input type="range" id="tr_pitch" min="4" max="50" step="1" value="14"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Lid</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
@@ -506,9 +506,9 @@
           </label>
         </div>
         <div id="trLidRows" style="display:none;">
-          <div class="og-row"><label>Lid thickness <span class="og-val" id="v_tr_lidcap">2.4</span> mm</label><input type="range" id="tr_lidcap" min="1" max="8" step="0.2" value="2.4"></div>
-          <div class="og-row"><label>Insertion depth <span class="og-val" id="v_tr_lidplug">8</span> mm</label><input type="range" id="tr_lidplug" min="2" max="30" step="0.5" value="8"></div>
-          <div class="og-row"><label>Fit clearance <span class="og-val" id="v_tr_lidfit">0.3</span> mm</label><input type="range" id="tr_lidfit" min="0.1" max="1" step="0.05" value="0.3"></div>
+          <div class="og-row"><label for="tr_lidcap">Lid thickness <span class="og-val" id="v_tr_lidcap">2.4</span> mm</label><input type="range" id="tr_lidcap" min="1" max="8" step="0.2" value="2.4"></div>
+          <div class="og-row"><label for="tr_lidplug">Insertion depth <span class="og-val" id="v_tr_lidplug">8</span> mm</label><input type="range" id="tr_lidplug" min="2" max="30" step="0.5" value="8"></div>
+          <div class="og-row"><label for="tr_lidfit">Fit clearance <span class="og-val" id="v_tr_lidfit">0.3</span> mm</label><input type="range" id="tr_lidfit" min="0.1" max="1" step="0.05" value="0.3"></div>
           <div class="og-toggle-row" style="margin-bottom:10px;">
             <div>
               <div class="og-toggle-label">Handle</div>
@@ -519,8 +519,8 @@
             </label>
           </div>
           <div id="trLidHandleRows">
-            <div class="og-row"><label>Handle Ø <span class="og-val" id="v_tr_lidhandled">20</span> mm</label><input type="range" id="tr_lidhandled" min="8" max="60" step="1" value="20"></div>
-            <div class="og-row"><label>Handle height <span class="og-val" id="v_tr_lidhandleh">8</span> mm</label><input type="range" id="tr_lidhandleh" min="2" max="30" step="0.5" value="8"></div>
+            <div class="og-row"><label for="tr_lidhandled">Handle Ø <span class="og-val" id="v_tr_lidhandled">20</span> mm</label><input type="range" id="tr_lidhandled" min="8" max="60" step="1" value="20"></div>
+            <div class="og-row"><label for="tr_lidhandleh">Handle height <span class="og-val" id="v_tr_lidhandleh">8</span> mm</label><input type="range" id="tr_lidhandleh" min="2" max="30" step="0.5" value="8"></div>
           </div>
           <p style="font-size:11px; color:var(--ink-dim); margin-top:6px; line-height:1.4;">The lid is exported as its own separate object — it can be placed individually on the build plate in the slicer.</p>
         </div>
@@ -539,12 +539,12 @@
         </div>
 
         <p class="og-section-title">Gearing</p>
-        <div class="og-row"><label>Module <span class="og-val" id="v_g_m">1.5</span> mm</label><input type="range" id="g_m" min="0.5" max="5" step="0.1" value="1.5"></div>
-        <div class="og-row"><label>Number of teeth <span class="og-val" id="v_g_z">24</span></label><input type="range" id="g_z" min="6" max="150" step="1" value="24"></div>
-        <div class="og-row"><label>Face width <span class="og-val" id="v_g_face">8</span> mm</label><input type="range" id="g_face" min="2" max="40" step="1" value="8"></div>
-        <div class="og-row" id="gearBoreRow"><label>Bore Ø <span class="og-val" id="v_g_bore">6</span> mm (0 = solid)</label><input type="range" id="g_bore" min="0" max="40" step="0.5" value="6"></div>
-        <div class="og-row" id="gearRimRow" style="display:none;"><label>Outer rim thickness <span class="og-val" id="v_g_rim">4</span> mm</label><input type="range" id="g_rim" min="2" max="30" step="0.5" value="4"></div>
-        <div class="og-row"><label>Pressure angle <span class="og-val" id="v_g_angle">20</span>°</label><input type="range" id="g_angle" min="14.5" max="25" step="0.5" value="20"></div>
+        <div class="og-row"><label for="g_m">Module <span class="og-val" id="v_g_m">1.5</span> mm</label><input type="range" id="g_m" min="0.5" max="5" step="0.1" value="1.5"></div>
+        <div class="og-row"><label for="g_z">Number of teeth <span class="og-val" id="v_g_z">24</span></label><input type="range" id="g_z" min="6" max="150" step="1" value="24"></div>
+        <div class="og-row"><label for="g_face">Face width <span class="og-val" id="v_g_face">8</span> mm</label><input type="range" id="g_face" min="2" max="40" step="1" value="8"></div>
+        <div class="og-row" id="gearBoreRow"><label for="g_bore">Bore Ø <span class="og-val" id="v_g_bore">6</span> mm (0 = solid)</label><input type="range" id="g_bore" min="0" max="40" step="0.5" value="6"></div>
+        <div class="og-row" id="gearRimRow" style="display:none;"><label for="g_rim">Outer rim thickness <span class="og-val" id="v_g_rim">4</span> mm</label><input type="range" id="g_rim" min="2" max="30" step="0.5" value="4"></div>
+        <div class="og-row"><label for="g_angle">Pressure angle <span class="og-val" id="v_g_angle">20</span>°</label><input type="range" id="g_angle" min="14.5" max="25" step="0.5" value="20"></div>
         <p class="og-skadis-note" id="gearUndercutNote" style="display:none; margin-top:10px;">
           With fewer than ~10 teeth, slight <b>undercut</b> occurs at the tooth root — a normal gear-design phenomenon with small tooth counts, not a tool error. For cleanly meshing gears, a tooth count ≥ 10 is recommended, especially with two equally small gears in mesh.
         </p>
@@ -559,9 +559,9 @@
       <!-- Zykloidgetriebe-Parameter -->
       <div class="og-section" id="panelCycloid" style="display:none;">
         <p class="og-section-title">Ratio &amp; size</p>
-        <div class="og-row"><label>Ratio 1:<span class="og-val" id="v_c_ratio">10</span></label><input type="range" id="c_ratio" min="2" max="50" step="1" value="10"></div>
-        <div class="og-row"><label>Effective diameter <span class="og-val" id="v_c_dia">90</span> mm</label><input type="range" id="c_dia" min="40" max="300" step="1" value="90"></div>
-        <div class="og-row"><label>Disc thickness <span class="og-val" id="v_c_thick">10</span> mm</label><input type="range" id="c_thick" min="4" max="25" step="0.5" value="10"></div>
+        <div class="og-row"><label for="c_ratio">Ratio 1:<span class="og-val" id="v_c_ratio">10</span></label><input type="range" id="c_ratio" min="2" max="50" step="1" value="10"></div>
+        <div class="og-row"><label for="c_dia">Effective diameter <span class="og-val" id="v_c_dia">90</span> mm</label><input type="range" id="c_dia" min="40" max="300" step="1" value="90"></div>
+        <div class="og-row"><label for="c_thick">Disc thickness <span class="og-val" id="v_c_thick">10</span> mm</label><input type="range" id="c_thick" min="4" max="25" step="0.5" value="10"></div>
 
         <div class="og-toggle-row" style="margin-top:14px; margin-bottom:4px;">
           <div>
@@ -575,14 +575,14 @@
         </div>
 
         <p class="og-section-title" style="margin-top:16px;">Fine tuning (checked automatically)</p>
-        <div class="og-row"><label>Eccentricity <span class="og-val" id="v_c_e">1.9</span> mm</label><input type="range" id="c_e" min="0.2" max="10" step="0.1" value="1.9"></div>
-        <div class="og-row"><label>Ring pin Ø <span class="og-val" id="v_c_rp">9.3</span> mm</label><input type="range" id="c_rp" min="1" max="40" step="0.2" value="9.3"></div>
-        <div class="og-row"><label>Input shaft Ø <span class="og-val" id="v_c_boss">12</span> mm</label><input type="range" id="c_boss" min="4" max="30" step="0.5" value="12"></div>
-        <div class="og-row"><label>Center hole fit clearance <span class="og-val" id="v_c_shaftfit">0.4</span> mm</label><input type="range" id="c_shaftfit" min="0.1" max="1" step="0.05" value="0.4"></div>
-        <div class="og-row"><label>Number of output pins <span class="og-val" id="v_c_outcount">6</span></label><input type="range" id="c_outcount" min="3" max="12" step="1" value="6"></div>
-        <div class="og-row"><label>Output pin Ø <span class="og-val" id="v_c_outpin">6</span> mm</label><input type="range" id="c_outpin" min="2" max="20" step="0.2" value="6"></div>
-        <div class="og-row"><label>Lid thickness <span class="og-val" id="v_c_coverthick">5</span> mm</label><input type="range" id="c_coverthick" min="3" max="15" step="0.5" value="5"></div>
-        <div class="og-row"><label>Schrauben-Ø (4×) <span class="og-val" id="v_c_boltd">3</span> mm</label><input type="range" id="c_boltd" min="2" max="12" step="0.5" value="3"></div>
+        <div class="og-row"><label for="c_e">Eccentricity <span class="og-val" id="v_c_e">1.9</span> mm</label><input type="range" id="c_e" min="0.2" max="10" step="0.1" value="1.9"></div>
+        <div class="og-row"><label for="c_rp">Ring pin Ø <span class="og-val" id="v_c_rp">9.3</span> mm</label><input type="range" id="c_rp" min="1" max="40" step="0.2" value="9.3"></div>
+        <div class="og-row"><label for="c_boss">Input shaft Ø <span class="og-val" id="v_c_boss">12</span> mm</label><input type="range" id="c_boss" min="4" max="30" step="0.5" value="12"></div>
+        <div class="og-row"><label for="c_shaftfit">Center hole fit clearance <span class="og-val" id="v_c_shaftfit">0.4</span> mm</label><input type="range" id="c_shaftfit" min="0.1" max="1" step="0.05" value="0.4"></div>
+        <div class="og-row"><label for="c_outcount">Number of output pins <span class="og-val" id="v_c_outcount">6</span></label><input type="range" id="c_outcount" min="3" max="12" step="1" value="6"></div>
+        <div class="og-row"><label for="c_outpin">Output pin Ø <span class="og-val" id="v_c_outpin">6</span> mm</label><input type="range" id="c_outpin" min="2" max="20" step="0.2" value="6"></div>
+        <div class="og-row"><label for="c_coverthick">Lid thickness <span class="og-val" id="v_c_coverthick">5</span> mm</label><input type="range" id="c_coverthick" min="3" max="15" step="0.5" value="5"></div>
+        <div class="og-row"><label for="c_boltd">Schrauben-Ø (4×) <span class="og-val" id="v_c_boltd">3</span> mm</label><input type="range" id="c_boltd" min="2" max="12" step="0.5" value="3"></div>
         <p class="og-skadis-note" id="cycloidClampNote" style="display:none; margin-top:6px;">
           One or more values were reduced slightly and automatically so that bores/contours do not overlap — the numbers above show the values actually used (verified).
         </p>
@@ -602,8 +602,8 @@
           <button type="button" class="og-gtype-btn" data-czapfen="hole" style="flex:1; min-width:70px; padding:10px;"><div class="og-shape-name" style="font-size:12px;">Hole</div></button>
           <button type="button" class="og-gtype-btn" data-czapfen="none" style="flex:1; min-width:70px; padding:10px;"><div class="og-shape-name" style="font-size:12px;">None</div></button>
         </div>
-        <div class="og-row" id="cZapfenDimRow"><label>Pin Ø / width <span class="og-val" id="v_c_zapfenD">8</span> mm</label><input type="range" id="c_zapfenD" min="3" max="30" step="0.5" value="8"></div>
-        <div class="og-row" id="cZapfenHRow"><label>Pin height / depth <span class="og-val" id="v_c_zapfenH">10</span> mm</label><input type="range" id="c_zapfenH" min="3" max="30" step="0.5" value="10"></div>
+        <div class="og-row" id="cZapfenDimRow"><label for="c_zapfenD">Pin Ø / width <span class="og-val" id="v_c_zapfenD">8</span> mm</label><input type="range" id="c_zapfenD" min="3" max="30" step="0.5" value="8"></div>
+        <div class="og-row" id="cZapfenHRow"><label for="c_zapfenH">Pin height / depth <span class="og-val" id="v_c_zapfenH">10</span> mm</label><input type="range" id="c_zapfenH" min="3" max="30" step="0.5" value="10"></div>
 
         <p style="font-size:11px; color:var(--ink-dim); margin-top:10px; line-height:1.5;">
           <b>6 parts</b> are generated (shown in different colors, pulled apart in the preview for clarity): <span style="color:#7a8a9a;">Front cover</span>, <span style="color:#5fd9a0;">Eccentric input shaft</span>, <span style="color:#ff8c3c;">Cycloidal disc</span>, <span style="color:#8a9a92;">Ring with pins</span>, <span style="color:#d9c79e;">Output disc</span>, <span style="color:#7a8a9a;">Back cover</span>. The front and back covers close the housing and are joined to the ring with 4 screws (bolt circle) — shaft passages already include clearance. Both covers also have a shallow recess on the inside into which the input shaft and output disc seat centered during assembly (axial guidance; otherwise it could not be assembled sensibly). All six main parts as separate, individually placeable objects in one 3MF file — each one is internally fused solid (e.g. ring + all pins as one piece); the covers stay removable as a whole.
@@ -616,22 +616,22 @@
       <!-- Planetengetriebe-Parameter -->
       <div class="og-section" id="panelPlanetary" style="display:none;">
         <p class="og-section-title">Ratio &amp; teeth</p>
-        <div class="og-row"><label>Sun gear teeth <span class="og-val" id="v_p_zs">12</span></label><input type="range" id="p_zs" min="6" max="40" step="1" value="12"></div>
-        <div class="og-row"><label>Planet gear teeth <span class="og-val" id="v_p_zp">18</span></label><input type="range" id="p_zp" min="6" max="60" step="1" value="18"></div>
-        <div class="og-row"><label>Number of planet gears <span class="og-val" id="v_p_count">3</span></label><input type="range" id="p_count" min="3" max="6" step="1" value="3"></div>
+        <div class="og-row"><label for="p_zs">Sun gear teeth <span class="og-val" id="v_p_zs">12</span></label><input type="range" id="p_zs" min="6" max="40" step="1" value="12"></div>
+        <div class="og-row"><label for="p_zp">Planet gear teeth <span class="og-val" id="v_p_zp">18</span></label><input type="range" id="p_zp" min="6" max="60" step="1" value="18"></div>
+        <div class="og-row"><label for="p_count">Number of planet gears <span class="og-val" id="v_p_count">3</span></label><input type="range" id="p_count" min="3" max="6" step="1" value="3"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 6px; line-height:1.4;" id="p_ratioInfo">Ring gear: 48 teeth · ratio 1:5 (carrier output, ring gear fixed)</p>
         <p class="og-skadis-note" id="p_clampNote" style="display:none; margin-top:6px;"></p>
 
         <p class="og-section-title" style="margin-top:16px;">Tooth shape &amp; dimensions</p>
-        <div class="og-row"><label>Module <span class="og-val" id="v_p_mod">1.5</span> mm</label><input type="range" id="p_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
-        <div class="og-row"><label>Pressure angle <span class="og-val" id="v_p_pa">20</span> °</label><input type="range" id="p_pa" min="14.5" max="25" step="0.5" value="20"></div>
-        <div class="og-row"><label>Face width (gears) <span class="og-val" id="v_p_face">10</span> mm</label><input type="range" id="p_face" min="4" max="30" step="1" value="10"></div>
+        <div class="og-row"><label for="p_mod">Module <span class="og-val" id="v_p_mod">1.5</span> mm</label><input type="range" id="p_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
+        <div class="og-row"><label for="p_pa">Pressure angle <span class="og-val" id="v_p_pa">20</span> °</label><input type="range" id="p_pa" min="14.5" max="25" step="0.5" value="20"></div>
+        <div class="og-row"><label for="p_face">Face width (gears) <span class="og-val" id="v_p_face">10</span> mm</label><input type="range" id="p_face" min="4" max="30" step="1" value="10"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Shafts &amp; fit</p>
-        <div class="og-row"><label>Sun shaft bore <span class="og-val" id="v_p_sunbore">6</span> mm</label><input type="range" id="p_sunbore" min="0" max="20" step="0.5" value="6"></div>
-        <div class="og-row"><label>Carrier output shaft bore <span class="og-val" id="v_p_outbore">8</span> mm</label><input type="range" id="p_outbore" min="0" max="25" step="0.5" value="8"></div>
-        <div class="og-row"><label>Planet pin Ø <span class="og-val" id="v_p_pind">4</span> mm</label><input type="range" id="p_pind" min="2" max="10" step="0.5" value="4"></div>
-        <div class="og-row"><label>Fit clearance (all bores) <span class="og-val" id="v_p_fit">0.4</span> mm</label><input type="range" id="p_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
+        <div class="og-row"><label for="p_sunbore">Sun shaft bore <span class="og-val" id="v_p_sunbore">6</span> mm</label><input type="range" id="p_sunbore" min="0" max="20" step="0.5" value="6"></div>
+        <div class="og-row"><label for="p_outbore">Carrier output shaft bore <span class="og-val" id="v_p_outbore">8</span> mm</label><input type="range" id="p_outbore" min="0" max="25" step="0.5" value="8"></div>
+        <div class="og-row"><label for="p_pind">Planet pin Ø <span class="og-val" id="v_p_pind">4</span> mm</label><input type="range" id="p_pind" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label for="p_fit">Fit clearance (all bores) <span class="og-val" id="v_p_fit">0.4</span> mm</label><input type="range" id="p_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Extension</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
@@ -645,13 +645,13 @@
           </label>
         </div>
         <div id="p_extendRow" style="display:none;">
-          <div class="og-row"><label>Shaft stub length <span class="og-val" id="v_p_extendlen">18</span> mm</label><input type="range" id="p_extendlen" min="5" max="40" step="1" value="18"></div>
+          <div class="og-row"><label for="p_extendlen">Shaft stub length <span class="og-val" id="v_p_extendlen">18</span> mm</label><input type="range" id="p_extendlen" min="5" max="40" step="1" value="18"></div>
           <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 14px; line-height:1.4;">Requires "Carrier output shaft bore" &gt; 0 — the shaft stub automatically takes this diameter.</p>
         </div>
 
         <p class="og-section-title" style="margin-top:16px;">Housing</p>
-        <div class="og-row"><label>Lid thickness <span class="og-val" id="v_p_coverthick">4</span> mm</label><input type="range" id="p_coverthick" min="2" max="10" step="0.5" value="4"></div>
-        <div class="og-row"><label>Schrauben-Ø (4×) <span class="og-val" id="v_p_boltd">3</span> mm</label><input type="range" id="p_boltd" min="2" max="12" step="0.5" value="3"></div>
+        <div class="og-row"><label for="p_coverthick">Lid thickness <span class="og-val" id="v_p_coverthick">4</span> mm</label><input type="range" id="p_coverthick" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label for="p_boltd">Schrauben-Ø (4×) <span class="og-val" id="v_p_boltd">3</span> mm</label><input type="range" id="p_boltd" min="2" max="12" step="0.5" value="3"></div>
         <div style="display:flex; gap:6px; margin-top:14px;">
           <button type="button" class="og-gtype-btn active" data-pflansch="round" style="flex:1; padding:9px;"><div class="og-shape-name" style="font-size:11.5px;">Round</div></button>
           <button type="button" class="og-gtype-btn" data-pflansch="square" style="flex:1; padding:9px;"><div class="og-shape-name" style="font-size:11.5px;">Square</div></button>
@@ -665,28 +665,28 @@
       <!-- Planetengetriebe 2-stufig -->
       <div class="og-section" id="panelPlanetary2" style="display:none;">
         <p class="og-section-title">Stage 1 (input)</p>
-        <div class="og-row"><label>Sun gear 1 teeth <span class="og-val" id="v_p2_zs1">12</span></label><input type="range" id="p2_zs1" min="6" max="40" step="1" value="12"></div>
-        <div class="og-row"><label>Planet gear 1 teeth <span class="og-val" id="v_p2_zp1">24</span></label><input type="range" id="p2_zp1" min="6" max="60" step="1" value="24"></div>
+        <div class="og-row"><label for="p2_zs1">Sun gear 1 teeth <span class="og-val" id="v_p2_zs1">12</span></label><input type="range" id="p2_zs1" min="6" max="40" step="1" value="12"></div>
+        <div class="og-row"><label for="p2_zp1">Planet gear 1 teeth <span class="og-val" id="v_p2_zp1">24</span></label><input type="range" id="p2_zp1" min="6" max="60" step="1" value="24"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 6px;" id="p2_stage1Info">Ring gear 1: 60 teeth · i₁ = 6.00</p>
 
         <p class="og-section-title" style="margin-top:16px;">Stage 2 (output)</p>
-        <div class="og-row"><label>Sun gear 2 teeth <span class="og-val" id="v_p2_zs2">10</span></label><input type="range" id="p2_zs2" min="6" max="40" step="1" value="10"></div>
-        <div class="og-row"><label>Planet gear 2 teeth <span class="og-val" id="v_p2_zp2">20</span></label><input type="range" id="p2_zp2" min="6" max="60" step="1" value="20"></div>
+        <div class="og-row"><label for="p2_zs2">Sun gear 2 teeth <span class="og-val" id="v_p2_zs2">10</span></label><input type="range" id="p2_zs2" min="6" max="40" step="1" value="10"></div>
+        <div class="og-row"><label for="p2_zp2">Planet gear 2 teeth <span class="og-val" id="v_p2_zp2">20</span></label><input type="range" id="p2_zp2" min="6" max="60" step="1" value="20"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 6px;" id="p2_stage2Info">Ring gear 2: 50 teeth · i₂ = 6.00</p>
 
         <p class="og-section-title" style="margin-top:16px;">Both stages (shared)</p>
-        <div class="og-row"><label>Number of planet gears <span class="og-val" id="v_p2_count">3</span></label><input type="range" id="p2_count" min="3" max="6" step="1" value="3"></div>
+        <div class="og-row"><label for="p2_count">Number of planet gears <span class="og-val" id="v_p2_count">3</span></label><input type="range" id="p2_count" min="3" max="6" step="1" value="3"></div>
         <p style="font-size:11px; color:var(--accent); margin:-8px 0 6px; font-weight:600;" id="p2_ratioInfo">Total ratio: 1:36.00</p>
         <p class="og-skadis-note" id="p2_clampNote" style="display:none; margin-top:6px;"></p>
-        <div class="og-row" style="margin-top:10px;"><label>Module <span class="og-val" id="v_p2_mod">1.5</span> mm</label><input type="range" id="p2_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
-        <div class="og-row"><label>Pressure angle <span class="og-val" id="v_p2_pa">20</span> °</label><input type="range" id="p2_pa" min="14.5" max="25" step="0.5" value="20"></div>
-        <div class="og-row"><label>Face width (gears) <span class="og-val" id="v_p2_face">8</span> mm</label><input type="range" id="p2_face" min="4" max="25" step="1" value="8"></div>
+        <div class="og-row" style="margin-top:10px;"><label for="p2_mod">Module <span class="og-val" id="v_p2_mod">1.5</span> mm</label><input type="range" id="p2_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
+        <div class="og-row"><label for="p2_pa">Pressure angle <span class="og-val" id="v_p2_pa">20</span> °</label><input type="range" id="p2_pa" min="14.5" max="25" step="0.5" value="20"></div>
+        <div class="og-row"><label for="p2_face">Face width (gears) <span class="og-val" id="v_p2_face">8</span> mm</label><input type="range" id="p2_face" min="4" max="25" step="1" value="8"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Shafts &amp; fit</p>
-        <div class="og-row"><label>Sun shaft 1 bore (input) <span class="og-val" id="v_p2_sunbore">6</span> mm</label><input type="range" id="p2_sunbore" min="0" max="20" step="0.5" value="6"></div>
-        <div class="og-row"><label>Carrier output shaft bore <span class="og-val" id="v_p2_outbore">8</span> mm</label><input type="range" id="p2_outbore" min="0" max="25" step="0.5" value="8"></div>
-        <div class="og-row"><label>Planet pin Ø <span class="og-val" id="v_p2_pind">4</span> mm</label><input type="range" id="p2_pind" min="2" max="10" step="0.5" value="4"></div>
-        <div class="og-row"><label>Fit clearance (all bores) <span class="og-val" id="v_p2_fit">0.4</span> mm</label><input type="range" id="p2_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
+        <div class="og-row"><label for="p2_sunbore">Sun shaft 1 bore (input) <span class="og-val" id="v_p2_sunbore">6</span> mm</label><input type="range" id="p2_sunbore" min="0" max="20" step="0.5" value="6"></div>
+        <div class="og-row"><label for="p2_outbore">Carrier output shaft bore <span class="og-val" id="v_p2_outbore">8</span> mm</label><input type="range" id="p2_outbore" min="0" max="25" step="0.5" value="8"></div>
+        <div class="og-row"><label for="p2_pind">Planet pin Ø <span class="og-val" id="v_p2_pind">4</span> mm</label><input type="range" id="p2_pind" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label for="p2_fit">Fit clearance (all bores) <span class="og-val" id="v_p2_fit">0.4</span> mm</label><input type="range" id="p2_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Extension</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
@@ -700,12 +700,12 @@
           </label>
         </div>
         <div id="p2_extendRow" style="display:none;">
-          <div class="og-row"><label>Shaft stub length <span class="og-val" id="v_p2_extendlen">18</span> mm</label><input type="range" id="p2_extendlen" min="5" max="40" step="1" value="18"></div>
+          <div class="og-row"><label for="p2_extendlen">Shaft stub length <span class="og-val" id="v_p2_extendlen">18</span> mm</label><input type="range" id="p2_extendlen" min="5" max="40" step="1" value="18"></div>
         </div>
 
         <p class="og-section-title" style="margin-top:16px;">Housing</p>
-        <div class="og-row"><label>Lid thickness <span class="og-val" id="v_p2_coverthick">4</span> mm</label><input type="range" id="p2_coverthick" min="2" max="10" step="0.5" value="4"></div>
-        <div class="og-row"><label>Schrauben-Ø (4×) <span class="og-val" id="v_p2_boltd">3</span> mm</label><input type="range" id="p2_boltd" min="2" max="12" step="0.5" value="3"></div>
+        <div class="og-row"><label for="p2_coverthick">Lid thickness <span class="og-val" id="v_p2_coverthick">4</span> mm</label><input type="range" id="p2_coverthick" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label for="p2_boltd">Schrauben-Ø (4×) <span class="og-val" id="v_p2_boltd">3</span> mm</label><input type="range" id="p2_boltd" min="2" max="12" step="0.5" value="3"></div>
         <div style="display:flex; gap:6px; margin-top:14px;">
           <button type="button" class="og-gtype-btn active" data-p2flansch="round" style="flex:1; padding:9px;"><div class="og-shape-name" style="font-size:11.5px;">Round</div></button>
           <button type="button" class="og-gtype-btn" data-p2flansch="square" style="flex:1; padding:9px;"><div class="og-shape-name" style="font-size:11.5px;">Square</div></button>
@@ -719,29 +719,29 @@
       <!-- Stirnradgetriebe 2-stufig -->
       <div class="og-section" id="panelSpur2" style="display:none;">
         <p class="og-section-title">Stage 1</p>
-        <div class="og-row"><label>Pinion 1 teeth (input) <span class="og-val" id="v_s2_z1">12</span></label><input type="range" id="s2_z1" min="6" max="60" step="1" value="12"></div>
-        <div class="og-row"><label>Intermediate gear 1 teeth <span class="og-val" id="v_s2_z2">36</span></label><input type="range" id="s2_z2" min="6" max="100" step="1" value="36"></div>
+        <div class="og-row"><label for="s2_z1">Pinion 1 teeth (input) <span class="og-val" id="v_s2_z1">12</span></label><input type="range" id="s2_z1" min="6" max="60" step="1" value="12"></div>
+        <div class="og-row"><label for="s2_z2">Intermediate gear 1 teeth <span class="og-val" id="v_s2_z2">36</span></label><input type="range" id="s2_z2" min="6" max="100" step="1" value="36"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Stage 2</p>
-        <div class="og-row"><label>Pinion 2 teeth (on intermediate shaft) <span class="og-val" id="v_s2_z3">12</span></label><input type="range" id="s2_z3" min="6" max="60" step="1" value="12"></div>
-        <div class="og-row"><label>Intermediate gear 2 teeth (output) <span class="og-val" id="v_s2_z4">36</span></label><input type="range" id="s2_z4" min="6" max="100" step="1" value="36"></div>
+        <div class="og-row"><label for="s2_z3">Pinion 2 teeth (on intermediate shaft) <span class="og-val" id="v_s2_z3">12</span></label><input type="range" id="s2_z3" min="6" max="60" step="1" value="12"></div>
+        <div class="og-row"><label for="s2_z4">Intermediate gear 2 teeth (output) <span class="og-val" id="v_s2_z4">36</span></label><input type="range" id="s2_z4" min="6" max="100" step="1" value="36"></div>
         <p style="font-size:11px; color:var(--accent); margin:6px 0; font-weight:600;" id="s2_ratioInfo">Total ratio: 1:9.00</p>
 
         <p class="og-section-title" style="margin-top:16px;">Tooth shape &amp; dimensions</p>
-        <div class="og-row"><label>Module <span class="og-val" id="v_s2_mod">1.5</span> mm</label><input type="range" id="s2_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
-        <div class="og-row"><label>Pressure angle <span class="og-val" id="v_s2_pa">20</span> °</label><input type="range" id="s2_pa" min="14.5" max="25" step="0.5" value="20"></div>
-        <div class="og-row"><label>Face width (gears) <span class="og-val" id="v_s2_face">10</span> mm</label><input type="range" id="s2_face" min="4" max="30" step="1" value="10"></div>
-        <div class="og-row"><label>Connecting shaft length (intermediate shaft) <span class="og-val" id="v_s2_facegap">4</span> mm</label><input type="range" id="s2_facegap" min="1" max="20" step="0.5" value="4"></div>
+        <div class="og-row"><label for="s2_mod">Module <span class="og-val" id="v_s2_mod">1.5</span> mm</label><input type="range" id="s2_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
+        <div class="og-row"><label for="s2_pa">Pressure angle <span class="og-val" id="v_s2_pa">20</span> °</label><input type="range" id="s2_pa" min="14.5" max="25" step="0.5" value="20"></div>
+        <div class="og-row"><label for="s2_face">Face width (gears) <span class="og-val" id="v_s2_face">10</span> mm</label><input type="range" id="s2_face" min="4" max="30" step="1" value="10"></div>
+        <div class="og-row"><label for="s2_facegap">Connecting shaft length (intermediate shaft) <span class="og-val" id="v_s2_facegap">4</span> mm</label><input type="range" id="s2_facegap" min="1" max="20" step="0.5" value="4"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Shafts &amp; fit</p>
-        <div class="og-row"><label>Input shaft bore <span class="og-val" id="v_s2_inbore">6</span> mm</label><input type="range" id="s2_inbore" min="0" max="20" step="0.5" value="6"></div>
-        <div class="og-row"><label>Output shaft bore <span class="og-val" id="v_s2_outbore">8</span> mm</label><input type="range" id="s2_outbore" min="0" max="25" step="0.5" value="8"></div>
-        <div class="og-row"><label>Intermediate shaft Ø <span class="og-val" id="v_s2_pind">6</span> mm</label><input type="range" id="s2_pind" min="3" max="15" step="0.5" value="6"></div>
-        <div class="og-row"><label>Fit clearance (all bores) <span class="og-val" id="v_s2_fit">0.4</span> mm</label><input type="range" id="s2_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
+        <div class="og-row"><label for="s2_inbore">Input shaft bore <span class="og-val" id="v_s2_inbore">6</span> mm</label><input type="range" id="s2_inbore" min="0" max="20" step="0.5" value="6"></div>
+        <div class="og-row"><label for="s2_outbore">Output shaft bore <span class="og-val" id="v_s2_outbore">8</span> mm</label><input type="range" id="s2_outbore" min="0" max="25" step="0.5" value="8"></div>
+        <div class="og-row"><label for="s2_pind">Intermediate shaft Ø <span class="og-val" id="v_s2_pind">6</span> mm</label><input type="range" id="s2_pind" min="3" max="15" step="0.5" value="6"></div>
+        <div class="og-row"><label for="s2_fit">Fit clearance (all bores) <span class="og-val" id="v_s2_fit">0.4</span> mm</label><input type="range" id="s2_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Housing</p>
-        <div class="og-row"><label>Lid thickness <span class="og-val" id="v_s2_coverthick">4</span> mm</label><input type="range" id="s2_coverthick" min="2" max="10" step="0.5" value="4"></div>
-        <div class="og-row"><label>Schrauben-Ø (4×) <span class="og-val" id="v_s2_boltd">3</span> mm</label><input type="range" id="s2_boltd" min="2" max="12" step="0.5" value="3"></div>
+        <div class="og-row"><label for="s2_coverthick">Lid thickness <span class="og-val" id="v_s2_coverthick">4</span> mm</label><input type="range" id="s2_coverthick" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label for="s2_boltd">Schrauben-Ø (4×) <span class="og-val" id="v_s2_boltd">3</span> mm</label><input type="range" id="s2_boltd" min="2" max="12" step="0.5" value="3"></div>
 
         <p style="font-size:11px; color:var(--ink-dim); margin-top:10px; line-height:1.5;">
           <b>Three parallel shafts in a row</b> (input – intermediate shaft – output) in a flat capsule housing: <span style="color:#5fd9a0;">Pinion 1</span> drives intermediate gear 1; fused solid onto the same intermediate shaft sits pinion 2, which drives <span style="color:#8a9a92;">intermediate gear 2 (output)</span> . All four gears share the same module and pressure angle (otherwise they will not mesh properly).
@@ -751,33 +751,33 @@
       <!-- Zahnriemen 2-stufig -->
       <div class="og-section" id="panelBelt2" style="display:none;">
         <p class="og-section-title">Stage 1</p>
-        <div class="og-row"><label>Pulley 1 teeth (input) <span class="og-val" id="v_b2_z1">16</span></label><input type="range" id="b2_z1" min="8" max="60" step="1" value="16"></div>
-        <div class="og-row"><label>Pulley 2 teeth <span class="og-val" id="v_b2_z2">36</span></label><input type="range" id="b2_z2" min="8" max="100" step="1" value="36"></div>
-        <div class="og-row"><label>Center distance stage 1 <span class="og-val" id="v_b2_cd1">40</span> mm</label><input type="range" id="b2_cd1" min="20" max="150" step="1" value="40"></div>
+        <div class="og-row"><label for="b2_z1">Pulley 1 teeth (input) <span class="og-val" id="v_b2_z1">16</span></label><input type="range" id="b2_z1" min="8" max="60" step="1" value="16"></div>
+        <div class="og-row"><label for="b2_z2">Pulley 2 teeth <span class="og-val" id="v_b2_z2">36</span></label><input type="range" id="b2_z2" min="8" max="100" step="1" value="36"></div>
+        <div class="og-row"><label for="b2_cd1">Center distance stage 1 <span class="og-val" id="v_b2_cd1">40</span> mm</label><input type="range" id="b2_cd1" min="20" max="150" step="1" value="40"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Stage 2</p>
-        <div class="og-row"><label>Pulley 3 teeth (intermediate shaft) <span class="og-val" id="v_b2_z3">16</span></label><input type="range" id="b2_z3" min="8" max="60" step="1" value="16"></div>
-        <div class="og-row"><label>Pulley 4 teeth (output) <span class="og-val" id="v_b2_z4">36</span></label><input type="range" id="b2_z4" min="8" max="100" step="1" value="36"></div>
-        <div class="og-row"><label>Center distance stage 2 <span class="og-val" id="v_b2_cd2">40</span> mm</label><input type="range" id="b2_cd2" min="20" max="150" step="1" value="40"></div>
+        <div class="og-row"><label for="b2_z3">Pulley 3 teeth (intermediate shaft) <span class="og-val" id="v_b2_z3">16</span></label><input type="range" id="b2_z3" min="8" max="60" step="1" value="16"></div>
+        <div class="og-row"><label for="b2_z4">Pulley 4 teeth (output) <span class="og-val" id="v_b2_z4">36</span></label><input type="range" id="b2_z4" min="8" max="100" step="1" value="36"></div>
+        <div class="og-row"><label for="b2_cd2">Center distance stage 2 <span class="og-val" id="v_b2_cd2">40</span> mm</label><input type="range" id="b2_cd2" min="20" max="150" step="1" value="40"></div>
         <p style="font-size:11px; color:var(--accent); margin:6px 0; font-weight:600;" id="b2_ratioInfo">Total ratio: 1:5.06</p>
         <p style="font-size:11px; color:var(--ink-dim); margin:-4px 0 10px; line-height:1.4;">The center distance must match the belt length you buy (not fixed by the tooth count, unlike gears).</p>
 
         <p class="og-section-title" style="margin-top:16px;">Pulley shape</p>
-        <div class="og-row"><label>Pitch <span class="og-val" id="v_b2_pitch">2.032</span> mm</label><input type="range" id="b2_pitch" min="1" max="5" step="0.1" value="2.032"></div>
+        <div class="og-row"><label for="b2_pitch">Pitch <span class="og-val" id="v_b2_pitch">2.032</span> mm</label><input type="range" id="b2_pitch" min="1" max="5" step="0.1" value="2.032"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 10px;">2.032 mm corresponds to GT2 — a simplified, practical profile, not an exact industrial standard.</p>
-        <div class="og-row"><label>Tooth depth <span class="og-val" id="v_b2_toothdepth">0.75</span> mm</label><input type="range" id="b2_toothdepth" min="0.3" max="2" step="0.05" value="0.75"></div>
-        <div class="og-row"><label>Pulley width <span class="og-val" id="v_b2_face">6</span> mm</label><input type="range" id="b2_face" min="3" max="20" step="1" value="6"></div>
-        <div class="og-row"><label>Connecting shaft length (intermediate shaft) <span class="og-val" id="v_b2_facegap">4</span> mm</label><input type="range" id="b2_facegap" min="1" max="20" step="0.5" value="4"></div>
+        <div class="og-row"><label for="b2_toothdepth">Tooth depth <span class="og-val" id="v_b2_toothdepth">0.75</span> mm</label><input type="range" id="b2_toothdepth" min="0.3" max="2" step="0.05" value="0.75"></div>
+        <div class="og-row"><label for="b2_face">Pulley width <span class="og-val" id="v_b2_face">6</span> mm</label><input type="range" id="b2_face" min="3" max="20" step="1" value="6"></div>
+        <div class="og-row"><label for="b2_facegap">Connecting shaft length (intermediate shaft) <span class="og-val" id="v_b2_facegap">4</span> mm</label><input type="range" id="b2_facegap" min="1" max="20" step="0.5" value="4"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Shafts &amp; fit</p>
-        <div class="og-row"><label>Input shaft bore <span class="og-val" id="v_b2_inbore">5</span> mm</label><input type="range" id="b2_inbore" min="0" max="20" step="0.5" value="5"></div>
-        <div class="og-row"><label>Output shaft bore <span class="og-val" id="v_b2_outbore">6</span> mm</label><input type="range" id="b2_outbore" min="0" max="25" step="0.5" value="6"></div>
-        <div class="og-row"><label>Intermediate shaft Ø <span class="og-val" id="v_b2_pind">5</span> mm</label><input type="range" id="b2_pind" min="3" max="15" step="0.5" value="5"></div>
-        <div class="og-row"><label>Fit clearance (all bores) <span class="og-val" id="v_b2_fit">0.4</span> mm</label><input type="range" id="b2_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
+        <div class="og-row"><label for="b2_inbore">Input shaft bore <span class="og-val" id="v_b2_inbore">5</span> mm</label><input type="range" id="b2_inbore" min="0" max="20" step="0.5" value="5"></div>
+        <div class="og-row"><label for="b2_outbore">Output shaft bore <span class="og-val" id="v_b2_outbore">6</span> mm</label><input type="range" id="b2_outbore" min="0" max="25" step="0.5" value="6"></div>
+        <div class="og-row"><label for="b2_pind">Intermediate shaft Ø <span class="og-val" id="v_b2_pind">5</span> mm</label><input type="range" id="b2_pind" min="3" max="15" step="0.5" value="5"></div>
+        <div class="og-row"><label for="b2_fit">Fit clearance (all bores) <span class="og-val" id="v_b2_fit">0.4</span> mm</label><input type="range" id="b2_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Housing</p>
-        <div class="og-row"><label>Lid thickness <span class="og-val" id="v_b2_coverthick">4</span> mm</label><input type="range" id="b2_coverthick" min="2" max="10" step="0.5" value="4"></div>
-        <div class="og-row"><label>Schrauben-Ø (4×) <span class="og-val" id="v_b2_boltd">3</span> mm</label><input type="range" id="b2_boltd" min="2" max="12" step="0.5" value="3"></div>
+        <div class="og-row"><label for="b2_coverthick">Lid thickness <span class="og-val" id="v_b2_coverthick">4</span> mm</label><input type="range" id="b2_coverthick" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label for="b2_boltd">Schrauben-Ø (4×) <span class="og-val" id="v_b2_boltd">3</span> mm</label><input type="range" id="b2_boltd" min="2" max="12" step="0.5" value="3"></div>
 
         <p style="font-size:11px; color:var(--ink-dim); margin-top:10px; line-height:1.5;">
           <b>Pulleys instead of gears</b> — the timing belt itself is NOT printable (it needs flexible material) and is bought separately; only the pulleys + the housing are printed. Unlike gears, the center distance is freely selectable (it must match the belt length you buy) and is not fixed by the tooth count. Otherwise the layout is like the spur gear train: <span style="color:#5fd9a0;">Pulley 1</span> (input), pulleys 2+3 fixed on the intermediate shaft, <span style="color:#8a9a92;">Pulley 4</span> (output).
@@ -787,22 +787,22 @@
       <!-- Schneckengetriebe -->
       <div class="og-section" id="panelWorm" style="display:none;">
         <p class="og-section-title">Worm</p>
-        <div class="og-row"><label>Module <span class="og-val" id="v_w_mod">1.5</span> mm</label><input type="range" id="w_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
-        <div class="og-row"><label>Number of starts <span class="og-val" id="v_w_starts">1</span></label><input type="range" id="w_starts" min="1" max="4" step="1" value="1"></div>
-        <div class="og-row"><label>Core diameter <span class="og-val" id="v_w_wormd">8</span> mm</label><input type="range" id="w_wormd" min="4" max="30" step="0.5" value="8"></div>
-        <div class="og-row"><label>Number of turns <span class="og-val" id="v_w_turns">5</span></label><input type="range" id="w_turns" min="2" max="12" step="1" value="5"></div>
-        <div class="og-row"><label>Worm shaft bore <span class="og-val" id="v_w_wormbore">5</span> mm</label><input type="range" id="w_wormbore" min="0" max="15" step="0.5" value="5"></div>
+        <div class="og-row"><label for="w_mod">Module <span class="og-val" id="v_w_mod">1.5</span> mm</label><input type="range" id="w_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
+        <div class="og-row"><label for="w_starts">Number of starts <span class="og-val" id="v_w_starts">1</span></label><input type="range" id="w_starts" min="1" max="4" step="1" value="1"></div>
+        <div class="og-row"><label for="w_wormd">Core diameter <span class="og-val" id="v_w_wormd">8</span> mm</label><input type="range" id="w_wormd" min="4" max="30" step="0.5" value="8"></div>
+        <div class="og-row"><label for="w_turns">Number of turns <span class="og-val" id="v_w_turns">5</span></label><input type="range" id="w_turns" min="2" max="12" step="1" value="5"></div>
+        <div class="og-row"><label for="w_wormbore">Worm shaft bore <span class="og-val" id="v_w_wormbore">5</span> mm</label><input type="range" id="w_wormbore" min="0" max="15" step="0.5" value="5"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Worm wheel</p>
-        <div class="og-row"><label>Number of teeth <span class="og-val" id="v_w_zwheel">24</span></label><input type="range" id="w_zwheel" min="10" max="80" step="1" value="24"></div>
-        <div class="og-row"><label>Wheel width <span class="og-val" id="v_w_wheelface">8</span> mm</label><input type="range" id="w_wheelface" min="3" max="25" step="1" value="8"></div>
-        <div class="og-row"><label>Wheel shaft bore <span class="og-val" id="v_w_wheelbore">6</span> mm</label><input type="range" id="w_wheelbore" min="0" max="20" step="0.5" value="6"></div>
+        <div class="og-row"><label for="w_zwheel">Number of teeth <span class="og-val" id="v_w_zwheel">24</span></label><input type="range" id="w_zwheel" min="10" max="80" step="1" value="24"></div>
+        <div class="og-row"><label for="w_wheelface">Wheel width <span class="og-val" id="v_w_wheelface">8</span> mm</label><input type="range" id="w_wheelface" min="3" max="25" step="1" value="8"></div>
+        <div class="og-row"><label for="w_wheelbore">Wheel shaft bore <span class="og-val" id="v_w_wheelbore">6</span> mm</label><input type="range" id="w_wheelbore" min="0" max="20" step="0.5" value="6"></div>
         <p style="font-size:11px; color:var(--accent); margin:6px 0; font-weight:600;" id="w_ratioInfo">Ratio: 1:24.00</p>
 
         <p class="og-section-title" style="margin-top:16px;">Fit &amp; housing</p>
-        <div class="og-row"><label>Pressure angle (wheel) <span class="og-val" id="v_w_pa">20</span> °</label><input type="range" id="w_pa" min="14.5" max="25" step="0.5" value="20"></div>
-        <div class="og-row"><label>Fit clearance (all bores) <span class="og-val" id="v_w_fit">0.4</span> mm</label><input type="range" id="w_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
-        <div class="og-row"><label>Base plate thickness <span class="og-val" id="v_w_coverthick">4</span> mm</label><input type="range" id="w_coverthick" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label for="w_pa">Pressure angle (wheel) <span class="og-val" id="v_w_pa">20</span> °</label><input type="range" id="w_pa" min="14.5" max="25" step="0.5" value="20"></div>
+        <div class="og-row"><label for="w_fit">Fit clearance (all bores) <span class="og-val" id="v_w_fit">0.4</span> mm</label><input type="range" id="w_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
+        <div class="og-row"><label for="w_coverthick">Base plate thickness <span class="og-val" id="v_w_coverthick">4</span> mm</label><input type="range" id="w_coverthick" min="2" max="10" step="0.5" value="4"></div>
 
         <p style="font-size:11px; color:var(--ink-dim); margin-top:10px; line-height:1.5;">
           <b>Open frame instead of a closed housing</b> — deliberately kept simple so the gearing stays visible and the interaction is easy to check and readjust. The worm wheel uses a simplified standard involute gearing (no specially calculated concave worm wheel profile) — sufficient for hobby/maker loads, as is common in many freely available print models. In this first version the worm's bearing blocks are solid support blocks without a through hole.
@@ -819,25 +819,25 @@
         </div>
 
         <p class="og-section-title">Tooth count &amp; ratio</p>
-        <div class="og-row"><label>Flexspline teeth <span class="og-val" id="v_h_zflex">100</span></label><input type="range" id="h_zflex" min="20" max="300" step="2" value="100"></div>
+        <div class="og-row"><label for="h_zflex">Flexspline teeth <span class="og-val" id="v_h_zflex">100</span></label><input type="range" id="h_zflex" min="20" max="300" step="2" value="100"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 6px;" id="h_zcircInfo">Ring gear: 102 teeth (always exactly 2 more, fixed rule)</p>
         <p style="font-size:11px; color:var(--accent); margin:6px 0; font-weight:600;" id="h_ratioInfo">Ratio: 1:50.00 (output rotates opposite to the input)</p>
-        <div class="og-row" style="margin-top:10px;"><label>Module <span class="og-val" id="v_h_mod">1</span> mm</label><input type="range" id="h_mod" min="0.5" max="2" step="0.1" value="1"></div>
-        <div class="og-row"><label>Pressure angle <span class="og-val" id="v_h_pa">20</span> °</label><input type="range" id="h_pa" min="14.5" max="25" step="0.5" value="20"></div>
+        <div class="og-row" style="margin-top:10px;"><label for="h_mod">Module <span class="og-val" id="v_h_mod">1</span> mm</label><input type="range" id="h_mod" min="0.5" max="2" step="0.1" value="1"></div>
+        <div class="og-row"><label for="h_pa">Pressure angle <span class="og-val" id="v_h_pa">20</span> °</label><input type="range" id="h_pa" min="14.5" max="25" step="0.5" value="20"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Flexspline (the critical part)</p>
-        <div class="og-row"><label>Wall thickness <span class="og-val" id="v_h_wallthick">1.3</span> mm</label><input type="range" id="h_wallthick" min="0.6" max="4" step="0.1" value="1.3"></div>
+        <div class="og-row"><label for="h_wallthick">Wall thickness <span class="og-val" id="v_h_wallthick">1.3</span> mm</label><input type="range" id="h_wallthick" min="0.6" max="4" step="0.1" value="1.3"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 6px; line-height:1.4;" id="h_wallNote">Recommendation for this module: 0.8–2.0 mm. Thinner = more flexibility, but more prone to breaking.</p>
-        <div class="og-row"><label>Cup length <span class="og-val" id="v_h_flexlen">20</span> mm</label><input type="range" id="h_flexlen" min="8" max="50" step="1" value="20"></div>
-        <div class="og-row"><label>Output shaft bore <span class="og-val" id="v_h_outbore">8</span> mm</label><input type="range" id="h_outbore" min="0" max="20" step="0.5" value="8"></div>
+        <div class="og-row"><label for="h_flexlen">Cup length <span class="og-val" id="v_h_flexlen">20</span> mm</label><input type="range" id="h_flexlen" min="8" max="50" step="1" value="20"></div>
+        <div class="og-row"><label for="h_outbore">Output shaft bore <span class="og-val" id="v_h_outbore">8</span> mm</label><input type="range" id="h_outbore" min="0" max="20" step="0.5" value="8"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Wave generator</p>
-        <div class="og-row"><label>Length <span class="og-val" id="v_h_wavelen">15</span> mm</label><input type="range" id="h_wavelen" min="5" max="40" step="1" value="15"></div>
-        <div class="og-row"><label>Input shaft bore <span class="og-val" id="v_h_inbore">6</span> mm</label><input type="range" id="h_inbore" min="0" max="20" step="0.5" value="6"></div>
+        <div class="og-row"><label for="h_wavelen">Length <span class="og-val" id="v_h_wavelen">15</span> mm</label><input type="range" id="h_wavelen" min="5" max="40" step="1" value="15"></div>
+        <div class="og-row"><label for="h_inbore">Input shaft bore <span class="og-val" id="v_h_inbore">6</span> mm</label><input type="range" id="h_inbore" min="0" max="20" step="0.5" value="6"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Fit &amp; housing</p>
-        <div class="og-row"><label>Fit clearance (bores) <span class="og-val" id="v_h_fit">0.4</span> mm</label><input type="range" id="h_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
-        <div class="og-row"><label>Screw Ø (4×, ring gear) <span class="og-val" id="v_h_boltd">3</span> mm</label><input type="range" id="h_boltd" min="2" max="12" step="0.5" value="3"></div>
+        <div class="og-row"><label for="h_fit">Fit clearance (bores) <span class="og-val" id="v_h_fit">0.4</span> mm</label><input type="range" id="h_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
+        <div class="og-row"><label for="h_boltd">Screw Ø (4×, ring gear) <span class="og-val" id="v_h_boltd">3</span> mm</label><input type="range" id="h_boltd" min="2" max="12" step="0.5" value="3"></div>
 
         <p style="font-size:11px; color:var(--ink-dim); margin-top:10px; line-height:1.5;">
           <b>3 parts</b>: <span style="color:#5fd9a0;">Wave generator</span> (rigid ellipse, input), <span style="color:#ff8c3c;">Flexspline</span> (elastic cup with external teeth, output — printed perfectly ROUND, only deforms during assembly through the material itself), <span style="color:#8a9a92;">Ring gear</span> (rigid, internal teeth, screwed fixed into the housing). Tooth profile deliberately shortened (addendum and dedendum 0.15× module each instead of the usual 1×/1.25× module) — this preserves the flexspline's remaining wall thickness and needs less deformation travel. The ring gear tooth count is coupled to the flexspline (+2, fixed rule for a two-lobe wave generator) and is not freely adjustable.
@@ -856,16 +856,16 @@
         </div>
 
         <p class="og-section-title">Basic dimensions</p>
-        <div class="og-row"><label>Height <span class="og-val" id="v_v_height">180</span> mm</label><input type="range" id="v_height" min="30" max="400" step="1" value="180"></div>
-        <div class="og-row"><label>Bottom radius <span class="og-val" id="v_v_bottomr">40</span> mm</label><input type="range" id="v_bottomr" min="5" max="150" step="1" value="40"></div>
-        <div class="og-row"><label>Top radius <span class="og-val" id="v_v_topr">40</span> mm</label><input type="range" id="v_topr" min="5" max="150" step="1" value="40"></div>
-        <div class="og-row"><label>Wall thickness <span class="og-val" id="v_v_wall">2.2</span> mm</label><input type="range" id="v_wall" min="0.8" max="10" step="0.1" value="2.2"></div>
-        <div class="og-row"><label>Floor thickness <span class="og-val" id="v_v_floor">3</span> mm</label><input type="range" id="v_floor" min="0.8" max="15" step="0.1" value="3"></div>
+        <div class="og-row"><label for="v_height">Height <span class="og-val" id="v_v_height">180</span> mm</label><input type="range" id="v_height" min="30" max="400" step="1" value="180"></div>
+        <div class="og-row"><label for="v_bottomr">Bottom radius <span class="og-val" id="v_v_bottomr">40</span> mm</label><input type="range" id="v_bottomr" min="5" max="150" step="1" value="40"></div>
+        <div class="og-row"><label for="v_topr">Top radius <span class="og-val" id="v_v_topr">40</span> mm</label><input type="range" id="v_topr" min="5" max="150" step="1" value="40"></div>
+        <div class="og-row"><label for="v_wall">Wall thickness <span class="og-val" id="v_v_wall">2.2</span> mm</label><input type="range" id="v_wall" min="0.8" max="10" step="0.1" value="2.2"></div>
+        <div class="og-row"><label for="v_floor">Floor thickness <span class="og-val" id="v_v_floor">3</span> mm</label><input type="range" id="v_floor" min="0.8" max="15" step="0.1" value="3"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Belly (bulge, negative = narrowing)</p>
-        <div class="og-row"><label>Strength <span class="og-val" id="v_v_bulgeamp">0</span> mm</label><input type="range" id="v_bulgeamp" min="-40" max="60" step="1" value="0"></div>
-        <div class="og-row"><label>Position (0 = bottom, 1 = top) <span class="og-val" id="v_v_bulgepos">0.5</span></label><input type="range" id="v_bulgepos" min="0" max="1" step="0.02" value="0.5"></div>
-        <div class="og-row"><label>Width <span class="og-val" id="v_v_bulgewidth">0.25</span></label><input type="range" id="v_bulgewidth" min="0.06" max="0.6" step="0.02" value="0.25"></div>
+        <div class="og-row"><label for="v_bulgeamp">Strength <span class="og-val" id="v_v_bulgeamp">0</span> mm</label><input type="range" id="v_bulgeamp" min="-40" max="60" step="1" value="0"></div>
+        <div class="og-row"><label for="v_bulgepos">Position (0 = bottom, 1 = top) <span class="og-val" id="v_v_bulgepos">0.5</span></label><input type="range" id="v_bulgepos" min="0" max="1" step="0.02" value="0.5"></div>
+        <div class="og-row"><label for="v_bulgewidth">Width <span class="og-val" id="v_v_bulgewidth">0.25</span></label><input type="range" id="v_bulgewidth" min="0.06" max="0.6" step="0.02" value="0.25"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Neck</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
@@ -878,8 +878,8 @@
             <span class="og-switch-track"></span>
           </label>
         </div>
-        <div class="og-row" id="vNeckRRow" style="display:none;"><label>Neck radius <span class="og-val" id="v_v_neckr">18</span> mm</label><input type="range" id="v_neckr" min="4" max="100" step="1" value="18"></div>
-        <div class="og-row" id="vNeckHRow" style="display:none;"><label>Neck height share <span class="og-val" id="v_v_neckh">0.18</span></label><input type="range" id="v_neckh" min="0.05" max="0.6" step="0.02" value="0.18"></div>
+        <div class="og-row" id="vNeckRRow" style="display:none;"><label for="v_neckr">Neck radius <span class="og-val" id="v_v_neckr">18</span> mm</label><input type="range" id="v_neckr" min="4" max="100" step="1" value="18"></div>
+        <div class="og-row" id="vNeckHRow" style="display:none;"><label for="v_neckh">Neck height share <span class="og-val" id="v_v_neckh">0.18</span></label><input type="range" id="v_neckh" min="0.05" max="0.6" step="0.02" value="0.18"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Pattern</p>
         <div style="display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap;">
@@ -888,10 +888,10 @@
           <button type="button" class="og-gtype-btn" data-vpattern="twisted" style="flex:1; min-width:70px; padding:9px;"><div class="og-shape-name" style="font-size:11.5px;">Twisted</div></button>
           <button type="button" class="og-gtype-btn" data-vpattern="faceted" style="flex:1; min-width:70px; padding:9px;"><div class="og-shape-name" style="font-size:11.5px;">Faceted</div></button>
         </div>
-        <div class="og-row" id="vRibCountRow" style="display:none;"><label>Number of ribs <span class="og-val" id="v_v_ribcount">14</span></label><input type="range" id="v_ribcount" min="3" max="40" step="1" value="14"></div>
-        <div class="og-row" id="vRibDepthRow" style="display:none;"><label>Rib depth <span class="og-val" id="v_v_ribdepth">2</span> mm</label><input type="range" id="v_ribdepth" min="0.3" max="8" step="0.1" value="2"></div>
-        <div class="og-row" id="vTwistRow" style="display:none;"><label>Twist <span class="og-val" id="v_v_twist">0.6</span> turns</label><input type="range" id="v_twist" min="-2" max="2" step="0.05" value="0.6"></div>
-        <div class="og-row" id="vFacetRow" style="display:none;"><label>Number of facets <span class="og-val" id="v_v_facetcount">8</span></label><input type="range" id="v_facetcount" min="5" max="24" step="1" value="8"></div>
+        <div class="og-row" id="vRibCountRow" style="display:none;"><label for="v_ribcount">Number of ribs <span class="og-val" id="v_v_ribcount">14</span></label><input type="range" id="v_ribcount" min="3" max="40" step="1" value="14"></div>
+        <div class="og-row" id="vRibDepthRow" style="display:none;"><label for="v_ribdepth">Rib depth <span class="og-val" id="v_v_ribdepth">2</span> mm</label><input type="range" id="v_ribdepth" min="0.3" max="8" step="0.1" value="2"></div>
+        <div class="og-row" id="vTwistRow" style="display:none;"><label for="v_twist">Twist <span class="og-val" id="v_v_twist">0.6</span> turns</label><input type="range" id="v_twist" min="-2" max="2" step="0.05" value="0.6"></div>
+        <div class="og-row" id="vFacetRow" style="display:none;"><label for="v_facetcount">Number of facets <span class="og-val" id="v_v_facetcount">8</span></label><input type="range" id="v_facetcount" min="5" max="24" step="1" value="8"></div>
 
         <p class="og-skadis-note" id="vaseClampNote" style="display:none; margin-top:10px;">
           Rib depth was reduced automatically so the inner wall does not become too thin/negative.
@@ -905,7 +905,7 @@
       <div class="og-section" id="panelLedsign" style="display:none;">
         <p class="og-section-title">Text</p>
         <div class="og-row">
-          <label>Lettering</label>
+          <label for="l_text">Lettering</label>
           <input type="text" id="l_text" value="HOME" maxlength="16" style="width:100%; background:var(--bg); border:1px solid var(--line); color:var(--ink); font-family:var(--f-mono); font-size:14px; padding:9px 10px; border-radius:7px; margin-top:6px;">
         </div>
 
@@ -921,26 +921,26 @@
         </p>
 
         <p class="og-section-title">Letter dimensions</p>
-        <div class="og-row"><label>Base height <span class="og-val" id="v_l_height">30</span> mm</label><input type="range" id="l_height" min="8" max="120" step="1" value="30"></div>
-        <div class="og-row"><label>Spacing between letters <span class="og-val" id="v_l_spacing">2</span> mm</label><input type="range" id="l_spacing" min="-15" max="20" step="0.5" value="2"></div>
+        <div class="og-row"><label for="l_height">Base height <span class="og-val" id="v_l_height">30</span> mm</label><input type="range" id="l_height" min="8" max="120" step="1" value="30"></div>
+        <div class="og-row"><label for="l_spacing">Spacing between letters <span class="og-val" id="v_l_spacing">2</span> mm</label><input type="range" id="l_spacing" min="-15" max="20" step="0.5" value="2"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 14px; line-height:1.4;">Negative = letters overlap, positive = gap in between.</p>
-        <div class="og-row"><label>Margin around each letter <span class="og-val" id="v_l_margin">6</span> mm</label><input type="range" id="l_margin" min="2" max="30" step="1" value="6"></div>
+        <div class="og-row"><label for="l_margin">Margin around each letter <span class="og-val" id="v_l_margin">6</span> mm</label><input type="range" id="l_margin" min="2" max="30" step="1" value="6"></div>
 
         <p class="og-section-title">Scale individual letters</p>
         <div id="ledLetterScales" style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;"></div>
 
         <p class="og-section-title">Floor &amp; wall</p>
-        <div class="og-row"><label>Floor thickness <span class="og-val" id="v_l_floor">2</span> mm</label><input type="range" id="l_floor" min="0.8" max="8" step="0.2" value="2"></div>
-        <div class="og-row"><label>Wall thickness <span class="og-val" id="v_l_wall">2.4</span> mm</label><input type="range" id="l_wall" min="0.8" max="8" step="0.2" value="2.4"></div>
-        <div class="og-row"><label>Wall height (for LED strip) <span class="og-val" id="v_l_wallheight">10</span> mm</label><input type="range" id="l_wallheight" min="4" max="40" step="1" value="10"></div>
+        <div class="og-row"><label for="l_floor">Floor thickness <span class="og-val" id="v_l_floor">2</span> mm</label><input type="range" id="l_floor" min="0.8" max="8" step="0.2" value="2"></div>
+        <div class="og-row"><label for="l_wall">Wall thickness <span class="og-val" id="v_l_wall">2.4</span> mm</label><input type="range" id="l_wall" min="0.8" max="8" step="0.2" value="2.4"></div>
+        <div class="og-row"><label for="l_wallheight">Wall height (for LED strip) <span class="og-val" id="v_l_wallheight">10</span> mm</label><input type="range" id="l_wallheight" min="4" max="40" step="1" value="10"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Ledge (shoulder for the lid)</p>
-        <div class="og-row"><label>Ledge width (inset) <span class="og-val" id="v_l_kantebreite">2.5</span> mm</label><input type="range" id="l_kantebreite" min="1" max="10" step="0.1" value="2.5"></div>
-        <div class="og-row"><label>Ledge height (lid insertion depth) <span class="og-val" id="v_l_kantehoehe">2</span> mm</label><input type="range" id="l_kantehoehe" min="0.5" max="10" step="0.1" value="2"></div>
+        <div class="og-row"><label for="l_kantebreite">Ledge width (inset) <span class="og-val" id="v_l_kantebreite">2.5</span> mm</label><input type="range" id="l_kantebreite" min="1" max="10" step="0.1" value="2.5"></div>
+        <div class="og-row"><label for="l_kantehoehe">Ledge height (lid insertion depth) <span class="og-val" id="v_l_kantehoehe">2</span> mm</label><input type="range" id="l_kantehoehe" min="0.5" max="10" step="0.1" value="2"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Lid</p>
-        <div class="og-row"><label>Lid thickness <span class="og-val" id="v_l_lidthick">1.2</span> mm</label><input type="range" id="l_lidthick" min="0.4" max="6" step="0.1" value="1.2"></div>
-        <div class="og-row"><label>Fit clearance <span class="og-val" id="v_l_lidfit">0.3</span> mm</label><input type="range" id="l_lidfit" min="0.1" max="1" step="0.05" value="0.3"></div>
+        <div class="og-row"><label for="l_lidthick">Lid thickness <span class="og-val" id="v_l_lidthick">1.2</span> mm</label><input type="range" id="l_lidthick" min="0.4" max="6" step="0.1" value="1.2"></div>
+        <div class="og-row"><label for="l_lidfit">Fit clearance <span class="og-val" id="v_l_lidfit">0.3</span> mm</label><input type="range" id="l_lidfit" min="0.1" max="1" step="0.05" value="0.3"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 14px; line-height:1.4;">Thinner lid = more light shines through evenly, thicker = more muted/directional.</p>
 
         <p class="og-section-title" style="margin-top:16px;">Cable passage</p>
@@ -956,7 +956,7 @@
         </div>
         <div id="wireHoleRows" style="display:none;">
           <div class="og-row">
-            <label>Which letter</label>
+            <label for="l_wireletter">Which letter</label>
             <select id="l_wireletter" style="width:100%; background:var(--bg); border:1px solid var(--line); color:var(--ink); font-family:var(--f-mono); font-size:13px; padding:8px 10px; border-radius:7px; margin-top:6px;"></select>
           </div>
           <label style="font-size:12.5px; color:var(--ink); display:block; margin-bottom:6px;">Position (3×3 grid)</label>
@@ -971,7 +971,7 @@
             <button type="button" class="og-gtype-btn" data-wirepos="links-unten" style="padding:14px 4px;" title="Bottom left">↙</button>
             <button type="button" class="og-gtype-btn" data-wirepos="rechts-unten" style="padding:14px 4px;" title="Bottom right">↘</button>
           </div>
-          <div class="og-row"><label>Hole Ø <span class="og-val" id="v_l_wireholed">5</span> mm</label><input type="range" id="l_wireholed" min="2" max="12" step="0.5" value="5"></div>
+          <div class="og-row"><label for="l_wireholed">Hole Ø <span class="og-val" id="v_l_wireholed">5</span> mm</label><input type="range" id="l_wireholed" min="2" max="12" step="0.5" value="5"></div>
         </div>
 
         <p style="font-size:11px; color:var(--ink-dim); margin-top:10px; line-height:1.5;">
@@ -1001,8 +1001,8 @@
 
         <div id="li_dimsTitle"><p class="og-section-title">Dimensions</p></div>
         <div id="lithoFlatDimsRows">
-          <div id="li_widthRow" class="og-row"><label>Width <span class="og-val" id="v_li_width">100</span> mm</label><input type="range" id="li_width" min="20" max="300" step="1" value="100"></div>
-          <div id="li_heightRow" class="og-row"><label>Height <span class="og-val" id="v_li_height">75</span> mm</label><input type="range" id="li_height" min="15" max="300" step="1" value="75"></div>
+          <div id="li_widthRow" class="og-row"><label for="li_width">Width <span class="og-val" id="v_li_width">100</span> mm</label><input type="range" id="li_width" min="20" max="300" step="1" value="100"></div>
+          <div id="li_heightRow" class="og-row"><label for="li_height">Height <span class="og-val" id="v_li_height">75</span> mm</label><input type="range" id="li_height" min="15" max="300" step="1" value="75"></div>
           <div id="li_keepaspectRow" class="og-toggle-row" style="margin-bottom:14px;">
             <div>
               <div class="og-toggle-label">Keep the image's aspect ratio</div>
@@ -1017,14 +1017,14 @@
 
         <div id="lithoCurveRows" style="display:none;">
           <p class="og-section-title">Curvature</p>
-          <div class="og-row"><label>Radius <span class="og-val" id="v_li_radius">60</span> mm</label><input type="range" id="li_radius" min="15" max="200" step="1" value="60"></div>
-          <div class="og-row" id="li_arcRow"><label id="li_arcLabel">Arc angle <span class="og-val" id="v_li_arc">120</span> °</label><input type="range" id="li_arc" min="20" max="359" step="1" value="120"></div>
+          <div class="og-row"><label for="li_radius">Radius <span class="og-val" id="v_li_radius">60</span> mm</label><input type="range" id="li_radius" min="15" max="200" step="1" value="60"></div>
+          <div class="og-row" id="li_arcRow"><label for="li_arc" id="li_arcLabel">Arc angle <span class="og-val" id="v_li_arc">120</span> °</label><input type="range" id="li_arc" min="20" max="359" step="1" value="120"></div>
         </div>
 
         <p class="og-section-title">Thickness &amp; resolution</p>
-        <div class="og-row"><label>Minimum thickness (brightest areas) <span class="og-val" id="v_li_minthick">0.8</span> mm</label><input type="range" id="li_minthick" min="0.3" max="3" step="0.1" value="0.8"></div>
-        <div class="og-row"><label>Maximum thickness (darkest areas) <span class="og-val" id="v_li_maxthick">3.2</span> mm</label><input type="range" id="li_maxthick" min="1" max="8" step="0.1" value="3.2"></div>
-        <div class="og-row"><label>Resolution <span class="og-val" id="v_li_res">180</span> px</label><input type="range" id="li_res" min="60" max="300" step="10" value="180"></div>
+        <div class="og-row"><label for="li_minthick">Minimum thickness (brightest areas) <span class="og-val" id="v_li_minthick">0.8</span> mm</label><input type="range" id="li_minthick" min="0.3" max="3" step="0.1" value="0.8"></div>
+        <div class="og-row"><label for="li_maxthick">Maximum thickness (darkest areas) <span class="og-val" id="v_li_maxthick">3.2</span> mm</label><input type="range" id="li_maxthick" min="1" max="8" step="0.1" value="3.2"></div>
+        <div class="og-row"><label for="li_res">Resolution <span class="og-val" id="v_li_res">180</span> px</label><input type="range" id="li_res" min="60" max="300" step="10" value="180"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 14px; line-height:1.4;">Resolution = pixels along the longer side. Higher = more detail, but noticeably slower in the browser and when printing.</p>
 
         <div class="og-toggle-row" style="margin-bottom:14px;">
@@ -1051,8 +1051,8 @@
             </label>
           </div>
           <div id="lithoBorderRows">
-            <div class="og-row"><label>Frame width <span class="og-val" id="v_li_borderw">4</span> mm</label><input type="range" id="li_borderw" min="1" max="15" step="0.5" value="4"></div>
-            <div class="og-row"><label>Frame height (above maximum thickness) <span class="og-val" id="v_li_borderh">1.5</span> mm</label><input type="range" id="li_borderh" min="0" max="6" step="0.5" value="1.5"></div>
+            <div class="og-row"><label for="li_borderw">Frame width <span class="og-val" id="v_li_borderw">4</span> mm</label><input type="range" id="li_borderw" min="1" max="15" step="0.5" value="4"></div>
+            <div class="og-row"><label for="li_borderh">Frame height (above maximum thickness) <span class="og-val" id="v_li_borderh">1.5</span> mm</label><input type="range" id="li_borderh" min="0" max="6" step="0.5" value="1.5"></div>
           </div>
         </div>
 
@@ -1066,7 +1066,7 @@
           </label>
         </div>
         <div id="lithoHangRow" style="display:none;">
-          <div class="og-row"><label>Hole Ø <span class="og-val" id="v_li_hangd">4</span> mm</label><input type="range" id="li_hangd" min="2" max="10" step="0.5" value="4"></div>
+          <div class="og-row"><label for="li_hangd">Hole Ø <span class="og-val" id="v_li_hangd">4</span> mm</label><input type="range" id="li_hangd" min="2" max="10" step="0.5" value="4"></div>
         </div>
 
         <p style="font-size:11px; color:var(--ink-dim); margin-top:10px; line-height:1.5;">

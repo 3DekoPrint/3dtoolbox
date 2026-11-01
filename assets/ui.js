@@ -21,3 +21,20 @@
     });
   });
 })();
+
+/* Barrierefreiheit: <label>Text <output>…</output><input type="range"></label> -
+   das <output> ist selbst beschriftbar und "frisst" das Label, der Regler bliebe ohne Namen. */
+(function () {
+  function fix(root) {
+    (root || document).querySelectorAll('label > output').forEach(function (o) {
+      var l = o.parentNode, i = l.querySelector('input,select,textarea');
+      if (!i || i.getAttribute('aria-label') || i.getAttribute('aria-labelledby')) return;
+      var t = (l.textContent || '').replace(o.textContent, '').replace(/\s+/g, ' ').trim();
+      if (t) i.setAttribute('aria-label', t);
+    });
+  }
+  var timer;
+  function later() { clearTimeout(timer); timer = setTimeout(fix, 120); }
+  function start() { fix(); if (window.MutationObserver) new MutationObserver(later).observe(document.body, { childList: true, subtree: true }); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();

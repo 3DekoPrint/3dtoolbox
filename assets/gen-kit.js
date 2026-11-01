@@ -196,7 +196,7 @@
         if (it.t === 'num' || it.t === 'int') {
           f.innerHTML = lab; var w = el('div', 'gk-num'), r = el('input'), n = el('input');
           r.type = 'range'; n.type = 'number'; r.min = n.min = it.min; r.max = n.max = it.max; r.step = n.step = it.step || (it.t === 'int' ? 1 : 0.1);
-          r.value = n.value = P[it.k]; w.appendChild(r); w.appendChild(n); f.appendChild(w);
+          r.value = n.value = P[it.k]; n.setAttribute('aria-label', L(it.label) + (it.unit ? ' (' + L(it.unit) + ')' : '')); w.appendChild(r); w.appendChild(n); f.appendChild(w);
           var upd = function (src) { return function () { var v = parseFloat(src.value); if (isNaN(v)) return; v = Math.max(it.min, Math.min(it.max, v)); if (it.t === 'int') v = Math.round(v); P[it.k] = v; if (src === r) n.value = numStr(v); else r.value = v; presetOff(); schedule(); }; };
           r.addEventListener('input', upd(r)); n.addEventListener('input', upd(n)); n.addEventListener('blur', function () { n.value = numStr(P[it.k]); });
           inputs[it.k] = { r: r, n: n };
@@ -233,9 +233,9 @@
     price.type = bw.type = bd.type = 'number'; price.min = 1; price.max = 500; price.step = 1; bw.min = bd.min = 50; bw.max = bd.max = 2000;
     bedSel.value = env.bed; matSel.value = env.mat; price.value = env.price; bw.value = env.bw; bd.value = env.bd;
     var mk = function (t, ctl) { var l = el('label', 'gk-e'); l.innerHTML = '<span>' + esc(t) + '</span>'; if (Array.isArray(ctl)) ctl.forEach(function (c) { l.appendChild(c); }); else l.appendChild(ctl); return l; };
-    env1.appendChild(mk(T.bed, [bedSel, bw, bd])); env1.appendChild(mk(T.mat, matSel)); env1.appendChild(mk(T.price, price));
+    bw.setAttribute('aria-label', T.bed + ' ' + (LANG === 'en' ? 'width' : 'Breite') + ' (mm)'); bd.setAttribute('aria-label', T.bed + ' ' + (LANG === 'en' ? 'depth' : 'Tiefe') + ' (mm)'); env1.appendChild(mk(T.bed, [bedSel, bw, bd])); env1.appendChild(mk(T.mat, matSel)); env1.appendChild(mk(T.price, price));
     var acts = el('div', 'gk-acts'), bLink = el('button', 'gk-btn', T.link), bSave = el('button', 'gk-btn', T.save), bLoad = el('button', 'gk-btn', T.load), bRes = el('button', 'gk-btn', T.reset), fl = el('input');
-    [bLink, bSave, bLoad, bRes].forEach(function (b) { b.type = 'button'; acts.appendChild(b); }); fl.type = 'file'; fl.accept = '.json,application/json'; fl.hidden = true; acts.appendChild(fl);
+    [bLink, bSave, bLoad, bRes].forEach(function (b) { b.type = 'button'; acts.appendChild(b); }); fl.type = 'file'; fl.setAttribute('aria-label', T.load); fl.accept = '.json,application/json'; fl.hidden = true; acts.appendChild(fl);
     var top = el('div', 'gk-dock-top'); top.appendChild(est); top.appendChild(dl);
     topHost.appendChild(top); dock.appendChild(env1); dock.appendChild(acts);
     function readEnv() {
