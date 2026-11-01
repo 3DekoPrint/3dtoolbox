@@ -79,3 +79,8 @@
 .en-vt{font-size:13px}.en-ex{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-dim)}
 .en-ex input{width:140px}
 .en-f{fill:rgba(240,122,28,.12);stroke:#f07a1c;stroke-width:.5;stroke-dasharray:2 1.5}.en-fh{fill:#fff;stroke:#f07a1c;stroke-width:.5}
+/* Gehäuse-Generator: #enParams enthält Überschriften und mehrere .en-grid-Blöcke untereinander (kein eigenes Raster) */
+.en-params{margin-top:12px}
+.en-grid input[type=range]{width:100%;accent-color:var(--accent)}
+.mp h2.en-h3{font-family:inherit;font-size:15px;margin:22px 0 0}
+.en-grid .i3-chk{flex-direction:row;align-items:center;gap:8px;color:var(--ink)}
