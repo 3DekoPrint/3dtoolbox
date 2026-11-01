@@ -1,0 +1,14 @@
+{
+ "conv-de": 56,
+ "conv-en": 55,
+ "cost-de": 75,
+ "cost-en": 74,
+ "db-de": 59,
+ "db-en": 61,
+ "finder-de": 60,
+ "finder-en": 59,
+ "grid-de": 87,
+ "grid-en": 85,
+ "lex-de": 48,
+ "lex-en": 49
+}
