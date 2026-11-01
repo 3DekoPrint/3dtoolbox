@@ -68,7 +68,7 @@
     font-family:var(--f-mono); font-size:12px; font-weight:700;
     background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:4px;
   }
-  .fm-lang-current{ padding:5px 10px; border-radius:5px; background:var(--accent); color:#1a1206; }
+  .fm-lang-current{ padding:5px 10px; border-radius:5px; background:var(--accent); color:var(--on-accent); }
   .fm-lang-link{ padding:5px 10px; border-radius:5px; color:var(--ink-dim); text-decoration:none; transition:color .15s ease, background .15s ease; }
   .fm-lang-link:hover{ color:var(--ink); background:var(--panel-2); }
   .fm-tagline{ color:var(--ink-dim); font-size:14.5px; line-height:1.55; margin:0 0 28px; max-width:640px; }
@@ -110,18 +110,18 @@
   .og-viewer-loading{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     font-family:var(--f-mono); font-size:13px; color:var(--ink-dim);
-    background:rgba(20,32,28,.6); z-index:5;
+    background:var(--panel); z-index:5;
   }
   .og-viewer canvas{ display:block; width:100%; height:100%; }
   .og-viewer-hint{
     position:absolute; bottom:10px; right:12px;
     font-family:var(--f-mono); font-size:10.5px; color:var(--ink-dim);
-    background:rgba(20,32,28,.72); padding:4px 9px; border-radius:6px; pointer-events:none;
+    background:var(--panel); padding:4px 9px; border-radius:6px; pointer-events:none;
   }
   .og-viewer-dims{
     position:absolute; top:10px; left:12px;
     font-family:var(--f-mono); font-size:11.5px; color:var(--accent-2);
-    background:rgba(20,32,28,.72); padding:6px 10px; border-radius:8px; line-height:1.6;
+    background:var(--panel); padding:6px 10px; border-radius:8px; line-height:1.6;
   }
 
   .og-panel{ display:flex; flex-direction:column; gap:14px; }
@@ -156,7 +156,7 @@
     background:var(--ink); border-radius:50%; transition:transform .15s ease;
   }
   .og-switch input:checked + .og-switch-track{ background:var(--accent); }
-  .og-switch input:checked + .og-switch-track::before{ transform:translateX(18px); background:#1a1206; }
+  .og-switch input:checked + .og-switch-track::before{ transform:translateX(18px); background:var(--on-accent); }
 
   .og-skadis-note{
     font-size:11px; color:var(--ink-dim); line-height:1.5; margin-top:10px;
@@ -172,7 +172,7 @@
   .og-color-hex{ font-family:var(--f-mono); font-size:12px; color:var(--ink-dim); }
 
   .og-export-btn{
-    width:100%; background:var(--accent); border:1px solid var(--accent); color:#1a1206;
+    width:100%; background:var(--accent); border:1px solid var(--accent); color:var(--on-accent);
     font-family:var(--f-mono); font-size:13.5px; font-weight:700;
     padding:13px 14px; border-radius:10px; cursor:pointer; transition:opacity .15s ease;
   }
@@ -208,7 +208,7 @@
   .bt-nav{
     position:sticky; top:12px; z-index:50; display:flex; align-items:center; gap:18px; flex-wrap:wrap;
     margin:12px 0 0; padding:9px 12px 9px 16px; border-radius:16px;
-    background:rgba(27,43,37,.78); border:1px solid var(--line);
+    background:var(--panel); border:1px solid var(--line);
     backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   }
   .bt-logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
@@ -217,11 +217,11 @@
   .bt-chip{
     font-family:var(--f-mono); font-size:12.5px; font-weight:600; text-decoration:none;
     color:var(--ink-dim); padding:9px 15px; border-radius:99px; border:1px solid var(--line);
-    background:rgba(27,43,37,.6); transition:color .15s, border-color .15s, transform .15s;
+    background:var(--panel); transition:color .15s, border-color .15s, transform .15s;
   }
   .bt-chip:hover{ color:var(--ink); border-color:var(--accent-2); transform:translateY(-1px); }
-  .bt-chip-active{ background:var(--accent); border-color:var(--accent); color:#1a1206; }
-  .bt-chip-active:hover{ color:#1a1206; border-color:var(--accent); transform:none; }
+  .bt-chip-active{ background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
+  .bt-chip-active:hover{ color:var(--on-accent); border-color:var(--accent); transform:none; }
   .bt-chip-flag::before{ content:"★ "; }
   .bt-ext-group{
     display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-left:auto; padding:5px 6px 5px 12px;
@@ -251,12 +251,12 @@
   }
   .bt-subhero .fm-sub{ font-size:clamp(15px,1.8vw,17px); max-width:640px; margin:0 0 26px; }
   .bt-kpis{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:640px; }
-  .bt-kpi{ padding:16px 14px; border-radius:18px; background:linear-gradient(180deg,rgba(34,54,45,.75),rgba(27,43,37,.75)); border:1px solid var(--line); }
+  .bt-kpi{ padding:16px 14px; border-radius:18px; background:linear-gradient(180deg,var(--panel),var(--panel)); border:1px solid var(--line); }
   .bt-kpi b{ display:block; font-family:var(--f-display); font-size:clamp(20px,2.6vw,26px); letter-spacing:-.02em; color:var(--ink); }
   .bt-kpi span{ display:block; margin-top:3px; font-size:12px; color:var(--ink-dim); line-height:1.35; }
   .bt-panel{
     margin-top:8px; padding:clamp(16px,3vw,32px); border-radius:28px;
-    background:radial-gradient(620px 300px at 0% 0%,rgba(95,217,160,.09),transparent 65%), linear-gradient(180deg,rgba(27,43,37,.85),rgba(22,36,30,.85));
+    background:radial-gradient(620px 300px at 0% 0%,rgba(95,217,160,.09),transparent 65%), linear-gradient(180deg,var(--panel),var(--panel));
     border:1px solid var(--line); box-shadow:0 30px 80px rgba(0,0,0,.25);
   }
   .bt-panel > :first-child{ margin-top:0; }
@@ -264,7 +264,7 @@
     background:radial-gradient(520px 260px at 100% 100%,rgba(255,140,60,.14),transparent 65%), var(--panel); }
   .lx-controlbar{ top:78px !important; }
   @media (max-width:560px){ .bt-kpis{ grid-template-columns:1fr; } }
-  .lx-controlbar{ background:#1a2a24 !important; border:1px solid var(--line); border-radius:16px; padding:10px 14px !important; }
+  .lx-controlbar{ background:var(--sel) !important; border:1px solid var(--line); border-radius:16px; padding:10px 14px !important; }
   .bt-switch-gen{ margin-top:0; }
   .bt-group-label{ font-family:var(--f-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-2); padding:0 6px 0 2px; }
   .bt-chip small{ font-size:9.5px; opacity:.7; margin-left:3px; letter-spacing:.05em; }
@@ -281,7 +281,7 @@
   /* ===== Generator-Seiten ===== */
   .bt-gen{ max-width:1080px !important; }
   .bt-gen .og-viewer-wrap{ border-radius:24px !important; border:1px solid rgba(95,217,160,.35) !important; box-shadow:0 0 0 1px rgba(95,217,160,.06), 0 24px 70px rgba(95,217,160,.07); overflow:hidden; }
-  .bt-gen .og-section{ border-radius:20px; background:linear-gradient(160deg,rgba(34,54,45,.92),rgba(27,43,37,.92)); }
+  .bt-gen .og-section{ border-radius:20px; background:linear-gradient(160deg,var(--panel),var(--panel)); }
   .bt-gen .og-shape-btn, .bt-gen .og-gtype-btn{ border-radius:16px; }
   .bt-gen .og-export-btn{ border-radius:14px; box-shadow:0 10px 30px rgba(255,140,60,.28); }
   .bt-gen .og-export-btn:hover{ box-shadow:0 14px 38px rgba(255,140,60,.4); }
@@ -294,33 +294,21 @@
 <script src="/assets/ref-config.js"></script>
 <script src="/assets/ref.js" defer></script>
 <link rel="stylesheet" href="/assets/theme.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
 </head>
 <body>
 
 <div class="fm-root bt-sub bt-gen">
-  <nav class="bt-nav">
-    <a class="bt-logo" href="/" aria-label="3DToolBox">
-      <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
-      <rect width="220" height="220" rx="44" fill="#FF6A2B"/>
-      <polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/>
-      <polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/>
-      <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
-    </svg>
-      <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
-    </a>
-    <div class="fm-lang-switch">
-      <span class="fm-lang-current">DE</span>
-      <a class="fm-lang-link" href="/en/3d-print-object-generator.html" hreflang="en" title="English version">EN</a>
-    </div>
+  <header class="tb-top">
+  <nav class="tb-nav" aria-label="Hauptnavigation">
+    <a class="bt-logo" href="/" aria-label="3DToolBox"><svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true"><rect width="220" height="220" rx="44" fill="#FF6A2B"/><polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/><polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/><polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/></svg><span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span></a>
+    <input type="checkbox" id="tbm" class="tb-mchk" aria-label="Menü"><label for="tbm" class="tb-mbtn"><span></span><span></span><span></span><em>Menü</em></label>
+    <ul class="tb-menu"><li class="tb-grp"><details><summary>Filamente</summary><div class="tb-dd"><a href="/"><b>Filament-Finder</b><span>Foto oder 3MF hochladen, passende Filamente finden</span></a><a href="/filament-datenbank.html"><b>Filament-Datenbank</b><span>Über 1000 Filamente nach Farbe durchsuchen</span></a><a href="/filament-restmengenrechner.html"><b>Restmengenrechner</b><span>Wie viel Filament ist noch auf der Spule?</span></a></div></details></li><li class="tb-grp"><details><summary>Werkzeuge</summary><div class="tb-dd"><a href="/3d-druck-kostenrechner.html"><b>Kostenrechner</b><span>Material, Strom und Verschleiß live berechnen</span></a><a href="/3d-datei-konverter.html"><b>Datei-Konverter</b><span>STL, 3MF, OBJ und STEP umwandeln</span></a><a href="/bild-zu-3d.html"><b>Bild zu 3D</b><span>Foto in Relief oder Lithophanie verwandeln</span></a></div></details></li><li class="tb-grp is-cur"><details><summary>Generatoren</summary><div class="tb-dd"><a href="/generatoren.html"><b>Alle Generatoren</b><span>Über 30 Generatoren mit Suche</span></a><a href="/gridfinity-generator.html"><b>Gridfinity</b><span>Behälter und Grundplatten im 42-mm-Raster</span></a><a href="/gehaeuse-generator.html"><b>Gehäuse-Generator</b><span>Gehäuse für Raspberry Pi, ESP32 und mehr</span></a><a href="/3d-druck-objektgenerator.html" aria-current="page"><b>Objekt-Generator</b><span>Boxen, Tabletts, Zykloiden und mehr</span></a><a href="/3d-druck-planetengetriebe-generator.html"><b>Planetengetriebe</b><span>Getriebe mit Hohlrad, Planeten und Sonne</span></a><a href="/3d-druck-namens-anhaenger.html"><b>Namens-Anhänger</b><span>Mehrfarbige Anhänger mit Namen</span></a><a href="/3d-druck-namensschild-anhaenger.html"><b>Namensschild</b><span>Namensschild mit Anhänger</span></a></div></details></li><li class="tb-grp"><details><summary>Wissen</summary><div class="tb-dd"><a href="/3d-druck-lexikon.html"><b>Lexikon</b><span>Druckprobleme, Slicer-Tipps und Begriffe</span></a><a href="/materialien/"><b>Materialien</b><span>PLA, PETG, ABS, ASA, TPU und mehr im Vergleich</span></a><a href="/slicer-einstellungen-helfer.html"><b>Slicer-Helfer</b><span>Einstellungen für Bambu Studio, Prusa und Cura</span></a></div></details></li><li class="tb-grp"><details><summary>Empfehlungen</summary><div class="tb-dd"><small>Extern · nicht von uns · Werbung</small><a href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener sponsored"><b>Meshy AI ↗</b><span>KI: aus Text oder Bild ein 3D-Modell erstellen</span></a><a href="https://than.gs/u/8355632" target="_blank" rel="noopener sponsored"><b>Thangs ↗</b><span>Große Bibliothek fertiger 3D-Modelle</span></a></div></details></li></ul>
+    <div class="tb-tools"><div class="fm-lang-switch"><span class="fm-lang-current">DE</span><a class="fm-lang-link" href="/en/3d-print-object-generator.html" hreflang="en">EN</a></div><button class="tb-theme" type="button" aria-label="Darstellung wechseln (hell/dunkel)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
   </nav>
-  <div class="bt-switch"><a class="bt-chip bt-chip-flag" href="/">Filament-Finder</a><a class="bt-chip" href="/3d-druck-kostenrechner.html">Kostenrechner</a><a class="bt-chip" href="/filament-datenbank.html">Filament-Datenbank</a><a class="bt-chip" href="/3d-druck-lexikon.html">Lexikon</a><a class="bt-chip" href="/filament-restmengenrechner.html">Restmengen</a><a class="bt-chip" href="/slicer-einstellungen-helfer.html">Slicer-Helfer</a><a class="bt-chip" href="/3d-datei-konverter.html">Konverter</a><a class="bt-chip" href="/bild-zu-3d.html">Bild zu 3D</a><a class="bt-chip" href="/gehaeuse-generator.html">Gehäuse</a><a class="bt-chip" href="/materialien/">Materialien</a></div>
-  <div class="bt-switch bt-switch-gen"><span class="bt-group-label">Generatoren</span><span class="bt-chip bt-chip-active" aria-current="page">Objekt-Generator</span><a class="bt-chip" href="/3d-druck-planetengetriebe-generator.html">Planetengetriebe</a><a class="bt-chip" href="/3d-druck-namens-anhaenger.html">Namens-Anhänger</a><a class="bt-chip" href="/3d-druck-namensschild-anhaenger.html">Namensschild</a>
-    <a class="bt-chip" href="/generatoren.html">Alle Generatoren →</a>
-    <span class="bt-ext-group"><span class="bt-ext-label">Extern · nicht von uns</span>
-      <a class="bt-chip bt-chip-ext" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI ↗</a>
-      <a class="bt-chip bt-chip-ext" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs ↗</a>
-    </span>
-  </div>
+  <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><a href="/generatoren.html">Generatoren</a></li><li><span aria-current="page">3D-Objekt-Generator</span></li></ol></nav>
+  </header>
   <header class="bt-subhero"><span class="bt-pill"><i></i>Parametrischer Generator</span>
   <h1 class="fm-title">3D-Objekt-Generator</h1>
   <p class="fm-sub">Grundform wählen, per Schieberegler anpassen (Maße, Wanddicke, Farbe) — direkt als 3MF exportieren. Ohne CAD-Kenntnisse, komplett im Browser. Optional mit passender SKADIS-Wandhalterung.</p>
@@ -1121,17 +1109,17 @@
     Alle Formen werden rein additiv aus Grundkörpern aufgebaut (kein Boolescher CAD-Kern) — für 3D-Druck ist das unproblematisch, jeder gängige Slicer verarbeitet die exportierte 3MF-Datei zu einem sauberen, druckbaren Modell — mehrteilige Baugruppen bleiben dabei als separat anordenbare Objekte erhalten. Die SKADIS-Clips sind nach den öffentlich dokumentierten Maßen der Lochplatte ausgelegt (40&nbsp;mm-Raster, 5×15&nbsp;mm-Langloch) — bitte vor dem Druck einmal an der eigenen Platte gegenprüfen, falls du eine Nicht-IKEA-Variante besitzt.
   </p>
 
-  <div class="fm-footer">
-    <p class="fm-footer-coop">
-      <img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo">
-      In Kooperation mit <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a>
-    </p>
-    <div class="fm-footer-legal">
-      <a href="/impressum.html">Impressum</a>
-      <span>·</span>
-      <a href="/datenschutz.html">Datenschutz</a>
+  <footer class="tb-foot">
+    <div class="tb-foot-grid">
+      <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
+      <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>
+      <nav aria-label="Werkzeuge"><b>Werkzeuge</b><a href="/3d-druck-kostenrechner.html">Kostenrechner</a><a href="/3d-datei-konverter.html">Datei-Konverter</a><a href="/bild-zu-3d.html">Bild zu 3D</a></nav>
+      <nav aria-label="Generatoren"><b>Generatoren</b><a href="/gehaeuse-generator.html">Gehäuse-Generator</a><a href="/3d-druck-objektgenerator.html">Objekt-Generator</a><a href="/3d-druck-planetengetriebe-generator.html">Planetengetriebe</a><a href="/3d-druck-namens-anhaenger.html">Namens-Anhänger</a><a href="/3d-druck-namensschild-anhaenger.html">Namensschild</a><a href="/generatoren.html">Alle Generatoren →</a></nav>
+      <nav aria-label="Wissen"><b>Wissen</b><a href="/3d-druck-lexikon.html">Lexikon</a><a href="/materialien/">Materialien</a><a href="/slicer-einstellungen-helfer.html">Slicer-Helfer</a></nav>
+      <div class="tb-foot-creator"><b>Creator?</b><p>Du zeigst 3D-Druck in deinem Content? Melde dich mit ein paar Infos zu deinem Kanal.</p><a class="tb-foot-btn" href="mailto:info@3dtoolbox.info?subject=Partneranfrage%203DToolBox">Kooperation anfragen</a></div>
     </div>
-  </div>
+    <div class="tb-foot-bot"><p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> In Kooperation mit <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p><p class="tb-foot-legal"><a href="/impressum.html">Impressum</a><span aria-hidden="true">·</span><a href="/datenschutz.html">Datenschutz</a></p></div>
+  </footer>
 </div>
 
 <script>

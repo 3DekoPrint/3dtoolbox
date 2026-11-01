@@ -38,18 +38,18 @@
 .cv-row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin-top:14px}
 .cv-row label{display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--ink-dim)}
 .cv-row select{background:var(--panel-2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:10px 12px;font-size:16px}
-.cv-btn{background:var(--accent);color:#1a1206;border:0;border-radius:10px;padding:11px 20px;font-size:15px;font-weight:700;cursor:pointer}
+.cv-btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:10px;padding:11px 20px;font-size:15px;font-weight:700;cursor:pointer}
 .cv-btn:disabled{opacity:.6;cursor:wait}
 .cv-status{min-height:1.5em;margin:10px 0 0;font-size:14px;color:var(--accent-2)}.cv-status.bad{color:var(--accent)}
 .cv-warn{font-size:13px;color:var(--ink-dim);margin:8px 0 0}
 .cv-out{margin-top:14px;display:grid;gap:10px}
 .cv-out canvas{width:100%;max-width:560px;aspect-ratio:3/2;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;touch-action:none;cursor:grab}
-.cv-dl{display:inline-block;background:var(--accent-2);color:#0c1a13;border-radius:10px;padding:11px 18px;font-weight:700;text-decoration:none;justify-self:start}
-.mp a.cv-dl:not(.bt-chip):not(.md-link){color:#0c1a13}
+.cv-dl{display:inline-block;background:var(--accent-2);color:var(--on-accent);border-radius:10px;padding:11px 18px;font-weight:700;text-decoration:none;justify-self:start}
+.mp a.cv-dl:not(.bt-chip):not(.md-link){color:var(--on-accent)}
 .mp [hidden]{display:none!important}
 .i3-modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .i3-mode{background:var(--panel-2);border:1px solid var(--line);color:var(--ink);border-radius:99px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer}
-.i3-mode.on{background:var(--accent);border-color:var(--accent);color:#1a1206}
+.i3-mode.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .i3-params{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 16px;margin-top:12px}
 .i3-params label{display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--ink-dim);min-width:0}
 .i3-params label output{color:var(--accent-2);font-weight:700;margin-left:4px}

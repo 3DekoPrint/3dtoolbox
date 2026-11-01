@@ -100,7 +100,7 @@
     padding:5px 10px;
     border-radius:5px;
     background:var(--accent);
-    color:#1a1206;
+    color:var(--on-accent);
   }
   .fm-lang-link{
     padding:5px 10px;
@@ -190,7 +190,7 @@
   }
   .fm-tool-btn:not(.fm-tool-soon):hover{
     background:var(--accent);
-    color:#1a1206;
+    color:var(--on-accent);
   }
   .fm-tool-btn.fm-tool-soon{
     border-color:var(--line);
@@ -199,7 +199,7 @@
   }
   .fm-tool-btn.fm-tool-active{
     background:var(--accent);
-    color:#1a1206;
+    color:var(--on-accent);
   }
 
   h1.fm-title{
@@ -244,7 +244,7 @@
     transition:background .15s ease, color .15s ease, border-color .15s ease;
   }
   .fd-pill:hover{ border-color:var(--accent); color:var(--ink); }
-  .fd-pill-active{ background:var(--accent); border-color:var(--accent); color:#1a1206; }
+  .fd-pill-active{ background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
 
   .fd-hex-search-wrap{
     position:relative;
@@ -375,7 +375,7 @@
   }
   .fd-shop-btn{
     background:var(--accent);
-    color:#1a1206;
+    color:var(--on-accent);
     text-decoration:none;
     font-weight:700;
     font-size:12px;
@@ -415,7 +415,7 @@
   .fm-partner-btn{
     display:inline-block;
     background:var(--accent);
-    color:#1a1206;
+    color:var(--on-accent);
     text-decoration:none;
     font-weight:700;
     font-size:12.5px;
@@ -469,7 +469,7 @@
   .fm-sub{ margin-bottom:30px; }
   .fm-flagship-badge{
     display:inline-flex; align-items:center; gap:5px; font-family:var(--f-mono);
-    font-size:11px; font-weight:700; letter-spacing:.04em; color:#1a1206; background:var(--accent-2);
+    font-size:11px; font-weight:700; letter-spacing:.04em; color:var(--on-accent); background:var(--accent-2);
     padding:5px 10px; border-radius:20px; margin-bottom:12px;
   }
   h1.fm-title-flagship{ font-size:31px; }
@@ -534,7 +534,7 @@
     text-decoration:none; font-family:var(--f-mono); font-size:12.5px; font-weight:600;
     padding:9px 16px; border-radius:8px; transition:background .15s ease, color .15s ease;
   }
-  .fm-db-preview-btn:hover{ background:var(--accent); color:#1a1206; }
+  .fm-db-preview-btn:hover{ background:var(--accent); color:var(--on-accent); }
 
   .fm-tool-card-name{ overflow-wrap:break-word; word-break:break-word; }
   @media (max-width:480px){
@@ -554,7 +554,7 @@
   .bt-nav{
     position:sticky; top:12px; z-index:50; display:flex; align-items:center; gap:18px; flex-wrap:wrap;
     margin:12px 0 0; padding:9px 12px 9px 16px; border-radius:16px;
-    background:rgba(27,43,37,.78); border:1px solid var(--line);
+    background:var(--panel); border:1px solid var(--line);
     backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   }
   .bt-logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
@@ -563,11 +563,11 @@
   .bt-chip{
     font-family:var(--f-mono); font-size:12.5px; font-weight:600; text-decoration:none;
     color:var(--ink-dim); padding:9px 15px; border-radius:99px; border:1px solid var(--line);
-    background:rgba(27,43,37,.6); transition:color .15s, border-color .15s, transform .15s;
+    background:var(--panel); transition:color .15s, border-color .15s, transform .15s;
   }
   .bt-chip:hover{ color:var(--ink); border-color:var(--accent-2); transform:translateY(-1px); }
-  .bt-chip-active{ background:var(--accent); border-color:var(--accent); color:#1a1206; }
-  .bt-chip-active:hover{ color:#1a1206; border-color:var(--accent); transform:none; }
+  .bt-chip-active{ background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
+  .bt-chip-active:hover{ color:var(--on-accent); border-color:var(--accent); transform:none; }
   .bt-chip-flag::before{ content:"★ "; }
   .bt-ext-group{
     display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-left:auto; padding:5px 6px 5px 12px;
@@ -597,12 +597,12 @@
   }
   .bt-subhero .fm-sub{ font-size:clamp(15px,1.8vw,17px); max-width:640px; margin:0 0 26px; }
   .bt-kpis{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:640px; }
-  .bt-kpi{ padding:16px 14px; border-radius:18px; background:linear-gradient(180deg,rgba(34,54,45,.75),rgba(27,43,37,.75)); border:1px solid var(--line); }
+  .bt-kpi{ padding:16px 14px; border-radius:18px; background:linear-gradient(180deg,var(--panel),var(--panel)); border:1px solid var(--line); }
   .bt-kpi b{ display:block; font-family:var(--f-display); font-size:clamp(20px,2.6vw,26px); letter-spacing:-.02em; color:var(--ink); }
   .bt-kpi span{ display:block; margin-top:3px; font-size:12px; color:var(--ink-dim); line-height:1.35; }
   .bt-panel{
     margin-top:8px; padding:clamp(16px,3vw,32px); border-radius:28px;
-    background:radial-gradient(620px 300px at 0% 0%,rgba(95,217,160,.09),transparent 65%), linear-gradient(180deg,rgba(27,43,37,.85),rgba(22,36,30,.85));
+    background:radial-gradient(620px 300px at 0% 0%,rgba(95,217,160,.09),transparent 65%), linear-gradient(180deg,var(--panel),var(--panel));
     border:1px solid var(--line); box-shadow:0 30px 80px rgba(0,0,0,.25);
   }
   .bt-panel > :first-child{ margin-top:0; }
@@ -610,7 +610,7 @@
     background:radial-gradient(520px 260px at 100% 100%,rgba(255,140,60,.14),transparent 65%), var(--panel); }
   .lx-controlbar{ top:78px !important; }
   @media (max-width:560px){ .bt-kpis{ grid-template-columns:1fr; } }
-  .lx-controlbar{ background:#1a2a24 !important; border:1px solid var(--line); border-radius:16px; padding:10px 14px !important; }
+  .lx-controlbar{ background:var(--sel) !important; border:1px solid var(--line); border-radius:16px; padding:10px 14px !important; }
   .bt-switch-gen{ margin-top:0; }
   .bt-group-label{ font-family:var(--f-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-2); padding:0 6px 0 2px; }
   .bt-chip small{ font-size:9.5px; opacity:.7; margin-left:3px; letter-spacing:.05em; }
@@ -632,7 +632,7 @@
 .md-tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
 .md-tab{background:var(--panel-2);color:var(--ink-dim);border:1px solid var(--line);border-radius:999px;padding:9px 18px;font:600 14px/1 inherit;cursor:pointer}
 .md-tab:hover{border-color:var(--accent);color:var(--ink)}
-.md-tab[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#1a1206}
+.md-tab[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .md-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
 .md-search{background:var(--panel-2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:8px 12px;font-size:14px;min-width:180px;flex:1}
 .md-intro{color:var(--ink-dim);font-size:14px;line-height:1.55;margin:0 0 14px}
@@ -662,33 +662,21 @@
 <script src="/assets/ref-config.js"></script>
 <script src="/assets/ref.js" defer></script>
 <link rel="stylesheet" href="/assets/theme.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
 </head>
 <body>
 
 <div class="fm-root bt-sub">
-  <nav class="bt-nav">
-    <a class="bt-logo" href="/en/" aria-label="3DToolBox">
-      <svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true">
-      <rect width="220" height="220" rx="44" fill="#FF6A2B"/>
-      <polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/>
-      <polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/>
-      <polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/>
-    </svg>
-      <span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span>
-    </a>
-    <div class="fm-lang-switch">
-      <a class="fm-lang-link" href="/filament-datenbank.html">DE</a>
-      <span class="fm-lang-current">EN</span>
-    </div>
+  <header class="tb-top">
+  <nav class="tb-nav" aria-label="Main navigation">
+    <a class="bt-logo" href="/en/" aria-label="3DToolBox"><svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true"><rect width="220" height="220" rx="44" fill="#FF6A2B"/><polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/><polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/><polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/></svg><span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span></a>
+    <input type="checkbox" id="tbm" class="tb-mchk" aria-label="Menu"><label for="tbm" class="tb-mbtn"><span></span><span></span><span></span><em>Menu</em></label>
+    <ul class="tb-menu"><li class="tb-grp is-cur"><details><summary>Filaments</summary><div class="tb-dd"><a href="/en/"><b>Filament Finder</b><span>Upload a photo or 3MF and find matching filaments</span></a><a href="/en/filament-database.html" aria-current="page"><b>Filament Database</b><span>Browse 1000+ filaments by colour</span></a><a href="/en/filament-remaining-calculator.html"><b>Remaining Filament</b><span>How much filament is left on the spool?</span></a></div></details></li><li class="tb-grp"><details><summary>Tools</summary><div class="tb-dd"><a href="/en/3d-print-cost-calculator.html"><b>Cost Calculator</b><span>Material, power and wear costs live</span></a><a href="/en/3d-file-converter.html"><b>File Converter</b><span>Convert STL, 3MF, OBJ and STEP</span></a><a href="/en/image-to-3d.html"><b>Image to 3D</b><span>Turn a photo into a relief or lithophane</span></a></div></details></li><li class="tb-grp"><details><summary>Generators</summary><div class="tb-dd"><a href="/en/generators.html"><b>All generators</b><span>30+ generators with search</span></a><a href="/en/gridfinity-generator.html"><b>Gridfinity</b><span>Bins and baseplates on the 42 mm grid</span></a><a href="/en/enclosure-generator.html"><b>Enclosure Generator</b><span>Cases for Raspberry Pi, ESP32 and more</span></a><a href="/en/3d-print-object-generator.html"><b>Object Generator</b><span>Boxes, trays, cycloids and more</span></a><a href="/en/3d-print-planetary-gearbox-generator.html"><b>Planetary Gearbox</b><span>Gearbox with ring, planets and sun gear</span></a><a href="/en/3d-print-layered-name-tag.html"><b>Layered Name Tag</b><span>Multicolour name tags</span></a><a href="/en/3d-print-name-plate-tag.html"><b>Name Plate Tag</b><span>Name plate with tag</span></a></div></details></li><li class="tb-grp"><details><summary>Knowledge</summary><div class="tb-dd"><a href="/en/3d-print-lexicon.html"><b>Lexicon</b><span>Print problems, slicer tips and terms</span></a><a href="/en/materials/"><b>Materials</b><span>PLA, PETG, ABS, ASA, TPU and more compared</span></a><a href="/en/slicer-settings-helper.html"><b>Slicer Helper</b><span>Settings for Bambu Studio, Prusa and Cura</span></a></div></details></li><li class="tb-grp"><details><summary>Recommended</summary><div class="tb-dd"><small>External · not by us · Ad</small><a href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener sponsored"><b>Meshy AI ↗</b><span>AI: create a 3D model from text or an image</span></a><a href="https://than.gs/u/8355632" target="_blank" rel="noopener sponsored"><b>Thangs ↗</b><span>Large library of ready-to-print 3D models</span></a></div></details></li></ul>
+    <div class="tb-tools"><div class="fm-lang-switch"><span class="fm-lang-current">EN</span><a class="fm-lang-link" href="/filament-datenbank.html" hreflang="de">DE</a></div><button class="tb-theme" type="button" aria-label="Switch appearance (light/dark)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
   </nav>
-  <div class="bt-switch"><a class="bt-chip bt-chip-flag" href="/en/">Filament Finder</a><a class="bt-chip" href="/en/3d-print-cost-calculator.html">Cost Calculator</a><span class="bt-chip bt-chip-active" aria-current="page">Filament Database</span><a class="bt-chip" href="/en/3d-print-lexicon.html">Lexicon</a><a class="bt-chip" href="/en/filament-remaining-calculator.html">Remaining Filament</a><a class="bt-chip" href="/en/slicer-settings-helper.html">Slicer Helper</a><a class="bt-chip" href="/en/3d-file-converter.html">Converter</a><a class="bt-chip" href="/en/image-to-3d.html">Image to 3D</a><a class="bt-chip" href="/en/enclosure-generator.html">Enclosures</a><a class="bt-chip" href="/en/materials/">Materials</a></div>
-  <div class="bt-switch bt-switch-gen"><span class="bt-group-label">Generators</span><a class="bt-chip" href="/en/3d-print-object-generator.html">Object Generator</a><a class="bt-chip" href="/en/3d-print-planetary-gearbox-generator.html">Planetary Gearbox</a><a class="bt-chip" href="/en/3d-print-layered-name-tag.html">Layered Name Tag</a><a class="bt-chip" href="/en/3d-print-name-plate-tag.html">Name Plate Tag</a>
-    <a class="bt-chip" href="/en/generators.html">All generators →</a>
-    <span class="bt-ext-group"><span class="bt-ext-label">External · not ours</span>
-      <a class="bt-chip bt-chip-ext" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI ↗</a>
-      <a class="bt-chip bt-chip-ext" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs ↗</a>
-    </span>
-  </div>
+  <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><span>Filaments</span></li><li><span aria-current="page">Filament Database</span></li></ol></nav>
+  </header>
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Filament Database</span>
   <h1 class="fm-title">Filament Database</h1>
@@ -730,23 +718,17 @@
 
   </section>
 
-  <div class="fm-partner">
-    <p class="fm-partner-title">Are you a 3D-print creator who wants to feature 3DToolBox in your content?</p>
-    <p class="fm-partner-text">We work with selected partners who introduce 3DToolBox and its connected tools to their audience. Reach out with a few details about your channel — we review every application personally.</p>
-    <a class="fm-partner-btn" href="mailto:info@3dtoolbox.info?subject=Partner%20inquiry%20-%203DToolBox">Become a partner</a>
-  </div>
-
-  <div class="fm-footer">
-    <p class="fm-footer-coop">
-      <img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo">
-      In cooperation with <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a>
-    </p>
-    <div class="fm-footer-legal">
-      <a href="/en/impressum.html">Legal Notice</a>
-      <span>·</span>
-      <a href="/en/datenschutz.html">Privacy Policy</a>
+  <footer class="tb-foot">
+    <div class="tb-foot-grid">
+      <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
+      <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>
+      <nav aria-label="Tools"><b>Tools</b><a href="/en/3d-print-cost-calculator.html">Cost Calculator</a><a href="/en/3d-file-converter.html">File Converter</a><a href="/en/image-to-3d.html">Image to 3D</a></nav>
+      <nav aria-label="Generators"><b>Generators</b><a href="/en/enclosure-generator.html">Enclosure Generator</a><a href="/en/3d-print-object-generator.html">Object Generator</a><a href="/en/3d-print-planetary-gearbox-generator.html">Planetary Gearbox</a><a href="/en/3d-print-layered-name-tag.html">Layered Name Tag</a><a href="/en/3d-print-name-plate-tag.html">Name Plate Tag</a><a href="/en/generators.html">All generators →</a></nav>
+      <nav aria-label="Knowledge"><b>Knowledge</b><a href="/en/3d-print-lexicon.html">Lexicon</a><a href="/en/materials/">Materials</a><a href="/en/slicer-settings-helper.html">Slicer Helper</a></nav>
+      <div class="tb-foot-creator"><b>Creator?</b><p>Do you show 3D printing in your content? Get in touch with a few details about your channel.</p><a class="tb-foot-btn" href="mailto:info@3dtoolbox.info?subject=Partner%20inquiry%20-%203DToolBox">Request a collaboration</a></div>
     </div>
-  </div>
+    <div class="tb-foot-bot"><p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> In cooperation with <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p><p class="tb-foot-legal"><a href="/en/impressum.html">Legal Notice</a><span aria-hidden="true">·</span><a href="/en/datenschutz.html">Privacy Policy</a></p></div>
+  </footer>
 </div>
 
 <script src="/assets/filament-catalog.js"></script>
@@ -981,7 +963,7 @@
     keys.forEach(k => {
       const c = clustersOf(fams[k])[0];
       const b = document.createElement('button'); b.type = 'button'; b.className = 'fd-pill';
-      b.innerHTML = '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:' + c.hex + ';border:1px solid rgba(255,255,255,.35)"></span>' + T.fam[k];
+      b.innerHTML = '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:' + c.hex + ';border:1px solid rgba(128,128,128,.55)"></span>' + T.fam[k];
       b.addEventListener('click', () => { const el = document.getElementById('fdfam-' + k); if (el) el.scrollIntoView({behavior:'smooth', block:'start'}); });
       jump.appendChild(b);
     });
