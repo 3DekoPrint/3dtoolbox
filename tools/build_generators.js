@@ -2,6 +2,7 @@
 /* Erzeugt aus den Generator-Beschreibungen (assets/gen/*.js) die DE- und EN-Seiten, die Übersicht und die Sitemap-Einträge.
    Aufruf im Repo-Hauptverzeichnis:  node tools/build_generators.js
    Nutzt die vorhandenen Seiten (Gehäuse-Generator) als Vorlage für Navigation, Partner-Hinweis und Fußzeile. */
+const NAV = require('./site_nav.js');
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..'), BASE = 'https://3dtoolbox.info';
 const defs = [];
@@ -34,13 +35,7 @@ const EXISTING = [
   { cat: 'art', de: ['Bild zu 3D', 'Foto wird Relief oder Lithophanie', '/bild-zu-3d.html'], en: ['Image to 3D', 'Turn a photo into a relief or lithophane', '/en/image-to-3d.html'] }
 ];
 
-function chunks(lg) {
-  const t = tpl[lg];
-  const nav = cut(t, '  <nav class="bt-nav">', '  </nav>') + '  </nav>\n';
-  const chips = cut(t, '  <div class="bt-switch">', '  <header class="bt-subhero">');
-  const tail = cut(t, '  <div class="fm-partner">', '</div>\n<script') + '</div>\n';
-  return { nav, chips, tail };
-}
+function chunks(lg) { return { tail: NAV.footer(lg) + '</div>' + String.fromCharCode(10) }; }
 function langNav(nav, lg, other) { return nav.replace(/<a class="fm-lang-link" href="[^"]*" hreflang="(en|de)">/, '<a class="fm-lang-link" href="' + other + '" hreflang="' + (lg === 'de' ? 'en' : 'de') + '">'); }
 function chipsFor(chips, lg, d) {
   let c = chips.replace(/<span class="bt-chip bt-chip-active" aria-current="page">([^<]*)<\/span>/, (m, n) => '<a class="bt-chip" href="' + (lg === 'de' ? '/gehaeuse-generator.html' : '/en/enclosure-generator.html') + '">' + n + '</a>');
@@ -69,7 +64,7 @@ function toolPage(d, lg) {
     { '@type': 'FAQPage', mainEntity: m.faq[lg].map(q => ({ '@type': 'Question', name: q[0], acceptedAnswer: { '@type': 'Answer', text: q[1] } })) },
     { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: '3DToolBox', item: BASE + Tl.root }, { '@type': 'ListItem', position: 2, name: Tl.gen, item: BASE + Tl.hubFile }, { '@type': 'ListItem', position: 3, name: m.h1[lg], item: BASE + url[lg] }] }] };
   let h = head(lg, { title: m.title[lg], desc: m.desc[lg], url, ld, css: '<link rel="stylesheet" href="/assets/gen-kit.css">\n' });
-  h += langNav(ch.nav, lg, other) + chipsFor(ch.chips, lg, d);
+  h += NAV.header(lg, { path: url[lg], other, crumbs: [[Tl.home, Tl.root], [Tl.gen, Tl.hubFile], [m.h1[lg], null]] });
   h += '  <header class="bt-subhero gk-hero"><span class="bt-pill"><i></i>' + esc(m.tag[lg]) + '</span><h1 class="fm-title">' + esc(m.h1[lg]) + '</h1><p class="fm-sub">' + esc(m.sub[lg]) + '</p>\n  <div class="bt-kpis"><div class="bt-kpi"><b>STL + 3MF</b><span>' + Tl.kpiExp + '</span></div><div class="bt-kpi"><b>0 €</b><span>' + Tl.kpiFree + '</span></div><div class="bt-kpi"><b>' + Tl.local + '</b><span>' + Tl.kpiLocal + '</span></div></div></header>\n';
   h += '  <div id="gk"></div>\n  <noscript><p class="cv-warn">' + Tl.nojs + '</p></noscript>\n  <section class="bt-panel mp">\n';
   h += '  <h2>' + Tl.intro + '</h2>' + m.intro[lg].map(p => '<p>' + esc(p) + '</p>').join('') + '\n';
@@ -83,12 +78,13 @@ function hubPage(lg) {
   const Tl = T[lg], ch = chunks(lg), url = { de: '/generatoren.html', en: '/en/generators.html' };
   const ld = { '@context': 'https://schema.org', '@graph': [{ '@type': 'CollectionPage', name: Tl.hubH1, url: BASE + url[lg], description: Tl.hubDesc }, { '@type': 'ItemList', itemListElement: defs.map((d, i) => ({ '@type': 'ListItem', position: i + 1, name: d.meta.h1[lg], url: BASE + urlOf(d, lg) })) }] };
   let h = head(lg, { title: Tl.hubTitle, desc: Tl.hubDesc, url, ld, css: '<link rel="stylesheet" href="/assets/gen-kit.css">\n' });
-  h += langNav(ch.nav, lg, url[lg === 'de' ? 'en' : 'de']) + chipsFor(ch.chips, lg, null);
+  h += NAV.header(lg, { path: url[lg], other: url[lg === 'de' ? 'en' : 'de'], crumbs: [[Tl.home, Tl.root], [Tl.hubH1, null]] });
   h += '  <header class="bt-subhero"><span class="bt-pill"><i></i>' + Tl.gen + '</span><h1 class="fm-title">' + Tl.hubH1 + '</h1><p class="fm-sub">' + Tl.hubSub + '</p></header>\n  <section class="bt-panel mp">\n  <input id="hubQ" class="gk-hubq" type="search" placeholder="' + Tl.hubSearch + '" autocomplete="off" aria-label="' + Tl.hubSearch + '">\n';
+  h += '  <nav class="gk-jump" aria-label="' + esc(Tl.hubH1) + '">' + Object.keys(Tl.cats).map(k => '<a href="#' + k + '">' + esc(Tl.cats[k]) + '</a>').join('') + '</nav>\n';
   Object.keys(Tl.cats).forEach(cat => {
     const rows = defs.filter(d => d.meta.cat === cat).map(d => [d.meta.h1[lg], d.meta.sub[lg].split('. ')[0].replace(/\.$/, ''), urlOf(d, lg)]).concat(EXISTING.filter(e => e.cat === cat).map(e => e[lg]));
     if (!rows.length) return;
-    h += '  <h2 class="gk-cat">' + Tl.cats[cat] + '</h2>\n  <ul class="gk-rows">' + rows.map(r => '<li><a href="' + r[2] + '"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span><i>' + Tl.open + ' →</i></a></li>').join('') + '</ul>\n';
+    h += '  <h2 class="gk-cat" id="' + cat + '">' + Tl.cats[cat] + '</h2>\n  <ul class="gk-rows">' + rows.map(r => '<li><a href="' + r[2] + '"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span><i>' + Tl.open + ' →</i></a></li>').join('') + '</ul>\n';
   });
   h += '  <p id="hubNone" class="cv-warn" hidden>' + Tl.hubNone + '</p>\n  </section>\n' + ch.tail;
   h += '<script>(function(){var q=document.getElementById("hubQ"),n=document.getElementById("hubNone");q.addEventListener("input",function(){var v=q.value.trim().toLowerCase(),any=false;document.querySelectorAll(".gk-rows li").forEach(function(li){var s=!v||li.textContent.toLowerCase().indexOf(v)>=0;li.style.display=s?"":"none";if(s)any=true});document.querySelectorAll(".gk-rows").forEach(function(ul){var vis=[].some.call(ul.children,function(li){return li.style.display!=="none"});ul.previousElementSibling.style.display=vis?"":"none";ul.style.display=vis?"":"none"});n.hidden=any})})();</script>\n</body>\n</html>\n';
@@ -135,6 +131,6 @@ function patchHome() {
     h = h.slice(0, j) + rows + h.slice(j); fs.writeFileSync(f, h);
   });
 }
-patchChips(); patchHome();
+
 
 console.log('Seiten:', out.map(o => o.path).join(', '));

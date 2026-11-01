@@ -33,21 +33,20 @@
 <script src="/assets/ref.js" defer></script>
 <link rel="stylesheet" href="/assets/theme.css">
 <link rel="stylesheet" href="/assets/gen-kit.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
 </head>
 <body>
 <div class="fm-root bt-sub">
-  <nav class="bt-nav">
+  <header class="tb-top">
+  <nav class="tb-nav" aria-label="Hauptnavigation">
     <a class="bt-logo" href="/" aria-label="3DToolBox"><svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true"><rect width="220" height="220" rx="44" fill="#FF6A2B"/><polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/><polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/><polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/></svg><span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span></a>
-    <div class="fm-lang-switch"><span class="fm-lang-current">DE</span><a class="fm-lang-link" href="/en/stamp-generator.html" hreflang="en">EN</a></div>
+    <input type="checkbox" id="tbm" class="tb-mchk" aria-label="Menü"><label for="tbm" class="tb-mbtn"><span></span><span></span><span></span><em>Menü</em></label>
+    <ul class="tb-menu"><li class="tb-grp"><details><summary>Filamente</summary><div class="tb-dd"><a href="/"><b>Filament-Finder</b><span>Foto oder 3MF hochladen, passende Filamente finden</span></a><a href="/filament-datenbank.html"><b>Filament-Datenbank</b><span>Über 1000 Filamente nach Farbe durchsuchen</span></a><a href="/filament-restmengenrechner.html"><b>Restmengenrechner</b><span>Wie viel Filament ist noch auf der Spule?</span></a></div></details></li><li class="tb-grp"><details><summary>Werkzeuge</summary><div class="tb-dd"><a href="/3d-druck-kostenrechner.html"><b>Kostenrechner</b><span>Material, Strom und Verschleiß live berechnen</span></a><a href="/3d-datei-konverter.html"><b>Datei-Konverter</b><span>STL, 3MF, OBJ und STEP umwandeln</span></a><a href="/bild-zu-3d.html"><b>Bild zu 3D</b><span>Foto in Relief oder Lithophanie verwandeln</span></a></div></details></li><li class="tb-grp is-cur"><details><summary>Generatoren</summary><div class="tb-dd"><a href="/generatoren.html"><b>Alle Generatoren</b><span>Über 30 Generatoren mit Suche</span></a><a href="/gridfinity-generator.html"><b>Gridfinity</b><span>Behälter und Grundplatten im 42-mm-Raster</span></a><a href="/gehaeuse-generator.html"><b>Gehäuse-Generator</b><span>Gehäuse für Raspberry Pi, ESP32 und mehr</span></a><a href="/3d-druck-objektgenerator.html"><b>Objekt-Generator</b><span>Boxen, Tabletts, Zykloiden und mehr</span></a><a href="/3d-druck-planetengetriebe-generator.html"><b>Planetengetriebe</b><span>Getriebe mit Hohlrad, Planeten und Sonne</span></a><a href="/3d-druck-namens-anhaenger.html"><b>Namens-Anhänger</b><span>Mehrfarbige Anhänger mit Namen</span></a><a href="/3d-druck-namensschild-anhaenger.html"><b>Namensschild</b><span>Namensschild mit Anhänger</span></a></div></details></li><li class="tb-grp"><details><summary>Wissen</summary><div class="tb-dd"><a href="/3d-druck-lexikon.html"><b>Lexikon</b><span>Druckprobleme, Slicer-Tipps und Begriffe</span></a><a href="/materialien/"><b>Materialien</b><span>PLA, PETG, ABS, ASA, TPU und mehr im Vergleich</span></a><a href="/slicer-einstellungen-helfer.html"><b>Slicer-Helfer</b><span>Einstellungen für Bambu Studio, Prusa und Cura</span></a></div></details></li><li class="tb-grp"><details><summary>Empfehlungen</summary><div class="tb-dd"><small>Extern · nicht von uns · Werbung</small><a href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener sponsored"><b>Meshy AI ↗</b><span>KI: aus Text oder Bild ein 3D-Modell erstellen</span></a><a href="https://than.gs/u/8355632" target="_blank" rel="noopener sponsored"><b>Thangs ↗</b><span>Große Bibliothek fertiger 3D-Modelle</span></a></div></details></li></ul>
+    <div class="tb-tools"><div class="fm-lang-switch"><span class="fm-lang-current">DE</span><a class="fm-lang-link" href="/en/stamp-generator.html" hreflang="en">EN</a></div><button class="tb-theme" type="button" aria-label="Darstellung wechseln (hell/dunkel)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
   </nav>
-  <div class="bt-switch"><a class="bt-chip bt-chip-flag" href="/">Filament-Finder</a><a class="bt-chip" href="/3d-druck-kostenrechner.html">Kostenrechner</a><a class="bt-chip" href="/filament-datenbank.html">Filament-Datenbank</a><a class="bt-chip" href="/3d-druck-lexikon.html">Lexikon</a><a class="bt-chip" href="/filament-restmengenrechner.html">Restmengen</a><a class="bt-chip" href="/slicer-einstellungen-helfer.html">Slicer-Helfer</a><a class="bt-chip" href="/3d-datei-konverter.html">Konverter</a><a class="bt-chip" href="/bild-zu-3d.html">Bild zu 3D</a><a class="bt-chip" href="/gehaeuse-generator.html">Gehäuse</a><a class="bt-chip" href="/materialien/">Materialien</a></div>
-  <div class="bt-switch bt-switch-gen"><span class="bt-group-label">Generatoren</span><a class="bt-chip" href="/3d-druck-objektgenerator.html">Objekt-Generator</a><a class="bt-chip" href="/3d-druck-planetengetriebe-generator.html">Planetengetriebe</a><a class="bt-chip" href="/3d-druck-namens-anhaenger.html">Namens-Anhänger</a><a class="bt-chip" href="/3d-druck-namensschild-anhaenger.html">Namensschild</a>
-    <a class="bt-chip" href="/generatoren.html">Alle Generatoren →</a><span class="bt-chip bt-chip-active" aria-current="page">Stempel</span>
-    <span class="bt-ext-group"><span class="bt-ext-label">Extern · nicht von uns</span>
-      <a class="bt-chip bt-chip-ext" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener">Meshy AI ↗</a>
-      <a class="bt-chip bt-chip-ext" href="https://than.gs/u/8355632" target="_blank" rel="noopener">Thangs ↗</a></span>
-  </div>
-
+  <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><a href="/generatoren.html">Generatoren</a></li><li><span aria-current="page">Stempel</span></li></ol></nav>
+  </header>
   <header class="bt-subhero gk-hero"><span class="bt-pill"><i></i>Kunst &amp; Schilder</span><h1 class="fm-title">Stempel</h1><p class="fm-sub">Textstempel mit Griff: Text und Schrift eingeben, die Spiegelung ist schon eingerechnet.</p>
   <div class="bt-kpis"><div class="bt-kpi"><b>STL + 3MF</b><span>Export</span></div><div class="bt-kpi"><b>0 €</b><span>Kosten</span></div><div class="bt-kpi"><b>im Browser</b><span>Läuft</span></div></div></header>
   <div id="gk"></div>
@@ -57,11 +56,17 @@
   <h2>Druckhinweise</h2><ul class="mp-list"><li>Schrift mindestens 8 mm hoch wählen, sonst werden Details zu fein. Fette Schriftarten stempeln besser.</li><li>Mit 0,12 mm Schichthöhe wird die Schrift am schärfsten. Stempelkissen oder Stoffe mit Stoff- oder Acrylfarbe nutzen.</li><li>Die Schrift hängt davon ab, welche Schriftarten dein Gerät hat. Die erste Option ist immer enthalten.</li></ul>
   <h2>Häufige Fragen</h2><h3>Warum ist die Schrift auf dem Modell gespiegelt?</h3><p>Weil ein Stempel seitenverkehrt sein muss, damit der Abdruck richtig herum ist. Mit der Option Spiegeln kannst du das abschalten.</p><h3>Wie viele Zeilen sind möglich?</h3><p>Bis zu drei Zeilen, getrennt durch den senkrechten Strich.</p>
   </section>
-  <div class="fm-partner"><p class="fm-partner-title">Du bist 3D-Print-Creator und willst 3DToolBox in deinem Content zeigen?</p><p class="fm-partner-text">Wir arbeiten mit ausgewählten Partnern zusammen, die 3DToolBox und angebundene Tools bei ihrem Publikum vorstellen. Melde dich mit ein paar Infos zu deinem Kanal — wir schauen uns jede Bewerbung persönlich an.</p><a class="fm-partner-btn" href="mailto:info@3dtoolbox.info?subject=Partneranfrage%203DToolBox">Partner werden</a></div>
-  <div class="fm-footer">
-    <p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> In Kooperation mit <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p>
-    <div class="fm-footer-legal"><a href="/impressum.html">Impressum</a><span>·</span><a href="/datenschutz.html">Datenschutz</a></div>
-  </div>
+  <footer class="tb-foot">
+    <div class="tb-foot-grid">
+      <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
+      <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>
+      <nav aria-label="Werkzeuge"><b>Werkzeuge</b><a href="/3d-druck-kostenrechner.html">Kostenrechner</a><a href="/3d-datei-konverter.html">Datei-Konverter</a><a href="/bild-zu-3d.html">Bild zu 3D</a></nav>
+      <nav aria-label="Generatoren"><b>Generatoren</b><a href="/gehaeuse-generator.html">Gehäuse-Generator</a><a href="/3d-druck-objektgenerator.html">Objekt-Generator</a><a href="/3d-druck-planetengetriebe-generator.html">Planetengetriebe</a><a href="/3d-druck-namens-anhaenger.html">Namens-Anhänger</a><a href="/3d-druck-namensschild-anhaenger.html">Namensschild</a><a href="/generatoren.html">Alle Generatoren →</a></nav>
+      <nav aria-label="Wissen"><b>Wissen</b><a href="/3d-druck-lexikon.html">Lexikon</a><a href="/materialien/">Materialien</a><a href="/slicer-einstellungen-helfer.html">Slicer-Helfer</a></nav>
+      <div class="tb-foot-creator"><b>Creator?</b><p>Du zeigst 3D-Druck in deinem Content? Melde dich mit ein paar Infos zu deinem Kanal.</p><a class="tb-foot-btn" href="mailto:info@3dtoolbox.info?subject=Partneranfrage%203DToolBox">Kooperation anfragen</a></div>
+    </div>
+    <div class="tb-foot-bot"><p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> In Kooperation mit <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p><p class="tb-foot-legal"><a href="/impressum.html">Impressum</a><span aria-hidden="true">·</span><a href="/datenschutz.html">Datenschutz</a></p></div>
+  </footer>
 </div>
 <script src="/assets/converter-core.js"></script>
 <script src="/assets/mesh-preview.js"></script>
