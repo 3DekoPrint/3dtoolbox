@@ -296,6 +296,7 @@
 <link rel="stylesheet" href="/assets/theme.css">
 <script src="/assets/theme-init.js"></script>
 <script src="/assets/ui.js" defer></script>
+<link rel="stylesheet" href="/assets/print-dock.css">
 </head>
 <body>
 <a class="tb-skip" href="#main">Zum Inhalt springen</a>
@@ -1177,7 +1178,7 @@
   animate();
 
   let modelGroup = new THREE.Group();
-  scene.add(modelGroup);
+  scene.add(modelGroup); window.__tbGroup = modelGroup;
 
   // ===== Hilfsfunktionen: Grundgeometrie ================================
 
@@ -5223,6 +5224,21 @@ function meshListToXmlObject(meshList, objectId){
   rebuildLetterScaleSliders();
 
   rebuild();
+})();
+</script>
+<script src="/assets/print-dock.js"></script>
+<script>
+(function () {
+  var wrap = document.querySelector('.og-viewer-wrap'); if (!wrap || !window.PrintDock) return;
+  var host = document.createElement('div'); wrap.parentNode.insertBefore(host, wrap.nextSibling);
+  function grp() { try { return typeof modelGroup !== 'undefined' && modelGroup ? modelGroup : window.__tbGroup; } catch (e) { return window.__tbGroup; } }
+  var pd = PrintDock.mount(host, {
+    tool: (document.querySelector('h1') || document.title).textContent || document.title,
+    stats: function () { var g = grp(); return g && g.children.length ? PrintDock.statsFromGroup(g) : null; },
+    describe: function () { return PrintDock.describeForm(document.querySelector('main') || document.body); },
+    link: function () { return String(location.href); }
+  });
+  (function wait() { var g = grp(); if (!g) return setTimeout(wait, 300); PrintDock.watchGroup(g, pd.update); })();
 })();
 </script>
 <script src="/assets/feedback.js" defer></script>

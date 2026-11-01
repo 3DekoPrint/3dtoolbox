@@ -146,8 +146,6 @@
       reset: 'Reset', fits: 'fits on the print bed', nofit: 'is larger than the print bed', plate: 'Custom plate', parts: 'Parts', tri: 'triangles', own: 'custom size (W × D mm)', noGl: 'The preview needs WebGL2. You can still download the files.',
       bedFit: function (w, d) { return 'Footprint ' + w.toFixed(0) + ' × ' + d.toFixed(0) + ' mm'; }, h: 'h', mn: 'min' }
   };
-  var BEDS = [['bambu256', 'Bambu X1 / P1 / A1 (256 × 256)', 256, 256], ['a1mini', 'Bambu A1 mini (180 × 180)', 180, 180], ['mk4', 'Prusa MK4 (250 × 210)', 250, 210], ['mini', 'Prusa Mini (180 × 180)', 180, 180],
-    ['ender3', 'Ender 3 (220 × 220)', 220, 220], ['k1', 'Creality K1 (220 × 220)', 220, 220], ['voron250', 'Voron 250 (250 × 250)', 250, 250], ['voron300', 'Voron 300 (300 × 300)', 300, 300], ['custom', '', 0, 0]];
   var MATS = [['pla', 'PLA', 1.24], ['petg', 'PETG', 1.27], ['abs', 'ABS / ASA', 1.05], ['tpu', 'TPU', 1.21]];
 
   /* ---------- Oberfläche ---------- */
@@ -159,8 +157,9 @@
     function L(x) { return x == null ? '' : typeof x === 'string' ? x : (x[LANG] || x.de || ''); }
     var P = {}, DEF = {}, flat = [], busy = false, again = false, last = null, timer = null, H = null, prev = null;
     def.groups.forEach(function (g) { g.items.forEach(function (it) { DEF[it.k] = it.def; P[it.k] = it.def; flat.push(it); }); });
-    var env = { bed: 'bambu256', bw: 220, bd: 220, mat: 'pla', price: 20 };
+    var env = { bed: 'x1c', bw: 220, bd: 220, mat: 'pla', price: 20 };
     try { var sv = JSON.parse(localStorage.getItem('tb_gk_env') || '{}'); Object.keys(sv).forEach(function (k) { if (k in env) env[k] = sv[k]; }); } catch (e) { /* Speicher gesperrt */ }
+    if (env.bed !== 'custom') { var pp0 = root.PrintDock && root.PrintDock.printer(env.bed); env.bed = pp0 ? pp0.id : 'x1c'; }
     function saveEnv() { try { localStorage.setItem('tb_gk_env', JSON.stringify(env)); } catch (e) { /* ignorieren */ } }
 
     host.innerHTML = '';
@@ -228,7 +227,7 @@
     bStl.type = bMf.type = 'button'; bStl.disabled = bMf.disabled = true; dl.appendChild(bStl); dl.appendChild(bMf);
     var est = el('div', 'gk-est');
     var env1 = el('div', 'gk-env'), bedSel = el('select'), matSel = el('select'), price = el('input'), bw = el('input'), bd = el('input');
-    bedSel.innerHTML = BEDS.map(function (b) { return '<option value="' + b[0] + '">' + (b[0] === 'custom' ? esc(T.own) : esc(b[1])) + '</option>'; }).join('');
+    bedSel.innerHTML = root.PrintDock.bedOptions(T.own);
     matSel.innerHTML = MATS.map(function (m) { return '<option value="' + m[0] + '">' + m[1] + '</option>'; }).join('');
     price.type = bw.type = bd.type = 'number'; price.min = 1; price.max = 500; price.step = 1; bw.min = bd.min = 50; bw.max = bd.max = 2000;
     bedSel.value = env.bed; matSel.value = env.mat; price.value = env.price; bw.value = env.bw; bd.value = env.bd;
@@ -238,9 +237,17 @@
     [bLink, bSave, bLoad, bRes].forEach(function (b) { b.type = 'button'; acts.appendChild(b); }); fl.type = 'file'; fl.setAttribute('aria-label', T.load); fl.accept = '.json,application/json'; fl.hidden = true; acts.appendChild(fl);
     var top = el('div', 'gk-dock-top'); top.appendChild(est); top.appendChild(dl);
     topHost.appendChild(top); dock.appendChild(env1); dock.appendChild(acts);
+    /* Anfrage bei 3DekoPrint (E-Mail) */
+    var PDL = root.PrintDock.T[LANG], bOrd = el('button', 'gk-btn gk-btn-order', PDL.btn); bOrd.type = 'button'; bOrd.setAttribute('aria-expanded', 'false'); bOrd.disabled = true; acts.insertBefore(bOrd, acts.firstChild);
+    var ord = root.PrintDock.orderPanel(LANG, function () {
+      if (!last) return null; var sz = last.size;
+      return { tool: L(def.meta.h1), stats: { vol: last.total.vol, area: last.total.area }, parts: last.parts.length, mat: env.mat, size: sz[0].toFixed(1) + ' × ' + sz[1].toFixed(1) + ' × ' + sz[2].toFixed(1) + ' mm' + (last.parts.length > 1 ? ' (' + last.parts.length + ' ' + T.parts + ')' : ''), link: String(root.location.href) };
+    });
+    dock.appendChild(ord.el);
+    bOrd.addEventListener('click', function () { var on = ord.toggle(); bOrd.setAttribute('aria-expanded', on ? 'true' : 'false'); if (on && ord.el.scrollIntoView) ord.el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); });
     function readEnv() {
       env.bed = bedSel.value; env.mat = matSel.value; env.price = Math.max(1, parseFloat(price.value) || 20);
-      var b = BEDS.filter(function (x) { return x[0] === env.bed; })[0]; if (env.bed === 'custom') { env.bw = Math.max(50, parseFloat(bw.value) || 220); env.bd = Math.max(50, parseFloat(bd.value) || 220); } else { env.bw = b[2]; env.bd = b[3]; bw.value = env.bw; bd.value = env.bd; }
+      var b = root.PrintDock.printer(env.bed) || root.PrintDock.printer('x1c'); if (env.bed === 'custom') { env.bw = Math.max(50, parseFloat(bw.value) || 220); env.bd = Math.max(50, parseFloat(bd.value) || 220); } else { env.bw = b.w; env.bd = b.d; bw.value = env.bw; bd.value = env.bd; }
       bw.style.display = bd.style.display = env.bed === 'custom' ? '' : 'none'; saveEnv(); showResult();
     }
     [bedSel, matSel, price, bw, bd].forEach(function (c) { c.addEventListener('input', readEnv); c.addEventListener('change', readEnv); });
@@ -259,6 +266,7 @@
       var vol = r.total.vol / 1000, shell = r.total.area * 1.2, mat = Math.min(r.total.vol, shell + Math.max(0, r.total.vol - shell) * 0.15) / 1000;
       var g = mat * dens, eur = g / 1000 * env.price, hours = (mat * 1000) / 5.5 / 3600 + r.parts.length * 0.05;
       est.innerHTML = '<div class="gk-m"><b>' + g.toFixed(g < 10 ? 1 : 0) + ' g</b><span>' + T.weight + '</span></div><div class="gk-m"><b>' + eur.toFixed(2).replace('.', LANG === 'de' ? ',' : '.') + ' €</b><span>' + T.cost + '</span></div><div class="gk-m"><b>≈ ' + fmtTime(hours) + '</b><span>' + T.time + '</span></div><div class="gk-m gk-m-s"><b>' + vol.toFixed(1) + ' cm³</b><span>' + T.vol + '</span></div><p class="gk-note">' + esc(T.est) + '</p>';
+      bOrd.disabled = false; if (!ord.el.hidden) ord.refresh();
       var fitA = r.w <= env.bw && r.d <= env.bd, fitB = r.w <= env.bd && r.d <= env.bw, fit = fitA || fitB;
       hFit.className = 'gk-fit ' + (fit ? 'ok' : 'bad'); hFit.innerHTML = '<i></i><span>' + T.bedFit(r.w, r.d) + ' · ' + (fit ? T.fits : T.nofit) + '</span>';
       var s = r.size; hSize.innerHTML = '<b>' + s[0].toFixed(1) + ' × ' + s[1].toFixed(1) + ' × ' + s[2].toFixed(1) + '</b> mm' + (r.parts.length > 1 ? ' · ' + r.parts.length + ' ' + T.parts : '');

@@ -63,7 +63,7 @@ function toolPage(d, lg) {
     { '@type': 'WebApplication', name: m.h1[lg], url: BASE + url[lg], description: m.desc[lg], applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any (Web Browser)', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' } },
     { '@type': 'FAQPage', mainEntity: m.faq[lg].map(q => ({ '@type': 'Question', name: q[0], acceptedAnswer: { '@type': 'Answer', text: q[1] } })) },
     { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: '3DToolBox', item: BASE + Tl.root }, { '@type': 'ListItem', position: 2, name: Tl.gen, item: BASE + Tl.hubFile }, { '@type': 'ListItem', position: 3, name: m.h1[lg], item: BASE + url[lg] }] }] };
-  let h = head(lg, { title: m.title[lg], desc: m.desc[lg], url, ld, css: '<link rel="stylesheet" href="/assets/gen-kit.css">\n' });
+  let h = head(lg, { title: m.title[lg], desc: m.desc[lg], url, ld, css: '<link rel="stylesheet" href="/assets/gen-kit.css">\n<link rel="stylesheet" href="/assets/print-dock.css">\n' });
   h += NAV.header(lg, { path: url[lg], other, crumbs: [[Tl.home, Tl.root], [Tl.gen, Tl.hubFile], [m.h1[lg], null]] });
   h += '  <header class="bt-subhero gk-hero"><span class="bt-pill"><i></i>' + esc(m.tag[lg]) + '</span><h1 class="fm-title">' + esc(m.h1[lg]) + '</h1><p class="fm-sub">' + esc(m.sub[lg]) + '</p>\n  <div class="bt-kpis"><div class="bt-kpi"><b>STL + 3MF</b><span>' + Tl.kpiExp + '</span></div><div class="bt-kpi"><b>0 €</b><span>' + Tl.kpiFree + '</span></div><div class="bt-kpi"><b>' + Tl.local + '</b><span>' + Tl.kpiLocal + '</span></div></div></header>\n';
   h += '  <div id="gk"></div>\n  <noscript><p class="cv-warn">' + Tl.nojs + '</p></noscript>\n  <section class="bt-panel mp">\n';
@@ -71,7 +71,7 @@ function toolPage(d, lg) {
   h += '  <h2>' + Tl.notes + '</h2><ul class="mp-list">' + m.notes[lg].map(n => '<li>' + esc(n) + '</li>').join('') + '</ul>\n';
   h += '  <h2>' + Tl.faq + '</h2>' + m.faq[lg].map(q => '<h3>' + esc(q[0]) + '</h3><p>' + esc(q[1]) + '</p>').join('') + '\n  </section>\n';
   h += ch.tail;
-  h += '<script src="/assets/converter-core.js"></script>\n<script src="/assets/mesh-preview.js"></script>\n<script src="/assets/gen-kit.js"></script>\n<script src="/assets/gen/' + d.id + '.js"></script>\n<script>GenKit.run(GenKit.registry["' + d.id + '"], document.getElementById("gk"));</script>\n</body>\n</html>\n';
+  h += '<script src="/assets/converter-core.js"></script>\n<script src="/assets/mesh-preview.js"></script>\n<script src="/assets/print-dock.js"></script>\n<script src="/assets/gen-kit.js"></script>\n<script src="/assets/gen/' + d.id + '.js"></script>\n<script>GenKit.run(GenKit.registry["' + d.id + '"], document.getElementById("gk"));</script>\n</body>\n</html>\n';
   return { path: (lg === 'de' ? '' : 'en/') + m.slug[lg] + '.html', html: h, url };
 }
 function hubPage(lg) {

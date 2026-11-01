@@ -30,6 +30,13 @@
   var out = $('i3Out'), status = $('i3Status'), prev = null;
   function msg(t, bad) { status.textContent = t || ''; status.className = 'cv-status' + (bad ? ' bad' : ''); }
 
+  var pdCur = null, pd = null;
+  function pdSet(mesh) {
+    if (!window.PrintDock) return; pdCur = mesh ? window.PrintDock.statsFromIndexed(mesh) : null;
+    if (pd) return pd.update();
+    var h = document.createElement('div'); out.parentNode.insertBefore(h, out.nextSibling);
+    pd = window.PrintDock.mount(h, { tool: (document.querySelector('h1') || document.title).textContent || document.title, stats: function () { return pdCur; }, describe: function () { return window.PrintDock.describeForm(document.querySelector('main') || document.body); }, link: function () { return String(location.href); } });
+  }
   function buildModes() {
     var h = '';
     ['litho', 'relief', 'sil'].forEach(function (m) { h += '<button type="button" class="i3-mode' + (m === st.mode ? ' on' : '') + '" data-m="' + m + '" role="tab" aria-selected="' + (m === st.mode) + '">' + T.modes[m] + '</button>'; });
@@ -74,8 +81,8 @@
         if (st.mode === 'relief') p.relief = { baseT: v.baseT, heightH: v.heightH, frame: v.frame };
         if (st.mode === 'sil') { p.height = v.height; p.threshold = v.thr / 100; p.lug = !!v.lug; p.lugD = v.lugD; p.holeD = Math.min(v.holeD, v.lugD - 1); }
         var mesh = I3.build(st.mode, gridFor(DET[v.det]), p);
-        if (!mesh.i.length) { st.mesh = null; out.hidden = true; msg(T.empty, true); return; }
-        st.mesh = mesh; var s = C.stats(mesh);
+        if (!mesh.i.length) { st.mesh = null; pdSet(null); out.hidden = true; msg(T.empty, true); return; }
+        st.mesh = mesh; var s = C.stats(mesh); pdSet(mesh);
         drawLight(p, v);
         $('i3Stats').textContent = s.tris.toLocaleString() + ' ' + T.tris + ' · ' + T.size + ': ' + s.size.map(function (x) { return x.toFixed(1); }).join(' × ');
         out.hidden = false; msg('');

@@ -197,13 +197,20 @@
     $('enEx').addEventListener('input', function () { EXPLODE = parseFloat(this.value); applyView(); });
   }
 
+  var pdCur = null, pd = null;
+  function pdSet(mesh) {
+    if (!window.PrintDock) return; pdCur = mesh ? window.PrintDock.statsFromIndexed(mesh) : null;
+    if (pd) return pd.update();
+    var h = document.createElement('div'); out.parentNode.insertBefore(h, out.nextSibling);
+    pd = window.PrintDock.mount(h, { tool: (document.querySelector('h1') || document.title).textContent || document.title, stats: function () { return pdCur; }, describe: function () { return window.PrintDock.describeForm(document.querySelector('main') || document.body); }, link: function () { return String(location.href); } });
+  }
   function recompute() {
     if (!st.ready) return;
     clearTimeout(st.timer); msg(T.busy);
     st.timer = setTimeout(function () {
       try {
         var r = EN.build(params()), mesh = pick(r) || r.base;
-        st.last = r; drawTop(); var s = C.stats(mesh);
+        st.last = r; drawTop(); var s = C.stats(mesh); pdSet(mesh);
         $('enStats').textContent = T.stat + ': ' + r.info.outer.map(function (x) { return x.toFixed(1); }).join(' × ') + ' mm · ' + s.tris.toLocaleString() + ' ' + T.tris;
         var fw = $('enFanWarn'); if (fw) { var fi = r.info.fan; fw.hidden = !fi; if (fi) fw.textContent = fi.fits ? T.g.fsm + ' ' + fi.m + ', ' + (fi.sd).toFixed(1) + ' mm' : T.g.fwarn; }
         out.hidden = false; msg('');

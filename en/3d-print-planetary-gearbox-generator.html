@@ -294,6 +294,7 @@
 <link rel="stylesheet" href="/assets/theme.css">
 <script src="/assets/theme-init.js"></script>
 <script src="/assets/ui.js" defer></script>
+<link rel="stylesheet" href="/assets/print-dock.css">
 </head>
 <body>
 <a class="tb-skip" href="#main">Skip to content</a>
@@ -826,7 +827,7 @@ function initScene(){
   scene.add(dir2);
 
   modelGroup = new THREE.Group();
-  scene.add(modelGroup);
+  scene.add(modelGroup); window.__tbGroup = modelGroup;
 
   window.addEventListener('resize', () => {
     camera.aspect = container.clientWidth/container.clientHeight;
@@ -1067,6 +1068,21 @@ initScene();
 setupUI();
 rebuild();
 
+})();
+</script>
+<script src="/assets/print-dock.js"></script>
+<script>
+(function () {
+  var wrap = document.querySelector('.og-viewer-wrap'); if (!wrap || !window.PrintDock) return;
+  var host = document.createElement('div'); wrap.parentNode.insertBefore(host, wrap.nextSibling);
+  function grp() { try { return typeof modelGroup !== 'undefined' && modelGroup ? modelGroup : window.__tbGroup; } catch (e) { return window.__tbGroup; } }
+  var pd = PrintDock.mount(host, {
+    tool: (document.querySelector('h1') || document.title).textContent || document.title,
+    stats: function () { var g = grp(); return g && g.children.length ? PrintDock.statsFromGroup(g) : null; },
+    describe: function () { return PrintDock.describeForm(document.querySelector('main') || document.body); },
+    link: function () { return String(location.href); }
+  });
+  (function wait() { var g = grp(); if (!g) return setTimeout(wait, 300); PrintDock.watchGroup(g, pd.update); })();
 })();
 </script>
 <script src="/assets/feedback.js" defer></script>

@@ -82,3 +82,6 @@
 .gk-hero .fm-sub{margin:0!important;flex:1 1 340px;font-size:14px!important;max-width:none}
 .gk-hero .bt-pill{margin:0}
 .gk-hero .bt-kpis{display:none}
+
+.gk-acts .gk-btn-order{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
+.gk-acts .gk-btn-order:hover:not(:disabled){filter:brightness(1.08)}
