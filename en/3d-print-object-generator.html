@@ -298,6 +298,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 
 <div class="fm-root bt-sub bt-gen">
   <header class="tb-top">
@@ -309,6 +310,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><a href="/en/generators.html">Generators</a></li><li><span aria-current="page">3D Object Generator</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero"><span class="bt-pill"><i></i>Parametric generator</span>
   <h1 class="fm-title">3D Object Generator</h1>
   <p class="fm-sub">Pick a base shape, adjust it with sliders (dimensions, wall thickness, color) — export directly as 3MF. No CAD skills needed, entirely in your browser. Optionally with a matching SKADIS wall mount.</p>
@@ -401,21 +403,21 @@
       <!-- Box-Parameter -->
       <div class="og-section" id="panelBox">
         <p class="og-section-title">Dimensions</p>
-        <div class="og-row"><label>Width <span class="og-val" id="v_box_w">120</span> mm</label><input type="range" id="box_w" min="30" max="300" step="1" value="120"></div>
-        <div class="og-row"><label>Depth <span class="og-val" id="v_box_d">90</span> mm</label><input type="range" id="box_d" min="30" max="300" step="1" value="90"></div>
-        <div class="og-row"><label>Height <span class="og-val" id="v_box_h">50</span> mm</label><input type="range" id="box_h" min="10" max="200" step="1" value="50"></div>
-        <div class="og-row"><label>Corner radius <span class="og-val" id="v_box_r">8</span> mm</label><input type="range" id="box_r" min="0" max="40" step="1" value="8"></div>
-        <div class="og-row"><label>Wall thickness <span class="og-val" id="v_box_wall">2.4</span> mm</label><input type="range" id="box_wall" min="0.8" max="10" step="0.2" value="2.4"></div>
-        <div class="og-row"><label>Floor thickness <span class="og-val" id="v_box_floor">3</span> mm</label><input type="range" id="box_floor" min="0.8" max="10" step="0.2" value="3"></div>
+        <div class="og-row"><label for="box_w">Width <span class="og-val" id="v_box_w">120</span> mm</label><input type="range" id="box_w" min="30" max="300" step="1" value="120"></div>
+        <div class="og-row"><label for="box_d">Depth <span class="og-val" id="v_box_d">90</span> mm</label><input type="range" id="box_d" min="30" max="300" step="1" value="90"></div>
+        <div class="og-row"><label for="box_h">Height <span class="og-val" id="v_box_h">50</span> mm</label><input type="range" id="box_h" min="10" max="200" step="1" value="50"></div>
+        <div class="og-row"><label for="box_r">Corner radius <span class="og-val" id="v_box_r">8</span> mm</label><input type="range" id="box_r" min="0" max="40" step="1" value="8"></div>
+        <div class="og-row"><label for="box_wall">Wall thickness <span class="og-val" id="v_box_wall">2.4</span> mm</label><input type="range" id="box_wall" min="0.8" max="10" step="0.2" value="2.4"></div>
+        <div class="og-row"><label for="box_floor">Floor thickness <span class="og-val" id="v_box_floor">3</span> mm</label><input type="range" id="box_floor" min="0.8" max="10" step="0.2" value="3"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Lid</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
           <div>
-            <div class="og-toggle-label">Add push-fit lid</div>
+            <div class="og-toggle-label" id="lbl_box_lidon">Add push-fit lid</div>
             <div class="og-toggle-sub">A plug fits snugly inside, like a food container</div>
           </div>
           <label class="og-switch">
-            <input type="checkbox" id="box_lidon">
+            <input type="checkbox" id="box_lidon" aria-labelledby="lbl_box_lidon">
             <span class="og-switch-track"></span>
           </label>
         </div>
@@ -1076,7 +1078,7 @@
       <div class="og-section" id="panelColor">
         <p class="og-section-title">Color (preview only)</p>
         <div class="og-color-row">
-          <input type="color" id="ogColor" value="#d9c79e">
+          <input aria-label="#D9C79E" type="color" id="ogColor" value="#d9c79e">
           <span class="og-color-hex" id="ogColorHex">#D9C79E</span>
         </div>
       </div>
@@ -1086,11 +1088,11 @@
         <p class="og-section-title">Wall mount</p>
         <div class="og-toggle-row">
           <div>
-            <div class="og-toggle-label">Add SKADIS mount</div>
+            <div class="og-toggle-label" id="lbl_ogSkadis">Add SKADIS mount</div>
             <div class="og-toggle-sub">2 push-in clips, 40&nbsp;mm pitch</div>
           </div>
           <label class="og-switch">
-            <input type="checkbox" id="ogSkadis">
+            <input type="checkbox" id="ogSkadis" aria-labelledby="lbl_ogSkadis">
             <span class="og-switch-track"></span>
           </label>
         </div>
@@ -1109,7 +1111,8 @@
     All shapes are built purely additively from basic solids (no Boolean CAD kernel) — this is unproblematic for 3D printing; every common slicer turns the exported 3MF file into a clean, printable model — multi-part assemblies are preserved as separately arrangeable objects. The SKADIS clips are designed to the publicly documented dimensions of the pegboard (40&nbsp;mm pitch, 5×15&nbsp;mm slot) — please check once against your own board before printing, in case you own a non-IKEA variant.
   </p>
 
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>

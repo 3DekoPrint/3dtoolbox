@@ -75,14 +75,14 @@
       if (c.holes) h += ['ox', 'oy', 'dx', 'dy', 'hd'].map(function (k) { return '<label>' + T.cust[k] + '<input type="number" step="0.05" min="0" data-c="' + k + '" value="' + c[k] + '"></label>'; }).join('');
       h += '</div>';
     }
-    h += '<h3 class="en-h3">' + T.g.size + '</h3><div class="en-grid">';
+    h += '<h2 class="en-h3">' + T.g.size + '</h2><div class="en-grid">';
     SPEC_SIZE.forEach(function (s) { var k = s[0]; h += '<label>' + T.g[s[4]] + ' <output>' + P[k] + '</output><input type="range" data-p="' + k + '" min="' + s[1] + '" max="' + s[2] + '" step="' + s[3] + '" value="' + P[k] + '"></label>'; });
     h += '<label class="i3-chk"><input type="checkbox" data-p="ctr"' + (P.ctr ? ' checked' : '') + '> ' + T.g.ctr + '</label></div><div class="en-grid">';
     SPEC.forEach(function (s) { var k = s[0]; h += '<label>' + T.f[k] + ' <output>' + P[k] + '</output><input type="range" data-p="' + k + '" min="' + s[1] + '" max="' + s[2] + '" step="' + s[3] + '" value="' + P[k] + '"></label>'; });
     h += '<label>' + T.f.mode + '<select data-p="mode">' + Object.keys(T.modes).map(function (m) { return '<option value="' + m + '"' + (P.mode === m ? ' selected' : '') + '>' + T.modes[m] + '</option>'; }).join('') + '</select></label>';
     h += '<label>' + T.f.part + '<select data-p="part">' + Object.keys(T.parts).map(function (m) { return '<option value="' + m + '"' + (P.part === m ? ' selected' : '') + '>' + T.parts[m] + '</option>'; }).join('') + '</select></label>';
     if (b.lid && b.lid.length) h += '<label class="i3-chk"><input type="checkbox" data-p="lidcut"' + (P.lidcut ? ' checked' : '') + '> ' + T.f.lidcut + ' ' + esc(b.lid.map(function (l) { return l[4]; }).join(', ')) + '</label>';
-    h += '</div><h3 class="en-h3">' + T.g.vent + '</h3><div class="en-grid">';
+    h += '</div><h2 class="en-h3">' + T.g.vent + '</h2><div class="en-grid">';
     h += '<label class="i3-chk"><input type="checkbox" data-p="vents"' + (P.vents ? ' checked' : '') + '> ' + T.f.vents + '</label>';
     h += '<label class="i3-chk"><input type="checkbox" data-p="sideVents"' + (P.sideVents ? ' checked' : '') + '> ' + T.g.sv + '</label>';
     SPEC_VENT.forEach(function (s) { var k = s[0]; h += '<label>' + T.g[s[4]] + ' <output>' + P[k] + '</output><input type="range" data-p="' + k + '" min="' + s[1] + '" max="' + s[2] + '" step="' + s[3] + '" value="' + P[k] + '"></label>'; });

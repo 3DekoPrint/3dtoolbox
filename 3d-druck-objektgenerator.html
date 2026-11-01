@@ -298,6 +298,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
 
 <div class="fm-root bt-sub bt-gen">
   <header class="tb-top">
@@ -309,6 +310,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><a href="/generatoren.html">Generatoren</a></li><li><span aria-current="page">3D-Objekt-Generator</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero"><span class="bt-pill"><i></i>Parametrischer Generator</span>
   <h1 class="fm-title">3D-Objekt-Generator</h1>
   <p class="fm-sub">Grundform wählen, per Schieberegler anpassen (Maße, Wanddicke, Farbe) — direkt als 3MF exportieren. Ohne CAD-Kenntnisse, komplett im Browser. Optional mit passender SKADIS-Wandhalterung.</p>
@@ -401,21 +403,21 @@
       <!-- Box-Parameter -->
       <div class="og-section" id="panelBox">
         <p class="og-section-title">Maße</p>
-        <div class="og-row"><label>Breite <span class="og-val" id="v_box_w">120</span> mm</label><input type="range" id="box_w" min="30" max="300" step="1" value="120"></div>
-        <div class="og-row"><label>Tiefe <span class="og-val" id="v_box_d">90</span> mm</label><input type="range" id="box_d" min="30" max="300" step="1" value="90"></div>
-        <div class="og-row"><label>Höhe <span class="og-val" id="v_box_h">50</span> mm</label><input type="range" id="box_h" min="10" max="200" step="1" value="50"></div>
-        <div class="og-row"><label>Eckenradius <span class="og-val" id="v_box_r">8</span> mm</label><input type="range" id="box_r" min="0" max="40" step="1" value="8"></div>
-        <div class="og-row"><label>Wanddicke <span class="og-val" id="v_box_wall">2.4</span> mm</label><input type="range" id="box_wall" min="0.8" max="10" step="0.2" value="2.4"></div>
-        <div class="og-row"><label>Bodendicke <span class="og-val" id="v_box_floor">3</span> mm</label><input type="range" id="box_floor" min="0.8" max="10" step="0.2" value="3"></div>
+        <div class="og-row"><label for="box_w">Breite <span class="og-val" id="v_box_w">120</span> mm</label><input type="range" id="box_w" min="30" max="300" step="1" value="120"></div>
+        <div class="og-row"><label for="box_d">Tiefe <span class="og-val" id="v_box_d">90</span> mm</label><input type="range" id="box_d" min="30" max="300" step="1" value="90"></div>
+        <div class="og-row"><label for="box_h">Höhe <span class="og-val" id="v_box_h">50</span> mm</label><input type="range" id="box_h" min="10" max="200" step="1" value="50"></div>
+        <div class="og-row"><label for="box_r">Eckenradius <span class="og-val" id="v_box_r">8</span> mm</label><input type="range" id="box_r" min="0" max="40" step="1" value="8"></div>
+        <div class="og-row"><label for="box_wall">Wanddicke <span class="og-val" id="v_box_wall">2.4</span> mm</label><input type="range" id="box_wall" min="0.8" max="10" step="0.2" value="2.4"></div>
+        <div class="og-row"><label for="box_floor">Bodendicke <span class="og-val" id="v_box_floor">3</span> mm</label><input type="range" id="box_floor" min="0.8" max="10" step="0.2" value="3"></div>
 
         <p class="og-section-title" style="margin-top:16px;">Deckel</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
           <div>
-            <div class="og-toggle-label">Steckdeckel hinzufügen</div>
+            <div class="og-toggle-label" id="lbl_box_lidon">Steckdeckel hinzufügen</div>
             <div class="og-toggle-sub">Zapfen steckt stramm ins Innere, wie eine Tupperdose</div>
           </div>
           <label class="og-switch">
-            <input type="checkbox" id="box_lidon">
+            <input type="checkbox" id="box_lidon" aria-labelledby="lbl_box_lidon">
             <span class="og-switch-track"></span>
           </label>
         </div>
@@ -1076,7 +1078,7 @@
       <div class="og-section" id="panelColor">
         <p class="og-section-title">Farbe (nur Vorschau)</p>
         <div class="og-color-row">
-          <input type="color" id="ogColor" value="#d9c79e">
+          <input aria-label="#D9C79E" type="color" id="ogColor" value="#d9c79e">
           <span class="og-color-hex" id="ogColorHex">#D9C79E</span>
         </div>
       </div>
@@ -1086,11 +1088,11 @@
         <p class="og-section-title">Wandhalterung</p>
         <div class="og-toggle-row">
           <div>
-            <div class="og-toggle-label">SKADIS-Halterung anbringen</div>
+            <div class="og-toggle-label" id="lbl_ogSkadis">SKADIS-Halterung anbringen</div>
             <div class="og-toggle-sub">2 Steckclips, 40&nbsp;mm Raster</div>
           </div>
           <label class="og-switch">
-            <input type="checkbox" id="ogSkadis">
+            <input type="checkbox" id="ogSkadis" aria-labelledby="lbl_ogSkadis">
             <span class="og-switch-track"></span>
           </label>
         </div>
@@ -1109,7 +1111,8 @@
     Alle Formen werden rein additiv aus Grundkörpern aufgebaut (kein Boolescher CAD-Kern) — für 3D-Druck ist das unproblematisch, jeder gängige Slicer verarbeitet die exportierte 3MF-Datei zu einem sauberen, druckbaren Modell — mehrteilige Baugruppen bleiben dabei als separat anordenbare Objekte erhalten. Die SKADIS-Clips sind nach den öffentlich dokumentierten Maßen der Lochplatte ausgelegt (40&nbsp;mm-Raster, 5×15&nbsp;mm-Langloch) — bitte vor dem Druck einmal an der eigenen Platte gegenprüfen, falls du eine Nicht-IKEA-Variante besitzt.
   </p>
 
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
       <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>

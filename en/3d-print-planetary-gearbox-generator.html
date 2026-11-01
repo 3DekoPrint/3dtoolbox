@@ -296,6 +296,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 
 <div class="fm-root bt-sub bt-gen">
   <header class="tb-top">
@@ -307,6 +308,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><a href="/en/generators.html">Generators</a></li><li><span aria-current="page">Planetary Gearbox Generator</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero"><span class="bt-pill"><i></i>Parametric generator</span>
   <h1 class="fm-title">Planetary Gearbox Generator</h1>
   <p class="fm-sub">Design the sun gear, planet gears, ring gear and carrier with sliders — export directly as 3MF. Tooth counts and planet count are checked automatically for mechanical validity (assembly condition, collision-free).</p>
@@ -330,38 +332,38 @@
 
       <div class="og-section">
         <p class="og-section-title">Ratio &amp; teeth</p>
-        <div class="og-row"><label>Sun gear teeth <span class="og-val" id="v_p_zs">12</span></label><input type="range" id="p_zs" min="6" max="40" step="1" value="12"></div>
-        <div class="og-row"><label>Planet gear teeth <span class="og-val" id="v_p_zp">18</span></label><input type="range" id="p_zp" min="6" max="60" step="1" value="18"></div>
-        <div class="og-row"><label>Number of planet gears <span class="og-val" id="v_p_count">3</span></label><input type="range" id="p_count" min="3" max="6" step="1" value="3"></div>
+        <div class="og-row"><label for="p_zs">Sun gear teeth <span class="og-val" id="v_p_zs">12</span></label><input type="range" id="p_zs" min="6" max="40" step="1" value="12"></div>
+        <div class="og-row"><label for="p_zp">Planet gear teeth <span class="og-val" id="v_p_zp">18</span></label><input type="range" id="p_zp" min="6" max="60" step="1" value="18"></div>
+        <div class="og-row"><label for="p_count">Number of planet gears <span class="og-val" id="v_p_count">3</span></label><input type="range" id="p_count" min="3" max="6" step="1" value="3"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 6px; line-height:1.4;" id="p_ratioInfo">Ring gear: 48 teeth · ratio 1:5 (carrier output, ring gear fixed)</p>
         <p class="og-skadis-note" id="p_clampNote" style="display:none; margin-top:6px;"></p>
       </div>
 
       <div class="og-section">
         <p class="og-section-title">Tooth shape &amp; dimensions</p>
-        <div class="og-row"><label>Module <span class="og-val" id="v_p_mod">1.5</span> mm</label><input type="range" id="p_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
-        <div class="og-row"><label>Pressure angle <span class="og-val" id="v_p_pa">20</span> °</label><input type="range" id="p_pa" min="14.5" max="25" step="0.5" value="20"></div>
-        <div class="og-row"><label>Face width (gears) <span class="og-val" id="v_p_face">10</span> mm</label><input type="range" id="p_face" min="4" max="30" step="1" value="10"></div>
+        <div class="og-row"><label for="p_mod">Module <span class="og-val" id="v_p_mod">1.5</span> mm</label><input type="range" id="p_mod" min="0.8" max="4" step="0.1" value="1.5"></div>
+        <div class="og-row"><label for="p_pa">Pressure angle <span class="og-val" id="v_p_pa">20</span> °</label><input type="range" id="p_pa" min="14.5" max="25" step="0.5" value="20"></div>
+        <div class="og-row"><label for="p_face">Face width (gears) <span class="og-val" id="v_p_face">10</span> mm</label><input type="range" id="p_face" min="4" max="30" step="1" value="10"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 14px; line-height:1.4;" id="p_underNote"></p>
       </div>
 
       <div class="og-section">
         <p class="og-section-title">Shafts &amp; fit</p>
-        <div class="og-row"><label>Sun shaft bore <span class="og-val" id="v_p_sunbore">6</span> mm</label><input type="range" id="p_sunbore" min="0" max="20" step="0.5" value="6"></div>
-        <div class="og-row"><label>Carrier output shaft bore <span class="og-val" id="v_p_outbore">8</span> mm</label><input type="range" id="p_outbore" min="0" max="25" step="0.5" value="8"></div>
-        <div class="og-row"><label>Planet pin Ø <span class="og-val" id="v_p_pind">4</span> mm</label><input type="range" id="p_pind" min="2" max="10" step="0.5" value="4"></div>
-        <div class="og-row"><label>Fit clearance (all bores) <span class="og-val" id="v_p_fit">0.4</span> mm</label><input type="range" id="p_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
+        <div class="og-row"><label for="p_sunbore">Sun shaft bore <span class="og-val" id="v_p_sunbore">6</span> mm</label><input type="range" id="p_sunbore" min="0" max="20" step="0.5" value="6"></div>
+        <div class="og-row"><label for="p_outbore">Carrier output shaft bore <span class="og-val" id="v_p_outbore">8</span> mm</label><input type="range" id="p_outbore" min="0" max="25" step="0.5" value="8"></div>
+        <div class="og-row"><label for="p_pind">Planet pin Ø <span class="og-val" id="v_p_pind">4</span> mm</label><input type="range" id="p_pind" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label for="p_fit">Fit clearance (all bores) <span class="og-val" id="v_p_fit">0.4</span> mm</label><input type="range" id="p_fit" min="0.1" max="1" step="0.05" value="0.4"></div>
       </div>
 
       <div class="og-section">
         <p class="og-section-title">Extension</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
           <div>
-            <div class="og-toggle-label">Extend output shaft</div>
+            <div class="og-toggle-label" id="lbl_p_extendon">Extend output shaft</div>
             <div class="og-toggle-sub">A shaft stub protrudes beyond the back cover — for docking another stage (e.g. a second planetary gearbox whose sun gear bore fits onto it)</div>
           </div>
           <label class="og-switch">
-            <input type="checkbox" id="p_extendon">
+            <input type="checkbox" id="p_extendon" aria-labelledby="lbl_p_extendon">
             <span class="og-switch-track"></span>
           </label>
         </div>
@@ -373,8 +375,8 @@
 
       <div class="og-section">
         <p class="og-section-title">Housing</p>
-        <div class="og-row"><label>Cover thickness <span class="og-val" id="v_p_coverthick">4</span> mm</label><input type="range" id="p_coverthick" min="2" max="10" step="0.5" value="4"></div>
-        <div class="og-row"><label>Screw Ø (4×) <span class="og-val" id="v_p_boltd">3</span> mm</label><input type="range" id="p_boltd" min="2" max="12" step="0.5" value="3"></div>
+        <div class="og-row"><label for="p_coverthick">Cover thickness <span class="og-val" id="v_p_coverthick">4</span> mm</label><input type="range" id="p_coverthick" min="2" max="10" step="0.5" value="4"></div>
+        <div class="og-row"><label for="p_boltd">Screw Ø (4×) <span class="og-val" id="v_p_boltd">3</span> mm</label><input type="range" id="p_boltd" min="2" max="12" step="0.5" value="3"></div>
         <div style="display:flex; gap:6px; margin-top:14px;">
           <button type="button" class="og-gtype-btn active" data-flansch="round" style="flex:1; padding:9px;"><div class="og-shape-name" style="font-size:11.5px;">Round</div></button>
           <button type="button" class="og-gtype-btn" data-flansch="square" style="flex:1; padding:9px;"><div class="og-shape-name" style="font-size:11.5px;">Square</div></button>
@@ -395,7 +397,8 @@
     All shapes are built purely additively from basic solids (no Boolean CAD kernel) — this is unproblematic for 3D printing; every common slicer turns the exported 3MF file into a clean, printable model. The involute gearing uses the same verified calculation as in the <a href="/en/3d-print-object-generator.html">3D Object Generator</a> (gear base shape).
   </p>
 
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>

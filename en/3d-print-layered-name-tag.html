@@ -292,6 +292,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 
 <div class="fm-root bt-sub bt-gen">
   <header class="tb-top">
@@ -303,6 +304,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><a href="/en/generators.html">Generators</a></li><li><span aria-current="page">Layered Name Tag</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero"><span class="bt-pill"><i></i>Personalized tags</span>
   <h1 class="fm-title">Layered Name Tag</h1>
   <p class="fm-sub">No tag, no base plate — the name itself is the key ring pendant. Three layers (name + two outline steps), each in its own color, with a key ring loop. Ready to export as a print-ready 3MF file.</p>
@@ -321,9 +323,9 @@
 
       <div class="og-section">
         <p class="og-section-title">Name</p>
-        <div class="og-row"><label>Text</label></div>
+        <div class="og-row"><label for="n_text">Text</label></div>
         <input type="text" id="n_text" value="Aya" maxlength="16" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-family:var(--f-mono); font-size:16px; margin-bottom:14px;">
-        <div class="og-row"><label>Font</label></div>
+        <div class="og-row"><label for="n_font">Font</label></div>
         <select id="n_font" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-size:14px; margin-bottom:6px;">
           <option value="'Baloo 2', cursive" selected>Rounded (Baloo 2)</option>
           <option value="'Fredoka', sans-serif">Playful (Fredoka)</option>
@@ -336,29 +338,29 @@
 
       <div class="og-section">
         <p class="og-section-title">Size &amp; layers</p>
-        <div class="og-row"><label>Name height <span class="og-val" id="v_n_height">30</span> mm</label><input type="range" id="n_height" min="15" max="80" step="1" value="30"></div>
-        <div class="og-row"><label>Detail level <span class="og-val" id="v_n_detail">3.5</span></label><input type="range" id="n_detail" min="1.5" max="6" step="0.5" value="3.5"></div>
+        <div class="og-row"><label for="n_height">Name height <span class="og-val" id="v_n_height">30</span> mm</label><input type="range" id="n_height" min="15" max="80" step="1" value="30"></div>
+        <div class="og-row"><label for="n_detail">Detail level <span class="og-val" id="v_n_detail">3.5</span></label><input type="range" id="n_detail" min="1.5" max="6" step="0.5" value="3.5"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 6px;" id="n_detailNote">Higher = sharper edges, but more triangles / a larger file.</p>
-        <div class="og-row"><label>Name thickness <span class="og-val" id="v_n_thick1">3</span> mm</label><input type="range" id="n_thick1" min="1" max="8" step="0.5" value="3"></div>
-        <div class="og-row"><label>Outline step 1 <span class="og-val" id="v_n_border1">1.6</span> mm</label><input type="range" id="n_border1" min="0.6" max="4" step="0.1" value="1.6"></div>
-        <div class="og-row"><label>Step 1 thickness <span class="og-val" id="v_n_thick2">1.6</span> mm</label><input type="range" id="n_thick2" min="0.8" max="4" step="0.2" value="1.6"></div>
-        <div class="og-row"><label>Outline step 2 <span class="og-val" id="v_n_border2">1.6</span> mm</label><input type="range" id="n_border2" min="0" max="4" step="0.1" value="1.6"></div>
-        <div class="og-row"><label>Step 2 thickness <span class="og-val" id="v_n_thick3">1.6</span> mm</label><input type="range" id="n_thick3" min="0.8" max="4" step="0.2" value="1.6"></div>
+        <div class="og-row"><label for="n_thick1">Name thickness <span class="og-val" id="v_n_thick1">3</span> mm</label><input type="range" id="n_thick1" min="1" max="8" step="0.5" value="3"></div>
+        <div class="og-row"><label for="n_border1">Outline step 1 <span class="og-val" id="v_n_border1">1.6</span> mm</label><input type="range" id="n_border1" min="0.6" max="4" step="0.1" value="1.6"></div>
+        <div class="og-row"><label for="n_thick2">Step 1 thickness <span class="og-val" id="v_n_thick2">1.6</span> mm</label><input type="range" id="n_thick2" min="0.8" max="4" step="0.2" value="1.6"></div>
+        <div class="og-row"><label for="n_border2">Outline step 2 <span class="og-val" id="v_n_border2">1.6</span> mm</label><input type="range" id="n_border2" min="0" max="4" step="0.1" value="1.6"></div>
+        <div class="og-row"><label for="n_thick3">Step 2 thickness <span class="og-val" id="v_n_thick3">1.6</span> mm</label><input type="range" id="n_thick3" min="0.8" max="4" step="0.2" value="1.6"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:4px 0 0;" id="n_mergeNote"></p>
       </div>
 
       <div class="og-section">
         <p class="og-section-title">Colors (preview)</p>
         <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
-          <input type="color" id="n_color1" value="#ff8c3c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <input aria-label="Name (layer 1)" type="color" id="n_color1" value="#ff8c3c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
           <span style="font-size:13px;">Name (layer 1)</span>
         </div>
         <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
-          <input type="color" id="n_color2" value="#ffffff" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <input aria-label="Outline step 1" type="color" id="n_color2" value="#ffffff" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
           <span style="font-size:13px;">Outline step 1</span>
         </div>
         <div style="display:flex; gap:10px; align-items:center;">
-          <input type="color" id="n_color3" value="#14201c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <input aria-label="Outline step 2" type="color" id="n_color3" value="#14201c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
           <span style="font-size:13px;">Outline step 2</span>
         </div>
       </div>
@@ -367,16 +369,16 @@
         <p class="og-section-title">Key ring loop</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
           <div>
-            <div class="og-toggle-label">Add loop</div>
+            <div class="og-toggle-label" id="lbl_n_holeon">Add loop</div>
             <div class="og-toggle-sub">Small tab with a hole, at the left edge of the name</div>
           </div>
           <label class="og-switch">
-            <input type="checkbox" id="n_holeon" checked>
+            <input type="checkbox" id="n_holeon" aria-labelledby="lbl_n_holeon" checked>
             <span class="og-switch-track"></span>
           </label>
         </div>
         <div id="n_holeRow">
-          <div class="og-row"><label>Hole Ø <span class="og-val" id="v_n_holed">4.5</span> mm</label><input type="range" id="n_holed" min="2.5" max="8" step="0.5" value="4.5"></div>
+          <div class="og-row"><label for="n_holed">Hole Ø <span class="og-val" id="v_n_holed">4.5</span> mm</label><input type="range" id="n_holed" min="2.5" max="8" step="0.5" value="4.5"></div>
         </div>
       </div>
 
@@ -390,7 +392,8 @@
     </div>
   </div>
 
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>

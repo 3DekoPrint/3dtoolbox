@@ -291,6 +291,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
 
 <div class="fm-root bt-sub">
   <header class="tb-top">
@@ -302,6 +303,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><span>Wissen</span></li><li><span aria-current="page">3D-Druck-Lexikon</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Wissensdatenbank</span>
   <h1 class="fm-title">3D-Druck-Lexikon</h1>
@@ -363,7 +365,7 @@
     <div class="lx-section-head">
       <h2 class="lx-section-title" id="material">🧵 Materialkunde</h2>
     </div>
-    <div class="lx-mat-scroll">
+    <div class="lx-mat-scroll" tabindex="0" role="region" aria-label="Materialvergleich (scrollbar)">
       <table class="lx-mat-table">
         <thead>
           <tr><th>Material</th><th>Düse</th><th>Bett</th><th>Kühlung</th><th>Besonderheiten</th></tr>
@@ -398,7 +400,8 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"3D-Druck-Lexikon: Schritt-für-Schritt-Anleitung","description":"Druckprobleme mit Ursache, Lösung und Prävention nachschlagen.","thumbnailUrl":"https://3dtoolbox.info/assets/video/lex-de.jpg","uploadDate":"2026-11-01","duration":"PT0M48S","contentUrl":"https://3dtoolbox.info/assets/video/lex-de.mp4","inLanguage":"de"}</script>
   </section>
   <!--/tb-video-->
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
       <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>

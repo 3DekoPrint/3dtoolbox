@@ -292,6 +292,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 
 <div class="fm-root bt-sub bt-gen">
   <header class="tb-top">
@@ -303,6 +304,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><a href="/en/generators.html">Generators</a></li><li><span aria-current="page">Name Plate Tag</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero"><span class="bt-pill"><i></i>Personalized tags</span>
   <h1 class="fm-title">Name Plate Tag</h1>
   <p class="fm-sub">Put your own word or name on a base plate in the shape you like — tag, heart, star or circle. Two colors, key ring loop, ready to export as a print-ready 3MF file.</p>
@@ -330,9 +332,9 @@
       </div>
 
       <div class="og-section">
-        <p class="og-section-title">Text</p>
-        <input type="text" id="s_text" value="Aya" maxlength="16" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-family:var(--f-mono); font-size:16px; margin-bottom:14px;">
-        <div class="og-row"><label>Font</label></div>
+        <p class="og-section-title" id="lbl_s_text">Text</p>
+        <input type="text" id="s_text" aria-labelledby="lbl_s_text" value="Aya" maxlength="16" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-family:var(--f-mono); font-size:16px; margin-bottom:14px;">
+        <div class="og-row"><label for="s_font">Font</label></div>
         <select id="s_font" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-size:14px; margin-bottom:6px;">
           <option value="'Baloo 2', cursive" selected>Rounded (Baloo 2)</option>
           <option value="'Fredoka', sans-serif">Playful (Fredoka)</option>
@@ -344,22 +346,22 @@
 
       <div class="og-section">
         <p class="og-section-title">Size &amp; thickness</p>
-        <div class="og-row"><label>Plate size <span class="og-val" id="v_s_size">55</span> mm</label><input type="range" id="s_size" min="25" max="120" step="1" value="55"></div>
-        <div class="og-row"><label>Plate thickness <span class="og-val" id="v_s_platethick">2.5</span> mm</label><input type="range" id="s_platethick" min="1.5" max="6" step="0.5" value="2.5"></div>
-        <div class="og-row"><label>Text height (raised) <span class="og-val" id="v_s_textthick">1.5</span> mm</label><input type="range" id="s_textthick" min="0.4" max="4" step="0.2" value="1.5"></div>
-        <div class="og-row"><label>Margin around the text <span class="og-val" id="v_s_margin">14</span> %</label><input type="range" id="s_margin" min="4" max="30" step="1" value="14"></div>
-        <div class="og-row"><label>Detail level <span class="og-val" id="v_s_detail">3.5</span></label><input type="range" id="s_detail" min="1.5" max="6" step="0.5" value="3.5"></div>
+        <div class="og-row"><label for="s_size">Plate size <span class="og-val" id="v_s_size">55</span> mm</label><input type="range" id="s_size" min="25" max="120" step="1" value="55"></div>
+        <div class="og-row"><label for="s_platethick">Plate thickness <span class="og-val" id="v_s_platethick">2.5</span> mm</label><input type="range" id="s_platethick" min="1.5" max="6" step="0.5" value="2.5"></div>
+        <div class="og-row"><label for="s_textthick">Text height (raised) <span class="og-val" id="v_s_textthick">1.5</span> mm</label><input type="range" id="s_textthick" min="0.4" max="4" step="0.2" value="1.5"></div>
+        <div class="og-row"><label for="s_margin">Margin around the text <span class="og-val" id="v_s_margin">14</span> %</label><input type="range" id="s_margin" min="4" max="30" step="1" value="14"></div>
+        <div class="og-row"><label for="s_detail">Detail level <span class="og-val" id="v_s_detail">3.5</span></label><input type="range" id="s_detail" min="1.5" max="6" step="0.5" value="3.5"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 0;">Higher = sharper text edges, but more triangles / a larger file.</p>
       </div>
 
       <div class="og-section">
         <p class="og-section-title">Colors (preview)</p>
         <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
-          <input type="color" id="s_colorplate" value="#14201c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <input aria-label="Base plate" type="color" id="s_colorplate" value="#14201c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
           <span style="font-size:13px;">Base plate</span>
         </div>
         <div style="display:flex; gap:10px; align-items:center;">
-          <input type="color" id="s_colortext" value="#ff8c3c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <input aria-label="Text" type="color" id="s_colortext" value="#ff8c3c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
           <span style="font-size:13px;">Text</span>
         </div>
       </div>
@@ -368,16 +370,16 @@
         <p class="og-section-title">Key ring loop</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
           <div>
-            <div class="og-toggle-label">Add loop</div>
+            <div class="og-toggle-label" id="lbl_s_holeon">Add loop</div>
             <div class="og-toggle-sub">Hole at the top edge of the plate</div>
           </div>
           <label class="og-switch">
-            <input type="checkbox" id="s_holeon" checked>
+            <input type="checkbox" id="s_holeon" aria-labelledby="lbl_s_holeon" checked>
             <span class="og-switch-track"></span>
           </label>
         </div>
         <div id="s_holeRow">
-          <div class="og-row"><label>Hole Ø <span class="og-val" id="v_s_holed">4.5</span> mm</label><input type="range" id="s_holed" min="2.5" max="8" step="0.5" value="4.5"></div>
+          <div class="og-row"><label for="s_holed">Hole Ø <span class="og-val" id="v_s_holed">4.5</span> mm</label><input type="range" id="s_holed" min="2.5" max="8" step="0.5" value="4.5"></div>
         </div>
       </div>
 
@@ -391,7 +393,8 @@
     </div>
   </div>
 
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>

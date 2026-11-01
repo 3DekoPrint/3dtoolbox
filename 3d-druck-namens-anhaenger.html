@@ -292,6 +292,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
 
 <div class="fm-root bt-sub bt-gen">
   <header class="tb-top">
@@ -303,6 +304,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><a href="/generatoren.html">Generatoren</a></li><li><span aria-current="page">Geschichteter Namens-Anhänger</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero"><span class="bt-pill"><i></i>Personalisierte Anhänger</span>
   <h1 class="fm-title">Geschichteter Namens-Anhänger</h1>
   <p class="fm-sub">Kein Schild, keine Grundplatte — der Name selbst ist der Schlüsselanhänger. Drei Schichten (Name + zwei Kontur-Stufen), jede in eigener Farbe, mit Schlüsselring-Öse. Direkt als druckfertige 3MF-Datei exportierbar.</p>
@@ -321,9 +323,9 @@
 
       <div class="og-section">
         <p class="og-section-title">Name</p>
-        <div class="og-row"><label>Text</label></div>
+        <div class="og-row"><label for="n_text">Text</label></div>
         <input type="text" id="n_text" value="Aya" maxlength="16" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-family:var(--f-mono); font-size:16px; margin-bottom:14px;">
-        <div class="og-row"><label>Schriftart</label></div>
+        <div class="og-row"><label for="n_font">Schriftart</label></div>
         <select id="n_font" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-size:14px; margin-bottom:6px;">
           <option value="'Baloo 2', cursive" selected>Rundlich (Baloo 2)</option>
           <option value="'Fredoka', sans-serif">Verspielt (Fredoka)</option>
@@ -336,29 +338,29 @@
 
       <div class="og-section">
         <p class="og-section-title">Größe &amp; Schichten</p>
-        <div class="og-row"><label>Namenshöhe <span class="og-val" id="v_n_height">30</span> mm</label><input type="range" id="n_height" min="15" max="80" step="1" value="30"></div>
-        <div class="og-row"><label>Detailgrad <span class="og-val" id="v_n_detail">3.5</span></label><input type="range" id="n_detail" min="1.5" max="6" step="0.5" value="3.5"></div>
+        <div class="og-row"><label for="n_height">Namenshöhe <span class="og-val" id="v_n_height">30</span> mm</label><input type="range" id="n_height" min="15" max="80" step="1" value="30"></div>
+        <div class="og-row"><label for="n_detail">Detailgrad <span class="og-val" id="v_n_detail">3.5</span></label><input type="range" id="n_detail" min="1.5" max="6" step="0.5" value="3.5"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 6px;" id="n_detailNote">Höher = schärfere Kanten, aber mehr Dreiecke/größere Datei.</p>
-        <div class="og-row"><label>Namens-Dicke <span class="og-val" id="v_n_thick1">3</span> mm</label><input type="range" id="n_thick1" min="1" max="8" step="0.5" value="3"></div>
-        <div class="og-row"><label>Kontur-Stufe 1 <span class="og-val" id="v_n_border1">1.6</span> mm</label><input type="range" id="n_border1" min="0.6" max="4" step="0.1" value="1.6"></div>
-        <div class="og-row"><label>Dicke Stufe 1 <span class="og-val" id="v_n_thick2">1.6</span> mm</label><input type="range" id="n_thick2" min="0.8" max="4" step="0.2" value="1.6"></div>
-        <div class="og-row"><label>Kontur-Stufe 2 <span class="og-val" id="v_n_border2">1.6</span> mm</label><input type="range" id="n_border2" min="0" max="4" step="0.1" value="1.6"></div>
-        <div class="og-row"><label>Dicke Stufe 2 <span class="og-val" id="v_n_thick3">1.6</span> mm</label><input type="range" id="n_thick3" min="0.8" max="4" step="0.2" value="1.6"></div>
+        <div class="og-row"><label for="n_thick1">Namens-Dicke <span class="og-val" id="v_n_thick1">3</span> mm</label><input type="range" id="n_thick1" min="1" max="8" step="0.5" value="3"></div>
+        <div class="og-row"><label for="n_border1">Kontur-Stufe 1 <span class="og-val" id="v_n_border1">1.6</span> mm</label><input type="range" id="n_border1" min="0.6" max="4" step="0.1" value="1.6"></div>
+        <div class="og-row"><label for="n_thick2">Dicke Stufe 1 <span class="og-val" id="v_n_thick2">1.6</span> mm</label><input type="range" id="n_thick2" min="0.8" max="4" step="0.2" value="1.6"></div>
+        <div class="og-row"><label for="n_border2">Kontur-Stufe 2 <span class="og-val" id="v_n_border2">1.6</span> mm</label><input type="range" id="n_border2" min="0" max="4" step="0.1" value="1.6"></div>
+        <div class="og-row"><label for="n_thick3">Dicke Stufe 2 <span class="og-val" id="v_n_thick3">1.6</span> mm</label><input type="range" id="n_thick3" min="0.8" max="4" step="0.2" value="1.6"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:4px 0 0;" id="n_mergeNote"></p>
       </div>
 
       <div class="og-section">
         <p class="og-section-title">Farben (Vorschau)</p>
         <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
-          <input type="color" id="n_color1" value="#ff8c3c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <input aria-label="Name (Schicht 1)" type="color" id="n_color1" value="#ff8c3c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
           <span style="font-size:13px;">Name (Schicht 1)</span>
         </div>
         <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
-          <input type="color" id="n_color2" value="#ffffff" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <input aria-label="Kontur-Stufe 1" type="color" id="n_color2" value="#ffffff" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
           <span style="font-size:13px;">Kontur-Stufe 1</span>
         </div>
         <div style="display:flex; gap:10px; align-items:center;">
-          <input type="color" id="n_color3" value="#14201c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <input aria-label="Kontur-Stufe 2" type="color" id="n_color3" value="#14201c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
           <span style="font-size:13px;">Kontur-Stufe 2</span>
         </div>
       </div>
@@ -367,16 +369,16 @@
         <p class="og-section-title">Schlüsselring-Öse</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
           <div>
-            <div class="og-toggle-label">Öse hinzufügen</div>
+            <div class="og-toggle-label" id="lbl_n_holeon">Öse hinzufügen</div>
             <div class="og-toggle-sub">Kleine Lasche mit Loch, am linken Rand des Namens</div>
           </div>
           <label class="og-switch">
-            <input type="checkbox" id="n_holeon" checked>
+            <input type="checkbox" id="n_holeon" aria-labelledby="lbl_n_holeon" checked>
             <span class="og-switch-track"></span>
           </label>
         </div>
         <div id="n_holeRow">
-          <div class="og-row"><label>Loch-Ø <span class="og-val" id="v_n_holed">4.5</span> mm</label><input type="range" id="n_holed" min="2.5" max="8" step="0.5" value="4.5"></div>
+          <div class="og-row"><label for="n_holed">Loch-Ø <span class="og-val" id="v_n_holed">4.5</span> mm</label><input type="range" id="n_holed" min="2.5" max="8" step="0.5" value="4.5"></div>
         </div>
       </div>
 
@@ -390,7 +392,8 @@
     </div>
   </div>
 
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
       <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>

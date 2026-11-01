@@ -670,6 +670,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
 
 <div class="fm-root bt-sub">
   <header class="tb-top">
@@ -681,6 +682,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><span>Werkzeuge</span></li><li><span aria-current="page">3D-Druck Kostenrechner</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Kostenkalkulation</span>
   <h1 class="fm-title">3D-Druck Kostenrechner</h1>
@@ -697,7 +699,7 @@
     </div>
 
     <div class="kr-row kr-full">
-      <label>Modell auswählen
+      <label for="printerPreset">Modell auswählen
         <span class="kr-hint">Richtwerte — unten frei anpassbar</span>
       </label>
       <div></div>
@@ -708,7 +710,7 @@
     </div>
 
     <div class="kr-row">
-      <label>Leistung
+      <label for="power">Leistung
         <span class="kr-hint">Ø Verbrauch beim Drucken</span>
       </label>
       <div class="kr-input-unit">
@@ -717,7 +719,7 @@
       </div>
     </div>
     <div class="kr-row">
-      <label>Kaufpreis
+      <label for="printerPrice">Kaufpreis
         <span class="kr-hint">für die Abschreibung</span>
       </label>
       <div class="kr-input-unit">
@@ -726,7 +728,7 @@
       </div>
     </div>
     <div class="kr-row">
-      <label>Lebensdauer
+      <label for="lifetime">Lebensdauer
         <span class="kr-hint">geschätzte Druckstunden gesamt</span>
       </label>
       <div class="kr-input-unit">
@@ -753,7 +755,7 @@
     </div>
 
     <div class="kr-row">
-      <label>Preis pro kg
+      <label for="pricePerKg">Preis pro kg
         <span class="kr-hint">Preis einer 1-kg-Rolle</span>
       </label>
       <div class="kr-input-unit">
@@ -762,7 +764,7 @@
       </div>
     </div>
     <div class="kr-row">
-      <label>Gewicht des Drucks
+      <label for="gramsUsed">Gewicht des Drucks
         <span class="kr-hint">aus dem Slicer (z. B. Cura, PrusaSlicer)</span>
       </label>
       <div class="kr-input-unit">
@@ -780,7 +782,7 @@
     </div>
 
     <div class="kr-row">
-      <label>Druckzeit
+      <label for="printHours">Druckzeit
         <span class="kr-hint">geschätzte Zeit aus dem Slicer</span>
       </label>
       <div class="kr-input-unit">
@@ -789,7 +791,7 @@
       </div>
     </div>
     <div class="kr-row">
-      <label>Strompreis
+      <label for="kwhPrice">Strompreis
         <span class="kr-hint">Ø Deutschland: 35 ct/kWh</span>
       </label>
       <div class="kr-input-unit">
@@ -926,7 +928,8 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Kostenrechner: Schritt-für-Schritt-Anleitung","description":"Material, Strom, Verschleiß und Fehldrucke berechnen.","thumbnailUrl":"https://3dtoolbox.info/assets/video/cost-de.jpg","uploadDate":"2026-11-01","duration":"PT1M15S","contentUrl":"https://3dtoolbox.info/assets/video/cost-de.mp4","inLanguage":"de"}</script>
   </section>
   <!--/tb-video-->
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
       <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>

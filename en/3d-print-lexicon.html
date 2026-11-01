@@ -291,6 +291,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 
 <div class="fm-root bt-sub">
   <header class="tb-top">
@@ -302,6 +303,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><span>Knowledge</span></li><li><span aria-current="page">3D Printing Lexicon</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Knowledge base</span>
   <h1 class="fm-title">3D Printing Lexicon</h1>
@@ -363,7 +365,7 @@
     <div class="lx-section-head">
       <h2 class="lx-section-title" id="material">🧵 Material Guide</h2>
     </div>
-    <div class="lx-mat-scroll">
+    <div class="lx-mat-scroll" tabindex="0" role="region" aria-label="Material comparison (scrollable)">
       <table class="lx-mat-table">
         <thead>
           <tr><th>Material</th><th>Nozzle</th><th>Bed</th><th>Cooling</th><th>Notes</th></tr>
@@ -398,7 +400,8 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"3D Printing Lexicon: step-by-step guide","description":"Look up print problems with cause, solution and prevention.","thumbnailUrl":"https://3dtoolbox.info/assets/video/lex-en.jpg","uploadDate":"2026-11-01","duration":"PT0M49S","contentUrl":"https://3dtoolbox.info/assets/video/lex-en.mp4","inLanguage":"en"}</script>
   </section>
   <!--/tb-video-->
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>

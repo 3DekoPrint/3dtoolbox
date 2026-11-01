@@ -666,6 +666,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 
 <div class="fm-root bt-sub">
   <header class="tb-top">
@@ -677,6 +678,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><span>Filaments</span></li><li><span aria-current="page">Filament Database</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Filament Database</span>
   <h1 class="fm-title">Filament Database</h1>
@@ -726,7 +728,8 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Filament Database: step-by-step guide","description":"Find filaments by material, brand and colour.","thumbnailUrl":"https://3dtoolbox.info/assets/video/db-en.jpg","uploadDate":"2026-11-01","duration":"PT1M1S","contentUrl":"https://3dtoolbox.info/assets/video/db-en.mp4","inLanguage":"en"}</script>
   </section>
   <!--/tb-video-->
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>
@@ -978,7 +981,7 @@
     viewEl.appendChild(jump);
     keys.forEach(k => {
       const cl = clustersOf(fams[k]);
-      const h = document.createElement('h3'); h.id = 'fdfam-' + k;
+      const h = document.createElement('h2'); h.id = 'fdfam-' + k;
       h.style.cssText = 'margin:22px 0 10px;font-size:15px;letter-spacing:.04em;scroll-margin-top:80px;';
       h.textContent = T.fam[k] + ' · ' + plural(fams[k].length, T.fil);
       viewEl.appendChild(h);

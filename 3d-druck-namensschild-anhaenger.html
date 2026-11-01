@@ -292,6 +292,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
 
 <div class="fm-root bt-sub bt-gen">
   <header class="tb-top">
@@ -303,6 +304,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><a href="/generatoren.html">Generatoren</a></li><li><span aria-current="page">Namensschild-Anhänger</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero"><span class="bt-pill"><i></i>Personalisierte Anhänger</span>
   <h1 class="fm-title">Namensschild-Anhänger</h1>
   <p class="fm-sub">Eigenes Wort oder Namen auf einer Grundplatte in Wunschform — Schild, Herz, Stern oder Kreis. Zwei Farben, Schlüsselring-Öse, direkt als druckfertige 3MF-Datei exportierbar.</p>
@@ -330,9 +332,9 @@
       </div>
 
       <div class="og-section">
-        <p class="og-section-title">Text</p>
-        <input type="text" id="s_text" value="Aya" maxlength="16" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-family:var(--f-mono); font-size:16px; margin-bottom:14px;">
-        <div class="og-row"><label>Schriftart</label></div>
+        <p class="og-section-title" id="lbl_s_text">Text</p>
+        <input type="text" id="s_text" aria-labelledby="lbl_s_text" value="Aya" maxlength="16" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-family:var(--f-mono); font-size:16px; margin-bottom:14px;">
+        <div class="og-row"><label for="s_font">Schriftart</label></div>
         <select id="s_font" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg-alt); color:var(--ink); font-size:14px; margin-bottom:6px;">
           <option value="'Baloo 2', cursive" selected>Rundlich (Baloo 2)</option>
           <option value="'Fredoka', sans-serif">Verspielt (Fredoka)</option>
@@ -344,22 +346,22 @@
 
       <div class="og-section">
         <p class="og-section-title">Größe &amp; Dicke</p>
-        <div class="og-row"><label>Plattengröße <span class="og-val" id="v_s_size">55</span> mm</label><input type="range" id="s_size" min="25" max="120" step="1" value="55"></div>
-        <div class="og-row"><label>Plattendicke <span class="og-val" id="v_s_platethick">2.5</span> mm</label><input type="range" id="s_platethick" min="1.5" max="6" step="0.5" value="2.5"></div>
-        <div class="og-row"><label>Text-Höhe (erhaben) <span class="og-val" id="v_s_textthick">1.5</span> mm</label><input type="range" id="s_textthick" min="0.4" max="4" step="0.2" value="1.5"></div>
-        <div class="og-row"><label>Rand um den Text <span class="og-val" id="v_s_margin">14</span> %</label><input type="range" id="s_margin" min="4" max="30" step="1" value="14"></div>
-        <div class="og-row"><label>Detailgrad <span class="og-val" id="v_s_detail">3.5</span></label><input type="range" id="s_detail" min="1.5" max="6" step="0.5" value="3.5"></div>
+        <div class="og-row"><label for="s_size">Plattengröße <span class="og-val" id="v_s_size">55</span> mm</label><input type="range" id="s_size" min="25" max="120" step="1" value="55"></div>
+        <div class="og-row"><label for="s_platethick">Plattendicke <span class="og-val" id="v_s_platethick">2.5</span> mm</label><input type="range" id="s_platethick" min="1.5" max="6" step="0.5" value="2.5"></div>
+        <div class="og-row"><label for="s_textthick">Text-Höhe (erhaben) <span class="og-val" id="v_s_textthick">1.5</span> mm</label><input type="range" id="s_textthick" min="0.4" max="4" step="0.2" value="1.5"></div>
+        <div class="og-row"><label for="s_margin">Rand um den Text <span class="og-val" id="v_s_margin">14</span> %</label><input type="range" id="s_margin" min="4" max="30" step="1" value="14"></div>
+        <div class="og-row"><label for="s_detail">Detailgrad <span class="og-val" id="v_s_detail">3.5</span></label><input type="range" id="s_detail" min="1.5" max="6" step="0.5" value="3.5"></div>
         <p style="font-size:11px; color:var(--ink-dim); margin:-8px 0 0;">Höher = schärfere Text-Kanten, aber mehr Dreiecke/größere Datei.</p>
       </div>
 
       <div class="og-section">
         <p class="og-section-title">Farben (Vorschau)</p>
         <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
-          <input type="color" id="s_colorplate" value="#14201c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <input aria-label="Grundplatte" type="color" id="s_colorplate" value="#14201c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
           <span style="font-size:13px;">Grundplatte</span>
         </div>
         <div style="display:flex; gap:10px; align-items:center;">
-          <input type="color" id="s_colortext" value="#ff8c3c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
+          <input aria-label="Text" type="color" id="s_colortext" value="#ff8c3c" style="width:40px; height:36px; border-radius:8px; border:1px solid var(--line); background:none; cursor:pointer;">
           <span style="font-size:13px;">Text</span>
         </div>
       </div>
@@ -368,16 +370,16 @@
         <p class="og-section-title">Schlüsselring-Öse</p>
         <div class="og-toggle-row" style="margin-bottom:14px;">
           <div>
-            <div class="og-toggle-label">Öse hinzufügen</div>
+            <div class="og-toggle-label" id="lbl_s_holeon">Öse hinzufügen</div>
             <div class="og-toggle-sub">Loch am oberen Rand der Platte</div>
           </div>
           <label class="og-switch">
-            <input type="checkbox" id="s_holeon" checked>
+            <input type="checkbox" id="s_holeon" aria-labelledby="lbl_s_holeon" checked>
             <span class="og-switch-track"></span>
           </label>
         </div>
         <div id="s_holeRow">
-          <div class="og-row"><label>Loch-Ø <span class="og-val" id="v_s_holed">4.5</span> mm</label><input type="range" id="s_holed" min="2.5" max="8" step="0.5" value="4.5"></div>
+          <div class="og-row"><label for="s_holed">Loch-Ø <span class="og-val" id="v_s_holed">4.5</span> mm</label><input type="range" id="s_holed" min="2.5" max="8" step="0.5" value="4.5"></div>
         </div>
       </div>
 
@@ -391,7 +393,8 @@
     </div>
   </div>
 
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
       <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>

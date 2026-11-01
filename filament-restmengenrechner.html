@@ -36,6 +36,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
 <div class="fm-root bt-sub">
   <header class="tb-top">
   <nav class="tb-nav" aria-label="Hauptnavigation">
@@ -46,6 +47,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><span>Filamente</span></li><li><span aria-current="page">Filament-Restmengenrechner</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Restmengenrechner</span><h1 class="fm-title">Filament-Restmengenrechner</h1><p class="fm-sub">Spule wiegen – und sofort sehen, wie viel Filament noch drauf ist und ob es für deinen Druck reicht.</p>
   <div class="bt-kpis"><div class="bt-kpi"><b>Gramm</b><span>Rest in g</span></div><div class="bt-kpi"><b>Meter</b><span>Restlänge</span></div><div class="bt-kpi"><b>Prozent</b><span>Füllstand</span></div></div></header>
@@ -65,7 +67,8 @@
   <div class="rr-bar"><i id="rrFill"></i></div>
   <p class="rr-verdict" id="rrVerdict"></p>
   <h2>So funktioniert der Rechner</h2><p>Wiege die Spule samt Restfilament auf einer Küchenwaage und ziehe das Leergewicht der Spule ab. Das Ergebnis ist die Restmenge in Gramm.</p><p>Die Länge ergibt sich aus Gewicht, Materialdichte und Durchmesser: Länge = Masse ÷ (Dichte × Querschnittsfläche). Alle Berechnungen laufen lokal in deinem Browser.</p><p>Tipp: Gib das benötigte Gewicht aus deinem Slicer ein – der Rechner zeigt, ob die Spule reicht, oder ob du lieber eine neue anbrechen solltest, um keinen Mid-Print-Wechsel zu riskieren.</p><h2>Häufige Fragen</h2><details class="mp-faq"><summary>Wie finde ich das Leergewicht meiner Spule?</summary><p>Das Leergewicht steht manchmal auf dem Spulenaufkleber. Sonst wiege eine leere Spule derselben Marke – typisch sind 120 bis 250 Gramm.</p></details><details class="mp-faq"><summary>Wie viele Meter sind 1 kg Filament?</summary><p>Bei 1,75 mm PLA (Dichte ca. 1,24 g/cm³) sind es rund 335 Meter, bei PETG etwa 330 Meter, bei ABS rund 400 Meter.</p></details><details class="mp-faq"><summary>Ist der Wert exakt?</summary><p>Nein, er ist eine Näherung: Dichte und Durchmesser schwanken je nach Hersteller und Farbe leicht.</p></details><p>Passendes Filament nachkaufen? Schau in die <a href="/filament-datenbank.html">Filament-Datenbank</a> oder nutz den <a href="/">Filament-Finder</a>.</p></section>
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
       <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>

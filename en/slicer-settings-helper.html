@@ -36,6 +36,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 <div class="fm-root bt-sub">
   <header class="tb-top">
   <nav class="tb-nav" aria-label="Main navigation">
@@ -46,6 +47,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><span>Knowledge</span></li><li><span aria-current="page">Slicer Settings Helper</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Slicer helper</span><h1 class="fm-title">Slicer Settings Helper</h1><p class="fm-sub">Pick material, nozzle and goal – and get starting values for temperature, layer height, speed, fan and retraction.</p>
   <div class="bt-kpis"><div class="bt-kpi"><b>24</b><span>Materials</span></div><div class="bt-kpi"><b>4</b><span>Nozzle sizes</span></div><div class="bt-kpi"><b>3</b><span>Goals</span></div></div></header>
@@ -59,7 +61,8 @@
   </div>
   <h2>Recommended starting values</h2><div id="shOut" aria-live="polite"></div><div id="shWarn"></div>
   <h2>How to use the values</h2><p>The values are starting points for Bambu Studio, PrusaSlicer, OrcaSlicer, Cura and others. Enter them in your filament and process profile, then use a temperature tower, flow test and retraction test to find what your printer really needs.</p><p>Speed is calculated from the material's maximum volumetric flow: speed = flow ÷ (layer height × line width). Thicker layers or wider lines therefore mean lower speed at the same flow.</p><p>Your hotend and extruder may differ from these guidelines (e.g. high-flow hotends). The values printed on the spool take priority.</p><h2>Frequently asked questions</h2><details class="mp-faq"><summary>What temperature is right for PLA?</summary><p>Usually 190–230 °C. The helper picks roughly the middle as a starting value; use a temperature tower to find the best value for your spool.</p></details><details class="mp-faq"><summary>Why does speed change with the nozzle?</summary><p>Maximum speed depends on volumetric flow. Larger nozzles with thicker layers move more material per second, so the speed per line drops.</p></details><details class="mp-faq"><summary>Do the values apply to every printer?</summary><p>No, they are guidelines. Bambu, Prusa, Creality and others have different hotends and extruders – use the values as a starting point and fine-tune.</p></details><p>Details per material are in our <a href="/en/materials/">material guides</a>.</p></section>
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>

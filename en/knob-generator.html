@@ -37,6 +37,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 <div class="fm-root bt-sub">
   <header class="tb-top">
   <nav class="tb-nav" aria-label="Main navigation">
@@ -47,6 +48,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><a href="/en/generators.html">Generators</a></li><li><span aria-current="page">Knob</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero gk-hero"><span class="bt-pill"><i></i>Workshop</span><h1 class="fm-title">Knob</h1><p class="fm-sub">Knobs for pots, switches and devices: set diameter, flutes and shaft bore, download STL or 3MF.</p>
   <div class="bt-kpis"><div class="bt-kpi"><b>STL + 3MF</b><span>Export</span></div><div class="bt-kpi"><b>0 €</b><span>Cost</span></div><div class="bt-kpi"><b>in browser</b><span>Runs</span></div></div></header>
   <div id="gk"></div>
@@ -56,7 +58,8 @@
   <h2>Printing notes</h2><ul class="mp-list"><li>Print with the open side (shaft hole) up; the flutes run vertically and need no supports.</li><li>The bore gets 0.1 mm clearance automatically. If the shaft is still too tight, raise it.</li><li>The set screw clamps the shaft: about 2.5 mm hole for an M3 self-tapping screw.</li></ul>
   <h2>Common questions</h2><h3>Which shaft do pots have?</h3><p>Most pots have 6 mm shafts with a flat (D-shaft) or knurl, guitar pots often 6.35 mm knurled.</p><h3>How many flutes?</h3><p>Between 8 and 16 look good and feel good in the hand.</p>
   </section>
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>

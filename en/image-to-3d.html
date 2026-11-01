@@ -36,6 +36,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 <div class="fm-root bt-sub">
   <header class="tb-top">
   <nav class="tb-nav" aria-label="Main navigation">
@@ -46,6 +47,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><span>Tools</span></li><li><span aria-current="page">Image to 3D Model</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Image to 3D</span><h1 class="fm-title">Image to 3D Model</h1><p class="fm-sub">Turn a photo or logo into a lithophane, a relief or a keychain – as STL or 3MF, right in your browser, no upload.</p>
   <div class="bt-kpis"><div class="bt-kpi"><b>3</b><span>Modes</span></div><div class="bt-kpi"><b>0</b><span>Uploads</span></div><div class="bt-kpi"><b>STL + 3MF</b><span>Export</span></div></div></header>
@@ -60,7 +62,8 @@
    <div id="i3Out" class="cv-out" hidden><div class="i3-dls"><button id="i3DlStl" class="cv-btn" type="button">Download STL</button><button id="i3Dl3mf" class="cv-btn" type="button">Download 3MF</button></div><span id="i3Stats" class="md-note" style="margin:0"></span><canvas id="i3Light" class="i3-light" hidden aria-label="Backlit preview: how the lithophane glows with light behind it"></canvas><span id="i3LightCap" class="md-note" style="margin:0" hidden>Backlit preview: how the lithophane glows with light behind it</span><canvas id="i3Canvas" width="840" height="560" aria-label="3D preview (drag to rotate, wheel to zoom)"></canvas><span class="md-note" style="margin:0">3D preview (drag to rotate, wheel to zoom)</span></div>
   </div>
   <h2>How an image becomes a 3D model</h2><p><b>Lithophane:</b> A photo becomes a thin plate. Dark areas turn thick and let little light through, light areas are thin and glow. Print it upright in white, ideally with 0.12–0.2 mm layer height, and put a light source behind it. The smooth side faces the viewer.</p><p><b>Relief:</b> The brightness of the image becomes height – light is high, dark is low. This makes signs, coins, embossing or landscape reliefs from grayscale images and height maps.</p><p><b>Silhouette / Logo:</b> A black-and-white image or a logo with a transparent background becomes a solid with the height you choose. Optionally it gets a hanging loop – ideal for keychains, cookie cutters and stands.</p><p>Everything runs in your browser: the image is not uploaded. The models are watertight (closed solids) and open directly in Bambu Studio, OrcaSlicer, PrusaSlicer or Cura.</p><h2>Frequently asked questions</h2><details class="mp-faq"><summary>Is my image uploaded?</summary><p>No. The image is processed only in your browser. No data is sent to a server.</p></details><details class="mp-faq"><summary>Which image works for a lithophane?</summary><p>Photos with good contrast and clear faces or subjects. Use “Contrast” and “Smoothing” to bring out detail. A higher resolution gives finer gradients but a bigger file.</p></details><details class="mp-faq"><summary>How do I print a lithophane?</summary><p>Standing upright, with white PLA, 0.12–0.2 mm layer height, 100% infill and few walls. The “light” thickness sets how much light passes through – 0.8 mm is a good starting value.</p></details><details class="mp-faq"><summary>How do I get a clean silhouette?</summary><p>Use an image with clear contrast or a PNG with a transparent background. The threshold sets from which brightness something becomes part of the solid; “Invert” swaps solid and background.</p></details><details class="mp-faq"><summary>Why are high-resolution files large?</summary><p>Every pixel becomes two triangles. “Standard” is enough for most models, “Very fine” pays off for photos as lithophanes.</p></details><p>More tools: <a href="/en/3d-file-converter.html">3D File Converter</a>, <a href="/en/slicer-settings-helper.html">Slicer Settings Helper</a>, <a href="/en/3d-print-cost-calculator.html">Cost Calculator</a>.</p></section>
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>

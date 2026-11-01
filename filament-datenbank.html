@@ -666,6 +666,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
 
 <div class="fm-root bt-sub">
   <header class="tb-top">
@@ -677,6 +678,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><span>Filamente</span></li><li><span aria-current="page">Filament-Datenbank</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Filament Datenbank</span>
   <h1 class="fm-title">Filament-Datenbank</h1>
@@ -726,7 +728,8 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Filament-Datenbank: Schritt-für-Schritt-Anleitung","description":"Filamente nach Material, Marke und Farbe finden.","thumbnailUrl":"https://3dtoolbox.info/assets/video/db-de.jpg","uploadDate":"2026-11-01","duration":"PT0M59S","contentUrl":"https://3dtoolbox.info/assets/video/db-de.mp4","inLanguage":"de"}</script>
   </section>
   <!--/tb-video-->
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
       <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>
@@ -978,7 +981,7 @@
     viewEl.appendChild(jump);
     keys.forEach(k => {
       const cl = clustersOf(fams[k]);
-      const h = document.createElement('h3'); h.id = 'fdfam-' + k;
+      const h = document.createElement('h2'); h.id = 'fdfam-' + k;
       h.style.cssText = 'margin:22px 0 10px;font-size:15px;letter-spacing:.04em;scroll-margin-top:80px;';
       h.textContent = T.fam[k] + ' · ' + plural(fams[k].length, T.fil);
       viewEl.appendChild(h);

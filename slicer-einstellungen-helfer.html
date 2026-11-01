@@ -36,6 +36,7 @@
 <script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
 <div class="fm-root bt-sub">
   <header class="tb-top">
   <nav class="tb-nav" aria-label="Hauptnavigation">
@@ -46,6 +47,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><span>Wissen</span></li><li><span aria-current="page">Slicer-Einstellungen-Helfer</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
 
   <header class="bt-subhero"><span class="bt-pill"><i></i>Slicer-Helfer</span><h1 class="fm-title">Slicer-Einstellungen-Helfer</h1><p class="fm-sub">Material, Düse und Ziel wählen – und Startwerte für Temperatur, Schichthöhe, Geschwindigkeit, Lüfter und Retraction erhalten.</p>
   <div class="bt-kpis"><div class="bt-kpi"><b>24</b><span>Materialien</span></div><div class="bt-kpi"><b>4</b><span>Düsengrößen</span></div><div class="bt-kpi"><b>3</b><span>Ziele</span></div></div></header>
@@ -59,7 +61,8 @@
   </div>
   <h2>Empfohlene Startwerte</h2><div id="shOut" aria-live="polite"></div><div id="shWarn"></div>
   <h2>So nutzt du die Werte</h2><p>Die Werte sind Startpunkte für Bambu Studio, PrusaSlicer, OrcaSlicer, Cura & Co. Trage sie in dein Filament- und Prozessprofil ein und prüfe dann mit einem Temperaturturm, einem Fluss-Test und einem Retraction-Test, was dein Drucker wirklich braucht.</p><p>Die Geschwindigkeit wird aus dem maximalen Volumenfluss des Materials berechnet: Geschwindigkeit = Fluss ÷ (Schichthöhe × Linienbreite). Dicke Schichten oder breite Linien bedeuten deshalb niedrigere Geschwindigkeit bei gleichem Fluss.</p><p>Dein Drucker kann bei Hotend und Extruder von diesen Richtwerten abweichen (z. B. High-Flow-Hotends). Herstellerangaben auf der Spule haben Vorrang.</p><h2>Häufige Fragen</h2><details class="mp-faq"><summary>Welche Temperatur ist für PLA richtig?</summary><p>Meist 190–230 °C. Als Startwert wählt der Helfer etwa die Mitte; per Temperaturturm findest du die beste Temperatur für deine Rolle.</p></details><details class="mp-faq"><summary>Warum ändert sich die Geschwindigkeit mit der Düse?</summary><p>Die Maximalgeschwindigkeit hängt vom Volumenfluss ab. Größere Düsen mit dickeren Schichten transportieren mehr Material pro Sekunde, deshalb sinkt die Geschwindigkeit pro Linie.</p></details><details class="mp-faq"><summary>Gelten die Werte für jeden Drucker?</summary><p>Nein, es sind Richtwerte. Bambu, Prusa, Creality &amp; Co. haben unterschiedliche Hotends und Extruder – nutze die Werte als Startpunkt und feintune.</p></details><p>Details pro Material findest du in unseren <a href="/materialien/">Material-Ratgebern</a>.</p></section>
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
       <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>
