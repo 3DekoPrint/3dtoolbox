@@ -22,7 +22,7 @@
     var rd = new FileReader();
     rd.onload = function () {
       state.buf = rd.result; state.name = f.name.replace(/\.[^.]+$/, ''); state.fmt = C.detect(f.name, rd.result); state.mesh = null; $('cvOut').hidden = true; msg('');
-      if (!state.fmt) { msg(T.err, true); return; }
+      if (!state.fmt) { state.buf = null; $('cvFileInfo').textContent = ''; $('cvQualityWrap').hidden = true; updateWarn(); msg(T.err, true); return; }
       $('cvFileInfo').textContent = f.name + ' · ' + fmtSize(f.size);
       $('cvQualityWrap').hidden = state.fmt !== 'step';
       var t = $('cvTarget'); if (t.value === state.fmt || (state.fmt === 'stl' && t.value === 'stlA')) t.value = state.fmt === '3mf' ? 'stl' : '3mf';

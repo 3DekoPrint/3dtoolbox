@@ -210,6 +210,8 @@
     font-family:var(--f-mono);
   }
   .kr-input-unit{ position:relative; }
+  .kr-warn{ display:block; margin-top:4px; font-size:12.5px; color:var(--accent-2); }
+  .kr-input-unit input[aria-invalid="true"]{ border-color:var(--accent-2); }
   .kr-input-unit input, select.kr-select{
     width:100%;
     background:var(--bg);
@@ -714,7 +716,7 @@
         <span class="kr-hint">Ø Verbrauch beim Drucken</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="power" value="120" min="0" step="5">
+        <input type="number" id="power" value="120" min="0" max="3000" step="5">
         <span class="kr-unit">W</span>
       </div>
     </div>
@@ -723,7 +725,7 @@
         <span class="kr-hint">für die Abschreibung</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="printerPrice" value="399" min="0" step="10">
+        <input type="number" id="printerPrice" value="399" min="0" max="100000" step="10">
         <span class="kr-unit">€</span>
       </div>
     </div>
@@ -732,7 +734,7 @@
         <span class="kr-hint">geschätzte Druckstunden gesamt</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="lifetime" value="3000" min="0" step="100">
+        <input type="number" id="lifetime" value="3000" min="0" max="100000" step="100">
         <span class="kr-unit">h</span>
       </div>
     </div>
@@ -759,7 +761,7 @@
         <span class="kr-hint">Preis einer 1-kg-Rolle</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="pricePerKg" value="20" min="0" step="0.5">
+        <input type="number" id="pricePerKg" value="20" min="0" max="1000" step="0.5">
         <span class="kr-unit">€/kg</span>
       </div>
     </div>
@@ -768,7 +770,7 @@
         <span class="kr-hint">aus dem Slicer (z. B. Cura, PrusaSlicer)</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="gramsUsed" value="50" min="0" step="1">
+        <input type="number" id="gramsUsed" value="50" min="0" max="100000" step="1">
         <span class="kr-unit">g</span>
       </div>
     </div>
@@ -786,7 +788,7 @@
         <span class="kr-hint">geschätzte Zeit aus dem Slicer</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="printHours" value="3" min="0" step="0.25">
+        <input type="number" id="printHours" value="3" min="0" max="2000" step="0.25">
         <span class="kr-unit">h</span>
       </div>
     </div>
@@ -795,7 +797,7 @@
         <span class="kr-hint">Ø Deutschland: 35 ct/kWh</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="kwhPrice" value="35" min="0" step="1">
+        <input type="number" id="kwhPrice" value="35" min="0" max="200" step="1">
         <span class="kr-unit">ct/kWh</span>
       </div>
     </div>
@@ -861,7 +863,7 @@
         <span class="kr-hint">Vorbereitung, Nachbearbeitung, Versand</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="laborMin" value="15" min="0" step="5">
+        <input type="number" id="laborMin" value="15" min="0" max="6000" step="5">
         <span class="kr-unit">min</span>
       </div>
     </div>
@@ -870,7 +872,7 @@
         <span class="kr-hint">dein Zielverdienst</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="wage" value="15" min="0" step="1">
+        <input type="number" id="wage" value="15" min="0" max="500" step="1">
         <span class="kr-unit">€/h</span>
       </div>
     </div>
@@ -879,7 +881,7 @@
         <span class="kr-hint">Karton, Folie, Etikett …</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="packaging" value="0.80" min="0" step="0.1">
+        <input type="number" id="packaging" value="0.80" min="0" max="1000" step="0.1">
         <span class="kr-unit">€</span>
       </div>
     </div>
@@ -897,7 +899,7 @@
         <span class="kr-hint">Aufschlag auf alle Kosten</span>
       </label>
       <div class="kr-input-unit">
-        <input type="number" id="margin" value="40" min="0" step="5">
+        <input type="number" id="margin" value="40" min="0" max="1000" step="5">
         <span class="kr-unit">%</span>
       </div>
     </div>
@@ -1016,14 +1018,34 @@
 
   let lastResult = null;
 
+  /* Eingabeprüfung: ungültige oder unplausible Werte werden begrenzt und sichtbar gemeldet */
+  const LIMITS = {power:[0,3000],printerPrice:[0,100000],lifetime:[0,100000],pricePerKg:[0,1000],gramsUsed:[0,100000],printHours:[0,2000],kwhPrice:[0,200],laborMin:[0,6000],wage:[0,500],packaging:[0,1000],marketFee:[0,90],margin:[0,1000]};
+  const MSG = { empty:'Bitte eine Zahl eingeben (gerechnet wird mit 0).', min:'Mindestwert ist ', max:'Höchstwert ist ', tail:'. Gerechnet wird mit diesem Wert.' };
+  function num(inp){
+    const lim = LIMITS[inp.id] || [0, 1e9], raw = inp.value.trim();
+    let v = parseFloat(raw), msg = '';
+    if (raw === '' || isNaN(v)) { v = 0; msg = MSG.empty; }
+    else if (v < lim[0]) { v = lim[0]; msg = MSG.min + lim[0] + MSG.tail; }
+    else if (v > lim[1]) { v = lim[1]; msg = MSG.max + lim[1] + MSG.tail; }
+    let w = document.getElementById('warn_' + inp.id);
+    if (!w) {
+      w = document.createElement('small'); w.className = 'kr-warn'; w.id = 'warn_' + inp.id; w.hidden = true;
+      (inp.closest('.kr-input-unit') || inp).insertAdjacentElement('afterend', w);
+      inp.setAttribute('aria-describedby', w.id);
+    }
+    w.hidden = !msg; w.textContent = msg;
+    if (msg) inp.setAttribute('aria-invalid', 'true'); else inp.removeAttribute('aria-invalid');
+    return v;
+  }
+
   function calc(){
-    const power = Math.max(0, parseFloat(el.power.value) || 0);
-    const printerPrice = Math.max(0, parseFloat(el.printerPrice.value) || 0);
-    const lifetime = Math.max(0, parseFloat(el.lifetime.value) || 0);
-    const pricePerKg = Math.max(0, parseFloat(el.pricePerKg.value) || 0);
-    const gramsUsed = Math.max(0, parseFloat(el.gramsUsed.value) || 0);
-    const printHours = Math.max(0, parseFloat(el.printHours.value) || 0);
-    const kwhPrice = (Math.max(0, parseFloat(el.kwhPrice.value) || 0)) / 100; // ct -> €
+    const power = num(el.power);
+    const printerPrice = num(el.printerPrice);
+    const lifetime = num(el.lifetime);
+    const pricePerKg = num(el.pricePerKg);
+    const gramsUsed = num(el.gramsUsed);
+    const printHours = num(el.printHours);
+    const kwhPrice = (num(el.kwhPrice)) / 100; // ct -> €
     const failRate = Math.max(0, parseFloat(failRateEl.value) || 0);
 
     const materialCost = (gramsUsed/1000) * pricePerKg;
@@ -1048,11 +1070,11 @@
 
     let sellPrice = null;
     if (sellerSwitch.classList.contains('kr-on')){
-      const laborMin = Math.max(0, parseFloat(el.laborMin.value) || 0);
-      const wage = Math.max(0, parseFloat(el.wage.value) || 0);
-      const packaging = Math.max(0, parseFloat(el.packaging.value) || 0);
-      const marketFee = Math.min(Math.max(0, parseFloat(el.marketFee.value) || 0), 95);
-      const margin = Math.max(0, parseFloat(el.margin.value) || 0);
+      const laborMin = num(el.laborMin);
+      const wage = num(el.wage);
+      const packaging = num(el.packaging);
+      const marketFee = num(el.marketFee);
+      const margin = num(el.margin);
 
       const laborCost = (laborMin/60) * wage;
       const baseCosts = total + laborCost + packaging;
