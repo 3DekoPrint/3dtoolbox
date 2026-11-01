@@ -1,0 +1,1 @@
+Baloo 2, Fredoka, Poppins, Pacifico - jeweils SIL Open Font License 1.1 (https://openfontlicense.org), bezogen aus den npm-Paketen @fontsource/*.
