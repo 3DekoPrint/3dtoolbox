@@ -243,3 +243,9 @@ input[type=range],input[type=checkbox],input[type=radio]{accent-color:var(--acce
 .fm-tool-card-active{background:var(--sel)}
 .fm-flagship-badge{display:none}
 .bt-finder .fm-eyebrow{color:var(--accent-2)}
+
+/* Video-Anleitung */
+.tb-video{max-width:880px;margin:34px auto 10px;padding:0 2px}
+.tb-video h2{font-family:var(--f-display);font-size:28px;margin:0 0 6px}
+.tb-video p{color:var(--ink-dim);margin:0 0 14px}
+.tb-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:var(--r-lg);background:var(--stage);border:1px solid var(--line);box-shadow:var(--shadow)}
