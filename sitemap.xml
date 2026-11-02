@@ -753,6 +753,42 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://3dtoolbox.info/lagersitz-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/lagersitz-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/bearing-seat-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/lagersitz-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/bearing-seat-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/lagersitz-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/bearing-seat-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/lagersitz-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/gedrucktes-lager-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/gedrucktes-lager-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/printed-bearing-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/gedrucktes-lager-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/printed-bearing-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/gedrucktes-lager-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/printed-bearing-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/gedrucktes-lager-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://3dtoolbox.info/schraubdeckel-generator.html</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/schraubdeckel-generator.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/screw-cap-generator.html"/>
