@@ -236,7 +236,7 @@
       { name: '3D/3dmodel.model', data: enc.encode(p.join('')) }
     ]);
   }
-  function writeSTEP(mesh, name) { // B-Rep aus ebenen Dreiecksflächen (jedes Dreieck = eine Fläche)
+  function writeSTEP(mesh, name) { // B-Rep: Dreiecke in einer Ebene werden zu einer ebenen Fläche zusammengefasst
     var nm = String(name || 'model').replace(/[^\w.\- ]/g, '_'), L = [], id = 0, k;
     function add(s) { id++; L.push('#' + id + '=' + s + ';'); return id; }
     L.push('ISO-10303-21;', 'HEADER;', "FILE_DESCRIPTION(('3DToolBox planar B-Rep'),'2;1');", "FILE_NAME('" + nm + ".step','2026-01-01T00:00:00',(''),(''),'3DToolBox','3dtoolbox.info','');", "FILE_SCHEMA(('AUTOMOTIVE_DESIGN { 1 0 10303 214 1 1 1 1 }'));", 'ENDSEC;', 'DATA;');
@@ -251,7 +251,13 @@
     var ctx = add('(GEOMETRIC_REPRESENTATION_CONTEXT(3) GLOBAL_UNCERTAINTY_ASSIGNED_CONTEXT((#' + unc + ')) GLOBAL_UNIT_ASSIGNED_CONTEXT((#' + len + ',#' + ang + ',#' + sa + ")) REPRESENTATION_CONTEXT('',''))");
     function f(x) { var s = String(+x.toPrecision(12)).toUpperCase(); if (/E/.test(s)) { var pr = s.split('E'); return (/\./.test(pr[0]) ? pr[0] : pr[0] + '.') + 'E' + pr[1].replace('+', ''); } return /\./.test(s) ? s : s + '.'; }
     function vec3(a) { return f(a[0]) + ',' + f(a[1]) + ',' + f(a[2]); }
-    var V = mesh.v, I = mesh.i, vp = [], pt = [], edges = new Map(), faces = [];
+    var V0 = mesh.v, I0 = mesh.i, V = [], I = [], vp = [], pt = [], edges = new Map(), faces = [], wm = new Map(), rm = [];
+    for (k = 0; k < V0.length / 3; k++) { /* nahezu gleiche Eckpunkte verschweißen (1e-4 mm) */
+      var wk = Math.round(V0[3 * k] * 1e4) + ',' + Math.round(V0[3 * k + 1] * 1e4) + ',' + Math.round(V0[3 * k + 2] * 1e4);
+      if (!wm.has(wk)) { wm.set(wk, V.length / 3); V.push(V0[3 * k], V0[3 * k + 1], V0[3 * k + 2]); }
+      rm[k] = wm.get(wk);
+    }
+    for (k = 0; k < I0.length; k += 3) { var wa = rm[I0[k]], wb = rm[I0[k + 1]], wc = rm[I0[k + 2]]; if (wa !== wb && wb !== wc && wa !== wc) I.push(wa, wb, wc); }
     function P(k) { return [V[3 * k], V[3 * k + 1], V[3 * k + 2]]; }
     function sub(a, b) { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
     function norm(a) { var l = Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]); return l ? [a[0] / l, a[1] / l, a[2] / l] : null; }
@@ -265,16 +271,97 @@
       }
       return [e, a < b];
     }
-    for (k = 0; k < I.length; k += 3) {
-      var a = I[k], b = I[k + 1], c = I[k + 2], pa = P(a), pb = P(b), pc = P(c), e1 = sub(pb, pa), e2 = sub(pc, pa);
-      var n = norm([e1[1] * e2[2] - e1[2] * e2[1], e1[2] * e2[0] - e1[0] * e2[2], e1[0] * e2[1] - e1[1] * e2[0]]), rd = norm(e1);
-      if (!n || !rd) continue;
-      used(a); used(b); used(c);
-      var nd = add("DIRECTION('',(" + vec3(n) + '))'), rdd = add("DIRECTION('',(" + vec3(rd) + '))'), axp = add("AXIS2_PLACEMENT_3D('',#" + pt[a] + ',#' + nd + ',#' + rdd + ')'), pl = add("PLANE('',#" + axp + ')');
-      var oes = [[a, b], [b, c], [c, a]].map(function (ab) { var e = edge(ab[0], ab[1]); return '#' + add("ORIENTED_EDGE('',*,*,#" + e[0] + ',' + (e[1] ? '.T.' : '.F.') + ')'); });
-      var lp = add("EDGE_LOOP('',(" + oes.join(',') + '))'), fb = add("FACE_OUTER_BOUND('',#" + lp + ',.T.)');
-      faces.push('#' + add("ADVANCED_FACE('',(#" + fb + '),#' + pl + ',.T.)'));
+    /* Dreiecke zu ebenen Flächen zusammenfassen: gleiche Ebene + gemeinsame Kante = eine Fläche */
+    var nT = I.length / 3, tn = new Array(nT), td = new Array(nT), tri = [], tol = 1e-6, ek = new Map(), t, q;
+    for (t = 0; t < nT; t++) {
+      var ta = I[3 * t], tb = I[3 * t + 1], tc = I[3 * t + 2], qa = P(ta), qb = P(tb), qc = P(tc), u1 = sub(qb, qa), u2 = sub(qc, qa);
+      var nn = norm([u1[1] * u2[2] - u1[2] * u2[1], u1[2] * u2[0] - u1[0] * u2[2], u1[0] * u2[1] - u1[1] * u2[0]]);
+      if (nn) { tn[t] = nn; td[t] = nn[0] * qa[0] + nn[1] * qa[1] + nn[2] * qa[2]; tri.push(t); }
+      [[ta, tb], [tb, tc], [tc, ta]].forEach(function (e) { var kk = Math.min(e[0], e[1]) + '_' + Math.max(e[0], e[1]); (ek.get(kk) || ek.set(kk, []).get(kk)).push(t); });
     }
+    var regs = [], seen = new Uint8Array(nT), sc = 0, mn = [1e30, 1e30, 1e30], mx = [-1e30, -1e30, -1e30];
+    for (k = 0; k < V.length; k += 3) for (q = 0; q < 3; q++) { if (V[k + q] < mn[q]) mn[q] = V[k + q]; if (V[k + q] > mx[q]) mx[q] = V[k + q]; }
+    sc = Math.max(mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2], 1);
+    var dtol = 1e-5 * sc;
+    tri.forEach(function (t0) {
+      if (seen[t0]) return;
+      var reg = [t0], stack = [t0], n0 = tn[t0], d0 = td[t0]; seen[t0] = 1;
+      while (stack.length) {
+        var cur = stack.pop(), cv = [I[3 * cur], I[3 * cur + 1], I[3 * cur + 2]];
+        for (q = 0; q < 3; q++) {
+          var ea = cv[q], eb = cv[(q + 1) % 3], nb = ek.get(Math.min(ea, eb) + '_' + Math.max(ea, eb)) || [];
+          nb.forEach(function (o) {
+            if (seen[o] || !tn[o]) return;
+            var dot = n0[0] * tn[o][0] + n0[1] * tn[o][1] + n0[2] * tn[o][2];
+            if (dot > 1 - tol && Math.abs(td[o] - d0) < dtol) { seen[o] = 1; reg.push(o); stack.push(o); }
+          });
+        }
+      }
+      /* Randkanten der Region (gerichtet, Gegenkanten heben sich auf) */
+      var dir = new Map();
+      reg.forEach(function (r) { var v3 = [I[3 * r], I[3 * r + 1], I[3 * r + 2]]; for (var j = 0; j < 3; j++) { var x = v3[j], y = v3[(j + 1) % 3], rev = y + '>' + x; if (dir.has(rev)) dir.delete(rev); else dir.set(x + '>' + y, [x, y]); } });
+      var out = new Map(); dir.forEach(function (e) { (out.get(e[0]) || out.set(e[0], []).get(e[0])).push(e); });
+      var loops = [], used2 = new Set();
+      dir.forEach(function (e0, key0) {
+        if (used2.has(key0)) return;
+        var lp = [], e = e0, guard = 0;
+        while (e && guard++ < 1e6) {
+          var kk = e[0] + '>' + e[1]; if (used2.has(kk)) break; used2.add(kk); lp.push(e[0]);
+          var cand = (out.get(e[1]) || []).filter(function (c) { return !used2.has(c[0] + '>' + c[1]); });
+          if (!cand.length) { e = null; break; }
+          if (cand.length > 1) { /* engste Linkskurve wählen */
+            var din = norm(sub(P(e[1]), P(e[0]))), best = null, ba = 1e9;
+            cand.forEach(function (c) { var dd = norm(sub(P(c[1]), P(c[0]))); if (!dd || !din) return; var cr = n0[0] * (din[1] * dd[2] - din[2] * dd[1]) + n0[1] * (din[2] * dd[0] - din[0] * dd[2]) + n0[2] * (din[0] * dd[1] - din[1] * dd[0]), dt = din[0] * dd[0] + din[1] * dd[1] + din[2] * dd[2], ang = Math.atan2(cr, dt); if (ang < ba) { ba = ang; best = c; } });
+            e = best || cand[0];
+          } else e = cand[0];
+        }
+        if (lp.length >= 3) loops.push(lp);
+      });
+      if (!loops.length) return;
+      var rd = norm(sub(P(loops[0][1]), P(loops[0][0]))) || [1, 0, 0], vv = [n0[1] * rd[2] - n0[2] * rd[1], n0[2] * rd[0] - n0[0] * rd[2], n0[0] * rd[1] - n0[1] * rd[0]];
+      function uv(i) { var p = P(i); return [p[0] * rd[0] + p[1] * rd[1] + p[2] * rd[2], p[0] * vv[0] + p[1] * vv[1] + p[2] * vv[2]]; }
+      var info = loops.map(function (lp) { var pts = lp.map(uv), ar = 0; for (var j = 0; j < pts.length; j++) { var p1 = pts[j], p2 = pts[(j + 1) % pts.length]; ar += p1[0] * p2[1] - p2[0] * p1[1]; } return { lp: lp, pts: pts, area: ar / 2, holes: [] }; });
+      function inside(pt, poly) { var c2 = false; for (var i2 = 0, j2 = poly.length - 1; i2 < poly.length; j2 = i2++) { if ((poly[i2][1] > pt[1]) !== (poly[j2][1] > pt[1]) && pt[0] < (poly[j2][0] - poly[i2][0]) * (pt[1] - poly[i2][1]) / (poly[j2][1] - poly[i2][1]) + poly[i2][0]) c2 = !c2; } return c2; }
+      var outers = info.filter(function (l) { return l.area > 0; });
+      info.filter(function (l) { return l.area <= 0; }).forEach(function (h) {
+        var host = null; outers.forEach(function (o) { if (inside(h.pts[0], o.pts) && (!host || o.area < host.area)) host = o; });
+        if (host) host.holes.push(h);
+      });
+      outers.forEach(function (o) { regs.push({ n0: n0, rd: rd, o: o }); });
+    });
+    /* T-Stellen schließen: Kanten, die nur einmal vorkommen, an Zwischenpunkten teilen */
+    var cnt = new Map(), allv = new Set();
+    function ukey(x, y) { return Math.min(x, y) + '_' + Math.max(x, y); }
+    regs.forEach(function (rg) { [rg.o].concat(rg.o.holes).forEach(function (l) { l.lp.forEach(function (x, j) { var y = l.lp[(j + 1) % l.lp.length]; allv.add(x); cnt.set(ukey(x, y), (cnt.get(ukey(x, y)) || 0) + 1); }); }); });
+    var ttol = 1e-4 * sc, avl = Array.from(allv);
+    function splitLoop(lp) {
+      var res = [];
+      lp.forEach(function (x, j) {
+        var y = lp[(j + 1) % lp.length]; res.push(x);
+        if (cnt.get(ukey(x, y)) !== 1) return;
+        var A = P(x), B = P(y), d = sub(B, A), L2 = d[0] * d[0] + d[1] * d[1] + d[2] * d[2], mid = [];
+        avl.forEach(function (w) {
+          if (w === x || w === y) return;
+          var Q = P(w), tt = ((Q[0] - A[0]) * d[0] + (Q[1] - A[1]) * d[1] + (Q[2] - A[2]) * d[2]) / L2;
+          if (tt <= 0 || tt >= 1) return;
+          var dx = Q[0] - A[0] - tt * d[0], dy = Q[1] - A[1] - tt * d[1], dz = Q[2] - A[2] - tt * d[2];
+          if (Math.sqrt(dx * dx + dy * dy + dz * dz) < ttol) mid.push([tt, w]);
+        });
+        mid.sort(function (a, b) { return a[0] - b[0]; }).forEach(function (m) { res.push(m[1]); });
+      });
+      return res;
+    }
+    function loopId(lp) {
+      var oes = lp.map(function (x, j) { var y = lp[(j + 1) % lp.length]; used(x); used(y); var e = edge(x, y); return '#' + add("ORIENTED_EDGE('',*,*,#" + e[0] + ',' + (e[1] ? '.T.' : '.F.') + ')'); });
+      return add("EDGE_LOOP('',(" + oes.join(',') + '))');
+    }
+    regs.forEach(function (rg) {
+      var o = rg.o, n0 = rg.n0, rd = rg.rd, ol = splitLoop(o.lp), anchor = ol[0];
+      var nd = add("DIRECTION('',(" + vec3(n0) + '))'), rdd = add("DIRECTION('',(" + vec3(rd) + '))'), axp = add("AXIS2_PLACEMENT_3D('',#" + (used(anchor), pt[anchor]) + ',#' + nd + ',#' + rdd + ')'), pl = add("PLANE('',#" + axp + ')');
+      var bounds = ['#' + add("FACE_OUTER_BOUND('',#" + loopId(ol) + ',.T.)')];
+      o.holes.forEach(function (h) { bounds.push('#' + add("FACE_BOUND('',#" + loopId(splitLoop(h.lp)) + ',.T.)')); });
+      faces.push('#' + add("ADVANCED_FACE('',(" + bounds.join(',') + '),#' + pl + ',.T.)'));
+    });
     var sh = add("CLOSED_SHELL('',(" + faces.join(',') + '))'), br = add("MANIFOLD_SOLID_BREP('" + nm + "',#" + sh + ')');
     var sr = add("SHAPE_REPRESENTATION('',(#" + ax + ',#' + br + '),#' + ctx + ')');
     add('SHAPE_DEFINITION_REPRESENTATION(#' + pds + ',#' + sr + ')');
