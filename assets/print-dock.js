@@ -3,7 +3,7 @@
 (function (root) {
   'use strict';
   /* ---- Einstellungen für Richtpreis und Kontakt (hier anpassen) ---- */
-  var CFG = { mail: 'info@3dekoprint.de', minEur: 8, baseEur: 3, matFactor: 1.5, hourEur: 2, spoolEur: 20, rate: 19.8 /* cm³/h (= 5,5 mm³/s, Mix aus Wand und Füllung) */ };
+  var CFG = { mail: 'info@3dekoprint.de', minEur: 8, baseEur: 3, matFactor: 1.5, hourEur: 2, spoolEur: 20, ship: { de: null, eu: null, world: null } /* Versandkosten in € je Zielgebiet (DHL); null = wird im Angebot genannt */, rate: 19.8 /* cm³/h (= 5,5 mm³/s, Mix aus Wand und Füllung) */ };
 
   /* ---- Druckerliste: [id, Name, Breite, Tiefe] in mm (nutzbarer Bauraum, ein Düsenbetrieb) ---- */
   var GROUPS = [
@@ -47,14 +47,18 @@
       send: 'Anfrage per E-Mail vorbereiten', copy: 'Text kopieren', copied: 'Text kopiert', priv: 'Es öffnet sich dein E-Mail-Programm mit einer fertigen Nachricht. Erst wenn du sie absendest, erreicht sie mich; vorher werden keine Daten übertragen.',
       mailFail: 'Falls sich nichts öffnet: Text kopieren und an', subj: 'Druckanfrage', hello: 'Hallo 3DekoPrint,', want: 'ich möchte folgendes Teil drucken lassen:', tool: 'Werkzeug', size: 'Größe', weight: 'Gewicht (geschätzt)', time: 'Druckzeit (geschätzt)',
       link: 'Konfiguration', ind2: 'Richtpreis laut Rechner', bye: 'Bitte schick mir ein Angebot. Danke!', h: 'Std.', mn: 'Min.', bed: 'Drucker', priceKg: 'Preis pro kg (€)', own: 'eigene Größe (B × T mm)', est: 'Grobe Schätzung bei 3 Wänden und 15 % Füllung.',
-      fits: 'passt aufs Druckbett', nofit: 'ist größer als das Druckbett', fp: 'Platzbedarf', none: 'Noch kein Modell berechnet.', w: 'Gewicht', cost: 'Material', t: 'Druckzeit', parts: 'Teile', hint: 'Wähle deinen Drucker für den Passcheck und die Materialschätzung.' },
+      fits: 'passt aufs Druckbett', nofit: 'ist größer als das Druckbett', fp: 'Platzbedarf', none: 'Noch kein Modell berechnet.', w: 'Gewicht', cost: 'Material', t: 'Druckzeit', parts: 'Teile', deliv: 'Lieferung', pick: 'Abholung', shipDe: 'Versand per DHL (Deutschland)', shipEu: 'Versand per DHL (EU)', shipWorld: 'Versand per DHL (Ausland außerhalb EU)', country: 'Land / PLZ', countryPh: 'z. B. Österreich, 1010', shipNote: 'Versandkosten kommen dazu', shipOffer: 'Versandkosten nenne ich dir im Angebot (nach Ziel und Paketgröße)', pickNote: 'Abholung ohne Versandkosten',
+      calc: 'So setzt sich der Richtpreis zusammen', calcLine: function (m, mf, t, th, base, min) { return 'Material ' + m + ' × ' + mf + ' + Druckzeit ' + t + ' × ' + th + ' + Grundpreis ' + base + ' (Mindestpreis ' + min + ')'; }, calcQty: 'Weitere Stücke zählen mit ca. 85 % des Einzelpreises.',
+      hint: 'Wähle deinen Drucker für den Passcheck und die Materialschätzung.' },
     en: { btn: 'Have 3DekoPrint print it', title: 'Have 3DekoPrint print it', intro: 'No printer? I will print the part for you. Send a non-binding request by e-mail and I will reply with a binding quote.',
       qty: 'Quantity', mat: 'Material', color: 'Colour', colorPh: 'e.g. black, forest green …', note: 'Message (optional)', noteSh: 'Special wishes, delivery country, deadline …', ind: 'Indicative price',
       indNote: 'Non-binding estimate from material and print time, plus shipping. I will give you the binding price in my quote after checking the model.',
       send: 'Prepare request by e-mail', copy: 'Copy text', copied: 'Text copied', priv: 'Your e-mail app opens with a ready message. It only reaches me when you send it; nothing is transferred before that.',
       mailFail: 'If nothing opens: copy the text and send it to', subj: 'Print request', hello: 'Hello 3DekoPrint,', want: 'I would like to have the following part printed:', tool: 'Tool', size: 'Size', weight: 'Weight (estimated)', time: 'Print time (estimated)',
       link: 'Configuration', ind2: 'Indicative price from the calculator', bye: 'Please send me a quote. Thanks!', h: 'h', mn: 'min', bed: 'Printer', priceKg: 'Price per kg (€)', own: 'custom size (W × D mm)', est: 'Rough estimate at 3 walls and 15 % infill.',
-      fits: 'fits on the print bed', nofit: 'is larger than the print bed', fp: 'Footprint', none: 'No model calculated yet.', w: 'Weight', cost: 'Material', t: 'Print time', parts: 'parts', hint: 'Pick your printer for the fit check and material estimate.' }
+      fits: 'fits on the print bed', nofit: 'is larger than the print bed', fp: 'Footprint', none: 'No model calculated yet.', w: 'Weight', cost: 'Material', t: 'Print time', parts: 'parts', deliv: 'Delivery', pick: 'Pick-up', shipDe: 'Shipping by DHL (Germany)', shipEu: 'Shipping by DHL (EU)', shipWorld: 'Shipping by DHL (outside the EU)', country: 'Country / postcode', countryPh: 'e.g. Austria, 1010', shipNote: 'plus shipping', shipOffer: 'I will name the shipping cost in my quote (by destination and parcel size)', pickNote: 'Pick-up, no shipping cost',
+      calc: 'How the indicative price is made up', calcLine: function (m, mf, t, th, base, min) { return 'Material ' + m + ' × ' + mf + ' + print time ' + t + ' × ' + th + ' + base fee ' + base + ' (minimum ' + min + ')'; }, calcQty: 'Additional pieces count at about 85 % of the single price.',
+      hint: 'Pick your printer for the fit check and material estimate.' }
   };
 
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
@@ -68,12 +72,14 @@
       '<div class="pd-grid"><label>' + esc(L.qty) + '<input type="number" min="1" max="99" value="1" id="' + id + 'q"></label>' +
       '<label>' + esc(L.mat) + '<select id="' + id + 'm">' + MATS.map(function (m) { return '<option value="' + m[0] + '">' + m[1] + '</option>'; }).join('') + '</select></label>' +
       '<label>' + esc(L.color) + '<input type="text" maxlength="60" placeholder="' + esc(L.colorPh) + '" id="' + id + 'c"></label></div>' +
+      '<div class="pd-grid pd-deliv"><label>' + esc(L.deliv) + '<select id="' + id + 'd"><option value="pick">' + esc(L.pick) + '</option><option value="de">' + esc(L.shipDe) + '</option><option value="eu">' + esc(L.shipEu) + '</option><option value="world">' + esc(L.shipWorld) + '</option></select></label>' +
+      '<label id="' + id + 'cl" hidden>' + esc(L.country) + '<input type="text" maxlength="60" placeholder="' + esc(L.countryPh) + '" id="' + id + 'o"></label></div>' +
       '<label class="pd-wide">' + esc(L.note) + '<textarea rows="3" maxlength="600" placeholder="' + esc(L.noteSh) + '" id="' + id + 'n"></textarea></label>' +
-      '<div class="pd-price"><span>' + esc(L.ind) + '</span><b id="' + id + 'p">–</b></div><p class="pd-small">' + esc(L.indNote) + '</p>' +
+      '<div class="pd-price"><span>' + esc(L.ind) + '</span><b id="' + id + 'p">–</b></div><p class="pd-small" id="' + id + 'sh"></p><p class="pd-small" id="' + id + 'b"></p><p class="pd-small">' + esc(L.indNote) + '</p>' +
       '<div class="pd-acts"><a class="pd-btn pd-main" id="' + id + 's" role="button">' + esc(L.send) + '</a><button type="button" class="pd-btn" id="' + id + 'k">' + esc(L.copy) + '</button></div>' +
       '<p class="pd-small">' + esc(L.priv) + ' ' + esc(L.mailFail) + ' ' + CFG.mail + '.</p><p class="pd-small pd-msg" id="' + id + 'x" role="status"></p>';
-    var q = box.querySelector('#' + id + 'q'), m = box.querySelector('#' + id + 'm'), c = box.querySelector('#' + id + 'c'), n = box.querySelector('#' + id + 'n'), p = box.querySelector('#' + id + 'p'), s = box.querySelector('#' + id + 's'), k = box.querySelector('#' + id + 'k'), x = box.querySelector('#' + id + 'x');
-    var userMat = false; m.addEventListener('change', function () { userMat = true; refresh(); });
+    var q = box.querySelector('#' + id + 'q'), m = box.querySelector('#' + id + 'm'), c = box.querySelector('#' + id + 'c'), n = box.querySelector('#' + id + 'n'), p = box.querySelector('#' + id + 'p'), s = box.querySelector('#' + id + 's'), k = box.querySelector('#' + id + 'k'), x = box.querySelector('#' + id + 'x'), dl = box.querySelector('#' + id + 'd'), co = box.querySelector('#' + id + 'o'), cl = box.querySelector('#' + id + 'cl'), sh = box.querySelector('#' + id + 'sh'), bk = box.querySelector('#' + id + 'b');
+    dl.addEventListener('change', function () { refresh(); }); var userMat = false; m.addEventListener('change', function () { userMat = true; refresh(); });
     function qty() { return Math.max(1, Math.min(99, parseInt(q.value, 10) || 1)); }
     function data() {
       var i = info(); if (!i || !i.stats) return null;
@@ -83,18 +89,24 @@
       var d = data(); if (!d) return '';
       var i = d.i, e = d.e, ls = [L.hello, '', L.want, '', '• ' + L.tool + ': ' + i.tool, '• ' + L.size + ': ' + i.size, '• ' + L.qty + ': ' + qty(), '• ' + L.mat + ': ' + mat(m.value)[1] + (c.value.trim() ? ', ' + c.value.trim() : ''),
         '• ' + L.weight + ': ' + Math.round(e.g) + ' g', '• ' + L.time + ': ' + fmtT(e.hours, L)];
+      var dtxt = dl.options[dl.selectedIndex].text; if (dl.value !== 'pick' && co.value.trim()) dtxt += ', ' + co.value.trim(); ls.push('• ' + L.deliv + ': ' + dtxt);
       if (i.details) ls.push('• ' + i.details);
       if (i.link) ls.push('• ' + L.link + ': ' + i.link);
-      ls.push('• ' + L.ind2 + ': ' + d.price + ' €');
+      ls.push('• ' + L.ind2 + ': ' + d.price + ' €' + (dl.value !== 'pick' ? ' (' + L.shipNote + ')' : ''));
       if (n.value.trim()) ls.push('', n.value.trim());
       ls.push('', L.bye); return ls.join('\n');
     }
     function refresh() {
       var d = data(); if (!d) { p.textContent = L.none; s.removeAttribute('href'); s.setAttribute('aria-disabled', 'true'); return; }
-      p.textContent = '≈ ' + d.price + ' €'; s.removeAttribute('aria-disabled');
+      var shipCost = dl.value === 'pick' ? 0 : CFG.ship[dl.value]; cl.hidden = dl.value === 'pick';
+      p.textContent = '≈ ' + (d.price + (shipCost || 0)) + ' €' + (dl.value !== 'pick' && shipCost == null ? ' + ' + (lang === 'en' ? 'shipping' : 'Versand') : '');
+      sh.textContent = dl.value === 'pick' ? L.pickNote : (shipCost == null ? L.shipOffer : L.shipNote + ': ' + shipCost + ' €');
+      var one = Math.max(CFG.minEur, CFG.baseEur + d.e.eur * CFG.matFactor + d.e.hours * CFG.hourEur);
+      bk.textContent = L.calc + ': ' + L.calcLine(money(d.e.eur, lang), String(CFG.matFactor).replace('.', lang === 'de' ? ',' : '.'), fmtT(d.e.hours, L), CFG.hourEur + ' €/' + (lang === 'en' ? 'h' : 'Std.'), CFG.baseEur + ' €', CFG.minEur + ' €') + ' = ' + Math.ceil(one) + ' €. ' + (qty() > 1 ? L.calcQty : '');
+      s.removeAttribute('aria-disabled');
       s.href = 'mailto:' + CFG.mail + '?subject=' + encodeURIComponent(L.subj + ': ' + d.i.tool) + '&body=' + encodeURIComponent(text());
     }
-    [q, c, n].forEach(function (f) { f.addEventListener('input', refresh); });
+    [q, c, n, co].forEach(function (f) { f.addEventListener('input', refresh); });
     s.addEventListener('click', function (ev) { if (s.getAttribute('aria-disabled')) ev.preventDefault(); else refresh(); });
     k.addEventListener('click', function () {
       var t = text(); if (!t) return;
@@ -183,6 +195,10 @@
     var last = ''; setInterval(function () { var sig = ''; g.traverse(function (o) { if (o.isMesh) sig += o.uuid + (o.visible ? '1' : '0'); }); if (sig !== last) { last = sig; cb(); } }, 500);
   }
   /* Eingaben der Seite als Text ("Name: Wert; …") für die Anfrage */
+  function labelText(f) {
+    var l = f.labels && f.labels[0]; if (!l) return ''; var c = l.cloneNode(true);
+    [].forEach.call(c.querySelectorAll('select,input,output,textarea,option'), function (n) { n.remove(); }); return c.textContent;
+  }
   function describeForm(scope, max) {
     var out = [], seen = {};
     [].forEach.call(scope.querySelectorAll('input,select,textarea'), function (f) {
@@ -190,10 +206,10 @@
       var v;
       if (f.type === 'checkbox') { if (!f.checked) return; v = document.documentElement.lang === 'en' ? 'yes' : 'ja'; } else if (f.type === 'radio') { if (!f.checked) return; v = f.value; } else if (f.tagName === 'SELECT') { v = f.options[f.selectedIndex] ? f.options[f.selectedIndex].text : ''; } else v = f.value;
       v = String(v || '').trim(); if (!v) return;
-      var lab = f.getAttribute('aria-label') || (f.labels && f.labels[0] ? f.labels[0].textContent : '') || f.name || f.id; lab = String(lab).replace(/\s+/g, ' ').trim().slice(0, 40); if (!lab) return;
+      var lab = f.getAttribute('aria-label') || labelText(f) || f.name || f.id; lab = String(lab).replace(/\s+/g, ' ').trim().slice(0, 40); if (!lab) return;
       var key = lab + '=' + v; if (seen[key]) return; seen[key] = 1; out.push(lab + ': ' + v.slice(0, 80));
     });
-    var t = out.join('; '); return t.length > (max || 500) ? t.slice(0, (max || 500) - 1) + '…' : t;
+    var t = out.join('; '); return t.length > (max || 800) ? t.slice(0, (max || 800) - 1) + '…' : t;
   }
   root.PrintDock = { describeForm: describeForm, statsFromIndexed: statsFromIndexed, statsFromGroup: statsFromGroup, watchGroup: watchGroup, CFG: CFG, GROUPS: GROUPS, MATS: MATS, printer: printer, flat: flat, bedOptions: bedOptions, estimate: estimate, quote: quote, orderPanel: orderPanel, mount: mount, statsFromMeshes: statsFromMeshes, fmtT: fmtT, T: T };
 })(typeof window !== 'undefined' ? window : this);
