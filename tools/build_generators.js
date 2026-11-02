@@ -86,6 +86,10 @@ function hubPage(lg) {
     if (!rows.length) return;
     h += '  <h2 class="gk-cat" id="' + cat + '">' + Tl.cats[cat] + '</h2>\n  <ul class="gk-rows gk-cards">' + rows.map(r => '<li><a href="' + r[2] + '">' + (r[3] ? '<img class="gk-th" src="' + r[3] + '" width="480" height="360" loading="lazy" alt="' + esc(r[0]) + '">' : '<span class="gk-th gk-th0" aria-hidden="true">3D</span>') + '<b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span><i>' + Tl.open + ' →</i></a></li>').join('') + '</ul>\n';
   });
+  var tip = lg === 'de'
+    ? ['Selbst konstruieren', 'Dein Teil ist nicht dabei? <a href="https://solidcraft.io" target="_blank" rel="noopener noreferrer">SolidCraft</a> ist ein kostenloses Open-Source-CAD zum Konstruieren eigener Teile, auch im Browser. Das ist ein Tipp von uns, kein Partner und keine Werbung.']
+    : ['Design your own', 'Your part is not listed? <a href="https://solidcraft.io" target="_blank" rel="noopener noreferrer">SolidCraft</a> is a free open-source CAD for designing your own parts, also in the browser. This is our tip, not a partner and not an ad.'];
+  h += '  <aside class="gk-ext"><b>' + tip[0] + '</b><p>' + tip[1] + '</p></aside>\n';
   h += '  <p id="hubNone" class="cv-warn" hidden>' + Tl.hubNone + '</p>\n  </section>\n' + ch.tail;
   h += '<script>(function(){var q=document.getElementById("hubQ"),n=document.getElementById("hubNone");q.addEventListener("input",function(){var v=q.value.trim().toLowerCase(),any=false;document.querySelectorAll(".gk-rows li").forEach(function(li){var s=!v||li.textContent.toLowerCase().indexOf(v)>=0;li.style.display=s?"":"none";if(s)any=true});document.querySelectorAll(".gk-rows").forEach(function(ul){var vis=[].some.call(ul.children,function(li){return li.style.display!=="none"});ul.previousElementSibling.style.display=vis?"":"none";ul.style.display=vis?"":"none"});n.hidden=any})})();</script>\n</body>\n</html>\n';
   return { path: (lg === 'de' ? '' : 'en/') + url[lg].split('/').pop(), html: h, url };
