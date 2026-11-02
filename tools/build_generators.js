@@ -9,7 +9,7 @@ const defs = [];
 global.self = global; global.GenKit = { define: function (d) { defs.push(d); return d; } };
 const files = fs.readdirSync(path.join(ROOT, 'assets/gen')).filter(f => f.endsWith('.js')).sort();
 files.forEach(f => (0, eval)(fs.readFileSync(path.join(ROOT, 'assets/gen', f), 'utf8')));
-const ORDER = ['railstop','doorwedge','doorcatch','rodclamp','tentpeg','guyline','tubecap','linewinder','cupclamp','canister','systembox','toolinsert','binbox','gear','bearingseat','printbearing','capthread','pulley','pipeadapter','gridfinity', 'spool', 'bolts', 'spacer', 'cableclip', 'hook', 'vent', 'vase', 'drawer', 'tray', 'pegboard', 'hingebox', 'deckbox', 'minibase', 'cutter', 'coaster', 'stamp', 'stencil', 'phonestand', 'knob', 'funnel', 'hexgrip', 'keycap','cleat','honeycomb','planter','keychain','bracket'];
+const ORDER = ['windowlever','windowbar','windowplate','railstop','doorwedge','doorcatch','rodclamp','tentpeg','guyline','tubecap','linewinder','cupclamp','canister','systembox','toolinsert','binbox','gear','bearingseat','printbearing','capthread','pulley','pipeadapter','gridfinity', 'spool', 'bolts', 'spacer', 'cableclip', 'hook', 'vent', 'vase', 'drawer', 'tray', 'pegboard', 'hingebox', 'deckbox', 'minibase', 'cutter', 'coaster', 'stamp', 'stencil', 'phonestand', 'knob', 'funnel', 'hexgrip', 'keycap','cleat','honeycomb','planter','keychain','bracket'];
 defs.sort((a, b) => (ORDER.indexOf(a.id) + 99) % 99 - (ORDER.indexOf(b.id) + 99) % 99);
 
 const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
