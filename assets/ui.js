@@ -38,3 +38,6 @@
   function start() { fix(); if (window.MutationObserver) new MutationObserver(later).observe(document.body, { childList: true, subtree: true }); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
+
+/* Startseite mobil: Erklärschritte des Filament-Finders eingeklappt */
+(function(){function f(){try{if(window.matchMedia('(max-width:620px)').matches){var d=document.querySelector('.fm-howto-d');if(d)d.removeAttribute('open');}}catch(e){}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',f);else f();})();

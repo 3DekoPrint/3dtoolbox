@@ -63,7 +63,12 @@ function top(lg) {
   /* Bereich vom Kopf bis zum Filament-Finder ersetzen */
   const a = h.search(/[ \t]*(?:<nav class="bt-nav">|<header class="tb-top">)/), b = h.indexOf('<section class="bt-finder" id="finder">');
   if (a < 0 || b < 0) throw new Error('Marker fehlen in ' + f);
-  h = h.slice(0, a) + top(lg) + h.slice(b);
+  /* Reihenfolge: Hero, beliebte Werkzeuge, Filament-Finder, Video, danach „Nach Aufgabe“ und Empfehlungen */
+  const t = top(lg), cut = t.indexOf('  <section class="tb-sec" id="aufgaben">'); if (cut < 0) throw new Error('aufgaben fehlt');
+  let rest = h.slice(b).replace(/[ \t]*<section class="tb-sec" id="aufgaben">[\s\S]*?<\/section>\s*/, '').replace(/[ \t]*<section class="tb-sec" id="extern">[\s\S]*?<\/section>\s*/, '');
+  const m = rest.search(/[ \t]*<footer class="tb-foot">/); if (m < 0) throw new Error('Fuss fehlt');
+  rest = rest.slice(0, m).replace(/[ \t]*<\/main>\s*$/, '').replace(/\s+$/, '') + '\n\n' + t.slice(cut).replace(/\s+$/, '') + '\n' + rest.slice(m);
+  h = h.slice(0, a) + t.slice(0, cut).replace(/\s+$/, '') + '\n\n' + rest;
   /* Partner-Kasten und alter Fuß ersetzen */
   h = h.replace(/[ \t]*<div id="partner"><\/div>\s*<div class="fm-partner">[\s\S]*?<\/div>\n/, '');
   h = h.replace(/[ \t]*<div class="fm-footer">[\s\S]*?<\/div>\s*<\/div>\n/, () => NAV.footer(lg));

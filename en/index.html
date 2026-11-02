@@ -1029,32 +1029,14 @@ window.tbLoad=(function(){
     </div>
   </section>
 
-  <section class="tb-sec" id="aufgaben">
-    <div class="tb-head"><div><span class="tb-mono">Overview</span><h2>By task</h2></div><p>Everything that comes up when printing, no installation, on phone and desktop.</p></div>
-    <div class="tb-cols">
-      <div class="tb-col"><h3>Filaments</h3><ul><li><a href="/en/">Filament Finder</a></li><li><a href="/en/filament-database.html">Filament Database</a></li><li><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></li></ul></div>
-      <div class="tb-col"><h3>Calculate & convert</h3><ul><li><a href="/en/3d-print-cost-calculator.html">Cost Calculator</a></li><li><a href="/en/3d-file-converter.html">File Converter</a></li><li><a href="/en/image-to-3d.html">Image to 3D</a></li><li><a href="/en/slicer-settings-helper.html">Slicer Helper</a></li></ul></div>
-      <div class="tb-col"><h3>Generators</h3><ul><li><a href="/en/generators.html#storage">Storage & organising</a></li><li><a href="/en/generators.html#workshop">Workshop</a></li><li><a href="/en/generators.html#home">Home</a></li><li><a href="/en/generators.html#art">Art & signs</a></li><li><a href="/en/generators.html#electronics">Electronics</a></li><li><a href="/en/generators.html">All generators</a></li></ul></div>
-      <div class="tb-col"><h3>Knowledge</h3><ul><li><a href="/en/3d-print-lexicon.html">Lexicon</a></li><li><a href="/en/materials/">Materials</a></li><li><a href="/en/slicer-settings-helper.html">Slicer Helper</a></li></ul></div>
-    </div>
-  </section>
-
-  <section class="tb-sec" id="extern">
-    <div class="tb-ext">
-      <div class="tb-ext-head"><span class="tb-mono">Not by 3DToolBox</span><h2>Recommended<span class="tb-ad">Ad</span></h2><p>Tools by other providers that fit 3D printing well. They open on the provider’s own site.</p></div>
-      <a class="tb-ext-item" id="fmToolMeshy" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener sponsored"><b>Meshy AI ↗</b><span>AI: create a print-ready 3D model from text or an image.</span></a>
-      <a class="tb-ext-item" id="fmToolThangs" href="https://than.gs/u/8355632" target="_blank" rel="noopener sponsored"><b>Thangs ↗</b><span>Large library of ready-to-print 3D models.</span></a>
-      <small>Contains partner links (ad). No extra cost for you.</small>
-    </div>
-  </section>
-
 <section class="bt-finder" id="finder">
   <p class="fm-eyebrow">Filament Matching</p>
   <span class="fm-flagship-badge">★ Our Flagship Tool</span>
   <h2 class="fm-title fm-title-flagship">Filament Finder</h2>
   <p class="fm-sub">Find filaments that match your photo or 3MF file in seconds — no sign-up needed, with direct shop links.</p>
 
-  <div class="fm-howto">
+  <details class="fm-howto fm-howto-d" open>
+    <summary>How it works</summary>
     <div class="fm-howto-grid">
       <div class="fm-howto-step">
         <div class="fm-howto-num">01</div>
@@ -1077,7 +1059,7 @@ window.tbLoad=(function(){
       <span class="fm-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Image analysis runs locally</span>
       <span class="fm-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Free to use</span>
     </div>
-  </div>
+  </details>
 
   <div class="fm-drop" id="fmDrop">
     <svg class="fm-drop-icon" viewBox="0 0 48 48" aria-hidden="true">
@@ -1180,7 +1162,26 @@ window.tbLoad=(function(){
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Filament Finder: step-by-step guide","description":"Upload a photo or 3MF and find matching filaments by colour distance.","thumbnailUrl":"https://3dtoolbox.info/assets/video/finder-en.jpg","uploadDate":"2026-11-01","duration":"PT0M59S","contentUrl":"https://3dtoolbox.info/assets/video/finder-en.mp4","inLanguage":"en"}</script>
   </section>
   <!--/tb-video-->
-    </main>
+
+  <section class="tb-sec" id="aufgaben">
+    <div class="tb-head"><div><span class="tb-mono">Overview</span><h2>By task</h2></div><p>Everything that comes up when printing, no installation, on phone and desktop.</p></div>
+    <div class="tb-cols">
+      <div class="tb-col"><h3>Filaments</h3><ul><li><a href="/en/">Filament Finder</a></li><li><a href="/en/filament-database.html">Filament Database</a></li><li><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></li></ul></div>
+      <div class="tb-col"><h3>Calculate & convert</h3><ul><li><a href="/en/3d-print-cost-calculator.html">Cost Calculator</a></li><li><a href="/en/3d-file-converter.html">File Converter</a></li><li><a href="/en/image-to-3d.html">Image to 3D</a></li><li><a href="/en/slicer-settings-helper.html">Slicer Helper</a></li></ul></div>
+      <div class="tb-col"><h3>Generators</h3><ul><li><a href="/en/generators.html#storage">Storage & organising</a></li><li><a href="/en/generators.html#workshop">Workshop</a></li><li><a href="/en/generators.html#home">Home</a></li><li><a href="/en/generators.html#art">Art & signs</a></li><li><a href="/en/generators.html#electronics">Electronics</a></li><li><a href="/en/generators.html">All generators</a></li></ul></div>
+      <div class="tb-col"><h3>Knowledge</h3><ul><li><a href="/en/3d-print-lexicon.html">Lexicon</a></li><li><a href="/en/materials/">Materials</a></li><li><a href="/en/slicer-settings-helper.html">Slicer Helper</a></li></ul></div>
+    </div>
+  </section>
+
+  <section class="tb-sec" id="extern">
+    <div class="tb-ext">
+      <div class="tb-ext-head"><span class="tb-mono">Not by 3DToolBox</span><h2>Recommended<span class="tb-ad">Ad</span></h2><p>Tools by other providers that fit 3D printing well. They open on the provider’s own site.</p></div>
+      <a class="tb-ext-item" id="fmToolMeshy" href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener sponsored"><b>Meshy AI ↗</b><span>AI: create a print-ready 3D model from text or an image.</span></a>
+      <a class="tb-ext-item" id="fmToolThangs" href="https://than.gs/u/8355632" target="_blank" rel="noopener sponsored"><b>Thangs ↗</b><span>Large library of ready-to-print 3D models.</span></a>
+      <small>Contains partner links (ad). No extra cost for you.</small>
+    </div>
+  </section>
+  </main>
 <footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
