@@ -29,6 +29,7 @@ const P = {
 
 const L = {
   de: {
+    adTag: 'Werbung', tipTag: 'Tipp, keine Werbung',
     nav: 'Hauptnavigation', menu: 'Menü', theme: 'Darstellung wechseln (hell/dunkel)', crumb: 'Brotkrumen', home: 'Startseite',
     groups: [
       { id: 'fil', label: 'Filamente', items: [['finder', 'Filament-Finder', 'Foto oder 3MF hochladen, passende Filamente finden'], ['db', 'Filament-Datenbank', 'Über 1000 Filamente nach Farbe durchsuchen'], ['rest', 'Restmengenrechner', 'Wie viel Filament ist noch auf der Spule?']] },
@@ -36,7 +37,7 @@ const L = {
       { id: 'gen', label: 'Generatoren', items: [['hub', 'Alle Generatoren', 'Über 30 Generatoren mit Suche'], ['grid', 'Gridfinity', 'Behälter und Grundplatten im 42-mm-Raster'], ['case', 'Gehäuse-Generator', 'Gehäuse für Raspberry Pi, ESP32 und mehr'], ['obj', 'Objekt-Generator', 'Boxen, Tabletts, Zykloiden und mehr'], ['gear', 'Planetengetriebe', 'Getriebe mit Hohlrad, Planeten und Sonne'], ['tag', 'Namens-Anhänger', 'Mehrfarbige Anhänger mit Namen'], ['plate', 'Namensschild', 'Namensschild mit Anhänger']] },
       { id: 'wiss', label: 'Wissen', items: [['lex', 'Lexikon', 'Druckprobleme, Slicer-Tipps und Begriffe'], ['mat', 'Materialien', 'PLA, PETG, ABS, ASA, TPU und mehr im Vergleich'], ['slicer', 'Slicer-Helfer', 'Einstellungen für Bambu Studio, Prusa und Cura']] }
     ],
-    ext: { id: 'ext', label: 'Empfehlungen', note: 'Extern · nicht von uns · Werbung', items: [['https://www.meshy.ai?via=3dekoprint', 'Meshy AI ↗', 'KI: aus Text oder Bild ein 3D-Modell erstellen'], ['https://than.gs/u/8355632', 'Thangs ↗', 'Große Bibliothek fertiger 3D-Modelle']] },
+    ext: { id: 'ext', label: 'Empfehlungen', note: 'Extern · nicht von uns', items: [['https://www.meshy.ai?via=3dekoprint', 'Meshy AI ↗', 'KI: aus Text oder Bild ein 3D-Modell erstellen'], ['https://than.gs/u/8355632', 'Thangs ↗', 'Große Bibliothek fertiger 3D-Modelle'], ['https://solidcraft.io', 'SolidCraft ↗', 'Kostenloses Open-Source-CAD zum Konstruieren eigener Teile', 'tip']] },
     foot: {
       about: 'Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.',
       creatorT: 'Creator?', creatorP: 'Du zeigst 3D-Druck in deinem Content? Melde dich mit ein paar Infos zu deinem Kanal.', creatorBtn: 'Kooperation anfragen', mailSubj: 'Partneranfrage%203DToolBox',
@@ -44,6 +45,7 @@ const L = {
     }
   },
   en: {
+    adTag: 'Ad', tipTag: 'Tip, not an ad',
     nav: 'Main navigation', menu: 'Menu', theme: 'Switch appearance (light/dark)', crumb: 'Breadcrumb', home: 'Home',
     groups: [
       { id: 'fil', label: 'Filaments', items: [['finder', 'Filament Finder', 'Upload a photo or 3MF and find matching filaments'], ['db', 'Filament Database', 'Browse 1000+ filaments by colour'], ['rest', 'Remaining Filament', 'How much filament is left on the spool?']] },
@@ -51,7 +53,7 @@ const L = {
       { id: 'gen', label: 'Generators', items: [['hub', 'All generators', '30+ generators with search'], ['grid', 'Gridfinity', 'Bins and baseplates on the 42 mm grid'], ['case', 'Enclosure Generator', 'Cases for Raspberry Pi, ESP32 and more'], ['obj', 'Object Generator', 'Boxes, trays, cycloids and more'], ['gear', 'Planetary Gearbox', 'Gearbox with ring, planets and sun gear'], ['tag', 'Layered Name Tag', 'Multicolour name tags'], ['plate', 'Name Plate Tag', 'Name plate with tag']] },
       { id: 'wiss', label: 'Knowledge', items: [['lex', 'Lexicon', 'Print problems, slicer tips and terms'], ['mat', 'Materials', 'PLA, PETG, ABS, ASA, TPU and more compared'], ['slicer', 'Slicer Helper', 'Settings for Bambu Studio, Prusa and Cura']] }
     ],
-    ext: { id: 'ext', label: 'Recommended', note: 'External · not by us · Ad', items: [['https://www.meshy.ai?via=3dekoprint', 'Meshy AI ↗', 'AI: create a 3D model from text or an image'], ['https://than.gs/u/8355632', 'Thangs ↗', 'Large library of ready-to-print 3D models']] },
+    ext: { id: 'ext', label: 'Recommended', note: 'External · not by us', items: [['https://www.meshy.ai?via=3dekoprint', 'Meshy AI ↗', 'AI: create a 3D model from text or an image'], ['https://than.gs/u/8355632', 'Thangs ↗', 'Large library of ready-to-print 3D models'], ['https://solidcraft.io', 'SolidCraft ↗', 'Free open-source CAD for designing your own parts', 'tip']] },
     foot: {
       about: 'Free tools for 3D printing. Everything runs in your browser, no account needed.',
       creatorT: 'Creator?', creatorP: 'Do you show 3D printing in your content? Get in touch with a few details about your channel.', creatorBtn: 'Request a collaboration', mailSubj: 'Partner%20inquiry%20-%203DToolBox',
@@ -81,8 +83,10 @@ function header(lg, o) {
     const links = items.map(it => {
       const url = extra ? it[0] : href(it[0], lg);
       const isCur = !extra && url === o.path;
-      const attrs = extra ? ' target="_blank" rel="noopener sponsored"' : '';
-      return '<a href="' + url + '"' + attrs + (isCur ? ' aria-current="page"' : '') + '><b>' + esc(it[1]) + '</b><span>' + esc(it[2]) + '</span></a>';
+      const tip = extra && it[3] === 'tip';
+      const attrs = extra ? (tip ? ' target="_blank" rel="noopener noreferrer"' : ' target="_blank" rel="noopener sponsored"') : '';
+      const pre = extra ? (tip ? T.tipTag : T.adTag) + ' · ' : '';
+      return '<a href="' + url + '"' + attrs + (isCur ? ' aria-current="page"' : '') + '><b>' + esc(it[1]) + '</b><span>' + esc(pre + it[2]) + '</span></a>';
     }).join('');
     const note = extra ? '<small>' + esc(T.ext.note) + '</small>' : '';
     return '<li class="tb-grp' + (cur ? ' is-cur' : '') + '"><details><summary>' + esc(label) + '</summary><div class="tb-dd">' + note + links + '</div></details></li>';
