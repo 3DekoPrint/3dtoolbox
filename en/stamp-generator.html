@@ -34,8 +34,11 @@
 <link rel="stylesheet" href="/assets/theme.css">
 <link rel="stylesheet" href="/assets/gen-kit.css">
 <link rel="stylesheet" href="/assets/print-dock.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 <div class="fm-root bt-sub">
   <header class="tb-top">
   <nav class="tb-nav" aria-label="Main navigation">
@@ -46,6 +49,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><a href="/en/generators.html">Generators</a></li><li><span aria-current="page">Stamp</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero gk-hero"><span class="bt-pill"><i></i>Art &amp; signs</span><h1 class="fm-title">Stamp</h1><p class="fm-sub">Text stamps with a handle: enter text and font, the mirroring is already included.</p>
   <div class="bt-kpis"><div class="bt-kpi"><b>STL + 3MF</b><span>Export</span></div><div class="bt-kpi"><b>0 €</b><span>Cost</span></div><div class="bt-kpi"><b>in browser</b><span>Runs</span></div></div></header>
   <div id="gk"></div>
@@ -55,7 +59,8 @@
   <h2>Printing notes</h2><ul class="mp-list"><li>Choose lettering at least 8 mm high, otherwise details get too fine. Bold fonts stamp better.</li><li>A 0.12 mm layer height gives the sharpest lettering. Use an ink pad or fabric or acrylic paint.</li><li>Available fonts depend on your device. The first option is always included.</li></ul>
   <h2>Common questions</h2><h3>Why is the lettering mirrored on the model?</h3><p>A stamp must be mirrored so the imprint reads correctly. You can switch this off with the mirror option.</p><h3>How many lines are possible?</h3><p>Up to three lines, separated by the vertical bar.</p>
   </section>
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>

@@ -33,8 +33,11 @@
 <script src="/assets/ref.js" defer></script>
 <link rel="stylesheet" href="/assets/theme.css">
 <link rel="stylesheet" href="/assets/gen-kit.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
 <div class="fm-root bt-sub">
   <header class="tb-top">
   <nav class="tb-nav" aria-label="Hauptnavigation">
@@ -45,6 +48,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><span aria-current="page">Alle Generatoren</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero"><span class="bt-pill"><i></i>Generatoren</span><h1 class="fm-title">Alle Generatoren</h1><p class="fm-sub">Kostenlose 3D-Druck-Generatoren: Maße eingeben, Vorschau ansehen, STL oder 3MF laden. Alles läuft in deinem Browser.</p></header>
   <section class="bt-panel mp">
   <input id="hubQ" class="gk-hubq" type="search" placeholder="Generator suchen …" autocomplete="off" aria-label="Generator suchen …">
@@ -63,7 +67,8 @@
   <ul class="gk-rows"><li><a href="/deckbox-generator.html"><b>Deckbox-Generator</b><span>Box für Spielkarten, Sammelkarten oder Tarot: Kartenformat und Anzahl eingeben, STL oder 3MF laden</span><i>Öffnen →</i></a></li><li><a href="/miniaturbasis-generator.html"><b>Miniaturbasis</b><span>Bases für Warhammer, D&amp;D und andere Tabletops: Form, Größe und Unterseite wählen, mehrere Stück auf einmal</span><i>Öffnen →</i></a></li></ul>
   <p id="hubNone" class="cv-warn" hidden>Nichts gefunden.</p>
   </section>
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
       <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>

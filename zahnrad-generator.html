@@ -34,8 +34,11 @@
 <link rel="stylesheet" href="/assets/theme.css">
 <link rel="stylesheet" href="/assets/gen-kit.css">
 <link rel="stylesheet" href="/assets/print-dock.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
 <div class="fm-root bt-sub">
   <header class="tb-top">
   <nav class="tb-nav" aria-label="Hauptnavigation">
@@ -46,6 +49,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><a href="/generatoren.html">Generatoren</a></li><li><span aria-current="page">Zahnrad</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero gk-hero"><span class="bt-pill"><i></i>Werkstatt</span><h1 class="fm-title">Zahnrad</h1><p class="fm-sub">Stirnräder mit Evolventenverzahnung, auch Schrägverzahnung und passendes Gegenrad: Modul, Zähnezahl und Bohrung einstellen, STL oder 3MF laden.</p>
   <div class="bt-kpis"><div class="bt-kpi"><b>STL + 3MF</b><span>Export</span></div><div class="bt-kpi"><b>0 €</b><span>Kosten</span></div><div class="bt-kpi"><b>im Browser</b><span>Läuft</span></div></div></header>
   <div id="gk"></div>
@@ -55,7 +59,8 @@
   <h2>Druckhinweise</h2><ul class="mp-list"><li>Flach drucken, mit der Stirnseite auf dem Bett. Die Zähne brauchen dann keine Stützen.</li><li>Das Zahnspiel gleicht Druckungenauigkeit aus. Läuft das Paar zu stramm, erhöhe das Spiel um 0,05 mm.</li><li>Stell den Achsabstand genau so ein, wie unten angezeigt. Schon 0,3 mm weniger lassen das Paar klemmen.</li><li>Für Belastung eher PETG oder Nylon nehmen und mehr Wände, mindestens 4.</li></ul>
   <h2>Häufige Fragen</h2><h3>Was ist das Modul?</h3><p>Das Modul ist der Teilkreisdurchmesser geteilt durch die Zähnezahl, in Millimetern. Modul 1 bis 2 ist für den 3D-Druck üblich.</p><h3>Wie finde ich das Modul eines vorhandenen Zahnrads?</h3><p>Außendurchmesser durch (Zähnezahl + 2) teilen. Bei 22 mm Außendurchmesser und 9 Zähnen ist das Modul 2.</p><h3>Wann nehme ich Schrägverzahnung?</h3><p>Sie läuft leiser und trägt mehr, erzeugt aber eine Kraft in Achsrichtung. Für den Alltag reicht Geradverzahnung.</p>
   </section>
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
       <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>

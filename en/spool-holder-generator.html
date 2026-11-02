@@ -34,8 +34,11 @@
 <link rel="stylesheet" href="/assets/theme.css">
 <link rel="stylesheet" href="/assets/gen-kit.css">
 <link rel="stylesheet" href="/assets/print-dock.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
 </head>
 <body>
+<a class="tb-skip" href="#main">Skip to content</a>
 <div class="fm-root bt-sub">
   <header class="tb-top">
   <nav class="tb-nav" aria-label="Main navigation">
@@ -46,6 +49,7 @@
   </nav>
   <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><a href="/en/generators.html">Generators</a></li><li><span aria-current="page">Spool Holder Generator</span></li></ol></nav>
   </header>
+  <main id="main" tabindex="-1">
   <header class="bt-subhero gk-hero"><span class="bt-pill"><i></i>Workshop</span><h1 class="fm-title">Spool Holder Generator</h1><p class="fm-sub">A filament holder for any spool: enter diameter, width and core bore, optionally with 608 ball bearings for smooth running.</p>
   <div class="bt-kpis"><div class="bt-kpi"><b>STL + 3MF</b><span>Export</span></div><div class="bt-kpi"><b>0 €</b><span>Cost</span></div><div class="bt-kpi"><b>in browser</b><span>Runs</span></div></div></header>
   <div id="gk"></div>
@@ -55,7 +59,8 @@
   <h2>Printing notes</h2><ul class="mp-list"><li>Print the frame flat (side down) and the hubs with the flange down, without supports.</li><li>Print the axle lying down with 4 walls, which makes it strongest.</li><li>3 walls and 15 % infill carry a 1 kg spool. For 5 kg spools use 4 walls and 25 % infill for the frame.</li><li>With 608 bearings (skateboard bearings, 8 × 22 × 7 mm) the spool runs almost without resistance. Without bearings it turns on the smooth axle.</li><li>If the hubs fit too tight, enter a 0.5 mm smaller spool bore or sand the hubs lightly.</li></ul>
   <h2>Common questions</h2><h3>Which spools fit?</h3><p>All common spools from about 100 to 300 mm in diameter. Just enter diameter, width and the centre bore. Most spools have a bore of 52 to 58 mm.</p><h3>Do I need ball bearings?</h3><p>No, they are optional. The cradles and the axle work without them. Bearings make the spool quieter and easier to turn.</p><h3>Does the holder slide around at high speed?</h3><p>The frame has a wide base. With very fast printers, place it on a non-slip mat.</p>
   </section>
-  <footer class="tb-foot">
+    </main>
+<footer class="tb-foot">
     <div class="tb-foot-grid">
       <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
       <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>
