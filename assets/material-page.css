@@ -84,3 +84,9 @@
 .en-grid input[type=range]{width:100%;accent-color:var(--accent)}
 .mp h2.en-h3{font-family:inherit;font-size:15px;margin:22px 0 0}
 .en-grid .i3-chk{flex-direction:row;align-items:center;gap:8px;color:var(--ink)}
+.mp-cta{display:inline-block;padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink)!important;font-weight:600;text-decoration:none;margin-right:8px}
+.mp-cta:hover{border-color:var(--accent-2)}
+.mp-note{font-size:13.5px;color:var(--ink-dim)}
+.mp h3{font-size:16px;margin:18px 0 4px}
+.mp ol,.mp ul{padding-left:1.3em}
+.mp .tb-tip{display:inline-block;padding:3px 10px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:12.5px;font-weight:600}
