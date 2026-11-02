@@ -735,6 +735,114 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://3dtoolbox.info/zelthering-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/zelthering-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/tent-peg-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/zelthering-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/tent-peg-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/zelthering-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/tent-peg-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/zelthering-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/leinenspanner-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/leinenspanner-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/guyline-tensioner-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/leinenspanner-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/guyline-tensioner-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/leinenspanner-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/guyline-tensioner-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/leinenspanner-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/rohrkappe-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/rohrkappe-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/tube-cap-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/rohrkappe-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/tube-cap-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/rohrkappe-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/tube-cap-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/rohrkappe-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/schnurwickler-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/schnurwickler-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/line-winder-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/schnurwickler-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/line-winder-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/schnurwickler-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/line-winder-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/schnurwickler-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/becherhalter-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/becherhalter-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/cup-holder-clamp-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/becherhalter-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/cup-holder-clamp-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/becherhalter-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/cup-holder-clamp-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/becherhalter-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/kartuschenfuss-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/kartuschenfuss-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/canister-stand-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/kartuschenfuss-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/canister-stand-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/kartuschenfuss-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/canister-stand-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/kartuschenfuss-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://3dtoolbox.info/systembox-generator.html</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/systembox-generator.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/system-box-generator.html"/>
