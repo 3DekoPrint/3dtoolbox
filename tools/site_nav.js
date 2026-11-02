@@ -40,7 +40,7 @@ const L = {
     foot: {
       about: 'Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.',
       creatorT: 'Creator?', creatorP: 'Du zeigst 3D-Druck in deinem Content? Melde dich mit ein paar Infos zu deinem Kanal.', creatorBtn: 'Kooperation anfragen', mailSubj: 'Partneranfrage%203DToolBox',
-      coop: 'In Kooperation mit', imp: 'Impressum', priv: 'Datenschutz', impUrl: '/impressum.html', privUrl: '/datenschutz.html'
+      coop: 'Ein Projekt von', imp: 'Impressum', priv: 'Datenschutz', impUrl: '/impressum.html', privUrl: '/datenschutz.html'
     }
   },
   en: {
@@ -55,7 +55,7 @@ const L = {
     foot: {
       about: 'Free tools for 3D printing. Everything runs in your browser, no account needed.',
       creatorT: 'Creator?', creatorP: 'Do you show 3D printing in your content? Get in touch with a few details about your channel.', creatorBtn: 'Request a collaboration', mailSubj: 'Partner%20inquiry%20-%203DToolBox',
-      coop: 'In cooperation with', imp: 'Legal Notice', priv: 'Privacy Policy', impUrl: '/en/impressum.html', privUrl: '/en/datenschutz.html'
+      coop: 'A project by', imp: 'Legal Notice', priv: 'Privacy Policy', impUrl: '/en/impressum.html', privUrl: '/en/datenschutz.html'
     }
   }
 };
