@@ -3,7 +3,8 @@
 (function (root) {
   'use strict';
   /* ---- Einstellungen für Richtpreis und Kontakt (hier anpassen) ---- */
-  var CFG = { mail: 'info@3dekoprint.de', minEur: 8, baseEur: 3, matFactor: 1.5, hourEur: 2, spoolEur: 20, ship: { de: null, eu: null, world: null } /* Versandkosten in € je Zielgebiet (DHL); null = wird im Angebot genannt */, rate: 19.8 /* cm³/h (= 5,5 mm³/s, Mix aus Wand und Füllung) */ };
+  var CFG = { mail: 'info@3dekoprint.de', minEur: 8, baseEur: 3, matFactor: 1.5, hourEur: 2, spoolEur: 20, /* DHL Paket, Online-Frankierung, Stand DHL-Preisseite 01.11.2026: [bis kg, €]. Welt = Startpreis „ab“ (je nach Zone teurer). pack = Verpackung in g */
+    shipTable: { de: [[2, 6.19], [5, 7.69], [10, 10.49], [20, 18.99], [31.5, 23.99]], eu: [[2, 14.49], [5, 17.49], [10, 22.49], [20, 28.49], [30, 45.49]], world: [[2, 19.49], [5, 26.99], [10, 34.99], [20, 48.99], [30, 62.99]] }, pack: 300, rate: 19.8 /* cm³/h (= 5,5 mm³/s, Mix aus Wand und Füllung) */ };
 
   /* ---- Druckerliste: [id, Name, Breite, Tiefe] in mm (nutzbarer Bauraum, ein Düsenbetrieb) ---- */
   var GROUPS = [
@@ -38,6 +39,15 @@
     var total = one * qty; if (qty > 1) total = one + (qty - 1) * Math.max(CFG.minEur * 0.6, one * 0.85);
     return Math.ceil(total);
   }
+  /* Versand: {eur, kg} oder null (zu schwer/groß → Angebot). Pakete bis 2 kg nur, wenn das Teil in 60 × 30 × 15 cm passt. */
+  function shipFor(zone, grams, qty, sizeStr) {
+    var tab = CFG.shipTable[zone]; if (!tab) return null;
+    var kg = (grams * qty + CFG.pack) / 1000, dims = (String(sizeStr || '').replace(/\(.*?\)/g, '').match(/[\d.]+/g) || []).map(Number).sort(function (a, b) { return b - a; });
+    var small = dims.length >= 3 ? dims[0] <= 550 && dims[1] <= 250 && dims[2] <= 100 : kg <= 2;
+    if (dims.length >= 3 && dims[0] > 1100) return null;
+    for (var i = 0; i < tab.length; i++) if (kg <= tab[i][0] && (i > 0 || small)) return { eur: tab[i][1], kg: tab[i][0] };
+    return null;
+  }
   function fmtT(h, L) { var m = Math.max(1, Math.round(h * 60)); return m < 60 ? m + ' ' + L.mn : Math.floor(m / 60) + ' ' + L.h + ' ' + (m % 60 ? (m % 60) + ' ' + L.mn : '').trim(); }
 
   var T = {
@@ -47,7 +57,7 @@
       send: 'Anfrage per E-Mail vorbereiten', copy: 'Text kopieren', copied: 'Text kopiert', priv: 'Es öffnet sich dein E-Mail-Programm mit einer fertigen Nachricht. Erst wenn du sie absendest, erreicht sie mich; vorher werden keine Daten übertragen.',
       mailFail: 'Falls sich nichts öffnet: Text kopieren und an', subj: 'Druckanfrage', hello: 'Hallo 3DekoPrint,', want: 'ich möchte folgendes Teil drucken lassen:', tool: 'Werkzeug', size: 'Größe', weight: 'Gewicht (geschätzt)', time: 'Druckzeit (geschätzt)',
       link: 'Konfiguration', ind2: 'Richtpreis laut Rechner', bye: 'Bitte schick mir ein Angebot. Danke!', h: 'Std.', mn: 'Min.', bed: 'Drucker', priceKg: 'Preis pro kg (€)', own: 'eigene Größe (B × T mm)', est: 'Grobe Schätzung bei 3 Wänden und 15 % Füllung.',
-      fits: 'passt aufs Druckbett', nofit: 'ist größer als das Druckbett', fp: 'Platzbedarf', none: 'Noch kein Modell berechnet.', w: 'Gewicht', cost: 'Material', t: 'Druckzeit', parts: 'Teile', deliv: 'Lieferung', pick: 'Abholung', shipDe: 'Versand per DHL (Deutschland)', shipEu: 'Versand per DHL (EU)', shipWorld: 'Versand per DHL (Ausland außerhalb EU)', country: 'Land / PLZ', countryPh: 'z. B. Österreich, 1010', shipNote: 'Versandkosten kommen dazu', shipOffer: 'Versandkosten nenne ich dir im Angebot (nach Ziel und Paketgröße)', pickNote: 'Abholung ohne Versandkosten',
+      fits: 'passt aufs Druckbett', nofit: 'ist größer als das Druckbett', fp: 'Platzbedarf', none: 'Noch kein Modell berechnet.', w: 'Gewicht', cost: 'Material', t: 'Druckzeit', parts: 'Teile', deliv: 'Lieferung', pick: 'Abholung', shipDe: 'Versand per DHL (Deutschland)', shipEu: 'Versand per DHL (EU)', shipWorld: 'Versand per DHL (Ausland außerhalb EU)', country: 'Land / PLZ', countryPh: 'z. B. Österreich, 1010', shipNote: 'Versandkosten kommen dazu', shipNote2: 'zzgl. Versand', shipLine: function (m, kg, w) { return 'Versand: ' + m + ' (DHL Paket bis ' + kg + ' kg, mit Sendungsverfolgung' + (w ? '; je nach Land teurer' : '') + ')'; }, shipOffer: 'Versandkosten nenne ich dir im Angebot (nach Ziel und Paketgröße)', pickNote: 'Abholung ohne Versandkosten',
       calc: 'So setzt sich der Richtpreis zusammen', calcLine: function (m, mf, t, th, base, min) { return 'Material ' + m + ' × ' + mf + ' + Druckzeit ' + t + ' × ' + th + ' + Grundpreis ' + base + ' (Mindestpreis ' + min + ')'; }, calcQty: 'Weitere Stücke zählen mit ca. 85 % des Einzelpreises.',
       hint: 'Wähle deinen Drucker für den Passcheck und die Materialschätzung.' },
     en: { btn: 'Have 3DekoPrint print it', title: 'Have 3DekoPrint print it', intro: 'No printer? I will print the part for you. Send a non-binding request by e-mail and I will reply with a binding quote.',
@@ -56,7 +66,7 @@
       send: 'Prepare request by e-mail', copy: 'Copy text', copied: 'Text copied', priv: 'Your e-mail app opens with a ready message. It only reaches me when you send it; nothing is transferred before that.',
       mailFail: 'If nothing opens: copy the text and send it to', subj: 'Print request', hello: 'Hello 3DekoPrint,', want: 'I would like to have the following part printed:', tool: 'Tool', size: 'Size', weight: 'Weight (estimated)', time: 'Print time (estimated)',
       link: 'Configuration', ind2: 'Indicative price from the calculator', bye: 'Please send me a quote. Thanks!', h: 'h', mn: 'min', bed: 'Printer', priceKg: 'Price per kg (€)', own: 'custom size (W × D mm)', est: 'Rough estimate at 3 walls and 15 % infill.',
-      fits: 'fits on the print bed', nofit: 'is larger than the print bed', fp: 'Footprint', none: 'No model calculated yet.', w: 'Weight', cost: 'Material', t: 'Print time', parts: 'parts', deliv: 'Delivery', pick: 'Pick-up', shipDe: 'Shipping by DHL (Germany)', shipEu: 'Shipping by DHL (EU)', shipWorld: 'Shipping by DHL (outside the EU)', country: 'Country / postcode', countryPh: 'e.g. Austria, 1010', shipNote: 'plus shipping', shipOffer: 'I will name the shipping cost in my quote (by destination and parcel size)', pickNote: 'Pick-up, no shipping cost',
+      fits: 'fits on the print bed', nofit: 'is larger than the print bed', fp: 'Footprint', none: 'No model calculated yet.', w: 'Weight', cost: 'Material', t: 'Print time', parts: 'parts', deliv: 'Delivery', pick: 'Pick-up', shipDe: 'Shipping by DHL (Germany)', shipEu: 'Shipping by DHL (EU)', shipWorld: 'Shipping by DHL (outside the EU)', country: 'Country / postcode', countryPh: 'e.g. Austria, 1010', shipNote: 'plus shipping', shipNote2: 'plus shipping', shipLine: function (m, kg, w) { return 'Shipping: ' + m + ' (DHL parcel up to ' + kg + ' kg, tracked' + (w ? '; more expensive depending on the country' : '') + ')'; }, shipOffer: 'I will name the shipping cost in my quote (by destination and parcel size)', pickNote: 'Pick-up, no shipping cost',
       calc: 'How the indicative price is made up', calcLine: function (m, mf, t, th, base, min) { return 'Material ' + m + ' × ' + mf + ' + print time ' + t + ' × ' + th + ' + base fee ' + base + ' (minimum ' + min + ')'; }, calcQty: 'Additional pieces count at about 85 % of the single price.',
       hint: 'Pick your printer for the fit check and material estimate.' }
   };
@@ -89,18 +99,20 @@
       var d = data(); if (!d) return '';
       var i = d.i, e = d.e, ls = [L.hello, '', L.want, '', '• ' + L.tool + ': ' + i.tool, '• ' + L.size + ': ' + i.size, '• ' + L.qty + ': ' + qty(), '• ' + L.mat + ': ' + mat(m.value)[1] + (c.value.trim() ? ', ' + c.value.trim() : ''),
         '• ' + L.weight + ': ' + Math.round(e.g) + ' g', '• ' + L.time + ': ' + fmtT(e.hours, L)];
+      var sp2 = dl.value === 'pick' ? null : shipFor(dl.value, e.g, qty(), i.size);
       var dtxt = dl.options[dl.selectedIndex].text; if (dl.value !== 'pick' && co.value.trim()) dtxt += ', ' + co.value.trim(); ls.push('• ' + L.deliv + ': ' + dtxt);
       if (i.details) ls.push('• ' + i.details);
       if (i.link) ls.push('• ' + L.link + ': ' + i.link);
-      ls.push('• ' + L.ind2 + ': ' + d.price + ' €' + (dl.value !== 'pick' ? ' (' + L.shipNote + ')' : ''));
+      ls.push('• ' + L.ind2 + ': ' + d.price + ' €' + (dl.value !== 'pick' ? ' (' + (sp2 ? L.shipNote2 + ' ' + (dl.value === 'world' ? (lang === 'en' ? 'from ' : 'ab ') : '') + money(sp2.eur, lang) : L.shipNote) + ')' : ''));
       if (n.value.trim()) ls.push('', n.value.trim());
       ls.push('', L.bye); return ls.join('\n');
     }
     function refresh() {
       var d = data(); if (!d) { p.textContent = L.none; s.removeAttribute('href'); s.setAttribute('aria-disabled', 'true'); return; }
-      var shipCost = dl.value === 'pick' ? 0 : CFG.ship[dl.value]; cl.hidden = dl.value === 'pick';
-      p.textContent = '≈ ' + (d.price + (shipCost || 0)) + ' €' + (dl.value !== 'pick' && shipCost == null ? ' + ' + (lang === 'en' ? 'shipping' : 'Versand') : '');
-      sh.textContent = dl.value === 'pick' ? L.pickNote : (shipCost == null ? L.shipOffer : L.shipNote + ': ' + shipCost + ' €');
+      var sp = dl.value === 'pick' ? null : shipFor(dl.value, d.e.g, qty(), d.i.size), shipCost = sp ? sp.eur : null; cl.hidden = dl.value === 'pick';
+      var from = dl.value === 'world' ? (lang === 'en' ? 'from ' : 'ab ') : '';
+      p.textContent = dl.value === 'pick' ? '≈ ' + d.price + ' €' : shipCost == null ? '≈ ' + d.price + ' € + ' + (lang === 'en' ? 'shipping' : 'Versand') : '≈ ' + (d.price + Math.ceil(shipCost)) + ' € ' + (lang === 'en' ? 'incl. shipping' : 'inkl. Versand');
+      sh.textContent = dl.value === 'pick' ? L.pickNote : (shipCost == null ? L.shipOffer : L.shipLine(from + money(shipCost, lang), sp.kg, lang === 'de' ? CFG.shipTable[dl.value] === CFG.shipTable.world : CFG.shipTable[dl.value] === CFG.shipTable.world));
       var one = Math.max(CFG.minEur, CFG.baseEur + d.e.eur * CFG.matFactor + d.e.hours * CFG.hourEur);
       bk.textContent = L.calc + ': ' + L.calcLine(money(d.e.eur, lang), String(CFG.matFactor).replace('.', lang === 'de' ? ',' : '.'), fmtT(d.e.hours, L), CFG.hourEur + ' €/' + (lang === 'en' ? 'h' : 'Std.'), CFG.baseEur + ' €', CFG.minEur + ' €') + ' = ' + Math.ceil(one) + ' €. ' + (qty() > 1 ? L.calcQty : '');
       s.removeAttribute('aria-disabled');
