@@ -715,6 +715,24 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/enclosure-generator.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/gehaeuse-generator.html"/>
   </url>
+  <url>
+    <loc>https://3dtoolbox.info/solidcraft-step-bearbeiten.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/solidcraft-step-bearbeiten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/edit-step-in-solidcraft.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/solidcraft-step-bearbeiten.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/edit-step-in-solidcraft.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/solidcraft-step-bearbeiten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/edit-step-in-solidcraft.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/solidcraft-step-bearbeiten.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <!-- gen:start -->
   <url>
     <loc>https://3dtoolbox.info/generatoren.html</loc>

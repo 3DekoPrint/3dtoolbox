@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEP-Datei in SolidCraft bearbeiten (kostenloses CAD im Browser) | 3DToolBox</title>
+<meta name="description" content="So holst du ein Teil aus dem 3DToolBox-Generator in SolidCraft: STL im Datei-Konverter in STEP umwandeln, importieren und Kanten, Löcher und Maße ändern. Ehrlich erklärt, wann das klappt.">
+<link rel="canonical" href="https://3dtoolbox.info/solidcraft-step-bearbeiten.html">
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/solidcraft-step-bearbeiten.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/edit-step-in-solidcraft.html">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/solidcraft-step-bearbeiten.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="3DToolBox">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="STEP-Datei in SolidCraft bearbeiten (kostenloses CAD im Browser) | 3DToolBox">
+<meta property="og:description" content="So holst du ein Teil aus dem 3DToolBox-Generator in SolidCraft: STL im Datei-Konverter in STEP umwandeln, importieren und Kanten, Löcher und Maße ändern. Ehrlich erklärt, wann das klappt.">
+<meta property="og:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta property="og:url" content="https://3dtoolbox.info/solidcraft-step-bearbeiten.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="STEP-Datei in SolidCraft bearbeiten (kostenloses CAD im Browser) | 3DToolBox">
+<meta name="twitter:description" content="So holst du ein Teil aus dem 3DToolBox-Generator in SolidCraft: STL im Datei-Konverter in STEP umwandeln, importieren und Kanten, Löcher und Maße ändern. Ehrlich erklärt, wann das klappt.">
+<meta name="twitter:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Teile in SolidCraft weiter bearbeiten","url":"https://3dtoolbox.info/solidcraft-step-bearbeiten.html","description":"So holst du ein Teil aus dem 3DToolBox-Generator in SolidCraft: STL im Datei-Konverter in STEP umwandeln, importieren und Kanten, Löcher und Maße ändern. Ehrlich erklärt, wann das klappt.","inLanguage":"de"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kostet SolidCraft etwas?","acceptedAnswer":{"@type":"Answer","text":"Nach unserem Stand ist die Browser-Version kostenlos nutzbar. Prüfe die aktuellen Bedingungen direkt bei SolidCraft."}},{"@type":"Question","name":"Wird meine Datei hochgeladen?","acceptedAnswer":{"@type":"Answer","text":"Unser Konverter arbeitet lokal in deinem Browser. Was du danach in SolidCraft öffnest, bestimmst du selbst; beachte dessen Datenschutzhinweise."}},{"@type":"Question","name":"Warum nicht direkt die STL bearbeiten?","acceptedAnswer":{"@type":"Answer","text":"Eine STL besteht nur aus Dreiecken. CAD-Funktionen wie Abrunden brauchen echte Flächen und Kanten, die ein STEP liefert."}},{"@type":"Question","name":"Brauche ich ein Konto?","acceptedAnswer":{"@type":"Answer","text":"Zum Ausprobieren haben wir keines gebraucht. Ob SolidCraft für bestimmte Funktionen eines verlangt, siehst du dort."}}]}]}</script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/material-page.css">
+<script src="/assets/ref-config.js"></script>
+<script src="/assets/ref.js" defer></script>
+<link rel="stylesheet" href="/assets/theme.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
+</head>
+<body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
+<div class="fm-root bt-sub">
+  <header class="tb-top">
+  <nav class="tb-nav" aria-label="Hauptnavigation">
+    <a class="bt-logo" href="/" aria-label="3DToolBox"><svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true"><rect width="220" height="220" rx="44" fill="#FF6A2B"/><polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/><polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/><polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/></svg><span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span></a>
+    <input type="checkbox" id="tbm" class="tb-mchk" aria-label="Menü"><label for="tbm" class="tb-mbtn"><span></span><span></span><span></span><em>Menü</em></label>
+    <ul class="tb-menu"><li class="tb-grp"><details><summary>Filamente</summary><div class="tb-dd"><a href="/"><b>Filament-Finder</b><span>Foto oder 3MF hochladen, passende Filamente finden</span></a><a href="/filament-datenbank.html"><b>Filament-Datenbank</b><span>Über 1000 Filamente nach Farbe durchsuchen</span></a><a href="/filament-restmengenrechner.html"><b>Restmengenrechner</b><span>Wie viel Filament ist noch auf der Spule?</span></a></div></details></li><li class="tb-grp"><details><summary>Werkzeuge</summary><div class="tb-dd"><a href="/3d-druck-kostenrechner.html"><b>Kostenrechner</b><span>Material, Strom und Verschleiß live berechnen</span></a><a href="/3d-datei-konverter.html"><b>Datei-Konverter</b><span>STL, 3MF, OBJ und STEP umwandeln</span></a><a href="/bild-zu-3d.html"><b>Bild zu 3D</b><span>Foto in Relief oder Lithophanie verwandeln</span></a></div></details></li><li class="tb-grp"><details><summary>Generatoren</summary><div class="tb-dd"><a href="/generatoren.html"><b>Alle Generatoren</b><span>Über 30 Generatoren mit Suche</span></a><a href="/gridfinity-generator.html"><b>Gridfinity</b><span>Behälter und Grundplatten im 42-mm-Raster</span></a><a href="/gehaeuse-generator.html"><b>Gehäuse-Generator</b><span>Gehäuse für Raspberry Pi, ESP32 und mehr</span></a><a href="/3d-druck-objektgenerator.html"><b>Objekt-Generator</b><span>Boxen, Tabletts, Zykloiden und mehr</span></a><a href="/3d-druck-planetengetriebe-generator.html"><b>Planetengetriebe</b><span>Getriebe mit Hohlrad, Planeten und Sonne</span></a><a href="/3d-druck-namens-anhaenger.html"><b>Namens-Anhänger</b><span>Mehrfarbige Anhänger mit Namen</span></a><a href="/3d-druck-namensschild-anhaenger.html"><b>Namensschild</b><span>Namensschild mit Anhänger</span></a></div></details></li><li class="tb-grp is-cur"><details><summary>Wissen</summary><div class="tb-dd"><a href="/3d-druck-lexikon.html"><b>Lexikon</b><span>Druckprobleme, Slicer-Tipps und Begriffe</span></a><a href="/materialien/"><b>Materialien</b><span>PLA, PETG, ABS, ASA, TPU und mehr im Vergleich</span></a><a href="/slicer-einstellungen-helfer.html"><b>Slicer-Helfer</b><span>Einstellungen für Bambu Studio, Prusa und Cura</span></a><a href="/solidcraft-step-bearbeiten.html" aria-current="page"><b>STEP in SolidCraft</b><span>Teile aus dem Generator in CAD weiter bearbeiten</span></a></div></details></li><li class="tb-grp"><details><summary>Empfehlungen</summary><div class="tb-dd"><small>Extern · nicht von uns</small><a href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener sponsored"><b>Meshy AI ↗</b><span>Werbung · KI: aus Text oder Bild ein 3D-Modell erstellen</span></a><a href="https://than.gs/u/8355632" target="_blank" rel="noopener sponsored"><b>Thangs ↗</b><span>Werbung · Große Bibliothek fertiger 3D-Modelle</span></a><a href="https://solidcraft.io" target="_blank" rel="noopener noreferrer"><b>SolidCraft ↗</b><span>Tipp, keine Werbung · Kostenloses Open-Source-CAD zum Konstruieren eigener Teile</span></a></div></details></li></ul>
+    <div class="tb-tools"><div class="fm-lang-switch"><span class="fm-lang-current">DE</span><a class="fm-lang-link" href="/en/edit-step-in-solidcraft.html" hreflang="en">EN</a></div><button class="tb-theme" type="button" aria-label="Darstellung wechseln (hell/dunkel)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
+  </nav>
+  <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><span>Wissen</span></li><li><span aria-current="page">Teile in SolidCraft weiter bearbeiten</span></li></ol></nav>
+  </header>
+  <main id="main" tabindex="-1">
+
+  <header class="bt-subhero"><span class="bt-pill"><i></i>Wissen</span><h1 class="fm-title">Teile in SolidCraft weiter bearbeiten</h1><p class="fm-sub">Generator-Teil als STEP laden und in einem kostenlosen CAD im Browser anpassen – mit klaren Grenzen.</p></header>
+  <section class="bt-panel mp">
+  <h2>Wofür das gut ist</h2><p>Die Generatoren von 3DToolBox liefern STL und 3MF. Das sind Dreiecksnetze: Sie eignen sich zum Drucken, aber nicht zum Konstruieren. Wenn du an einem fertigen Teil noch eine Kante abrunden, ein Loch versetzen oder eine Wand ändern willst, brauchst du ein CAD-Programm, das echte Flächen kennt. <a href="https://solidcraft.io" target="_blank" rel="noopener noreferrer">SolidCraft</a> ist ein kostenloses CAD, das direkt im Browser läuft und STEP-Dateien importiert.</p>
+  <p><a class="mp-cta" href="https://solidcraft.io" target="_blank" rel="noopener noreferrer">SolidCraft öffnen ↗</a> <span class="tb-tip">Tipp, keine Werbung</span></p>
+  <p class="mp-note">SolidCraft ist ein externes Programm. Wir haben keine Partnerschaft und erhalten keine Vergütung für diese Empfehlung.</p>
+  <h2>So gehst du vor</h2><ol><li>Teil im Generator einstellen und als <b>STL</b> herunterladen.</li><li>Im <a href="/3d-datei-konverter.html">Datei-Konverter</a> die STL laden und als Ziel <b>STEP</b> wählen. Die Umwandlung läuft in deinem Browser, die Datei wird nicht hochgeladen.</li><li>In SolidCraft auf der Startseite <b>Importieren</b> wählen und die STEP-Datei öffnen.</li><li>Das Teil als Volumenkörper bearbeiten, zum Beispiel mit <b>Vollrundung</b>, <b>Abschrägung</b>, <b>Bohrung</b> oder <b>Drücken/Ziehen</b>, und danach wieder als STL oder 3MF exportieren.</li></ol>
+  <h2>Wann es funktioniert – und wann nicht</h2><ul><li><b>Gut geeignet:</b> Teile aus ebenen Flächen, etwa Platten, Halter, Winkel, Kästen und Gehäuse. Der Konverter fasst Dreiecke in derselben Ebene zu einer Fläche zusammen, sodass in SolidCraft zum Beispiel eine ganze Kante auswählbar ist.</li><li><b>Eingeschränkt:</b> Runde Teile wie Zylinder, Knöpfe oder Vasen. Gekrümmte Flächen bleiben im STEP viele kleine ebene Flächen. Sie lassen sich öffnen und messen, aber nicht als glatte Rundung ändern.</li><li><b>Nicht bearbeitbar:</b> STL, 3MF und OBJ lassen sich in SolidCraft zwar öffnen, messen, verschieben und exportieren, aber nicht als Konstruktion ändern.</li></ul><p>Getestet haben wir einen STEP-Export mit Loch: SolidCraft importiert ihn als einen Volumenkörper, eine Kante ließ sich abrunden. Weitere Funktionen hängen vom jeweiligen Teil ab; probiere es mit einer Kopie.</p>
+  <h2>Häufige Fragen</h2><h3>Kostet SolidCraft etwas?</h3><p>Nach unserem Stand ist die Browser-Version kostenlos nutzbar. Prüfe die aktuellen Bedingungen direkt bei SolidCraft.</p><h3>Wird meine Datei hochgeladen?</h3><p>Unser Konverter arbeitet lokal in deinem Browser. Was du danach in SolidCraft öffnest, bestimmst du selbst; beachte dessen Datenschutzhinweise.</p><h3>Warum nicht direkt die STL bearbeiten?</h3><p>Eine STL besteht nur aus Dreiecken. CAD-Funktionen wie Abrunden brauchen echte Flächen und Kanten, die ein STEP liefert.</p><h3>Brauche ich ein Konto?</h3><p>Zum Ausprobieren haben wir keines gebraucht. Ob SolidCraft für bestimmte Funktionen eines verlangt, siehst du dort.</p>
+  <p>Weiter: <a href="/generatoren.html">Alle Generatoren</a> · <a href="/3d-datei-konverter.html">Datei-Konverter</a></p>
+  </section>
+  </main>
+<footer class="tb-foot">
+    <div class="tb-foot-grid">
+      <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
+      <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>
+      <nav aria-label="Werkzeuge"><b>Werkzeuge</b><a href="/3d-druck-kostenrechner.html">Kostenrechner</a><a href="/3d-datei-konverter.html">Datei-Konverter</a><a href="/bild-zu-3d.html">Bild zu 3D</a></nav>
+      <nav aria-label="Generatoren"><b>Generatoren</b><a href="/gehaeuse-generator.html">Gehäuse-Generator</a><a href="/3d-druck-objektgenerator.html">Objekt-Generator</a><a href="/3d-druck-planetengetriebe-generator.html">Planetengetriebe</a><a href="/3d-druck-namens-anhaenger.html">Namens-Anhänger</a><a href="/3d-druck-namensschild-anhaenger.html">Namensschild</a><a href="/generatoren.html">Alle Generatoren →</a></nav>
+      <nav aria-label="Wissen"><b>Wissen</b><a href="/3d-druck-lexikon.html">Lexikon</a><a href="/materialien/">Materialien</a><a href="/slicer-einstellungen-helfer.html">Slicer-Helfer</a><a href="/solidcraft-step-bearbeiten.html">STEP in SolidCraft</a></nav>
+      <div class="tb-foot-creator"><b>Creator?</b><p>Du zeigst 3D-Druck in deinem Content? Melde dich mit ein paar Infos zu deinem Kanal.</p><a class="tb-foot-btn" href="mailto:info@3dtoolbox.info?subject=Partneranfrage%203DToolBox">Kooperation anfragen</a></div>
+    </div>
+    <div class="tb-foot-bot"><p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> Ein Projekt von <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p><p class="tb-foot-legal"><a href="/impressum.html">Impressum</a><span aria-hidden="true">·</span><a href="/datenschutz.html">Datenschutz</a></p></div>
+  </footer>
+</div>
+</body>
+</html>
