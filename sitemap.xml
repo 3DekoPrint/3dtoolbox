@@ -771,6 +771,42 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://3dtoolbox.info/riemenscheiben-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/riemenscheiben-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/pulley-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/riemenscheiben-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/pulley-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/riemenscheiben-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/pulley-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/riemenscheiben-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/rohradapter-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/rohradapter-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/pipe-adapter-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/rohradapter-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/pipe-adapter-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/rohradapter-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/pipe-adapter-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/rohradapter-generator.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://3dtoolbox.info/gridfinity-generator.html</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/gridfinity-generator.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/gridfinity-generator.html"/>
