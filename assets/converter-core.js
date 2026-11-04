@@ -66,11 +66,29 @@
     var binary = false;
     if (u8.length >= 84) { tn = dv.getUint32(80, true); binary = 84 + tn * 50 === u8.length; }
     if (binary) {
+      /* Sehr große Dateien: Eckpunkte über eine Hash-Tabelle auf Float32-Bits verschweißen (kein String je Eckpunkt) */
+      var f32 = new Float32Array(3), u32 = new Uint32Array(f32.buffer), cap = 1 << 4, mask, tab, vv = new Float64Array(Math.max(3, tn * 9 / 2 | 0)), ii = new Uint32Array(tn * 3), nv = 0, ni = 0, h;
+      while (cap < tn * 3) cap <<= 1; cap <<= 1; mask = cap - 1; tab = new Int32Array(cap).fill(-1);
+      var keys = new Uint32Array(0), kx = []; /* Schlüssel (3 x u32) je Eckpunkt in wachsendem Feld */
+      var kbuf = new Uint32Array(Math.max(3, tn * 9 / 2 | 0));
       for (k = 0; k < tn; k++) {
-        var o = 84 + k * 50 + 12, ids = [];
-        for (var j = 0; j < 3; j++, o += 12) ids.push(b.vert(dv.getFloat32(o, true), dv.getFloat32(o + 4, true), dv.getFloat32(o + 8, true)));
-        b.tri(ids[0], ids[1], ids[2]);
+        var o = 84 + k * 50 + 12, t3 = [0, 0, 0];
+        for (var j = 0; j < 3; j++, o += 12) {
+          f32[0] = dv.getFloat32(o, true); f32[1] = dv.getFloat32(o + 4, true); f32[2] = dv.getFloat32(o + 8, true);
+          h = (Math.imul(u32[0], 73856093) ^ Math.imul(u32[1], 19349663) ^ Math.imul(u32[2], 83492791)) >>> 0; h &= mask;
+          var id = -1;
+          while (tab[h] !== -1) { var q = tab[h] * 3; if (kbuf[q] === u32[0] && kbuf[q + 1] === u32[1] && kbuf[q + 2] === u32[2]) { id = tab[h]; break; } h = (h + 1) & mask; }
+          if (id < 0) {
+            id = nv++;
+            if (nv * 3 > kbuf.length) { var nk = new Uint32Array(kbuf.length * 2); nk.set(kbuf); kbuf = nk; var nvv = new Float64Array(vv.length * 2); nvv.set(vv); vv = nvv; }
+            kbuf[id * 3] = u32[0]; kbuf[id * 3 + 1] = u32[1]; kbuf[id * 3 + 2] = u32[2]; vv[id * 3] = f32[0]; vv[id * 3 + 1] = f32[1]; vv[id * 3 + 2] = f32[2]; tab[h] = id;
+          }
+          t3[j] = id;
+        }
+        if (t3[0] !== t3[1] && t3[1] !== t3[2] && t3[0] !== t3[2]) { ii[ni++] = t3[0]; ii[ni++] = t3[1]; ii[ni++] = t3[2]; }
       }
+      if (!ni) throw new Error('empty');
+      return { v: vv.slice(0, nv * 3), i: ii.slice(0, ni) };
     } else {
       var txt = dec.decode(u8), re = /vertex\s+([-+0-9.eE]+)\s+([-+0-9.eE]+)\s+([-+0-9.eE]+)/g, m, ids2 = [];
       while ((m = re.exec(txt))) { ids2.push(b.vert(+m[1], +m[2], +m[3])); if (ids2.length === 3) { b.tri(ids2[0], ids2[1], ids2[2]); ids2 = []; } }
@@ -183,14 +201,15 @@
       return [nx / l, ny / l, nz / l];
     }
     if (ascii) {
-      var s = ['solid ' + (name || 'model')];
+      var s = new Chunks();
+      s.add('solid ' + (name || 'model') + '\n');
       for (k = 0; k < n; k++) {
-        var nm = normal(k); s.push(' facet normal ' + nm.join(' ') + '\n  outer loop');
-        for (var j = 0; j < 3; j++) s.push('   vertex ' + v[3 * ix[3 * k + j]] + ' ' + v[3 * ix[3 * k + j] + 1] + ' ' + v[3 * ix[3 * k + j] + 2]);
-        s.push('  endloop\n endfacet');
+        var nm = normal(k); s.add(' facet normal ' + nm.join(' ') + '\n  outer loop\n');
+        for (var j = 0; j < 3; j++) s.add('   vertex ' + v[3 * ix[3 * k + j]] + ' ' + v[3 * ix[3 * k + j] + 1] + ' ' + v[3 * ix[3 * k + j] + 2] + '\n');
+        s.add('  endloop\n endfacet\n');
       }
-      s.push('endsolid ' + (name || 'model'));
-      return new Blob([s.join('\n')], { type: 'model/stl' });
+      s.add('endsolid ' + (name || 'model') + '\n'); s.flush();
+      return new Blob(s.out, { type: 'model/stl' });
     }
     var buf = new ArrayBuffer(84 + n * 50), d = new DataView(buf); d.setUint32(80, n, true);
     for (k = 0; k < n; k++) {
@@ -199,22 +218,33 @@
     }
     return new Blob([buf], { type: 'model/stl' });
   }
+  /* Text in Stücken sammeln: vermeidet Millionen kleiner Strings bei sehr großen Modellen */
+  function Chunks() { this.cur = []; this.out = []; }
+  Chunks.prototype.add = function (s) { this.cur.push(s); if (this.cur.length >= 20000) this.flush(); };
+  Chunks.prototype.flush = function () { if (this.cur.length) { this.out.push(this.cur.join('')); this.cur = []; } };
+  Chunks.prototype.bytes = function () {
+    this.flush();
+    var parts = this.out.map(function (t) { return enc.encode(t); }), n = parts.reduce(function (a, q) { return a + q.length; }, 0), r = new Uint8Array(n), o = 0;
+    parts.forEach(function (q) { r.set(q, o); o += q.length; }); this.out = []; return r;
+  };
   function writeOBJ(mesh, name) {
-    var s = ['# 3DToolBox', 'o ' + (name || 'model')], k;
-    for (k = 0; k < mesh.v.length; k += 3) s.push('v ' + mesh.v[k] + ' ' + mesh.v[k + 1] + ' ' + mesh.v[k + 2]);
-    for (k = 0; k < mesh.i.length; k += 3) s.push('f ' + (mesh.i[k] + 1) + ' ' + (mesh.i[k + 1] + 1) + ' ' + (mesh.i[k + 2] + 1));
-    return new Blob([s.join('\n')], { type: 'text/plain' });
+    var c = new Chunks(), k, v = mesh.v, ix = mesh.i;
+    c.add('# 3DToolBox\no ' + (name || 'model') + '\n');
+    for (k = 0; k < v.length; k += 3) c.add('v ' + v[k] + ' ' + v[k + 1] + ' ' + v[k + 2] + '\n');
+    for (k = 0; k < ix.length; k += 3) c.add('f ' + (ix[k] + 1) + ' ' + (ix[k + 1] + 1) + ' ' + (ix[k + 2] + 1) + '\n');
+    c.flush(); return new Blob(c.out, { type: 'text/plain' });
   }
   function write3MF(mesh, name) {
-    var p = ['<?xml version="1.0" encoding="UTF-8"?>\n<model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02"><metadata name="Application">3DToolBox</metadata><resources><object id="1" type="model"><mesh><vertices>'], k;
-    for (k = 0; k < mesh.v.length; k += 3) p.push('<vertex x="' + mesh.v[k] + '" y="' + mesh.v[k + 1] + '" z="' + mesh.v[k + 2] + '"/>');
-    p.push('</vertices><triangles>');
-    for (k = 0; k < mesh.i.length; k += 3) p.push('<triangle v1="' + mesh.i[k] + '" v2="' + mesh.i[k + 1] + '" v3="' + mesh.i[k + 2] + '"/>');
-    p.push('</triangles></mesh></object></resources><build><item objectid="1"/></build></model>');
+    var p = new Chunks(), k;
+    p.add('<?xml version="1.0" encoding="UTF-8"?>\n<model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02"><metadata name="Application">3DToolBox</metadata><resources><object id="1" type="model"><mesh><vertices>');
+    for (k = 0; k < mesh.v.length; k += 3) p.add('<vertex x="' + mesh.v[k] + '" y="' + mesh.v[k + 1] + '" z="' + mesh.v[k + 2] + '"/>');
+    p.add('</vertices><triangles>');
+    for (k = 0; k < mesh.i.length; k += 3) p.add('<triangle v1="' + mesh.i[k] + '" v2="' + mesh.i[k + 1] + '" v3="' + mesh.i[k + 2] + '"/>');
+    p.add('</triangles></mesh></object></resources><build><item objectid="1"/></build></model>');
     return zipStore([
       { name: '[Content_Types].xml', data: enc.encode('<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>') },
       { name: '_rels/.rels', data: enc.encode('<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>') },
-      { name: '3D/3dmodel.model', data: enc.encode(p.join('')) }
+      { name: '3D/3dmodel.model', data: p.bytes() }
     ]);
   }
   /* Mehrere Teile als getrennte Objekte in einer 3MF (z. B. Schraube + Mutter). parts: [{name, mesh}] */
@@ -252,6 +282,8 @@
     function f(x) { var s = String(+x.toPrecision(12)).toUpperCase(); if (/E/.test(s)) { var pr = s.split('E'); return (/\./.test(pr[0]) ? pr[0] : pr[0] + '.') + 'E' + pr[1].replace('+', ''); } return /\./.test(s) ? s : s + '.'; }
     function vec3(a) { return f(a[0]) + ',' + f(a[1]) + ',' + f(a[2]); }
     var V0 = mesh.v, I0 = mesh.i, V = [], I = [], vp = [], pt = [], edges = new Map(), faces = [], wm = new Map(), rm = [];
+    function tooBig(tris, faces) { var e = new Error('TOOBIG'); e.code = 'TOOBIG'; e.tris = tris; e.faces = faces; return e; }
+    if (I0.length / 3 > 400000) throw tooBig(I0.length / 3, 0); /* Figuren/Scans: B-Rep wäre riesig und würde den Browser-Speicher sprengen */
     for (k = 0; k < V0.length / 3; k++) { /* nahezu gleiche Eckpunkte verschweißen (1e-4 mm) */
       var wk = Math.round(V0[3 * k] * 1e4) + ',' + Math.round(V0[3 * k + 1] * 1e4) + ',' + Math.round(V0[3 * k + 2] * 1e4);
       if (!wm.has(wk)) { wm.set(wk, V.length / 3); V.push(V0[3 * k], V0[3 * k + 1], V0[3 * k + 2]); }
@@ -329,6 +361,7 @@
       });
       outers.forEach(function (o) { regs.push({ n0: n0, rd: rd, o: o }); });
     });
+    if (regs.length > 60000) throw tooBig(nT, regs.length); /* kaum ebene Flächen: STEP wäre unbrauchbar groß */
     /* T-Stellen schließen: Kanten, die nur einmal vorkommen, an Zwischenpunkten teilen */
     var cnt = new Map(), allv = new Set();
     function ukey(x, y) { return Math.min(x, y) + '_' + Math.max(x, y); }
