@@ -131,16 +131,9 @@
     <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's Privacy Statement</a>.
   </p>
 
-  <h2>4. Embedded external scripts (CDN)</h2>
+  <h2>4. Embedded libraries</h2>
   <p>
-    To power the tool, we load two JavaScript libraries from external providers:
-  </p>
-  <ul>
-    <li><strong>JSZip</strong> (to read 3MF files) from cdnjs.cloudflare.com (Cloudflare, Inc.)</li>
-    <li><strong>heic2any</strong> (to convert iPhone HEIC photos) from cdn.jsdelivr.net (jsDelivr / Prospect One)</li>
-  </ul>
-  <p>
-    Loading these files technically transmits your IP address to the respective providers. We do not perform any further analysis of this data ourselves. The legal basis is our legitimate interest in providing a functional, low-maintenance tool (Art. 6(1)(f) GDPR).
+    The tools use the JavaScript libraries three.js (3D view), JSZip (3MF files) and heic2any (iPhone HEIC photos). These files are stored on our own server (see section 3) and are not loaded from third-party providers or content delivery networks. As a result, no IP address is transmitted to other providers when these libraries are loaded.
   </p>
 
   <h2>5. Visitor counter</h2>
