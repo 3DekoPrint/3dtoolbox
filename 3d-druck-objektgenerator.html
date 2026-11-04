@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>3D-Objekt-Generator: Box, Behälter, SKADIS | 3DToolBox</title>
-<meta name="description" content="Ohne CAD-Kenntnisse eigene 3D-Druck-Objekte gestalten: Box, Rundbehälter oder Lochtablett per Schieberegler anpassen, inklusive optionaler SKADIS-Wandhalterung mit passenden Steckclips.">
+<meta name="description" content="Ohne CAD-Kenntnisse eigene 3D-Druck-Objekte gestalten: Box, Rundbehälter oder Lochtablett per Schieberegler anpassen.">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "3D-Objekt-Generator: Box, Behälter, SKADIS", "url": "https://3dtoolbox.info/3d-druck-objektgenerator.html", "description": "Ohne CAD-Kenntnisse eigene 3D-Druck-Objekte gestalten: Box, Rundbehälter oder Lochtablett per Schieberegler anpassen, inklusive optionaler SKADIS-Wandhalterung mit passenden Steckclips.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (Web Browser)", "inLanguage": "de", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "publisher": {"@type": "Organization", "name": "3DekoPrint", "url": "https://3dtoolbox.info/", "logo": "https://3dtoolbox.info/assets/3dekoprint-logo.png"}}]}</script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -30,11 +30,9 @@
 <link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-objektgenerator.html">
 <link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-object-generator.html">
 <link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-objektgenerator.html">
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FontLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/TextGeometry.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="/assets/vendor/three/three.min.js"></script>
+<script src="/assets/vendor/three/OrbitControls.js"></script>
+<script src="/assets/vendor/jszip/jszip.min.js"></script>
 
 <style>
   :root{
@@ -3134,10 +3132,10 @@
   // "Graffiti"-Schrift gibt es aktuell nicht als frei gehostete
   // typeface.json-Datei, die ich seriös verlinken könnte.
   const LED_FONTS = [
-    { id:'helvetiker', label:'Modern (serifenlos)', url:'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/fonts/helvetiker_regular.typeface.json' },
-    { id:'helvetiker_bold', label:'Modern Fett', url:'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/fonts/helvetiker_bold.typeface.json' },
-    { id:'optimer', label:'Rund/Modern', url:'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/fonts/optimer_bold.typeface.json' },
-    { id:'gentilis', label:'Elegant (Serife)', url:'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/fonts/gentilis_bold.typeface.json' }
+    { id:'helvetiker', label:'Modern (serifenlos)', url:'/assets/vendor/three/fonts/helvetiker_regular.typeface.json' },
+    { id:'helvetiker_bold', label:'Modern Fett', url:'/assets/vendor/three/fonts/helvetiker_bold.typeface.json' },
+    { id:'optimer', label:'Rund/Modern', url:'/assets/vendor/three/fonts/optimer_bold.typeface.json' },
+    { id:'gentilis', label:'Elegant (Serife)', url:'/assets/vendor/three/fonts/gentilis_bold.typeface.json' }
   ];
   const fontCache = new Map();
   function loadLedFont(fontId){
