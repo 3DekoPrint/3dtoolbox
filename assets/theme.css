@@ -8,6 +8,7 @@
 @font-face{font-family:"TB Mono";src:url(/assets/fonts/JetBrainsMono-500.woff2) format("woff2");font-weight:500 800;font-display:swap}
 
 :root{
+  --danger:#b3261e; --danger-bg:#fdecea;
   --bg:#eef2ee; --bg-deep:#f7faf8; --panel:#ffffff; --panel-2:#e3eee7; --ink:#13221b; --ink-dim:#4a5f54;
   --accent:#0f5c3f; --accent-2:#a4531f; --on-accent:#ffffff; --line:#c5d4ca; --line-soft:rgba(19,34,27,.13); --glass:#ffffff;
   --sel:#dcefe3; --sel-line:#a8cdb7; --stage:#0f3d2b; --stage-ink:#eaf3ed; --stage-grid:rgba(234,243,237,.08);
@@ -18,10 +19,12 @@
   font-family:var(--f-text); color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --danger:#ff9d94; --danger-bg:#3a1713;
   --bg:#0e1814; --bg-deep:#0b1310; --panel:#15231d; --panel-2:#1d3128; --ink:#e9f1ec; --ink-dim:#9db4a7;
   --accent:#5fd9a0; --accent-2:#f0a46a; --on-accent:#0b1a13; --line:#2b4338; --line-soft:rgba(233,241,236,.13); --glass:#15231d;
   --sel:#1f3a2e; --sel-line:#3a6650; --stage:#0a1410; --stage-ink:#e9f1ec; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark}}
 :root[data-theme="dark"]{
+  --danger:#ff9d94; --danger-bg:#3a1713;
   --bg:#0e1814; --bg-deep:#0b1310; --panel:#15231d; --panel-2:#1d3128; --ink:#e9f1ec; --ink-dim:#9db4a7;
   --accent:#5fd9a0; --accent-2:#f0a46a; --on-accent:#0b1a13; --line:#2b4338; --line-soft:rgba(233,241,236,.13); --glass:#15231d;
   --sel:#1f3a2e; --sel-line:#3a6650; --stage:#0a1410; --stage-ink:#e9f1ec; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark}
