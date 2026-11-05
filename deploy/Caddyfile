@@ -1,0 +1,15 @@
+:80 {
+    root * /var/www/3dtoolbox
+    encode zstd gzip
+    try_files {path} {path}.html {path}/index.html
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+        Cross-Origin-Opener-Policy "same-origin"
+        Content-Security-Policy "default-src 'self'; script-src 'self' https://gc.zgo.at 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' https://3dtoolbox.goatcounter.com data: blob:; font-src 'self' data:; connect-src 'self' https://3dtoolbox.goatcounter.com blob: data: https://countapi.mileshilliard.com; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+        -Server
+    }
+    file_server
+}
