@@ -1,4 +1,4 @@
-:80 {
+3dtoolbox.info {
     root * /var/www/3dtoolbox
     encode zstd gzip
     try_files {path} {path}.html {path}/index.html
@@ -9,7 +9,12 @@
         Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
         Cross-Origin-Opener-Policy "same-origin"
         Content-Security-Policy "default-src 'self'; script-src 'self' https://gc.zgo.at 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' https://3dtoolbox.goatcounter.com data: blob:; font-src 'self' data:; connect-src 'self' https://3dtoolbox.goatcounter.com blob: data: https://countapi.mileshilliard.com; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+        Strict-Transport-Security "max-age=86400"
         -Server
     }
     file_server
+}
+
+www.3dtoolbox.info {
+    redir https://3dtoolbox.info{uri} permanent
 }
