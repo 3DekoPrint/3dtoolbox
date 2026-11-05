@@ -40,7 +40,8 @@
 .cv-row select{background:var(--panel-2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:10px 12px;font-size:16px}
 .cv-btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:10px;padding:11px 20px;font-size:15px;font-weight:700;cursor:pointer}
 .cv-btn:disabled{opacity:.6;cursor:wait}
-.cv-status{min-height:1.5em;margin:10px 0 0;font-size:14px;color:var(--accent-2)}.cv-status.bad{color:var(--danger);background:var(--danger-bg);border:1px solid var(--danger);border-radius:10px;padding:10px 14px;font-weight:600}
+.cv-status{min-height:1.5em;margin:10px 0 0;font-size:14px;color:var(--accent-2)}.cv-status.bad{--d:var(--danger,#b3261e);--db:var(--danger-bg,#fdecea);color:var(--d);background:var(--db);border:1px solid var(--d);border-radius:10px;padding:10px 14px;font-weight:600}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .cv-status.bad{--d:var(--danger,#ff9d94);--db:var(--danger-bg,#3a1713)}}
 .cv-warn{font-size:13px;color:var(--ink-dim);margin:8px 0 0}
 .cv-out{margin-top:14px;display:grid;gap:10px}
 .cv-out canvas{width:100%;max-width:560px;aspect-ratio:3/2;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;touch-action:none;cursor:grab}
