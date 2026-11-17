@@ -3,12 +3,12 @@
   var C = window.Conv; if (!C) return;
   var LANG = (document.documentElement.lang || 'de').slice(0, 2) === 'en' ? 'en' : 'de';
   var T = {
-    de: { drop: 'Datei hierher ziehen oder klicken', loaded: 'Geladen', tris: 'Dreiecke', size: 'Größe (mm)', err: 'Die Datei konnte nicht gelesen werden. Ist sie beschädigt oder ein anderes Format?', errStep: 'Die STEP-Datei konnte nicht verarbeitet werden. Möglicherweise enthält sie keine Volumenkörper/Flächen.', busy: 'Wird verarbeitet …', loadStep: 'STEP-Modul wird geladen (einmalig ca. 3 MB) …',
+    de: { drop: 'Datei hierher ziehen oder klicken', loaded: 'Geladen', tris: 'Dreiecke', size: 'Größe (mm)', err: 'Die Datei konnte nicht gelesen werden. Ist sie beschädigt oder ein anderes Format?', errModule: 'Das STEP-Modul konnte nicht geladen werden (Verbindung oder Browser-Sicherheitsregel). Bitte Seite neu laden und erneut versuchen.', errStep: 'Die STEP-Datei konnte nicht verarbeitet werden. Möglicherweise enthält sie keine Volumenkörper/Flächen.', busy: 'Wird verarbeitet …', loadStep: 'STEP-Modul wird geladen (einmalig ca. 3 MB) …',
       conv: 'Konvertieren', dl: 'Herunterladen', done: 'Fertig', same: 'Quell- und Zielformat sind gleich.', big: 'Achtung: Bei vielen Flächen wird die STEP-Datei groß.',
       tooBig: 'STEP ist für dieses Modell nicht möglich: {n} Dreiecke und kaum ebene Flächen (typisch für Figuren und Scans). Die Datei wäre riesig und würde den Browser zum Absturz bringen. Nutze für solche Modelle STL oder 3MF, oder vereinfache das Netz vorher im Slicer oder in Meshmixer/Blender.', huge: 'Die Datei ist größer als 400 MB und zu groß für den Browser. Bitte vorher verkleinern (zum Beispiel Dreiecke reduzieren).', mb: 'MB', kb: 'KB',
       stepWarn: 'Hinweis: Aus einem Netz entsteht kein ursprüngliches CAD-Modell. Dreiecke in einer Ebene werden zu ebenen Flächen zusammengefasst – das lässt sich bei Teilen aus ebenen Flächen gut weiterbearbeiten. Runde Formen bleiben viele kleine Flächen.', none: 'Noch keine Datei gewählt.',
       meshBad: 'Das Netz ist nicht wasserdicht (offene Kanten: {o}, verdrehte Flächen: {f}, mehrfach genutzte Kanten: {m}, entartete Dreiecke: {d}). Bei STEP meldet z. B. Bambu Studio dann „Schale nicht geschlossen“. Tipp: Quelldatei vorher reparieren (Bambu Studio: Rechtsklick → Reparieren, oder Windows 3D-Builder).' },
-    en: { drop: 'Drop a file here or click', loaded: 'Loaded', tris: 'triangles', size: 'Size (mm)', err: 'The file could not be read. It may be damaged or a different format.', errStep: 'The STEP file could not be processed. It may not contain solids/faces.', busy: 'Processing …', loadStep: 'Loading STEP module (one time, about 3 MB) …',
+    en: { drop: 'Drop a file here or click', loaded: 'Loaded', tris: 'triangles', size: 'Size (mm)', err: 'The file could not be read. It may be damaged or a different format.', errModule: 'The STEP module could not be loaded (connection or browser security rule). Please reload the page and try again.', errStep: 'The STEP file could not be processed. It may not contain solids/faces.', busy: 'Processing …', loadStep: 'Loading STEP module (one time, about 3 MB) …',
       conv: 'Convert', dl: 'Download', done: 'Done', same: 'Source and target format are the same.', big: 'Note: with many faces the STEP file gets large.',
       tooBig: 'STEP is not possible for this model: {n} triangles and hardly any flat faces (typical for figures and scans). The file would be huge and crash the browser. Use STL or 3MF for such models, or simplify the mesh first in your slicer or in Meshmixer/Blender.', huge: 'The file is larger than 400 MB and too big for the browser. Please reduce it first (for example decimate triangles).', mb: 'MB', kb: 'KB',
       stepWarn: 'Note: a mesh does not turn back into an original CAD model. Triangles in one plane are merged into flat faces – this works well for parts made of flat faces. Round shapes stay many small faces.', none: 'No file selected yet.',
@@ -64,7 +64,7 @@
       var ck = C.check(mesh), wn = $('cvWarn');
       if (!ck.ok && tgt === 'step') wn.textContent = T.meshBad.replace('{o}', ck.open).replace('{f}', ck.flipped).replace('{m}', ck.multi).replace('{d}', ck.degen);
       draw(mesh);
-    } catch (e) { msg(e && e.code === 'TOOBIG' ? T.tooBig.replace('{n}', Math.round(e.tris).toLocaleString()) : (state.fmt === 'step' ? T.errStep : T.err), true); }
+    } catch (e) { msg(e && e.code === 'TOOBIG' ? T.tooBig.replace('{n}', Math.round(e.tris).toLocaleString()) : (e && (e.message === 'occt' || e.name === 'EvalError' || /unsafe-eval|CompileError|wasm/i.test(String(e.message))) ? T.errModule : (state.fmt === 'step' ? T.errStep : T.err)), true); }
     btn.disabled = false;
   });
 

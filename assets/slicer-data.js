@@ -12,13 +12,13 @@ window.SlicerData = {
     glue: { de: 'PEI mit Klebestift', en: 'PEI with glue stick' }
   },
   m: {
-    'PLA':     { n:[190,230], b:[25,65],  fan:[100,100], vol:[15,21],  rd:[0.5,1.0], rb:[3,5], cap:250, surf:'pei',
+    'PLA':     { n:[190,230], b:[50,60],  fan:[100,100], vol:[15,21],  rd:[0.5,1.0], rb:[3,5], cap:250, surf:'pei',
       tip:{ de:'Der Allrounder: bei Überhängen volle Kühlung, bei kleinen Teilen Layerzeit-Minimum beachten.', en:'The all-rounder: full cooling for overhangs, mind the minimum layer time on small parts.' } },
-    'PLA+':    { n:[190,230], b:[25,65],  fan:[100,100], vol:[14,20],  rd:[0.5,1.0], rb:[3,5], cap:250, surf:'pei',
+    'PLA+':    { n:[190,230], b:[50,60],  fan:[100,100], vol:[14,20],  rd:[0.5,1.0], rb:[3,5], cap:250, surf:'pei',
       tip:{ de:'Meist etwas höhere Temperatur als Standard-PLA nötig – per Temperaturturm feintunen.', en:'Often needs slightly higher temperatures than standard PLA – fine-tune with a temperature tower.' } },
-    'SILK':    { n:[190,230], b:[25,65],  fan:[100,100], vol:[10,14],  rd:[0.8,1.2], rb:[3,5], cap:150, surf:'pei',
+    'SILK':    { n:[190,230], b:[50,60],  fan:[100,100], vol:[10,14],  rd:[0.8,1.2], rb:[3,5], cap:150, surf:'pei',
       tip:{ de:'Langsamer und etwas wärmer drucken für den Glanz; neigt zu Fäden, Retraction prüfen.', en:'Print slower and slightly hotter for the shine; prone to stringing, check retraction.' } },
-    'MATTE':   { n:[190,230], b:[25,65],  fan:[100,100], vol:[12,16],  rd:[0.5,1.0], rb:[3,5], cap:200, surf:'pei',
+    'MATTE':   { n:[190,230], b:[50,60],  fan:[100,100], vol:[12,16],  rd:[0.5,1.0], rb:[3,5], cap:200, surf:'pei',
       tip:{ de:'Verzeiht Layerlinien gut; bei zu kalter Düse wird die Oberfläche rau.', en:'Hides layer lines well; a nozzle that is too cold gives a rough surface.' } },
     'PLA-CF':  { n:[210,240], b:[45,65],  fan:[100,100], vol:[9,12],   rd:[0.5,1.0], rb:[3,5], cap:150, surf:'pei',
       tip:{ de:'Gehärtete Düse Pflicht; 0,4 mm ist knapp, 0,6 mm verstopft seltener. Gut trocknen.', en:'Hardened nozzle is a must; 0.4 mm is tight, 0.6 mm clogs less. Dry well.' } },
@@ -36,7 +36,7 @@ window.SlicerData = {
       tip:{ de:'Gehärtete Düse erforderlich; matte Oberfläche, weniger Fäden als reines PETG.', en:'Hardened nozzle required; matte surface, less stringing than plain PETG.' } },
     'ABS':     { n:[240,280], b:[90,100], fan:[0,20],    vol:[12,16],  rd:[0.5,1.0], rb:[3,5], cap:200, surf:'abs',
       tip:{ de:'Geschlossenes Gehäuse, Zugluft vermeiden, Dämpfe nur gut belüftet; Brim gegen Warping.', en:'Enclosed chamber, avoid drafts, print only in a ventilated area; use a brim against warping.' } },
-    'ASA':     { n:[240,280], b:[75,100], fan:[0,30],    vol:[12,16],  rd:[0.5,1.0], rb:[3,5], cap:200, surf:'abs',
+    'ASA':     { n:[240,280], b:[90,110], fan:[0,30],    vol:[12,16],  rd:[0.5,1.0], rb:[3,5], cap:200, surf:'abs',
       tip:{ de:'Wie ABS, aber UV-stabil für Außenbereich; Gehäuse und gute Belüftung.', en:'Like ABS but UV-stable for outdoor use; enclosure and good ventilation.' } },
     'TPU':     { n:[210,240], b:[25,60],  fan:[50,100],  vol:[3,5],    rd:[0,1.0],   rb:null,  cap:40,  surf:'tpu',
       tip:{ de:'Direktantrieb empfohlen, langsam und gleichmäßig drucken, Retraction minimal halten.', en:'Direct drive recommended, print slowly and evenly, keep retraction minimal.' } },
@@ -58,7 +58,7 @@ window.SlicerData = {
       tip:{ de:'Lösliches Support-Material für ABS (Limonen); ähnliche Einstellungen wie ABS.', en:'Soluble support for ABS (limonene); similar settings to ABS.' } },
     'PP':      { n:[220,270], b:[80,105], fan:[30,100],  vol:[5,8],    rd:[1.0,2.0], rb:[4,6], cap:100, surf:'pp',
       tip:{ de:'Haftet schlecht auf fast allem – PP-Klebeband ist der einfachste Trick; starkes Warping.', en:'Sticks poorly to almost everything – PP tape is the easiest trick; strong warping.' } },
-    'GLOW':    { n:[190,230], b:[25,65],  fan:[100,100], vol:[10,14],  rd:[0.5,1.0], rb:[3,5], cap:200, surf:'pei',
+    'GLOW':    { n:[190,230], b:[50,60],  fan:[100,100], vol:[10,14],  rd:[0.5,1.0], rb:[3,5], cap:200, surf:'pei',
       tip:{ de:'Leuchtpigmente sind abrasiv: gehärtete Düse. Werte gelten für PLA-Basis, sonst Hersteller beachten.', en:'Glow pigments are abrasive: hardened nozzle. Values are for a PLA base, otherwise follow the manufacturer.' } }
   }
 };

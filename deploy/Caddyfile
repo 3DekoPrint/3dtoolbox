@@ -1,0 +1,56 @@
+# 3dtoolbox.info - Caddy-Konfiguration (Quelle der Wahrheit; auf dem Server nach /etc/caddy/Caddyfile kopieren)
+# Parameter {args[0]} = zusätzliche script-src-Quellen (nur der Konverter braucht 'unsafe-eval' für das STEP-Modul)
+(sec) {
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+        Cross-Origin-Opener-Policy "same-origin"
+        Content-Security-Policy "default-src 'self'; script-src 'self' https://gc.zgo.at 'unsafe-inline' 'wasm-unsafe-eval' blob: {args[0]}; style-src 'self' 'unsafe-inline'; img-src 'self' https://3dtoolbox.goatcounter.com data: blob:; font-src 'self' data:; connect-src 'self' https://3dtoolbox.goatcounter.com https://api.web3forms.com blob: data:; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+        Strict-Transport-Security "max-age=31536000"
+        -Server
+    }
+}
+
+3dtoolbox.info {
+    root * /var/www/3dtoolbox
+    encode zstd gzip
+    # WASM-Module (STEP/Geometrie) zusätzlich komprimieren (Standardliste enthält application/wasm nicht)
+    encode {
+        zstd
+        gzip
+        match {
+            header Content-Type application/wasm*
+        }
+    }
+
+    # Versionsverwaltung und Server-Dateien nie ausliefern
+    @hidden path /.git /.git/* /deploy /deploy/* /server /server/* /.github/* /.gitignore
+    handle @hidden {
+        respond 404
+    }
+
+    @convert path /3d-datei-konverter.html /en/3d-file-converter.html /3d-datei-konverter /en/3d-file-converter
+    handle @convert {
+        import sec "'unsafe-eval'"
+        try_files {path} {path}.html
+        file_server
+    }
+
+    handle {
+        import sec "blob:"
+        try_files {path} {path}.html {path}/index.html
+
+        # Cache: Assets 1 Tag (mit Revalidierung), HTML immer prüfen
+        @assets path /assets/*
+        header @assets Cache-Control "public, max-age=86400, must-revalidate"
+        @html path *.html /
+        header @html Cache-Control "no-cache"
+        file_server
+    }
+}
+
+www.3dtoolbox.info {
+    redir https://3dtoolbox.info{uri} permanent
+}

@@ -374,7 +374,7 @@
       <div class="og-shape-name">Lithophanie</div>
     </div>
   </div>
-  <p style="font-size:11px; color:var(--ink-dim); margin:10px 0 22px;">Leuchtschrift ist vorübergehend ausgeblendet (wird überarbeitet) — sieben Grundformen aktuell verfügbar.</p>
+  <p style="font-size:11px; color:var(--ink-dim); margin:10px 0 22px;">Leuchtschrift ist vorübergehend ausgeblendet (wird überarbeitet) — 13 Grundformen aktuell verfügbar.</p>
 
   <div class="og-layout">
     <div class="og-viewer-wrap">
@@ -545,7 +545,7 @@
         <div class="og-row" id="gearRimRow" style="display:none;"><label for="g_rim">Randdicke außen <span class="og-val" id="v_g_rim">4</span> mm</label><input type="range" id="g_rim" min="2" max="30" step="0.5" value="4"></div>
         <div class="og-row"><label for="g_angle">Eingriffswinkel <span class="og-val" id="v_g_angle">20</span>°</label><input type="range" id="g_angle" min="14.5" max="25" step="0.5" value="20"></div>
         <p class="og-skadis-note" id="gearUndercutNote" style="display:none; margin-top:10px;">
-          Bei weniger als ~10 Zähnen tritt am Zahnfuß ein leichter <b>Unterschnitt</b> auf — ein normales Getriebebau-Phänomen bei kleinen Zähnezahlen, kein Fehler des Tools. Für sauber kämmende Zahnräder empfiehlt sich eine Zähnezahl ≥ 10, besonders bei zwei gleich kleinen Rädern im Eingriff.
+          Bei weniger als ~17 Zähnen (bei 20° Eingriffswinkel) tritt am Zahnfuß ein leichter <b>Unterschnitt</b> auf — ein normales Getriebebau-Phänomen bei kleinen Zähnezahlen, kein Fehler des Tools. Für sauber kämmende Zahnräder empfiehlt sich eine Zähnezahl ≥ 17, besonders bei zwei gleich kleinen Rädern im Eingriff.
         </p>
         <p class="og-skadis-note" id="gearInternalNote" style="display:none; margin-top:10px;">
           Die Innenverzahnung nutzt dieselbe Zahnkontur wie die Außenverzahnung, nur als Loch in einem Ring — mit bewusst etwas mehr Radialspiel als eine lehrbuchgenaue Auslegung, damit es im 3D-Druck nicht klemmt. Für den Eingriff ein Außenrad mit gleichem Modul &amp; Eingriffswinkel separat exportieren.
@@ -4667,7 +4667,7 @@
     const val = parseFloat(gZEl.value);
     state.gear.z = val;
     document.getElementById('v_g_z').textContent = val;
-    gUndercutNote.style.display = val < 10 ? 'block' : 'none';
+    gUndercutNote.style.display = val < 17 ? 'block' : 'none';
     clampGearBore();
     rebuild();
   });

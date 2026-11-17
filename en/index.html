@@ -1142,17 +1142,6 @@ window.tbLoad=(function(){
   </section>
 
 
-  <div class="fm-counter" id="fmCounter" style="display:none;">
-    <div class="fm-counter-stat">
-      <span class="fm-counter-num" id="fmCounterTotal">–</span>
-      <span class="fm-counter-label">Total visitors</span>
-    </div>
-    <div class="fm-counter-divider"></div>
-    <div class="fm-counter-stat">
-      <span class="fm-counter-num" id="fmCounterToday">–</span>
-      <span class="fm-counter-label">today</span>
-    </div>
-  </div>
 
   <!--tb-video-->
   <section class="tb-video" aria-labelledby="tbv-finder">
@@ -1233,58 +1222,6 @@ window.tbLoad=(function(){
     }
   }
   applyPartnerLinks();
-
-  // ============================================================
-  // BESUCHERZÄHLER — nutzt den kostenlosen, anmeldefreien Dienst
-  // countapi.mileshilliard.com. Zählt jeden Besucher nur EINMAL
-  // (gemerkt per localStorage — gilt domainweit, also auch über
-  // DE/EN-Sprachwechsel hinweg, da beide dieselbe Domain nutzen).
-  // Sichtbar ist der Zähler nur mit ?stats=1 in der URL, damit ihn
-  // niemand außer dir zu sehen bekommt.
-  // ============================================================
-  (function initVisitorCounter(){
-    const NAMESPACE = '3dtoolbox_info_v1';
-    const totalKey = `${NAMESPACE}_total`;
-    const todayDateStr = new Date().toISOString().slice(0,10);
-    const todayKey = `${NAMESPACE}_daily_${todayDateStr}`;
-
-    const showStats = new URLSearchParams(window.location.search).get('stats') === '1';
-    const counterEl = document.getElementById('fmCounter');
-    if (showStats && counterEl) counterEl.style.display = 'flex';
-
-    const totalEl = document.getElementById('fmCounterTotal');
-    const todayEl = document.getElementById('fmCounterToday');
-
-    const STORE_TOTAL = '3dtb_counted_total';
-    const STORE_DAY = '3dtb_counted_day';
-    let alreadyCountedTotal = false, alreadyCountedToday = false;
-    try {
-      alreadyCountedTotal = localStorage.getItem(STORE_TOTAL) === '1';
-      alreadyCountedToday = localStorage.getItem(STORE_DAY) === todayDateStr;
-    } catch(e){}
-
-    const totalUrl = alreadyCountedTotal
-      ? `https://countapi.mileshilliard.com/api/v1/get/${totalKey}`
-      : `https://countapi.mileshilliard.com/api/v1/hit/${totalKey}`;
-    fetch(totalUrl)
-      .then(r => r.json())
-      .then(data => {
-        if (totalEl) totalEl.textContent = data.value.toLocaleString('de-DE');
-        if (!alreadyCountedTotal) { try { localStorage.setItem(STORE_TOTAL, '1'); } catch(e){} }
-      })
-      .catch(() => { if (totalEl) totalEl.textContent = '–'; });
-
-    const todayUrl = alreadyCountedToday
-      ? `https://countapi.mileshilliard.com/api/v1/get/${todayKey}`
-      : `https://countapi.mileshilliard.com/api/v1/hit/${todayKey}`;
-    fetch(todayUrl)
-      .then(r => r.json())
-      .then(data => {
-        if (todayEl) todayEl.textContent = data.value.toLocaleString('de-DE');
-        if (!alreadyCountedToday) { try { localStorage.setItem(STORE_DAY, todayDateStr); } catch(e){} }
-      })
-      .catch(() => { if (todayEl) todayEl.textContent = '–'; });
-  })();
 
   // Jede Filament-Farbe verweist auf eine konkrete Produktseite (wo bestätigt)
   // oder auf die interne Shop-Suche für genau diesen Artikel — nie nur auf die Startseite.
