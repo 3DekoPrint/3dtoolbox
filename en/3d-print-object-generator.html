@@ -374,7 +374,7 @@
       <div class="og-shape-name">Lithophane</div>
     </div>
   </div>
-  <p style="font-size:11px; color:var(--ink-dim); margin:10px 0 22px;">Light-up lettering is temporarily hidden (being reworked) — seven base shapes are currently available.</p>
+  <p style="font-size:11px; color:var(--ink-dim); margin:10px 0 22px;">Light-up lettering is temporarily hidden (being reworked) — 13 base shapes are currently available.</p>
 
   <div class="og-layout">
     <div class="og-viewer-wrap">
@@ -545,7 +545,7 @@
         <div class="og-row" id="gearRimRow" style="display:none;"><label for="g_rim">Outer rim thickness <span class="og-val" id="v_g_rim">4</span> mm</label><input type="range" id="g_rim" min="2" max="30" step="0.5" value="4"></div>
         <div class="og-row"><label for="g_angle">Pressure angle <span class="og-val" id="v_g_angle">20</span>°</label><input type="range" id="g_angle" min="14.5" max="25" step="0.5" value="20"></div>
         <p class="og-skadis-note" id="gearUndercutNote" style="display:none; margin-top:10px;">
-          With fewer than ~10 teeth, slight <b>undercut</b> occurs at the tooth root — a normal gear-design phenomenon with small tooth counts, not a tool error. For cleanly meshing gears, a tooth count ≥ 10 is recommended, especially with two equally small gears in mesh.
+          With fewer than ~17 teeth (at a 20° pressure angle), slight <b>undercut</b> occurs at the tooth root — a normal gear-design phenomenon with small tooth counts, not a tool error. For cleanly meshing gears, a tooth count ≥ 17 is recommended, especially with two equally small gears in mesh.
         </p>
         <p class="og-skadis-note" id="gearInternalNote" style="display:none; margin-top:10px;">
           The internal gearing uses the same tooth profile as the external gearing, just as a hole in a ring — with deliberately a bit more radial clearance than a textbook design so it does not bind in 3D printing. For the mesh, export an external gear with the same module &amp; pressure angle separately.
@@ -4667,7 +4667,7 @@
     const val = parseFloat(gZEl.value);
     state.gear.z = val;
     document.getElementById('v_g_z').textContent = val;
-    gUndercutNote.style.display = val < 10 ? 'block' : 'none';
+    gUndercutNote.style.display = val < 17 ? 'block' : 'none';
     clampGearBore();
     rebuild();
   });
