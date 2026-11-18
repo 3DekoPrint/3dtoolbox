@@ -135,12 +135,12 @@
 
   /* ---------- Texte der Oberfläche ---------- */
   var UI = {
-    de: { load: 'Lade 3D-Bibliothek …', busy: 'Berechne …', err: 'Mit diesen Werten lässt sich kein gültiges Teil berechnen. Bitte Maße prüfen.', lib: 'Die 3D-Bibliothek konnte nicht geladen werden (WebAssembly wird benötigt).',
+    de: { errAt: 'Zuletzt geändert:', clamped: function (a, b) { return 'Auf den zulässigen Bereich ' + a + '–' + b + ' begrenzt.'; }, load: 'Lade 3D-Bibliothek …', busy: 'Berechne …', err: 'Mit diesen Werten lässt sich kein gültiges Teil berechnen. Bitte Maße prüfen.', lib: 'Die 3D-Bibliothek konnte nicht geladen werden (WebAssembly wird benötigt).',
       stage: 'Vorschau', drag: 'Ziehen = drehen · Mausrad = zoomen', preset: 'Voreinstellung', custom: '— eigene Werte —', size: 'Maße', vol: 'Volumen', weight: 'Gewicht', cost: 'Material', time: 'Druckzeit',
       est: 'Grobe Schätzung bei 3 Wänden und 15 % Füllung.', bed: 'Druckbett', mat: 'Material', price: 'Preis pro kg (€)', stl: 'STL herunterladen', mf: '3MF herunterladen', link: 'Link kopieren', copied: 'Link kopiert', save: 'Konfiguration speichern', load: 'Konfiguration öffnen',
       reset: 'Zurücksetzen', fits: 'passt aufs Druckbett', nofit: 'ist größer als das Druckbett', plate: 'Eigene Platte', parts: 'Teile', tri: 'Dreiecke', own: 'eigene Größe (B × T mm)', noGl: 'Die Vorschau braucht WebGL2. Die Dateien lassen sich trotzdem herunterladen.',
       bedFit: function (w, d) { return 'Platzbedarf ' + w.toFixed(0) + ' × ' + d.toFixed(0) + ' mm'; }, h: 'Std.', mn: 'Min.' },
-    en: { load: 'Loading 3D library …', busy: 'Calculating …', err: 'These values do not give a valid part. Please check the dimensions.', lib: 'The 3D library could not be loaded (WebAssembly is required).',
+    en: { errAt: 'Last changed:', clamped: function (a, b) { return 'Limited to the allowed range ' + a + '–' + b + '.'; }, load: 'Loading 3D library …', busy: 'Calculating …', err: 'These values do not give a valid part. Please check the dimensions.', lib: 'The 3D library could not be loaded (WebAssembly is required).',
       stage: 'Preview', drag: 'Drag = rotate · wheel = zoom', preset: 'Preset', custom: '— custom values —', size: 'Size', vol: 'Volume', weight: 'Weight', cost: 'Material', time: 'Print time',
       est: 'Rough estimate at 3 walls and 15 % infill.', bed: 'Print bed', mat: 'Material', price: 'Price per kg (€)', stl: 'Download STL', mf: 'Download 3MF', link: 'Copy link', copied: 'Link copied', save: 'Save configuration', load: 'Open configuration',
       reset: 'Reset', fits: 'fits on the print bed', nofit: 'is larger than the print bed', plate: 'Custom plate', parts: 'Parts', tri: 'triangles', own: 'custom size (W × D mm)', noGl: 'The preview needs WebGL2. You can still download the files.',
@@ -164,7 +164,7 @@
 
     host.innerHTML = '';
     host.classList.add('gk');
-    var stage = el('div', 'gk-stage'), cv = el('canvas', 'gk-cv'), hud = el('div', 'gk-hud'), tip = el('div', 'gk-tip', T.drag), stat = el('div', 'gk-stat', T.load);
+    var stage = el('div', 'gk-stage'), cv = el('canvas', 'gk-cv'), hud = el('div', 'gk-hud'), tip = el('div', 'gk-tip', T.drag), stat = el('div', 'gk-stat', T.load); stat.setAttribute('role', 'status');
     stage.appendChild(cv); stage.appendChild(hud); stage.appendChild(tip); stage.appendChild(stat);
     var tabs = el('div', 'gk-tabs', ''), body = el('div', 'gk-body');
     var dock = el('div', 'gk-dock');
@@ -179,7 +179,7 @@
     function numStr(v) { return String(Math.round(v * 1000) / 1000); }
     def.groups.forEach(function (g, gi) {
       var b = el('button', 'gk-tab' + (gi === 0 ? ' on' : ''), '<span class="gk-tn">' + String(gi + 1).padStart(2, '0') + '</span>' + esc(L(g.title))); b.type = 'button';
-      var pane = el('div', 'gk-pane' + (gi === 0 ? ' on' : ''));
+      var pane = el('div', 'gk-pane' + (gi === 0 ? ' on' : '')); pane.setAttribute('role', 'group'); pane.setAttribute('aria-label', L(g.title));
       if (gi === 0 && def.presets && def.presets.length) {
         var pr = el('label', 'gk-f gk-f-wide'), sel = el('select'); sel.id = 'gkPreset';
         sel.innerHTML = '<option value="">' + esc(T.custom) + '</option>' + def.presets.map(function (p, i) { return '<option value="' + i + '">' + esc(L(p.label)) + '</option>'; }).join('');
@@ -192,11 +192,12 @@
       }
       g.items.forEach(function (it) {
         var f = el('label', 'gk-f' + (it.t === 'bool' ? ' gk-f-bool' : '')), c, lab = '<span>' + esc(L(it.label)) + (it.unit ? ' <i>' + esc(L(it.unit)) + '</i>' : '') + (it.hint ? ' <em title="' + esc(L(it.hint)) + '">?</em>' : '') + '</span>';
+        f.setAttribute('data-lab', L(it.label));
         if (it.t === 'num' || it.t === 'int') {
           f.innerHTML = lab; var w = el('div', 'gk-num'), r = el('input'), n = el('input');
           r.type = 'range'; n.type = 'number'; r.min = n.min = it.min; r.max = n.max = it.max; r.step = n.step = it.step || (it.t === 'int' ? 1 : 0.1);
-          r.value = n.value = P[it.k]; n.setAttribute('aria-label', L(it.label) + (it.unit ? ' (' + L(it.unit) + ')' : '')); w.appendChild(r); w.appendChild(n); f.appendChild(w);
-          var upd = function (src) { return function () { var v = parseFloat(src.value); if (isNaN(v)) return; v = Math.max(it.min, Math.min(it.max, v)); if (it.t === 'int') v = Math.round(v); P[it.k] = v; if (src === r) n.value = numStr(v); else r.value = v; presetOff(); schedule(); }; };
+          r.value = n.value = P[it.k]; n.setAttribute('aria-label', L(it.label) + (it.unit ? ' (' + L(it.unit) + ')' : '') + ', ' + it.min + '–' + it.max); n.title = it.min + '–' + it.max + (it.unit ? ' ' + L(it.unit) : ''); var cl = el('small', 'gk-clamp'); cl.hidden = true; cl.setAttribute('role', 'status'); w.appendChild(r); w.appendChild(n); f.appendChild(w); f.appendChild(cl);
+          var upd = function (src) { return function () { var v = parseFloat(src.value); if (isNaN(v)) return; var raw = v; v = Math.max(it.min, Math.min(it.max, v)); if (src === n && raw !== v) { cl.textContent = T.clamped(it.min, it.max); cl.hidden = false; } else cl.hidden = true; if (it.t === 'int') v = Math.round(v); P[it.k] = v; if (src === r) n.value = numStr(v); else r.value = v; presetOff(); schedule(); }; };
           r.addEventListener('input', upd(r)); n.addEventListener('input', upd(n)); n.addEventListener('blur', function () { n.value = numStr(P[it.k]); });
           inputs[it.k] = { r: r, n: n };
         } else if (it.t === 'bool') {
@@ -215,6 +216,10 @@
       b.addEventListener('click', function () { tabBtns.forEach(function (x) { x.classList.remove('on'); }); panes.forEach(function (x) { x.classList.remove('on'); }); b.classList.add('on'); pane.classList.add('on'); });
       tabs.appendChild(b); tabBtns.push(b); body.appendChild(pane); panes.push(pane);
     });
+    var touched = null;
+    body.addEventListener('input', function (e) { var r = e.target.closest && e.target.closest('.gk-f'); if (r && r.getAttribute('data-lab')) touched = r; });
+    body.addEventListener('change', function (e) { var r = e.target.closest && e.target.closest('.gk-f'); if (r && r.getAttribute('data-lab')) touched = r; });
+    function markBad(on) { Object.keys(rows).forEach(function (k) { rows[k].classList.remove('gk-f-bad'); var i = rows[k].querySelector('input[type=number],select'); if (i) i.removeAttribute('aria-invalid'); }); if (on && touched) { touched.classList.add('gk-f-bad'); var i = touched.querySelector('input[type=number],select'); if (i) i.setAttribute('aria-invalid', 'true'); } }
     function presetOff() { if (inputs.__preset) inputs.__preset.value = ''; }
     function applyShow() { flat.forEach(function (it) { if (it.show) rows[it.k].style.display = it.show(P) ? '' : 'none'; }); }
     function syncInputs() {
@@ -284,8 +289,8 @@
         var res = null, bad = false;
         try { var out = def.build(P, H); if (!out || !out.length) bad = true; else res = process(out.map(function (o) { return { name: o.name, mesh: o.mesh }; })); } catch (e) { bad = true; if (root.console) console.warn(e); }
         busy = false;
-        if (bad || !res || res.total.tris < 4) { stat.textContent = T.err; stat.classList.add('on', 'bad'); bStl.disabled = bMf.disabled = true; }
-        else { last = res; stat.classList.remove('on', 'bad'); ensurePrev(); if (prev && ok3d) prev.set(res.preview); bStl.disabled = bMf.disabled = false; showResult(); }
+        if (bad || !res || res.total.tris < 4) { stat.textContent = T.err + (touched ? ' ' + T.errAt + ' „' + touched.getAttribute('data-lab') + '“.' : ''); stat.classList.add('on', 'bad'); bStl.disabled = bMf.disabled = true; markBad(true); last = null; est.innerHTML = ''; hSize.innerHTML = ''; hFit.className = 'gk-fit'; hFit.innerHTML = ''; bOrd.disabled = true; }
+        else { last = res; markBad(false); stat.classList.remove('on', 'bad'); ensurePrev(); if (prev && ok3d) prev.set(res.preview); bStl.disabled = bMf.disabled = false; showResult(); }
         if (again) { again = false; rebuild(); }
       }, 0);
     }
