@@ -545,8 +545,8 @@ window.MaterialDB = {
   "hard": 0,
   "src": "P,B,R",
   "nozzle": {
-   "de": "230–270",
-   "en": "230–270"
+   "de": "230–250",
+   "en": "230–250"
   },
   "bed": {
    "de": "60–80",
@@ -657,7 +657,7 @@ window.MaterialDB = {
   "hard": 0,
   "src": "P,B,R",
   "nozzle": {
-   "de": "240–280",
+   "de": "240–260",
    "en": "240–280"
   },
   "bed": {
