@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'workshop', slug: { de: 'drehknopf-generator', en: 'knob-generator' },
     title: { de: 'Drehknopf-Generator: Knöpfe mit Wellenaufnahme als STL/3MF (kostenlos)', en: 'Knob Generator: knobs with shaft bore as STL/3MF (free)' },
     h1: { de: 'Drehknopf', en: 'Knob' },
-    sub: { de: 'Knöpfe für Potis, Schalter und Geräte: Durchmesser, Rillen und Wellenaufnahme einstellen, STL oder 3MF laden.', en: 'Knobs for pots, switches and devices: set diameter, flutes and shaft bore, download STL or 3MF.' },
+    sub: { de: 'Knöpfe für Potis, Schalter und Geräte: Durchmesser, Rillen und Wellenaufnahme einstellen, STL oder 3MF herunterladen.', en: 'Knobs for pots, switches and devices: set diameter, flutes and shaft bore, download STL or 3MF.' },
     desc: { de: 'Kostenloser Drehknopf-Generator: Knöpfe mit Rillen für Potentiometer, Schalter und Geräte, mit runder, D-förmiger oder sechseckiger Aufnahme und Madenschraube. Export als STL und 3MF.', en: 'Free knob generator: fluted knobs for potentiometers, switches and devices with round, D-shaped or hex bore and set screw. Export as STL and 3MF.' },
     tag: { de: 'Werkstatt', en: 'Workshop' },
     intro: { de: ['Wähle den Außendurchmesser und die Höhe, dann die Rillen für einen guten Griff. Die Aufnahme passt auf runde Wellen, Wellen mit Abflachung (D-Welle) oder Sechskant.', 'Für Potis nimm 6 mm mit Abflachung, für 1/4-Zoll-Wellen etwa 6,35 mm.'], en: ['Pick the outer diameter and height, then the flutes for a good grip. The bore fits round shafts, shafts with a flat (D-shaft) or hex.', 'For pots use 6 mm with a flat, for 1/4 inch shafts about 6.35 mm.'] },

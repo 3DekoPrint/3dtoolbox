@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'storage', slug: { de: 'sortierschale-generator', en: 'sorting-tray-generator' },
     title: { de: 'Sortierschale-Generator: Fächerschale nach Maß als STL/3MF (kostenlos)', en: 'Sorting Tray Generator: compartment tray as STL/3MF (free)' },
     h1: { de: 'Sortierschale', en: 'Sorting Tray' },
-    sub: { de: 'Schale mit Fächern für Schrauben, Perlen oder Spielsteine: Größe und Fächeranzahl einstellen, STL oder 3MF laden.', en: 'A tray with compartments for screws, beads or game pieces: set size and number of compartments, download STL or 3MF.' },
+    sub: { de: 'Schale mit Fächern für Schrauben, Perlen oder Spielsteine: Größe und Fächeranzahl einstellen, STL oder 3MF herunterladen.', en: 'A tray with compartments for screws, beads or game pieces: set size and number of compartments, download STL or 3MF.' },
     desc: { de: 'Kostenloser Sortierschalen-Generator: Schalen mit 1 bis 8 mal 1 bis 6 Fächern, niedrigen Trennwänden und runden Ecken. Export als STL und 3MF.', en: 'Free sorting tray generator: trays with 1 to 8 by 1 to 6 compartments, low dividers and rounded corners. Export as STL and 3MF.' },
     tag: { de: 'Aufbewahren', en: 'Storage' },
     intro: { de: ['Die Schale hat ein gleichmäßiges Raster aus Fächern. Mit niedrigeren Trennstegen kannst du Teile leicht umsortieren, mit hohen bleibt alles getrennt.', 'Gut für Werkstatt, Basteltisch, Spielabende und Sammlungen.'], en: ['The tray has an even grid of compartments. Lower dividers let you easily shift parts around, tall dividers keep everything separate.', 'Great for the workshop, craft desk, game nights and collections.'] },

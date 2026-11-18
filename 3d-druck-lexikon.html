@@ -350,7 +350,579 @@
       <h2 class="lx-section-title" id="probleme">🛠 Häufige Druckprobleme</h2>
       <span class="lx-section-count" id="lxProblemCount"></span>
     </div>
-    <div class="lx-cards" id="lxProblemCards"></div>
+    <div class="lx-cards" id="lxProblemCards"><!--lx-pre--><details class="lx-card" id="warping">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Warping (Aufbiegen der Ecken)</p>
+          <span class="lx-tag">Haftung &amp; 1. Schicht</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Ecken oder Kanten lösen sich vom Bett und biegen sich nach oben — vor allem bei großflächigen Teilen aus ABS, ASA oder Nylon.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Ungleichmäßige Abkühlung zwischen unterer und oberer Schicht</li><li>Zu geringe Bett-Temperatur für das Material</li><li>Zugluft im Raum (Fenster, Lüfter, Klimaanlage, Tür)</li><li>Große, flache Grundfläche ohne zusätzliche Haftungshilfe</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Heizbett-Temperatur erhöhen (siehe Materialkunde unten), Brim mit 5–8 mm Breite hinzufügen, jede Zugluftquelle eliminieren.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Gehäuse bzw. zugluftfreien Druckraum nutzen, Bett vor jedem Druck mit Isopropanol reinigen, bei ABS/ASA grundsätzlich mit Gehäuse drucken, Brim für große flache Teile standardmäßig aktivieren.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#elephant-foot" data-jump="elephant-foot">Elephant Foot (ausgebeulte erste Schichten)</a><a class="lx-related-chip" href="#bett-haftung" data-jump="bett-haftung">Schlechte Bett-Haftung / erste Schicht löst sich</a><a class="lx-related-chip" href="#curling-ecken" data-jump="curling-ecken">Curling an dünnen Teilen/Ecken</a></div>
+        </div>
+      </details><details class="lx-card" id="elephant-foot">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Elephant Foot (ausgebeulte erste Schichten)</p>
+          <span class="lx-tag">Haftung &amp; 1. Schicht</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Die untersten 1–3 Schichten sind sichtbar breiter als der Rest des Modells, wie ein leicht ausgebeulter Fuß.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu heißes Bett drückt die erste Schicht platt</li><li>Zu hoher Erstschicht-Druck bzw. zu geringer Z-Offset</li><li>Zu weiches Material trifft auf zu warmes Bett</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>„Elephant Foot Compensation“ im Slicer aktivieren (Start meist 0,1–0,3 mm), Z-Offset minimal erhöhen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Erstschicht-Höhe nicht zu niedrig wählen, Bett-Temperatur nach der ersten Schicht leicht absenken, Z-Offset regelmäßig neu kalibrieren.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#warping" data-jump="warping">Warping (Aufbiegen der Ecken)</a><a class="lx-related-chip" href="#bett-haftung" data-jump="bett-haftung">Schlechte Bett-Haftung / erste Schicht löst sich</a><a class="lx-related-chip" href="#masshaltigkeit" data-jump="masshaltigkeit">Maße stimmen nicht (Über-/Untermaß)</a></div>
+        </div>
+      </details><details class="lx-card" id="bett-haftung">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Schlechte Bett-Haftung / erste Schicht löst sich</p>
+          <span class="lx-tag">Haftung &amp; 1. Schicht</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Der Druck löst sich schon in den ersten Schichten teilweise oder komplett vom Bett.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Bett nicht plan bzw. nicht genivelliert</li><li>Zu großer Düsenabstand zum Bett</li><li>Verschmutztes oder fettiges Bett</li><li>Falsche Erstschicht-Temperatur für das Material</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Z-Offset neu kalibrieren (Papier- oder Feeler-Gauge-Test), Bett gründlich mit Isopropanol reinigen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Auto-Bed-Leveling mit manuellem Feintuning kombinieren, bei PETG/ABS zusätzlich Haftmittel (Leimstift, Haarspray) verwenden, Federn/Klemmen der Druckplatte regelmäßig prüfen.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#warping" data-jump="warping">Warping (Aufbiegen der Ecken)</a><a class="lx-related-chip" href="#elephant-foot" data-jump="elephant-foot">Elephant Foot (ausgebeulte erste Schichten)</a><a class="lx-related-chip" href="#layer-shift" data-jump="layer-shift">Layer Shift (versetzte Schichten)</a></div>
+        </div>
+      </details><details class="lx-card" id="curling-ecken">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Curling an dünnen Teilen/Ecken</p>
+          <span class="lx-tag">Haftung &amp; 1. Schicht</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Dünne, freistehende Teile oder Ecken biegen sich während des Drucks leicht nach oben, ohne sich ganz vom Bett zu lösen.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu schnelle Abkühlung ungleich verteilt</li><li>Zu wenig Haftfläche bei sehr filigranen Konturen</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Teilkühlung (Part Cooling Fan) für die ersten Schichten reduzieren, Brim gezielt an kritischen Stellen hinzufügen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Modell-Orientierung so wählen, dass dünne Teile möglichst flach aufliegen, Erstschicht-Geschwindigkeit reduzieren.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#warping" data-jump="warping">Warping (Aufbiegen der Ecken)</a><a class="lx-related-chip" href="#bett-haftung" data-jump="bett-haftung">Schlechte Bett-Haftung / erste Schicht löst sich</a></div>
+        </div>
+      </details><details class="lx-card" id="stringing">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Stringing (Fäden zwischen Bauteilen)</p>
+          <span class="lx-tag">Extrusion &amp; Fluss</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Dünne Kunststofffäden ziehen sich zwischen separaten Druckteilen oder über Lücken.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu hohe Drucktemperatur</li><li>Kein oder zu schwaches Retraction</li><li>Feuchtes Filament (besonders PETG, Nylon, TPU)</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Retraction-Distanz erhöhen (Bowden: 4–7 mm, Direct Drive: 0,5–2 mm), Retraction-Speed auf 25–45 mm/s setzen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Temperatur in 5 °C-Schritten senken, bis die Fäden verschwinden, Filament in einer Trockenbox lagern, „Combing Mode“ bzw. „Avoid Crossing Perimeters“ aktivieren.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#feuchtes-filament" data-jump="feuchtes-filament">Feuchtes Filament (Knistern, Blasen, Stringing)</a><a class="lx-related-chip" href="#blobs-zits" data-jump="blobs-zits">Blobs &amp; Zits (Kleckse an der Oberfläche)</a><a class="lx-related-chip" href="#clogging" data-jump="clogging">Düse verstopft (Clogging)</a></div>
+        </div>
+      </details><details class="lx-card" id="unterextrusion">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Unterextrusion</p>
+          <span class="lx-tag">Extrusion &amp; Fluss</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Sichtbare Lücken zwischen Linien, dünne oder brüchige Wände, unvollständig gefüllte Bereiche.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Flow-Faktor zu niedrig eingestellt</li><li>Verstopfte oder teilverstopfte Düse</li><li>Falscher Filamentdurchmesser im Slicer hinterlegt</li><li>Zu niedrige Drucktemperatur</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Flow-Kalibrierung über einen 100%-Würfel-Test durchführen (Wanddicke nachmessen und Extrusion Multiplier anpassen).</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Regelmäßige E-Steps-Kalibrierung, Düse auf Verschleiß prüfen, Filamentdurchmesser stichprobenartig mit Messschieber kontrollieren.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#clogging" data-jump="clogging">Düse verstopft (Clogging)</a><a class="lx-related-chip" href="#ueberextrusion" data-jump="ueberextrusion">Überextrusion</a><a class="lx-related-chip" href="#nozzle-verschleiss" data-jump="nozzle-verschleiss">Nozzle-Verschleiß (ausgeleierte Düse)</a><a class="lx-related-chip" href="#flow-kalibrierung" data-jump="flow-kalibrierung">Flow-Kalibrierung pro Filament (Schritt für Schritt)</a></div>
+        </div>
+      </details><details class="lx-card" id="ueberextrusion">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Überextrusion</p>
+          <span class="lx-tag">Extrusion &amp; Fluss</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Wände wirken zu dick, Oberflächen sind rau oder wulstig, sichtbare Kleckse an Nahtpunkten.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Flow-Faktor zu hoch</li><li>Ausgeleierte, zu weit gebohrte Düse</li><li>Falscher (zu kleiner) Filamentdurchmesser im Slicer eingetragen</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Flow-Kalibrierung per 100%-Würfel-Test, Extrusion Multiplier in kleinen Schritten (±2–3 %) reduzieren.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Düse alle paar hundert Druckstunden tauschen, insbesondere bei abrasiven Filamenten (Carbon, Glasfaser, Glitzer).</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#unterextrusion" data-jump="unterextrusion">Unterextrusion</a><a class="lx-related-chip" href="#blobs-zits" data-jump="blobs-zits">Blobs &amp; Zits (Kleckse an der Oberfläche)</a><a class="lx-related-chip" href="#nozzle-verschleiss" data-jump="nozzle-verschleiss">Nozzle-Verschleiß (ausgeleierte Düse)</a><a class="lx-related-chip" href="#flow-kalibrierung" data-jump="flow-kalibrierung">Flow-Kalibrierung pro Filament (Schritt für Schritt)</a></div>
+        </div>
+      </details><details class="lx-card" id="clogging">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Düse verstopft (Clogging)</p>
+          <span class="lx-tag">Extrusion &amp; Fluss</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Der Extruder klickt/überspringt Schritte, es kommt kein oder kaum Filament mehr aus der Düse.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Filamentreste verkoken bei häufigen Temperaturwechseln</li><li>Feuchtes Filament blubbert in der Schmelzzone</li><li>Minderwertiges oder stark schwankendes Filament</li><li>Zu geringer Abstand zwischen Düse und Bett verstopft die Öffnung</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Cold-Pull-Methode (Atomic Method) zur Reinigung: Filament bei Zieltemperatur einführen, auf ca. 90 °C abkühlen lassen, dann kräftig herausziehen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Düse regelmäßig wechseln (Verschleißteil), Filament trocken in einer Box mit Silica-Gel lagern, hochwertiges Filament mit konstantem Durchmesser verwenden.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#feuchtes-filament" data-jump="feuchtes-filament">Feuchtes Filament (Knistern, Blasen, Stringing)</a><a class="lx-related-chip" href="#unterextrusion" data-jump="unterextrusion">Unterextrusion</a><a class="lx-related-chip" href="#nozzle-verschleiss" data-jump="nozzle-verschleiss">Nozzle-Verschleiß (ausgeleierte Düse)</a></div>
+        </div>
+      </details><details class="lx-card" id="nozzle-verschleiss">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Nozzle-Verschleiß (ausgeleierte Düse)</p>
+          <span class="lx-tag">Extrusion &amp; Fluss</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Über Zeit schleichend zunehmende Überextrusion, ungenaue Maße, obwohl Einstellungen unverändert sind.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Abrasive Filamente (Carbon-, Glasfaser-, Metall-gefüllt, Glitzer) nutzen weiche Messingdüsen schnell ab</li><li>Sehr hohe Laufleistung ohne Düsenwechsel</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Düse mit Messschieber am Auslass nachmessen (z. B. 0,4 mm-Düse sollte nicht deutlich größer sein) und bei Abweichung tauschen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Für abrasive Filamente gehärteten Stahl oder Hartmetall-Düsen verwenden, reguläre Düsen nach ca. 200–500 Druckstunden ersetzen.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#ueberextrusion" data-jump="ueberextrusion">Überextrusion</a><a class="lx-related-chip" href="#unterextrusion" data-jump="unterextrusion">Unterextrusion</a></div>
+        </div>
+      </details><details class="lx-card" id="delamination">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Delamination / Schichttrennung</p>
+          <span class="lx-tag">Oberfläche &amp; Optik</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Das Teil bricht sauber entlang einer einzelnen Schicht auseinander, statt quer durch das Material.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu niedrige Drucktemperatur für ausreichende Schichtverbindung</li><li>Zu starke/zu frühe Teilkühlung</li><li>Zugluft kühlt einzelne Schichten ungleichmäßig ab</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Drucktemperatur um 5–10 °C erhöhen, Testdruck mit reduzierter Kühlung wiederholen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Bei strukturell wichtigen Teilen Bauteilkühlung reduzieren, geschlossenes Gehäuse nutzen, für hohe Festigkeit ggf. auf ASA/PETG statt PLA wechseln.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#ringing" data-jump="ringing">Ghosting / Ringing (Vibrationsmuster, VFA)</a><a class="lx-related-chip" href="#zseam" data-jump="zseam">Z-Seam sichtbar (Naht-Linie)</a><a class="lx-related-chip" href="#druckrichtung" data-jump="druckrichtung">Druckrichtung für mehr Festigkeit</a></div>
+        </div>
+      </details><details class="lx-card" id="blobs-zits">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Blobs &amp; Zits (Kleckse an der Oberfläche)</p>
+          <span class="lx-tag">Oberfläche &amp; Optik</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Kleine Kunststoff-Kleckse oder „Pickel“ an bestimmten Stellen der Außenwand, oft am selben Punkt jeder Schicht.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Nahtpunkt (Seam) schlecht bzw. immer an derselben Stelle platziert</li><li>Ungünstige Retraction-/Restart-Einstellungen an der Naht</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>„Coasting“ aktivieren (Extrusion kurz vor Linienende stoppen), Wipe-on-Retract aktivieren.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Seam-Position auf „Aligned“ stellen oder gezielt in eine unauffällige Ecke legen, Retraction-Distanz leicht erhöhen.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#stringing" data-jump="stringing">Stringing (Fäden zwischen Bauteilen)</a><a class="lx-related-chip" href="#zseam" data-jump="zseam">Z-Seam sichtbar (Naht-Linie)</a><a class="lx-related-chip" href="#ringing" data-jump="ringing">Ghosting / Ringing (Vibrationsmuster, VFA)</a></div>
+        </div>
+      </details><details class="lx-card" id="ringing">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Ghosting / Ringing (Vibrationsmuster, VFA)</p>
+          <span class="lx-tag">Oberfläche &amp; Optik</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Wellenartige, sich wiederholende Muster auf der Außenwand, meist um scharfe Ecken oder Details herum.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu hohe Beschleunigung bzw. ruckartige Bewegungen</li><li>Lockerer Rahmen oder lose Riemen</li><li>Zu hoher Jerk/Junction-Deviation-Wert</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Beschleunigung und Jerk/Junction-Deviation in der Firmware bzw. im Slicer reduzieren.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Input Shaping kalibrieren, sofern die Firmware es unterstützt (z. B. Klipper), Druckerrahmen regelmäßig auf Wackeln/lose Schrauben prüfen.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#layer-shift" data-jump="layer-shift">Layer Shift (versetzte Schichten)</a><a class="lx-related-chip" href="#delamination" data-jump="delamination">Delamination / Schichttrennung</a></div>
+        </div>
+      </details><details class="lx-card" id="zseam">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Z-Seam sichtbar (Naht-Linie)</p>
+          <span class="lx-tag">Oberfläche &amp; Optik</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Eine senkrechte Linie oder Stufenkante ist an der Stelle sichtbar, an der jede Schicht beginnt und endet.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Seam-Position zufällig oder ungünstig gewählt</li><li>Kleine Druckungenauigkeit am Start-/Endpunkt jeder Schicht</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Seam-Ausrichtung im Slicer auf „Aligned“, „Nearest“ oder eine definierte Ecke stellen, damit sie an einer unauffälligen Stelle liegt.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>„Seam Painting“ nutzen, um die Naht manuell an eine versteckte Kante zu legen, leichtes „Coasting“ gegen Blobs an der Naht kombinieren.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#blobs-zits" data-jump="blobs-zits">Blobs &amp; Zits (Kleckse an der Oberfläche)</a><a class="lx-related-chip" href="#ringing" data-jump="ringing">Ghosting / Ringing (Vibrationsmuster, VFA)</a></div>
+        </div>
+      </details><details class="lx-card" id="pillowing">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Pillowing (Blasen/raue Top-Fläche)</p>
+          <span class="lx-tag">Oberfläche &amp; Optik</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Die oberste, geschlossene Fläche wirkt blasig oder kissenartig uneben statt glatt.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu wenige Top-Layer für die gewählte Infill-Dichte</li><li>Infill-Muster stützt die Decklage ungleichmäßig</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Anzahl der Top-Layer erhöhen (mind. 4–5 bei 0,2 mm Layerhöhe), Infill-Dichte leicht erhöhen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Top-Layer-Anzahl passend zur Infill-Dichte wählen (weniger Infill = mehr Top-Layer nötig), Gyroid- oder Grid-Infill für gleichmäßigere Unterstützung nutzen.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#top-layer-luecken" data-jump="top-layer-luecken">Löcher/Lücken in der Decklage (Top-Layer)</a></div>
+        </div>
+      </details><details class="lx-card" id="farbinkonsistenz">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Farbinkonsistenz bei Multicolor/AMS</p>
+          <span class="lx-tag">Oberfläche &amp; Optik</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Bei Multi-Material-/Multi-Color-Drucken wirkt eine Farbe leicht verschmutzt oder es entstehen sichtbare Übergänge an Farbwechselstellen.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu geringes Purge-/Spülvolumen beim Filamentwechsel</li><li>Reste der vorherigen Farbe in der Schmelzkammer</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Purge-Volumen in der Filament-Kompatibilitätstabelle des Slicers erhöhen, insbesondere bei Wechseln zwischen sehr unterschiedlichen Farben (z. B. Schwarz → Weiß).</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Purge-Tower/Flushing-Objekt einplanen, ähnliche Farbreihenfolgen im Druckauftrag bevorzugen, wenn möglich.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#stringing" data-jump="stringing">Stringing (Fäden zwischen Bauteilen)</a></div>
+        </div>
+      </details><details class="lx-card" id="layer-shift">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Layer Shift (versetzte Schichten)</p>
+          <span class="lx-tag">Mechanik &amp; Bewegung</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Ab einer bestimmten Höhe verschiebt sich der komplette Druck plötzlich seitlich in X- oder Y-Richtung.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Riemen zu locker gespannt</li><li>Schrittmotor überlastet oder hat Schritte übersprungen</li><li>Mechanische Kollision, z. B. ein hängen gebliebenes Kabel oder ein Objekt auf der Druckbahn</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Druck in der Regel nicht mehr rettbar — abbrechen, danach Riemenspannung und Bewegungsachsen auf Schwergängigkeit prüfen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Regelmäßige Wartung von Riemen und Grundplatten-Schrauben, Druckgeschwindigkeit/Beschleunigung nicht zu hoch wählen, Motorstrom (VREF) korrekt einstellen.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#ringing" data-jump="ringing">Ghosting / Ringing (Vibrationsmuster, VFA)</a><a class="lx-related-chip" href="#bett-haftung" data-jump="bett-haftung">Schlechte Bett-Haftung / erste Schicht löst sich</a></div>
+        </div>
+      </details><details class="lx-card" id="thermal-runaway">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Thermal Runaway / Heizfehler</p>
+          <span class="lx-tag">Mechanik &amp; Bewegung</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Drucker bricht mit einer Fehlermeldung zur Heizung ab, oder die Düsen-/Bett-Temperatur schwankt stark statt stabil zu bleiben.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Thermistor sitzt lose oder ist beschädigt</li><li>Heizpatrone defekt oder Kabel beschädigt</li><li>PID-Werte nicht kalibriert</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Verkabelung von Thermistor und Heizpatrone auf festen Sitz und Beschädigungen prüfen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>PID-Autotune für Düse und Bett regelmäßig durchführen, Kabel an Bewegungspunkten (Druckkopf) auf Ermüdungsbrüche kontrollieren.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#clogging" data-jump="clogging">Düse verstopft (Clogging)</a></div>
+        </div>
+      </details><details class="lx-card" id="skipped-steps">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Ungewöhnliche Geräusche / Skipped Steps</p>
+          <span class="lx-tag">Mechanik &amp; Bewegung</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Klickende oder knarzende Geräusche vom Extruder-Motor, teils verbunden mit Unterextrusion.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu hoher Widerstand beim Filamentvorschub (z. B. Clog, zu enger Bowden-Radius)</li><li>Extruder-Federspannung zu hoch oder zu niedrig</li><li>Druckgeschwindigkeit über der mechanischen Kapazität des Extruders</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Extruder-Federspannung prüfen und nachjustieren, Bowden-Schlauch auf Knicke kontrollieren.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Filamentpfad regelmäßig auf Reibungspunkte prüfen, Retraction-Einstellungen nicht unnötig aggressiv wählen.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#clogging" data-jump="clogging">Düse verstopft (Clogging)</a><a class="lx-related-chip" href="#unterextrusion" data-jump="unterextrusion">Unterextrusion</a></div>
+        </div>
+      </details><details class="lx-card" id="ueberhang-durchsacken">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Überhänge sacken durch</p>
+          <span class="lx-tag">Support &amp; Überhänge</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Freitragende, schräge Flächen wirken ausgefranst oder sacken sichtbar nach unten durch.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu wenig Bauteilkühlung</li><li>Drucktemperatur zu hoch für den Überhangwinkel</li><li>Überhangwinkel zu steil für das Material</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Bauteilkühlung (Part Cooling Fan) für Überhänge auf 100 % stellen, Drucktemperatur leicht senken.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Ab ca. 45–50° Überhangwinkel Stützstrukturen einplanen, Modell-Orientierung so wählen, dass kritische Überhänge minimiert werden.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#bridging" data-jump="bridging">Bridging reißt oder sackt durch</a><a class="lx-related-chip" href="#support-marken" data-jump="support-marken">Supports schwer entfernbar / hinterlassen Narben</a><a class="lx-related-chip" href="#support" data-jump="support">Support klug einsetzen — die 45°-Regel</a></div>
+        </div>
+      </details><details class="lx-card" id="bridging">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Bridging reißt oder sackt durch</p>
+          <span class="lx-tag">Support &amp; Überhänge</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Material, das eine Lücke zwischen zwei Stützpunkten überspannen soll, sackt in der Mitte durch oder reißt.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Bridging-Kühlung zu niedrig</li><li>Bridging-Geschwindigkeit zu hoch oder zu niedrig für die Spannweite</li><li>Zu große Distanz ohne Zwischenstütze</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Bridging-spezifische Lüftergeschwindigkeit auf 100 % stellen, Bridging-Flow leicht reduzieren.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Sehr große Spannweiten (&gt;30–40 mm) mit dünnen Hilfsstützen unterteilen, Bridging-Geschwindigkeit separat vom Normaldruck kalibrieren.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#ueberhang-durchsacken" data-jump="ueberhang-durchsacken">Überhänge sacken durch</a><a class="lx-related-chip" href="#support" data-jump="support">Support klug einsetzen — die 45°-Regel</a></div>
+        </div>
+      </details><details class="lx-card" id="support-marken">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Supports schwer entfernbar / hinterlassen Narben</p>
+          <span class="lx-tag">Support &amp; Überhänge</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Stützstrukturen lassen sich nur mit Kraft und Beschädigung der Oberfläche lösen, oder hinterlassen raue Kontaktflächen.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu geringer Z-Abstand zwischen Support und Modell</li><li>Support-Dichte zu hoch</li><li>Falscher Support-Typ für das Material</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Z-Gap zwischen Support und Modell im Slicer leicht erhöhen (typisch 0,15–0,3 mm), Support-Dichte reduzieren.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Organische/Baum-Supports für einfacheres Entfernen bei Sichtteilen nutzen, Support-Interface-Layer (dünne Trennschicht) aktivieren.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#ueberhang-durchsacken" data-jump="ueberhang-durchsacken">Überhänge sacken durch</a></div>
+        </div>
+      </details><details class="lx-card" id="feuchtes-filament">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Feuchtes Filament (Knistern, Blasen, Stringing)</p>
+          <span class="lx-tag">Material &amp; Handling</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Knister- oder Zischgeräusche an der Düse, kleine Bläschen/raue Oberfläche, verstärktes Stringing, spröde Ergebnisse — typisch bei PETG, Nylon, TPU, PVA.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Filament hat über Zeit Feuchtigkeit aus der Luft aufgenommen (hygroskopisches Material)</li><li>Offene Lagerung ohne Trockenmittel</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Filament vor dem Druck trocknen: im Filamenttrockner oder Backofen bei materialgerechter Temperatur (z. B. PETG ca. 65 °C, mehrere Stunden).</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Filament grundsätzlich in versiegelten Boxen mit Silica-Gel oder aktivem Trockner lagern, besonders bei Nylon/TPU/PVA möglichst direkt aus der Trockenbox drucken.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#stringing" data-jump="stringing">Stringing (Fäden zwischen Bauteilen)</a><a class="lx-related-chip" href="#clogging" data-jump="clogging">Düse verstopft (Clogging)</a><a class="lx-related-chip" href="#sproedes-filament" data-jump="sproedes-filament">Sprödes / brüchiges Filament</a></div>
+        </div>
+      </details><details class="lx-card" id="filament-verheddert">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Filament reißt oder verheddert sich auf der Spule</p>
+          <span class="lx-tag">Material &amp; Handling</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Der Druck stoppt mitten im Auftrag, weil sich das Filament auf der Spule verhakt hat oder gerissen ist.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Filamentende beim letzten Gebrauch nicht fixiert, dadurch unter andere Wicklungen gerutscht</li><li>Spule nicht sauber gewickelt (Billigware, Umspulen nötig)</li><li>Filament durch Alterung spröde geworden und reißt unter Zugspannung</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Bei Verhedderung: Druck pausieren, Spule entnehmen, verhakte Wicklung vorsichtig lösen; bei Riss: Enden sauber anschrägen und mit einer kurzen Splice-Verbindung oder neuem Filament fortsetzen.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Filamentende nach jedem Druck immer in der Halteklemme der Spule fixieren, Spulenhalter mit geringer Reibung nutzen.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#sproedes-filament" data-jump="sproedes-filament">Sprödes / brüchiges Filament</a></div>
+        </div>
+      </details><details class="lx-card" id="sproedes-filament">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Sprödes / brüchiges Filament</p>
+          <span class="lx-tag">Material &amp; Handling</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Filament bricht schon beim leichten Biegen, häufig verbunden mit häufigen Filamentabrissen während des Drucks.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Feuchtigkeitsaufnahme (besonders PLA und PETG über lange Zeit)</li><li>UV-/Lichteinwirkung bei langer offener Lagerung</li><li>Materialalterung generell</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Filament trocknen (siehe „Feuchtes Filament“) — stellt bei vielen Materialien einen Großteil der ursprünglichen Flexibilität wieder her.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Lichtgeschützt und trocken lagern, ältere Spulenreste vor Gebrauch testen statt direkt in einem großen Druck zu verbauen.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#feuchtes-filament" data-jump="feuchtes-filament">Feuchtes Filament (Knistern, Blasen, Stringing)</a><a class="lx-related-chip" href="#filament-verheddert" data-jump="filament-verheddert">Filament reißt oder verheddert sich auf der Spule</a></div>
+        </div>
+      </details><details class="lx-card" id="top-layer-luecken">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Löcher/Lücken in der Decklage (Top-Layer)</p>
+          <span class="lx-tag">Maßhaltigkeit</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Die oberste Fläche ist nicht vollständig geschlossen, kleine Löcher lassen das Infill-Muster durchscheinen.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Zu wenige Top-Layer für die Infill-Dichte</li><li>Infill-Overlap zu gering eingestellt</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>Top-Layer-Anzahl erhöhen (mind. 4–5 bei 0,2 mm Layerhöhe).</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Infill-Overlap-Prozentsatz prüfen (Standard meist 10–15 %), Top-Layer-Anzahl an gewählte Infill-Dichte anpassen.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#pillowing" data-jump="pillowing">Pillowing (Blasen/raue Top-Fläche)</a></div>
+        </div>
+      </details><details class="lx-card" id="masshaltigkeit">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Maße stimmen nicht (Über-/Untermaß)</p>
+          <span class="lx-tag">Maßhaltigkeit</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Löcher sind zu eng für Schrauben/Stifte, oder Steckverbindungen sitzen zu locker bzw. zu stramm.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Ursachen</p>
+            <ul><li>Horizontale Expansion durch die geschmolzene Kunststoffbreite (Löcher werden minimal kleiner, Außenkonturen minimal größer)</li><li>Elephant Foot an der Kontaktfläche</li><li>Ungenaue Kalibrierung von E-Steps/Flow</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Sofort-Lösung</p>
+            <p>„Horizontal Expansion“ bzw. „XY Compensation“ im Slicer nutzen: Löcher leicht vergrößern (z. B. +0,1 bis +0,2 mm), Außenkonturen leicht verkleinern.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prävention</p>
+            <p>Für funktionale Passungen immer einen kleinen Testdruck mit den exakten Solltoleranzen machen, Flow und E-Steps sauber kalibrieren.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#elephant-foot" data-jump="elephant-foot">Elephant Foot (ausgebeulte erste Schichten)</a><a class="lx-related-chip" href="#ueberextrusion" data-jump="ueberextrusion">Überextrusion</a><a class="lx-related-chip" href="#schrumpfung" data-jump="schrumpfung">Material-Schrumpfung ausgleichen</a><a class="lx-related-chip" href="#flow-kalibrierung" data-jump="flow-kalibrierung">Flow-Kalibrierung pro Filament (Schritt für Schritt)</a></div>
+        </div>
+      </details><!--/lx-pre--></div>
     <div class="lx-empty" id="lxProblemEmpty" style="display:none;">Keine Probleme zu diesem Suchbegriff gefunden.</div>
   </div>
 
@@ -360,7 +932,375 @@
       <h2 class="lx-section-title" id="guides">🧭 Praxis-Guides</h2>
       <span class="lx-section-count" id="lxGuideCount"></span>
     </div>
-    <div class="lx-cards" id="lxGuideCards"></div>
+    <div class="lx-cards" id="lxGuideCards"><!--lx-pre--><details class="lx-card" id="schichthoehe">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Schichthöhe richtig wählen (0,08–0,32 mm)</p>
+          <span class="lx-tag">Slicer &amp; Qualität</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Der eine Regler, der Oberflächenqualität UND Druckzeit bestimmt — und wann welche Stufe sich lohnt.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Das Prinzip</p>
+          <ul>
+            <li><strong>Feiner = schönere Oberfläche:</strong> Dünne Schichten machen Rundungen und Schrägen sichtbar glatter — an senkrechten Wänden sieht man kaum einen Unterschied.</li>
+            <li><strong>Dicker = schneller fertig:</strong> 0,28 mm statt 0,20 mm spart grob ein Drittel Druckzeit — bei Funktionsteilen oft völlig egal.</li>
+            <li><strong>Die Grenze setzt die Düse:</strong> Faustregel Schichthöhe = 25–80 % des Düsendurchmessers. Bei 0,4 mm Düse also sinnvoll zwischen 0,10 und 0,32 mm.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Die 5 Stufen im Überblick</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Höhe</th><th>Einsatz</th><th>Rel. Druckzeit</th></tr></thead>
+            <tbody>
+              <tr><td>0,08 mm</td><td>Miniaturen, Schmuck, feinste Details</td><td>~250 %</td></tr>
+              <tr><td>0,12 mm</td><td>Figuren, Deko, sichtbare Flächen</td><td>~170 %</td></tr>
+              <tr><td>0,20 mm</td><td>Allrounder — 90 % aller Drucke (Referenz)</td><td>100 %</td></tr>
+              <tr><td>0,28 mm</td><td>Funktionsteile, Prototypen, große Modelle</td><td>~70 %</td></tr>
+              <tr><td>0,32 mm</td><td>Grobe Teile, erste Entwürfe (Obergrenze 0,4-mm-Düse)</td><td>~60 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          <strong>3 Profi-Tricks:</strong> Adaptive Schichthöhe im Slicer nutzen (fein an Rundungen, grob an geraden Flächen). Erste Schicht immer dicker wählen (0,2–0,25 mm) — verzeiht Bett-Unebenheiten und haftet besser. Für Festigkeit eher dicker drucken: weniger Schichten = weniger Nahtstellen, 0,24–0,28 mm eignen sich gut für Funktionsteile.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#duesenwahl" data-jump="duesenwahl">Die richtige Düse wählen (0,2–0,8 mm)</a><a class="lx-related-chip" href="#waende-infill" data-jump="waende-infill">Wände vs. Infill — was ein Teil wirklich stabil macht</a></div>
+        </div>
+      </details><details class="lx-card" id="duesenwahl">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Die richtige Düse wählen (0,2–0,8 mm)</p>
+          <span class="lx-tag">Hardware</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Linienbreite bestimmt die Detailgrenze, Durchsatz die Geschwindigkeit, Bahnbreite die Festigkeit.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Was die Düse verändert</p>
+          <ul>
+            <li><strong>Linienbreite = Detailgrenze:</strong> Die Düse bestimmt, wie fein Schrift, Kanten und dünne Wände werden können.</li>
+            <li><strong>Durchsatz = Geschwindigkeit:</strong> Eine 0,8er drückt ein Vielfaches an Material pro Sekunde durch — große Teile in Stunden statt Tagen.</li>
+            <li><strong>Breitere Bahnen = stärkere Teile:</strong> Dickere Linien verschmelzen besser, Funktionsteile aus der 0,6er halten spürbar mehr.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Wann welche Düse</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Düse</th><th>Typ</th><th>Vorteil</th><th>Nachteil</th></tr></thead>
+            <tbody>
+              <tr><td>0,2 mm</td><td>Detail-Düse</td><td>Feinste Details, Miniaturen, Schmuck</td><td>Langsam, verstopfungsanfällig — CF-Filamente tabu</td></tr>
+              <tr><td>0,4 mm</td><td>Der Standard ★</td><td>Bestes Verhältnis Qualität/Tempo, riesige Profil-Auswahl</td><td>Weder am schnellsten noch am feinsten</td></tr>
+              <tr><td>0,6 mm</td><td>Funktions-Düse</td><td>Stärkere Teile, kürzere Druckzeit, erste Wahl für CF/TPU</td><td>Feine Details gehen verloren</td></tr>
+              <tr><td>0,8 mm</td><td>Speed-Düse</td><td>Sehr schnelle, sehr stabile Drucke, große Bauteile</td><td>Sichtbar grobe Linien, kaum Details</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          Wenn du nur eine Düse besitzt: <strong>0,4 mm</strong> — alles andere sind Spezialwerkzeuge für konkrete Fälle. Geheimtipp für die Werkstatt: <strong>0,6 mm + 0,28 mm Schicht</strong> ist fast so schnell wie 0,8 mm, aber deutlich sauberer. Schichthöhe und Düse immer zusammen wählen (25–80 %-Regel).
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#schichthoehe" data-jump="schichthoehe">Schichthöhe richtig wählen (0,08–0,32 mm)</a><a class="lx-related-chip" href="#waende-infill" data-jump="waende-infill">Wände vs. Infill — was ein Teil wirklich stabil macht</a></div>
+        </div>
+      </details><details class="lx-card" id="support">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Support klug einsetzen — die 45°-Regel</p>
+          <span class="lx-tag">Support &amp; Überhänge</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Der wichtigste Wert, um Support-Bedarf einzuschätzen, plus Einstellungen für sauberes Ablösen.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Die 45°-Regel</p>
+          <ul>
+            <li><strong>Bis 45° zur Senkrechten:</strong> kein Support nötig — jede Schicht liegt noch genug auf der darunter, sauber druckbar.</li>
+            <li><strong>Steiler als 45°:</strong> meist Support nötig — die Schicht ragt zu weit ins Leere und sackt durch.</li>
+            <li><strong>Faustregel:</strong> Überhänge bis 45° und Brücken bis ~5–10 mm Spannweite gehen ohne Stütze. Alles darüber → Support oder umkonstruieren.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Wann Support wirklich nötig ist</p>
+          <ul>
+            <li><strong>Steile Überhänge:</strong> flacher als 45° zur Waagerechten — z. B. weit auskragende Nasen.</li>
+            <li><strong>Lange Brücken:</strong> über ~10 mm freie Spannweite hängt der Faden durch.</li>
+            <li><strong>Schwebende Inseln:</strong> Bereiche ohne Verbindung zur Ebene darunter brauchen immer Stütze.</li>
+          </ul>
+          <p style="margin-top:8px;">Kein Support nötig bei: Löchern (Bögen bis 90° halten sich selbst), Fasen und flachen Kegeln.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Einstellungen für leichtes Entfernen</p>
+          <table class="lx-mini-table">
+            <tbody>
+              <tr><td><strong>Z-Abstand</strong></td><td>0,2 mm (≈ 1 Schichthöhe) — löst sauber ab</td></tr>
+              <tr><td><strong>Support-Typ</strong></td><td>Baumstützen (Tree/Organic) — weniger Material, greift nur wo nötig</td></tr>
+              <tr><td><strong>Nur auf Platte</strong></td><td>An, wenn möglich — vermeidet Narben auf der Bauteil-Oberfläche</td></tr>
+              <tr><td><strong>Überhang-Schwelle</strong></td><td>45–50° — erst ab diesem Winkel wird gestützt, spart unnötige Stützen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          <strong>Der beste Support ist der, den du gar nicht brauchst:</strong> 45°-Fasen statt scharfer Überhänge (Kanten anfasen/chamfern, dann trägt sich alles selbst). Waagerechte Löcher als Tropfen- statt Kreisform ziehen — spart die Brücke. Und: oft verschwindet der Überhang schon durch Drehen des Teils auf dem Bett. Denk beim Modellieren mit: Wie liegt das Teil später auf der Platte?
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#ueberhang-durchsacken" data-jump="ueberhang-durchsacken">Überhänge sacken durch</a><a class="lx-related-chip" href="#bridging" data-jump="bridging">Bridging reißt oder sackt durch</a><a class="lx-related-chip" href="#support-marken" data-jump="support-marken">Supports schwer entfernbar / hinterlassen Narben</a><a class="lx-related-chip" href="#druckrichtung" data-jump="druckrichtung">Druckrichtung für mehr Festigkeit</a></div>
+        </div>
+      </details><details class="lx-card" id="druckrichtung">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Druckrichtung für mehr Festigkeit</p>
+          <span class="lx-tag">Festigkeit</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Warum die Druckrichtung über stabil oder Bruch entscheidet — und wie du sie schon beim Konstruieren mitdenkst.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Das Prinzip</p>
+          <ul>
+            <li><strong>Entlang der Schichten: stark.</strong> In der Druckebene (X/Y) hält das Material fast wie Vollmaterial.</li>
+            <li><strong>Quer zu den Schichten: schwach.</strong> In Z hält nur die Verklebung der Lagen — hier bricht es zuerst.</li>
+          </ul>
+          <p style="margin-top:8px;">Merksatz: Ein FDM-Druck reißt zwischen den Schichten wie ein Buch, das man an den Seiten aufblättert — nie quer durchs Papier. Also: Hauptlast immer in die Druckebene legen.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Richtig ausrichten — Beispiele</p>
+          <ul>
+            <li><strong>Haken &amp; Aufhänger flach legen:</strong> Die Zugkraft muss entlang der Schichten ziehen, nicht sie auftrennen.</li>
+            <li><strong>Stifte &amp; Achsen liegend drucken:</strong> Stehend gedruckt brechen sie an der schwächsten Lage sofort ab.</li>
+            <li><strong>Winkel &amp; Halter clever kippen:</strong> So orientieren, dass die Biegekraft in die Druckebene fällt.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Der Zielkonflikt</p>
+          <p>Die stärkste Lage ist nicht immer die schönste — du musst abwägen: <strong>Festigkeit</strong> (Prio 1 bei Funktionsteilen, Hauptlast entlang der Schichten), <strong>Oberfläche</strong> (Prio 2 bei Optik, Sichtseiten nach oben oder außen legen) und <strong>Support-Aufwand</strong> (Prio 3, Ausrichtung mit wenig Überhang spart Nacharbeit &amp; Material).</p>
+        </div>
+        <div class="lx-callout">
+          Kritische Last, die du nicht wegdrehen kannst? Dann Wände hoch und ein zähes Material wie <strong>PETG oder PA</strong> wählen. Oder: Teil zerlegen und verkleben — ein L-Teil in zwei flache Hälften trennen, beide optimal gedruckt, dann fügen. Zwei stark gedruckte Hälften &gt; ein schwach gedrucktes Ganzes.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#delamination" data-jump="delamination">Delamination / Schichttrennung</a><a class="lx-related-chip" href="#support" data-jump="support">Support klug einsetzen — die 45°-Regel</a><a class="lx-related-chip" href="#waende-infill" data-jump="waende-infill">Wände vs. Infill — was ein Teil wirklich stabil macht</a></div>
+        </div>
+      </details><details class="lx-card" id="waende-infill">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Wände vs. Infill — was ein Teil wirklich stabil macht</p>
+          <span class="lx-tag">Festigkeit</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Der größte Irrtum beim funktionalen Druck: mehr Infill. Dabei machen die Wände ein Teil stabil.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Wände tragen</p>
+          <ul>
+            <li><strong>Mehr Perimeter = mehr Festigkeit:</strong> Vier Wände bei 20 % Infill sind stabiler als zwei Wände bei 50 %.</li>
+            <li><strong>Infill stützt nur die Deckschicht:</strong> Über ~40 % bringt es kaum mehr Festigkeit, kostet aber Zeit &amp; Material.</li>
+            <li><strong>Wandstärke = Perimeter × Linienbreite:</strong> 3 Wände × 0,4 mm = 1,2 mm massives Material außen.</li>
+          </ul>
+          <p style="margin-top:8px;">Faustregel: Erst Wände hoch, dann Infill. So sparst du Zeit und Filament — bei mehr Stabilität.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Wie viele Wände?</p>
+          <table class="lx-mini-table">
+            <tbody>
+              <tr><td>Deko &amp; Optik</td><td>keine Last — spart Zeit, Oberfläche zählt</td><td>2 Wände</td></tr>
+              <tr><td>Standard-Gebrauch</td><td>Boxen, Halter, Alltagsteile ohne große Kraft</td><td>3 Wände</td></tr>
+              <tr><td>Funktional &amp; belastet</td><td>Klemmen, Haken, Werkzeughalter</td><td>4 Wände</td></tr>
+              <tr><td>Hoch belastet</td><td>trägt echtes Gewicht oder Hebelkräfte</td><td>5–6 Wände</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Welches Infill-Muster?</p>
+          <div class="lx-guide-grid">
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Gyroid</p><ul><li>Gleich stark in alle Richtungen</li><li>Guter Allrounder</li><li>Standardwahl</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Grid / Lines</p><ul><li>Am schnellsten</li><li>Für unkritische Teile</li><li>Weniger belastbar</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Kubisch</p><ul><li>Stark in 3 Achsen</li><li>Gut für Mechanik</li><li>Etwas langsamer</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Konzentrisch</p><ul><li>Folgt der Kontur</li><li>Ideal für TPU/flexibel</li><li>Nicht für harte Last</li></ul></div>
+          </div>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Wie viel Infill?</p>
+          <table class="lx-mini-table">
+            <tbody>
+              <tr><td>Deko / Optik</td><td>5–10 %</td></tr>
+              <tr><td>Standard-Gebrauch</td><td>15 %</td></tr>
+              <tr><td>Funktional</td><td>25–40 %</td></tr>
+              <tr><td>Hoch belastet</td><td>40–60 %</td></tr>
+              <tr><td>Fast massiv (selten nötig)</td><td>&gt; 60 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          Im Zweifel: <strong>Gyroid bei 15–25 %.</strong> Deckt fast alle funktionalen Drucke ab. Über 50 % Infill lohnt selten — dann lieber eine Wand mehr, das spart Zeit und Material bei mehr Stabilität.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#druckrichtung" data-jump="druckrichtung">Druckrichtung für mehr Festigkeit</a><a class="lx-related-chip" href="#top-layer-luecken" data-jump="top-layer-luecken">Löcher/Lücken in der Decklage (Top-Layer)</a><a class="lx-related-chip" href="#duesenwahl" data-jump="duesenwahl">Die richtige Düse wählen (0,2–0,8 mm)</a></div>
+        </div>
+      </details><details class="lx-card" id="schrumpfung">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Material-Schrumpfung ausgleichen</p>
+          <span class="lx-tag">Material</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Jedes Filament schrumpft beim Abkühlen — nur wie viel? Die Werte pro Material und wie du sie ausgleichst.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Warum schrumpft's?</p>
+          <ul>
+            <li><strong>Heiß raus, kalt fest:</strong> Geschmolzenes Filament zieht sich beim Abkühlen zusammen — je höher die Drucktemperatur, desto stärker der Effekt.</li>
+            <li><strong>Je größer das Teil, desto mehr mm:</strong> Schrumpfung ist prozentual — bei 20 mm merkst du nichts, bei 200 mm fehlt plötzlich mehr als 1 mm.</li>
+            <li><strong>Löcher trifft es doppelt:</strong> Das Material schrumpft aufs Zentrum zu — Bohrungen werden enger als der Rest des Teils.</li>
+          </ul>
+          <p style="margin-top:8px;">Gleiches Material ≠ gleiche Schrumpfung: Marke, Pigment und Additive verändern den Wert spürbar. Werte hier als Startpunkt nehmen, dann selbst messen.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Typische Schrumpfung beim Abkühlen</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Material</th><th>Schrumpfung</th></tr></thead>
+            <tbody>
+              <tr><td>PLA — der Maßhaltige</td><td>0,2–0,5 %</td></tr>
+              <tr><td>PETG — kaum kritisch</td><td>0,2–0,8 %</td></tr>
+              <tr><td>ASA — besser als ABS</td><td>0,4–0,7 %</td></tr>
+              <tr><td>PC — Polycarbonat</td><td>0,5–0,8 %</td></tr>
+              <tr><td>TPU — flex, je nach Härte</td><td>0,4–1,4 %</td></tr>
+              <tr><td>ABS — der Klassiker-Warper</td><td>0,7–1,6 %</td></tr>
+              <tr><td>PA / Nylon — zieht Feuchte</td><td>0,7–2,0 %</td></tr>
+              <tr><td>PP — der Extremfall</td><td>1,0–3,0 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">So gleichst du es aus</p>
+          <ul>
+            <li><strong>Testwürfel drucken &amp; messen:</strong> 100-mm-Testteil drucken, mit Messschieber messen — Ist ÷ Soll ist deine echte Schrumpfung.</li>
+            <li><strong>Kompensation im Slicer setzen:</strong> Bambu Studio/Orca: Filament → Schrumpfung. Der Slicer skaliert dann automatisch — pro Filament gespeichert.</li>
+            <li><strong>Tür zu bei ABS, ASA &amp; PA:</strong> Geschlossener, warmer Bauraum = gleichmäßiges Abkühlen = weniger Schrumpf und Verzug.</li>
+            <li><strong>Löcher extra kompensieren:</strong> X-Y-Lochkompensation ~0,05 mm bei PLA, 0,1 mm bei PETG/ABS, 0,15 mm bei Nylon.</li>
+          </ul>
+        </div>
+        <div class="lx-callout">
+          <strong>Geheimtipp:</strong> CF/GF-Varianten (Carbon/Glasfaser) schrumpfen deutlich weniger als das Grundmaterial — ideal, wenn's wirklich auf Maß ankommt. Ab ABS aufwärts gilt: maßhaltige Teile ohne Schrumpf-Kompensation zu drucken ist Glückssache — PLA/PETG verzeihen mehr, der Rest nicht.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#masshaltigkeit" data-jump="masshaltigkeit">Maße stimmen nicht (Über-/Untermaß)</a><a class="lx-related-chip" href="#elephant-foot" data-jump="elephant-foot">Elephant Foot (ausgebeulte erste Schichten)</a><a class="lx-related-chip" href="#filament-guide" data-jump="filament-guide">Welches Filament wofür? Die 8 wichtigsten Materialien</a></div>
+        </div>
+      </details><details class="lx-card" id="filament-guide">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Welches Filament wofür? Die 8 wichtigsten Materialien</p>
+          <span class="lx-tag">Material</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Temperaturen, Eigenschaften und Einsatzzwecke der acht wichtigsten Filamente — auf einen Blick.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Die Alltags-Vier</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Material</th><th>Düse / Bett</th><th>Bewertung</th><th>Kurzprofil</th></tr></thead>
+            <tbody>
+              <tr><td><strong>PLA</strong><br>der Einsteiger</td><td>190–220° / 50–60°</td><td class="lx-rating">Druck <span class="fill">●●●●●</span><br>Stärke <span class="fill">●●</span><span class="empty">●●●</span><br>Outdoor <span class="fill">●</span><span class="empty">●●●●</span></td><td>Kaum Verzug, riesige Farbauswahl. Wird ab ~55 °C weich — nichts fürs Auto im Sommer.</td></tr>
+              <tr><td><strong>PETG</strong><br>der Allrounder</td><td>230–250° / 70–90°</td><td class="lx-rating">Druck <span class="fill">●●●●</span><span class="empty">●</span><br>Stärke <span class="fill">●●●●</span><span class="empty">●</span><br>Outdoor <span class="fill">●●●●</span><span class="empty">●</span></td><td>Zäh, wasser- und chemikalienbeständig. Erste Wahl für funktionale Teile in Haus &amp; Garten.</td></tr>
+              <tr><td><strong>TPU</strong><br>der Flexible</td><td>210–240° / 40–60°</td><td class="lx-rating">Druck <span class="fill">●●●</span><span class="empty">●●</span><br>Stärke <span class="fill">●●</span><span class="empty">●●●</span><br>Outdoor <span class="fill">●●●●</span><span class="empty">●</span></td><td>Gummiartig, dämpft Stöße, Shore-Härte beachten. Langsam drucken — Geduld zahlt sich aus.</td></tr>
+              <tr><td><strong>ABS</strong><br>der Klassiker</td><td>230–260° / 90–110°</td><td class="lx-rating">Druck <span class="fill">●●●</span><span class="empty">●●</span><br>Stärke <span class="fill">●●●●</span><span class="empty">●</span><br>Outdoor <span class="fill">●●●</span><span class="empty">●●</span></td><td>Hitzebeständig, gut zu verschleifen. Will eine geschlossene, warme Kammer — sonst Warping.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Die Spezialisten</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Material</th><th>Düse / Bett</th><th>Bewertung</th><th>Kurzprofil</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ASA</strong><br>der Outdoor-König</td><td>240–260° / 90–110°</td><td class="lx-rating">Druck <span class="fill">●●●</span><span class="empty">●●</span><br>Stärke <span class="fill">●●●●</span><span class="empty">●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>UV-stabil, wetterfest, vergilbt nicht. Alles, was dauerhaft draußen lebt, druckst du in ASA.</td></tr>
+              <tr><td><strong>PA / Nylon</strong><br>der Zähe</td><td>250–280° / 70–100°</td><td class="lx-rating">Druck <span class="fill">●●●●</span><span class="empty">●</span><br>Stärke <span class="fill">●●●●●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>Extrem zäh und abriebfest — Zahnräder, Lager, Scharniere. Zieht Wasser: vor jedem Druck trocknen.</td></tr>
+              <tr><td><strong>CF-Verbund</strong><br>PETG-CF · PA-CF</td><td>250–280° / 70–110°</td><td class="lx-rating">Druck <span class="fill">●●●●</span><span class="empty">●</span><br>Stärke <span class="fill">●●●●●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>Steif, leicht, maßhaltig — kaum Verzug. Carbonfasern fressen Messingdüsen: gehärtete Düse Pflicht.</td></tr>
+              <tr><td><strong>PC</strong><br>der Industrielle</td><td>260–310° / 100–120°</td><td class="lx-rating">Druck <span class="fill">●●●●●</span><br>Stärke <span class="fill">●●●●●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>Schlagzäh, formstabil bis ~110 °C. Braucht Temperatur — Kammer &amp; heißes Bett Pflicht.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Was drucke ich womit?</p>
+          <div class="lx-guide-grid">
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PLA</p><ul><li>Prototypen &amp; Deko</li><li>Organizer für innen</li><li>Modelle &amp; Geschenke</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PETG</p><ul><li>Halter &amp; Clips</li><li>Vorratsdosen, Töpfe</li><li>Teile für Haus &amp; Garten</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">TPU</p><ul><li>Dichtungen &amp; Füße</li><li>Hüllen &amp; Puffer</li><li>Flexible Scharniere</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">ABS</p><ul><li>Gehäuse &amp; Abdeckungen</li><li>Mechanische Teile</li><li>Teile fürs Auto (innen)</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">ASA</p><ul><li>Gartenzubehör</li><li>Außen-Halterungen</li><li>Schilder &amp; Abdeckungen</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PA / Nylon</p><ul><li>Zahnräder &amp; Lager</li><li>Hochbelastete Halter</li><li>Verschleißteile</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">CF-Verbund</p><ul><li>Drohnen- &amp; RC-Teile</li><li>Leichte Strukturteile</li><li>Maßhaltige Vorrichtungen</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PC</p><ul><li>Maschinenteile</li><li>Teile nahe Hitzequellen</li><li>Schutzabdeckungen</li></ul></div>
+          </div>
+        </div>
+        <div class="lx-callout">
+          <strong>Praxis-Hinweise:</strong> PA und PC unbedingt vor dem Druck trocknen — feuchtes Filament ruiniert Oberfläche und Festigkeit. TPU langsam und möglichst direkt vom Spulenhalter drucken, nicht durchs AMS zwängen. CF-Filamente brauchen eine gehärtete Düse — bei Messingdüsen Finger weg, die Carbonfasern nutzen sie in kürzester Zeit ab.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#schrumpfung" data-jump="schrumpfung">Material-Schrumpfung ausgleichen</a><a class="lx-related-chip" href="#druckrichtung" data-jump="druckrichtung">Druckrichtung für mehr Festigkeit</a></div>
+        </div>
+      </details><details class="lx-card" id="flow-kalibrierung">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Flow-Kalibrierung pro Filament (Schritt für Schritt)</p>
+          <span class="lx-tag">Kalibrierung</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Ein 35-mm-Würfel drucken, mit dem Messschieber messen, den exakten Flow-Wert berechnen — für jede Spule einmalig lohnenswert.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Warum kalibrieren?</p>
+          <p>Der Flow-Wert (Extrusion Multiplier) steuert, wie viel Filament der Drucker pro Millimeter Bewegung tatsächlich ausstößt. Herstellerangaben und der Filamentdurchmesser schwanken leicht zwischen Marke, Farbe und sogar Charge — bei 100% Flow kommt dadurch minimal zu viel oder zu wenig Material heraus. Das Ergebnis: leicht über- oder untermaßige Drucke. Eine einmalige Kalibrierung pro Filament behebt das dauerhaft.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Schritt 1 — Testwürfel drucken</p>
+          <p>Einen Würfel mit <strong>35 × 35 × 35 mm</strong> Kantenlänge mit den <strong>Standardeinstellungen</strong> deines Profils drucken (Flow/Extrusion Multiplier auf 100% lassen, normales Infill z. B. 15–20% reicht). Wichtig: nur die Flow-Einstellung testen, an anderen Parametern (Temperatur, Geschwindigkeit) währenddessen nichts ändern.</p>
+          <a class="lx-download-btn" href="/assets/kalibrierwuerfel-35mm.stl" download="">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Kalibrierwürfel (35×35×35 mm) als STL herunterladen
+          </a>
+          <p class="lx-download-note">Wasserdichter Würfel, exakt 35,000 mm Kantenlänge — bereit zum Slicen.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Schritt 2 — Mit dem Messschieber messen</p>
+          <p>Nach dem Abkühlen alle drei Achsen (X, Y, Z) an je zwei Stellen mit einer digitalen Schieblehre messen und den Mittelwert bilden. Beispiel: Soll-Maß 35,0 mm, gemessen im Schnitt <strong>34,8 mm</strong> — der Würfel ist zu klein, es wurde zu wenig Material extrudiert (Unterextrusion).</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Schritt 3 — Die Formel</p>
+          <div class="lx-callout" style="margin-top:0;">
+            <strong>Neuer Flow (%) = Aktueller Flow (%) × (Soll-Maß ÷ Ist-Maß)</strong>
+          </div>
+          <p style="margin-top:10px;">Durchgerechnet mit dem Beispiel oben: 100% × (35,0 ÷ 34,8) = 100% × 1,00575 = <strong>100,6%</strong>. Der Flow muss also von 100% auf rund 100,6% angehoben werden, damit beim nächsten Druck genau 35,0 mm herauskommen. Ist der Würfel umgekehrt zu groß (Überextrusion), ergibt die gleiche Formel automatisch einen Wert unter 100% — sie funktioniert in beide Richtungen.</p>
+        </div>
+        <div class="lx-calc">
+          <p class="lx-calc-title">🧮 Flow-Rechner — trag deine eigenen Werte ein</p>
+          <div class="lx-calc-grid">
+            <div class="lx-calc-field">
+              <label for="lxFlowTarget">Soll-Maß (mm)</label>
+              <input type="number" id="lxFlowTarget" value="35" step="0.01">
+            </div>
+            <div class="lx-calc-field">
+              <label for="lxFlowMeasured">Gemessen (mm)</label>
+              <input type="number" id="lxFlowMeasured" value="34.8" step="0.01">
+            </div>
+            <div class="lx-calc-field">
+              <label for="lxFlowCurrent">Aktueller Flow (%)</label>
+              <input type="number" id="lxFlowCurrent" value="100" step="0.1">
+            </div>
+          </div>
+          <div class="lx-calc-result" id="lxFlowResult">Neuer Flow-Wert: <span class="lx-calc-val">100,57 %</span></div>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Schritt 4 — Neuen Wert im Slicer einstellen</p>
+          <ul>
+            <li><strong>PrusaSlicer / OrcaSlicer / SuperSlicer:</strong> Filament-Einstellungen → Advanced → „Extrusion multiplier“</li>
+            <li><strong>Cura:</strong> Druckeinstellungen → Material → „Flow“ (in %)</li>
+            <li><strong>Bambu Studio:</strong> Filament-Einstellungen → „Flow Ratio“, alternativ die integrierte Flow-Dynamics-Kalibrierung nutzen</li>
+          </ul>
+          <p style="margin-top:8px;">Den Wert am besten direkt im Filament-Profil speichern, nicht global — so bleibt er für diese Spule dauerhaft erhalten.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Schritt 5 — Würfel erneut drucken &amp; prüfen</p>
+          <p>Mit dem neuen Flow-Wert denselben Würfel nochmal drucken und erneut messen. Er sollte jetzt sehr nah an <strong>35,0 mm</strong> liegen (typische Abweichung unter 0,05 mm). Falls noch eine kleine Differenz bleibt, die Formel einfach ein zweites Mal anwenden — mit dem neuen Flow-Wert als „Aktueller Flow“ und dem neuen Messwert.</p>
+        </div>
+        <div class="lx-callout">
+          Nicht verwechseln: Flow behebt <strong>Unter-/Überextrusion</strong> (zu wenig oder zu viel Material). Für ausschließlich zu enge oder zu weite <strong>Löcher</strong> bei ansonsten korrekten Außenmaßen ist stattdessen „Horizontal Expansion“ zuständig, für ausgebeulte erste Schichten die „Elephant Foot Compensation“ — beide Einstellungen bitte separat lassen.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Verwandt:</span><a class="lx-related-chip" href="#unterextrusion" data-jump="unterextrusion">Unterextrusion</a><a class="lx-related-chip" href="#ueberextrusion" data-jump="ueberextrusion">Überextrusion</a><a class="lx-related-chip" href="#masshaltigkeit" data-jump="masshaltigkeit">Maße stimmen nicht (Über-/Untermaß)</a></div>
+        </div>
+      </details><!--/lx-pre--></div>
     <div class="lx-empty" id="lxGuideEmpty" style="display:none;">Kein Guide zu diesem Suchbegriff gefunden.</div>
   </div>
 
@@ -370,7 +1310,207 @@
       <h2 class="lx-section-title" id="slicer">🎛 Slicer-Tipps &amp; Tricks</h2>
     </div>
     <div class="lx-slicer-tabs" id="lxSlicerTabs"></div>
-    <div id="lxSlicerPanels"></div>
+    <div id="lxSlicerPanels"><!--lx-pre-->
+      <div class="lx-slicer-panel lx-slicer-panel-active" id="panel-prusaslicer">
+        <div class="lx-tip-list">
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Organic Supports nutzen</p>
+              <p class="lx-tip-text">Für komplexe Überhänge deutlich materialsparender und leichter zu entfernen als klassische Grid-Supports. Zu finden unter Support-Material → Style: Organic.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Variable Layer Height</p>
+              <p class="lx-tip-text">Für runde oder gekrümmte Objekte aktivieren, um an flachen Stellen schneller und an Kurven feiner zu drucken — spart Zeit ohne sichtbaren Qualitätsverlust.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Eigene Filament-Profile anlegen</p>
+              <p class="lx-tip-text">Pro Spule/Charge ein eigenes Profil speichern statt das Standardprofil zu überschreiben — so bleiben bewährte Einstellungen erhalten.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Ironing für Sichtflächen</p>
+              <p class="lx-tip-text">Glättet Top-Flächen sichtbar, kostet aber zusätzliche Druckzeit. Lohnt sich vor allem bei Deko- und Präsentationsteilen.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Sequential Printing</p>
+              <p class="lx-tip-text">„Complete individual objects“ druckt viele Kleinteile nacheinander statt schichtweise parallel — verhindert Kollisionen mit dem Druckkopf, allerdings nur bei ausreichender Bauraumhöhe pro Objekt sinnvoll.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Adaptive Bettmesh (falls vorhanden)</p>
+              <p class="lx-tip-text">Sorgt für gleichmäßigere erste Schichten auf leicht unebenen Betten, besonders bei großflächigen Drucken relevant.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Detailierte Support-Blocker nutzen</p>
+              <p class="lx-tip-text">Mit dem Stützen-Pinsel gezielt Bereiche von automatischen Supports ausschließen oder erzwingen, statt nur globale Winkel-Schwellen zu nutzen.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Retraction pro Filament kalibrieren</p>
+              <p class="lx-tip-text">Der integrierte Retraction-Test-Assistent hilft, Stringing materialspezifisch statt pauschal zu minimieren.</p>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="lx-slicer-panel" id="panel-cura">
+        <div class="lx-tip-list">
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Adaptive Layers aktivieren</p>
+              <p class="lx-tip-text">In den Experimenteinstellungen zu finden — passt die Schichthöhe automatisch an Detailgrad und Wandwinkel an, für mehr Detailtreue ohne unnötigen Zeitverlust an flachen Flächen.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Tree Supports für organische Formen</p>
+              <p class="lx-tip-text">Meist deutlich leichter zu entfernen als lineare Supports und benötigen oft weniger Material.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Profile über „Custom“ duplizieren</p>
+              <p class="lx-tip-text">Standardprofile nie direkt überschreiben, sondern als Kopie anpassen — sonst lässt sich schwer zum Ursprungszustand zurückkehren.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Z-Seam-Ausrichtung auf „Sharpest Corner“</p>
+              <p class="lx-tip-text">Versteckt die sichtbare Naht zuverlässig an der schärfsten Kante des Modells statt an einer zufälligen Stelle.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Mesh Fixes aktivieren</p>
+              <p class="lx-tip-text">Bei fehlerhaften, nicht wasserdichten STL-Dateien hilft „Union Overlapping Volumes“ und „Keep Disconnected Faces“ häufig ohne externe Reparatur-Tools.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Ooze Shield bei Multi-Material</p>
+              <p class="lx-tip-text">Fängt Oozing beim Filamentwechsel ab und hält die Farbübergänge am Modell selbst sauberer.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Combing Mode: „Not in Skin“</p>
+              <p class="lx-tip-text">Reduziert sichtbare Fahrspuren auf Außen- und Top-Flächen deutlich, ohne die Reisezeiten stark zu erhöhen.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Gradual Infill Steps</p>
+              <p class="lx-tip-text">Reduziert die Infill-Dichte zur Modellmitte hin stufenweise — spart Material und Zeit bei kaum spürbarem Festigkeitsverlust im Kern.</p>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="lx-slicer-panel" id="panel-bambustudio">
+        <div class="lx-tip-list">
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Flow-Dynamics-Kalibrierung (Pressure Advance)</p>
+              <p class="lx-tip-text">Pro Filament durchführen — macht einen spürbaren Unterschied bei scharfen Ecken und feinen Details, zu finden unter Kalibrierung → Flow Dynamics.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">AMS-Purge-Volumen anpassen</p>
+              <p class="lx-tip-text">In der Filament-Kompatibilitätstabelle das Spülvolumen zwischen Farben feintunen, um Materialverschwendung bei häufigen Wechseln zu reduzieren.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Precise Wall aktivieren</p>
+              <p class="lx-tip-text">Sorgt für maßhaltigere Außenwände, besonders wichtig bei funktionalen Teilen mit engen Passungen.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Auto-Bettnivellierung aktiv lassen</p>
+              <p class="lx-tip-text">Bei X1/P1-Serien vor jedem Druck aktiv lassen statt manuell zu kalibrieren — spart Zeit und ist zuverlässiger als eine einmalige Handkalibrierung.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Flow-Rate-Kalibrierung pro Spule</p>
+              <p class="lx-tip-text">Gerade bei Fremdfilament (nicht Bambu Lab) lohnt sich die integrierte Flow-Rate-Kalibrierung, um Herstellerschwankungen auszugleichen.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Timelapse für Fehlerdiagnose nutzen</p>
+              <p class="lx-tip-text">Bei wiederkehrenden Problemen hilft der Zeitraffer, den genauen Moment eines Fehlers (z. B. Layer Shift, Kollision) zu identifizieren.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Smooth Time Lapse vs. Normal</p>
+              <p class="lx-tip-text">Für saubere Zeitraffer-Videos „Smooth“ wählen — hebt die Druckdüse zwischen Schichten kurz an, kostet aber etwas Druckzeit.</p>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="lx-slicer-panel" id="panel-orcaslicer">
+        <div class="lx-tip-list">
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Integrierten Calibration-Tab nutzen</p>
+              <p class="lx-tip-text">Enthält strukturierte Tests für Flow, Pressure Advance, Temperatur-Turm und Retraction an einem Ort — deutlich systematischer als manuelles Ausprobieren.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Adaptive Bettmesh-Kalibrierung</p>
+              <p class="lx-tip-text">Sofern der Drucker es unterstützt, sorgt sie für gleichmäßigere erste Schichten auch bei leicht unebenen Betten.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Precise Wall + Arachne-Wandgenerator</p>
+              <p class="lx-tip-text">Kombination sorgt für gleichmäßigere Wandstärken gerade bei dünnen, spitz zulaufenden Bereichen.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Gute Wahl beim Umstieg von PrusaSlicer</p>
+              <p class="lx-tip-text">Basiert auf demselben Fundament, bringt aber deutlich mehr eingebaute Kalibrierungs-Werkzeuge mit — Profile lassen sich oft direkt importieren.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Pressure-Advance-Turm statt Einzeltest</p>
+              <p class="lx-tip-text">Der Turm-Test zeigt mehrere PA-Werte in einem Druck übereinander — schneller als einzelne Testdrucke nacheinander.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Skirt als Vorwärm-Linie einsetzen</p>
+              <p class="lx-tip-text">Ein mehrlagiger Skirt in ausreichendem Abstand zum Modell hilft, die Düse vor dem eigentlichen Druck stabil auf Temperatur zu bringen.</p>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="lx-slicer-panel" id="panel-superslicer">
+        <div class="lx-tip-list">
+          
+            <div class="lx-tip" style="--dot:#a8bdb2">
+              <p class="lx-tip-title">Sehr granulare Parameter nutzen</p>
+              <p class="lx-tip-text">Fast jeder Aspekt der Extrusion ist einzeln einstellbar — ideal für Nutzer, die jeden Parameter selbst feintunen wollen, aber mit Zeitaufwand verbunden.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#a8bdb2">
+              <p class="lx-tip-title">Arachne-Wandgenerator aktivieren</p>
+              <p class="lx-tip-text">Sorgt für variierende Wandstärken statt einer festen Anzahl an Perimetern — besonders hilfreich bei dünnen Details unter der Standard-Wanddicke.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#a8bdb2">
+              <p class="lx-tip-title">Eher für Fortgeschrittene geeignet</p>
+              <p class="lx-tip-text">Die Standardwerte benötigen häufiger manuelles Feintuning als bei Cura oder Bambu Studio — für Einsteiger ist ein anderer Slicer oft der einfachere Start.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#a8bdb2">
+              <p class="lx-tip-title">Erweiterte Kühlungs-Kurven nutzen</p>
+              <p class="lx-tip-text">Lüftergeschwindigkeit lässt sich abhängig von der minimalen Schichtzeit sehr fein über eine Kurve statt nur über feste Stufen steuern.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#a8bdb2">
+              <p class="lx-tip-title">Perimeter-Reihenfolge anpassen</p>
+              <p class="lx-tip-text">„Innen zuerst“ oder „Außen zuerst“ lässt sich gezielt für bessere Maßhaltigkeit vs. bessere Optik der Außenwand konfigurieren.</p>
+            </div>
+          
+        </div>
+      </div>
+    <!--/lx-pre--></div>
   </div>
 
   <!-- ============ MATERIAL ============ -->
@@ -383,7 +1523,71 @@
         <thead>
           <tr><th>Material</th><th>Düse</th><th>Bett</th><th>Kühlung</th><th>Besonderheiten</th></tr>
         </thead>
-        <tbody id="lxMatBody"></tbody>
+        <tbody id="lxMatBody"><!--lx-pre-->
+      <tr>
+        <td class="lx-mat-name">PLA</td>
+        <td>190–220 °C</td>
+        <td>50–60 °C</td>
+        <td>100 %</td>
+        <td>Einsteigerfreundlich, geringes Warping, aber spröde bei Schlagbelastung.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">PETG</td>
+        <td>220–250 °C</td>
+        <td>70–80 °C</td>
+        <td>30–50 %</td>
+        <td>Zäh und schlagfest, neigt zu Stringing, gute Chemikalienbeständigkeit.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">ABS</td>
+        <td>230–250 °C</td>
+        <td>90–110 °C</td>
+        <td>0–20 %</td>
+        <td>Warpt stark, Gehäuse dringend empfohlen, deutliche Geruchsbelästigung.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">ASA</td>
+        <td>235–250 °C</td>
+        <td>90–110 °C</td>
+        <td>0–20 %</td>
+        <td>Ähnlich ABS, aber deutlich UV-beständiger — gut für Outdoor-Teile.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">TPU</td>
+        <td>210–230 °C</td>
+        <td>30–60 °C</td>
+        <td>30–50 %</td>
+        <td>Flexibel, langsam drucken, Direct-Drive-Extruder klar im Vorteil.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">Nylon (PA)</td>
+        <td>240–260 °C</td>
+        <td>70–90 °C</td>
+        <td>0–20 %</td>
+        <td>Sehr feuchtigkeitsempfindlich, unbedingt vor Gebrauch trocknen.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">PC (Polycarbonat)</td>
+        <td>260–280 °C</td>
+        <td>100–120 °C</td>
+        <td>0 %</td>
+        <td>Sehr hohe Festigkeit und Temperaturbeständigkeit, benötigt Vollgehäuse und hohe Drucktemperaturen.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">PVA</td>
+        <td>190–210 °C</td>
+        <td>45–60 °C</td>
+        <td>0–30 %</td>
+        <td>Wasserlösliches Supportmaterial, extrem feuchtigkeitsempfindlich, luftdicht lagern.</td>
+      </tr>
+    <!--/lx-pre--></tbody>
       </table>
     </div>
     <p class="fm-note" style="margin-top:14px; border-top:none; padding-top:0;">Genaue Werte hängen immer vom konkreten Filament-Hersteller ab. Passendes Filament findest du in der <a href="/filament-datenbank.html">Filament-Datenbank</a>, die Materialkosten pro Druck rechnet der <a href="/3d-druck-kostenrechner.html">Kostenrechner</a>.</p>
@@ -395,7 +1599,7 @@
       <h2 class="lx-section-title" id="glossar">📚 Glossar</h2>
       <span class="lx-section-count" id="lxGlossCount"></span>
     </div>
-    <div class="lx-glossary" id="lxGlossary"></div>
+    <div class="lx-glossary" id="lxGlossary"><!--lx-pre--><div class="lx-gloss-item" id="g-retraction"><p class="lx-gloss-term">Retraction</p><p class="lx-gloss-def">Kurzes Zurückziehen des Filaments vor Reisebewegungen, um Fäden (Stringing) zu vermeiden.</p></div><div class="lx-gloss-item" id="g-z-offset"><p class="lx-gloss-term">Z-Offset</p><p class="lx-gloss-def">Feineinstellung des Abstands zwischen Düse und Bett, entscheidend für die Qualität der ersten Schicht.</p></div><div class="lx-gloss-item" id="g-flow-extrusion-multiplier"><p class="lx-gloss-term">Flow / Extrusion Multiplier</p><p class="lx-gloss-def">Faktor, der die tatsächlich ausgestoßene Filamentmenge relativ zur berechneten Menge steuert.</p></div><div class="lx-gloss-item" id="g-pressure-advance-linear-advance"><p class="lx-gloss-term">Pressure Advance / Linear Advance</p><p class="lx-gloss-def">Kompensiert den Druckaufbau in der Düse bei Geschwindigkeitsänderungen, für schärfere Ecken und weniger Blobs.</p></div><div class="lx-gloss-item" id="g-input-shaping"><p class="lx-gloss-term">Input Shaping</p><p class="lx-gloss-def">Firmware-Feature (v. a. in Klipper) zur Reduktion von Vibrationen und Ringing bei hohen Geschwindigkeiten.</p></div><div class="lx-gloss-item" id="g-brim"><p class="lx-gloss-term">Brim</p><p class="lx-gloss-def">Zusätzliche, dünne Materiallage rund um das Modell auf der ersten Schicht zur Verbesserung der Bett-Haftung.</p></div><div class="lx-gloss-item" id="g-raft"><p class="lx-gloss-term">Raft</p><p class="lx-gloss-def">Vollflächiges Opfer-Fundament unter dem Modell, das bei sehr schwieriger Haftung oder unebenem Bett hilft.</p></div><div class="lx-gloss-item" id="g-skirt"><p class="lx-gloss-term">Skirt</p><p class="lx-gloss-def">Umlaufende Linie(n) um das Modell ohne Kontakt zu ihm — dient dem Vorwärmen der Düse und der Kontrolle des Filamentflusses vor Druckbeginn.</p></div><div class="lx-gloss-item" id="g-seam-naht"><p class="lx-gloss-term">Seam (Naht)</p><p class="lx-gloss-def">Der Punkt, an dem jede geschlossene Kontur einer Schicht beginnt und endet — potenziell sichtbar als kleine Linie oder Blob.</p></div><div class="lx-gloss-item" id="g-arachne-wandgenerator"><p class="lx-gloss-term">Arachne (Wandgenerator)</p><p class="lx-gloss-def">Algorithmus für variable Wandstärken statt einer festen Anzahl an Perimetern, besonders hilfreich bei dünnen Details.</p></div><div class="lx-gloss-item" id="g-coasting"><p class="lx-gloss-term">Coasting</p><p class="lx-gloss-def">Stoppt die Extrusion kurz vor dem Ende einer Linie, um den restlichen Druck in der Düse für das Ende zu nutzen — reduziert Blobs.</p></div><div class="lx-gloss-item" id="g-combing"><p class="lx-gloss-term">Combing</p><p class="lx-gloss-def">Steuert, ob Reisebewegungen innerhalb bereits gedruckter Konturen bleiben, um sichtbare Fahrspuren auf Außenflächen zu vermeiden.</p></div><div class="lx-gloss-item" id="g-infill"><p class="lx-gloss-term">Infill</p><p class="lx-gloss-def">Innere Füllstruktur eines Drucks, meist als Prozentsatz und Muster (z. B. Gyroid, Grid, Honeycomb) angegeben.</p></div><div class="lx-gloss-item" id="g-perimeter-wandlinien"><p class="lx-gloss-term">Perimeter / Wandlinien</p><p class="lx-gloss-def">Die äußeren, geschlossenen Umrisslinien jeder Schicht, die die sichtbare Außenwand bilden.</p></div><div class="lx-gloss-item" id="g-top-bottom-layer"><p class="lx-gloss-term">Top/Bottom Layer</p><p class="lx-gloss-def">Die vollflächig gefüllten Deck- und Bodenschichten eines Drucks, unabhängig vom Infill-Muster.</p></div><div class="lx-gloss-item" id="g-layer-height-schichthoehe"><p class="lx-gloss-term">Layer Height (Schichthöhe)</p><p class="lx-gloss-def">Die Dicke jeder einzelnen gedruckten Schicht — kleinere Werte bedeuten mehr Detail, aber längere Druckzeit.</p></div><div class="lx-gloss-item" id="g-nozzle-duese"><p class="lx-gloss-term">Nozzle (Düse)</p><p class="lx-gloss-def">Die Öffnung am Ende des Hotends, durch die das geschmolzene Filament austritt, meist 0,4 mm im Standard.</p></div><div class="lx-gloss-item" id="g-hotend"><p class="lx-gloss-term">Hotend</p><p class="lx-gloss-def">Die beheizte Baugruppe, die das Filament aufschmilzt, bestehend aus Heizblock, Thermistor, Düse und Wärmebarriere.</p></div><div class="lx-gloss-item" id="g-bowden-vs-direct-drive"><p class="lx-gloss-term">Bowden vs. Direct Drive</p><p class="lx-gloss-def">Zwei Extruder-Bauformen: beim Bowden liegt der Motor entfernt vom Hotend (langer Schlauch), bei Direct Drive sitzt er direkt darauf.</p></div><div class="lx-gloss-item" id="g-pid-tuning"><p class="lx-gloss-term">PID-Tuning</p><p class="lx-gloss-def">Kalibrierverfahren, das die Heizregelung von Düse und Bett auf stabile, schwankungsarme Temperaturen einstellt.</p></div><div class="lx-gloss-item" id="g-e-steps"><p class="lx-gloss-term">E-Steps</p><p class="lx-gloss-def">Anzahl der Motorschritte, die der Firmware für einen definierten Filamentvorschub (z. B. 100 mm) hinterlegt sind — Grundlage für korrekte Extrusion.</p></div><div class="lx-gloss-item" id="g-bed-leveling"><p class="lx-gloss-term">Bed Leveling</p><p class="lx-gloss-def">Ausgleich der Neigung/Unebenheit des Druckbetts, manuell oder automatisch per Sensor (ABL).</p></div><div class="lx-gloss-item" id="g-mesh-bed-leveling"><p class="lx-gloss-term">Mesh Bed Leveling</p><p class="lx-gloss-def">Automatisch erstelltes Höhenprofil des Betts an mehreren Messpunkten, das während des Drucks kompensiert wird.</p></div><div class="lx-gloss-item" id="g-elephant-foot-compensation"><p class="lx-gloss-term">Elephant Foot Compensation</p><p class="lx-gloss-def">Slicer-Einstellung, die die untersten Schichten geringfügig schmaler druckt, um das Ausbeulen der ersten Schicht auszugleichen.</p></div><div class="lx-gloss-item" id="g-horizontal-expansion-xy-compensation"><p class="lx-gloss-term">Horizontal Expansion / XY Compensation</p><p class="lx-gloss-def">Slicer-Einstellung, die Außenkonturen und Löcher um einen festen Betrag skaliert, um Über-/Untermaß auszugleichen.</p></div><div class="lx-gloss-item" id="g-support-stuetzstruktur"><p class="lx-gloss-term">Support / Stützstruktur</p><p class="lx-gloss-def">Temporäres, mitgedrucktes Material zur Abstützung von Überhängen, das nach dem Druck entfernt wird.</p></div><div class="lx-gloss-item" id="g-organische-baum-supports"><p class="lx-gloss-term">Organische / Baum-Supports</p><p class="lx-gloss-def">Astartige Stützstrukturen mit wenigen Kontaktpunkten zum Modell, meist material­sparender und leichter zu entfernen als Gitter-Supports.</p></div><div class="lx-gloss-item" id="g-bridging"><p class="lx-gloss-term">Bridging</p><p class="lx-gloss-def">Drucken einer freitragenden Linie zwischen zwei Stützpunkten ohne darunterliegendes Material.</p></div><div class="lx-gloss-item" id="g-overhang-ueberhang"><p class="lx-gloss-term">Overhang (Überhang)</p><p class="lx-gloss-def">Bereich eines Modells, der über die darunterliegende Schicht hinausragt und ab einem bestimmten Winkel Unterstützung benötigt.</p></div><div class="lx-gloss-item" id="g-purge-flushing"><p class="lx-gloss-term">Purge / Flushing</p><p class="lx-gloss-def">Ausschieben von Restmaterial beim Filament- oder Farbwechsel, um saubere Übergänge zu gewährleisten.</p></div><div class="lx-gloss-item" id="g-ams-automatic-material-system"><p class="lx-gloss-term">AMS (Automatic Material System)</p><p class="lx-gloss-def">Bambu-Lab-System zum automatischen Wechseln zwischen mehreren Filamentspulen für Multi-Color-/Multi-Material-Drucke.</p></div><div class="lx-gloss-item" id="g-cold-pull-atomic-method"><p class="lx-gloss-term">Cold Pull / Atomic Method</p><p class="lx-gloss-def">Reinigungsverfahren für verstopfte Düsen: Filament wird bei kontrollierter Abkühlung kräftig aus dem Hotend gezogen.</p></div><div class="lx-gloss-item" id="g-adaptive-layers"><p class="lx-gloss-term">Adaptive Layers</p><p class="lx-gloss-def">Automatische Anpassung der Schichthöhe je nach Modellgeometrie — flache Bereiche schneller, Details feiner.</p></div><div class="lx-gloss-item" id="g-ironing"><p class="lx-gloss-term">Ironing</p><p class="lx-gloss-def">Zusätzlicher Glättungs-Durchgang über Top-Flächen mit reduziertem Materialfluss für eine besonders glatte Optik.</p></div><div class="lx-gloss-item" id="g-ooze-shield"><p class="lx-gloss-term">Ooze Shield</p><p class="lx-gloss-def">Dünne, separate Wand um das Modell, die bei Multi-Material-Drucken Filamentreste vom Düsenwechsel auffängt.</p></div><div class="lx-gloss-item" id="g-jerk-junction-deviation"><p class="lx-gloss-term">Jerk / Junction Deviation</p><p class="lx-gloss-def">Firmware-Parameter, die bestimmen, wie abrupt Geschwindigkeits- und Richtungsänderungen an Ecken erfolgen dürfen.</p></div><div class="lx-gloss-item" id="g-vfa-vertical-fine-artifacts"><p class="lx-gloss-term">VFA (Vertical Fine Artifacts)</p><p class="lx-gloss-def">Feine, meist hochfrequente Rillen an der Außenwand, oft durch Vibrationen der Lüfter oder Riemen verursacht.</p></div><div class="lx-gloss-item" id="g-shrinkage-schrumpfung"><p class="lx-gloss-term">Shrinkage (Schrumpfung)</p><p class="lx-gloss-def">Materialbedingtes Zusammenziehen beim Abkühlen, das die tatsächlichen Maße leicht vom Modell abweichen lässt.</p></div><div class="lx-gloss-item" id="g-hygroskopisch"><p class="lx-gloss-term">Hygroskopisch</p><p class="lx-gloss-def">Eigenschaft eines Materials, Feuchtigkeit aus der Luft aufzunehmen — betrifft PETG, Nylon, TPU und PVA besonders stark.</p></div><div class="lx-gloss-item" id="g-filament-trockner-trockenbox"><p class="lx-gloss-term">Filament-Trockner / Trockenbox</p><p class="lx-gloss-def">Behälter mit aktiver Beheizung oder Trockenmittel zur feuchtigkeitsfreien Lagerung bzw. Trocknung von Filament.</p></div><div class="lx-gloss-item" id="g-shore-haerte"><p class="lx-gloss-term">Shore-Härte</p><p class="lx-gloss-def">Maßeinheit für die Härte flexibler Materialien wie TPU — niedrigere Werte (z. B. 85A) bedeuten weicher/gummiartiger, höhere Werte fester.</p></div><div class="lx-gloss-item" id="g-fase-chamfer"><p class="lx-gloss-term">Fase (Chamfer)</p><p class="lx-gloss-def">Eine abgeschrägte statt scharfe Kante an einem Modell — verwandelt einen support-pflichtigen Überhang oft in eine selbsttragende, druckbare Fläche.</p></div><!--/lx-pre--></div>
     <div class="lx-empty" id="lxGlossEmpty" style="display:none;">Kein Begriff zu diesem Suchbegriff gefunden.</div>
   </div>
 

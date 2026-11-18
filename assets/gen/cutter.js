@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'home', slug: { de: 'ausstecher-generator', en: 'cookie-cutter-generator' },
     title: { de: 'Ausstecher-Generator: Keksausstecher nach Maß als STL/3MF (kostenlos)', en: 'Cookie Cutter Generator: custom cutters as STL/3MF (free)' },
     h1: { de: 'Ausstecher', en: 'Cookie Cutter' },
-    sub: { de: 'Keks- und Plätzchenausstecher in vielen Formen oder als Buchstabe: Größe und Höhe einstellen, STL oder 3MF laden.', en: 'Cookie and biscuit cutters in many shapes or as a letter: set size and height, download STL or 3MF.' },
+    sub: { de: 'Keks- und Plätzchenausstecher in vielen Formen oder als Buchstabe: Größe und Höhe einstellen, STL oder 3MF herunterladen.', en: 'Cookie and biscuit cutters in many shapes or as a letter: set size and height, download STL or 3MF.' },
     desc: { de: 'Kostenloser Ausstecher-Generator: Herz, Stern, Blume, Kreis, Sechseck oder Buchstabe als Keksausstecher mit Schneide und Flansch. Export als STL und 3MF.', en: 'Free cookie cutter generator: heart, star, flower, circle, hexagon or a letter as cutter with cutting edge and flange. Export as STL and 3MF.' },
     tag: { de: 'Haushalt', en: 'Home' },
     intro: { de: ['Wähle eine Form und die Größe. Der Ausstecher hat unten eine dünne Schneide, die in der Wand dicker wird, und oben einen Rand zum Drücken.', 'Mit der Form Text bekommst du einen Buchstaben oder ein kurzes Wort als Ausstecher.'], en: ['Pick a shape and size. The cutter has a thin cutting edge at the bottom that thickens up the wall and a rim on top for pressing.', 'With the Text shape you get a letter or a short word as a cutter.'] },

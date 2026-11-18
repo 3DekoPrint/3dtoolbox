@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'caravan', slug: { de: 'tuerkeil-generator', en: 'door-wedge-generator' },
     title: { de: 'Türkeil-Generator: Türstopper für Wohnwagen und Wohnmobil als STL (kostenlos)', en: 'Door Wedge Generator: door stopper for caravans and motorhomes as STL (free)' },
     h1: { de: 'Türkeil', en: 'Door wedge' },
-    sub: { de: 'Keil, der Wohnwagen-, Wohnmobil- oder Haustür offen hält. Höhe, Länge und Rippen einstellen, STL laden.', en: 'A wedge that holds a caravan, motorhome or house door open. Set height, length and ribs, download STL.' },
+    sub: { de: 'Keil, der Wohnwagen-, Wohnmobil- oder Haustür offen hält. Höhe, Länge und Rippen einstellen, STL herunterladen.', en: 'A wedge that holds a caravan, motorhome or house door open. Set height, length and ribs, download STL.' },
     desc: { de: 'Kostenloser Türkeil-Generator für den 3D-Druck: Türstopper mit Rippen gegen das Wegrutschen, Aufhängeloch und einstellbarer Höhe für Wohnwagen und Wohnmobil. Export als STL und 3MF.', en: 'Free door wedge generator for 3D printing: door stopper with anti-slip ribs, hanging hole and adjustable height for caravans and motorhomes. Export as STL and 3MF.' },
     tag: { de: 'Wohnwagen', en: 'Caravan' },
     intro: { de: ['Stelle ein, wie hoch der Spalt unter der Tür maximal ist. Der Keil läuft von dort flach aus und klemmt die Tür fest.', 'Die Rippen auf der Unterseite greifen auf Teppich, Fliesen und Wohnwagenboden. Mit einem Streifen Gummi wird der Halt noch besser.'], en: ['Set the maximum height of the gap under the door. The wedge tapers flat from there and jams the door.', 'The ribs on the underside grip carpet, tile and caravan floor. A strip of rubber improves the hold further.'] },

@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'home', slug: { de: 'wandhaken-generator', en: 'wall-hook-generator' },
     title: { de: 'Wandhaken-Generator: Haken & Garderobe nach Maß als STL/3MF (kostenlos)', en: 'Wall Hook Generator: custom hooks & coat racks as STL/3MF (free)' },
     h1: { de: 'Wandhaken-Generator', en: 'Wall Hook Generator' },
-    sub: { de: 'Haken für Jacken, Taschen oder Werkzeug: Anzahl, Ausladung und Stärke einstellen, STL oder 3MF laden.', en: 'Hooks for jackets, bags or tools: set number, reach and strength, download STL or 3MF.' },
+    sub: { de: 'Haken für Jacken, Taschen oder Werkzeug: Anzahl, Ausladung und Stärke einstellen, STL oder 3MF herunterladen.', en: 'Hooks for jackets, bags or tools: set number, reach and strength, download STL or 3MF.' },
     desc: { de: 'Kostenloser Wandhaken-Generator: 1 bis 4 Haken auf einer Platte mit Senkschrauben, Verstärkung und frei wählbarer Ausladung. Export als STL und 3MF.', en: 'Free wall hook generator: 1 to 4 hooks on one plate with countersunk screws, gusset and adjustable reach. Export as STL and 3MF.' },
     tag: { de: 'Haushalt', en: 'Home' },
     intro: { de: ['Der Haken wird liegend gedruckt, so verlaufen die Schichten entlang des Hakens und er hält deutlich mehr Last als ein stehend gedruckter.', 'Die Verstärkung unter dem Arm nimmt die Kraft auf. Zwei Senkschrauben halten die Platte an der Wand.'], en: ['The hook prints lying down so the layers run along the hook, which holds far more load than a hook printed upright.', 'The gusset under the arm takes the force. Two countersunk screws hold the plate to the wall.'] },

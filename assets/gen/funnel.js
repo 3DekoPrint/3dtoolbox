@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'home', slug: { de: 'trichter-generator', en: 'funnel-generator' },
     title: { de: 'Trichter-Generator: Trichter nach Maß als STL/3MF (kostenlos)', en: 'Funnel Generator: custom funnels as STL/3MF (free)' },
     h1: { de: 'Trichter', en: 'Funnel' },
-    sub: { de: 'Trichter für Flaschen, Tanks und Werkstatt: Öffnung, Ablauf und Höhe eingeben, STL oder 3MF laden.', en: 'Funnels for bottles, tanks and the workshop: enter opening, spout and height, download STL or 3MF.' },
+    sub: { de: 'Trichter für Flaschen, Tanks und Werkstatt: Öffnung, Ablauf und Höhe eingeben, STL oder 3MF herunterladen.', en: 'Funnels for bottles, tanks and the workshop: enter opening, spout and height, download STL or 3MF.' },
     desc: { de: 'Kostenloser Trichter-Generator: Trichter in jeder Größe mit einstellbarem Ablaufrohr, Öffnung und Rand. Export als STL und 3MF, direkt im Browser.', en: 'Free funnel generator: funnels of any size with adjustable spout, opening and rim. Export as STL and 3MF, right in your browser.' },
     tag: { de: 'Haushalt', en: 'Home' },
     intro: { de: ['Der Trichter entsteht als Drehkörper. Du stellst den Durchmesser der oberen Öffnung, den Durchmesser des Ablaufs, die Länge des Rohrs und die Höhe des Kegels ein.', 'Ein Rand oben macht den Trichter steifer und angenehmer in der Hand.'], en: ['The funnel is a solid of revolution. You set the diameter of the top opening, the diameter of the spout, the length of the pipe and the height of the cone.', 'A rim on top stiffens the funnel and feels nicer in the hand.'] },

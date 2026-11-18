@@ -40,7 +40,7 @@
     '.fb-box input[type=text],.fb-box input[type=email],.fb-box textarea{width:100%;background:var(--panel-2,#22362d);border:1px solid var(--line,#2f473c);color:var(--ink,#eef3ee);border-radius:8px;padding:10px 12px;font:inherit;font-size:15px}' +
     '.fb-box textarea{min-height:130px;resize:vertical}.fb-box input:focus,.fb-box textarea:focus{outline:2px solid var(--accent,#ff8c3c);outline-offset:1px}' +
     '.fb-full{grid-column:1/-1}.fb-consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-dim,#a8bdb2);line-height:1.5}.fb-consent input{margin-top:3px}.fb-consent a{color:var(--accent-2,#5fd9a0)}' +
-    '.fb-btn{background:var(--accent,#ff8c3c);color:#1a1206;border:0;border-radius:999px;padding:12px 24px;font:700 15px inherit;font-family:inherit;cursor:pointer}.fb-btn:hover{filter:brightness(1.08)}' +
+    '.fb-btn{background:var(--accent,#ff8c3c);color:var(--on-accent,#fff);border:0;border-radius:999px;padding:12px 24px;font:700 15px inherit;font-family:inherit;cursor:pointer}.fb-btn:hover{filter:brightness(1.08)}' +
     '.fb-msg{font-size:13.5px;margin-top:10px;color:var(--ink-dim,#a8bdb2)}.fb-msg.err{color:#ff8a7a}.fb-msg a{color:var(--accent-2,#5fd9a0)}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
 

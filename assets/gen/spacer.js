@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'workshop', slug: { de: 'abstandshalter-generator', en: 'spacer-generator' },
     title: { de: 'Abstandshalter-Generator: Hülsen & Distanzstücke als STL/3MF (kostenlos)', en: 'Spacer Generator: standoffs & spacers as STL/3MF (free)' },
     h1: { de: 'Abstandshalter-Generator', en: 'Spacer Generator' },
-    sub: { de: 'Distanzhülsen rund, sechskant oder quadratisch: Außenmaß, Bohrung und Höhe eingeben, Stückzahl wählen, STL oder 3MF laden.', en: 'Round, hex or square spacers: enter outer size, bore and height, pick a quantity, download STL or 3MF.' },
+    sub: { de: 'Distanzhülsen rund, sechskant oder quadratisch: Außenmaß, Bohrung und Höhe eingeben, Stückzahl wählen, STL oder 3MF herunterladen.', en: 'Round, hex or square spacers: enter outer size, bore and height, pick a quantity, download STL or 3MF.' },
     desc: { de: 'Kostenloser Abstandshalter-Generator: Distanzhülsen mit Bohrung, Fase und Stückzahl nach Maß. Export als STL und 3MF, direkt im Browser.', en: 'Free spacer generator: custom spacers and standoffs with bore, chamfer and quantity. Export as STL and 3MF, right in your browser.' },
     tag: { de: 'Werkstatt', en: 'Workshop' },
     intro: { de: ['Abstandshalter braucht man überall: zwischen Platinen und Gehäuse, unter Motoren oder an Möbeln. Hier stellst du Form, Durchmesser, Bohrung und Höhe ein und bekommst mehrere identische Hülsen in einer Datei.', 'Die Bohrung bekommt automatisch ein kleines Spiel, damit die Schraube hindurchpasst.'], en: ['Spacers are needed everywhere: between boards and enclosures, under motors or on furniture. Set shape, diameter, bore and height and get several identical spacers in one file.', 'The bore gets a small clearance automatically so the screw slides through.'] },
