@@ -150,6 +150,18 @@
 
   /* ---------- Oberfläche ---------- */
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+    /* Allgemeine Hilfetexte nach Feldname (nur wenn das Feld keinen eigenen hint hat). */
+  var DH = [
+    [/^(Wandstärke|Wall)/i, { de: 'Dicke der Außenwände. Dicker heißt stabiler. Ein Vielfaches deiner Düsenbreite (z. B. 1,2 mm bei 0,4 mm) druckt am saubersten.', en: 'Thickness of the outer walls. Thicker is stronger. A multiple of your nozzle width (e.g. 1.2 mm for 0.4 mm) prints cleanest.' }],
+    [/^(Spiel|Clearance)/i, { de: 'Zusätzlicher Abstand zwischen zwei Teilen. Typisch sind 0,1 bis 0,3 mm. Bei Passungen mit einem kleinen Testteil prüfen, denn jeder Drucker liegt etwas anders.', en: 'Extra gap between two parts. Typically 0.1 to 0.3 mm. Check fits with a small test piece, as every printer differs slightly.' }],
+    [/^(Eckenradius|Corner radius)/i, { de: 'Rundung der Ecken. 0 ergibt scharfe Ecken, größere Werte sehen weicher aus und halten Stößen besser stand.', en: 'Rounding of the corners. 0 gives sharp corners; larger values look softer and take knocks better.' }],
+    [/^(Schraubenloch|Screw hole)/i, { de: 'Durchmesser des Lochs. Nimm den Schraubendurchmesser plus etwa 0,3 bis 0,5 mm, zum Beispiel 3,4 mm für M3.', en: 'Hole diameter. Use the screw diameter plus about 0.3 to 0.5 mm, for example 3.4 mm for M3.' }],
+    [/^(Stückzahl|Quantity)/i, { de: 'Anzahl der Teile in einer Datei. Mehrere Teile sparen Zeit beim Plattenwechsel, müssen aber auf die Druckplatte passen.', en: 'Number of parts in one file. More parts save time on plate changes but must fit on the print bed.' }],
+    [/^(Linksgewinde|Left-hand thread)/i, { de: 'Dreht sich beim Lösen im Uhrzeigersinn. Normal ist ein Rechtsgewinde, daher nur bei Bedarf aktivieren.', en: 'Loosens by turning clockwise. A right-hand thread is normal, so enable this only if needed.' }],
+    [/^(Aufhängeloch|Hanging hole)/i, { de: 'Loch zum Aufhängen, etwa an einem Nagel oder Haken.', en: 'Hole for hanging, for example on a nail or hook.' }],
+    [/^(Spalt|Gap)/i, { de: 'Abstand zwischen den Teilen. Zu klein verschmelzen sie im Druck, zu groß wackeln sie.', en: 'Distance between parts. Too small and they fuse in the print; too large and they wobble.' }]
+  ];
+  function defHint(it, Lf) { var lb = Lf(it.label) || ''; for (var i = 0; i < DH.length; i++) if (DH[i][0].test(lb)) return DH[i][1]; return null; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   function run(def, host) {
@@ -191,7 +203,7 @@
         inputs.__preset = sel;
       }
       g.items.forEach(function (it) {
-        var f = el('label', 'gk-f' + (it.t === 'bool' ? ' gk-f-bool' : '')), c, lab = '<span>' + esc(L(it.label)) + (it.unit ? ' <i>' + esc(L(it.unit)) + '</i>' : '') + (it.hint ? ' <em title="' + esc(L(it.hint)) + '">?</em>' : '') + '</span>';
+        var f = el('label', 'gk-f' + (it.t === 'bool' ? ' gk-f-bool' : '')), c; if (!it.hint) { var dh = defHint(it, L); if (dh) it.hint = dh; } var lab = '<span>' + esc(L(it.label)) + (it.unit ? ' <i>' + esc(L(it.unit)) + '</i>' : '') + (it.hint ? ' <em tabindex="0" role="note" aria-label="' + esc(L(it.hint)) + '" title="' + esc(L(it.hint)) + '">?</em>' : '') + '</span>';
         f.setAttribute('data-lab', L(it.label));
         if (it.t === 'num' || it.t === 'int') {
           f.innerHTML = lab; var w = el('div', 'gk-num'), r = el('input'), n = el('input');
