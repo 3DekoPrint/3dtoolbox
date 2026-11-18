@@ -18,10 +18,10 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(
 const cut = (s, a, b) => { const i = s.indexOf(a), j = s.indexOf(b, i + 1); if (i < 0 || j < 0) throw new Error('Vorlage: ' + a); return s.slice(i, j); };
 const T = {
   de: { lang: 'de', locale: 'de_DE', root: '/', pre: '', gen: 'Generatoren', all: 'Alle Generatoren', hubFile: '/generatoren.html', free: 'kostenlos', local: 'im Browser', kpiExp: 'Export', kpiFree: 'Kosten', kpiLocal: 'Läuft',
-    notes: 'Druckhinweise', faq: 'Häufige Fragen', intro: 'So funktioniert es', nojs: 'Dieses Werkzeug braucht JavaScript und WebAssembly. Bitte aktiviere JavaScript in deinem Browser.', home: 'Startseite',
+    notes: 'Druckhinweise', faq: 'Häufige Fragen', rel: 'Verwandte Werkzeuge', intro: 'So funktioniert es', nojs: 'Dieses Werkzeug braucht JavaScript und WebAssembly. Bitte aktiviere JavaScript in deinem Browser.', home: 'Startseite',
     cats: { storage: 'Aufbewahren & Ordnen', workshop: 'Werkstatt', home: 'Haushalt', art: 'Kunst & Schilder', electronics: 'Elektronik', tabletop: 'Tabletop', camping: 'Camping & Outdoor', caravan: 'Wohnwagen & Wohnmobil' }, hubH1: 'Alle Generatoren', hubSub: 'Kostenlose 3D-Druck-Generatoren: Maße eingeben, Vorschau ansehen, STL oder 3MF herunterladen. Alles läuft in deinem Browser.', hubSearch: 'Generator suchen …', hubNone: 'Nichts gefunden.', hubTitle: 'Alle 3D-Druck-Generatoren (kostenlos) | 3DToolBox', hubDesc: 'Alle Generatoren von 3DToolBox auf einen Blick: Gridfinity, Spulenhalter, Schrauben, Gehäuse, Getriebe und mehr. Kostenlos, im Browser, mit STL- und 3MF-Export.', open: 'Öffnen' },
   en: { lang: 'en', locale: 'en_US', root: '/en/', pre: '/en', gen: 'Generators', all: 'All generators', hubFile: '/en/generators.html', free: 'free', local: 'in browser', kpiExp: 'Export', kpiFree: 'Cost', kpiLocal: 'Runs',
-    notes: 'Printing notes', faq: 'Common questions', intro: 'How it works', nojs: 'This tool needs JavaScript and WebAssembly. Please enable JavaScript in your browser.', home: 'Home',
+    notes: 'Printing notes', faq: 'Common questions', rel: 'Related tools', intro: 'How it works', nojs: 'This tool needs JavaScript and WebAssembly. Please enable JavaScript in your browser.', home: 'Home',
     cats: { storage: 'Storage & organising', workshop: 'Workshop', home: 'Home', art: 'Art & signs', electronics: 'Electronics', tabletop: 'Tabletop', camping: 'Camping & Outdoor', caravan: 'Caravan & motorhome' }, hubH1: 'All generators', hubSub: 'Free 3D-printing generators: type the dimensions, check the preview, download STL or 3MF. Everything runs in your browser.', hubSearch: 'Search generators …', hubNone: 'Nothing found.', hubTitle: 'All 3D Printing Generators (free) | 3DToolBox', hubDesc: 'Every 3DToolBox generator at a glance: Gridfinity, spool holder, bolts, enclosures, gears and more. Free, in your browser, with STL and 3MF export.', open: 'Open' }
 };
 const urlOf = (d, lg) => (lg === 'de' ? '/' : '/en/') + d.meta.slug[lg] + '.html';
@@ -56,6 +56,19 @@ function head(lg, o) {
     '<link rel="icon" href="/favicon.ico" sizes="any">\n<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">\n<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">\n' +
     '<link rel="stylesheet" href="/assets/site.css">\n<link rel="stylesheet" href="/assets/material-page.css">\n<script src="/assets/ref-config.js"></script>\n<script src="/assets/ref.js" defer></script>\n<link rel="stylesheet" href="/assets/theme.css">\n' + (o.css || '') + '</head>\n<body>\n<div class="fm-root bt-sub">\n';
 }
+
+/* Verwandte Werkzeuge: bis zu 3 passende Generatoren (gleiche Kategorie, sonst Nachbarn) + Kostenrechner */
+const COST = { de: ['Druckkostenrechner', 'Material, Strom und Zeit: was kostet dein Druck wirklich?', '/3d-druck-kostenrechner.html', ''], en: ['Print cost calculator', 'Material, power and time: what does your print really cost?', '/en/3d-print-cost-calculator.html', ''] };
+function rowOf(d, lg) { return [d.meta.h1[lg], d.meta.sub[lg].split('. ')[0].replace(/\.$/, ''), urlOf(d, lg), fs.existsSync(path.join(ROOT, 'assets/gen-img', d.id + '.webp')) ? '/assets/gen-img/' + d.id + '.webp' : '']; }
+function relatedHtml(d, lg) {
+  const Tl = T[lg], i = defs.indexOf(d);
+  let same = defs.filter(x => x !== d && x.meta.cat === d.meta.cat);
+  const cut0 = same.findIndex(x => defs.indexOf(x) > i); if (cut0 > 0) same = same.slice(cut0).concat(same.slice(0, cut0)); /* nächste Nachbarn zuerst */
+  const rows = same.map(x => rowOf(x, lg)).concat(EXISTING.filter(e => e.cat === d.meta.cat).map(e => e[lg]));
+  for (let k = 1; rows.length < 3 && k < defs.length; k++) { const x = defs[(i + k) % defs.length]; if (x !== d && !same.includes(x)) rows.push(rowOf(x, lg)); }
+  const pick = rows.slice(0, 3).concat([COST[lg]]);
+  return '  <section class="bt-panel mp gk-related"><h2>' + Tl.rel + '</h2>\n  <ul class="gk-rows gk-cards">' + pick.map(r => '<li><a href="' + r[2] + '">' + (r[3] ? '<img class="gk-th" src="' + r[3] + '" width="480" height="360" loading="lazy" alt="' + esc(r[0]) + '">' : '<span class="gk-th gk-th0" aria-hidden="true">3D</span>') + '<b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span><i>' + Tl.open + ' →</i></a></li>').join('') + '</ul></section>\n';
+}
 function toolPage(d, lg) {
   const m = d.meta, Tl = T[lg], ch = chunks(lg), other = urlOf(d, lg === 'de' ? 'en' : 'de');
   const url = { de: urlOf(d, 'de'), en: urlOf(d, 'en') };
@@ -70,6 +83,7 @@ function toolPage(d, lg) {
   h += '  <h2>' + Tl.intro + '</h2>' + m.intro[lg].map(p => '<p>' + esc(p) + '</p>').join('') + '\n';
   h += '  <h2>' + Tl.notes + '</h2><ul class="mp-list">' + m.notes[lg].map(n => '<li>' + esc(n) + '</li>').join('') + '</ul>\n';
   h += '  <h2>' + Tl.faq + '</h2>' + m.faq[lg].map(q => '<h3>' + esc(q[0]) + '</h3><p>' + esc(q[1]) + '</p>').join('') + '\n  </section>\n';
+  h += relatedHtml(d, lg);
   h += ch.tail;
   h += '<script src="/assets/converter-core.js"></script>\n<script src="/assets/mesh-preview.js"></script>\n<script src="/assets/print-dock.js"></script>\n<script src="/assets/gen-kit.js"></script>\n<script src="/assets/gen/' + d.id + '.js"></script>\n<script>GenKit.run(GenKit.registry["' + d.id + '"], document.getElementById("gk"));</script>\n</body>\n</html>\n';
   return { path: (lg === 'de' ? '' : 'en/') + m.slug[lg] + '.html', html: h, url };
