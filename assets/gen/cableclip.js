@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'home', slug: { de: 'kabelclip-generator', en: 'cable-clip-generator' },
     title: { de: 'Kabelclip-Generator: Kabelhalter nach Maß als STL/3MF (kostenlos)', en: 'Cable Clip Generator: custom cable holders as STL/3MF (free)' },
     h1: { de: 'Kabelclip-Generator', en: 'Cable Clip Generator' },
-    sub: { de: 'Kabelhalter für ein bis acht Kabel: Kabeldurchmesser eingeben, Öffnung und Befestigung wählen, STL oder 3MF laden.', en: 'Cable holders for one to eight cables: enter the cable diameter, choose opening and mounting, download STL or 3MF.' },
+    sub: { de: 'Kabelhalter für ein bis acht Kabel: Kabeldurchmesser eingeben, Öffnung und Befestigung wählen, STL oder 3MF herunterladen.', en: 'Cable holders for one to eight cables: enter the cable diameter, choose opening and mounting, download STL or 3MF.' },
     desc: { de: 'Kostenloser Kabelclip-Generator: Kabelhalter für Schreibtisch, Wand und Werkstatt in jeder Größe, mit Schraublöchern oder Klebefläche. Export als STL und 3MF.', en: 'Free cable clip generator: cable holders for desk, wall and workshop in any size, with screw holes or adhesive base. Export as STL and 3MF.' },
     tag: { de: 'Haushalt', en: 'Home' },
     intro: { de: ['Der Clip hält Kabel an Schreibtisch, Wand oder Rückseite von Möbeln. Der Kabeldurchmesser bestimmt die Ringgröße, die Öffnung oben lässt sich mit einem Klick auf das Kabel schieben.', 'Wähle Senkschrauben-Laschen oder eine glatte Unterseite zum Aufkleben mit doppelseitigem Klebeband.'], en: ['The clip holds cables on a desk, wall or the back of furniture. The cable diameter sets the ring size and the opening on top lets you snap the cable in.', 'Choose countersunk screw tabs or a flat underside for double-sided tape.'] },

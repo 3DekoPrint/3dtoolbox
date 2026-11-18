@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'home', slug: { de: 'regalwinkel-generator', en: 'shelf-bracket-generator' },
     title: { de: 'Regalwinkel-Generator: Winkelträger nach Maß als STL/3MF (kostenlos)', en: 'Shelf Bracket Generator: custom brackets as STL/3MF (free)' },
     h1: { de: 'Regalwinkel', en: 'Shelf Bracket' },
-    sub: { de: 'Winkel für Regalbretter und Ablagen: Maße, Verstärkung und Schrauben einstellen, STL oder 3MF laden.', en: 'Brackets for shelf boards and ledges: set size, gusset and screws, download STL or 3MF.' },
+    sub: { de: 'Winkel für Regalbretter und Ablagen: Maße, Verstärkung und Schrauben einstellen, STL oder 3MF herunterladen.', en: 'Brackets for shelf boards and ledges: set size, gusset and screws, download STL or 3MF.' },
     desc: { de: 'Kostenloser Regalwinkel-Generator: L-Winkel mit Verstärkung und Senkschraublöchern für Regalbretter und Ablagen. Export als STL und 3MF.', en: 'Free shelf bracket generator: L brackets with gusset and countersunk screw holes for shelf boards and ledges. Export as STL and 3MF.' },
     tag: { de: 'Haushalt', en: 'Home' },
     intro: { de: ['Der Winkel besteht aus einer Wandplatte, einem Auflagearm und einer Verstärkung dazwischen. Du stellst die Länge der beiden Schenkel, Breite, Stärke und Schrauben ein.', 'Gedruckt wird er auf der Seite liegend, damit die Schichten die Last tragen.'], en: ['The bracket consists of a wall plate, a support arm and a gusset between them. Set the length of both legs, width, strength and screws.', 'It prints lying on its side so the layers carry the load.'] },

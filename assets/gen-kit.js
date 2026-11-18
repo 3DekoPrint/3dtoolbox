@@ -137,12 +137,12 @@
   var UI = {
     de: { load: 'Lade 3D-Bibliothek …', busy: 'Berechne …', err: 'Mit diesen Werten lässt sich kein gültiges Teil berechnen. Bitte Maße prüfen.', lib: 'Die 3D-Bibliothek konnte nicht geladen werden (WebAssembly wird benötigt).',
       stage: 'Vorschau', drag: 'Ziehen = drehen · Mausrad = zoomen', preset: 'Voreinstellung', custom: '— eigene Werte —', size: 'Maße', vol: 'Volumen', weight: 'Gewicht', cost: 'Material', time: 'Druckzeit',
-      est: 'Grobe Schätzung bei 3 Wänden und 15 % Füllung.', bed: 'Druckbett', mat: 'Material', price: 'Preis pro kg (€)', stl: 'STL laden', mf: '3MF laden', link: 'Link kopieren', copied: 'Link kopiert', save: 'Konfiguration speichern', load: 'Konfiguration laden',
+      est: 'Grobe Schätzung bei 3 Wänden und 15 % Füllung.', bed: 'Druckbett', mat: 'Material', price: 'Preis pro kg (€)', stl: 'STL herunterladen', mf: '3MF herunterladen', link: 'Link kopieren', copied: 'Link kopiert', save: 'Konfiguration speichern', load: 'Konfiguration öffnen',
       reset: 'Zurücksetzen', fits: 'passt aufs Druckbett', nofit: 'ist größer als das Druckbett', plate: 'Eigene Platte', parts: 'Teile', tri: 'Dreiecke', own: 'eigene Größe (B × T mm)', noGl: 'Die Vorschau braucht WebGL2. Die Dateien lassen sich trotzdem herunterladen.',
       bedFit: function (w, d) { return 'Platzbedarf ' + w.toFixed(0) + ' × ' + d.toFixed(0) + ' mm'; }, h: 'Std.', mn: 'Min.' },
     en: { load: 'Loading 3D library …', busy: 'Calculating …', err: 'These values do not give a valid part. Please check the dimensions.', lib: 'The 3D library could not be loaded (WebAssembly is required).',
       stage: 'Preview', drag: 'Drag = rotate · wheel = zoom', preset: 'Preset', custom: '— custom values —', size: 'Size', vol: 'Volume', weight: 'Weight', cost: 'Material', time: 'Print time',
-      est: 'Rough estimate at 3 walls and 15 % infill.', bed: 'Print bed', mat: 'Material', price: 'Price per kg (€)', stl: 'Get STL', mf: 'Get 3MF', link: 'Copy link', copied: 'Link copied', save: 'Save configuration', load: 'Load configuration',
+      est: 'Rough estimate at 3 walls and 15 % infill.', bed: 'Print bed', mat: 'Material', price: 'Price per kg (€)', stl: 'Download STL', mf: 'Download 3MF', link: 'Copy link', copied: 'Link copied', save: 'Save configuration', load: 'Open configuration',
       reset: 'Reset', fits: 'fits on the print bed', nofit: 'is larger than the print bed', plate: 'Custom plate', parts: 'Parts', tri: 'triangles', own: 'custom size (W × D mm)', noGl: 'The preview needs WebGL2. You can still download the files.',
       bedFit: function (w, d) { return 'Footprint ' + w.toFixed(0) + ' × ' + d.toFixed(0) + ' mm'; }, h: 'h', mn: 'min' }
   };

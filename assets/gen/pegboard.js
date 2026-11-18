@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'workshop', slug: { de: 'lochwand-halter-generator', en: 'pegboard-hook-generator' },
     title: { de: 'Lochwand-Halter-Generator: Haken & Ablagen als STL/3MF (kostenlos)', en: 'Pegboard Hook Generator: hooks & shelves as STL/3MF (free)' },
     h1: { de: 'Lochwand-Halter', en: 'Pegboard Hooks' },
-    sub: { de: 'Haken und Ablagen für Lochwände: Lochabstand, Stiftmaße und Ausladung einstellen, STL oder 3MF laden.', en: 'Hooks and shelves for pegboards: set hole pitch, peg size and reach, download STL or 3MF.' },
+    sub: { de: 'Haken und Ablagen für Lochwände: Lochabstand, Stiftmaße und Ausladung einstellen, STL oder 3MF herunterladen.', en: 'Hooks and shelves for pegboards: set hole pitch, peg size and reach, download STL or 3MF.' },
     desc: { de: 'Kostenloser Lochwand-Generator: Haken und kleine Ablagen für jede Lochwand mit frei wählbarem Lochabstand und Stiftdurchmesser. Export als STL und 3MF.', en: 'Free pegboard generator: hooks and small shelves for any pegboard with adjustable hole pitch and peg diameter. Export as STL and 3MF.' },
     tag: { de: 'Werkstatt', en: 'Workshop' },
     intro: { de: ['Miss den Abstand zweier Löcher und den Lochdurchmesser deiner Lochwand. Der Generator setzt zwei Stifte im richtigen Abstand an einen Haken oder eine Ablage.', 'Gedruckt wird der Halter auf der Seite, so verlaufen die Schichten entlang der Last.'], en: ['Measure the distance between two holes and the hole diameter of your pegboard. The generator places two pegs at the right spacing on a hook or shelf.', 'The holder prints on its side so the layers run along the load.'] },

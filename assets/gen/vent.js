@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'electronics', slug: { de: 'lueftungsgitter-generator', en: 'vent-grille-generator' },
     title: { de: 'Lüftungsgitter-Generator: Gitter nach Maß als STL/3MF (kostenlos)', en: 'Vent Grille Generator: custom grilles as STL/3MF (free)' },
     h1: { de: 'Lüftungsgitter-Generator', en: 'Vent Grille Generator' },
-    sub: { de: 'Gitter für Lüfter, Gehäuse und Schränke: Größe, Muster und Befestigung einstellen, STL oder 3MF laden.', en: 'Grilles for fans, enclosures and cabinets: set size, pattern and mounting, download STL or 3MF.' },
+    sub: { de: 'Gitter für Lüfter, Gehäuse und Schränke: Größe, Muster und Befestigung einstellen, STL oder 3MF herunterladen.', en: 'Grilles for fans, enclosures and cabinets: set size, pattern and mounting, download STL or 3MF.' },
     desc: { de: 'Kostenloser Lüftungsgitter-Generator: Schlitze, Waben oder Lochmuster in beliebiger Größe, mit Eckschrauben und runden Ecken. Export als STL und 3MF.', en: 'Free vent grille generator: slots, honeycomb or round holes in any size, with corner screws and rounded corners. Export as STL and 3MF.' },
     tag: { de: 'Elektronik', en: 'Electronics' },
     intro: { de: ['Das Gitter schützt Lüfter, lässt Luft durch und passt in jeden Ausschnitt. Wähle Schlitze, Waben oder Löcher und stelle die Stege so schmal ein, wie dein Drucker sie sauber schafft.', 'Für Lüfter nimm Schraubenabstand und Größe aus dem Datenblatt, etwa 40, 60, 80 oder 120 mm.'], en: ['The grille protects fans, lets air through and fits any cut-out. Pick slots, honeycomb or round holes and set the bars as thin as your printer can do cleanly.', 'For fans use the screw spacing and size from the data sheet, for example 40, 60, 80 or 120 mm.'] },

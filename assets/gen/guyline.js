@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'camping', slug: { de: 'leinenspanner-generator', en: 'guyline-tensioner-generator' },
     title: { de: 'Leinenspanner-Generator: Abspannleinen-Spanner für Zelt und Tarp (kostenlos)', en: 'Guyline Tensioner Generator for tents and tarps as STL (free)' },
     h1: { de: 'Leinenspanner', en: 'Guyline tensioner' },
-    sub: { de: 'Spanner für Abspannleinen: Lochgröße passend zur Leine einstellen, Länge und Form wählen, STL laden.', en: 'Tensioners for guylines: set the hole size to your cord, choose length and shape, download STL.' },
+    sub: { de: 'Spanner für Abspannleinen: Lochgröße passend zur Leine einstellen, Länge und Form wählen, STL herunterladen.', en: 'Tensioners for guylines: set the hole size to your cord, choose length and shape, download STL.' },
     desc: { de: 'Kostenloser Leinenspanner-Generator für den 3D-Druck: Spanner mit drei Löchern für Zeltleinen, Tarp und Hängematte mit einstellbarem Lochdurchmesser. Export als STL und 3MF.', en: 'Free guyline tensioner generator for 3D printing: three-hole tensioners for tent lines, tarps and hammocks with adjustable hole diameter. Export as STL and 3MF.' },
     tag: { de: 'Camping', en: 'Camping' },
     intro: { de: ['Miss den Durchmesser deiner Leine und stelle das Loch etwas größer ein. Die Leine läuft im Zickzack durch die drei Löcher und klemmt sich unter Zug selbst.', 'Die Platte lässt sich mehrfach drucken. Mit kleineren Löchern klemmt sie stärker, mit größeren lässt sie sich leichter verschieben.'], en: ['Measure the diameter of your cord and set the hole slightly larger. The line runs in a zigzag through the three holes and grips itself under tension.', 'The plate can be printed several times. Smaller holes grip more, larger holes slide more easily.'] },

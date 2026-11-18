@@ -18,7 +18,7 @@ const C = {
     s2: 'So gehst du vor',
     steps: [
       'Teil im Generator einstellen und als <b>STL</b> herunterladen.',
-      'Im <a href="/3d-datei-konverter.html">Datei-Konverter</a> die STL laden und als Ziel <b>STEP</b> wählen. Die Umwandlung läuft in deinem Browser, die Datei wird nicht hochgeladen.',
+      'Im <a href="/3d-datei-konverter.html">Datei-Konverter</a> die STL öffnen und als Ziel <b>STEP</b> wählen. Die Umwandlung läuft in deinem Browser, die Datei wird nicht hochgeladen.',
       'In SolidCraft auf der Startseite <b>Importieren</b> wählen und die STEP-Datei öffnen.',
       'Das Teil als Volumenkörper bearbeiten, zum Beispiel mit <b>Vollrundung</b>, <b>Abschrägung</b>, <b>Bohrung</b> oder <b>Drücken/Ziehen</b>, und danach wieder als STL oder 3MF exportieren.'
     ],

@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'art', slug: { de: 'schluesselanhaenger-generator', en: 'keychain-generator' },
     title: { de: 'Schlüsselanhänger-Generator: Namensanhänger als STL/3MF (kostenlos)', en: 'Keychain Generator: name tags as STL/3MF (free)' },
     h1: { de: 'Schlüsselanhänger', en: 'Keychain' },
-    sub: { de: 'Anhänger mit Namen oder Text: Form, Schrift und Öse einstellen, STL oder 3MF laden.', en: 'A tag with a name or text: set shape, font and eyelet, download STL or 3MF.' },
+    sub: { de: 'Anhänger mit Namen oder Text: Form, Schrift und Öse einstellen, STL oder 3MF herunterladen.', en: 'A tag with a name or text: set shape, font and eyelet, download STL or 3MF.' },
     desc: { de: 'Kostenloser Schlüsselanhänger-Generator: Anhänger mit erhabener Schrift, Öse und Rand in Kapsel-, Rechteck- oder Kreisform. Export als STL und 3MF.', en: 'Free keychain generator: tags with raised lettering, eyelet and rim in pill, rectangle or circle shape. Export as STL and 3MF.' },
     tag: { de: 'Kunst & Schilder', en: 'Art & signs' },
     intro: { de: ['Gib den Text ein, wähle Form und Schrift und stelle Öse und Dicke ein. Die Schrift steht erhaben auf der Platte, optional mit Rand.', 'Für mehrfarbige Anhänger nutze die Schichtfarbwechsel deines Slicers an der Höhe, wo die Schrift beginnt.'], en: ['Enter the text, choose shape and font and set the eyelet and thickness. The lettering stands raised on the plate, optionally with a rim.', 'For multicolor tags use your slicer’s color change at the height where the lettering starts.'] },

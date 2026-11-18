@@ -6,7 +6,7 @@ GenKit.define({
     cat: 'tabletop', slug: { de: 'deckbox-generator', en: 'deck-box-generator' },
     title: { de: 'Deckbox-Generator: Kartenbox nach Maß als STL/3MF (kostenlos)', en: 'Deck Box Generator: custom card box as STL/3MF (free)' },
     h1: { de: 'Deckbox-Generator', en: 'Deck Box Generator' },
-    sub: { de: 'Box für Spielkarten, Sammelkarten oder Tarot: Kartenformat und Anzahl eingeben, STL oder 3MF laden.', en: 'A box for playing cards, trading cards or tarot: enter card format and count, download STL or 3MF.' },
+    sub: { de: 'Box für Spielkarten, Sammelkarten oder Tarot: Kartenformat und Anzahl eingeben, STL oder 3MF herunterladen.', en: 'A box for playing cards, trading cards or tarot: enter card format and count, download STL or 3MF.' },
     desc: { de: 'Kostenloser Deckbox-Generator: Kartenboxen mit Schiebedeckel für Poker, Magic, Pokémon, Tarot oder eigene Formate. Mit Hüllen, Griffmulde, Export als STL und 3MF.', en: 'Free deck box generator: card boxes with a sliding lid for poker, Magic, Pokémon, tarot or custom sizes. With sleeve option and finger notch. Export as STL and 3MF.' },
     tag: { de: 'Tabletop', en: 'Tabletop' },
     intro: { de: ['Gib das Kartenformat und die Kartenzahl ein. Der Generator berechnet die Höhe des Stapels und baut Box und Deckel dazu, der Deckel wird einfach aufgesteckt.', 'Mit Hüllen (Sleeves) wird das Format automatisch etwas größer. Eine Griffmulde macht das Herausnehmen leicht.'], en: ['Enter the card format and the number of cards. The generator works out the stack height and builds a matching box and lid; the lid just slides on.', 'With sleeves the format grows a little automatically. A finger notch makes taking cards out easy.'] },
