@@ -350,7 +350,579 @@
       <h2 class="lx-section-title" id="probleme">🛠 Common Print Problems</h2>
       <span class="lx-section-count" id="lxProblemCount"></span>
     </div>
-    <div class="lx-cards" id="lxProblemCards"></div>
+    <div class="lx-cards" id="lxProblemCards"><!--lx-pre--><details class="lx-card" id="warping">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Warping (corners lifting)</p>
+          <span class="lx-tag">Adhesion &amp; 1st Layer</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Corners or edges detach from the bed and curl upward — mostly on large flat parts printed in ABS, ASA or nylon.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Uneven cooling between the bottom and top of the print</li><li>Bed temperature too low for the material</li><li>Draft in the room (windows, fans, AC, doors)</li><li>Large, flat footprint with no extra adhesion aid</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Increase bed temperature (see material guide below), add a brim 5–8 mm wide, and eliminate every draft source.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Print inside an enclosure or a draft-free space, clean the bed with isopropyl alcohol before every print, always use an enclosure for ABS/ASA, enable a brim by default for large flat parts.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#elephant-foot" data-jump="elephant-foot">Elephant Foot (bulging first layers)</a><a class="lx-related-chip" href="#bed-adhesion" data-jump="bed-adhesion">Poor bed adhesion / first layer detaches</a><a class="lx-related-chip" href="#curling-corners" data-jump="curling-corners">Curling on thin parts/corners</a></div>
+        </div>
+      </details><details class="lx-card" id="elephant-foot">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Elephant Foot (bulging first layers)</p>
+          <span class="lx-tag">Adhesion &amp; 1st Layer</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">The bottom 1–3 layers are visibly wider than the rest of the model, like a slightly bulging foot.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>A too-hot bed squishes the first layer flat</li><li>First-layer squish too strong / Z-offset too low</li><li>Soft material meeting an overly warm bed</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Enable "Elephant Foot Compensation" in the slicer (start around 0.1–0.3 mm), raise the Z-offset slightly.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Don't set first-layer height too low, lower the bed temperature slightly after the first layer, recalibrate Z-offset regularly.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#warping" data-jump="warping">Warping (corners lifting)</a><a class="lx-related-chip" href="#bed-adhesion" data-jump="bed-adhesion">Poor bed adhesion / first layer detaches</a><a class="lx-related-chip" href="#dimensional-accuracy" data-jump="dimensional-accuracy">Dimensions off (over-/undersized)</a></div>
+        </div>
+      </details><details class="lx-card" id="bed-adhesion">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Poor bed adhesion / first layer detaches</p>
+          <span class="lx-tag">Adhesion &amp; 1st Layer</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">The print partially or fully detaches from the bed within the first few layers.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Bed not flat / not properly leveled</li><li>Nozzle too far from the bed</li><li>Dirty or greasy bed surface</li><li>Wrong first-layer temperature for the material</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Recalibrate Z-offset (paper or feeler-gauge test), clean the bed thoroughly with isopropyl alcohol.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Combine auto bed leveling with manual fine-tuning, use an adhesion aid (glue stick, hairspray) for PETG/ABS, regularly check the bed's springs/clips.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#warping" data-jump="warping">Warping (corners lifting)</a><a class="lx-related-chip" href="#elephant-foot" data-jump="elephant-foot">Elephant Foot (bulging first layers)</a><a class="lx-related-chip" href="#layer-shift" data-jump="layer-shift">Layer shift (offset layers)</a></div>
+        </div>
+      </details><details class="lx-card" id="curling-corners">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Curling on thin parts/corners</p>
+          <span class="lx-tag">Adhesion &amp; 1st Layer</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Thin, unsupported parts or corners curl slightly upward during printing without fully detaching from the bed.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Uneven, too-fast cooling</li><li>Too little contact area on very fine outlines</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Reduce part cooling fan speed for the first few layers, add a brim specifically at critical spots.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Orient the model so thin parts lie as flat as possible, reduce first-layer speed.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#warping" data-jump="warping">Warping (corners lifting)</a><a class="lx-related-chip" href="#bed-adhesion" data-jump="bed-adhesion">Poor bed adhesion / first layer detaches</a></div>
+        </div>
+      </details><details class="lx-card" id="stringing">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Stringing (thin strands between parts)</p>
+          <span class="lx-tag">Extrusion &amp; Flow</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Thin plastic strands stretch between separate print parts or across gaps.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Print temperature too high</li><li>No or too weak retraction</li><li>Wet/moist filament (especially PETG, nylon, TPU)</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Increase retraction distance (Bowden: 4–7 mm, direct drive: 0.5–2 mm), set retraction speed to 25–45 mm/s.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Lower temperature in 5 °C steps until strings disappear, store filament in a dry box, enable "combing mode" / "avoid crossing perimeters".</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#wet-filament" data-jump="wet-filament">Wet filament (crackling, bubbles, stringing)</a><a class="lx-related-chip" href="#blobs-zits" data-jump="blobs-zits">Blobs &amp; zits (surface bumps)</a><a class="lx-related-chip" href="#clogging" data-jump="clogging">Clogged nozzle</a></div>
+        </div>
+      </details><details class="lx-card" id="underextrusion">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Under-extrusion</p>
+          <span class="lx-tag">Extrusion &amp; Flow</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Visible gaps between lines, thin or brittle walls, incompletely filled areas.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Flow factor set too low</li><li>Partially or fully clogged nozzle</li><li>Wrong filament diameter set in the slicer</li><li>Print temperature too low</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Run a flow calibration using a 100% wall-thickness cube test (measure the wall and adjust the extrusion multiplier).</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Recalibrate E-steps regularly, check the nozzle for wear, occasionally verify filament diameter with calipers.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#clogging" data-jump="clogging">Clogged nozzle</a><a class="lx-related-chip" href="#overextrusion" data-jump="overextrusion">Over-extrusion</a><a class="lx-related-chip" href="#nozzle-wear" data-jump="nozzle-wear">Nozzle wear (worn-out orifice)</a><a class="lx-related-chip" href="#flow-calibration" data-jump="flow-calibration">Flow calibration per filament (step by step)</a></div>
+        </div>
+      </details><details class="lx-card" id="overextrusion">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Over-extrusion</p>
+          <span class="lx-tag">Extrusion &amp; Flow</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Walls look too thick, surfaces are rough or bumpy, visible blobs at seam points.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Flow factor set too high</li><li>Worn, over-bored nozzle</li><li>Wrong (too small) filament diameter entered in the slicer</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Run a flow calibration with a 100% wall-thickness cube test, reduce the extrusion multiplier in small steps (±2–3%).</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Replace the nozzle every few hundred print hours, especially with abrasive filaments (carbon, glass fiber, glitter).</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#underextrusion" data-jump="underextrusion">Under-extrusion</a><a class="lx-related-chip" href="#blobs-zits" data-jump="blobs-zits">Blobs &amp; zits (surface bumps)</a><a class="lx-related-chip" href="#nozzle-wear" data-jump="nozzle-wear">Nozzle wear (worn-out orifice)</a><a class="lx-related-chip" href="#flow-calibration" data-jump="flow-calibration">Flow calibration per filament (step by step)</a></div>
+        </div>
+      </details><details class="lx-card" id="clogging">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Clogged nozzle</p>
+          <span class="lx-tag">Extrusion &amp; Flow</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">The extruder clicks or skips steps, and little to no filament comes out of the nozzle.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Filament residue carbonizes from frequent temperature changes</li><li>Wet filament bubbles in the melt zone</li><li>Low-quality or inconsistent-diameter filament</li><li>Nozzle sitting too close to the bed, clogging the opening</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Cold pull / atomic method: insert filament at target temperature, let it cool to roughly 90 °C, then pull it out firmly.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Replace the nozzle regularly (it's a wear part), store filament dry in a box with silica gel, use quality filament with a consistent diameter.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#wet-filament" data-jump="wet-filament">Wet filament (crackling, bubbles, stringing)</a><a class="lx-related-chip" href="#underextrusion" data-jump="underextrusion">Under-extrusion</a><a class="lx-related-chip" href="#nozzle-wear" data-jump="nozzle-wear">Nozzle wear (worn-out orifice)</a></div>
+        </div>
+      </details><details class="lx-card" id="nozzle-wear">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Nozzle wear (worn-out orifice)</p>
+          <span class="lx-tag">Extrusion &amp; Flow</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Gradually increasing over-extrusion over time and less accurate dimensions, even though settings haven't changed.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Abrasive filaments (carbon fiber, glass fiber, metal-filled, glitter) wear soft brass nozzles quickly</li><li>Very high print hours without a nozzle swap</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Measure the nozzle opening with calipers (e.g. a 0.4 mm nozzle shouldn't be noticeably larger) and replace it if worn.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Use hardened steel or carbide nozzles for abrasive filaments, replace regular nozzles after roughly 200–500 print hours.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#overextrusion" data-jump="overextrusion">Over-extrusion</a><a class="lx-related-chip" href="#underextrusion" data-jump="underextrusion">Under-extrusion</a></div>
+        </div>
+      </details><details class="lx-card" id="delamination">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Delamination / layer separation</p>
+          <span class="lx-tag">Surface &amp; Aesthetics</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">The part breaks cleanly along a single layer instead of across the material.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Print temperature too low for adequate layer bonding</li><li>Cooling too aggressive or starts too early</li><li>Draft cools individual layers unevenly</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Increase print temperature by 5–10 °C, repeat a test print with reduced cooling.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Reduce part cooling for structurally important parts, use an enclosure, consider switching to ASA/PETG instead of PLA for higher strength.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#ringing" data-jump="ringing">Ghosting / ringing (vibration patterns, VFA)</a><a class="lx-related-chip" href="#z-seam" data-jump="z-seam">Visible Z-seam</a><a class="lx-related-chip" href="#print-orientation" data-jump="print-orientation">Print orientation for maximum strength</a></div>
+        </div>
+      </details><details class="lx-card" id="blobs-zits">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Blobs &amp; zits (surface bumps)</p>
+          <span class="lx-tag">Surface &amp; Aesthetics</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Small plastic blobs or "pimples" at specific spots on the outer wall, often at the same point on every layer.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Seam placed poorly or always at the same spot</li><li>Unfavorable retraction/restart settings at the seam</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Enable "coasting" (stop extrusion just before the end of a line), enable wipe-on-retract.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Set seam position to "Aligned" or place it deliberately in an inconspicuous corner, increase retraction distance slightly.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#stringing" data-jump="stringing">Stringing (thin strands between parts)</a><a class="lx-related-chip" href="#z-seam" data-jump="z-seam">Visible Z-seam</a><a class="lx-related-chip" href="#ringing" data-jump="ringing">Ghosting / ringing (vibration patterns, VFA)</a></div>
+        </div>
+      </details><details class="lx-card" id="ringing">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Ghosting / ringing (vibration patterns, VFA)</p>
+          <span class="lx-tag">Surface &amp; Aesthetics</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Wave-like, repeating patterns on the outer wall, usually around sharp corners or details.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Acceleration too high / jerky movements</li><li>Loose frame or slack belts</li><li>Jerk / junction deviation set too high</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Reduce acceleration and jerk/junction deviation in the firmware or slicer.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Calibrate input shaping if the firmware supports it (e.g. Klipper), regularly check the printer frame for wobble or loose screws.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#layer-shift" data-jump="layer-shift">Layer shift (offset layers)</a><a class="lx-related-chip" href="#delamination" data-jump="delamination">Delamination / layer separation</a></div>
+        </div>
+      </details><details class="lx-card" id="z-seam">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Visible Z-seam</p>
+          <span class="lx-tag">Surface &amp; Aesthetics</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">A vertical line or step is visible at the spot where each layer starts and ends.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Seam position chosen randomly or poorly</li><li>Small print inaccuracy at each layer's start/end point</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Set seam alignment in the slicer to "Aligned", "Nearest" or a defined corner so it sits in an inconspicuous spot.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Use "seam painting" to manually place the seam on a hidden edge, combine with light "coasting" to avoid blobs at the seam.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#blobs-zits" data-jump="blobs-zits">Blobs &amp; zits (surface bumps)</a><a class="lx-related-chip" href="#ringing" data-jump="ringing">Ghosting / ringing (vibration patterns, VFA)</a></div>
+        </div>
+      </details><details class="lx-card" id="pillowing">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Pillowing (bubbly top surface)</p>
+          <span class="lx-tag">Surface &amp; Aesthetics</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">The topmost, closed surface looks bubbly or pillow-like instead of smooth.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Too few top layers for the chosen infill density</li><li>Infill pattern supports the top surface unevenly</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Increase the number of top layers (at least 4–5 at 0.2 mm layer height), slightly increase infill density.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Match the top layer count to the infill density (lower infill needs more top layers), use gyroid or grid infill for more even support.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#top-layer-gaps" data-jump="top-layer-gaps">Gaps/holes in the top layer</a></div>
+        </div>
+      </details><details class="lx-card" id="color-inconsistency">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Color inconsistency in multicolor/AMS prints</p>
+          <span class="lx-tag">Surface &amp; Aesthetics</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">On multi-material/multi-color prints, one color looks slightly contaminated, or visible transitions appear at color-change points.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Purge/flush volume too low during the filament change</li><li>Residue of the previous color left in the melt chamber</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Increase the purge volume in the slicer's filament compatibility table, especially between very different colors (e.g. black → white).</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Plan a purge tower / flushing object, keep color sequences similar in a print job wherever possible.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#stringing" data-jump="stringing">Stringing (thin strands between parts)</a></div>
+        </div>
+      </details><details class="lx-card" id="layer-shift">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Layer shift (offset layers)</p>
+          <span class="lx-tag">Mechanics &amp; Motion</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">From a certain height onward, the entire print suddenly shifts sideways in X or Y.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Belt tension too loose</li><li>Stepper motor overloaded or skipped steps</li><li>Mechanical collision, e.g. a snagged cable or object in the print path</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Usually not salvageable — abort the print, then check belt tension and axis movement for stiffness.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Regular maintenance of belts and frame screws, don't push print speed/acceleration too high, set stepper current (VREF) correctly.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#ringing" data-jump="ringing">Ghosting / ringing (vibration patterns, VFA)</a><a class="lx-related-chip" href="#bed-adhesion" data-jump="bed-adhesion">Poor bed adhesion / first layer detaches</a></div>
+        </div>
+      </details><details class="lx-card" id="thermal-runaway">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Thermal runaway / heating fault</p>
+          <span class="lx-tag">Mechanics &amp; Motion</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">The printer aborts with a heating error, or nozzle/bed temperature swings strongly instead of staying stable.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Thermistor loose or damaged</li><li>Faulty heater cartridge or damaged wiring</li><li>PID values not calibrated</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Check thermistor and heater cartridge wiring for a firm connection and damage.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Run PID autotune for the nozzle and bed regularly, check cables at moving points (print head) for fatigue cracks.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#clogging" data-jump="clogging">Clogged nozzle</a></div>
+        </div>
+      </details><details class="lx-card" id="skipped-steps">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Unusual noises / skipped steps</p>
+          <span class="lx-tag">Mechanics &amp; Motion</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Clicking or grinding noises from the extruder motor, sometimes paired with under-extrusion.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>High resistance in filament feeding (e.g. a clog, too tight a Bowden bend)</li><li>Extruder spring tension too high or too low</li><li>Print speed exceeding the extruder's mechanical capacity</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Check and readjust extruder spring tension, inspect the Bowden tube for kinks.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Regularly check the filament path for friction points, avoid unnecessarily aggressive retraction settings.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#clogging" data-jump="clogging">Clogged nozzle</a><a class="lx-related-chip" href="#underextrusion" data-jump="underextrusion">Under-extrusion</a></div>
+        </div>
+      </details><details class="lx-card" id="overhang-sagging">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Overhangs sagging</p>
+          <span class="lx-tag">Supports &amp; Overhangs</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Unsupported, angled surfaces look frayed or visibly sag downward.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Too little part cooling</li><li>Print temperature too high for the overhang angle</li><li>Overhang angle too steep for the material</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Set part cooling fan to 100% for overhangs, lower print temperature slightly.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Plan supports from roughly 45–50° overhang angle onward, orient the model to minimize critical overhangs.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#bridging" data-jump="bridging">Bridging sags or breaks</a><a class="lx-related-chip" href="#support-scarring" data-jump="support-scarring">Supports hard to remove / leave scarring</a><a class="lx-related-chip" href="#support" data-jump="support">Using supports wisely — the 45° rule</a></div>
+        </div>
+      </details><details class="lx-card" id="bridging">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Bridging sags or breaks</p>
+          <span class="lx-tag">Supports &amp; Overhangs</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Material meant to span a gap between two support points sags in the middle or breaks.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Bridging cooling too low</li><li>Bridging speed too high or too low for the span</li><li>Span too long without an intermediate support</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Set bridging-specific fan speed to 100%, slightly reduce bridging flow.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Break up very long spans (&gt;30–40 mm) with thin helper supports, calibrate bridging speed separately from normal printing.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#overhang-sagging" data-jump="overhang-sagging">Overhangs sagging</a><a class="lx-related-chip" href="#support" data-jump="support">Using supports wisely — the 45° rule</a></div>
+        </div>
+      </details><details class="lx-card" id="support-scarring">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Supports hard to remove / leave scarring</p>
+          <span class="lx-tag">Supports &amp; Overhangs</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Supports only come off with force and damage the surface, or leave rough contact points.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Z-gap between support and model too small</li><li>Support density too high</li><li>Wrong support type for the material</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Slightly increase the Z-gap between support and model in the slicer (typically 0.15–0.3 mm), reduce support density.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Use organic/tree supports for easier removal on visible parts, enable a support interface layer (thin separation layer).</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#overhang-sagging" data-jump="overhang-sagging">Overhangs sagging</a></div>
+        </div>
+      </details><details class="lx-card" id="wet-filament">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Wet filament (crackling, bubbles, stringing)</p>
+          <span class="lx-tag">Material &amp; Handling</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Crackling or hissing sounds at the nozzle, small bubbles/rough surface, increased stringing, brittle results — typical for PETG, nylon, TPU, PVA.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Filament has absorbed moisture from the air over time (hygroscopic material)</li><li>Open storage with no desiccant</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Dry the filament before printing: in a filament dryer or oven at a material-appropriate temperature (e.g. PETG around 65 °C for several hours).</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Store filament in sealed boxes with silica gel or an active dryer, print nylon/TPU/PVA straight from the dry box wherever possible.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#stringing" data-jump="stringing">Stringing (thin strands between parts)</a><a class="lx-related-chip" href="#clogging" data-jump="clogging">Clogged nozzle</a><a class="lx-related-chip" href="#brittle-filament" data-jump="brittle-filament">Brittle filament</a></div>
+        </div>
+      </details><details class="lx-card" id="tangled-filament">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Filament tangling or snapping on the spool</p>
+          <span class="lx-tag">Material &amp; Handling</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">The print stops mid-job because filament has snagged on the spool or snapped.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Filament end wasn't secured after last use and slipped under other windings</li><li>Spool wound unevenly (cheap filament, may need rewinding)</li><li>Filament has become brittle with age and snaps under tension</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>For tangles: pause the print, remove the spool, carefully free the snagged winding; for breaks: cleanly bevel both ends and splice them or continue with new filament.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Always secure the filament end in the spool's retaining clip after every print, use a low-friction spool holder.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#brittle-filament" data-jump="brittle-filament">Brittle filament</a></div>
+        </div>
+      </details><details class="lx-card" id="brittle-filament">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Brittle filament</p>
+          <span class="lx-tag">Material &amp; Handling</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Filament breaks with only slight bending, often paired with frequent filament breaks during printing.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Moisture absorption (especially PLA and PETG over long periods)</li><li>UV/light exposure from long open storage</li><li>General material aging</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Dry the filament (see "wet filament") — restores much of the original flexibility for many materials.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Store away from light and moisture, test older partial spools before committing them to a large print.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#wet-filament" data-jump="wet-filament">Wet filament (crackling, bubbles, stringing)</a><a class="lx-related-chip" href="#tangled-filament" data-jump="tangled-filament">Filament tangling or snapping on the spool</a></div>
+        </div>
+      </details><details class="lx-card" id="top-layer-gaps">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Gaps/holes in the top layer</p>
+          <span class="lx-tag">Dimensional Accuracy</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">The topmost surface isn't fully closed, small holes let the infill pattern show through.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Too few top layers for the infill density</li><li>Infill overlap set too low</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Increase the number of top layers (at least 4–5 at 0.2 mm layer height).</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>Check the infill overlap percentage (usually 10–15% by default), match top layer count to the chosen infill density.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#pillowing" data-jump="pillowing">Pillowing (bubbly top surface)</a></div>
+        </div>
+      </details><details class="lx-card" id="dimensional-accuracy">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Dimensions off (over-/undersized)</p>
+          <span class="lx-tag">Dimensional Accuracy</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-card-symptom">Holes are too tight for screws/pins, or plug connections sit too loose or too tight.</span>
+        </summary>
+        <div class="lx-card-body">
+          <div class="lx-block">
+            <p class="lx-block-label">Causes</p>
+            <ul><li>Horizontal expansion from the width of the molten plastic (holes shrink slightly, outer contours grow slightly)</li><li>Elephant foot at the contact surface</li><li>Inaccurate E-steps/flow calibration</li></ul>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Quick fix</p>
+            <p>Use "horizontal expansion" / "XY compensation" in the slicer: enlarge holes slightly (e.g. +0.1 to +0.2 mm), shrink outer contours slightly.</p>
+          </div>
+          <div class="lx-block">
+            <p class="lx-block-label">Prevention</p>
+            <p>For functional fits, always run a small test print with the exact target tolerances, calibrate flow and E-steps carefully.</p>
+          </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#elephant-foot" data-jump="elephant-foot">Elephant Foot (bulging first layers)</a><a class="lx-related-chip" href="#overextrusion" data-jump="overextrusion">Over-extrusion</a><a class="lx-related-chip" href="#shrinkage" data-jump="shrinkage">Compensating for material shrinkage</a><a class="lx-related-chip" href="#flow-calibration" data-jump="flow-calibration">Flow calibration per filament (step by step)</a></div>
+        </div>
+      </details><!--/lx-pre--></div>
     <div class="lx-empty" id="lxProblemEmpty" style="display:none;">No problems found for this search term.</div>
   </div>
 
@@ -360,7 +932,375 @@
       <h2 class="lx-section-title" id="guides">🧭 Practical Guides</h2>
       <span class="lx-section-count" id="lxGuideCount"></span>
     </div>
-    <div class="lx-cards" id="lxGuideCards"></div>
+    <div class="lx-cards" id="lxGuideCards"><!--lx-pre--><details class="lx-card" id="layer-height-guide">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Choosing the right layer height (0.08–0.32 mm)</p>
+          <span class="lx-tag">Slicer &amp; Quality</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">The one setting that controls both surface quality AND print time — and when each step is worth it.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">The principle</p>
+          <ul>
+            <li><strong>Finer = smoother surface:</strong> Thin layers make curves and slopes look visibly smoother — on vertical walls you barely notice a difference.</li>
+            <li><strong>Thicker = faster:</strong> 0.28 mm instead of 0.20 mm saves roughly a third of print time — often irrelevant for functional parts.</li>
+            <li><strong>The nozzle sets the limit:</strong> Rule of thumb — layer height = 25–80% of the nozzle diameter. With a 0.4 mm nozzle, that's roughly 0.10–0.32 mm.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">The 5 steps at a glance</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Height</th><th>Use case</th><th>Rel. print time</th></tr></thead>
+            <tbody>
+              <tr><td>0.08 mm</td><td>Miniatures, jewelry, finest detail</td><td>~250%</td></tr>
+              <tr><td>0.12 mm</td><td>Figures, decor, visible surfaces</td><td>~170%</td></tr>
+              <tr><td>0.20 mm</td><td>All-rounder — 90% of prints (reference)</td><td>100%</td></tr>
+              <tr><td>0.28 mm</td><td>Functional parts, prototypes, large models</td><td>~70%</td></tr>
+              <tr><td>0.32 mm</td><td>Rough parts, first drafts (upper limit for a 0.4 mm nozzle)</td><td>~60%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          <strong>3 pro tricks:</strong> Use adaptive layers in the slicer (fine on curves, coarse on flat sections). Always print a thicker first layer (0.2–0.25 mm) — it forgives bed unevenness and sticks better. For strength, go thicker: fewer layers means fewer bond lines, so 0.24–0.28 mm works well for functional parts.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#nozzle-guide" data-jump="nozzle-guide">Choosing the right nozzle (0.2–0.8 mm)</a><a class="lx-related-chip" href="#walls-vs-infill" data-jump="walls-vs-infill">Walls vs. infill — what actually makes a part strong</a></div>
+        </div>
+      </details><details class="lx-card" id="nozzle-guide">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Choosing the right nozzle (0.2–0.8 mm)</p>
+          <span class="lx-tag">Hardware</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Line width sets the detail limit, throughput sets the speed, bead width sets the strength.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">What the nozzle changes</p>
+          <ul>
+            <li><strong>Line width = detail limit:</strong> The nozzle determines how fine text, edges and thin walls can get.</li>
+            <li><strong>Throughput = speed:</strong> A 0.8 mm nozzle pushes far more material per second — large parts finish in hours instead of days.</li>
+            <li><strong>Wider beads = stronger parts:</strong> Thicker lines fuse better, so functional parts from a 0.6 mm nozzle hold up noticeably more.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Which nozzle for which job</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Nozzle</th><th>Type</th><th>Pro</th><th>Con</th></tr></thead>
+            <tbody>
+              <tr><td>0.2 mm</td><td>Detail nozzle</td><td>Finest detail, miniatures, jewelry</td><td>Slow, clog-prone — CF filaments off-limits</td></tr>
+              <tr><td>0.4 mm</td><td>The standard ★</td><td>Best quality/speed ratio, huge profile selection</td><td>Neither the fastest nor the finest</td></tr>
+              <tr><td>0.6 mm</td><td>Functional nozzle</td><td>Stronger parts, shorter print time, first choice for CF/TPU</td><td>Fine detail is lost</td></tr>
+              <tr><td>0.8 mm</td><td>Speed nozzle</td><td>Very fast, very stable prints, large parts</td><td>Visibly coarse lines, almost no detail</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          If you only own one nozzle: <strong>0.4 mm</strong> — everything else is a specialty tool for specific cases. Workshop secret: <strong>0.6 mm + 0.28 mm layers</strong> is nearly as fast as 0.8 mm but noticeably cleaner. Always choose layer height and nozzle together (the 25–80% rule).
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#layer-height-guide" data-jump="layer-height-guide">Choosing the right layer height (0.08–0.32 mm)</a><a class="lx-related-chip" href="#walls-vs-infill" data-jump="walls-vs-infill">Walls vs. infill — what actually makes a part strong</a></div>
+        </div>
+      </details><details class="lx-card" id="support">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Using supports wisely — the 45° rule</p>
+          <span class="lx-tag">Supports &amp; Overhangs</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">The single most useful number for judging support needs, plus settings for clean removal.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">The 45° rule</p>
+          <ul>
+            <li><strong>Up to 45° from vertical:</strong> no support needed — each layer still sits far enough on the one below, prints clean.</li>
+            <li><strong>Steeper than 45°:</strong> support is usually needed — the layer extends too far into thin air and sags.</li>
+            <li><strong>Rule of thumb:</strong> overhangs up to 45° and bridges up to roughly 5–10 mm span print fine unsupported. Anything beyond that → support or redesign.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">When support is actually needed</p>
+          <ul>
+            <li><strong>Steep overhangs:</strong> flatter than 45° from horizontal — e.g. far-projecting noses.</li>
+            <li><strong>Long bridges:</strong> beyond roughly 10 mm of free span, the strand sags.</li>
+            <li><strong>Floating islands:</strong> areas with no connection to the layer below always need support.</li>
+          </ul>
+          <p style="margin-top:8px;">No support needed for: holes (arches up to 90° self-support), chamfers, and shallow cones.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Settings for easy removal</p>
+          <table class="lx-mini-table">
+            <tbody>
+              <tr><td><strong>Z-gap</strong></td><td>0.2 mm (≈ 1 layer height) — releases cleanly</td></tr>
+              <tr><td><strong>Support type</strong></td><td>Tree/organic supports — less material, only touches where needed</td></tr>
+              <tr><td><strong>Support on build plate only</strong></td><td>On, when possible — avoids scarring on the part's surface</td></tr>
+              <tr><td><strong>Overhang threshold</strong></td><td>45–50° — support only kicks in past this angle, saving unnecessary material</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          <strong>The best support is the one you never needed:</strong> use 45° chamfers instead of sharp overhangs (bevel the edge and it prints self-supporting). Pull horizontal holes into a teardrop instead of a circle — it removes the bridge entirely. And often the overhang simply disappears by rotating the part on the bed. While modeling, keep asking: how will this part actually sit on the plate?
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#overhang-sagging" data-jump="overhang-sagging">Overhangs sagging</a><a class="lx-related-chip" href="#bridging" data-jump="bridging">Bridging sags or breaks</a><a class="lx-related-chip" href="#support-scarring" data-jump="support-scarring">Supports hard to remove / leave scarring</a><a class="lx-related-chip" href="#print-orientation" data-jump="print-orientation">Print orientation for maximum strength</a></div>
+        </div>
+      </details><details class="lx-card" id="print-orientation">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Print orientation for maximum strength</p>
+          <span class="lx-tag">Strength</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Why print orientation decides between solid and broken — and how to plan for it while modeling.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">The principle</p>
+          <ul>
+            <li><strong>Along the layers: strong.</strong> In the print plane (X/Y), the material holds almost like solid stock.</li>
+            <li><strong>Across the layers: weak.</strong> In Z, only the bond between layers holds — this is where parts break first.</li>
+          </ul>
+          <p style="margin-top:8px;">Rule of thumb: an FDM part tears between layers like a book flipped open at the pages — never across the paper itself. So always put the main load into the print plane.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Orienting correctly — examples</p>
+          <ul>
+            <li><strong>Lay hooks and hangers flat:</strong> The pulling force needs to run along the layers, not pry them apart.</li>
+            <li><strong>Print pins and axles lying down:</strong> Printed upright, they snap at the weakest layer immediately.</li>
+            <li><strong>Tilt angles and brackets cleverly:</strong> Orient so the bending force falls into the print plane.</li>
+          </ul>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">The trade-off</p>
+          <p>The strongest orientation isn't always the prettiest — weigh it up: <strong>strength</strong> (priority 1 for functional parts, main load along the layers), <strong>surface finish</strong> (priority 2 for looks, put visible faces up or outward) and <strong>support effort</strong> (priority 3, orienting with minimal overhang saves cleanup and material).</p>
+        </div>
+        <div class="lx-callout">
+          A critical load you can't reorient away? Then thicken the walls and pick a tough material like <strong>PETG or PA</strong>. Or: split the part and glue it — separating an L-shaped part into two flat halves, each printed optimally, then joined. Two strongly printed halves beat one weakly printed whole.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#delamination" data-jump="delamination">Delamination / layer separation</a><a class="lx-related-chip" href="#support" data-jump="support">Using supports wisely — the 45° rule</a><a class="lx-related-chip" href="#walls-vs-infill" data-jump="walls-vs-infill">Walls vs. infill — what actually makes a part strong</a></div>
+        </div>
+      </details><details class="lx-card" id="walls-vs-infill">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Walls vs. infill — what actually makes a part strong</p>
+          <span class="lx-tag">Strength</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">The most common mistake in functional printing: adding more infill. The walls are what make a part stable.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Walls carry the load</p>
+          <ul>
+            <li><strong>More perimeters = more strength:</strong> Four walls at 20% infill are stronger than two walls at 50%.</li>
+            <li><strong>Infill only supports the top surface:</strong> Above roughly 40% it adds barely any strength, but costs time and material.</li>
+            <li><strong>Wall thickness = perimeters × line width:</strong> 3 walls × 0.4 mm = 1.2 mm of solid material on the outside.</li>
+          </ul>
+          <p style="margin-top:8px;">Rule of thumb: walls first, then infill. It saves time and filament — while increasing stability.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">How many walls?</p>
+          <table class="lx-mini-table">
+            <tbody>
+              <tr><td>Decor &amp; looks</td><td>no load — saves time, looks are what matters</td><td>2 walls</td></tr>
+              <tr><td>Standard use</td><td>boxes, holders, everyday parts without real force</td><td>3 walls</td></tr>
+              <tr><td>Functional &amp; loaded</td><td>clamps, hooks, tool holders</td><td>4 walls</td></tr>
+              <tr><td>Heavily loaded</td><td>carries real weight or leverage</td><td>5–6 walls</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Which infill pattern?</p>
+          <div class="lx-guide-grid">
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Gyroid</p><ul><li>Equally strong in every direction</li><li>Great all-rounder</li><li>Default choice</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Grid / Lines</p><ul><li>Fastest option</li><li>Fine for non-critical parts</li><li>Less load-bearing</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Cubic</p><ul><li>Strong across 3 axes</li><li>Good for mechanical parts</li><li>Slightly slower</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">Concentric</p><ul><li>Follows the contour</li><li>Great for TPU/flexibles</li><li>Not for hard loads</li></ul></div>
+          </div>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">How much infill?</p>
+          <table class="lx-mini-table">
+            <tbody>
+              <tr><td>Decor / looks</td><td>5–10%</td></tr>
+              <tr><td>Standard use</td><td>15%</td></tr>
+              <tr><td>Functional</td><td>25–40%</td></tr>
+              <tr><td>Heavily loaded</td><td>40–60%</td></tr>
+              <tr><td>Nearly solid (rarely needed)</td><td>&gt; 60%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-callout">
+          When in doubt: <strong>gyroid at 15–25%.</strong> Covers nearly every functional print. Going above 50% infill is rarely worth it — add another wall instead, saving time and material while gaining more stability.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#print-orientation" data-jump="print-orientation">Print orientation for maximum strength</a><a class="lx-related-chip" href="#top-layer-gaps" data-jump="top-layer-gaps">Gaps/holes in the top layer</a><a class="lx-related-chip" href="#nozzle-guide" data-jump="nozzle-guide">Choosing the right nozzle (0.2–0.8 mm)</a></div>
+        </div>
+      </details><details class="lx-card" id="shrinkage">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Compensating for material shrinkage</p>
+          <span class="lx-tag">Material</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Every filament shrinks as it cools — but by how much? The values per material and how to compensate.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Why it shrinks</p>
+          <ul>
+            <li><strong>Hot in, tight when cold:</strong> Molten filament contracts as it cools — the higher the print temperature, the stronger the effect.</li>
+            <li><strong>The bigger the part, the more millimeters:</strong> Shrinkage is a percentage — at 20 mm you won't notice, at 200 mm you can suddenly be missing over a millimeter.</li>
+            <li><strong>Holes get hit twice:</strong> Material shrinks toward the center, so bores end up tighter than the rest of the part.</li>
+          </ul>
+          <p style="margin-top:8px;">Same material ≠ same shrinkage: brand, pigment and additives noticeably change the value. Treat the figures below as a starting point, then measure your own.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Typical shrinkage on cooling</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Material</th><th>Shrinkage</th></tr></thead>
+            <tbody>
+              <tr><td>PLA — the dimensionally stable one</td><td>0.2–0.5%</td></tr>
+              <tr><td>PETG — rarely an issue</td><td>0.2–0.8%</td></tr>
+              <tr><td>ASA — better than ABS</td><td>0.4–0.7%</td></tr>
+              <tr><td>PC — polycarbonate</td><td>0.5–0.8%</td></tr>
+              <tr><td>TPU — flex, depends on hardness</td><td>0.4–1.4%</td></tr>
+              <tr><td>ABS — the classic warper</td><td>0.7–1.6%</td></tr>
+              <tr><td>PA / nylon — pulls in moisture</td><td>0.7–2.0%</td></tr>
+              <tr><td>PP — the extreme case</td><td>1.0–3.0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">How to compensate</p>
+          <ul>
+            <li><strong>Print a test cube and measure:</strong> print a 100 mm test piece, measure it with calipers — actual ÷ target gives your real shrinkage rate.</li>
+            <li><strong>Set compensation in the slicer:</strong> Bambu Studio/Orca: Filament → Shrinkage. The slicer then scales the model automatically — saved per filament.</li>
+            <li><strong>Close the door for ABS, ASA &amp; PA:</strong> an enclosed, warm chamber means even cooling, which means less shrinkage and warping.</li>
+            <li><strong>Compensate holes separately:</strong> XY hole compensation of roughly 0.05 mm for PLA, 0.1 mm for PETG/ABS, 0.15 mm for nylon.</li>
+          </ul>
+        </div>
+        <div class="lx-callout">
+          <strong>Pro tip:</strong> CF/GF variants (carbon/glass fiber) shrink noticeably less than the base material — ideal when dimensions really matter. From ABS upward: printing dimensionally accurate parts without shrinkage compensation is a gamble — PLA/PETG are forgiving, the rest aren't.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#dimensional-accuracy" data-jump="dimensional-accuracy">Dimensions off (over-/undersized)</a><a class="lx-related-chip" href="#elephant-foot" data-jump="elephant-foot">Elephant Foot (bulging first layers)</a><a class="lx-related-chip" href="#filament-selection-guide" data-jump="filament-selection-guide">Which filament for what? The 8 key materials</a></div>
+        </div>
+      </details><details class="lx-card" id="filament-selection-guide">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Which filament for what? The 8 key materials</p>
+          <span class="lx-tag">Material</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Temperatures, properties and use cases for the eight most important filaments — at a glance.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">The everyday four</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Material</th><th>Nozzle / bed</th><th>Rating</th><th>Quick profile</th></tr></thead>
+            <tbody>
+              <tr><td><strong>PLA</strong><br>the beginner</td><td>190–220° / 50–60°</td><td class="lx-rating">Print <span class="fill">●●●●●</span><br>Strength <span class="fill">●●</span><span class="empty">●●●</span><br>Outdoor <span class="fill">●</span><span class="empty">●●●●</span></td><td>Barely warps, huge color range. Softens above ~55 °C — no good for a hot car.</td></tr>
+              <tr><td><strong>PETG</strong><br>the all-rounder</td><td>230–250° / 70–90°</td><td class="lx-rating">Print <span class="fill">●●●●</span><span class="empty">●</span><br>Strength <span class="fill">●●●●</span><span class="empty">●</span><br>Outdoor <span class="fill">●●●●</span><span class="empty">●</span></td><td>Tough, water- and chemical-resistant. First choice for functional parts around the house &amp; garden.</td></tr>
+              <tr><td><strong>TPU</strong><br>the flexible one</td><td>210–240° / 40–60°</td><td class="lx-rating">Print <span class="fill">●●●</span><span class="empty">●●</span><br>Strength <span class="fill">●●</span><span class="empty">●●●</span><br>Outdoor <span class="fill">●●●●</span><span class="empty">●</span></td><td>Rubbery, absorbs impact, mind the Shore hardness. Print slowly — patience pays off.</td></tr>
+              <tr><td><strong>ABS</strong><br>the classic</td><td>230–260° / 90–110°</td><td class="lx-rating">Print <span class="fill">●●●</span><span class="empty">●●</span><br>Strength <span class="fill">●●●●</span><span class="empty">●</span><br>Outdoor <span class="fill">●●●</span><span class="empty">●●</span></td><td>Heat-resistant, sands well. Wants an enclosed, warm chamber — otherwise warping.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">The specialists</p>
+          <table class="lx-mini-table">
+            <thead><tr><th>Material</th><th>Nozzle / bed</th><th>Rating</th><th>Quick profile</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ASA</strong><br>the outdoor king</td><td>240–260° / 90–110°</td><td class="lx-rating">Print <span class="fill">●●●</span><span class="empty">●●</span><br>Strength <span class="fill">●●●●</span><span class="empty">●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>UV-stable, weatherproof, doesn't yellow. Anything living outdoors long-term gets printed in ASA.</td></tr>
+              <tr><td><strong>PA / Nylon</strong><br>the tough one</td><td>250–280° / 70–100°</td><td class="lx-rating">Print <span class="fill">●●●●</span><span class="empty">●</span><br>Strength <span class="fill">●●●●●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>Extremely tough and abrasion-resistant — gears, bearings, hinges. Absorbs water: dry before every print.</td></tr>
+              <tr><td><strong>CF blends</strong><br>PETG-CF · PA-CF</td><td>250–280° / 70–110°</td><td class="lx-rating">Print <span class="fill">●●●●</span><span class="empty">●</span><br>Strength <span class="fill">●●●●●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>Stiff, light, dimensionally accurate — barely warps. Carbon fiber eats brass nozzles: a hardened nozzle is mandatory.</td></tr>
+              <tr><td><strong>PC</strong><br>the industrial one</td><td>260–310° / 100–120°</td><td class="lx-rating">Print <span class="fill">●●●●●</span><br>Strength <span class="fill">●●●●●</span><br>Outdoor <span class="fill">●●●●●</span></td><td>Impact-tough, dimensionally stable up to ~110 °C. Needs heat — an enclosure and a hot bed are mandatory.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">What to print in what</p>
+          <div class="lx-guide-grid">
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PLA</p><ul><li>Prototypes &amp; decor</li><li>Indoor organizers</li><li>Models &amp; gifts</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PETG</p><ul><li>Holders &amp; clips</li><li>Storage containers, jars</li><li>House &amp; garden parts</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">TPU</p><ul><li>Seals &amp; feet</li><li>Cases &amp; bumpers</li><li>Flexible hinges</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">ABS</p><ul><li>Enclosures &amp; covers</li><li>Mechanical parts</li><li>Interior car parts</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">ASA</p><ul><li>Garden accessories</li><li>Outdoor mounts</li><li>Signs &amp; covers</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PA / Nylon</p><ul><li>Gears &amp; bearings</li><li>Heavily loaded holders</li><li>Wear parts</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">CF blends</p><ul><li>Drone &amp; RC parts</li><li>Lightweight structural parts</li><li>Dimensionally critical fixtures</li></ul></div>
+            <div class="lx-guide-cell"><p class="lx-guide-cell-title">PC</p><ul><li>Machine parts</li><li>Parts near heat sources</li><li>Protective covers</li></ul></div>
+          </div>
+        </div>
+        <div class="lx-callout">
+          <strong>Practical notes:</strong> Always dry PA and PC before printing — wet filament ruins both surface finish and strength. Print TPU slowly and, ideally, straight off the spool holder rather than forcing it through an AMS. CF filaments need a hardened nozzle — stay away from brass nozzles, the carbon fiber wears them out in no time.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#shrinkage" data-jump="shrinkage">Compensating for material shrinkage</a><a class="lx-related-chip" href="#print-orientation" data-jump="print-orientation">Print orientation for maximum strength</a></div>
+        </div>
+      </details><details class="lx-card" id="flow-calibration">
+        <summary class="lx-card-head">
+          <p class="lx-card-title">Flow calibration per filament (step by step)</p>
+          <span class="lx-tag">Calibration</span>
+          <svg class="lx-card-chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span class="lx-guide-intro">Print a 35 mm cube, measure it with calipers, calculate the exact flow value — worth doing once per spool.</span>
+        </summary>
+        <div class="lx-card-body">
+          
+        <div class="lx-block">
+          <p class="lx-block-label">Why calibrate?</p>
+          <p>The flow value (extrusion multiplier) controls how much filament the printer actually pushes out per millimeter of movement. Manufacturer specs and filament diameter vary slightly between brand, color and even batch — at 100% flow this results in slightly too much or too little material. The result: prints that come out marginally over- or undersized. A one-time calibration per filament fixes this permanently.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Step 1 — Print a test cube</p>
+          <p>Print a cube with <strong>35 × 35 × 35 mm</strong> edges using your profile's <strong>default settings</strong> (leave flow/extrusion multiplier at 100%, normal infill like 15–20% is fine). Important: only test the flow setting — don't change other parameters (temperature, speed) in between.</p>
+          <a class="lx-download-btn" href="/assets/kalibrierwuerfel-35mm.stl" download="">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Download the 35×35×35 mm calibration cube (STL)
+          </a>
+          <p class="lx-download-note">Watertight cube, exactly 35.000 mm per edge — ready to slice.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Step 2 — Measure with calipers</p>
+          <p>Once cooled, measure all three axes (X, Y, Z) at two points each with digital calipers and average the results. Example: target 35.0 mm, measured average <strong>34.8 mm</strong> — the cube is too small, meaning too little material was extruded (under-extrusion).</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Step 3 — The formula</p>
+          <div class="lx-callout" style="margin-top:0;">
+            <strong>New flow (%) = Current flow (%) × (Target size ÷ Measured size)</strong>
+          </div>
+          <p style="margin-top:10px;">Worked through with the example above: 100% × (35.0 ÷ 34.8) = 100% × 1.00575 = <strong>100.6%</strong>. Flow needs to go from 100% to roughly 100.6% so the next print comes out at exactly 35.0 mm. If the cube prints too large instead (over-extrusion), the same formula automatically gives a value below 100% — it works in both directions.</p>
+        </div>
+        <div class="lx-calc">
+          <p class="lx-calc-title">🧮 Flow calculator — plug in your own numbers</p>
+          <div class="lx-calc-grid">
+            <div class="lx-calc-field">
+              <label for="lxFlowTarget">Target size (mm)</label>
+              <input type="number" id="lxFlowTarget" value="35" step="0.01">
+            </div>
+            <div class="lx-calc-field">
+              <label for="lxFlowMeasured">Measured (mm)</label>
+              <input type="number" id="lxFlowMeasured" value="34.8" step="0.01">
+            </div>
+            <div class="lx-calc-field">
+              <label for="lxFlowCurrent">Current flow (%)</label>
+              <input type="number" id="lxFlowCurrent" value="100" step="0.1">
+            </div>
+          </div>
+          <div class="lx-calc-result" id="lxFlowResult">New flow value: <span class="lx-calc-val">100.57 %</span></div>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Step 4 — Enter the new value in your slicer</p>
+          <ul>
+            <li><strong>PrusaSlicer / OrcaSlicer / SuperSlicer:</strong> Filament Settings → Advanced → "Extrusion multiplier"</li>
+            <li><strong>Cura:</strong> Print Settings → Material → "Flow" (in %)</li>
+            <li><strong>Bambu Studio:</strong> Filament Settings → "Flow Ratio", or run the built-in Flow Dynamics calibration</li>
+          </ul>
+          <p style="margin-top:8px;">Best saved directly in the filament profile rather than globally — that way it sticks permanently for this specific spool.</p>
+        </div>
+        <div class="lx-block">
+          <p class="lx-block-label">Step 5 — Reprint and verify</p>
+          <p>Print the same cube again with the new flow value and measure once more. It should now land very close to <strong>35.0 mm</strong> (typical deviation under 0.05 mm). If a small gap remains, simply apply the formula a second time — using the new flow value as "current flow" and the new measurement.</p>
+        </div>
+        <div class="lx-callout">
+          Don't mix these up: flow fixes <strong>under-/over-extrusion</strong> (too little or too much material). For holes that are only too tight or too loose while overall dimensions are otherwise correct, use "horizontal expansion" instead; for bulging first layers, use "elephant foot compensation" — keep these settings separate.
+        </div>
+          <div class="lx-related"><span class="lx-related-label">Related:</span><a class="lx-related-chip" href="#underextrusion" data-jump="underextrusion">Under-extrusion</a><a class="lx-related-chip" href="#overextrusion" data-jump="overextrusion">Over-extrusion</a><a class="lx-related-chip" href="#dimensional-accuracy" data-jump="dimensional-accuracy">Dimensions off (over-/undersized)</a></div>
+        </div>
+      </details><!--/lx-pre--></div>
     <div class="lx-empty" id="lxGuideEmpty" style="display:none;">No guide found for this search term.</div>
   </div>
 
@@ -370,7 +1310,207 @@
       <h2 class="lx-section-title" id="slicer">🎛 Slicer Tips &amp; Tricks</h2>
     </div>
     <div class="lx-slicer-tabs" id="lxSlicerTabs"></div>
-    <div id="lxSlicerPanels"></div>
+    <div id="lxSlicerPanels"><!--lx-pre-->
+      <div class="lx-slicer-panel lx-slicer-panel-active" id="panel-prusaslicer">
+        <div class="lx-tip-list">
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Use Organic Supports</p>
+              <p class="lx-tip-text">Much more material-efficient and easier to remove than classic grid supports for complex overhangs. Found under Support material → Style: Organic.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Variable Layer Height</p>
+              <p class="lx-tip-text">Enable for rounded or curved objects to print faster on flat sections and finer on curves — saves time with no visible quality loss.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Create dedicated filament profiles</p>
+              <p class="lx-tip-text">Save a separate profile per spool/batch instead of overwriting the default profile — keeps proven settings intact.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Ironing for visible surfaces</p>
+              <p class="lx-tip-text">Noticeably smooths top surfaces, at the cost of extra print time. Worth it for display and presentation pieces.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Sequential printing</p>
+              <p class="lx-tip-text">"Complete individual objects" prints many small parts one after another instead of layer by layer in parallel — avoids print head collisions, but only makes sense with enough clearance height per object.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Adaptive bed mesh (if available)</p>
+              <p class="lx-tip-text">Gives more even first layers on slightly uneven beds, especially relevant for large-footprint prints.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Use detailed support blockers</p>
+              <p class="lx-tip-text">Use the support brush to exclude or force supports in specific areas instead of relying only on global angle thresholds.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#ff8c3c">
+              <p class="lx-tip-title">Calibrate retraction per filament</p>
+              <p class="lx-tip-text">The built-in retraction test wizard helps minimize stringing per material instead of using one blanket setting.</p>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="lx-slicer-panel" id="panel-cura">
+        <div class="lx-tip-list">
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Enable Adaptive Layers</p>
+              <p class="lx-tip-text">Found under experimental settings — automatically adjusts layer height to detail level and wall angle for more detail without wasting time on flat areas.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Tree Supports for organic shapes</p>
+              <p class="lx-tip-text">Usually much easier to remove than linear supports and often use less material.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Duplicate profiles via "Custom"</p>
+              <p class="lx-tip-text">Never overwrite the default profiles directly — duplicate and adjust instead, otherwise it's hard to get back to the original state.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Z-seam alignment: "Sharpest Corner"</p>
+              <p class="lx-tip-text">Reliably hides the visible seam at the model's sharpest edge instead of a random spot.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Enable Mesh Fixes</p>
+              <p class="lx-tip-text">For faulty, non-watertight STL files, "Union Overlapping Volumes" and "Keep Disconnected Faces" often help without needing external repair tools.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Ooze Shield for multi-material</p>
+              <p class="lx-tip-text">Catches oozing during filament changes and keeps color transitions on the model itself cleaner.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Combing Mode: "Not in Skin"</p>
+              <p class="lx-tip-text">Noticeably reduces visible travel marks on outer and top surfaces without a big increase in travel time.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#5fd9a0">
+              <p class="lx-tip-title">Gradual Infill Steps</p>
+              <p class="lx-tip-text">Reduces infill density gradually toward the model's core — saves material and time with barely noticeable loss of core strength.</p>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="lx-slicer-panel" id="panel-bambustudio">
+        <div class="lx-tip-list">
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Flow Dynamics calibration (Pressure Advance)</p>
+              <p class="lx-tip-text">Run per filament — makes a noticeable difference on sharp corners and fine details, found under Calibration → Flow Dynamics.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Tune AMS purge volume</p>
+              <p class="lx-tip-text">Fine-tune the flush volume between colors in the filament compatibility table to cut down on waste during frequent changes.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Enable Precise Wall</p>
+              <p class="lx-tip-text">Gives more dimensionally accurate outer walls, important especially for functional parts with tight fits.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Leave auto bed leveling on</p>
+              <p class="lx-tip-text">On X1/P1 series, leave it active before every print instead of calibrating manually — saves time and is more reliable than a one-off manual calibration.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Flow rate calibration per spool</p>
+              <p class="lx-tip-text">Especially with third-party filament (not Bambu Lab), the built-in flow rate calibration is worth running to account for manufacturer variance.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Use timelapse for troubleshooting</p>
+              <p class="lx-tip-text">For recurring issues, the timelapse helps pinpoint the exact moment of a failure (e.g. layer shift, collision).</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#56b7e6">
+              <p class="lx-tip-title">Smooth vs. Normal timelapse</p>
+              <p class="lx-tip-text">Choose "Smooth" for clean timelapse videos — it briefly lifts the nozzle between layers, at the cost of some print time.</p>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="lx-slicer-panel" id="panel-orcaslicer">
+        <div class="lx-tip-list">
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Use the built-in Calibration tab</p>
+              <p class="lx-tip-text">Contains structured tests for flow, pressure advance, a temperature tower and retraction all in one place — far more systematic than manual trial and error.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Adaptive bed mesh calibration</p>
+              <p class="lx-tip-text">If your printer supports it, gives more even first layers even on slightly uneven beds.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Precise Wall + Arachne wall generator</p>
+              <p class="lx-tip-text">The combination gives more even wall thickness, especially in thin, tapering areas.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">A great choice coming from PrusaSlicer</p>
+              <p class="lx-tip-text">Built on the same foundation but with far more built-in calibration tools — profiles can often be imported directly.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Pressure advance tower over single tests</p>
+              <p class="lx-tip-text">The tower test shows several PA values stacked in one print — faster than running individual test prints one after another.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#c792ea">
+              <p class="lx-tip-title">Use a skirt as a warm-up line</p>
+              <p class="lx-tip-text">A multi-loop skirt at sufficient distance from the model helps bring the nozzle up to a stable temperature before the actual print starts.</p>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="lx-slicer-panel" id="panel-superslicer">
+        <div class="lx-tip-list">
+          
+            <div class="lx-tip" style="--dot:#a8bdb2">
+              <p class="lx-tip-title">Use the very granular parameters</p>
+              <p class="lx-tip-text">Almost every aspect of extrusion can be tuned individually — ideal for users who want to fine-tune every parameter themselves, though it takes time.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#a8bdb2">
+              <p class="lx-tip-title">Enable the Arachne wall generator</p>
+              <p class="lx-tip-text">Gives variable wall thickness instead of a fixed perimeter count — especially useful for thin details under the standard wall thickness.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#a8bdb2">
+              <p class="lx-tip-title">Better suited to advanced users</p>
+              <p class="lx-tip-text">Default values need manual fine-tuning more often than in Cura or Bambu Studio — beginners may find another slicer an easier starting point.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#a8bdb2">
+              <p class="lx-tip-title">Use advanced cooling curves</p>
+              <p class="lx-tip-text">Fan speed can be controlled via a fine curve based on minimum layer time instead of just fixed steps.</p>
+            </div>
+          
+            <div class="lx-tip" style="--dot:#a8bdb2">
+              <p class="lx-tip-title">Adjust perimeter order</p>
+              <p class="lx-tip-text">"Inner first" or "outer first" can be configured deliberately to trade off dimensional accuracy against outer-wall appearance.</p>
+            </div>
+          
+        </div>
+      </div>
+    <!--/lx-pre--></div>
   </div>
 
   <!-- ============ MATERIAL ============ -->
@@ -383,7 +1523,71 @@
         <thead>
           <tr><th>Material</th><th>Nozzle</th><th>Bed</th><th>Cooling</th><th>Notes</th></tr>
         </thead>
-        <tbody id="lxMatBody"></tbody>
+        <tbody id="lxMatBody"><!--lx-pre-->
+      <tr>
+        <td class="lx-mat-name">PLA</td>
+        <td>190–220 °C</td>
+        <td>50–60 °C</td>
+        <td>100%</td>
+        <td>Beginner-friendly, low warping, but brittle under impact.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">PETG</td>
+        <td>220–250 °C</td>
+        <td>70–80 °C</td>
+        <td>30–50%</td>
+        <td>Tough and impact-resistant, prone to stringing, good chemical resistance.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">ABS</td>
+        <td>230–250 °C</td>
+        <td>90–110 °C</td>
+        <td>0–20%</td>
+        <td>Warps strongly, an enclosure is strongly recommended, noticeable odor.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">ASA</td>
+        <td>235–250 °C</td>
+        <td>90–110 °C</td>
+        <td>0–20%</td>
+        <td>Similar to ABS but much more UV-resistant — great for outdoor parts.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">TPU</td>
+        <td>210–230 °C</td>
+        <td>30–60 °C</td>
+        <td>30–50%</td>
+        <td>Flexible, print slowly, direct-drive extruders have a clear edge.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">Nylon (PA)</td>
+        <td>240–260 °C</td>
+        <td>70–90 °C</td>
+        <td>0–20%</td>
+        <td>Very moisture-sensitive, dry thoroughly before use.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">PC (Polycarbonate)</td>
+        <td>260–280 °C</td>
+        <td>100–120 °C</td>
+        <td>0%</td>
+        <td>Very high strength and heat resistance, needs a full enclosure and high print temperatures.</td>
+      </tr>
+    
+      <tr>
+        <td class="lx-mat-name">PVA</td>
+        <td>190–210 °C</td>
+        <td>45–60 °C</td>
+        <td>0–30%</td>
+        <td>Water-soluble support material, extremely moisture-sensitive, store airtight.</td>
+      </tr>
+    <!--/lx-pre--></tbody>
       </table>
     </div>
     <p class="fm-note" style="margin-top:14px; border-top:none; padding-top:0;">Exact values always depend on the specific filament brand. Find matching filament in the <a href="/en/filament-database.html">Filament Database</a>, and calculate material cost per print with the <a href="/en/3d-print-cost-calculator.html">Cost Calculator</a>.</p>
@@ -395,7 +1599,7 @@
       <h2 class="lx-section-title" id="glossar">📚 Glossary</h2>
       <span class="lx-section-count" id="lxGlossCount"></span>
     </div>
-    <div class="lx-glossary" id="lxGlossary"></div>
+    <div class="lx-glossary" id="lxGlossary"><!--lx-pre--><div class="lx-gloss-item" id="g-retraction"><p class="lx-gloss-term">Retraction</p><p class="lx-gloss-def">Briefly pulling the filament back before travel moves to avoid stringing.</p></div><div class="lx-gloss-item" id="g-z-offset"><p class="lx-gloss-term">Z-offset</p><p class="lx-gloss-def">Fine adjustment of the distance between nozzle and bed, critical for first-layer quality.</p></div><div class="lx-gloss-item" id="g-flow-extrusion-multiplier"><p class="lx-gloss-term">Flow / Extrusion Multiplier</p><p class="lx-gloss-def">A factor that controls the actual amount of filament extruded relative to the calculated amount.</p></div><div class="lx-gloss-item" id="g-pressure-advance-linear-advance"><p class="lx-gloss-term">Pressure Advance / Linear Advance</p><p class="lx-gloss-def">Compensates for pressure buildup in the nozzle during speed changes, giving sharper corners and fewer blobs.</p></div><div class="lx-gloss-item" id="g-input-shaping"><p class="lx-gloss-term">Input Shaping</p><p class="lx-gloss-def">A firmware feature (mainly in Klipper) that reduces vibration and ringing at high speeds.</p></div><div class="lx-gloss-item" id="g-brim"><p class="lx-gloss-term">Brim</p><p class="lx-gloss-def">An extra thin layer of material printed around the model on the first layer to improve bed adhesion.</p></div><div class="lx-gloss-item" id="g-raft"><p class="lx-gloss-term">Raft</p><p class="lx-gloss-def">A full sacrificial foundation printed under the model, helpful for very difficult adhesion or an uneven bed.</p></div><div class="lx-gloss-item" id="g-skirt"><p class="lx-gloss-term">Skirt</p><p class="lx-gloss-def">Loops printed around the model without touching it — used to prime the nozzle and stabilize filament flow before printing starts.</p></div><div class="lx-gloss-item" id="g-seam"><p class="lx-gloss-term">Seam</p><p class="lx-gloss-def">The point where each closed contour on a layer starts and ends — potentially visible as a small line or blob.</p></div><div class="lx-gloss-item" id="g-arachne-wall-generator"><p class="lx-gloss-term">Arachne (wall generator)</p><p class="lx-gloss-def">An algorithm for variable wall thickness instead of a fixed number of perimeters, especially useful for thin details.</p></div><div class="lx-gloss-item" id="g-coasting"><p class="lx-gloss-term">Coasting</p><p class="lx-gloss-def">Stops extrusion just before the end of a line, using the remaining pressure in the nozzle for the line's end — reduces blobs.</p></div><div class="lx-gloss-item" id="g-combing"><p class="lx-gloss-term">Combing</p><p class="lx-gloss-def">Controls whether travel moves stay within already-printed contours to avoid visible travel marks on outer surfaces.</p></div><div class="lx-gloss-item" id="g-infill"><p class="lx-gloss-term">Infill</p><p class="lx-gloss-def">The internal fill structure of a print, usually given as a percentage and a pattern (e.g. gyroid, grid, honeycomb).</p></div><div class="lx-gloss-item" id="g-perimeters-wall-lines"><p class="lx-gloss-term">Perimeters / wall lines</p><p class="lx-gloss-def">The outer, closed outline lines of each layer that form the visible outer wall.</p></div><div class="lx-gloss-item" id="g-top-bottom-layer"><p class="lx-gloss-term">Top/bottom layer</p><p class="lx-gloss-def">The fully solid top and bottom layers of a print, independent of the infill pattern.</p></div><div class="lx-gloss-item" id="g-layer-height"><p class="lx-gloss-term">Layer height</p><p class="lx-gloss-def">The thickness of each individual printed layer — smaller values mean more detail but longer print times.</p></div><div class="lx-gloss-item" id="g-nozzle"><p class="lx-gloss-term">Nozzle</p><p class="lx-gloss-def">The opening at the end of the hotend through which molten filament exits, commonly 0.4 mm by default.</p></div><div class="lx-gloss-item" id="g-hotend"><p class="lx-gloss-term">Hotend</p><p class="lx-gloss-def">The heated assembly that melts the filament, consisting of heater block, thermistor, nozzle and heat break.</p></div><div class="lx-gloss-item" id="g-bowden-vs-direct-drive"><p class="lx-gloss-term">Bowden vs. direct drive</p><p class="lx-gloss-def">Two extruder designs: with Bowden, the motor sits away from the hotend (long tube); with direct drive, it sits right on top of it.</p></div><div class="lx-gloss-item" id="g-pid-tuning"><p class="lx-gloss-term">PID tuning</p><p class="lx-gloss-def">A calibration process that tunes the heating control of nozzle and bed for stable, low-fluctuation temperatures.</p></div><div class="lx-gloss-item" id="g-e-steps"><p class="lx-gloss-term">E-steps</p><p class="lx-gloss-def">The number of motor steps the firmware uses for a defined length of filament feed (e.g. 100 mm) — the basis for accurate extrusion.</p></div><div class="lx-gloss-item" id="g-bed-leveling"><p class="lx-gloss-term">Bed leveling</p><p class="lx-gloss-def">Compensating for the tilt/unevenness of the print bed, manually or automatically via a sensor (ABL).</p></div><div class="lx-gloss-item" id="g-mesh-bed-leveling"><p class="lx-gloss-term">Mesh bed leveling</p><p class="lx-gloss-def">An automatically generated height map of the bed at multiple points, compensated for during printing.</p></div><div class="lx-gloss-item" id="g-elephant-foot-compensation"><p class="lx-gloss-term">Elephant Foot Compensation</p><p class="lx-gloss-def">A slicer setting that prints the bottom layers slightly narrower to offset first-layer bulging.</p></div><div class="lx-gloss-item" id="g-horizontal-expansion-xy-compensation"><p class="lx-gloss-term">Horizontal Expansion / XY Compensation</p><p class="lx-gloss-def">A slicer setting that scales outer contours and holes by a fixed amount to correct for over-/undersizing.</p></div><div class="lx-gloss-item" id="g-support"><p class="lx-gloss-term">Support</p><p class="lx-gloss-def">Temporary, printed material that props up overhangs and is removed after printing.</p></div><div class="lx-gloss-item" id="g-organic-tree-supports"><p class="lx-gloss-term">Organic / tree supports</p><p class="lx-gloss-def">Branch-like support structures with few contact points to the model, usually more material-efficient and easier to remove than grid supports.</p></div><div class="lx-gloss-item" id="g-bridging"><p class="lx-gloss-term">Bridging</p><p class="lx-gloss-def">Printing an unsupported line between two support points with no material underneath.</p></div><div class="lx-gloss-item" id="g-overhang"><p class="lx-gloss-term">Overhang</p><p class="lx-gloss-def">An area of a model that extends beyond the layer below it and needs support past a certain angle.</p></div><div class="lx-gloss-item" id="g-purge-flushing"><p class="lx-gloss-term">Purge / flushing</p><p class="lx-gloss-def">Ejecting leftover material during a filament or color change to ensure clean transitions.</p></div><div class="lx-gloss-item" id="g-ams-automatic-material-system"><p class="lx-gloss-term">AMS (Automatic Material System)</p><p class="lx-gloss-def">Bambu Lab's system for automatically switching between multiple filament spools for multi-color/multi-material prints.</p></div><div class="lx-gloss-item" id="g-cold-pull-atomic-method"><p class="lx-gloss-term">Cold pull / atomic method</p><p class="lx-gloss-def">A nozzle-cleaning technique: filament is pulled firmly out of the hotend during controlled cooling.</p></div><div class="lx-gloss-item" id="g-adaptive-layers"><p class="lx-gloss-term">Adaptive layers</p><p class="lx-gloss-def">Automatic adjustment of layer height based on model geometry — faster on flat areas, finer on details.</p></div><div class="lx-gloss-item" id="g-ironing"><p class="lx-gloss-term">Ironing</p><p class="lx-gloss-def">An extra smoothing pass over top surfaces with reduced material flow for an especially smooth finish.</p></div><div class="lx-gloss-item" id="g-ooze-shield"><p class="lx-gloss-term">Ooze shield</p><p class="lx-gloss-def">A thin, separate wall around the model that catches filament ooze from nozzle changes during multi-material prints.</p></div><div class="lx-gloss-item" id="g-jerk-junction-deviation"><p class="lx-gloss-term">Jerk / junction deviation</p><p class="lx-gloss-def">Firmware parameters that determine how abruptly speed and direction can change at corners.</p></div><div class="lx-gloss-item" id="g-vfa-vertical-fine-artifacts"><p class="lx-gloss-term">VFA (Vertical Fine Artifacts)</p><p class="lx-gloss-def">Fine, usually high-frequency grooves on the outer wall, often caused by fan or belt vibration.</p></div><div class="lx-gloss-item" id="g-shrinkage"><p class="lx-gloss-term">Shrinkage</p><p class="lx-gloss-def">Material-related contraction during cooling that causes actual dimensions to deviate slightly from the model.</p></div><div class="lx-gloss-item" id="g-hygroscopic"><p class="lx-gloss-term">Hygroscopic</p><p class="lx-gloss-def">A material property of absorbing moisture from the air — strongly affects PETG, nylon, TPU and PVA.</p></div><div class="lx-gloss-item" id="g-filament-dryer-dry-box"><p class="lx-gloss-term">Filament dryer / dry box</p><p class="lx-gloss-def">A container with active heating or a desiccant used to store or dry filament moisture-free.</p></div><div class="lx-gloss-item" id="g-shore-hardness"><p class="lx-gloss-term">Shore hardness</p><p class="lx-gloss-def">A scale for the hardness of flexible materials like TPU — lower numbers (e.g. 85A) mean softer/rubbery, higher numbers mean firmer.</p></div><div class="lx-gloss-item" id="g-chamfer"><p class="lx-gloss-term">Chamfer</p><p class="lx-gloss-def">A beveled instead of sharp edge on a model — often turns a support-requiring overhang into a self-supporting, printable surface.</p></div><!--/lx-pre--></div>
     <div class="lx-empty" id="lxGlossEmpty" style="display:none;">No term found for this search term.</div>
   </div>
 
