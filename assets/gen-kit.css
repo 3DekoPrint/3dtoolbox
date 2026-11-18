@@ -100,3 +100,6 @@
 .gk-ext{margin:28px 0 8px;padding:14px 18px;border:1px solid var(--bd,rgba(0,0,0,.12));border-radius:14px;background:var(--bg2,rgba(16,90,60,.06))}
 .gk-ext b{display:block;margin-bottom:4px}
 .gk-ext p{margin:0;font-size:.95rem;line-height:1.5}
+
+.gk-clamp{font-size:12px;color:var(--accent-2)}
+.gk-f-bad>span{color:var(--accent-2)}.gk-f-bad input[type=number],.gk-f-bad select{border-color:var(--accent-2)}
