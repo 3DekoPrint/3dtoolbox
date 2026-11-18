@@ -1,6 +1,6 @@
 // Fügt die Praxis-Abschnitte aus tools/material_guides.js vor "Ähnliche Materialien vergleichen" ein (idempotent).
 const fs = require('fs'), path = require('path');
-const ROOT = path.resolve(__dirname, '..'), G = require('./material_guides.js');
+const ROOT = path.resolve(__dirname, '..'), G = Object.assign({}, require('./material_guides.js'), require('./material_guides_2.js'), require('./material_guides_3.js'), require('./material_guides_4.js'));
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const targets = { de: ['materialien/', '<h2>Ähnliche Materialien vergleichen</h2>'], en: ['en/materials/', '<h2>Compare similar materials</h2>'] };
 let n = 0;
