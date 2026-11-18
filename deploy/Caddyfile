@@ -35,6 +35,7 @@
     handle @convert {
         import sec
         header Content-Security-Policy "default-src 'self'; script-src 'self' https://gc.zgo.at 'unsafe-inline' 'wasm-unsafe-eval' blob: 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' https://3dtoolbox.goatcounter.com data: blob:; font-src 'self' data:; connect-src 'self' https://3dtoolbox.goatcounter.com https://api.web3forms.com blob: data:; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+        header Cache-Control "no-cache"
         try_files {path} {path}.html
         file_server
     }
@@ -44,11 +45,12 @@
         header Content-Security-Policy "default-src 'self'; script-src 'self' https://gc.zgo.at 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' https://3dtoolbox.goatcounter.com data: blob:; font-src 'self' data:; connect-src 'self' https://3dtoolbox.goatcounter.com https://api.web3forms.com blob: data:; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
         try_files {path} {path}.html {path}/index.html
 
-        # Cache: Assets 1 Tag (mit Revalidierung), HTML immer prüfen
-        @assets path /assets/*
-        header @assets Cache-Control "public, max-age=86400, must-revalidate"
-        @html path *.html /
-        header @html Cache-Control "no-cache"
+        # Cache: Code (JS/CSS) und HTML werden bei jedem Aufruf per ETag geprüft (304 = fast kostenlos),
+        # damit Änderungen sofort ankommen. Schwere, selten geänderte Dateien (Bilder, Schriften, WASM) 1 Tag.
+        @code path *.html *.js *.css /
+        header @code Cache-Control "no-cache"
+        @heavy path *.webp *.png *.jpg *.svg *.woff2 *.wasm *.ico
+        header @heavy Cache-Control "public, max-age=86400"
         file_server
     }
 }
