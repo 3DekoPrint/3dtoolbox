@@ -715,7 +715,7 @@
   <div class="fd-empty" id="fdEmpty" style="display:none;">No filaments found for this selection.</div>
 
   <p class="fm-note">
-    Color values come from official manufacturer data, RAL standard colors, or colorimeter-measured references (filamentcolors.xyz) depending on the brand, and may vary slightly with screen, batch and lighting. Elegoo, Sunlu, Anycubic, Azurefilm, Recreus and Redline Filament are currently connected. <b>Advertising:</b> the shop buttons are affiliate links – if you buy through them we receive a small commission at no extra cost to you. Prefer finding your filament from a photo or 3MF file instead? Try the <a href="/en/" style="color:var(--accent-2);">Filament Finder</a>.
+    Color values come from official manufacturer data, RAL standard colors, or colorimeter-measured references (filamentcolors.xyz) depending on the brand, and may vary slightly with screen, batch and lighting. Elegoo, Sunlu, Anycubic, Azurefilm, Recreus, Redline Filament and 3DJake are currently connected. <b>Advertising:</b> the shop buttons are affiliate links – if you buy through them we receive a small commission at no extra cost to you. Prefer finding your filament from a photo or 3MF file instead? Try the <a href="/en/" style="color:var(--accent-2);">Filament Finder</a>.
   </p>
 
   </section>
@@ -755,7 +755,7 @@
   // ============================================================
   // Anbieter, Daten und Affiliate-Links werden zentral in /assets/filament-catalog.js gepflegt
   // (dort lassen sich weitere Anbieter per Kommentar aktivieren).
-  const FILAMENTS = window.FilamentCatalog.items('en').map(it => ({name:it.name, brand:it.brand, material:it.material, hex:it.hex, color:it.color, shops:[{shop:it.shop, url:it.url}]}));
+  const FILAMENTS = window.FilamentCatalog.items('en').map(it => ({name:it.name, brand:it.brand, material:it.material, hex:it.hex, color:it.color, shops:(it.shops || [{shop:it.shop, url:it.url}])}));
 
   // ---- Farb-Zuordnung: alle Farbtöne auf einer Seite (nach Familien gegliedert) → Produkte aller Marken ----
   // Stufe 1: Farbfamilien (Rot, Blau, Gold …). Stufe 2: Farbtöne einer Familie; sehr ähnliche Töne
