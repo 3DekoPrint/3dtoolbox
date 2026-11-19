@@ -1574,6 +1574,17 @@ window.tbLoad=(function(){
     const label = labelOverride || primary.name;
     const sublabel = sublabelOverride || (primary.brand + ' · closest match');
     const row = renderExactRow(hex, label, sublabel, primary.url, primary.shop, extraHtml, (primary.shops || []).slice(1));
+    if (row && !(primary.shops || []).some(s => /3DJake/i.test(s.shop))){
+      const col = row.querySelector('.fm-buy-col');
+      if (col){
+        const a = document.createElement('a');
+        a.className = 'fm-buy fm-buy-2';
+        a.textContent = 'More at 3DJake ↗';
+        a.href = '/en/3djake-filament-range.html?brand=' + encodeURIComponent(primary.brand || '') + '&mat=' + encodeURIComponent(primary.material || '');
+        const wrap = col.querySelector('.fm-buy-more') || col;
+        wrap.appendChild(a);
+      }
+    }
 
     const alternatives = matches.slice(1);
     if (alternatives.length){
