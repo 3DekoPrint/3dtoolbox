@@ -11,6 +11,7 @@ const LOGO = {
 const P = {
   finder: ['/', '/en/'],
   db: ['/filament-datenbank.html', '/en/filament-database.html'],
+  jake: ['/filament-3djake-sortiment.html', '/en/3djake-filament-range.html'],
   rest: ['/filament-restmengenrechner.html', '/en/filament-remaining-calculator.html'],
   cost: ['/3d-druck-kostenrechner.html', '/en/3d-print-cost-calculator.html'],
   conv: ['/3d-datei-konverter.html', '/en/3d-file-converter.html'],
@@ -33,7 +34,7 @@ const L = {
     adTag: 'Werbung', tipTag: 'Tipp, keine Werbung',
     nav: 'Hauptnavigation', menu: 'Menü', theme: 'Darstellung wechseln (hell/dunkel)', crumb: 'Brotkrumen', home: 'Startseite',
     groups: [
-      { id: 'fil', label: 'Filamente', items: [['finder', 'Filament-Finder', 'Foto oder 3MF hochladen, passende Filamente finden'], ['db', 'Filament-Datenbank', 'Über 1000 Filamente nach Farbe durchsuchen'], ['rest', 'Restmengenrechner', 'Wie viel Filament ist noch auf der Spule?']] },
+      { id: 'fil', label: 'Filamente', items: [['finder', 'Filament-Finder', 'Foto oder 3MF hochladen, passende Filamente finden'], ['db', 'Filament-Datenbank', 'Über 1000 Filamente nach Farbe durchsuchen'], ['jake', '3DJake-Sortiment', 'Alle lieferbaren Filamente von 3DJake (Werbung)'], ['rest', 'Restmengenrechner', 'Wie viel Filament ist noch auf der Spule?']] },
       { id: 'tool', label: 'Werkzeuge', items: [['cost', 'Kostenrechner', 'Material, Strom und Verschleiß live berechnen'], ['conv', 'Datei-Konverter', 'STL, 3MF, OBJ und STEP umwandeln'], ['img', 'Bild zu 3D', 'Foto in Relief oder Lithophanie verwandeln']] },
       { id: 'gen', label: 'Generatoren', items: [['hub', 'Alle Generatoren', 'Über 30 Generatoren mit Suche'], ['grid', 'Gridfinity', 'Behälter und Grundplatten im 42-mm-Raster'], ['case', 'Gehäuse-Generator', 'Gehäuse für Raspberry Pi, ESP32 und mehr'], ['obj', 'Objekt-Generator', 'Boxen, Tabletts, Zykloiden und mehr'], ['gear', 'Planetengetriebe', 'Getriebe mit Hohlrad, Planeten und Sonne'], ['tag', 'Namens-Anhänger', 'Mehrfarbige Anhänger mit Namen'], ['plate', 'Namensschild', 'Namensschild mit Anhänger']] },
       { id: 'wiss', label: 'Wissen', items: [['lex', 'Lexikon', 'Druckprobleme, Slicer-Tipps und Begriffe'], ['mat', 'Materialien', 'PLA, PETG, ABS, ASA, TPU und mehr im Vergleich'], ['slicer', 'Slicer-Helfer', 'Einstellungen für Bambu Studio, Prusa und Cura'], ['solid', 'STEP in SolidCraft', 'Teile aus dem Generator in CAD weiter bearbeiten']] }
@@ -49,7 +50,7 @@ const L = {
     adTag: 'Ad', tipTag: 'Tip, not an ad',
     nav: 'Main navigation', menu: 'Menu', theme: 'Switch appearance (light/dark)', crumb: 'Breadcrumb', home: 'Home',
     groups: [
-      { id: 'fil', label: 'Filaments', items: [['finder', 'Filament Finder', 'Upload a photo or 3MF and find matching filaments'], ['db', 'Filament Database', 'Browse 1000+ filaments by colour'], ['rest', 'Remaining Filament', 'How much filament is left on the spool?']] },
+      { id: 'fil', label: 'Filaments', items: [['finder', 'Filament Finder', 'Upload a photo or 3MF and find matching filaments'], ['db', 'Filament Database', 'Browse 1000+ filaments by colour'], ['jake', '3DJake range', 'Every in-stock 3DJake filament (ad)'], ['rest', 'Remaining Filament', 'How much filament is left on the spool?']] },
       { id: 'tool', label: 'Tools', items: [['cost', 'Cost Calculator', 'Material, power and wear costs live'], ['conv', 'File Converter', 'Convert STL, 3MF, OBJ and STEP'], ['img', 'Image to 3D', 'Turn a photo into a relief or lithophane']] },
       { id: 'gen', label: 'Generators', items: [['hub', 'All generators', '30+ generators with search'], ['grid', 'Gridfinity', 'Bins and baseplates on the 42 mm grid'], ['case', 'Enclosure Generator', 'Cases for Raspberry Pi, ESP32 and more'], ['obj', 'Object Generator', 'Boxes, trays, cycloids and more'], ['gear', 'Planetary Gearbox', 'Gearbox with ring, planets and sun gear'], ['tag', 'Layered Name Tag', 'Multicolour name tags'], ['plate', 'Name Plate Tag', 'Name plate with tag']] },
       { id: 'wiss', label: 'Knowledge', items: [['lex', 'Lexicon', 'Print problems, slicer tips and terms'], ['mat', 'Materials', 'PLA, PETG, ABS, ASA, TPU and more compared'], ['slicer', 'Slicer Helper', 'Settings for Bambu Studio, Prusa and Cura'], ['solid', 'STEP in SolidCraft', 'Keep editing generator parts in CAD']] }

@@ -1,0 +1,14 @@
+.jk-ad{font-size:13.5px;color:var(--ink-dim);margin:0 0 14px}
+.jk-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.jk-filters label{display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--ink-dim)}
+.jk-filters select,.jk-filters input{background:var(--panel-2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:10px 12px;font-size:16px;font-family:inherit;min-width:0}
+.jk-filters select:focus,.jk-filters input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.jk-count{margin:14px 0 8px;font-size:13px;color:var(--ink-dim)}
+.jk-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.jk-list li{display:flex;flex-direction:column;gap:3px;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+.jk-list small{color:var(--ink-dim);font-size:12px}
+.jk-list b{font-size:14px;line-height:1.35;overflow-wrap:anywhere}
+.jk-list a{margin-top:6px;font-size:13px;color:var(--accent-2);align-self:flex-start}
+.jk-mt{font-size:11.5px;color:var(--ink-dim)}
+.jk-more{background:var(--panel-2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 18px;font-size:15px;cursor:pointer;font-family:inherit}
+.jk-more:hover,.jk-more:focus-visible{border-color:var(--accent)}
