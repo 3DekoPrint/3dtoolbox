@@ -41,6 +41,12 @@
     selB.addEventListener('change', apply); selM.addEventListener('change', apply);
     var t; q.addEventListener('input', function () { clearTimeout(t); t = setTimeout(apply, 120); });
     more.addEventListener('click', function () { shown += PAGE; render(); });
+    try {
+      var qs = new URLSearchParams(location.search), pb = (qs.get('brand') || '').toLowerCase(), pm = (qs.get('mat') || '').toLowerCase().replace('+', '');
+      if (pb) J.brands.forEach(function (n, i) { if (n.toLowerCase() === pb) selB.value = i; });
+      if (pm) J.mats.forEach(function (n, i) { var l = n.toLowerCase(); if (l === pm || l.indexOf(pm) === 0 || pm.indexOf(l) === 0) { if (selM.value === '') selM.value = i; } });
+      if (qs.get('q')) q.value = qs.get('q');
+    } catch (e) {}
     apply();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
