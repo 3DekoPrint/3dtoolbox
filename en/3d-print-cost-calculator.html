@@ -1102,6 +1102,21 @@
     calc();
   });
 
+  // Werte aus der Druckbett-Vorschau übernehmen (?g=Gramm&h=Stunden&mat=pla&p=Preis/kg)
+  (function () {
+    try {
+      const q = new URLSearchParams(location.search);
+      const g = parseFloat(q.get('g')), h = parseFloat(q.get('h')), p = parseFloat(q.get('p')), m = (q.get('mat') || '').toUpperCase();
+      if (!(g > 0) && !(h > 0)) return;
+      const pill = m ? document.querySelector('#materialPills .kr-pill[data-mat="' + m + '"]') : null;
+      if (pill) pill.click();
+      if (g > 0 && g <= 100000) el.gramsUsed.value = Math.round(g);
+      if (h > 0 && h <= 2000) el.printHours.value = Math.round(h * 100) / 100;
+      if (p > 0 && p <= 1000) el.pricePerKg.value = p;
+      calc();
+    } catch (e) { /* Parameter ignorieren */ }
+  })();
+
   document.getElementById('exportBtn').addEventListener('click', () => {
     if (!lastResult) return;
     const r = lastResult;

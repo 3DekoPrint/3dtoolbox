@@ -1635,4 +1635,22 @@
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://3dtoolbox.info/druckbett-vorschau.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/druckbett-vorschau.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/print-bed-preview.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/druckbett-vorschau.html"/>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/print-bed-preview.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/druckbett-vorschau.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/print-bed-preview.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/druckbett-vorschau.html"/>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
