@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/material-page.css">
 <link rel="stylesheet" href="/assets/bedview.css">
+<link rel="stylesheet" href="/assets/print-dock.css">
 <script src="/assets/ref-config.js"></script>
 <script src="/assets/ref.js" defer></script>
 <link rel="stylesheet" href="/assets/theme.css">
@@ -69,6 +70,8 @@
         <p id="bvHint" class="bv-hint" hidden></p><p id="bvMeshMsg" class="bv-hint" hidden></p>
         <p class="bv-note">Richtwerte: Gewicht und Zeit werden aus Volumen, Oberfläche und Füllung geschätzt. Dein Slicer rechnet genauer. Die Bauhöhe der Drucker ist ein Richtwert, du kannst sie ändern.</p>
         <a id="bvCalc" class="bv-link" href="#">Im Kostenrechner weiterrechnen →</a>
+        <div class="bv-acts"><button id="bvOrderBtn" class="bv-btn bv-main" type="button" aria-expanded="false">Von 3DekoPrint drucken lassen</button></div>
+        <div id="bvOrderHost"></div>
       </div>
     </div>
     <div>

@@ -14,7 +14,7 @@ const C = {
     flat: 'Flach auf größte Fläche legen', reset: 'Ausrichtung zurücksetzen', s4: 'Material und Füllung', mat: 'Material', infill: 'Füllung', price: 'Preis pro kg (€)',
     views: ['Iso', 'Oben', 'Vorn', 'Seite'], empty: 'Lade eine Datei, um sie auf dem Druckbett zu sehen.', fileNote: 'STL, 3MF, OBJ oder STEP',
     results: 'Ergebnis', size: 'Maße (B × T × H)', fp: 'Fläche auf dem Bett', vol: 'Volumen', weight: 'Gewicht', time: 'Druckzeit', cost: 'Materialkosten', mesh: 'Netz', tris: 'Dreiecke',
-    est: 'Richtwerte: Gewicht und Zeit werden aus Volumen, Oberfläche und Füllung geschätzt. Dein Slicer rechnet genauer. Die Bauhöhe der Drucker ist ein Richtwert, du kannst sie ändern.', calc: 'Im Kostenrechner weiterrechnen',
+    est: 'Richtwerte: Gewicht und Zeit werden aus Volumen, Oberfläche und Füllung geschätzt. Dein Slicer rechnet genauer. Die Bauhöhe der Drucker ist ein Richtwert, du kannst sie ändern.', calc: 'Im Kostenrechner weiterrechnen', order: 'Von 3DekoPrint drucken lassen',
     hStep: 'So geht es', steps: ['Drucker wählen: Das Bett wird in der Größe deines Druckers gezeigt.', 'Datei laden: Das Modell erscheint in der Mitte des Betts. Mit der Maus drehen, mit dem Mausrad zoomen.', 'Ausrichten: Flach auf die größte Fläche legen oder in 90°-Schritten drehen. Rot bedeutet: passt nicht.', 'Material wählen: Du siehst Gewicht, Druckzeit und Materialkosten als Richtwert.'],
     hGood: 'Gut zu wissen', good: ['Die Vorschau ersetzt keinen Slicer. Stützen, Brim, Schichtlinien und exakte Zeiten kommen erst dort.', 'Bei mehrfarbigen Drucken mit Düsenwechsel (z. B. H2C) kann der nutzbare Bauraum kleiner sein als hier angezeigt.', 'Mehr Hilfe zu Maßen und Spiel: <a href="/3d-druck-toleranzen-wandstaerke.html">Toleranzen und Wandstärken</a> und das <a href="/3d-druck-lexikon.html">Lexikon</a>.'] },
   en: { lang: 'en', locale: 'en_US', url: URL_EN, other: URL_DE,
@@ -26,7 +26,7 @@ const C = {
     flat: 'Lay flat on largest face', reset: 'Reset orientation', s4: 'Material and infill', mat: 'Material', infill: 'Infill', price: 'Price per kg (€)',
     views: ['Iso', 'Top', 'Front', 'Side'], empty: 'Load a file to see it on the print bed.', fileNote: 'STL, 3MF, OBJ or STEP',
     results: 'Result', size: 'Size (W × D × H)', fp: 'Footprint on bed', vol: 'Volume', weight: 'Weight', time: 'Print time', cost: 'Material cost', mesh: 'Mesh', tris: 'Triangles',
-    est: 'Estimates: weight and time are derived from volume, surface and infill. Your slicer is more precise. Printer build heights are guide values, you can change them.', calc: 'Continue in the cost calculator',
+    est: 'Estimates: weight and time are derived from volume, surface and infill. Your slicer is more precise. Printer build heights are guide values, you can change them.', calc: 'Continue in the cost calculator', order: 'Have 3DekoPrint print it',
     hStep: 'How it works', steps: ['Choose your printer: the bed is shown at your printer’s size.', 'Load a file: the model appears in the middle of the bed. Drag to rotate, scroll to zoom.', 'Orient: lay it flat on its largest face or rotate in 90° steps. Red means it does not fit.', 'Choose a material: you see weight, print time and material cost as a guide.'],
     hGood: 'Good to know', good: ['The preview does not replace a slicer. Supports, brim, layer lines and exact times only come there.', 'For multi-colour prints with nozzle changes (e.g. H2C) the usable build volume can be smaller than shown here.', 'More help on sizes and clearances: <a href="/en/3d-print-tolerances-wall-thickness.html">tolerances and wall thickness</a> and the <a href="/en/3d-print-lexicon.html">lexicon</a>.'] }
 };
@@ -66,6 +66,7 @@ function page(lg) {
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/material-page.css">
 <link rel="stylesheet" href="/assets/bedview.css">
+<link rel="stylesheet" href="/assets/print-dock.css">
 <script src="/assets/ref-config.js"></script>
 <script src="/assets/ref.js" defer></script>
 <link rel="stylesheet" href="/assets/theme.css">
@@ -96,6 +97,8 @@ ${NAV.header(lg, { path: c.url, other: c.other, crumbs })}  <main id="main" tabi
         <p id="bvHint" class="bv-hint" hidden></p><p id="bvMeshMsg" class="bv-hint" hidden></p>
         <p class="bv-note">${c.est}</p>
         <a id="bvCalc" class="bv-link" href="#">${c.calc} →</a>
+        <div class="bv-acts"><button id="bvOrderBtn" class="bv-btn bv-main" type="button" aria-expanded="false">${c.order}</button></div>
+        <div id="bvOrderHost"></div>
       </div>
     </div>
     <div>
