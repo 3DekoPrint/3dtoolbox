@@ -23,7 +23,9 @@ DE = dict(
   <p>Die Farbvorschläge sind per Farbabstandsberechnung ermittelte Näherungswerte. Bildschirm, Foto, Beleuchtung, Charge und Druckeinstellungen beeinflussen das Ergebnis. Eine exakte Farbübereinstimmung können wir nicht garantieren.</p>
 
   <h2>5. Händler, Preise und Werbung</h2>
-  <p>Links zu Händlern sind Partnerlinks (Werbung). Wenn du darüber bestellst, erhalten wir gegebenenfalls eine Provision, für dich ändert sich der Preis nicht. Wir verkaufen nichts selbst. Preise, Verfügbarkeit, Lieferung und der Kaufvertrag betreffen ausschließlich dich und den Händler. Produktnamen und Sortimentsdaten stammen aus Angaben der Händler und können abweichen oder veraltet sein. Maßgeblich ist immer die Produktseite des Händlers.</p>
+  <p>Links zu Händlern sind Partnerlinks (Werbung). Wenn du darüber bestellst, erhalten wir gegebenenfalls eine Provision, für dich ändert sich der Preis nicht. Über die Händlerlinks verkaufen wir nichts selbst. Preise, Verfügbarkeit, Lieferung und der Kaufvertrag betreffen ausschließlich dich und den Händler. Produktnamen und Sortimentsdaten stammen aus Angaben der Händler und können abweichen oder veraltet sein. Maßgeblich ist immer die Produktseite des Händlers.</p>
+  <h3>Druckanfragen bei 3DekoPrint</h3>
+  <p>Über „Von 3DekoPrint drucken lassen“ kannst du eine unverbindliche Anfrage stellen. Der angezeigte Preis ist ein Richtpreis aus einer automatischen Schätzung von Material und Druckzeit, zuzüglich Versand und gegebenenfalls Reinigung. Ein Vertrag kommt erst zustande, wenn 3DekoPrint dir ein Angebot schickt und du es annimmst. Es wird keine Umsatzsteuer ausgewiesen (Kleinunternehmerregelung nach § 19 UStG). Eigene Dateien schickst du per E-Mail an 3DekoPrint und bestätigst dabei, dass du die Rechte daran hast. Mehrere Stücke und Versand ins Nicht-EU-Ausland gibt es nur auf Anfrage.</p>
 
   <h2>6. Marken</h2>
   <p>Marken- und Produktnamen gehören ihren jeweiligen Inhabern. Wir nennen sie nur, um Produkte zu bezeichnen. Es besteht keine Verbindung zu den Herstellern und keine Billigung durch sie.</p>
@@ -57,7 +59,9 @@ EN = dict(
   <p>Colour suggestions are approximations calculated from colour distance. Screen, photo, lighting, batch and print settings affect the result. We cannot guarantee an exact colour match.</p>
 
   <h2>5. Retailers, prices and advertising</h2>
-  <p>Links to retailers are affiliate links (ads). If you order through them we may receive a commission; the price does not change for you. We do not sell anything ourselves. Prices, availability, delivery and the purchase contract concern only you and the retailer. Product names and range data come from retailer information and may differ or be out of date. The retailer’s product page is always authoritative.</p>
+  <p>Links to retailers are affiliate links (ads). If you order through them we may receive a commission; the price does not change for you. We do not sell anything ourselves through the retailer links. Prices, availability, delivery and the purchase contract concern only you and the retailer. Product names and range data come from retailer information and may differ or be out of date. The retailer’s product page is always authoritative.</p>
+  <h3>Print requests to 3DekoPrint</h3>
+  <p>Using “Have 3DekoPrint print it” you can send a non-binding request. The price shown is an indicative price from an automatic estimate of material and print time, plus shipping and, if chosen, cleaning. A contract is only concluded when 3DekoPrint sends you a quote and you accept it. No VAT is shown (small-business rule under § 19 UStG). You send your own files to 3DekoPrint by e-mail and confirm that you hold the rights to them. Several pieces and shipping outside the EU are available on request only.</p>
 
   <h2>6. Trademarks</h2>
   <p>Brand and product names belong to their respective owners. We use them only to identify products. There is no connection to, or endorsement by, the manufacturers.</p>
