@@ -24,3 +24,4 @@
 .pd-host{min-width:0;max-width:100%}.pd-dock,.pd-order{min-width:0;max-width:100%}.pd-env label{min-width:0;max-width:100%}.pd-env .pd-bed{width:100%}.pd-env label:first-child{flex:1 1 220px}
 .pd-chk{display:flex;gap:8px;align-items:center;margin:10px 0 0;font-size:14px;color:var(--ink)}
 .pd-chk input{width:18px;height:18px;accent-color:var(--accent)}
+.pd-order a.pd-main,.pd-order a.pd-main:hover,.pd-order a.pd-main:visited{color:var(--on-accent)!important}
