@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/material-page.css">
 <link rel="stylesheet" href="/assets/bedview.css">
+<link rel="stylesheet" href="/assets/print-dock.css">
 <script src="/assets/ref-config.js"></script>
 <script src="/assets/ref.js" defer></script>
 <link rel="stylesheet" href="/assets/theme.css">
@@ -69,6 +70,8 @@
         <p id="bvHint" class="bv-hint" hidden></p><p id="bvMeshMsg" class="bv-hint" hidden></p>
         <p class="bv-note">Estimates: weight and time are derived from volume, surface and infill. Your slicer is more precise. Printer build heights are guide values, you can change them.</p>
         <a id="bvCalc" class="bv-link" href="#">Continue in the cost calculator →</a>
+        <div class="bv-acts"><button id="bvOrderBtn" class="bv-btn bv-main" type="button" aria-expanded="false">Have 3DekoPrint print it</button></div>
+        <div id="bvOrderHost"></div>
       </div>
     </div>
     <div>

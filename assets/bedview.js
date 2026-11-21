@@ -125,6 +125,7 @@
   /* ---------- Anzeige ---------- */
   function fmtT(h) { var m = Math.max(1, Math.round(h * 60)); return m < 60 ? m + ' ' + T.mn : Math.floor(m / 60) + ' ' + T.h + (m % 60 ? ' ' + (m % 60) + ' ' + T.mn : ''); }
   function num(v, d) { return v.toFixed(d).replace('.', DE ? ',' : '.'); }
+  var order = null;
   function refresh() {
     if (!S.base) { $('bvInfo').hidden = true; $('bvEmpty').hidden = false; return; }
     var t = transformed(), T3 = gl.T, w = t.size[0], d = t.size[1], h = t.size[2];
@@ -151,7 +152,9 @@
     $('bvMeshMsg').textContent = ck.ok ? '' : T.meshBadMsg.replace('{o}', ck.open).replace('{m}', ck.multi).replace('{f}', ck.flipped).replace('{d}', ck.degen); $('bvMeshMsg').hidden = ck.ok;
     $('bvTris').textContent = String(S.base.i.length / 3).replace(/\B(?=(\d{3})+(?!\d))/g, DE ? '.' : ',');
     $('bvCalc').href = (DE ? '/3d-druck-kostenrechner.html' : '/en/3d-print-cost-calculator.html') + '?g=' + Math.round(g) + '&h=' + (Math.round(hours * 100) / 100) + '&mat=' + $('bvMat').value + '&p=' + price;
+    S.stat = { vol: st.vol, area: st.area, w: w, d: d, size: w.toFixed(1) + ' × ' + d.toFixed(1) + ' × ' + h.toFixed(1) + ' mm', infill: infill, pct: Math.round(infill * 100) };
     $('bvInfo').hidden = false; $('bvEmpty').hidden = true; $('bvUnitIn').disabled = false;
+    if (order && !order.el.hidden) order.refresh();
   }
   function msg(t, bad) { var s = $('bvStatus'); s.textContent = t || ''; s.className = 'bv-status' + (bad ? ' bad' : ''); }
   function load(f) {
@@ -205,6 +208,14 @@
     ['dragenter', 'dragover'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
     ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
     drop.addEventListener('drop', function (e) { if (e.dataTransfer.files[0]) load(e.dataTransfer.files[0]); });
+    var lang = DE ? 'de' : 'en', TT = PD.T[lang];
+    order = PD.orderPanel(lang, function () {
+      if (!S.base || !S.stat) return null; var f = S.stat;
+      return { tool: DE ? 'Druckbett-Vorschau' : 'Print bed preview', stats: { vol: f.vol, area: f.area, w: f.w, d: f.d, size: f.size, parts: 1 }, size: f.size, infill: f.infill, mat: $('bvMat').value,
+        details: TT.fileLine + ': ' + (S.name || '') + ' | ' + (DE ? 'Füllung ' : 'Infill ') + f.pct + ' % | ' + TT.rights };
+    });
+    $('bvOrderHost').appendChild(order.el);
+    $('bvOrderBtn').addEventListener('click', function () { var on = order.toggle(); $('bvOrderBtn').setAttribute('aria-expanded', on ? 'true' : 'false'); if (on) order.el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); });
     window.BedView = { load: load, state: S, refresh: refresh };
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();

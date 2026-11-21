@@ -31,3 +31,5 @@
 .bv-radio{display:flex;gap:14px;font-size:14px;color:var(--ink)}
 .bv-radio label{flex-direction:row;align-items:center;gap:6px;color:var(--ink)}
 .bv-link{display:inline-block;margin-top:10px;color:var(--accent-2)}
+.bv-acts{margin:12px 0 0}.bv-main{background:var(--accent);color:#1b1208;border-color:var(--accent);font-weight:700;padding:10px 14px}
+#bvOrderHost{margin-top:4px}
