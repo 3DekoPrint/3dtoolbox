@@ -1653,4 +1653,76 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://3dtoolbox.info/3d-druck-kosten-sparen.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-kosten-sparen.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-save-costs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-kosten-sparen.html"/>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/3d-print-save-costs.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-kosten-sparen.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-save-costs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-kosten-sparen.html"/>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/3d-druck-toleranzen-wandstaerke.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-toleranzen-wandstaerke.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-tolerances-wall-thickness.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-toleranzen-wandstaerke.html"/>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/3d-print-tolerances-wall-thickness.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-toleranzen-wandstaerke.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-tolerances-wall-thickness.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-toleranzen-wandstaerke.html"/>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/ratgeber-ersatzteile-drucken.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/ratgeber-ersatzteile-drucken.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/guide-print-spare-parts.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/ratgeber-ersatzteile-drucken.html"/>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/guide-print-spare-parts.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/ratgeber-ersatzteile-drucken.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/guide-print-spare-parts.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/ratgeber-ersatzteile-drucken.html"/>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/ratgeber-prototypen-drucken.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/ratgeber-prototypen-drucken.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/guide-print-prototypes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/ratgeber-prototypen-drucken.html"/>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://3dtoolbox.info/en/guide-print-prototypes.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3dtoolbox.info/ratgeber-prototypen-drucken.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/guide-print-prototypes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/ratgeber-prototypen-drucken.html"/>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
