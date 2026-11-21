@@ -91,3 +91,11 @@
 .mp h3{font-size:16px;margin:18px 0 4px}
 .mp ol,.mp ul{padding-left:1.3em}
 .mp .tb-tip{display:inline-block;padding:3px 10px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:12.5px;font-weight:600}
+.mp-ov{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:14px 16px;margin:0 0 20px;background:var(--panel-2)}
+.mp-ov h2{margin:0 0 10px!important;font-size:16px!important}
+.mp-ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:0}
+.mp-ov-grid div{min-width:0}.mp-ov-grid dt{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
+.mp-ov-grid dd{margin:2px 0 0;font-weight:600;overflow-wrap:anywhere}
+.mp-ov p{margin:10px 0 0;font-size:14px}
+.mp-ov-btn{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font:inherit;font-size:13px;cursor:pointer;margin-top:10px}
+.mp-ov-btn:hover,.mp-ov-btn:focus-visible{border-color:var(--accent);outline:none}

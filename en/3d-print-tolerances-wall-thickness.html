@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tolerances and Minimum Wall Thickness in 3D Printing (FAQ) | 3DToolBox</title>
+<meta name="description" content="How much clearance do fits need? What is the minimum wall? Guide values for FDM prints with a 0.4 mm nozzle: tolerance, holes, walls, overhangs, text.">
+<link rel="canonical" href="https://3dtoolbox.info/en/3d-print-tolerances-wall-thickness.html">
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/3d-druck-toleranzen-wandstaerke.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/3d-print-tolerances-wall-thickness.html">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/3d-druck-toleranzen-wandstaerke.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="3DToolBox">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Tolerances and Minimum Wall Thickness in 3D Printing (FAQ)">
+<meta property="og:description" content="How much clearance do fits need? What is the minimum wall? Guide values for FDM prints with a 0.4 mm nozzle: tolerance, holes, walls, overhangs, text.">
+<meta property="og:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta property="og:url" content="https://3dtoolbox.info/en/3d-print-tolerances-wall-thickness.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tolerances and Minimum Wall Thickness in 3D Printing (FAQ)">
+<meta name="twitter:description" content="How much clearance do fits need? What is the minimum wall? Guide values for FDM prints with a 0.4 mm nozzle: tolerance, holes, walls, overhangs, text.">
+<meta name="twitter:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Tolerances and Minimum Wall Thickness in 3D Printing (FAQ)","description":"How much clearance do fits need? What is the minimum wall? Guide values for FDM prints with a 0.4 mm nozzle: tolerance, holes, walls, overhangs, text.","inLanguage":"en","mainEntityOfPage":"https://3dtoolbox.info/en/3d-print-tolerances-wall-thickness.html","author":{"@type":"Organization","name":"3DToolBox"},"publisher":{"@type":"Organization","name":"3DToolBox"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What tolerance does a 3D printer have?","acceptedAnswer":{"@type":"Answer","text":"Typically about ±0.1 to ±0.3 mm, depending on printer, material and calibration."}},{"@type":"Question","name":"How much clearance do two mating parts need?","acceptedAnswer":{"@type":"Answer","text":"For moving parts and lids usually 0.2 to 0.3 mm. For tighter fits, check with a test piece first."}},{"@type":"Question","name":"What minimum wall thickness makes sense?","acceptedAnswer":{"@type":"Answer","text":"At least 0.8 mm, for strong parts 1.2 to 2 mm. A multiple of the nozzle width prints cleanest."}},{"@type":"Question","name":"Why are my holes too small?","acceptedAnswer":{"@type":"Answer","text":"FDM printing often makes inner contours slightly small. Add 0.3 to 0.5 mm for screw holes."}}]}]}</script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/material-page.css">
+<link rel="stylesheet" href="/assets/bedview.css">
+<script src="/assets/ref-config.js"></script>
+<script src="/assets/ref.js" defer></script>
+<link rel="stylesheet" href="/assets/theme.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
+</head>
+<body>
+<a class="tb-skip" href="#main">Skip to content</a>
+<div class="fm-root bt-sub">
+  <header class="tb-top">
+  <nav class="tb-nav" aria-label="Main navigation">
+    <a class="bt-logo" href="/en/" aria-label="3DToolBox"><svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true"><rect width="220" height="220" rx="44" fill="#FF6A2B"/><polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/><polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/><polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/></svg><span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span></a>
+    <input type="checkbox" id="tbm" class="tb-mchk" aria-label="Menu"><label for="tbm" class="tb-mbtn"><span></span><span></span><span></span><em>Menu</em></label>
+    <ul class="tb-menu"><li class="tb-grp"><details><summary>Filaments</summary><div class="tb-dd"><a href="/en/"><b>Filament Finder</b><span>Upload a photo or 3MF and find matching filaments</span></a><a href="/en/filament-database.html"><b>Filament Database</b><span>Browse 1000+ filaments by colour</span></a><a href="/en/3djake-filament-range.html"><b>3DJake range</b><span>Every in-stock 3DJake filament (ad)</span></a><a href="/en/filament-remaining-calculator.html"><b>Remaining Filament</b><span>How much filament is left on the spool?</span></a></div></details></li><li class="tb-grp"><details><summary>Tools</summary><div class="tb-dd"><a href="/en/3d-print-cost-calculator.html"><b>Cost Calculator</b><span>Material, power and wear costs live</span></a><a href="/en/print-bed-preview.html"><b>Print Bed Preview</b><span>See your model on the print bed and check the fit</span></a><a href="/en/3d-file-converter.html"><b>File Converter</b><span>Convert STL, 3MF, OBJ and STEP</span></a><a href="/en/image-to-3d.html"><b>Image to 3D</b><span>Turn a photo into a relief or lithophane</span></a></div></details></li><li class="tb-grp"><details><summary>Generators</summary><div class="tb-dd"><a href="/en/generators.html"><b>All generators</b><span>30+ generators with search</span></a><a href="/en/gridfinity-generator.html"><b>Gridfinity</b><span>Bins and baseplates on the 42 mm grid</span></a><a href="/en/enclosure-generator.html"><b>Enclosure Generator</b><span>Cases for Raspberry Pi, ESP32 and more</span></a><a href="/en/3d-print-object-generator.html"><b>Object Generator</b><span>Boxes, trays, cycloids and more</span></a><a href="/en/3d-print-planetary-gearbox-generator.html"><b>Planetary Gearbox</b><span>Gearbox with ring, planets and sun gear</span></a><a href="/en/3d-print-layered-name-tag.html"><b>Layered Name Tag</b><span>Multicolour name tags</span></a><a href="/en/3d-print-name-plate-tag.html"><b>Name Plate Tag</b><span>Name plate with tag</span></a></div></details></li><li class="tb-grp is-cur"><details><summary>Knowledge</summary><div class="tb-dd"><a href="/en/3d-print-lexicon.html"><b>Lexicon</b><span>Print problems, slicer tips and terms</span></a><a href="/en/3d-print-save-costs.html"><b>Save costs</b><span>Levers for cheaper prints</span></a><a href="/en/3d-print-tolerances-wall-thickness.html" aria-current="page"><b>Tolerances &amp; wall thickness</b><span>Clearances, fits and minimum values</span></a><a href="/en/guide-print-spare-parts.html"><b>Guide: spare parts</b><span>Reprint broken parts yourself</span></a><a href="/en/guide-print-prototypes.html"><b>Guide: prototypes</b><span>Fast route to a first sample</span></a><a href="/en/materials/"><b>Materials</b><span>PLA, PETG, ABS, ASA, TPU and more compared</span></a><a href="/en/slicer-settings-helper.html"><b>Slicer Helper</b><span>Settings for Bambu Studio, Prusa and Cura</span></a><a href="/en/edit-step-in-solidcraft.html"><b>STEP in SolidCraft</b><span>Keep editing generator parts in CAD</span></a></div></details></li><li class="tb-grp"><details><summary>Recommended</summary><div class="tb-dd"><small>External · not by us</small><a href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener sponsored"><b>Meshy AI ↗</b><span>Ad · AI: create a 3D model from text or an image</span></a><a href="https://than.gs/u/8355632" target="_blank" rel="noopener sponsored"><b>Thangs ↗</b><span>Ad · Large library of ready-to-print 3D models</span></a><a href="https://solidcraft.io" target="_blank" rel="noopener noreferrer"><b>SolidCraft ↗</b><span>Tip, not an ad · Free open-source CAD for designing your own parts</span></a></div></details></li></ul>
+    <div class="tb-tools"><div class="fm-lang-switch"><span class="fm-lang-current">EN</span><a class="fm-lang-link" href="/3d-druck-toleranzen-wandstaerke.html" hreflang="de">DE</a></div><button class="tb-theme" type="button" aria-label="Switch appearance (light/dark)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
+  </nav>
+  <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><span>Knowledge</span></li><li><span aria-current="page">Tolerances and minimum wall thickness</span></li></ol></nav>
+  </header>
+  <main id="main" tabindex="-1">
+
+  <header class="bt-subhero"><span class="bt-pill"><i></i>Knowledge</span><h1 class="fm-title">Tolerances and minimum wall thickness</h1><p class="fm-sub">Guide values for FDM prints so parts fit the first time and do not break.</p></header>
+  <ul class="bv-trust"><li>Free</li><li>No sign-up</li><li>No data sent: inputs stay in your browser</li></ul>
+  <section class="bt-panel mp">
+  <h2>Dimensional accuracy: what to expect</h2><p>A well-tuned FDM printer usually hits dimensions within about ±0.1 to ±0.3 mm. Outer dimensions are often slightly large, holes and inner contours slightly small. Heat, material shrinkage and the first layer (elephant foot) play a part. Always allow clearance for fits and print a small test piece.</p>
+  <h2>Guide values for clearance and holes</h2><div class="md-tablewrap"><table class="md-table"><thead><tr><th>Use</th><th>Guide value</th></tr></thead><tbody><tr><td>Moving parts, lids, snap fits</td><td>0.2 to 0.3 mm clearance</td></tr><tr><td>Clean, lightly sliding fit</td><td>0.1 to 0.2 mm clearance</td></tr><tr><td>Press fit</td><td>0 to 0.1 mm, only after testing</td></tr><tr><td>Hole for a screw</td><td>screw diameter + 0.3 to 0.5 mm (M3: about 3.4 mm)</td></tr><tr><td>Hole for a magnet or heat-set nut</td><td>size + 0.1 to 0.2 mm, then test</td></tr><tr><td>Small holes under 3 mm</td><td>tend to close up, better to drill out</td></tr></tbody></table></div>
+  <h2>Minimum walls and fine details</h2><div class="md-tablewrap"><table class="md-table"><thead><tr><th>Feature</th><th>Guide value (0.4 mm nozzle)</th></tr></thead><tbody><tr><td>Wall, simple</td><td>at least 0.8 mm (two lines); multiples of the line width print cleanest</td></tr><tr><td>Wall, strong</td><td>1.2 to 2 mm</td></tr><tr><td>Free-standing thin pins or ribs</td><td>at least about 1.5 mm, otherwise they snap easily</td></tr><tr><td>Text and embossing</td><td>stroke width from about 0.8 mm, height from 0.6 mm</td></tr><tr><td>Overhang without support</td><td>up to about 45 °</td></tr><tr><td>Bridge without support</td><td>short spans up to about 5 to 10 mm print cleanly</td></tr></tbody></table></div><p>You can set wall thickness and clearance directly in our <a href="/en/generators.html">generators</a>. Terms such as elephant foot or retraction are explained in the <a href="/en/3d-print-lexicon.html">lexicon</a>.</p>
+  <h2>How to test a fit</h2><ol class="mp-list"><li>Print a small test piece with just the critical dimensions (only the pin and the hole).</li><li>Measure with calipers and correct the clearance by the measured deviation.</li><li>Only then print the large part. This saves material and time.</li></ol>
+  <h2>Frequently asked questions</h2><details class="mp-faq"><summary>What tolerance does a 3D printer have?</summary><p>Typically about ±0.1 to ±0.3 mm, depending on printer, material and calibration.</p></details><details class="mp-faq"><summary>How much clearance do two mating parts need?</summary><p>For moving parts and lids usually 0.2 to 0.3 mm. For tighter fits, check with a test piece first.</p></details><details class="mp-faq"><summary>What minimum wall thickness makes sense?</summary><p>At least 0.8 mm, for strong parts 1.2 to 2 mm. A multiple of the nozzle width prints cleanest.</p></details><details class="mp-faq"><summary>Why are my holes too small?</summary><p>FDM printing often makes inner contours slightly small. Add 0.3 to 0.5 mm for screw holes.</p></details>
+  <p class="md-note">All values are practical guide values for FDM printers with a 0.4 mm nozzle. Every printer, filament and slicer behaves a little differently: always print a small test piece for fits.</p>
+  </section>
+  </main>
+  <footer class="tb-foot">
+    <div class="tb-foot-grid">
+      <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
+      <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/3djake-filament-range.html">3DJake range</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>
+      <nav aria-label="Tools"><b>Tools</b><a href="/en/3d-print-cost-calculator.html">Cost Calculator</a><a href="/en/print-bed-preview.html">Print Bed Preview</a><a href="/en/3d-file-converter.html">File Converter</a><a href="/en/image-to-3d.html">Image to 3D</a></nav>
+      <nav aria-label="Generators"><b>Generators</b><a href="/en/enclosure-generator.html">Enclosure Generator</a><a href="/en/3d-print-object-generator.html">Object Generator</a><a href="/en/3d-print-planetary-gearbox-generator.html">Planetary Gearbox</a><a href="/en/3d-print-layered-name-tag.html">Layered Name Tag</a><a href="/en/3d-print-name-plate-tag.html">Name Plate Tag</a><a href="/en/generators.html">All generators →</a></nav>
+      <nav aria-label="Knowledge"><b>Knowledge</b><a href="/en/3d-print-lexicon.html">Lexicon</a><a href="/en/3d-print-save-costs.html">Save costs</a><a href="/en/3d-print-tolerances-wall-thickness.html">Tolerances &amp; wall thickness</a><a href="/en/guide-print-spare-parts.html">Guide: spare parts</a><a href="/en/guide-print-prototypes.html">Guide: prototypes</a></nav>
+      <div class="tb-foot-creator"><b>Creator?</b><p>Do you show 3D printing in your content? Get in touch with a few details about your channel.</p><a class="tb-foot-btn" href="mailto:info@3dtoolbox.info?subject=Partner%20inquiry%20-%203DToolBox">Request a collaboration</a></div>
+    </div>
+    <div class="tb-foot-bot"><p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> A project by <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p><p class="tb-foot-legal"><a href="/en/impressum.html">Legal Notice</a><span aria-hidden="true">·</span><a href="/en/datenschutz.html">Privacy Policy</a><span aria-hidden="true">·</span><a href="/en/terms-of-use.html">Terms of Use</a></p></div>
+  </footer>
+</div>
+</body>
+</html>

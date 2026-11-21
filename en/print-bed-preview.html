@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Print Bed Preview: See Your Model on the 3D Printer Bed | 3DToolBox</title>
+<meta name="description" content="Load an STL, 3MF, OBJ or STEP file and see it live on your printer’s bed. Check the fit, lay it flat, estimate weight and print time. Free, runs in your browser.">
+<link rel="canonical" href="https://3dtoolbox.info/en/print-bed-preview.html">
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/druckbett-vorschau.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/print-bed-preview.html">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/druckbett-vorschau.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="3DToolBox">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Print Bed Preview: See Your Model on the 3D Printer Bed | 3DToolBox">
+<meta property="og:description" content="Load an STL, 3MF, OBJ or STEP file and see it live on your printer’s bed. Check the fit, lay it flat, estimate weight and print time. Free, runs in your browser.">
+<meta property="og:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta property="og:url" content="https://3dtoolbox.info/en/print-bed-preview.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Print Bed Preview: See Your Model on the 3D Printer Bed | 3DToolBox">
+<meta name="twitter:description" content="Load an STL, 3MF, OBJ or STEP file and see it live on your printer’s bed. Check the fit, lay it flat, estimate weight and print time. Free, runs in your browser.">
+<meta name="twitter:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Print Bed Preview","url":"https://3dtoolbox.info/en/print-bed-preview.html","description":"Load an STL, 3MF, OBJ or STEP file and see it live on your printer’s bed. Check the fit, lay it flat, estimate weight and print time. Free, runs in your browser.","applicationCategory":"DesignApplication","operatingSystem":"Any","inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/material-page.css">
+<link rel="stylesheet" href="/assets/bedview.css">
+<script src="/assets/ref-config.js"></script>
+<script src="/assets/ref.js" defer></script>
+<link rel="stylesheet" href="/assets/theme.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
+</head>
+<body>
+<a class="tb-skip" href="#main">Skip to content</a>
+<div class="fm-root bt-sub">
+  <header class="tb-top">
+  <nav class="tb-nav" aria-label="Main navigation">
+    <a class="bt-logo" href="/en/" aria-label="3DToolBox"><svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true"><rect width="220" height="220" rx="44" fill="#FF6A2B"/><polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/><polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/><polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/></svg><span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span></a>
+    <input type="checkbox" id="tbm" class="tb-mchk" aria-label="Menu"><label for="tbm" class="tb-mbtn"><span></span><span></span><span></span><em>Menu</em></label>
+    <ul class="tb-menu"><li class="tb-grp"><details><summary>Filaments</summary><div class="tb-dd"><a href="/en/"><b>Filament Finder</b><span>Upload a photo or 3MF and find matching filaments</span></a><a href="/en/filament-database.html"><b>Filament Database</b><span>Browse 1000+ filaments by colour</span></a><a href="/en/3djake-filament-range.html"><b>3DJake range</b><span>Every in-stock 3DJake filament (ad)</span></a><a href="/en/filament-remaining-calculator.html"><b>Remaining Filament</b><span>How much filament is left on the spool?</span></a></div></details></li><li class="tb-grp is-cur"><details><summary>Tools</summary><div class="tb-dd"><a href="/en/3d-print-cost-calculator.html"><b>Cost Calculator</b><span>Material, power and wear costs live</span></a><a href="/en/print-bed-preview.html" aria-current="page"><b>Print Bed Preview</b><span>See your model on the print bed and check the fit</span></a><a href="/en/3d-file-converter.html"><b>File Converter</b><span>Convert STL, 3MF, OBJ and STEP</span></a><a href="/en/image-to-3d.html"><b>Image to 3D</b><span>Turn a photo into a relief or lithophane</span></a></div></details></li><li class="tb-grp"><details><summary>Generators</summary><div class="tb-dd"><a href="/en/generators.html"><b>All generators</b><span>30+ generators with search</span></a><a href="/en/gridfinity-generator.html"><b>Gridfinity</b><span>Bins and baseplates on the 42 mm grid</span></a><a href="/en/enclosure-generator.html"><b>Enclosure Generator</b><span>Cases for Raspberry Pi, ESP32 and more</span></a><a href="/en/3d-print-object-generator.html"><b>Object Generator</b><span>Boxes, trays, cycloids and more</span></a><a href="/en/3d-print-planetary-gearbox-generator.html"><b>Planetary Gearbox</b><span>Gearbox with ring, planets and sun gear</span></a><a href="/en/3d-print-layered-name-tag.html"><b>Layered Name Tag</b><span>Multicolour name tags</span></a><a href="/en/3d-print-name-plate-tag.html"><b>Name Plate Tag</b><span>Name plate with tag</span></a></div></details></li><li class="tb-grp"><details><summary>Knowledge</summary><div class="tb-dd"><a href="/en/3d-print-lexicon.html"><b>Lexicon</b><span>Print problems, slicer tips and terms</span></a><a href="/en/3d-print-save-costs.html"><b>Save costs</b><span>Levers for cheaper prints</span></a><a href="/en/3d-print-tolerances-wall-thickness.html"><b>Tolerances &amp; wall thickness</b><span>Clearances, fits and minimum values</span></a><a href="/en/guide-print-spare-parts.html"><b>Guide: spare parts</b><span>Reprint broken parts yourself</span></a><a href="/en/guide-print-prototypes.html"><b>Guide: prototypes</b><span>Fast route to a first sample</span></a><a href="/en/materials/"><b>Materials</b><span>PLA, PETG, ABS, ASA, TPU and more compared</span></a><a href="/en/slicer-settings-helper.html"><b>Slicer Helper</b><span>Settings for Bambu Studio, Prusa and Cura</span></a><a href="/en/edit-step-in-solidcraft.html"><b>STEP in SolidCraft</b><span>Keep editing generator parts in CAD</span></a></div></details></li><li class="tb-grp"><details><summary>Recommended</summary><div class="tb-dd"><small>External · not by us</small><a href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener sponsored"><b>Meshy AI ↗</b><span>Ad · AI: create a 3D model from text or an image</span></a><a href="https://than.gs/u/8355632" target="_blank" rel="noopener sponsored"><b>Thangs ↗</b><span>Ad · Large library of ready-to-print 3D models</span></a><a href="https://solidcraft.io" target="_blank" rel="noopener noreferrer"><b>SolidCraft ↗</b><span>Tip, not an ad · Free open-source CAD for designing your own parts</span></a></div></details></li></ul>
+    <div class="tb-tools"><div class="fm-lang-switch"><span class="fm-lang-current">EN</span><a class="fm-lang-link" href="/druckbett-vorschau.html" hreflang="de">DE</a></div><button class="tb-theme" type="button" aria-label="Switch appearance (light/dark)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
+  </nav>
+  <nav class="tb-crumb" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li><span>Tools</span></li><li><span aria-current="page">Print Bed Preview</span></li></ol></nav>
+  </header>
+  <main id="main" tabindex="-1">
+
+  <header class="bt-subhero"><span class="bt-pill"><i></i>Tools</span><h1 class="fm-title">Print Bed Preview</h1><p class="fm-sub">Load your model and see at once how it sits on your printer’s bed. Size, fit, weight and print time at a glance.</p></header>
+  <ul class="bv-trust"><li>Runs locally in your browser</li><li>Your file is not uploaded</li><li>No sign-up</li><li>Free</li></ul>
+  <section class="bt-panel mp">
+  <div class="bv-grid">
+    <div>
+      <div class="bv-stage"><div id="bvCanvas" role="img" aria-label="Print Bed Preview"></div>
+        <div class="bv-views"><button class="bv-btn" type="button" data-view="iso">Iso</button><button class="bv-btn" type="button" data-view="top">Top</button><button class="bv-btn" type="button" data-view="front">Front</button><button class="bv-btn" type="button" data-view="side">Side</button></div></div>
+      <p id="bvEmpty" class="bv-empty">Load a file to see it on the print bed.</p>
+      <span id="bvFit" class="bv-fit" aria-live="polite" hidden></span>
+      <div id="bvInfo" hidden>
+        <div class="bv-res">
+          <div><small>Size (W × D × H)</small><b id="bvSize"></b></div><div><small>Footprint on bed</small><b id="bvFp"></b></div>
+          <div><small>Volume</small><b id="bvVol"></b></div><div><small>Weight</small><b id="bvW"></b></div>
+          <div><small>Print time</small><b id="bvTime"></b></div><div><small>Material cost</small><b id="bvCost"></b></div>
+          <div><small>Mesh</small><b id="bvMesh"></b></div><div><small>Triangles</small><b id="bvTris"></b></div>
+        </div>
+        <p id="bvHint" class="bv-hint" hidden></p><p id="bvMeshMsg" class="bv-hint" hidden></p>
+        <p class="bv-note">Estimates: weight and time are derived from volume, surface and infill. Your slicer is more precise. Printer build heights are guide values, you can change them.</p>
+        <a id="bvCalc" class="bv-link" href="#">Continue in the cost calculator →</a>
+      </div>
+    </div>
+    <div>
+      <div class="bv-step"><h2><i>1</i>Choose your printer</h2>
+        <label>Printer<select id="bvPrinter"></select></label>
+        <label style="margin-top:8px">Build height (mm, guide value)<input id="bvH" type="number" min="20" max="1000" step="1" value="256"></label></div>
+      <div class="bv-step"><h2><i>2</i>Load a file</h2>
+        <div id="bvDrop" class="bv-drop" role="button" tabindex="0"><b>Drop a file here or click</b><span>STL, 3MF, OBJ or STEP</span><span id="bvFile"></span></div>
+        <input id="bvInput" type="file" accept=".stl,.3mf,.obj,.step,.stp" hidden>
+        <p id="bvStatus" class="bv-status" role="status"></p></div>
+      <div class="bv-step"><h2><i>3</i>Orient</h2>
+        <div class="bv-radio" role="radiogroup" aria-label="File unit"><span>File unit:</span><label><input type="radio" name="bvUnit" id="bvUnitMm" value="1" checked>mm</label><label><input type="radio" name="bvUnit" id="bvUnitIn" value="25.4">inch</label></div>
+        <label style="margin-top:8px">Scale (%)<input id="bvScale" type="number" min="1" max="10000" step="1" value="100"></label>
+        <div class="bv-tools"><button id="bvFlat" class="bv-btn" type="button">Lay flat on largest face</button>
+          <button class="bv-btn" type="button" data-rot="x:90">X 90°</button><button class="bv-btn" type="button" data-rot="y:90">Y 90°</button><button class="bv-btn" type="button" data-rot="z:90">Z 90°</button>
+          <button id="bvReset" class="bv-btn" type="button">Reset orientation</button></div></div>
+      <div class="bv-step"><h2><i>4</i>Material and infill</h2>
+        <div class="bv-row"><label>Material<select id="bvMat"></select></label><label>Price per kg (€)<input id="bvPrice" type="number" min="1" max="1000" step="1" value="20"></label></div>
+        <label style="margin-top:8px">Infill: <b id="bvInfillOut">15 %</b><input id="bvInfill" type="range" min="5" max="100" step="5" value="15"></label></div>
+    </div>
+  </div>
+  </section>
+  <section class="bt-panel mp"><h2>How it works</h2><ol class="mp-list"><li>Choose your printer: the bed is shown at your printer’s size.</li><li>Load a file: the model appears in the middle of the bed. Drag to rotate, scroll to zoom.</li><li>Orient: lay it flat on its largest face or rotate in 90° steps. Red means it does not fit.</li><li>Choose a material: you see weight, print time and material cost as a guide.</li></ol>
+  <h2>Good to know</h2><ul class="mp-list"><li>The preview does not replace a slicer. Supports, brim, layer lines and exact times only come there.</li><li>For multi-colour prints with nozzle changes (e.g. H2C) the usable build volume can be smaller than shown here.</li><li>More help on sizes and clearances: <a href="/en/3d-print-tolerances-wall-thickness.html">tolerances and wall thickness</a> and the <a href="/en/3d-print-lexicon.html">lexicon</a>.</li></ul></section>
+  </main>
+  <footer class="tb-foot">
+    <div class="tb-foot-grid">
+      <div class="tb-foot-about"><b>3DToolBox</b><p>Free tools for 3D printing. Everything runs in your browser, no account needed.</p></div>
+      <nav aria-label="Filaments"><b>Filaments</b><a href="/en/">Filament Finder</a><a href="/en/filament-database.html">Filament Database</a><a href="/en/3djake-filament-range.html">3DJake range</a><a href="/en/filament-remaining-calculator.html">Remaining Filament</a></nav>
+      <nav aria-label="Tools"><b>Tools</b><a href="/en/3d-print-cost-calculator.html">Cost Calculator</a><a href="/en/print-bed-preview.html">Print Bed Preview</a><a href="/en/3d-file-converter.html">File Converter</a><a href="/en/image-to-3d.html">Image to 3D</a></nav>
+      <nav aria-label="Generators"><b>Generators</b><a href="/en/enclosure-generator.html">Enclosure Generator</a><a href="/en/3d-print-object-generator.html">Object Generator</a><a href="/en/3d-print-planetary-gearbox-generator.html">Planetary Gearbox</a><a href="/en/3d-print-layered-name-tag.html">Layered Name Tag</a><a href="/en/3d-print-name-plate-tag.html">Name Plate Tag</a><a href="/en/generators.html">All generators →</a></nav>
+      <nav aria-label="Knowledge"><b>Knowledge</b><a href="/en/3d-print-lexicon.html">Lexicon</a><a href="/en/3d-print-save-costs.html">Save costs</a><a href="/en/3d-print-tolerances-wall-thickness.html">Tolerances &amp; wall thickness</a><a href="/en/guide-print-spare-parts.html">Guide: spare parts</a><a href="/en/guide-print-prototypes.html">Guide: prototypes</a></nav>
+      <div class="tb-foot-creator"><b>Creator?</b><p>Do you show 3D printing in your content? Get in touch with a few details about your channel.</p><a class="tb-foot-btn" href="mailto:info@3dtoolbox.info?subject=Partner%20inquiry%20-%203DToolBox">Request a collaboration</a></div>
+    </div>
+    <div class="tb-foot-bot"><p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> A project by <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p><p class="tb-foot-legal"><a href="/en/impressum.html">Legal Notice</a><span aria-hidden="true">·</span><a href="/en/datenschutz.html">Privacy Policy</a><span aria-hidden="true">·</span><a href="/en/terms-of-use.html">Terms of Use</a></p></div>
+  </footer>
+</div>
+<script src="/assets/vendor/three/three.min.js"></script>
+<script src="/assets/vendor/three/OrbitControls.js"></script>
+<script src="/assets/converter-core.js"></script>
+<script src="/assets/print-dock.js"></script>
+<script src="/assets/bedview.js"></script>
+</body>
+</html>

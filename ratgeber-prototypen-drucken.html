@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prototypen 3D-drucken: Vom Entwurf zum ersten Muster | 3DToolBox</title>
+<meta name="description" content="So kommst du mit dem 3D-Drucker schnell zum Prototyp: Vorgehen, Material, Einstellungen und ehrliche Grenzen gegenüber dem Serienteil.">
+<link rel="canonical" href="https://3dtoolbox.info/ratgeber-prototypen-drucken.html">
+<link rel="alternate" hreflang="de" href="https://3dtoolbox.info/ratgeber-prototypen-drucken.html">
+<link rel="alternate" hreflang="en" href="https://3dtoolbox.info/en/guide-print-prototypes.html">
+<link rel="alternate" hreflang="x-default" href="https://3dtoolbox.info/ratgeber-prototypen-drucken.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="3DToolBox">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="Prototypen 3D-drucken: Vom Entwurf zum ersten Muster">
+<meta property="og:description" content="So kommst du mit dem 3D-Drucker schnell zum Prototyp: Vorgehen, Material, Einstellungen und ehrliche Grenzen gegenüber dem Serienteil.">
+<meta property="og:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta property="og:url" content="https://3dtoolbox.info/ratgeber-prototypen-drucken.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Prototypen 3D-drucken: Vom Entwurf zum ersten Muster">
+<meta name="twitter:description" content="So kommst du mit dem 3D-Drucker schnell zum Prototyp: Vorgehen, Material, Einstellungen und ehrliche Grenzen gegenüber dem Serienteil.">
+<meta name="twitter:image" content="https://3dtoolbox.info/assets/og-image.png">
+<meta name="impact-site-verification" value="d9f2e77f-7d09-4a51-8edd-e7dffea888c4">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Prototypen 3D-drucken: Vom Entwurf zum ersten Muster","description":"So kommst du mit dem 3D-Drucker schnell zum Prototyp: Vorgehen, Material, Einstellungen und ehrliche Grenzen gegenüber dem Serienteil.","inLanguage":"de","mainEntityOfPage":"https://3dtoolbox.info/ratgeber-prototypen-drucken.html","author":{"@type":"Organization","name":"3DToolBox"},"publisher":{"@type":"Organization","name":"3DToolBox"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Wie schnell bekomme ich einen Prototyp?","acceptedAnswer":{"@type":"Answer","text":"Kleine Teile sind oft in ein bis drei Stunden gedruckt, größere brauchen einen Tag. Dicke Schichten und wenig Füllung beschleunigen."}},{"@type":"Question","name":"Ist ein FDM-Prototyp so stabil wie das Serienteil?","acceptedAnswer":{"@type":"Answer","text":"Meist nicht. Gedruckte Teile sind in Schichtrichtung schwächer und weichen im Material ab."}},{"@type":"Question","name":"Welches Material nehme ich für Prototypen?","acceptedAnswer":{"@type":"Answer","text":"In den meisten Fällen PLA. Für Funktionstests mit Wärme oder Zähigkeit PETG oder ASA."}}]}]}</script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/material-page.css">
+<link rel="stylesheet" href="/assets/bedview.css">
+<script src="/assets/ref-config.js"></script>
+<script src="/assets/ref.js" defer></script>
+<link rel="stylesheet" href="/assets/theme.css">
+<script src="/assets/theme-init.js"></script>
+<script src="/assets/ui.js" defer></script>
+</head>
+<body>
+<a class="tb-skip" href="#main">Zum Inhalt springen</a>
+<div class="fm-root bt-sub">
+  <header class="tb-top">
+  <nav class="tb-nav" aria-label="Hauptnavigation">
+    <a class="bt-logo" href="/" aria-label="3DToolBox"><svg viewBox="0 0 220 220" class="fm-brand-icon" aria-hidden="true"><rect width="220" height="220" rx="44" fill="#FF6A2B"/><polygon points="110,40 175,77.5 110,115 45,77.5" fill="#3E5169"/><polygon points="45,77.5 110,115 110,190 45,152.5" fill="#26313F"/><polygon points="110,115 175,77.5 175,152.5 110,190" fill="#161D26"/></svg><span class="fm-brand-word"><span class="fm-brand-3d">3D</span>ToolBox</span></a>
+    <input type="checkbox" id="tbm" class="tb-mchk" aria-label="Menü"><label for="tbm" class="tb-mbtn"><span></span><span></span><span></span><em>Menü</em></label>
+    <ul class="tb-menu"><li class="tb-grp"><details><summary>Filamente</summary><div class="tb-dd"><a href="/"><b>Filament-Finder</b><span>Foto oder 3MF hochladen, passende Filamente finden</span></a><a href="/filament-datenbank.html"><b>Filament-Datenbank</b><span>Über 1000 Filamente nach Farbe durchsuchen</span></a><a href="/filament-3djake-sortiment.html"><b>3DJake-Sortiment</b><span>Alle lieferbaren Filamente von 3DJake (Werbung)</span></a><a href="/filament-restmengenrechner.html"><b>Restmengenrechner</b><span>Wie viel Filament ist noch auf der Spule?</span></a></div></details></li><li class="tb-grp"><details><summary>Werkzeuge</summary><div class="tb-dd"><a href="/3d-druck-kostenrechner.html"><b>Kostenrechner</b><span>Material, Strom und Verschleiß live berechnen</span></a><a href="/druckbett-vorschau.html"><b>Druckbett-Vorschau</b><span>Modell auf dem Druckbett ansehen und Passung prüfen</span></a><a href="/3d-datei-konverter.html"><b>Datei-Konverter</b><span>STL, 3MF, OBJ und STEP umwandeln</span></a><a href="/bild-zu-3d.html"><b>Bild zu 3D</b><span>Foto in Relief oder Lithophanie verwandeln</span></a></div></details></li><li class="tb-grp"><details><summary>Generatoren</summary><div class="tb-dd"><a href="/generatoren.html"><b>Alle Generatoren</b><span>Über 30 Generatoren mit Suche</span></a><a href="/gridfinity-generator.html"><b>Gridfinity</b><span>Behälter und Grundplatten im 42-mm-Raster</span></a><a href="/gehaeuse-generator.html"><b>Gehäuse-Generator</b><span>Gehäuse für Raspberry Pi, ESP32 und mehr</span></a><a href="/3d-druck-objektgenerator.html"><b>Objekt-Generator</b><span>Boxen, Tabletts, Zykloiden und mehr</span></a><a href="/3d-druck-planetengetriebe-generator.html"><b>Planetengetriebe</b><span>Getriebe mit Hohlrad, Planeten und Sonne</span></a><a href="/3d-druck-namens-anhaenger.html"><b>Namens-Anhänger</b><span>Mehrfarbige Anhänger mit Namen</span></a><a href="/3d-druck-namensschild-anhaenger.html"><b>Namensschild</b><span>Namensschild mit Anhänger</span></a></div></details></li><li class="tb-grp is-cur"><details><summary>Wissen</summary><div class="tb-dd"><a href="/3d-druck-lexikon.html"><b>Lexikon</b><span>Druckprobleme, Slicer-Tipps und Begriffe</span></a><a href="/3d-druck-kosten-sparen.html"><b>Kosten sparen</b><span>Hebel für günstigere Drucke</span></a><a href="/3d-druck-toleranzen-wandstaerke.html"><b>Toleranzen &amp; Wandstärken</b><span>Spiel, Passungen und Mindestwerte</span></a><a href="/ratgeber-ersatzteile-drucken.html"><b>Ratgeber: Ersatzteile</b><span>Defekte Teile selbst nachdrucken</span></a><a href="/ratgeber-prototypen-drucken.html" aria-current="page"><b>Ratgeber: Prototypen</b><span>Schnell zum ersten Muster</span></a><a href="/materialien/"><b>Materialien</b><span>PLA, PETG, ABS, ASA, TPU und mehr im Vergleich</span></a><a href="/slicer-einstellungen-helfer.html"><b>Slicer-Helfer</b><span>Einstellungen für Bambu Studio, Prusa und Cura</span></a><a href="/solidcraft-step-bearbeiten.html"><b>STEP in SolidCraft</b><span>Teile aus dem Generator in CAD weiter bearbeiten</span></a></div></details></li><li class="tb-grp"><details><summary>Empfehlungen</summary><div class="tb-dd"><small>Extern · nicht von uns</small><a href="https://www.meshy.ai?via=3dekoprint" target="_blank" rel="noopener sponsored"><b>Meshy AI ↗</b><span>Werbung · KI: aus Text oder Bild ein 3D-Modell erstellen</span></a><a href="https://than.gs/u/8355632" target="_blank" rel="noopener sponsored"><b>Thangs ↗</b><span>Werbung · Große Bibliothek fertiger 3D-Modelle</span></a><a href="https://solidcraft.io" target="_blank" rel="noopener noreferrer"><b>SolidCraft ↗</b><span>Tipp, keine Werbung · Kostenloses Open-Source-CAD zum Konstruieren eigener Teile</span></a></div></details></li></ul>
+    <div class="tb-tools"><div class="fm-lang-switch"><span class="fm-lang-current">DE</span><a class="fm-lang-link" href="/en/guide-print-prototypes.html" hreflang="en">EN</a></div><button class="tb-theme" type="button" aria-label="Darstellung wechseln (hell/dunkel)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
+  </nav>
+  <nav class="tb-crumb" aria-label="Brotkrumen"><ol><li><a href="/">Startseite</a></li><li><span>Wissen</span></li><li><span aria-current="page">Prototypen 3D-drucken</span></li></ol></nav>
+  </header>
+  <main id="main" tabindex="-1">
+
+  <header class="bt-subhero"><span class="bt-pill"><i></i>Wissen</span><h1 class="fm-title">Prototypen 3D-drucken</h1><p class="fm-sub">Mit einem FDM-Drucker kommst du in Stunden vom Entwurf zum anfassbaren Muster. Für Funktion und Passform ideal, für Serienaussagen nur begrenzt.</p></header>
+  <ul class="bv-trust"><li>Kostenlos</li><li>Ohne Anmeldung</li><li>Keine Datenweitergabe: Eingaben bleiben im Browser</li></ul>
+  <section class="bt-panel mp">
+  <h2>Wofür Prototypen aus dem Drucker taugen</h2><ul class="mp-list"><li>Passform und Maße am echten Teil prüfen</li><li>Ergonomie, Griffigkeit und Größe beurteilen</li><li>Gehäuse, Halter und Montage testen</li><li>Schnelle Varianten vergleichen, bevor Geld in Werkzeuge fließt</li></ul>
+  <h2>Ehrliche Grenzen</h2><p>Ein gedruckter Prototyp verhält sich nicht wie ein Spritzgussteil. Festigkeit in Schichtrichtung, Oberfläche, Maßhaltigkeit und Materialverhalten weichen ab. Aussagen über Lebensdauer, Zulassung oder Serienkosten lassen sich daraus nur begrenzt ableiten. Prüfe kritische Eigenschaften am späteren Fertigungsverfahren.</p>
+  <h2>Vorgehen</h2><ol class="mp-list"><li><b>Ziel festlegen:</b> Was soll der Prototyp zeigen: Maße, Funktion oder Optik?</li><li><b>Schnell drucken:</b> Dicke Schichten (0,2 bis 0,3 mm) und wenig Füllung (10 bis 15 %) sparen Zeit und Geld, siehe <a href="/3d-druck-kosten-sparen.html">Kosten sparen</a>.</li><li><b>Passung testen:</b> Spiel nach den <a href="/3d-druck-toleranzen-wandstaerke.html">Richtwerten</a> einplanen.</li><li><b>Prüfen:</b> In der <a href="/druckbett-vorschau.html">Druckbett-Vorschau</a> Größe und Lage kontrollieren.</li><li><b>Iterieren:</b> Maße anpassen und neu drucken. Gehäuse und Halter lassen sich mit den <a href="/generatoren.html">Generatoren</a> parametrisch ändern.</li></ol>
+  <h2>Material für Prototypen</h2><p>Für fast alle Muster reicht <a href="/materialien/pla.html">PLA</a>: günstig, maßhaltig, einfach. Brauchst du Zähigkeit oder Wärme für einen Funktionstest, nimm <a href="/materialien/petg.html">PETG</a> oder <a href="/materialien/asa.html">ASA</a>. Eine Übersicht findest du bei den <a href="/materialien/">Materialien</a>.</p>
+  <h2>Häufige Fragen</h2><details class="mp-faq"><summary>Wie schnell bekomme ich einen Prototyp?</summary><p>Kleine Teile sind oft in ein bis drei Stunden gedruckt, größere brauchen einen Tag. Dicke Schichten und wenig Füllung beschleunigen.</p></details><details class="mp-faq"><summary>Ist ein FDM-Prototyp so stabil wie das Serienteil?</summary><p>Meist nicht. Gedruckte Teile sind in Schichtrichtung schwächer und weichen im Material ab.</p></details><details class="mp-faq"><summary>Welches Material nehme ich für Prototypen?</summary><p>In den meisten Fällen PLA. Für Funktionstests mit Wärme oder Zähigkeit PETG oder ASA.</p></details>
+  <p class="md-note">Alle Werte sind Richtwerte aus der Praxis von FDM-Druckern mit 0,4-mm-Düse. Jeder Drucker, jedes Filament und jeder Slicer verhält sich etwas anders: Drucke bei Passungen immer ein kleines Testteil.</p>
+  </section>
+  </main>
+  <footer class="tb-foot">
+    <div class="tb-foot-grid">
+      <div class="tb-foot-about"><b>3DToolBox</b><p>Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.</p></div>
+      <nav aria-label="Filamente"><b>Filamente</b><a href="/">Filament-Finder</a><a href="/filament-datenbank.html">Filament-Datenbank</a><a href="/filament-3djake-sortiment.html">3DJake-Sortiment</a><a href="/filament-restmengenrechner.html">Restmengenrechner</a></nav>
+      <nav aria-label="Werkzeuge"><b>Werkzeuge</b><a href="/3d-druck-kostenrechner.html">Kostenrechner</a><a href="/druckbett-vorschau.html">Druckbett-Vorschau</a><a href="/3d-datei-konverter.html">Datei-Konverter</a><a href="/bild-zu-3d.html">Bild zu 3D</a></nav>
+      <nav aria-label="Generatoren"><b>Generatoren</b><a href="/gehaeuse-generator.html">Gehäuse-Generator</a><a href="/3d-druck-objektgenerator.html">Objekt-Generator</a><a href="/3d-druck-planetengetriebe-generator.html">Planetengetriebe</a><a href="/3d-druck-namens-anhaenger.html">Namens-Anhänger</a><a href="/3d-druck-namensschild-anhaenger.html">Namensschild</a><a href="/generatoren.html">Alle Generatoren →</a></nav>
+      <nav aria-label="Wissen"><b>Wissen</b><a href="/3d-druck-lexikon.html">Lexikon</a><a href="/3d-druck-kosten-sparen.html">Kosten sparen</a><a href="/3d-druck-toleranzen-wandstaerke.html">Toleranzen &amp; Wandstärken</a><a href="/ratgeber-ersatzteile-drucken.html">Ratgeber: Ersatzteile</a><a href="/ratgeber-prototypen-drucken.html">Ratgeber: Prototypen</a></nav>
+      <div class="tb-foot-creator"><b>Creator?</b><p>Du zeigst 3D-Druck in deinem Content? Melde dich mit ein paar Infos zu deinem Kanal.</p><a class="tb-foot-btn" href="mailto:info@3dtoolbox.info?subject=Partneranfrage%203DToolBox">Kooperation anfragen</a></div>
+    </div>
+    <div class="tb-foot-bot"><p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> Ein Projekt von <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p><p class="tb-foot-legal"><a href="/impressum.html">Impressum</a><span aria-hidden="true">·</span><a href="/datenschutz.html">Datenschutz</a><span aria-hidden="true">·</span><a href="/nutzungshinweise.html">Nutzungshinweise</a></p></div>
+  </footer>
+</div>
+</body>
+</html>

@@ -15,6 +15,11 @@ const P = {
   rest: ['/filament-restmengenrechner.html', '/en/filament-remaining-calculator.html'],
   cost: ['/3d-druck-kostenrechner.html', '/en/3d-print-cost-calculator.html'],
   conv: ['/3d-datei-konverter.html', '/en/3d-file-converter.html'],
+  bed: ['/druckbett-vorschau.html', '/en/print-bed-preview.html'],
+  spar: ['/3d-druck-kosten-sparen.html', '/en/3d-print-save-costs.html'],
+  tol: ['/3d-druck-toleranzen-wandstaerke.html', '/en/3d-print-tolerances-wall-thickness.html'],
+  spare: ['/ratgeber-ersatzteile-drucken.html', '/en/guide-print-spare-parts.html'],
+  proto: ['/ratgeber-prototypen-drucken.html', '/en/guide-print-prototypes.html'],
   img: ['/bild-zu-3d.html', '/en/image-to-3d.html'],
   slicer: ['/slicer-einstellungen-helfer.html', '/en/slicer-settings-helper.html'],
   lex: ['/3d-druck-lexikon.html', '/en/3d-print-lexicon.html'],
@@ -35,9 +40,9 @@ const L = {
     nav: 'Hauptnavigation', menu: 'Menü', theme: 'Darstellung wechseln (hell/dunkel)', crumb: 'Brotkrumen', home: 'Startseite',
     groups: [
       { id: 'fil', label: 'Filamente', items: [['finder', 'Filament-Finder', 'Foto oder 3MF hochladen, passende Filamente finden'], ['db', 'Filament-Datenbank', 'Über 1000 Filamente nach Farbe durchsuchen'], ['jake', '3DJake-Sortiment', 'Alle lieferbaren Filamente von 3DJake (Werbung)'], ['rest', 'Restmengenrechner', 'Wie viel Filament ist noch auf der Spule?']] },
-      { id: 'tool', label: 'Werkzeuge', items: [['cost', 'Kostenrechner', 'Material, Strom und Verschleiß live berechnen'], ['conv', 'Datei-Konverter', 'STL, 3MF, OBJ und STEP umwandeln'], ['img', 'Bild zu 3D', 'Foto in Relief oder Lithophanie verwandeln']] },
+      { id: 'tool', label: 'Werkzeuge', items: [['cost', 'Kostenrechner', 'Material, Strom und Verschleiß live berechnen'], ['bed', 'Druckbett-Vorschau', 'Modell auf dem Druckbett ansehen und Passung prüfen'], ['conv', 'Datei-Konverter', 'STL, 3MF, OBJ und STEP umwandeln'], ['img', 'Bild zu 3D', 'Foto in Relief oder Lithophanie verwandeln']] },
       { id: 'gen', label: 'Generatoren', items: [['hub', 'Alle Generatoren', 'Über 30 Generatoren mit Suche'], ['grid', 'Gridfinity', 'Behälter und Grundplatten im 42-mm-Raster'], ['case', 'Gehäuse-Generator', 'Gehäuse für Raspberry Pi, ESP32 und mehr'], ['obj', 'Objekt-Generator', 'Boxen, Tabletts, Zykloiden und mehr'], ['gear', 'Planetengetriebe', 'Getriebe mit Hohlrad, Planeten und Sonne'], ['tag', 'Namens-Anhänger', 'Mehrfarbige Anhänger mit Namen'], ['plate', 'Namensschild', 'Namensschild mit Anhänger']] },
-      { id: 'wiss', label: 'Wissen', items: [['lex', 'Lexikon', 'Druckprobleme, Slicer-Tipps und Begriffe'], ['mat', 'Materialien', 'PLA, PETG, ABS, ASA, TPU und mehr im Vergleich'], ['slicer', 'Slicer-Helfer', 'Einstellungen für Bambu Studio, Prusa und Cura'], ['solid', 'STEP in SolidCraft', 'Teile aus dem Generator in CAD weiter bearbeiten']] }
+      { id: 'wiss', label: 'Wissen', items: [['lex', 'Lexikon', 'Druckprobleme, Slicer-Tipps und Begriffe'], ['spar', 'Kosten sparen', 'Hebel für günstigere Drucke'], ['tol', 'Toleranzen & Wandstärken', 'Spiel, Passungen und Mindestwerte'], ['spare', 'Ratgeber: Ersatzteile', 'Defekte Teile selbst nachdrucken'], ['proto', 'Ratgeber: Prototypen', 'Schnell zum ersten Muster'], ['mat', 'Materialien', 'PLA, PETG, ABS, ASA, TPU und mehr im Vergleich'], ['slicer', 'Slicer-Helfer', 'Einstellungen für Bambu Studio, Prusa und Cura'], ['solid', 'STEP in SolidCraft', 'Teile aus dem Generator in CAD weiter bearbeiten']] }
     ],
     ext: { id: 'ext', label: 'Empfehlungen', note: 'Extern · nicht von uns', items: [['https://www.meshy.ai?via=3dekoprint', 'Meshy AI ↗', 'KI: aus Text oder Bild ein 3D-Modell erstellen'], ['https://than.gs/u/8355632', 'Thangs ↗', 'Große Bibliothek fertiger 3D-Modelle'], ['https://solidcraft.io', 'SolidCraft ↗', 'Kostenloses Open-Source-CAD zum Konstruieren eigener Teile', 'tip']] },
     foot: {
@@ -51,9 +56,9 @@ const L = {
     nav: 'Main navigation', menu: 'Menu', theme: 'Switch appearance (light/dark)', crumb: 'Breadcrumb', home: 'Home',
     groups: [
       { id: 'fil', label: 'Filaments', items: [['finder', 'Filament Finder', 'Upload a photo or 3MF and find matching filaments'], ['db', 'Filament Database', 'Browse 1000+ filaments by colour'], ['jake', '3DJake range', 'Every in-stock 3DJake filament (ad)'], ['rest', 'Remaining Filament', 'How much filament is left on the spool?']] },
-      { id: 'tool', label: 'Tools', items: [['cost', 'Cost Calculator', 'Material, power and wear costs live'], ['conv', 'File Converter', 'Convert STL, 3MF, OBJ and STEP'], ['img', 'Image to 3D', 'Turn a photo into a relief or lithophane']] },
+      { id: 'tool', label: 'Tools', items: [['cost', 'Cost Calculator', 'Material, power and wear costs live'], ['bed', 'Print Bed Preview', 'See your model on the print bed and check the fit'], ['conv', 'File Converter', 'Convert STL, 3MF, OBJ and STEP'], ['img', 'Image to 3D', 'Turn a photo into a relief or lithophane']] },
       { id: 'gen', label: 'Generators', items: [['hub', 'All generators', '30+ generators with search'], ['grid', 'Gridfinity', 'Bins and baseplates on the 42 mm grid'], ['case', 'Enclosure Generator', 'Cases for Raspberry Pi, ESP32 and more'], ['obj', 'Object Generator', 'Boxes, trays, cycloids and more'], ['gear', 'Planetary Gearbox', 'Gearbox with ring, planets and sun gear'], ['tag', 'Layered Name Tag', 'Multicolour name tags'], ['plate', 'Name Plate Tag', 'Name plate with tag']] },
-      { id: 'wiss', label: 'Knowledge', items: [['lex', 'Lexicon', 'Print problems, slicer tips and terms'], ['mat', 'Materials', 'PLA, PETG, ABS, ASA, TPU and more compared'], ['slicer', 'Slicer Helper', 'Settings for Bambu Studio, Prusa and Cura'], ['solid', 'STEP in SolidCraft', 'Keep editing generator parts in CAD']] }
+      { id: 'wiss', label: 'Knowledge', items: [['lex', 'Lexicon', 'Print problems, slicer tips and terms'], ['spar', 'Save costs', 'Levers for cheaper prints'], ['tol', 'Tolerances & wall thickness', 'Clearances, fits and minimum values'], ['spare', 'Guide: spare parts', 'Reprint broken parts yourself'], ['proto', 'Guide: prototypes', 'Fast route to a first sample'], ['mat', 'Materials', 'PLA, PETG, ABS, ASA, TPU and more compared'], ['slicer', 'Slicer Helper', 'Settings for Bambu Studio, Prusa and Cura'], ['solid', 'STEP in SolidCraft', 'Keep editing generator parts in CAD']] }
     ],
     ext: { id: 'ext', label: 'Recommended', note: 'External · not by us', items: [['https://www.meshy.ai?via=3dekoprint', 'Meshy AI ↗', 'AI: create a 3D model from text or an image'], ['https://than.gs/u/8355632', 'Thangs ↗', 'Large library of ready-to-print 3D models'], ['https://solidcraft.io', 'SolidCraft ↗', 'Free open-source CAD for designing your own parts', 'tip']] },
     foot: {
