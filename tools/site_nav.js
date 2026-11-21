@@ -43,7 +43,7 @@ const L = {
     foot: {
       about: 'Kostenlose Werkzeuge für den 3D-Druck. Alles läuft in deinem Browser, ohne Konto.',
       creatorT: 'Creator?', creatorP: 'Du zeigst 3D-Druck in deinem Content? Melde dich mit ein paar Infos zu deinem Kanal.', creatorBtn: 'Kooperation anfragen', mailSubj: 'Partneranfrage%203DToolBox',
-      coop: 'Ein Projekt von', imp: 'Impressum', priv: 'Datenschutz', impUrl: '/impressum.html', privUrl: '/datenschutz.html'
+      coop: 'Ein Projekt von', imp: 'Impressum', priv: 'Datenschutz', terms: 'Nutzungshinweise', termsUrl: '/nutzungshinweise.html', impUrl: '/impressum.html', privUrl: '/datenschutz.html'
     }
   },
   en: {
@@ -59,7 +59,7 @@ const L = {
     foot: {
       about: 'Free tools for 3D printing. Everything runs in your browser, no account needed.',
       creatorT: 'Creator?', creatorP: 'Do you show 3D printing in your content? Get in touch with a few details about your channel.', creatorBtn: 'Request a collaboration', mailSubj: 'Partner%20inquiry%20-%203DToolBox',
-      coop: 'A project by', imp: 'Legal Notice', priv: 'Privacy Policy', impUrl: '/en/impressum.html', privUrl: '/en/datenschutz.html'
+      coop: 'A project by', imp: 'Legal Notice', priv: 'Privacy Policy', terms: 'Terms of Use', termsUrl: '/en/terms-of-use.html', impUrl: '/en/impressum.html', privUrl: '/en/datenschutz.html'
     }
   }
 };
@@ -125,7 +125,7 @@ function footer(lg) {
   return '  <footer class="tb-foot">\n    <div class="tb-foot-grid">\n      <div class="tb-foot-about"><b>3DToolBox</b><p>' + esc(F.about) + '</p></div>\n      ' + T.groups.map(col).join('\n      ') + '\n' +
     '      <div class="tb-foot-creator"><b>' + F.creatorT + '</b><p>' + esc(F.creatorP) + '</p><a class="tb-foot-btn" href="mailto:info@3dtoolbox.info?subject=' + F.mailSubj + '">' + esc(F.creatorBtn) + '</a></div>\n    </div>\n' +
     '    <div class="tb-foot-bot"><p class="fm-footer-coop"><img src="/assets/3dekoprint-logo.png" alt="3DekoPrint Logo" class="fm-footer-logo" width="20" height="20"> ' + F.coop + ' <a href="https://3dekoprint.de" target="_blank" rel="noopener">3DekoPrint</a></p>' +
-    '<p class="tb-foot-legal"><a href="' + F.impUrl + '">' + F.imp + '</a><span aria-hidden="true">·</span><a href="' + F.privUrl + '">' + F.priv + '</a></p></div>\n  </footer>\n';
+    '<p class="tb-foot-legal"><a href="' + F.impUrl + '">' + F.imp + '</a><span aria-hidden="true">·</span><a href="' + F.privUrl + '">' + F.priv + '</a><span aria-hidden="true">·</span><a href="' + F.termsUrl + '">' + F.terms + '</a></p></div>\n  </footer>\n';
 }
 
 module.exports = { header, footer, crumbsFor, groupOf, P, L, LOGO, href };
